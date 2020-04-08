@@ -2,7 +2,13 @@
 
 * To start the app, run:
 
-$ bundle exec solr_wrapper
-$ rails s
+``` bash
+  bundle exec solr_wrapper
+```
+
+``` bash
+  rails s
+```
+
 
 
