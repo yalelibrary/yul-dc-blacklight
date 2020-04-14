@@ -1,0 +1,59 @@
+version: '2.1'
+services:
+
+  base:
+    image: "${REGISTRY_HOST}${REGISTRY_URI}/base:latest"
+    env_file:
+      - .env
+      - .env.development
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+
+  web:
+    build: .
+    image: "${REGISTRY_HOST}${REGISTRY_URI}:${TAG:-master}"
+    env_file:
+      - .env
+      - .env.development
+    volumes:
+      - .:/home/app/webapp
+    # Keep the stdin open, so we can attach to our app container's process
+    # and do things such as byebug, etc:
+    stdin_open: true
+    # Enable sending signals (CTRL+C, CTRL+P + CTRL+Q) into the container:
+    tty: true
+    depends_on:
+      - solr
+      - db
+
+  # https://hub.docker.com/_/postgres
+  db:
+    image: postgres
+    env_file:
+      - .env
+      - .env.development
+    ports:
+      - "5432"
+    volumes:
+      - 'postgres:/var/lib/postgresql/data'
+
+  solr:
+    image: solr:8
+    ports:
+      - "8983"
+    volumes:
+      - './solr/conf:/opt/config:delegated'
+      - solr:/opt/solr/server/solr/mycores
+    env_file:
+      - .env.development
+      - .env
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - "${SOLR_CORE}"
+      - /opt/config
+
+volumes:
+  postgres:
+  solr:
