@@ -32,7 +32,6 @@ services:
     image: postgres
     env_file:
       - .env
-      - .env.development
     ports:
       - "5432"
     volumes:
