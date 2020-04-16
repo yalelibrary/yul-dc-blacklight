@@ -5,7 +5,6 @@ services:
     image: "${REGISTRY_HOST}${REGISTRY_URI}/base:latest"
     env_file:
       - .env
-      - .env.development
     build:
       context: .
       dockerfile: Dockerfile.base
@@ -15,7 +14,8 @@ services:
     image: "${REGISTRY_HOST}${REGISTRY_URI}:${TAG:-master}"
     env_file:
       - .env
-      - .env.development
+    ports:
+      - "80:80"
     volumes:
       - .:/home/app/webapp
     # Keep the stdin open, so we can attach to our app container's process
@@ -41,12 +41,11 @@ services:
   solr:
     image: solr:8
     ports:
-      - "8983"
+      - "8983:8983"
     volumes:
       - './solr/conf:/opt/config:delegated'
       - solr:/opt/solr/server/solr/mycores
     env_file:
-      - .env.development
       - .env
     entrypoint:
       - docker-entrypoint.sh
