@@ -16,7 +16,7 @@ jobs:
             chmod +x /usr/local/bin/docker-compose
       - run:
           name: install docker
-          command: apt-get update; apt-get install docker.io
+          command: apt-get update && apt-get install -y docker.io
       - setup_remote_docker
       - checkout
       # - run:
