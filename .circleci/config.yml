@@ -16,7 +16,7 @@ jobs:
             chmod +x /usr/local/bin/docker-compose
       - run:
           name: install docker
-          command: sudo apt-get install docker
+          command: apt-get install docker
       - setup_remote_docker
       - checkout
       # - run:
