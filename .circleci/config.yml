@@ -8,6 +8,7 @@ jobs:
       - image: notch8/blacklight-yul
     executor: ruby/default
     steps:
+      - setup_remote_docker
       - checkout
       - run:
           name: install bundler
