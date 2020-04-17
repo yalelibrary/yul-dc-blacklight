@@ -8,6 +8,12 @@ jobs:
       - image: notch8/blacklight-yul
     executor: ruby/default
     steps:
+      - run:
+          name: Install Docker Compose
+          command: |
+            set -x
+            curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+            chmod +x /usr/local/bin/docker-compose
       - setup_remote_docker
       - checkout
       - run:
@@ -18,7 +24,7 @@ jobs:
             bundle config set path 'vendor/bundle'
       - run:
           name: start database
-          command: docker run postgres
+          command: docker-compose up db
       - ruby/bundle-install
       - run:
           name: rspec
