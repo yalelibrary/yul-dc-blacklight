@@ -18,7 +18,7 @@ jobs:
             bundle config set path 'vendor/bundle'
       - run:
           name: start database
-          command: docker-compose up db
+          command: docker run postgres
       - ruby/bundle-install
       - run:
           name: rspec
