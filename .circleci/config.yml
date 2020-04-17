@@ -5,7 +5,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: notch/blacklight-yul
+      - image: notch8/blacklight-yul
     executor: ruby/default
     steps:
       - checkout
