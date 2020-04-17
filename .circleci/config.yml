@@ -11,5 +11,7 @@ jobs:
       - checkout
       - run:
           name: install bundler
-          command: bundle update --bundler
+          command: |
+            gem update --system
+            gem install bundler
       - ruby/bundle-install
