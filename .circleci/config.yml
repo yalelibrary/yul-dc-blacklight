@@ -19,16 +19,9 @@ jobs:
           command: apt-get update && apt-get install -y docker.io
       - setup_remote_docker
       - checkout
-      # - run:
-      #     name: install bundler
-      #     command: |
-      #       gem update --system
-      #       gem install bundler
-      #       bundle config set path 'vendor/bundle'
       - run:
           name: start docker container
           command: docker-compose up -d web
-      # - ruby/bundle-install
       - run:
           name: rspec
           command: docker run -it notch8/blacklight-yul bundle exec rspec
