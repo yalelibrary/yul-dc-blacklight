@@ -24,8 +24,8 @@ jobs:
             bundle config set path 'vendor/bundle'
       - run:
           name: start database
-          command: docker-compose up -d db
+          command: docker-compose up -d web
       - ruby/bundle-install
       - run:
           name: rspec
-          command: bundle exec rspec spec
+          command: docker-compose exec web bundle exec rspec
