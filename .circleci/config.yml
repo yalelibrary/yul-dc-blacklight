@@ -31,4 +31,4 @@ jobs:
       # - ruby/bundle-install
       - run:
           name: rspec
-          command: docker ps
+          command: docker run -it notch8/blacklight-yul bundle exec rspec
