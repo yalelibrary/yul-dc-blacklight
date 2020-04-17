@@ -6,7 +6,7 @@ jobs:
   build:
     docker:
       - image: notch8/blacklight-yul
-    executor: ruby/default
+    executor: docker/docker
     steps:
       - run:
           name: Install Docker Compose
@@ -16,12 +16,12 @@ jobs:
             chmod +x /usr/local/bin/docker-compose
       - setup_remote_docker
       - checkout
-      - run:
-          name: install bundler
-          command: |
-            gem update --system
-            gem install bundler
-            bundle config set path 'vendor/bundle'
+      # - run:
+      #     name: install bundler
+      #     command: |
+      #       gem update --system
+      #       gem install bundler
+      #       bundle config set path 'vendor/bundle'
       - run:
           name: start docker container
           command: docker-compose up -d web
