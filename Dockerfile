@@ -1,4 +1,4 @@
-FROM notch8/blacklight-yul/base:latest
+FROM notch8/blacklight-yul-base:latest
 
 ADD https://time.is/just build-time
 COPY ops/nginx.sh /etc/service/nginx/run
