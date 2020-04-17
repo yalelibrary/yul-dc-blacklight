@@ -28,4 +28,4 @@ jobs:
       # - ruby/bundle-install
       - run:
           name: rspec
-          command: docker-compose exec web bundle exec rspec
+          command: bundle exec rspec
