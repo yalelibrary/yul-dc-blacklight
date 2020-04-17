@@ -5,7 +5,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.5-stretch-node
+      - image: notch/blacklight-yul
     executor: ruby/default
     steps:
       - checkout
