@@ -16,3 +16,6 @@ jobs:
             gem install bundler
             bundle config set path 'vendor/bundle'
       - ruby/bundle-install
+      - run:
+          name: rspec
+          command: bundle exec rspec spec
