@@ -1,0 +1,43 @@
+version: 2.1
+orbs:
+  docker: circleci/docker@1.0.1
+
+jobs:
+  build:
+    docker:
+      - image: notch8/blacklight-yul
+    executor: docker/docker
+    steps:
+      - run:
+          name: Install Docker Compose
+          command: |
+            set -x
+            curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+            chmod +x /usr/local/bin/docker-compose
+      - run:
+          name: install docker
+          command: apt-get update && apt-get install -y docker.io
+      - setup_remote_docker
+      - checkout
+      - run:
+          name: install bundler
+          command: |
+            gem update --system
+            gem install bundler
+            bundle config set path 'vendor/bundle'
+      - run:
+          name: bundle install
+          command: bundle install
+      # @todo in a future iteration, start solr; start puma
+      - run:
+          name: rspec
+          command:  |
+            bundle exec rspec
+          environment:
+            DB_ADAPTER: sqlite3
+      # @todo in a future iteration, build a docker image tagged with the commit hash
+      #   and push to docker hub
+      #
+      # - run:
+      #     name: build and push
+      #     command: 

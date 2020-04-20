@@ -2,7 +2,7 @@ version: '2.1'
 services:
 
   base:
-    image: "${REGISTRY_HOST}${REGISTRY_URI}/base:latest"
+    image: "${REGISTRY_HOST}${REGISTRY_URI}-base:latest"
     env_file:
       - .env
     build:
@@ -33,7 +33,7 @@ services:
     env_file:
       - .env
     ports:
-      - "5432"
+      - "5432:5432"
     volumes:
       - 'postgres:/var/lib/postgresql/data'
 

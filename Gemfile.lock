@@ -45,6 +45,8 @@ GEM
     activerecord (6.0.2.2)
       activemodel (= 6.0.2.2)
       activesupport (= 6.0.2.2)
+    activerecord-nulldb-adapter (0.4.0)
+      activerecord (>= 2.0.0)
     activestorage (6.0.2.2)
       actionpack (= 6.0.2.2)
       activejob (= 6.0.2.2)
@@ -104,6 +106,7 @@ GEM
       warden (~> 1.2.3)
     devise-guests (0.7.0)
       devise
+    diff-lcs (1.3)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dot-properties (0.1.3)
@@ -225,6 +228,23 @@ GEM
     rsolr (2.3.0)
       builder (>= 2.1.2)
       faraday (>= 0.9.0)
+    rspec-core (3.9.1)
+      rspec-support (~> 3.9.1)
+    rspec-expectations (3.9.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-mocks (3.9.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-rails (4.0.0)
+      actionpack (>= 4.2)
+      activesupport (>= 4.2)
+      railties (>= 4.2)
+      rspec-core (~> 3.9)
+      rspec-expectations (~> 3.9)
+      rspec-mocks (~> 3.9)
+      rspec-support (~> 3.9)
+    rspec-support (3.9.2)
     ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
     rubyzip (2.3.0)
@@ -259,6 +279,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sqlite3 (1.4.2)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -312,6 +333,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-nulldb-adapter
   blacklight
   blacklight-marc (>= 7.0.0.rc1, < 8)
   bootsnap (>= 1.4.2)
@@ -327,11 +349,13 @@ DEPENDENCIES
   puma (~> 4.1)
   rails (~> 6.0.2, >= 6.0.2.2)
   rsolr (>= 1.0, < 3)
+  rspec-rails (~> 4.0.0)
   sass-rails (>= 6)
   selenium-webdriver
   solr_wrapper (>= 0.3)
   spring
   spring-watcher-listen (~> 2.0.0)
+  sqlite3
   turbolinks (~> 5)
   twitter-typeahead-rails (= 0.11.1.pre.corejavascript)
   tzinfo-data
@@ -343,4 +367,4 @@ RUBY VERSION
    ruby 2.6.5p114
 
 BUNDLED WITH
-   2.1.2
+   2.1.4
