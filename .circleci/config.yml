@@ -25,16 +25,19 @@ jobs:
             gem update --system
             gem install bundler
             bundle config set path 'vendor/bundle'
-      # - run:
-      #     name: start database
-      #     command: docker-compose up -d web
-      - ruby/bundle-install
+      - run:
+          name: bundle install
+          command: bundle install
+      # @todo in a future iteration, start solr; start puma
       - run:
           name: rspec
           command:  |
             bundle exec rspec
           environment:
             DB_ADAPTER: sqlite3
+      # @todo in a future iteration, build a docker image tagged with the commit hash
+      #   and push to docker hub
+      #
       # - run:
-      #     name: rspec
-      #     command: docker run -it notch8/blacklight-yul bundle exec rspec
+      #     name: build and push
+      #     command: 
