@@ -1,12 +1,12 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2
+  docker: circleci/docker@1.0.1
 
 jobs:
   build:
     docker:
       - image: notch8/blacklight-yul
-    executor: ruby/default
+    executor: docker/docker
     steps:
       - run:
           name: Install Docker Compose
@@ -14,6 +14,9 @@ jobs:
             set -x
             curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
             chmod +x /usr/local/bin/docker-compose
+      - run:
+          name: install docker
+          command: apt-get update && apt-get install -y docker.io
       - setup_remote_docker
       - checkout
       - run:
@@ -32,3 +35,6 @@ jobs:
             bundle exec rspec
           environment:
             DB_ADAPTER: sqlite3
+      # - run:
+      #     name: rspec
+      #     command: docker run -it notch8/blacklight-yul bundle exec rspec
