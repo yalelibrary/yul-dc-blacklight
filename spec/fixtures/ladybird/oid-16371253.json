@@ -1,0 +1,55 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/16371253",
+  "identifierShelfMark": "Takamiya MS 81",
+  "title": [
+    "Missal, use of Sarum (fragment)"
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "publicationPlace": [
+    "England,"
+  ],
+  "date": "[between 1400 and 1450]",
+  "extent": "3 l. : parchment ; 491 x 340 mm.",
+  "language": [
+    "Latin"
+  ],
+  "description": [
+    "Decoration: numerous initials in burnished gold or blue; extensive penwork.",
+    "From the collection of Toshiyuki Takamiya, 2013-.",
+    "Layout: double columns of 39 lines.",
+    "Script: gothic liturgical script."
+  ],
+  "subjectName": [
+    "Catholic Church.--Sarum manual."
+  ],
+  "subjectTopic": [
+    "Manuscripts, Medieval--Connecticut--New Haven.",
+    "Medieval and Renaissance Manuscript Fragments in Beinecke Library.",
+    "Medieval and Renaissance Manuscripts in Beinecke Library.",
+    "Missals--Early works to 1800."
+  ],
+  "genre": [
+    "Manuscripts, Medieval--England--15th century.",
+    "Missals--England--15th century."
+  ],
+  "format": "text",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "12297336",
+  "orbisBarcode": "39002104623971",
+  "references": [
+    "A handlist of western Medieval manuscripts in the Takamiya collection / Toshiyuki Takamiya, in The Medieval book: glosses from friends & colleagues of Christopher de Hamel, ed. by Richard Linenthal, James Marrow and William Noel. 't Goy-Houten: Hes & De Graff, 2010, pp. 421-437.",
+    "Missal, Use of Sarum (Fragment). Takamiya MS 81."
+  ],
+  "dateStructured": "1400-00-00T00:00:00Z",
+  "resourceType": "Archives or Manuscripts",
+  "illustrativeMatter": "141112i14001450ctu                 lat d",
+  "oid": 16371253,
+  "collectionId": 1,
+  "children": [],
+  "abstract": "Manuscript leaves from a Sarum missal, containing text from Masses for the third and eighth Sundays after Pentecost and for the dedication of a church."
+}

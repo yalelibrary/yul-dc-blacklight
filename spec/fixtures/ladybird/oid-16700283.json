@@ -1,0 +1,54 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/16700283",
+  "identifierShelfMark": "Takamiya MS 142",
+  "title": [
+    "Book of hours (fragment)"
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "publicationPlace": [
+    "Flanders,"
+  ],
+  "date": "[ca. 1300]",
+  "extent": "1 l. : parchment ; 65 x 85 mm",
+  "language": [
+    "Latin"
+  ],
+  "description": [
+    "Byname: Ghistelles Hours.",
+    "Decoration: decorated border showing two hounds chasing a stag.",
+    "Previously owned by Sir Sydney Cockerell? Previously owned by Alan G. Thomas. From the collection of Toshiyuki Takamiya, 2013-.",
+    "Script: Gothic."
+  ],
+  "subjectName": [
+    "Cockerell, Sydney Carlyle,--Sir,--1867-1962--Ownership.",
+    "Thomas, Alan G.--Ownership."
+  ],
+  "subjectTopic": [
+    "Books of hours--Early works to 1800",
+    "Manuscripts, Medieval--Connecticut--New Haven",
+    "Medieval and Renaissance Manuscripts in Beinecke Library"
+  ],
+  "genre": [
+    "Manuscripts, Medieval--Flanders--14th century"
+  ],
+  "format": "text",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "13640726",
+  "orbisBarcode": "39002094365690",
+  "references": [
+    "A handlist of western Medieval manuscripts in the Takamiya collection / Toshiyuki Takamiya, in The Medieval book: glosses from friends & colleagues of Christopher de Hamel, ed. by Richard Linenthal, James Marrow and William Noel. 't Goy-Houten: Hes & De Graff, 2010, pp. 421-437.",
+    "Book of Hours (Fragment). Takamiya MS 142."
+  ],
+  "dateStructured": "1300-00-00T00:00:00Z",
+  "resourceType": "Archives or Manuscripts",
+  "illustrativeMatter": "180618s1400    ctu                 lat d",
+  "oid": 16700283,
+  "collectionId": 1,
+  "children": [],
+  "abstract": "Lower half of a single manuscript leaf, on parchment, containing five lines of text and marginal decoration. From the \"Ghistelles Hours.\""
+}

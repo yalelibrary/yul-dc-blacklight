@@ -1,0 +1,53 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/9884809",
+  "creator": [
+    "Coronelli, Vincenzo, 1650-1718"
+  ],
+  "title": [
+    "Amico Lettore"
+  ],
+  "publicationPlace": [
+    "Venice",
+    "Italy Venice"
+  ],
+  "publisher": [
+    "Accademia Cosmografica degli Argonauti"
+  ],
+  "date": "1699]",
+  "extent": "1 globe : hand col., paper gores over papier-mâché and plaster, mounted on a carved baroque walnut stand . Brass meridian with wooden horizon (5 cm wide) with mounted hand col. zodiacal paper 47 cm. in diam.",
+  "language": [
+    "it"
+  ],
+  "description": [
+    "This celestial globe corresponds to Coronelli's terrestrial globe of 1699.",
+    "Not in Younge's \"Catalogue of early globes\".",
+    "The globe shows three cartouches, one includes title the other two are left blank.",
+    "Image of globe with further description is listed online under \"Lanman Globe Collection\"",
+    "BEIN Globe 21: From the library of Jonathan T. Lanman."
+  ],
+  "scale": "Scale not given ;",
+  "coordinates": "",
+  "genre": [
+    "Celestial globes",
+    "Early works to 1800"
+  ],
+  "orbisBibId": "9884809",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/brbldl_getrec.asp?fld=img&id=16425166",
+  "dateStructured": "1699   ",
+  "illustrativeMatter": "    zz d    ",
+  "titleStatement": [
+    "Amico Lettore / Oltre al molti Globi delineati dal P. Cosmografo Coronelli per Sourani diuersi di uarie e uaste misure ne ha ultimamente composti e stampi di cinque grandezze a publica beneficio, fra quali i piu commodi, ed exalti sono i presenti. I Numeri, che accompagnano le Stelle calcolate all'Epoca dell 1700; cosi l'altre notitie, ed uso de medesimi Globi, uengono nel sio Epitome Cosmografico diffusamente spiegate"
+  ],
+  "contributor": [
+    "Italy Venice."
+  ],
+  "provenanceControlled": "Lanman, Jonathan T. Ownership.",
+  "bibId": 9884809,
+  "suppressInOpac": false,
+  "createDate": "2011-08-04T15:17:30.000+0000",
+  "updateDate": "2018-03-12T17:43:52.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

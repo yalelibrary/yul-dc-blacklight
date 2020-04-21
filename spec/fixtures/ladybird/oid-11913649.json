@@ -1,0 +1,44 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/11913649",
+  "identifierShelfMark": "Landberg MSS 492",
+  "creator": [
+    "Maqrīzī, Aḥmad ibn ʻAlī, 1364-1442"
+  ],
+  "title": [
+    "al-Bayān wa-al-iʻrāb ʻammā bi-arḍ Miṣr min al-Aʻrāb / Aḥmad ibn ʻAlī al-Maqrīzī"
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "date": "[18--?]",
+  "extent": "leaves ;",
+  "language": [
+    "Arabic"
+  ],
+  "description": [
+    "Modern (19th century) naskhī."
+  ],
+  "subjectTopic": [
+    "History--Egypt"
+  ],
+  "genre": [
+    "Manuscripts"
+  ],
+  "format": "text",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "3827095",
+  "orbisBarcode": "39002097273412",
+  "references": [
+    "Brockelmann,",
+    "II, 40; S II, p. 37."
+  ],
+  "dateStructured": "1800-00-00T00:00:00Z",
+  "illustrativeMatter": "ara d",
+  "oid": 11913649,
+  "collectionId": 1,
+  "children": [],
+  "abstract": "Treatise on the Arab tribes which settled in Egypt."
+}

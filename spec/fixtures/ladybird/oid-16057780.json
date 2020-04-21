@@ -1,0 +1,54 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/16057780",
+  "identifierShelfMark": "WA MSS S-3019",
+  "box": "Box 5",
+  "sourceTitle": "[Objects associated with Buffalo Bill]",
+  "sourceDate": "[circa 1870-1895]",
+  "creator": [
+    "Colt's Patent Fire Arms Manufacturing Co"
+  ],
+  "title": [
+    "Colt revolver"
+  ],
+  "date": "ca. 1895",
+  "extent": "1 revolver + case : 29 cm.",
+  "description": [
+    "One revolver made by Colt's Patent Fire-Arms Manufacturing Company and owned by Nathan Salsbury. The gun is 29 cm in length and was stamped in several places: \"Colt's PT. F. A. Mfg. Co. Hartford CT. U.S.A. / Patented Aug.5.1884 Nov.6.88. Mar.5.95.\" along the top of the barrel, \"Colt. D. A. 38\" along the side of the barrel, and a rampant colt in a circle at the top of the ivory grip. It is stamped \"411\" on the cylinder release, and with serial number \"15 / 936\" on the buttstrap. The monogram \"NS\" is inlaid in gold on the side between the grip and the cylinder, and is surrounded by engraved flourishes. The revolver is housed in a fitted velvet-lined box."
+  ],
+  "subjectName": [
+    "Buffalo Bill,--1846-1917.",
+    "Buffalo Bill's Wild West Company.",
+    "Buffalo Bill's Wild West Show.",
+    "Colt's Patent Fire Arms Manufacturing Co",
+    "Colt's Patent Fire Arms Manufacturing Co.",
+    "Salsbury, Nathan,--1846-1902.",
+    "Sitting Bull,--1831-1890."
+  ],
+  "subjectTopic": [
+    "Theatrical managers--United States.",
+    "Wild west shows."
+  ],
+  "genre": [
+    "Revolvers (firearms)--United States--19th century."
+  ],
+  "format": "three dimensional object",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement"
+  ],
+  "orbisBibId": "12442385",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/callnumSRCHXC.asp?&amp;CN=WA_MSS_S-3019",
+  "references": [
+    "Nathan Salsbury, Objects Associated with Buffalo Bill. Yale Collection of Western Americana, Beinecke Rare Book and Manuscript Library."
+  ],
+  "dateStructured": "1870-00-00T00:00:00Z",
+  "resourceType": "Tools, Equipment & Instruments",
+  "illustrativeMatter": "150424i18701895vp nnn            rneng d",
+  "copyrightDate": "[circa 1870-1895]",
+  "oid": 16057780,
+  "collectionId": 1,
+  "children": [],
+  "abstract": "Nathan Salsbury (1846-1902), Civil War veteran, actor, and theatrical entrepreneur; after 1884 co-owner, producer and manager of \"Buffalo Bill's Wild West Show.\""
+}

@@ -1,0 +1,52 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/16425155",
+  "identifierShelfMark": "Globe 21",
+  "creator": [
+    "Coronelli, Vincenzo, 1650-1718."
+  ],
+  "title": [
+    "Amico Lettore / Oltre al molti Globi delineati dal P. Cosmografo Coronelli per Sourani diuersi di uarie e uaste misure ne ha ultimamente composti e stampi di cinque grandezze a publica beneficio, fra quali i piu commodi, ed exalti sono i presenti. I Numer"
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "publicationPlace": [
+    "[Venice :"
+  ],
+  "publisher": [
+    "Accademia Cosmografica degli Argonauti,"
+  ],
+  "date": "1699]",
+  "extent": "1 globe : hand col., paper gores over papier-mâché and plaster, mounted on a carved baroque walnut stand . Brass meridian with wooden horizon (5 cm wide) with mounted hand col. zodiacal paper 47 cm. in diam.",
+  "description": [
+    "From the library of Jonathan T. Lanman.",
+    "Image of globe with further description is listed online under \"Lanman Globe Collection\"",
+    "Not in Younge's \"Catalogue of early globes\".",
+    "The globe shows three cartouches, one includes title the other two are left blank.",
+    "This celestial globe corresponds to Coronelli's terrestrial globe of 1699."
+  ],
+  "subjectName": [
+    "Lanman, Jonathan T"
+  ],
+  "subjectTopic": [
+    "Celestial globes--Early works to 1800."
+  ],
+  "scale": "Scale not given ;",
+  "projection": "Convex proj.",
+  "coordinates": "a",
+  "genre": [
+    "Celestial globes."
+  ],
+  "format": "three dimensional object",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "9884809",
+  "dateStructured": "1699-00-00T00:00:00Z",
+  "resourceType": "Maps, Atlases & Globes",
+  "illustrativeMatter": "850124q1699    it     zz d     0   ita",
+  "oid": 16425155,
+  "collectionId": 1,
+  "children": []
+}

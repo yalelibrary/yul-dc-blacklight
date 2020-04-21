@@ -1,0 +1,51 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/7151233",
+  "creator": [
+    "Giard, Robert"
+  ],
+  "title": [
+    "Robert Giard papers"
+  ],
+  "extent": "50.34 linear feet (271 boxes)",
+  "language": [
+    "en"
+  ],
+  "description": [
+    "This material is open for research.",
+    "The papers consist of photographs, correspondence, diaries, financial papers, and printed materials documenting Robert Giard's career as a photographer and personal life, spanning the years 1972 to 2002. The bulk of the papers contain photographic prints by Giard in several sizes of various subjects, including portraits of gay and lesbian writers, landscapes, nudes, still lifes, and portraits of the Thanks Be To Grandmother Winifred Foundation grant recipients.",
+    "Robert Giard was an American photographer, born in Hartford, Connecticut in 1939. He received a Bachelor of Arts from Yale University in 1961, and Master of Arts in Comparative Literature from Boston University in 1965. In 1972 he began to take photographs, focusing on landscapes and portraits of his friends, artists, writers, and nudes. His monograph Particular Voices: Portraits of Gay and Lesbian Writers, published by MIT Press in 1997, contains a selection from over 500 portraits he had taken in the previous decade. In 1996, Giard was commissioned to document the 321 grant recipients of the Thanks Be To Grandmother Winifred Foundation. The grant recipients were women over the age of 54 whose projects benefited adult women. From 1996 to 2001, Giard traveled across the U. S. to photograph each year's grant recipents. He died in 2002 of a heart attack.",
+    "In English.",
+    "Finding aid available"
+  ],
+  "subjectName": [
+    ""
+  ],
+  "genre": [
+    "Photographic prints",
+    "Portraits",
+    "Portraits",
+    "Archives",
+    "Portraits",
+    "LGBTQ resource"
+  ],
+  "orbisBibId": "7151233",
+  "importUrl": "http://hdl.handle.net/10079/fa/beinecke.giard http://beinecke.library.yale.edu/dl_crosscollex/callnumSRCHXC.asp?CN=YCAL_MSS_702",
+  "references": [
+    "Robert Giard Papers. Yale Collection of American Literature, Beinecke Rare Book and Manuscript Library."
+  ],
+  "dateStructured": "1972200",
+  "illustrativeMatter": "            ",
+  "subjectEra": "20th century.",
+  "titleStatement": [
+    "Robert Giard papers, 1972-2002"
+  ],
+  "provenanceUncontrolled": "Purchased from Jonathan G. Silin on the Eugene G. O'Neill Memorial Fund, 2004. Gift of Jonathan G. Silin, 2011.",
+  "bibId": 7151233,
+  "suppressInOpac": false,
+  "createDate": "2006-01-09T19:38:56.000+0000",
+  "updateDate": "2019-04-23T19:22:01.000+0000",
+  "holdingCount": 2,
+  "children": []
+}

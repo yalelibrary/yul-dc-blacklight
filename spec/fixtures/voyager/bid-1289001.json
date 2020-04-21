@@ -1,0 +1,54 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/1289001",
+  "creator": [
+    "Retzsch, Moritz, 1779-1857"
+  ],
+  "title": [
+    "Faust; esquisses dessinées"
+  ],
+  "alternativeTitle": [
+    ""
+  ],
+  "publicationPlace": [
+    "Paris"
+  ],
+  "publisher": [
+    "Giard,Editeur"
+  ],
+  "date": "[1830]",
+  "extent": "1 p.l., 8 pp. : [66] plates. 22 x 28 cm.",
+  "language": [
+    "fr"
+  ],
+  "description": [
+    "Etched t.p.; title within ornamental border.",
+    "Contains 26 numbered etches plates before letters; lithographs of plates 1-21, 23-26 after letters; proof of border of t.p.; 15 plates without numbers or letters.",
+    "BEIN Speck Ck99 R3 +830b Copy 2:  Another copy containing only the 26 numbered etched plates before letters, as in the above. 24 x 31 cm. (Text 21 x 28 cm.). In portfolio with original paper covers. \"Auf dem Umschlag eine Originallithographie, nicht nach Retzsch, lith. von Bachebois ainé à St. Denis\"--Kippenberg, no. 1884.",
+    "BEIN Speck Ck99 R3 +830b Copy 3:  23 x 29 cm. (Text 21 x 28 cm.). Another copy containing only the 26 numbered etched plates before letters. Bound in boards with original paper covers pasted on sides.",
+    "BEIN Speck Ck99 R3 +830b Copy 4: Another copy containing only the 26 numbered etched plates before letters. 23 x 30 cm. (Text 20 x 28 cm.) \"THe chess-players. A drawing by Moritz Retzsch, explained, according to hints from himself, by C. Borr. von Miltitz,\" dated 1837: 1 leaf, 4 p. at end."
+  ],
+  "subjectName": [
+    "1749-1832."
+  ],
+  "subjectTopic": [
+    "Illustrations"
+  ],
+  "orbisBibId": "1289001",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/brbldl_getrec.asp?fld=img&id=16712919",
+  "dateStructured": "1830   ",
+  "illustrativeMatter": "f          0",
+  "titleStatement": [
+    "Faust; esquisses dessinées par Retsch"
+  ],
+  "contributor": [
+    "Miltitz, Carl Borromäus von, 1781-1845."
+  ],
+  "bibId": 1289001,
+  "suppressInOpac": false,
+  "createDate": "2002-06-01T04:00:00.000+0000",
+  "updateDate": "2019-05-15T17:54:27.000+0000",
+  "holdingCount": 4,
+  "children": []
+}

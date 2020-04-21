@@ -1,0 +1,39 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/11607445",
+  "identifierShelfMark": "Landberg MSS 596",
+  "title": [
+    "[Qiṣṣat Sindbād al-barrī]"
+  ],
+  "alternativeTitle": [
+    "Book of Sindbad.",
+    "Sindbad the sailor"
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "date": "[17--?]",
+  "extent": "81 leaves ; 20.5 x 14.5 cm.",
+  "description": [
+    "A few leaves supplied in a later hand.",
+    "Fair modern (18th century?) naskhī, in red and black.",
+    "Islamic binding, paper covered, with flap."
+  ],
+  "subjectTopic": [
+    "Arabic language and literature--Belles lettres",
+    "Islamic binding"
+  ],
+  "format": "mixed material",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "3832098",
+  "references": [
+    "Brockelmann, S I, pp. 237, 239, 252."
+  ],
+  "dateStructured": "1700-00-00T00:00:00Z",
+  "oid": 11607445,
+  "collectionId": 1,
+  "children": [],
+  "abstract": "The tale of Sindbād and his princely pupil, in colloquial Arabic."
+}

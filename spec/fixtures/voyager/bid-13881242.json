@@ -1,0 +1,56 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/13881242",
+  "creator": [
+    "United States. Hydrographic Office, cartographer"
+  ],
+  "title": [
+    "Tracks for full powered steam vessels with the shortest navigable distances in nautical miles from anchorage to anchorage, New York distances are measures to and from the Battery achorage"
+  ],
+  "edition": [
+    "16th edition, I '16."
+  ],
+  "publicationPlace": [
+    "Washington, D.C.",
+    "United States Washington (D.C.)"
+  ],
+  "publisher": [
+    "Published ... at the Hydrographic Office"
+  ],
+  "date": "Sep., 1914 [that is, 1916]",
+  "extent": "1 map : color ; 67 x 112 cm",
+  "language": [
+    "en"
+  ],
+  "description": [
+    "\"Small corrections from notices to mariners ('15-2, 18, 30, from other sources I '16.\"",
+    "Relief shown by hachures and spot heights.",
+    "\"No. 1262.\"",
+    "Includes charts: \"Speeds per hour with daily and weekly distances in nautical miles\" and \"Reduction knots on nautical miles to statute miles.\" Also includes 4 distance charts."
+  ],
+  "geoSubject": "x------",
+  "scale": "Scale approximately 1:50,000,000",
+  "coordinates": "-180.000000 180.000000 090.000000 -090.000000 (W 180°--E 180°/N 90°--S 90°).",
+  "genre": [
+    "World maps",
+    "Maps"
+  ],
+  "format": "cartographic image",
+  "orbisBibId": "13881242",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/brbldl_getrec.asp?fld=img&id=16686253",
+  "dateStructured": "1916   ",
+  "illustrativeMatter": "dg     a    ",
+  "titleStatement": [
+    "Tracks for full powered steam vessels with the shortest navigable distances in nautical miles from anchorage to anchorage, New York distances are measures to and from the Battery achorage"
+  ],
+  "contributor": [
+    "United States Washington (D.C.)"
+  ],
+  "bibId": 13881242,
+  "suppressInOpac": false,
+  "createDate": "2018-12-11T15:54:53.000+0000",
+  "updateDate": "2019-03-18T16:35:52.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

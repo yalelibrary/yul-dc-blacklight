@@ -1,0 +1,31 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/2012143",
+  "identifierShelfMark": "Ethiopic MSS 28",
+  "title": [
+    "Ethiopic ms. scroll"
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "publicationPlace": [
+    "[Ethiopia]"
+  ],
+  "date": "[s.a.]",
+  "extent": "10.4 x 156.5 cm.",
+  "description": [
+    "Leaves are sewn vertically, end to end."
+  ],
+  "genre": [
+    "Handscrolls"
+  ],
+  "format": "text",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "13888969",
+  "resourceType": "Archives or Manuscripts",
+  "oid": 2012143,
+  "collectionId": 1,
+  "children": []
+}

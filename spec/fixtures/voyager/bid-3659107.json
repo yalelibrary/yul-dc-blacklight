@@ -1,0 +1,75 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/3659107",
+  "creator": [
+    "Eliot, George, 1819-1880"
+  ],
+  "title": [
+    "George Eliot and George Henry Lewes collection"
+  ],
+  "alternativeTitle": [
+    ""
+  ],
+  "extent": "14.5 linear ft. (64 boxes)",
+  "language": [
+    "en"
+  ],
+  "description": [
+    "The collection includes correspondence by, to and about Eliot and Lewes. There are 4 journals, 1 diary, several notebooks with notes for a projected novel, quotes, poetry, and early school essays all belonging to George Eliot, accompanied by reviews and scripts of dramatizations of Daniel Deronda in the 1920s and 1970s. With 3 journals, 9 diaries, and notebooks with research notes belonging to George Henry Lewes, accompanied by miscellaneous writings, including several chapters of Problems of Life and Mind. There is also printed material, reviews, memorabilia, and photograph portraits of Eliot and Lewes as well as artwork by others. Principal correspondents include members of the Lewes family, Caroline and Charles Bray, John Emerich Edward Dalberg Acton, Barbara Leigh Smith Bodichon, John Chapman, Anna Chalmers and J. W. Cross, Alexandre D'Albert-Durade, Frederic Harrison, Sara Sophia Hennell, Frances Lucy Evans Houghton, Maria Lewis, Edward Robert Bulwer Lytton, Herbert Spencer, and Anthony Trollope.",
+    "Finding aid available."
+  ],
+  "subjectName": [
+    "Baron, 1834-1902.",
+    "1827-1891.",
+    "Mrs., 1814-1905.",
+    "1811-1884.",
+    "1837-1923.",
+    "Lady, 1840-1920.",
+    "1822-1894.",
+    "1813-1878.",
+    "1840-1924. (John Walter),",
+    "1804-1886.",
+    "1819-1880.",
+    "1831-1923.",
+    "",
+    "1805-1882.",
+    "1843-1891.",
+    "d. 1836?",
+    "1817-1878.",
+    "1846-1875.",
+    "",
+    "1800?-1887.",
+    "Earl of, 1831-1891.",
+    "1820-1903.",
+    "1815-1882."
+  ],
+  "genre": [
+    "Diaries",
+    "Photographic prints",
+    "Archives",
+    "Archives"
+  ],
+  "orbisBibId": "3659107",
+  "importUrl": "http://hdl.handle.net/10079/fa/beinecke.eliot http://beinecke.library.yale.edu/dl_crosscollex/callnumSRCHXC.asp?WC=N&SS=N&CN=GEN_MSS_963",
+  "references": [
+    "George Eliot and George Henry Lewes Collection. General Collection, Beinecke Rare Book and Manuscript Library, Yale University."
+  ],
+  "dateStructured": "1834198",
+  "illustrativeMatter": "            ",
+  "subjectEra": "19th century 19th century",
+  "titleStatement": [
+    "George Eliot and George Henry Lewes collection, 1834-1981"
+  ],
+  "contributor": [
+    "Lewes, George Henry, 1817-1878. http://id.loc.gov/authorities/names/n50049235"
+  ],
+  "provenanceControlled": "Lewes, Gertrude.",
+  "provenanceUncontrolled": "Purchased and acquired from various sources.",
+  "bibId": 3659107,
+  "suppressInOpac": false,
+  "createDate": "2002-06-01T04:00:00.000+0000",
+  "updateDate": "2019-04-23T19:21:08.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

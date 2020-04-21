@@ -1,0 +1,53 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/10269867",
+  "identifierShelfMark": "Beinecke MS 410",
+  "title": [
+    "Indulgence Scroll"
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "publicationPlace": [
+    "England"
+  ],
+  "date": "s. XV^^4",
+  "extent": "f. 1 : parchment ; 1515 x 165 (1391 x 141) mm.",
+  "language": [
+    "English",
+    "Latin"
+  ],
+  "description": [
+    "Note of a 16th-century owner at the end of the roll: An Indulgence of Innocent VI ca. 1352.",
+    "Parchment roll, unevenly trimmed at top and bottom, composed of three membranes segments glued together, the third an addition of the late fifteenth century."
+  ],
+  "subjectName": [
+    "Innocent VI, Pope, d. 1362"
+  ],
+  "subjectTopic": [
+    "Indulgences--England--Early works to 1800"
+  ],
+  "genre": [
+    "Illuminated manuscripts",
+    "Indulgences (documents)",
+    "Manuscripts",
+    "Miniatures (Illuminations)",
+    "Scrolls (information artifacts)"
+  ],
+  "format": "mixed material",
+  "partOf": "Teaching resource: Barbara A. Shailor, Medieval Studies",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "9734851",
+  "orbisBarcode": "39002091597519",
+  "importUrl": "https://pre1600ms.beinecke.library.yale.edu/docs/pre1600.ms410.htm",
+  "references": [
+    "Indulgence Scroll. General Collection, Beinecke Rare Book and Manuscript Library, Yale University.",
+    "Shailor, B. Catalogue of Medieval and Renaissance Manuscripts in the Beinecke Rare Book and Manuscript Library, MS 410."
+  ],
+  "resourceType": "Archives or Manuscripts",
+  "oid": 10269867,
+  "collectionId": 1,
+  "children": [],
+  "abstract": "Manuscript on parchment roll, unevenly trimmed at top and bottom, composed of three membranes segments glued together, the third an addition of the late 15th century. Includes Prayers to be said for a pardon of 32,055 years; and Prayer based on the measurement of the length of the body of Christ. The texts are written on one side of a roll (dorse is blank)."
+}

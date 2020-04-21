@@ -1,0 +1,47 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/2055095",
+  "identifierShelfMark": "GEN MSS VOL 728 (Oversize)",
+  "creator": [
+    "Johnson, Samuel, 1709-1784"
+  ],
+  "title": [
+    "A General dictionary of the English language"
+  ],
+  "numberOfPages": "Vol. 3",
+  "extentOfDigitization": "Complete work digitized.",
+  "publicationPlace": [
+    "London"
+  ],
+  "publisher": [
+    "Printed by W. Strahan, for J. and P. Knapton [etc.]"
+  ],
+  "date": "1755",
+  "extent": "43 cm.",
+  "language": [
+    "English"
+  ],
+  "description": [
+    "Four volume printer's proof with manuscript notes throughout."
+  ],
+  "genre": [
+    "Annotations",
+    "Dictionaries",
+    "Marginalia",
+    "Proofs (Printed matter)"
+  ],
+  "format": "text",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "1169354",
+  "orbisBarcode": "39002094045110",
+  "dateStructured": "1755-00-00T00:00:00Z",
+  "resourceType": "Books, Journals & Pamphlets",
+  "oid": 2055095,
+  "collectionId": 1,
+  "children": [],
+  "abstract": "Published on April 15, 1755 and written largely single-handedly by Samuel Johnson. Sometimes published as \"Johnson's Dictionary.\" The first edition was published in two folio volumes; later editions were published in four volumes."
+}

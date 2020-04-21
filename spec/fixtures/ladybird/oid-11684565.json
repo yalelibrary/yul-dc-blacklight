@@ -1,0 +1,60 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/11684565",
+  "identifierShelfMark": "Beinecke MS 2",
+  "creator": [
+    "Zeno, Jacopo, 1417-1481"
+  ],
+  "title": [
+    "Vita Caroli Zeni"
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "publicationPlace": [
+    "Italy,"
+  ],
+  "date": "[ca. 1458]",
+  "extent": "ff. ii + 192 + i : parchment ; 271 x 177 (177 x 106) mm.",
+  "language": [
+    "Latin"
+  ],
+  "description": [
+    "Binding: Eighteenth century. Brownish-red goatskin, gold-tooled; pale green and gold, Dutch gilt paper boards.",
+    "On f. 1r, a foliage border which includes hares, stork, vase, and arms of the Piccolomini family (argent, a cross azur with 5 crescents or; surmounted by keys in saltire argent and a papal tiara; supported by a pair of angels). Eleven elaborate initials, 11- to 7-line, in gold, red, blue, and green entwined with foliage. The style of decoration is decidedly Roman.",
+    "Purchased by William Loring Andrews who presented it to Yale in 1894.",
+    "Script: Written in humanistic script by Franciscus de Tianis of Pistoia."
+  ],
+  "subjectName": [
+    "Zeno, Carlo,--1334-1418",
+    "Zeno, Jacopo,--1417-1481"
+  ],
+  "subjectTopic": [
+    "Biography--Middle Ages, 500-1500",
+    "Crusades--13th-15th centuries",
+    "Illumination of books and manuscripts, Medieval",
+    "Manuscripts, Medieval--Connecticut--New Haven",
+    "Medieval and Renaissance Manuscripts in Beinecke Library"
+  ],
+  "genre": [
+    "Decorated initials",
+    "Manuscripts"
+  ],
+  "format": "mixed material",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "9801995",
+  "orbisBarcode": "39002091594300",
+  "importUrl": "https://pre1600ms.beinecke.library.yale.edu/docs/pre1600.ms002.htm",
+  "references": [
+    "Jacopo Zeno, Vita Caroli Zeni. General Collection, Beinecke Rare Book and Manuscript Library, Yale University.",
+    "Shailor, B. Catalogue of Medieval and Renaissance Manuscripts in the Beinecke Rare Book and Manuscript Library, MS 2."
+  ],
+  "dateStructured": "1458-00-00T00:00:00Z",
+  "resourceType": "Archives or Manuscripts",
+  "oid": 11684565,
+  "collectionId": 1,
+  "children": [],
+  "abstract": "Manuscript on parchment of Jacopo Zeno, Vita Caroli Zeni. With a dedicatory preface to Pope Pius II. This manuscript is of special importance because it contains the complete work."
+}

@@ -1,0 +1,57 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/8330740",
+  "title": [
+    "Dai Min kyūhen bankoku jinseki rotei zenzu",
+    "大明九辺万国人跡路程全図"
+  ],
+  "alternativeTitle": [
+    "大明九辺万国人跡路程全図"
+  ],
+  "publicationPlace": [
+    "Kyōto",
+    "京都",
+    "Japan Kyoto"
+  ],
+  "publisher": [
+    "Umemura Yahaku",
+    "梅村弥白"
+  ],
+  "date": "[between 1890 and 1899?]",
+  "extent": "1 map : col. ; folded in covers 25 x 16 cm",
+  "language": [
+    "jp"
+  ],
+  "description": [
+    "Relief shown pictorially.",
+    "Japanese reprint of a Chinese map published in 1663.",
+    "In Japanese.",
+    "BEIN Lanman Covers 56 189X: From the library of Jonathan T. Lanman (#18)."
+  ],
+  "geoSubject": "a-cc--- China",
+  "scale": "Scale not given.",
+  "coordinates": "",
+  "genre": [
+    "Maps"
+  ],
+  "format": "cartographic image",
+  "orbisBibId": "8330740",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/brbldl_getrec.asp?fld=img&id=16189150",
+  "dateStructured": "189u   ",
+  "illustrativeMatter": "i      a    ",
+  "titleStatement": [
+    "Dai Min kyūhen bankoku jinseki rotei zenzu [cartographic material].",
+    "大明九辺万国人跡路程全図"
+  ],
+  "contributor": [
+    "Japan Kyoto."
+  ],
+  "provenanceControlled": "Lanman, Jonathan T. Ownership.",
+  "bibId": 8330740,
+  "suppressInOpac": false,
+  "createDate": "2008-08-15T14:47:48.000+0000",
+  "updateDate": "2019-06-05T21:33:00.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

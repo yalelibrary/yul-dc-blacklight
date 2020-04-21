@@ -1,0 +1,41 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/15234629",
+  "identifierShelfMark": "11 1860A",
+  "folder": "BRBL_00009",
+  "title": [
+    "[World map in Chinese, 1860.]"
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "publicationPlace": [
+    "[China,"
+  ],
+  "date": "1860?]",
+  "extent": "85 x 160 cm.",
+  "language": [
+    "Chinese"
+  ],
+  "description": [
+    "Title supplied by cataloger."
+  ],
+  "scale": "Scale [ca. 1:35 000 000].",
+  "coordinates": "a",
+  "genre": [
+    "Maps",
+    "World maps--1860"
+  ],
+  "format": "cartographic",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement"
+  ],
+  "orbisBibId": "8394689",
+  "orbisBarcode": "39002091118928",
+  "dateStructured": "1860-00-00T00:00:00Z",
+  "resourceType": "Maps, Atlases & Globes",
+  "illustrativeMatter": "chi d",
+  "oid": 15234629,
+  "collectionId": 1,
+  "children": []
+}

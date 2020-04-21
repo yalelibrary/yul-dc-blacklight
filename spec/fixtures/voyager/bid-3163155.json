@@ -1,0 +1,50 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/3163155",
+  "creator": [
+    "Kane, Paul, 1810-1871"
+  ],
+  "title": [
+    "Paintings"
+  ],
+  "publicationPlace": [
+    ""
+  ],
+  "date": "1846-1848.",
+  "extent": "6 paintings : oil on canvas.",
+  "language": [
+    "en"
+  ],
+  "description": [
+    "A set of six framed oil paintings of scenes in the Pacific Northwest. Four of the paintings, \"Falls of the Peluse Snake River,\" \"Kakkabakka Falls (Falls on the Willamette)\", \"Buffalo Hunt,\" and \"Buffalo Resting\", have been attributed to Paul Kane.  \"Fort Vancouver, Columbia River,\"  has been attributed to John Mix Stanley (see Hassrick, et al., Painted Journeys, 2016).  C. P. Wilson, in his article “Early Western Paintings” in The Beaver (June, 1948) suggests that “Mount Hood from the East” might be by or after a work by Henry J. Warre, a British Army officer.",
+    "Paul Kane (1810-1871), from Toronto, spent four years in Europe and returned to North America to paint Indians and scenes of the Northwest. He joined the Hudson's Bay Company's 1846 spring brigade to the Northwest and George Simpson, the company's governor, commissioned paintings. After two years, Kane returned east and fulfilled commissions by George William Allan of Toronto and others, to do oil paintings of Northwest Indians and scenes."
+  ],
+  "subjectName": [
+    "1810-1871.",
+    "1814-1872.",
+    "Sir, 1819-1898."
+  ],
+  "geoSubject": "n-usw-- Northwest, Pacific",
+  "genre": [
+    "Pictorial works",
+    "Pictorial works"
+  ],
+  "orbisBibId": "3163155",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/callnumSRCHXC.asp?WC=N&SS=N&CN=WA_MSS_278",
+  "references": [
+    "Paul Kane Paintings. Yale Collection of Western Americana, Beinecke Rare Book and Manuscript Library."
+  ],
+  "dateStructured": "1846184",
+  "illustrativeMatter": "nnn         ",
+  "titleStatement": [
+    "Paintings"
+  ],
+  "provenanceUncontrolled": "Acquired from the widow of Sir George Simpson. Given to the library by William Robertson Coe.",
+  "bibId": 3163155,
+  "suppressInOpac": false,
+  "createDate": "2002-06-01T04:00:00.000+0000",
+  "updateDate": "2020-03-16T16:51:35.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

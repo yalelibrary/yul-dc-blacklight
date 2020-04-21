@@ -1,0 +1,56 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/16685691",
+  "identifierShelfMark": "BrSides Elephant Folio 2018 22",
+  "creator": [
+    "United States. Hydrographic Office"
+  ],
+  "title": [
+    "Tracks for full powered steam vessels with the shortest navigable distances in nautical miles from anchorage to anchorage, New York distances are measures to and from the Battery achorage."
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "edition": [
+    "16th edition, I '16."
+  ],
+  "publicationPlace": [
+    "Washington, D.C. :"
+  ],
+  "publisher": [
+    "Published ... at the Hydrographic Office, "
+  ],
+  "date": "Sep., 1914 [that is, 1916]",
+  "extent": "1 map : color ; 67 x 112 cm",
+  "language": [
+    "English"
+  ],
+  "description": [
+    "\"No. 1262.\"",
+    "\"Small corrections from notices to mariners ('15-2, 18, 30, from other sources I '16.\"",
+    "Includes charts: \"Speeds per hour with daily and weekly distances in nautical miles\" and \"Reduction knots on nautical miles to statute miles.\" Also includes 4 distance charts.",
+    "Relief shown by hachures and spot heights."
+  ],
+  "subjectTopic": [
+    "Steam-navigation--Maps."
+  ],
+  "geoSubject": "x------",
+  "scale": "Scale approximately 1:50,000,000",
+  "coordinates": "a",
+  "genre": [
+    "World maps"
+  ],
+  "format": "cartographic",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement"
+  ],
+  "orbisBibId": "13881242",
+  "orbisBarcode": "39002131329220",
+  "dateStructured": "1916-00-00T00:00:00Z",
+  "resourceType": "Maps, Atlases & Globes",
+  "illustrativeMatter": "181211s1916    dcudg     a     0   eng d",
+  "copyrightDate": "Sep., 1914 [that is, 1916]",
+  "oid": 16685691,
+  "collectionId": 1,
+  "children": []
+}

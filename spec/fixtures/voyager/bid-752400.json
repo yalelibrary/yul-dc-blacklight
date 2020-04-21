@@ -1,0 +1,53 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/752400",
+  "title": [
+    "Ebony"
+  ],
+  "alternativeTitle": [
+    "Ebony",
+    "Ebony",
+    "Ebony magazine"
+  ],
+  "publicationPlace": [
+    "Chicago"
+  ],
+  "publisher": [
+    "Johnson Pub. Co."
+  ],
+  "date": "",
+  "extent": "v. : ill., ports. ; 35 cm",
+  "language": [
+    "en"
+  ],
+  "description": [
+    "Publisher varies.",
+    "Some irregularities in numbering; some numbers in vol. 29 incorrectly numbered vol. 30.",
+    "BEIN JWJ A +Eb74: Presentation inscription: Eunice W. Johnson. Autograph: John H. Johnson: 1:3 (copies 1 and 2).",
+    "BEIN JWJ A +Eb74: Presentation inscription: Mrs. James Weldon Johnson for Yale university Library, April 5th, 1967: 22:6.",
+    "BEIN JWJ A +Eb74: Bookplate: Carl Van Vechten: 2:3,6,8,11,12.",
+    "BEIN JWJ A +Eb74: Mailing label: Carl Van Vechten: 12:7-12; 13:10-12; 14:1-12; 15:1,4-5,7-12; 16:1-5,7-12; 17:1,3-6,9-12; 18:1-12; 19:1-12; 20:1-4,6; 22:7.",
+    "BEIN JWJ A +Eb74 9:6 copy 2: Reprint of article, Men's ware advertising, p. [93]-100 only.",
+    "DIV :  Library has current issues only"
+  ],
+  "geoSubject": "n-us---",
+  "genre": [
+    "Periodicals"
+  ],
+  "orbisBibId": "752400",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/callnumSRCHXC.asp?WC=N&SS=N&CN=JWJ_A_+Eb74",
+  "issn": "0012-9011",
+  "dateStructured": "1945999",
+  "illustrativeMatter": "mr p       0",
+  "titleStatement": [
+    "Ebony"
+  ],
+  "provenanceControlled": "Van Vechten, Carl, 1880-1964 Bookplate. Van Vechten, Carl, 1880-1964 Ownership. Johnson, John H. (John Harold), 1918- Autograph. Johnson, Eunice Walker Autograph. Johnson, Grace Nail, 1885-1976 Presentation inscription to Yale University Library.",
+  "bibId": 752400,
+  "suppressInOpac": false,
+  "createDate": "2002-06-01T04:00:00.000+0000",
+  "updateDate": "2020-02-27T14:43:04.000+0000",
+  "holdingCount": 5,
+  "children": []
+}

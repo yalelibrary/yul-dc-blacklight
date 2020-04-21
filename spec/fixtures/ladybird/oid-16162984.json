@@ -1,0 +1,58 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/16162984",
+  "identifierShelfMark": "Takamiya MS 36",
+  "title": [
+    "Old testament chronicle and genealogy of Christ (Part 1)."
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "publicationPlace": [
+    "[England],"
+  ],
+  "date": "[ca. 1400-1450]",
+  "extent": "1 roll : parchment ; 1600 x 291 mm.",
+  "language": [
+    "English, Middle (1100-1500)"
+  ],
+  "description": [
+    "Annotation at top of roll in late 18th century hand attributing ownership in 1485 to Richard Kidderminster, Abbot of Winchecombe.",
+    "Binding: modern case.",
+    "Decoration: names in colored cartouches of green or brown squares.",
+    "Layout: double column.",
+    "On deposit from the collection of Toshiyuki Takamiya, 2013-.",
+    "Originally formed a single roll with Takamiya MS 53.",
+    "Script: English gothic bookhand."
+  ],
+  "subjectName": [
+    "Jesus Christ--Genealogy--Early works to 1800."
+  ],
+  "subjectTopic": [
+    "Bible--Chronology--Early works to 1800.",
+    "English literature--Middle English, 1100-1500.",
+    "English prose literature--Middle English, 1100-1500.",
+    "Manuscripts, Medieval--Connecticut--New Haven.",
+    "Medieval and Renaissance Manuscripts in Beinecke Library."
+  ],
+  "genre": [
+    "Manuscripts, Medieval--England--15th century."
+  ],
+  "format": "text",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "11781026",
+  "orbisBarcode": "39002091549445",
+  "references": [
+    "A handlist of western Medieval manuscripts in the Takamiya collection / Toshiyuki Takamiya, in The Medieval book: glosses from friends &amp; colleagues of Christopher de Hamel, ed. by Richard Linenthal, James Marrow and William Noel. 't Goy-Houten: Hes &amp; De Graff, 2010, pp. 421-437.",
+    "Old Testament Chronicle and Genealogy of Christ (Part 1). Takamiya MS 36."
+  ],
+  "dateStructured": "1400-00-00T00:00:00Z",
+  "resourceType": "Archives or Manuscripts",
+  "illustrativeMatter": "131202i14001450ctu                 enm d",
+  "oid": 16162984,
+  "collectionId": 1,
+  "children": [],
+  "abstract": "Manuscript, on vellum, in a single hand, containing the first section of an Old Testament chronicle and genealogy of Christ in Middle English prose."
+}

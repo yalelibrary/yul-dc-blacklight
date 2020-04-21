@@ -1,0 +1,45 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/9896328",
+  "creator": [
+    "Galen"
+  ],
+  "title": [
+    "Opera varia"
+  ],
+  "publicationPlace": [
+    "Constantinople or southern Italy"
+  ],
+  "date": "[ca. 1300]",
+  "language": [
+    "gr"
+  ],
+  "description": [
+    "Material is open for research.",
+    "Manuscript on paper.",
+    "In Greek."
+  ],
+  "genre": [
+    "Manuscripts, Medieval Byzantine Empire 14th century",
+    "Manuscripts, Medieval Italy 14th century",
+    "Medieval and Renaissance Manuscripts in Beinecke Library"
+  ],
+  "format": "unspecified",
+  "orbisBibId": "9896328",
+  "importUrl": "https://pre1600ms.beinecke.library.yale.edu/docs/pre1600.ms1121.htm http://beinecke.library.yale.edu/dl_crosscollex/callnumSRCHXC.asp?WC=N&SS=N&CN=Beinecke_MS_1121",
+  "references": [
+    "Galen, Opera Varia. General Collection, Beinecke Rare Book and Manuscript Library, Yale University."
+  ],
+  "dateStructured": "1300   ",
+  "illustrativeMatter": "            ",
+  "titleStatement": [
+    "Opera varia"
+  ],
+  "bibId": 9896328,
+  "suppressInOpac": false,
+  "createDate": "2011-08-09T15:55:02.000+0000",
+  "updateDate": "2018-10-01T19:01:04.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

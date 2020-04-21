@@ -1,0 +1,33 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/2004628",
+  "identifierShelfMark": "WA MSS 278",
+  "sourceTitle": "Paintings",
+  "sourceCreated": "1846-1848",
+  "title": [
+    "Fort Vancouver"
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "date": "1846-1848",
+  "extent": "color",
+  "description": [
+    "A list of the paintings can be found in: Withington, M. C. 278.",
+    "By or after Lieutenant Warre.",
+    "Paintings described by Mr. C. P. Wilson in an article “Early Western Paintings” which appeared in The Beaver, June 1949 (no. 280)."
+  ],
+  "genre": [
+    "Oil paintings"
+  ],
+  "format": "still image",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "3163155",
+  "dateStructured": "1846-00-00T00:00:00Z",
+  "oid": 2004628,
+  "collectionId": 1,
+  "children": [],
+  "abstract": "A series of six framed oil paintings, four of them attributed to Paul Kane. Paintings depict Fort Vancouver, Snake River, buffalo, and buffalo hunting. This painting was a part of Mr. Coe's gift of his Western Collection, acquired from the widow of a grandson of Sir George Simpson, Governor of the Hudson’s Bay Company’s Territories in North America."
+}

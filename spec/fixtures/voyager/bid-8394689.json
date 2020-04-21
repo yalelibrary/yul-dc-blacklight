@@ -1,0 +1,54 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/8394689",
+  "title": [
+    "Di qiu quan tu",
+    "地球全圖"
+  ],
+  "alternativeTitle": [
+    "地球全圖"
+  ],
+  "edition": [
+    "Tao yin ben."
+  ],
+  "publicationPlace": [
+    "China",
+    "China",
+    "China"
+  ],
+  "publisher": [
+    "publisher not identified",
+    "publisher not identified"
+  ],
+  "date": "Xianfeng wu nian [1855]",
+  "extent": "1 map : color ; 93 x 170 cm",
+  "language": [
+    "ch"
+  ],
+  "scale": "Scale not determined.",
+  "coordinates": "-180.000000 180.000000 090.000000 -090.000000 (W 180°--E 180°/N 90°--S 90°).",
+  "genre": [
+    "World maps",
+    "Chinese rare maps"
+  ],
+  "format": "cartographic image",
+  "orbisBibId": "8394689",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/brbldl_getrec.asp?fld=img&id=16595618",
+  "dateStructured": "1855   ",
+  "illustrativeMatter": "       a    ",
+  "titleStatement": [
+    "Di qiu quan tu / Dechen zhi ; Chen Xiutang zhu zi.",
+    "地球全圖 / 德臣製 ; 陳修堂註字"
+  ],
+  "contributor": [
+    "Chen, Xiutang. 880-05",
+    "China."
+  ],
+  "bibId": 8394689,
+  "suppressInOpac": false,
+  "createDate": "2008-10-15T15:01:44.000+0000",
+  "updateDate": "2018-11-28T16:47:49.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

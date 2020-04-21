@@ -1,0 +1,48 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/13006050",
+  "title": [
+    "Livre du Lancelot du Lac: three miniatures"
+  ],
+  "publicationPlace": [
+    "Paris"
+  ],
+  "date": "[ca. 1440]",
+  "extent": "3 items : parchment ; 100 x100 mm (largest)",
+  "language": [
+    "fr"
+  ],
+  "description": [
+    "Binding: individually mounted.",
+    "This material is open for research.",
+    "Three miniatures, on vellum, from the copy of the Livre du Lancelot du Lac illustrated by the Dunois Master. They depict: 1) the Duke of Clarence and esquire, meeting a knight cutting off a woman's hair; 2) King Baudemagnus leading the battle against the Romans; 3) Lancelot's arrival at the city of Gorre.",
+    "In Middle French."
+  ],
+  "subjectName": [
+    "(Legendary character)"
+  ],
+  "genre": [
+    "Manuscripts, Medieval France 14th century",
+    "Early works to 1800",
+    "Medieval and Renaissance Manuscripts in Beinecke Library"
+  ],
+  "format": "unspecified",
+  "orbisBibId": "13006050",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/brbldl_getrec.asp?fld=img&id=16394251",
+  "references": [
+    "Livre du Lancelot du Lac: three miniatures (Takamiya MS 99). General Collection, Beinecke Rare Book and Manuscript Library, Yale University."
+  ],
+  "dateStructured": "1440   ",
+  "illustrativeMatter": "            ",
+  "titleStatement": [
+    "Livre du Lancelot du Lac: three miniatures"
+  ],
+  "provenanceUncontrolled": "Purchsed from Toshiyuki Takamiya on the Edwin J. Beinecke Book Fund, 2017.",
+  "bibId": 13006050,
+  "suppressInOpac": false,
+  "createDate": "2016-12-19T15:07:22.000+0000",
+  "updateDate": "2019-02-24T22:34:12.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

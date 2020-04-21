@@ -1,0 +1,46 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/3798665",
+  "creator": [
+    "Kinānī, ʻAbd al-ʻAzīz ibn Yaḥyá, d. 854 or 5."
+  ],
+  "title": [
+    "Kitāb al-ḥaydah"
+  ],
+  "alternativeTitle": [
+    "Ḥaydah wa-al-iʻtidhār fī al-radd ʾalá man qāla bi-khalq al-Qurʾān"
+  ],
+  "extent": "82 leaves ; 21.5 x 15 cm.",
+  "language": [
+    "ar"
+  ],
+  "description": [
+    "Fair naskhī.",
+    "Account of a disputation with Bishr ibn Ghayāth al-Marīsī, before the caliph al-Maʾmūn, on the question whether the Koran was created.",
+    "Followed by 1 leaf of notes.",
+    "Copied in A.H. 509 (A.D. 1116).",
+    "Available on microfilm from Beinecke Rare Book and Manuscript Library, Yale University"
+  ],
+  "subjectName": [
+    "d. 833.",
+    "Caliph, 786-833."
+  ],
+  "genre": [
+    "Theology"
+  ],
+  "format": "unspecified",
+  "orbisBibId": "3798665",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/brbldl_getrec.asp?fld=img&id=14716294",
+  "dateStructured": "1116   ",
+  "illustrativeMatter": "||          ",
+  "titleStatement": [
+    "Kitāb al-ḥaydah / li-ʻAbd al-ʻAzīz al-Kinānī al-Makkī. -- 1116"
+  ],
+  "bibId": 3798665,
+  "suppressInOpac": false,
+  "createDate": "2002-06-01T04:00:00.000+0000",
+  "updateDate": "2018-10-01T18:58:04.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

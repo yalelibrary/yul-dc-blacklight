@@ -1,0 +1,43 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/16414889",
+  "identifierShelfMark": "1978 1351",
+  "creator": [
+    "Cruikshank, George, 1792-1878."
+  ],
+  "title": [
+    "A comic alphabet, designed, etched & published by George Cruikshank, No. 23 Myddelton Terrace, Pentonville."
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "date": "1836.",
+  "extent": "24 plates. 13 cm.",
+  "language": [
+    "English"
+  ],
+  "description": [
+    "Cover-title.",
+    "Plates printed on a continuous strip of paper, folded in Japanese fashion ; linen backed ; portrait of the publisher Tilt on back cover. cf. A. M. Cohn, George Cruikshank, no. 189."
+  ],
+  "genre": [
+    "Accordion fold format (Binding).",
+    "Alphabet books",
+    "Book illustrations",
+    "Cartoons (Humorous images)",
+    "Etchings",
+    "Intaglio prints"
+  ],
+  "format": "mixed material",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "3577942",
+  "orbisBarcode": "39002113596465",
+  "dateStructured": "1836-00-00T00:00:00Z",
+  "resourceType": "Books, Journals & Pamphlets",
+  "illustrativeMatter": "931103s1836    enk           00010 eng d",
+  "oid": 16414889,
+  "collectionId": 1,
+  "children": []
+}

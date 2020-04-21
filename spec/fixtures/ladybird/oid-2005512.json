@@ -1,0 +1,27 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/2005512",
+  "identifierShelfMark": "GEN MSS 257",
+  "folder": "Folder 24",
+  "sourceTitle": "Abraham Lincoln collection, 1824-1865",
+  "title": [
+    "[Gold pen used by Lincoln to sign the Emancipation Proclamation in the Executive Mansion, Washington, D.C., 1863 Jan 1]"
+  ],
+  "extentOfDigitization": "Complete folder digitized.",
+  "date": "undated",
+  "extent": "17.5 cm.",
+  "genre": [
+    "Artifacts"
+  ],
+  "format": "three dimensional object",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "4113177",
+  "findingAid": "http://hdl.handle.net/10079/fa/beinecke.lincoln",
+  "oid": 2005512,
+  "collectionId": 1,
+  "children": []
+}

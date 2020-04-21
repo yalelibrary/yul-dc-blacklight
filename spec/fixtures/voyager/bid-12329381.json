@@ -1,0 +1,53 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/12329381",
+  "title": [
+    "Bible (Proverbs to Apocalypse)."
+  ],
+  "publicationPlace": [
+    "England"
+  ],
+  "date": "[between 1200 and 1299]",
+  "extent": "218 l. : parchment ; 212 x 145 mm.",
+  "language": [
+    "la"
+  ],
+  "description": [
+    "With an Oxford pledge note for the Selton Loan Chest dated 1469 and the mark of the stationer John More. There is also a note by M. Paris, possibly Master Thomas Paris of Oriel College.",
+    "Layout: double columns of 49 lines.",
+    "Script: small gothic script.",
+    "Decoration: red and blue penwork initials.",
+    "Binding: modern goatskin.",
+    "This material is open for research.",
+    "Manuscript, on parchment, of the books of the Bible from Proverbs through the Apocalypse.",
+    "In Latin."
+  ],
+  "subjectTopic": [
+    "Versions",
+    "Vulgate"
+  ],
+  "genre": [
+    "Manuscripts, Medieval England 13th century",
+    "Medieval and Renaissance Manuscripts in Beinecke Library"
+  ],
+  "format": "unspecified",
+  "orbisBibId": "12329381",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/brbldl_getrec.asp?fld=img&id=16565592",
+  "references": [
+    "Bible (Proverbs to Apocalypse) (Takamiya MS 104)."
+  ],
+  "dateStructured": "1200129",
+  "illustrativeMatter": "            ",
+  "titleStatement": [
+    "Bible (Proverbs to Apocalypse)."
+  ],
+  "provenanceControlled": "Coates, Ronald A. Autograph. Cron, Brian S. Ownership. Millar, Eric George Bookplate.",
+  "provenanceUncontrolled": "Ex libris Ronald A. Coates. Ex libris Eric Millar. Formerly owned by Brian S. Cron. Purchased from Toshiyuki Takamiya on the Edwin J. Beinecke Book Fund, 2017.",
+  "bibId": 12329381,
+  "suppressInOpac": false,
+  "createDate": "2014-12-15T15:09:26.000+0000",
+  "updateDate": "2019-02-24T22:34:16.000+0000",
+  "holdingCount": 1,
+  "children": []
+}
