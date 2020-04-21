@@ -1,53 +1,42 @@
 [![CircleCI](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master.svg?style=svg)](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master)
 
-# Running with Docker (recommended)
+# Prerequisites
+- Download [Docker Dekstop](https://www.docker.com/products/docker-desktop)
 
-1. docker-compose build base
-2. docker-compose build web
-3. docker-compose up web
-4. docker-compose exec web bash <-- to connect to the container
 
-You should now be able to access your rails app at `http://localhost` and your solr instance at `http://localhost:8983`
+# Docker Development Setup
+## If this is your first time working in this repo or the Dockerfile has been updated you will need to (re)build your services
+- Build the base service (foundation of the app)
+  ``` bash
+  docker-compose build base
+  ```
+- Build the web service
+  ``` bash
+  docker-compose build web
+  ```
+
+## Starting the app
+- Start the web service
+  ``` bash
+  docker-compose up web
+  ```
+- Access the rails app at `http://localhost:3000`
+- Access the solr instance at `http://localhost:8983`
+
 
 ## Indexing sample data
-
 `bundle exec rake yale:load_voyager_sample_data`
 
-# Not encouraged: Running locally
 
-## Prerequisites
+## Customizing Blacklight:
+There are many ways to override specific behaviors and views in Blacklight. Because Blacklight is distributed as a Rails engine-based gem, all customization of Blacklight behavior should be done within your application by overriding Blacklight-provided behaviors with your own.
 
-- Download [Postgresql](https://postgresapp.com/)
-- Install bundle - `gem install bundler`
+- To modify this text, you need to [override the Blacklight-provided view](http://guides.rubyonrails.org/engines.html#improving-engine-functionality). You can copy this file, located in the blacklight gem: `/usr/local/rvm/gems/ruby-2.6.5/gems/blacklight-7.7.0/app/views/catalog/_home_text.html.erb`
+to your own application: `/home/app/webapp/app/views/catalog/_home_text.html.erb`
+- [Index your own data](https://github.com/projectblacklight/blacklight/wiki/Indexing-your-data-into-solr) into Solr
+- [Configure Blacklight](https://github.com/projectblacklight/blacklight/wiki#blacklight-configuration) to match your data and user-experience needs
 
-## Get Started
 
-- Open the Postgresql app and press the "start" button
-- Navigate to the repo in your terminal and run `bundle install`
-- Run `rake db:create`
-
-  - this should create a "blacklight_yul_development" database and a "blacklight_yul_test" database
-
-- Run `rake db:migrate`
-
-- Start the solr_wrapper
-
-  ```bash
-  bundle exec solr_wrapper
-  ```
-
-- Start the server
-
-  ```bash
-  rails s
-  ```
-
-- Visit <http://localhost:3000/>
-
-  - If you get an error the first time, refresh the page
-
-## Troubleshooting
-
+# Troubleshooting
 - Error: "PG::UnableToSend: no connection to the server"
-
   - Solution: Make sure that you pressed "start" in the Postgresql app. If you open it, it should say "running" and there should be 2 three tiered images. Once for the blacklight_yul_development db and one for the blacklight_yul_test db
