@@ -1,0 +1,55 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/11756910",
+  "title": [
+    "Mirour of mans salvacioune"
+  ],
+  "alternativeTitle": [
+    "Speculum humanae salvationis. English, Middle (ca. 1100-1500)"
+  ],
+  "publicationPlace": [
+    "England"
+  ],
+  "date": "[ca. 1450]",
+  "extent": "64 l. : paper ; 284 x 210 mm",
+  "language": [
+    "en"
+  ],
+  "description": [
+    "Layout: single columns of 17 lines.",
+    "Script: gothic bookhand.",
+    "Decoration: some initials, line fillers, underlining, in red ink.",
+    "Binding: nineteenth-century full brown morocco, gilt.",
+    "This material is open for research.",
+    "Manuscript, on paper, in a single hand, of the English verse translation of this work of popular theology and devotional meditation.",
+    "In Middle English."
+  ],
+  "genre": [
+    "Manuscripts, Medieval England 15th century",
+    "Early works to 1800",
+    "Early works to 1800",
+    "Early works to 1800",
+    "Medieval and Renaissance Manuscripts in Beinecke Library"
+  ],
+  "format": "unspecified",
+  "orbisBibId": "11756910",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/brbldl_getrec.asp?fld=img&id=16157343",
+  "references": [
+    "Mirour of mans salvacioune (Takamiya MS 97). General Collection, Beinecke Rare Book and Manuscript Library, Yale University."
+  ],
+  "dateStructured": "1450   ",
+  "illustrativeMatter": "            ",
+  "subjectEra": "Middle English, 1100-1500. Middle English, 1100-1500.",
+  "titleStatement": [
+    "Mirour of mans salvacioune"
+  ],
+  "provenanceControlled": "Foyle, William A. (William Alfred), 1885-1963 Bookplate. Harmsworth, R. Leicester (Robert Leicester), Sir, 1870-1937 Ownership. Huth, Alfred Henry, 1850-1910 Bookplate.",
+  "provenanceUncontrolled": "Ex libris Alfred Henry Huth. Formerly owned by Sir Leicester Harmsworth. Ex libris William and Christina Foyle. Purchased from Toshiyuki Takamiya on the Edwin J. Beinecke Book Fund, 2017.",
+  "bibId": 11756910,
+  "suppressInOpac": false,
+  "createDate": "2013-11-14T20:16:50.000+0000",
+  "updateDate": "2019-02-24T22:33:39.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

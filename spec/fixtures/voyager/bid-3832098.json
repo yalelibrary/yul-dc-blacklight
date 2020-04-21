@@ -1,0 +1,36 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/3832098",
+  "title": [
+    "[Qiṣṣat Sindbād al-barrī]. --"
+  ],
+  "extent": "81 leaves ; 20.5 x 14.5 cm.",
+  "language": [
+    "ar"
+  ],
+  "description": [
+    "Fair modern (18th century?) naskhī, in red and black.",
+    "A few leaves supplied in a later hand.",
+    "Islamic binding, paper covered, with flap.",
+    "The tale of Sindbād and his princely pupil, in colloquial Arabic.",
+    "Incomplete at beginning and end."
+  ],
+  "genre": [
+    "Arabic language and literature",
+    "Islamic binding"
+  ],
+  "format": "unspecified",
+  "orbisBibId": "3832098",
+  "dateStructured": "1700179",
+  "illustrativeMatter": "||          ",
+  "titleStatement": [
+    "[Qiṣṣat Sindbād al-barrī]. -- [17--?]."
+  ],
+  "bibId": 3832098,
+  "suppressInOpac": false,
+  "createDate": "2002-06-01T04:00:00.000+0000",
+  "updateDate": "2018-10-01T18:58:15.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

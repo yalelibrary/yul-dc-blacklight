@@ -1,0 +1,48 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/2111169",
+  "identifierShelfMark": "Beinecke MS 1121",
+  "creator": [
+    "Galen"
+  ],
+  "title": [
+    "Opera varia"
+  ],
+  "alternativeTitle": [
+    "[ad Glauconem de medendi methodo]",
+    "[On the therapeutic method. Greek]"
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "publicationPlace": [
+    "[Constantinople or southern Italy]"
+  ],
+  "date": "ca. 1300",
+  "extent": "1 vol.",
+  "language": [
+    "Greek, Ancient (to 1453)"
+  ],
+  "description": [
+    "Brown ink on paper."
+  ],
+  "subjectTopic": [
+    "Medicine --Early works to 1800"
+  ],
+  "genre": [
+    "Manuscripts"
+  ],
+  "format": "text",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "9896328",
+  "orbisBarcode": "39002099258734",
+  "importUrl": "https://pre1600ms.beinecke.library.yale.edu/docs/pre1600.ms1121.htm",
+  "dateStructured": "1300-00-00T00:00:00Z",
+  "resourceType": "Archives or Manuscripts",
+  "oid": 2111169,
+  "collectionId": 1,
+  "children": [],
+  "abstract": "MS of 8 works by Galen in Greek: 1. ff.1-15v Galen, de temperamentis. 2. ff.15v-54r Galen, de naturalibus facultatibus 3. ff.54r-54v short fragment of unknown provenance. 4. ff.54v-57v Galen, de inaequali intemperie. 5. ff.57v-60 Galen, de optima corporis nostri constitutione. 6. ff.60-61 Galen, de bono habitu 7. ff.62-106 Galen, de difficultate respirationis 8. ff.107-140 Galen ad Glauconem de medendi methodo 9.141-154 Galen de alimentorum facultatibus."
+}

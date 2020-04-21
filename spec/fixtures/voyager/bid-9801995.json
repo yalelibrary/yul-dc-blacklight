@@ -1,0 +1,56 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/9801995",
+  "creator": [
+    "Zeno, Jacopo, 1417-1481"
+  ],
+  "title": [
+    "Vita Caroli Zeni"
+  ],
+  "publicationPlace": [
+    "Italy"
+  ],
+  "date": "[ca. 1458]",
+  "extent": "ff. ii + 192 + i : parchment ; 271 x 177 (177 x 106) mm.",
+  "language": [
+    "la"
+  ],
+  "description": [
+    "Script: Written in humanistic script by Franciscus de Tianis of Pistoia.",
+    "On f. 1r, a foliage border which includes hares, stork, vase, and arms of the Piccolomini family (argent, a cross azur with 5 crescents or; surmounted by keys in saltire argent and a papal tiara; supported by a pair of angels). Eleven elaborate initials, 11- to 7-line, in gold, red, blue, and green entwined with foliage. The style of decoration is decidedly Roman.",
+    "Binding: Eighteenth century. Brownish-red goatskin, gold-tooled; pale green and gold, Dutch gilt paper boards.",
+    "Material is open for research.",
+    "Manuscript on parchment of Jacopo Zeno, Vita Caroli Zeni. With a dedicatory preface to Pope Pius II. This manuscript is of special importance because it contains the complete work.",
+    "In Latin.",
+    "De Ricci, v. 1, p. 161, no. 2. Exhibition Catalogue: W. Cahn and J. Marrow, eds., \"Medieval and Renaissance Manuscripts at Yale: A Selection,\" Yale University Library Gazette 52 (1978), pp. 229-30, no. 54, pl. 20 (f.1r).",
+    "Record created by Beinecke staff from catalog description by Barbara Shailor."
+  ],
+  "subjectName": [
+    "1334-1418.",
+    "1417-1481."
+  ],
+  "genre": [
+    "Manuscripts, Medieval Italy 15th century",
+    "Medieval and Renaissance Manuscripts in Beinecke Library"
+  ],
+  "format": "unspecified",
+  "orbisBibId": "9801995",
+  "importUrl": "https://pre1600ms.beinecke.library.yale.edu/docs/pre1600.ms002.htm http://beinecke.library.yale.edu/dl_crosscollex/callnumSRCHXC.asp?WC=N&SS=N&CN=Beinecke_MS_2",
+  "references": [
+    "Jacopo Zeno, Vita Caroli Zeni. General Collection, Beinecke Rare Book and Manuscript Library, Yale University."
+  ],
+  "dateStructured": "1458   ",
+  "illustrativeMatter": "            ",
+  "subjectEra": "Middle Ages, 500-1500. 13th-15th centuries.",
+  "titleStatement": [
+    "Vita Caroli Zeni"
+  ],
+  "provenanceUncontrolled": "Purchased by William Loring Andrews who presented it to Yale in 1894.",
+  "bibId": 9801995,
+  "suppressInOpac": false,
+  "createDate": "2011-06-20T15:39:47.000+0000",
+  "updateDate": "2018-10-01T19:00:38.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

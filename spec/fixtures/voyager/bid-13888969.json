@@ -1,0 +1,46 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/13888969",
+  "title": [
+    "[Ethiopian scroll of spiritual healing]."
+  ],
+  "publicationPlace": [
+    "Ethiopia"
+  ],
+  "date": "[19th century].",
+  "extent": "1 scroll : on parchment ; 104 x 1565 mm",
+  "language": [
+    "ge"
+  ],
+  "description": [
+    "Scroll on parchment, one column, single-line borders, rubricated for the start of new prayers and for the names of the saints and for the name(s) of the owner(s).",
+    "Probably missing a third strip of parchment that would have carried final prayers and a third illumination.",
+    "This material is open for research.",
+    "Manuscript in an unidentified hand. Lines 1-44, Asmat prayer against charm, ጸሎት፡ በእንተ፡ መፍትሔ፡ ሥራይ፡; lines 44-81, Asmat prayer against charm,  ጸሎት፡ በእንተ፡ መፍትሔ፡ ሥራይ፡; lines 82-141, Asmat prayer against charm, ጸሎት፡ በእንተ፡ መፍትሔ፡ ሥራይ፡; lines 141-169, Asmat prayer against fever or diarrhea, ጸሎት፡ በእንተ፡ ፍፀ[ን]ት; lines 170-188, Asmat prayer for the binding of demons, ጸሎት፡ በእንተ፡ ማእሠረ፡ አጋንንት፡; lines 188-197, Prayer against the suffering of [the demon] Buda, ጸሎት፡ በእንተ፡ ሕማመ፡ ቡደ, illegible at the end.",
+    "Illuminations:  1. Guardian angel (possibly Gabriel or Michael) with sword and scabbard, in black, red, green, and blue.  The lower garment of the angel is of checkerboard of black, red, and white.  The calves are alternating stripes in red and green.  The shoes have toes that curl.  2.  Talismanic symbol in the shape of a Roman cross, with face in center, in blue, red, and black.",
+    "Copied for Aksala Maryam, primary owner.  A secondary hand has added the name Walatta Gabra'el.",
+    "In Geʻez."
+  ],
+  "genre": [
+    "Manuscripts, Ethiopic Ethiopia 19th century",
+    "Ethiopic manuscripts"
+  ],
+  "format": "text",
+  "orbisBibId": "13888969",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/callnumSRCHXC.asp?WC=N&SS=N&CN=Ethiopic_MSS_28",
+  "references": [
+    "Ethiopian Scroll of Spiritual Healing.  General Collection, Beinecke Rare Book and Manuscript Library, Yale University."
+  ],
+  "dateStructured": "1800189",
+  "illustrativeMatter": "            ",
+  "titleStatement": [
+    "[Ethiopian scroll of spiritual healing]."
+  ],
+  "bibId": 13888969,
+  "suppressInOpac": false,
+  "createDate": "2018-12-19T19:46:46.000+0000",
+  "updateDate": "2019-01-02T15:55:08.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

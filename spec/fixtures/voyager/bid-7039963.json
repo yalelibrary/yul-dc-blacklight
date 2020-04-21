@@ -1,0 +1,35 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/7039963",
+  "title": [
+    "\"Vaudevilles et chansons\""
+  ],
+  "extent": "1 v. (ca. 300 p.) ; 25 x 18 cm.",
+  "language": [
+    "fr"
+  ],
+  "description": [
+    "Binding: Contemporary French blue morocco, gilt with the arms of Michel Begon on front and back.",
+    "Bookplate of E. Valdruche.",
+    "Anonymous MS.",
+    "Containing a collection of anonymous French love songs and vaudevilles, with an alphabetical index at the back."
+  ],
+  "orbisBibId": "7039963",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/brbldl_getrec.asp?fld=img&id=1262704",
+  "references": [
+    "Vaudevilles et Chansons. James Marshall and Marie-Louise Osborn Collection, Beinecke Rare Book and Manuscript Library, Yale University."
+  ],
+  "dateStructured": "17uu   ",
+  "illustrativeMatter": "uuu         ",
+  "titleStatement": [
+    "\"Vaudevilles et chansons\", [18th Century]."
+  ],
+  "provenanceUncontrolled": "For information on the source of acquisition, consult the appropriate curator.",
+  "bibId": 7039963,
+  "suppressInOpac": false,
+  "createDate": "2005-08-08T18:02:48.000+0000",
+  "updateDate": "2018-07-06T14:27:08.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

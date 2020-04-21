@@ -1,0 +1,47 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/10001192",
+  "identifierMfhd": "/repositories/11/archival_objects/304086",
+  "identifierShelfMark": "GEN MSS 963",
+  "box": "7",
+  "sourceTitle": "George Eliot and George Henry Lewes collection",
+  "sourceDate": "1834-1981",
+  "sourceNote": "Section III. Letters to/about GEORGE ELIOT & GEORGE HENRY LEWES. Bracebridge, Charles Holte, 1799-1872",
+  "creator": [
+    "Bracebridge, Charles Holte, 1799-1872 "
+  ],
+  "title": [
+    "to GE"
+  ],
+  "extentOfDigitization": "Complete folder digitized.",
+  "date": "1859 Oct 10",
+  "extent": "3 p.",
+  "description": [
+    "Holograph letter, signed."
+  ],
+  "subjectName": [
+    "Eliot, George, 1819-1880"
+  ],
+  "subjectTopic": [
+    "Authors, English --19th century --Archives"
+  ],
+  "genre": [
+    "Correspondence"
+  ],
+  "format": "text",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "3659107",
+  "orbisBarcode": "39002091548348",
+  "findingAid": "http://hdl.handle.net/10079/fa/beinecke.eliot",
+  "references": [
+    "George Eliot and George Henry Lewes Collection. General Collection, Beinecke Rare Book and Manuscript Library.\n\n"
+  ],
+  "dateStructured": "1859-10-10T00:00:00Z",
+  "oid": 10001192,
+  "collectionId": 1,
+  "children": []
+}

@@ -1,0 +1,49 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/16057779",
+  "identifierShelfMark": "WA MSS S-3019",
+  "box": "Box 2",
+  "sourceTitle": "[Objects associated with Buffalo Bill]",
+  "sourceDate": "[circa 1870-1895]",
+  "title": [
+    "Rawhide bolas"
+  ],
+  "date": "[1870]",
+  "extent": "1 bolas : 121 cm.",
+  "description": [
+    "One twisted rawhide bolas with three rawhide-covered weights, and measuring 121 cm in length. Used to capture running game during a hunt, the bolas is unmarked and its original owner is unidentified."
+  ],
+  "subjectName": [
+    "Buffalo Bill,--1846-1917.",
+    "Buffalo Bill's Wild West Company.",
+    "Buffalo Bill's Wild West Show.",
+    "Salsbury, Nathan,--1846-1902.",
+    "Sitting Bull,--1831-1890."
+  ],
+  "subjectTopic": [
+    "Theatrical managers--United States.",
+    "Wild west shows."
+  ],
+  "genre": [
+    "Bolas (projectile weapons)--United States--19th century."
+  ],
+  "format": "three dimensional object",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement"
+  ],
+  "orbisBibId": "12442385",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/callnumSRCHXC.asp?&amp;CN=WA_MSS_S-3019",
+  "references": [
+    "Nathan Salsbury, Objects Associated with Buffalo Bill. Yale Collection of Western Americana, Beinecke Rare Book and Manuscript Library."
+  ],
+  "dateStructured": "1870-00-00T00:00:00Z",
+  "resourceType": "Tools, Equipment & Instruments",
+  "illustrativeMatter": "150424i18701895vp nnn            rneng d",
+  "copyrightDate": "[circa 1870-1895]",
+  "oid": 16057779,
+  "collectionId": 1,
+  "children": [],
+  "abstract": "Nathan Salsbury (1846-1902), Civil War veteran, actor, and theatrical entrepreneur; after 1884 co-owner, producer and manager of \"Buffalo Bill's Wild West Show.\""
+}

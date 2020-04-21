@@ -1,0 +1,48 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/13640726",
+  "title": [
+    "Book of hours (fragment)"
+  ],
+  "publicationPlace": [
+    "Flanders"
+  ],
+  "date": "[ca. 1300]",
+  "extent": "1 l. : parchment ; 65 x 85 mm",
+  "language": [
+    "la"
+  ],
+  "description": [
+    "Script: Gothic.",
+    "Decoration: decorated border showing two hounds chasing a stag.",
+    "Byname: Ghistelles Hours.",
+    "This material is open for research.",
+    "Lower half of a single manuscript leaf, on parchment, containing five lines of text and marginal decoration. From the \"Ghistelles Hours.\"",
+    "In Latin."
+  ],
+  "genre": [
+    "Manuscripts, Medieval Flanders 14th century",
+    "Early works to 1800",
+    "Medieval and Renaissance Manuscripts in Beinecke Library"
+  ],
+  "format": "unspecified",
+  "orbisBibId": "13640726",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/brbldl_getrec.asp?fld=img&id=16700284",
+  "references": [
+    "Book of Hours (Fragment). Takamiya MS 142."
+  ],
+  "dateStructured": "1400   ",
+  "illustrativeMatter": "            ",
+  "titleStatement": [
+    "Book of hours (fragment)"
+  ],
+  "provenanceControlled": "Cockerell, Sydney Carlyle, Sir, 1867-1962 Ownership. Thomas, Alan G. Ownership.",
+  "provenanceUncontrolled": "Previously owned by Sir Sydney Cockerell? Previously owned by Alan G. Thomas. Purchased from Toshiyuki Takamiya on the Edwin J. Beinecke Book Fund, 2017.",
+  "bibId": 13640726,
+  "suppressInOpac": false,
+  "createDate": "2018-06-18T15:04:26.000+0000",
+  "updateDate": "2019-04-23T14:13:33.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

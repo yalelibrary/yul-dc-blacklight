@@ -1,0 +1,52 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/12297336",
+  "title": [
+    "Missal, use of Sarum (fragment)"
+  ],
+  "publicationPlace": [
+    "England"
+  ],
+  "date": "[between 1400 and 1450]",
+  "extent": "3 l. : parchment ; 491 x 340 mm.",
+  "language": [
+    "la"
+  ],
+  "description": [
+    "Layout: double columns of 39 lines.",
+    "Script: gothic liturgical script.",
+    "Decoration: numerous initials in burnished gold or blue; extensive penwork.",
+    "This material is open for research.",
+    "Manuscript leaves from a Sarum missal, containing text from Masses for the third and eighth Sundays after Pentecost and for the dedication of a church.",
+    "In Latin."
+  ],
+  "subjectName": [
+    ""
+  ],
+  "genre": [
+    "Manuscripts, Medieval England 15th century",
+    "Missals England 15th century",
+    "Early works to 1800",
+    "Medieval and Renaissance Manuscript Fragments in Beinecke Library",
+    "Medieval and Renaissance Manuscripts in Beinecke Library"
+  ],
+  "format": "unspecified",
+  "orbisBibId": "12297336",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/brbldl_getrec.asp?fld=img&id=16394803",
+  "references": [
+    "Missal, Use of Sarum (Fragment) (Takamiya MS 81). General Collection, Beinecke Rare Book and Manuscript Library, Yale University."
+  ],
+  "dateStructured": "1400145",
+  "illustrativeMatter": "            ",
+  "titleStatement": [
+    "Missal, use of Sarum (fragment)"
+  ],
+  "provenanceUncontrolled": "Purchased from Toshiyuki Takamiya on the Edwin J. Beinecke Book Fund, 2017.",
+  "bibId": 12297336,
+  "suppressInOpac": false,
+  "createDate": "2014-11-12T19:59:10.000+0000",
+  "updateDate": "2019-02-24T22:33:44.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

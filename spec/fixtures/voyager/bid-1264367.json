@@ -1,0 +1,51 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/1264367",
+  "title": [
+    "The glory of old England ..."
+  ],
+  "alternativeTitle": [
+    "",
+    ""
+  ],
+  "publicationPlace": [
+    "White-Hall"
+  ],
+  "publisher": [
+    "printed upon the ice, on the River Thames, February the 18th"
+  ],
+  "date": "1739-40.",
+  "extent": "broadside : illus. ; 42 x 21 cm.",
+  "language": [
+    "en"
+  ],
+  "description": [
+    "Engraving showing the statue of Queen Anne at Blenhiem Palace (in background), and text of inscription by Sarah Marlborough, dated 1738, with imprint: London, Printed & published ... by R. Walker, in Fleet Lane.",
+    "With verse: Behold the liquid Thames now frozen o'er ..."
+  ],
+  "subjectName": [
+    "Queen of Great Britain, 1665-1714."
+  ],
+  "genre": [
+    "Brit Tracts"
+  ],
+  "orbisBibId": "1264367",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/brbldl_getrec.asp?fld=img&id=1112693",
+  "dateStructured": "1739174",
+  "illustrativeMatter": "            ",
+  "subjectEra": "1740.",
+  "titleStatement": [
+    "The glory of old England ... / William Bailey"
+  ],
+  "contributor": [
+    "Marlborough, Sarah Jennings Churchill, Duchess of, 1660-1744.",
+    "Bailey, William."
+  ],
+  "bibId": 1264367,
+  "suppressInOpac": false,
+  "createDate": "2002-06-01T04:00:00.000+0000",
+  "updateDate": "2015-06-23T22:13:18.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

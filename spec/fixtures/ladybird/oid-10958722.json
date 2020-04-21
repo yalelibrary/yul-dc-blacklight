@@ -1,0 +1,59 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/10958722",
+  "identifierShelfMark": "Beinecke MS 801",
+  "title": [
+    "Texts on St. Jerome"
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "publicationPlace": [
+    "Settimo near Florence,"
+  ],
+  "date": "1 May 1457.",
+  "extent": "ff. i + 79 + ix : paper and parchment ; 230 x 170 mm.",
+  "material": "parchment",
+  "language": [
+    "Italian"
+  ],
+  "description": [
+    "Binding: Quarter binding of bevelled wooden boards (worm-eaten) and brown leather; spine with three raised bands and paper title label with handwritten 17th-century inscription: “Vita / di S. / Girola.” On the boards marks of one clasp attached to the front board and on the front board the ca. 1800 inscription “JO.” written in black ink. Possibly the binding once belonged to another manuscript.",
+    "Collection of Bernard M. Rosenthal (MS 38). Purchased from him on the Edwin J. Beinecke Fund.",
+    "Description follow modern foliation which includes two preliminary leaves..",
+    "Headings in pale red, often difficult to read. Yellow heightening of the majuscules. Initials, with guide letters written in the space reserved for the initial: (1) flourished initials (3-4 lines) in red with pale red (or brown) penwork or in blue with red penwork, sometimes with marginal penwork extensions; (2) at the beginning of each text a larger initial; the letters following this type of initial are majuscules. F. 3r: 12-line blue initial of the littera duplex type with extensive penwork in red and some blue, with decorative border in the same colours in the inner and lower margin and tendrils in the other margins containing flowers and acorns; the border of the lower margin terminates in a medallion containing a coat of arms; ff. 8r, 41r: 9-line initial of the same type and in the same colours; f. 47v: 6-line, idem; f. 77v: 7-line black initial.",
+    "Script: Copied by one hand in a peculiar form of Southern Gothica Textualis Libraria under Humanistic influence as visible in the total lack of compression; special features are: the sloping hairline at the top of the second stroke of e, parallelled by the sloping stroke on i; h with exceptionally long curved extension under the baseline; the forked lower ending of f and straight s on or under the baseline and the forked descender of p; and the very fancy majuscules.",
+    "The lower margin of f. 62 torn off."
+  ],
+  "subjectName": [
+    "Jerome,--Saint,--d. 419 or 20"
+  ],
+  "subjectTopic": [
+    "Christian hagiography",
+    "Illumination of books and manuscripts, Medieval",
+    "Latin letters",
+    "Manuscripts, Medieval--Connecticut--New Haven",
+    "Medieval and Renaissance Manuscripts in Beinecke Library"
+  ],
+  "genre": [
+    "Decorated initials",
+    "Manuscript waste (Binding)",
+    "Manuscripts",
+    "Rubrics"
+  ],
+  "format": "text",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "9869346",
+  "orbisBarcode": "39002104686564",
+  "importUrl": "https://pre1600ms.beinecke.library.yale.edu/docs/MS801.pdf",
+  "references": [
+    "Texts on St. Jerome. General Collection, Beinecke Rare Book and Manuscript Library, Yale University."
+  ],
+  "resourceType": "Archives or Manuscripts",
+  "oid": 10958722,
+  "collectionId": 1,
+  "children": [],
+  "abstract": "Manuscript on paper and parchment containing 1) Ownership inscription and note on the scribe, followed by a variant form of a Biblical quotation (Lamentations 3:27-28). 2) Legend of St. Jerome in Italian, with special attention for miraculous events, as an introduction to artt. 4-6. Quotes Iohannes Belet (12th century), St. Augustine, Prosper of Aquitaine, Isidore of Seville, Sulpicius Severus. 3) Ps.-Eusebius, Epistula de morte Hieronymi (BHL 3866), Italian translation. 4) Ps. -Augustinus Hipponensis, Epistola de magnificentiis Hieronymi (BHL 3867), Italian translation. 5) Ps.-Cyrillus, Epistola de miraculis Hieronymi (BHL 3868), in Italian translation. 6) History of abbot Daniel living in Thebais and his disobedient servant, to whom he tells the life of a virtuous man they have met, called Eulogius, who eventually became patricius and praefectus praetorio in Constantinople at the time of emperor Justinus I (518-527); due to the loss of one or more quires the major part of the text, containing the intervention of the Virgin, is missing."
+}

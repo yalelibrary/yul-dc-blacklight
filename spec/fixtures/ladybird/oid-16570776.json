@@ -1,0 +1,55 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/16570776",
+  "identifierShelfMark": "EEa 794b",
+  "creator": [
+    "Baldwyn, George Augustus."
+  ],
+  "title": [
+    "A new, royal, authentic, complete, and universal system of geography: or, A modern history and description of the whole world. Containing ... accounts and descriptions of Europe, Asia, Africa, and America ... including the substance and essence of the most remarkable voyages and travels ... particularly the late discoveries in the South seas, and towards the North pole ... Comprising every interesting discovery and circumstance in the narratives of Captain Cook's voyages round the world. Together with all the recent discoveries ... carefully written and compiled from the late journals of ... Captains Phillips, King, Ball, Hunter, White, Dixon, Portlock, Mears, Patterson, Bruce, Anbury, Rochon, Morse, Blyth, Ross, Imlay, Keate, Brissot, Hodges, &c. &c. Also compendious histories of every empire, kingdom, state, &c. ... The whole embellished and enriched with upwards of an hundred most elegant and superb copperplates ... By George Augustus Baldwyn, esq. assisted by many gentlemen eminent for their knowledge ... of geography; particularly Charles Andres Robertson, esq.--Clement Walley Oulton. esq.-- and Henry Hogg ..."
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "publicationPlace": [
+    "London,"
+  ],
+  "publisher": [
+    "Sold by A. Hogg"
+  ],
+  "date": "[1794?]",
+  "extent": "iv [4] v-viii, v-cxii, 812 (i.e. 816) [4] p. front., 71 pl., 17 maps. 40 x 25 cm.",
+  "language": [
+    "English"
+  ],
+  "description": [
+    "Autograph of N.B. Haswell.",
+    "Irregularities in paging 1 map (Europe) wanting.",
+    "Many of the plates dated 1794."
+  ],
+  "subjectName": [
+    "Haswell, N.B.--Autograph.",
+    "Hogg, Henry.",
+    "Outlon, Clement Walley.",
+    "Robertson, Charles Andrew."
+  ],
+  "subjectTopic": [
+    "Geography."
+  ],
+  "genre": [
+    "Intaglio prints",
+    "Maps"
+  ],
+  "format": "text",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "5404463",
+  "orbisBarcode": "39002002294065",
+  "dateStructured": "1794-00-00T00:00:00Z",
+  "resourceType": "Books, Journals & Pamphlets",
+  "illustrativeMatter": "841208s1794    enkbf         000 0 eng",
+  "oid": 16570776,
+  "collectionId": 1,
+  "children": []
+}

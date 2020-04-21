@@ -1,0 +1,42 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/1169354",
+  "creator": [
+    "Johnson, Samuel, 1709-1784"
+  ],
+  "title": [
+    "A dictionary of the English language ..."
+  ],
+  "publicationPlace": [
+    "London"
+  ],
+  "publisher": [
+    "Printed by W. Strahan, for J. and P. Knapton [etc.]"
+  ],
+  "date": "1755]",
+  "extent": "3 v. ; 43 cm.",
+  "language": [
+    "en"
+  ],
+  "description": [
+    "BEIN GEN MSS VOL 728 (Oversize):  Incomplete copy of mixed sheets and proofs of the first edition, with corrections by Johnson and his amanuenses, which first appeared in the 4th edition, 1773. Without t.p.'s and preliminary matter; with some omissions, text runs from A-Pum. Armorial binding of Ralph Sneyd."
+  ],
+  "genre": [
+    "Dictionaries"
+  ],
+  "orbisBibId": "1169354",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/callnumSRCHXC.asp?WC=N&SS=N&CN=GEN_MSS_VOL_728_(Oversize)",
+  "dateStructured": "1755   ",
+  "illustrativeMatter": "      d    0",
+  "titleStatement": [
+    "A dictionary of the English language ... / by Samuel Johnson ..."
+  ],
+  "provenanceControlled": "Johnson, Samuel, 1709-1784 Ms. notes. Sneyd, Ralph Binding.",
+  "bibId": 1169354,
+  "suppressInOpac": false,
+  "createDate": "2002-06-01T04:00:00.000+0000",
+  "updateDate": "2020-03-03T13:49:15.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

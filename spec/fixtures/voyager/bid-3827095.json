@@ -1,0 +1,36 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/3827095",
+  "creator": [
+    "Maqrīzī, Aḥmad ibn ʻAlī, 1364-1442"
+  ],
+  "title": [
+    "al-Bayān wa-al-iʻrāb ʻammā bi-arḍ Miṣr min al-Aʻrāb"
+  ],
+  "extent": "15 leaves ; 33 x 22 cm.",
+  "language": [
+    "ar"
+  ],
+  "description": [
+    "Modern (19th century) naskhī.",
+    "Treatise on the Arab tribes which settled in Egypt."
+  ],
+  "genre": [
+    "History"
+  ],
+  "format": "unspecified",
+  "orbisBibId": "3827095",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/brbldl_getrec.asp?fld=img&id=11977426",
+  "dateStructured": "1800189",
+  "illustrativeMatter": "||          ",
+  "titleStatement": [
+    "al-Bayān wa-al-iʻrāb ʻammā bi-arḍ Miṣr min al-Aʻrāb / Aḥmad ibn ʻAlī al-Maqrīzī. -- [18--?]."
+  ],
+  "bibId": 3827095,
+  "suppressInOpac": false,
+  "createDate": "2002-06-01T04:00:00.000+0000",
+  "updateDate": "2018-10-01T18:58:13.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

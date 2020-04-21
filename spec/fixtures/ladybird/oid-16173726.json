@@ -1,0 +1,56 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/16173726",
+  "identifierShelfMark": "Covers 5626 +1880",
+  "creator": [
+    "Li, Mengquan (Cartographer), cartographer.",
+    "李蒙泉 (Cartographer), cartographer."
+  ],
+  "title": [
+    "Su Sheng yu di ying wu quan tu / ji yong zhi xian Li Mengquan, Chen Jiaxun tong jian hua."
+  ],
+  "alternativeTitle": [
+    "蘇省輿地營伍全圖 / 即用知縣李蒙泉, 陳嘉勲仝監畫."
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "extent": "1 map on 6 volumes : color ; 124 x 159 cm, folded to 27 x 9 cm",
+  "language": [
+    "Chinese"
+  ],
+  "description": [
+    "\"Mei fang er shi li\"--Volume 6.",
+    "\"每方二十里\"--Volume 6."
+  ],
+  "subjectName": [
+    "Chen, Jiaxun (Cartographer), cartographer.",
+    "陳嘉勲 (Cartographer), cartographer."
+  ],
+  "subjectTopic": [
+    "Chinese rare maps.",
+    "Military camps.--(OCoLC)fst01021054",
+    "Military camps--China--Jiangsu Sheng--Maps."
+  ],
+  "geoSubject": "a-cc-ku",
+  "scale": "Scale not given.",
+  "coordinates": "a",
+  "genre": [
+    "Maps.--(OCoLC)fst01423704",
+    "Military maps.",
+    "Pictorial maps."
+  ],
+  "format": "cartographic",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "12286028",
+  "orbisBarcode": "39002113593728",
+  "dateStructured": "1880-00-00T00:00:00Z",
+  "resourceType": "Maps, Atlases & Globes",
+  "illustrativeMatter": "141028s1880    cc        a     0   chi d",
+  "copyrightDate": "[1880?]",
+  "oid": 16173726,
+  "collectionId": 1,
+  "children": []
+}

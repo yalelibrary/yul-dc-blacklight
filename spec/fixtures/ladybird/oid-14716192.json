@@ -1,0 +1,52 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/14716192",
+  "identifierShelfMark": "Landberg MSS 75",
+  "creator": [
+    "Kinānī, ʻAbd al-ʻAzīz ibn Yaḥyá, d. 854 or 5"
+  ],
+  "title": [
+    "Kitāb al-ḥaydah / li-ʻAbd al-ʻAzīz al-Kinānī al-Makkī. -- 1116."
+  ],
+  "alternativeTitle": [
+    "Ḥaydah wa-al-iʻtidhār fī al-radd ʾalá man qāla bi-khalq al-Qurʾān"
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "extent": "82 leaves ; 21.5 x 15 cm.",
+  "language": [
+    "Arabic"
+  ],
+  "description": [
+    "Fair naskhī."
+  ],
+  "subjectName": [
+    "Maʾmūn,--Caliph,--786-833",
+    "Marīsī, Bishr ibn Ghayāth,--d. 833"
+  ],
+  "subjectTopic": [
+    "Theology--Dogmatics"
+  ],
+  "genre": [
+    "Manuscripts"
+  ],
+  "format": "text",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "3798665",
+  "orbisBarcode": "39002094341147",
+  "references": [
+    "440.",
+    "Berlin catalog,",
+    "Brockelmann,",
+    "I, 193; S I, p. 340."
+  ],
+  "dateStructured": "1116-00-00T00:00:00Z",
+  "illustrativeMatter": "ara d",
+  "oid": 14716192,
+  "collectionId": 1,
+  "children": [],
+  "abstract": "Followed by 1 leaf of notes."
+}

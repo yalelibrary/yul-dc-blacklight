@@ -1,0 +1,44 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/16189097",
+  "identifierShelfMark": "Lanman Covers 56 189x",
+  "title": [
+    "[Map of China]."
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "publicationPlace": [
+    "Kyoto [Japan] :"
+  ],
+  "publisher": [
+    "Umemura Yahaku,"
+  ],
+  "date": "[189x?]",
+  "extent": "1 map ; folded in covers 25 x 16 cm.",
+  "language": [
+    "Japanese"
+  ],
+  "description": [
+    "In Japanese.",
+    "Japanese reprint of a Chinese map published in 1663.",
+    "Transliteration supplied by cataloger."
+  ],
+  "geoSubject": "China--Maps.",
+  "scale": "Scale not given.",
+  "coordinates": "a",
+  "genre": [
+    "Maps."
+  ],
+  "format": "cartographic",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "8330740",
+  "orbisBarcode": "39002113593819",
+  "resourceType": "Maps, Atlases & Globes",
+  "illustrativeMatter": "080815s189u    ja ",
+  "oid": 16189097,
+  "collectionId": 1,
+  "children": []
+}

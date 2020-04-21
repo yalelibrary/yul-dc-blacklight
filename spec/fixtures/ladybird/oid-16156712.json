@@ -1,0 +1,65 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/16156712",
+  "identifierShelfMark": "Takamiya MS 97",
+  "title": [
+    "Mirour of mans salvacioune."
+  ],
+  "alternativeTitle": [
+    "Speculum humanae salvationis. English, Middle (ca. 1100-1500)"
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "publicationPlace": [
+    "[England],"
+  ],
+  "date": "[ca. 1450]",
+  "extent": "64 l. : paper ; 284 x 210 mm.",
+  "language": [
+    "English, Middle (1100-1500)"
+  ],
+  "description": [
+    "Binding: nineteenth-century full brown morocco, gilt.",
+    "Decoration: some initials, line fillers, underlining, in red ink.",
+    "Ex libris Alfred Henry Huth; Sir Leicester Harmsworth; William and Christina Foyle. On deposit from the collection of Toshiyuki Takamiya, 2013-.",
+    "Layout: single columns of 17 lines.",
+    "Script: gothic bookhand.",
+    "Some errors in contemporary foliation."
+  ],
+  "subjectName": [
+    "Foyle, William A.--(William Alfred),--1885-1963--Bookplate.",
+    "Harmsworth, R. Leicester--(Robert Leicester),--Sir,--1870-1937--Ownership.",
+    "Huth, Alfred Henry,--1850-1910--Bookplate."
+  ],
+  "subjectTopic": [
+    "Christian life--Early works to 1800.",
+    "Devotional literature, English (Middle)",
+    "English literature--Middle English, 1100-1500.",
+    "English poetry--Middle English, 1100-1500.",
+    "Manuscripts, Medieval--Connecticut--New Haven.",
+    "Medieval and Renaissance Manuscripts in Beinecke Library.",
+    "Salvation--Early works to 1800.",
+    "Typology (Theology)--Early works to 1800."
+  ],
+  "genre": [
+    "Manuscripts, Medieval--England--15th century."
+  ],
+  "format": "text",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "11756910",
+  "orbisBarcode": "39002091549304",
+  "references": [
+    "A handlist of western Medieval manuscripts in the Takamiya collection / Toshiyuki Takamiya, in The Medieval book: glosses from friends &amp; colleagues of Christopher de Hamel, ed. by Richard Linenthal, James Marrow and William Noel. 't Goy-Houten: Hes &amp; De Graff, 2010, pp. 421-437.",
+    "Mirour of mans salvacioune. Takamiya MS 97."
+  ],
+  "dateStructured": "1450-00-00T00:00:00Z",
+  "resourceType": "Archives or Manuscripts",
+  "illustrativeMatter": "131114s1450    ctu                 enm d",
+  "oid": 16156712,
+  "collectionId": 1,
+  "children": [],
+  "abstract": "Manuscript, on paper, in a single hand, of the English verse translation of this work of popular theology and devotional meditation."
+}

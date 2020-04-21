@@ -1,0 +1,86 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/3435140",
+  "creator": [
+    "Wharton, Edith, 1862-1937"
+  ],
+  "title": [
+    "Edith Wharton collection"
+  ],
+  "extent": "31.0 linear feet (69 boxes) + 12 broadside, 4 art.",
+  "language": [
+    "en",
+    "eng",
+    "fre"
+  ],
+  "description": [
+    "This material is open for research.",
+    "The Edith Wharton Collection consists of manuscripts, correspondence, photographs, and personal papers relating to the life and career of American author Edith Wharton, as well as letters and research material gathered by Gaillard Lapsley, Percy Lubbock, Oscar Lichtenberg, Georges Markow-Totevy, and Louis Auchincloss.",
+    "Edith Wharton (1862-1937) was a noted American fiction writer,best known for her novels Ethan Frome, The House of Mirth, and The Age of Innocence.",
+    "Unpublished finding aid in repository."
+  ],
+  "subjectName": [
+    "",
+    "Sir, 1872-1956.",
+    "1862-1925.",
+    "1865-1959.",
+    "1859-1927.",
+    "1852-1935.",
+    "1851-1928. (William Crary),",
+    "",
+    "1903-1983.",
+    "1857-1924.",
+    "1907-1997.",
+    "1872-1959.",
+    "1840-1924.",
+    "1869-1951.",
+    "1844-1909.",
+    "1876-1943.",
+    "1849-1928.",
+    "1843-1916.",
+    "1853-1937.",
+    "",
+    "1879-1965.",
+    "1829-1914. (Silas Weir),",
+    "1864-",
+    "1858-1919.",
+    "1856-1925.",
+    "1862-1937.",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "subjectTopic": [
+    "Description and travel",
+    "Social life and customs",
+    "Intellectual life"
+  ],
+  "geoSubject": "France Newport (R.I.) Paris (France)",
+  "genre": [
+    "Photographs"
+  ],
+  "orbisBibId": "3435140",
+  "importUrl": "http://hdl.handle.net/10079/fa/beinecke.wharton http://beinecke.library.yale.edu/dl_crosscollex/callnumSRCHXC.asp?WC=N&SS=N&CN=YCAL_MSS_42",
+  "references": [
+    "Edith Wharton Collection. Yale Collection of American Literature, Beinecke Rare Book and Manuscript Library."
+  ],
+  "dateStructured": "1868198",
+  "illustrativeMatter": "            ",
+  "subjectEra": "20th century. 20th century. 20th century. 20th century. 20th century.",
+  "titleStatement": [
+    "Edith Wharton collection, 1868-1981 (inclusive)."
+  ],
+  "provenanceUncontrolled": "Bequest of Edith Wharton (1937); gifts of Louis Auchincloss, Gaillard Lapsley, Percy Lubbock, Oscar Lichtenberg, and Georges Markow-Totevy.",
+  "bibId": 3435140,
+  "suppressInOpac": false,
+  "createDate": "2002-06-01T04:00:00.000+0000",
+  "updateDate": "2019-05-28T13:10:04.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

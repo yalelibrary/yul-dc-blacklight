@@ -1,0 +1,35 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/3577942",
+  "creator": [
+    "Cruikshank, George, 1792-1878"
+  ],
+  "title": [
+    "A comic alphabet"
+  ],
+  "publicationPlace": [
+    ""
+  ],
+  "date": "1836.",
+  "extent": "24 plates. 13 cm.",
+  "language": [
+    "en"
+  ],
+  "description": [
+    "Cover-title.",
+    "Plates printed on a continuous strip of paper, folded in Japanese fashion; portrait of the publisher Tilt on back cover. cf. A. M. Cohn, George Cruikshank, no. 189."
+  ],
+  "orbisBibId": "3577942",
+  "dateStructured": "1836   ",
+  "illustrativeMatter": "           0",
+  "titleStatement": [
+    "A comic alphabet, designed, etched & published by George Cruikshank, No. 23 Myddelton Terrace, Pentonville"
+  ],
+  "bibId": 3577942,
+  "suppressInOpac": false,
+  "createDate": "2002-06-01T04:00:00.000+0000",
+  "updateDate": "2011-03-30T18:19:01.000+0000",
+  "holdingCount": 1,
+  "children": []
+}

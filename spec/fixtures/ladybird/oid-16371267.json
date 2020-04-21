@@ -1,0 +1,51 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/16371267",
+  "identifierShelfMark": "Takamiya MS 99",
+  "title": [
+    "Livre du Lancelot du Lac: three miniatures."
+  ],
+  "extentOfDigitization": "Complete work digitized.",
+  "publicationPlace": [
+    "Paris,"
+  ],
+  "date": "[ca. 1440]",
+  "extent": "3 items : parchment ; 100 x100 mm (largest)",
+  "language": [
+    "French, Middle (ca.1400-1600)"
+  ],
+  "description": [
+    "Binding: individually mounted.",
+    "From the collection of Toshiyuki Takamiya, 2013-."
+  ],
+  "subjectName": [
+    "Lancelot--(Legendary character)"
+  ],
+  "subjectTopic": [
+    "Arthurian romances in art.",
+    "Arthurian romances in art--Early works to 1800.",
+    "Manuscripts, Medieval--Connecticut--New Haven.",
+    "Medieval and Renaissance Manuscripts in Beinecke Library."
+  ],
+  "genre": [
+    "Manuscripts, Medieval--France--14th century."
+  ],
+  "format": "text",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "13006050",
+  "references": [
+    "A handlist of western Medieval manuscripts in the Takamiya collection / Toshiyuki Takamiya, in The Medieval book: glosses from friends & colleagues of Christopher de Hamel, ed. by Richard Linenthal, James Marrow and William Noel. 't Goy-Houten: Hes & De Graff, 2010, pp. 421-437.",
+    "Livre du Lancelot du Lac: three miniatures.. Takamiya MS 99."
+  ],
+  "dateStructured": "1440-00-00T00:00:00Z",
+  "resourceType": "Archives or Manuscripts",
+  "illustrativeMatter": "161219s1440    ctu                 frm d",
+  "oid": 16371267,
+  "collectionId": 1,
+  "children": [],
+  "abstract": "Three miniatures, on vellum, from the copy of the Livre du Lancelot du Lac illustrated by the Dunois Master. They depict: 1) the Duke of Clarence and esquire, meeting a knight cutting off a woman's hair; 2) King Baudemagnus leading the battle against the Romans; 3) Lancelot's arrival at the city of Gorre."
+}

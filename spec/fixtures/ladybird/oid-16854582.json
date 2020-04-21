@@ -1,0 +1,50 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/16854582",
+  "identifierMfhd": "/repositories/11/archival_objects/699963",
+  "identifierShelfMark": "YCAL MSS 702",
+  "box": "8",
+  "sourceTitle": "Robert Giard papers",
+  "sourceDate": "1972-2002",
+  "sourceNote": "February 2005 Acquisition. Professional papers",
+  "creator": [
+    "Giard, Robert, 1939-2002"
+  ],
+  "title": [
+    "Desk files, weekly calendars, grant proposals, resumes, professional correspondence, exhibition announcements and brochures, obituaries, awards, articles, plans for future projects"
+  ],
+  "extentOfDigitization": "Partial work digitized.",
+  "date": "1994-2002",
+  "extent": "16 Folders ; 27.8 x 21.1 cm.",
+  "language": [
+    "English"
+  ],
+  "subjectTopic": [
+    "LGBTQ resource",
+    "Photographers--United States--20th Century",
+    "Photographers--United States--Archives"
+  ],
+  "geoSubject": "United States--Maps, Manuscript",
+  "genre": [
+    "Manuscript maps",
+    "Manuscripts",
+    "Typescripts"
+  ],
+  "format": "text",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "7151233",
+  "orbisBarcode": "39002104850970",
+  "findingAid": "http://hdl.handle.net/10079/fa/beinecke.giard",
+  "references": [
+    "Robert Giard Papers. Yale Collection of American Literature, Beinecke Rare Book and Manuscript Library."
+  ],
+  "dateStructured": "1994-00-00T00:00:00Z",
+  "resourceType": "Archives or Manuscripts",
+  "oid": 16854582,
+  "collectionId": 1,
+  "children": []
+}

@@ -1,0 +1,50 @@
+{
+  "source": "ladybird",
+  "recordType": "oid",
+  "uri": "/ladybird/oid/2012036",
+  "identifierMfhd": "/repositories/11/archival_objects/555049",
+  "identifierShelfMark": "YCAL MSS 202",
+  "box": "4",
+  "folder": "201",
+  "sourceTitle": "Walt Whitman collection",
+  "sourceDate": "1842-1949",
+  "sourceNote": "Series V. Adrian Van Sinderen Gift. OTHER PAPERS",
+  "title": [
+    "[Gold?] coin"
+  ],
+  "date": "n.d.",
+  "extent": "2 cm.",
+  "language": [
+    "English"
+  ],
+  "description": [
+    "Inscribed: Walt Whitman to Mary Davis Xmas 1891."
+  ],
+  "subjectName": [
+    "Whitman, Walt, 1819-1892"
+  ],
+  "subjectTopic": [
+    "American literature --19th century",
+    "Authors, American --19th century --Archives"
+  ],
+  "genre": [
+    "Artifacts"
+  ],
+  "format": "three dimensional object",
+  "partOf": "Beinecke Library",
+  "rights": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "orbisBibId": "6805375",
+  "orbisBarcode": "39002091459793",
+  "findingAid": "http://hdl.handle.net/10079/fa/beinecke.whitman",
+  "references": [
+    "Walt Whitman Collection. Yale Collection of American Literature, Beinecke Rare Book and Manuscript Library.\n\n"
+  ],
+  "digital": "Walt Whitman Collection",
+  "dateStructured": "1891-00-00T00:00:00Z",
+  "resourceType": "Archives or Manuscripts",
+  "oid": 2012036,
+  "collectionId": 1,
+  "children": []
+}

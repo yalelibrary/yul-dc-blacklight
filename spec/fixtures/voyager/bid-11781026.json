@@ -1,0 +1,57 @@
+{
+  "source": "ils",
+  "recordType": "bib",
+  "uri": "/ils/bib/11781026",
+  "title": [
+    "Old testament chronicle and genealogy of Christ (Part 1)."
+  ],
+  "publicationPlace": [
+    "England"
+  ],
+  "date": "[ca. 1400-1450]",
+  "extent": "1 roll : parchment ; 1600 x 291 mm",
+  "language": [
+    "en"
+  ],
+  "description": [
+    "Originally formed a single roll with Takamiya MS 53.",
+    "Annotation at top of roll in late 18th century hand attributing ownership in 1485 to Richard Kidderminster, Abbot of Winchecombe.",
+    "Layout: double column.",
+    "Script: English gothic bookhand.",
+    "Decoration: names in colored cartouches of green or brown squares.",
+    "Binding: modern case.",
+    "This material is open for research.",
+    "Manuscript, on vellum, in a single hand, containing the first section of an Old Testament chronicle and genealogy of Christ in Middle English prose.",
+    "In Middle English."
+  ],
+  "subjectName": [
+    ""
+  ],
+  "genre": [
+    "Manuscripts, Medieval England 15th century",
+    "Genealogy",
+    "Early works to 1800",
+    "Chronology",
+    "Early works to 1800",
+    "Medieval and Renaissance Manuscripts in Beinecke Library"
+  ],
+  "format": "unspecified",
+  "orbisBibId": "11781026",
+  "importUrl": "http://beinecke.library.yale.edu/dl_crosscollex/brbldl_getrec.asp?fld=img&id=16162989",
+  "references": [
+    "Old Testament Chronicle and Genealogy of Christ (Part 1) (Takamiya MS 36). General Collection, Beinecke Rare Book and Manuscript Library, Yale University."
+  ],
+  "dateStructured": "1400145",
+  "illustrativeMatter": "            ",
+  "subjectEra": "Middle English, 1100-1500. Middle English, 1100-1500.",
+  "titleStatement": [
+    "Old testament chronicle and genealogy of Christ (Part 1)."
+  ],
+  "provenanceUncontrolled": "Purchased from Toshiyuki Takamiya on the Edwin J. Beinecke Book Fund, 2017.",
+  "bibId": 11781026,
+  "suppressInOpac": false,
+  "createDate": "2013-12-02T19:44:01.000+0000",
+  "updateDate": "2019-02-24T22:33:49.000+0000",
+  "holdingCount": 1,
+  "children": []
+}
