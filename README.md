@@ -1,13 +1,11 @@
-# Prerequisites
+[![CircleCI](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master.svg?style=svg)](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master)
 
-- Download [Postgresql](https://postgresapp.com/)
-- Install bundle - `gem install bundler`
-
-# Running with Docker
+# Running with Docker (recommended)
 
 1. docker-compose build base
 2. docker-compose build web
 3. docker-compose up web
+4. docker-compose exec web bash <-- to connect to the container
 
 You should now be able to access your rails app at `http://localhost` and your solr instance at `http://localhost:8983`
 
@@ -16,6 +14,11 @@ You should now be able to access your rails app at `http://localhost` and your s
 `bundle exec rake yale:load_voyager_sample_data`
 
 # Not encouraged: Running locally
+
+## Prerequisites
+
+- Download [Postgresql](https://postgresapp.com/)
+- Install bundle - `gem install bundler`
 
 ## Get Started
 
