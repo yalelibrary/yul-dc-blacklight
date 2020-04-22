@@ -48,32 +48,32 @@ services:
       - .env
     command: bash -c 'precreate-core blacklight-development /opt/config; precreate-core blacklight-test /opt/config; exec solr -f'
 
-  images:
-    image:
-    env_file:
-      - .env
-    ports:
-      - ''
-    volumes:
-      - ''
+  # images:
+  #   image:
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - ''
+  #   volumes:
+  #     - ''
 
-  manifests:
-    image:
-    env_file:
-      - .env
-    ports:
-      - ''
-    volumes:
-      - ''
+  # manifests:
+  #   image:
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - ''
+  #   volumes:
+  #     - ''
 
-  blacklight:
-    image:
-    env_file:
-      - .env
-    ports:
-      - ''
-    volumes:
-      - ''
+  # blacklight:
+  #   image:
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - ''
+  #   volumes:
+  #     - ''
 
 volumes:
   postgres:
