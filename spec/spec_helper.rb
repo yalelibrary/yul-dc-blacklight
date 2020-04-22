@@ -11,6 +11,11 @@
 # a separate helper file that requires the additional dependencies and performs
 # the additional setup, and require it from the spec files that actually need
 # it.
+
+ENV["RAILS_ENV"] ||= 'test'
+
+require 'capybara/rspec'
+
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
