@@ -2,7 +2,7 @@ version: '2.1'
 services:
 
   base:
-    image: "${REGISTRY_HOST}${REGISTRY_URI}-base:latest"
+    image: '${REGISTRY_HOST}${REGISTRY_URI}-base:latest'
     env_file:
       - .env
     build:
@@ -11,11 +11,11 @@ services:
 
   web:
     build: .
-    image: "${REGISTRY_HOST}${REGISTRY_URI}:${TAG:-master}"
+    image: '${REGISTRY_HOST}${REGISTRY_URI}:${TAG:-master}'
     env_file:
       - .env
     ports:
-      - "80:80"
+      - '80:80'
     volumes:
       - .:/home/app/webapp
     # Keep the stdin open, so we can attach to our app container's process
@@ -33,20 +33,47 @@ services:
     env_file:
       - .env
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
       - 'postgres:/var/lib/postgresql/data'
 
   solr:
     image: solr:8
     ports:
-      - "8983:8983"
+      - '8983:8983'
     volumes:
       - './solr/conf:/opt/config:delegated'
       - solr:/opt/solr/server/solr/mycores
     env_file:
       - .env
-    command: bash -c "precreate-core blacklight-development /opt/config; precreate-core blacklight-test /opt/config; exec solr -f"
+    command: bash -c 'precreate-core blacklight-development /opt/config; precreate-core blacklight-test /opt/config; exec solr -f'
+
+  images:
+    image:
+    env_file:
+      - .env
+    ports:
+      - ''
+    volumes:
+      - ''
+
+  manifests:
+    image:
+    env_file:
+      - .env
+    ports:
+      - ''
+    volumes:
+      - ''
+
+  blacklight:
+    image:
+    env_file:
+      - .env
+    ports:
+      - ''
+    volumes:
+      - ''
 
 volumes:
   postgres:
