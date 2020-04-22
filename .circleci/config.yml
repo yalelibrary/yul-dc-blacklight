@@ -6,8 +6,17 @@ jobs:
   build:
     docker:
       - image: notch8/blacklight-yul
+        environment:
+            POSTGRES_DB: blacklight_yul_test
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: password
       - image: solr:8.3-slim
         command: bin/solr -cloud -noprompt -f -p 8983
+      - image: circleci/postgres:9.5-alpine-ram
+        environment:
+            POSTGRES_DB: blacklight_yul_test
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: password
     executor: docker/docker
     steps:
       # - run:
@@ -40,13 +49,11 @@ jobs:
       - run:
           name: bundle install
           command: bundle install
-      # @todo in a future iteration, start solr; start puma
       - run:
           name: rspec
           command:  |
             bundle exec rspec
-          environment:
-            DB_ADAPTER: sqlite3
+      #
       # @todo in a future iteration, build a docker image tagged with the commit hash
       #   and push to docker hub
       #
