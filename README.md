@@ -1,11 +1,11 @@
 [![CircleCI](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master.svg?style=svg)](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master)
 
 # Prerequisites
-- Download [Docker Dekstop](https://www.docker.com/products/docker-desktop)
+- Download [Docker Dekstop](https://www.docker.com/products/docker-desktop) and log in
 
 
 # Docker Development Setup
-## If this is your first time working in this repo or the Dockerfile has been updated you will need to (re)build your services
+### If this is your first time working in this repo or the Dockerfile has been updated you will need to (re)build your services
 - Build the base service (foundation of the app)
   ``` bash
   docker-compose build base
@@ -22,6 +22,19 @@
   ```
 - Access the rails app at `http://localhost:3000`
 - Access the solr instance at `http://localhost:8983`
+
+#### Accessing the web container
+- Navigate to the app root directory in another tab and run:
+  ``` bash
+  docker-compose exec web bash
+  ```
+- You will need to be inside the container to:
+  - Run migrations
+  - Access the seed file
+  - Access the rails console for debugging
+    ```
+    bundle exec rails c
+    ```
 
 
 ## Indexing sample data
