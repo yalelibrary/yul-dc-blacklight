@@ -9,13 +9,13 @@ services:
       context: .
       dockerfile: Dockerfile.base
 
-  web:
+  web: # blacklight app
     build: .
     image: '${REGISTRY_HOST}${REGISTRY_URI}:${TAG:-master}'
     env_file:
       - .env
     ports:
-      - '80:80'
+      - '3000:3000'
     volumes:
       - .:/home/app/webapp
     # Keep the stdin open, so we can attach to our app container's process
@@ -26,6 +26,8 @@ services:
     depends_on:
       - solr
       - db
+      - images
+      - manifests
 
   # https://hub.docker.com/_/postgres
   db:
@@ -48,32 +50,15 @@ services:
       - .env
     command: bash -c 'precreate-core blacklight-development /opt/config; precreate-core blacklight-test /opt/config; exec solr -f'
 
-  # images:
-  #   image:
-  #   env_file:
-  #     - .env
-  #   ports:
-  #     - ''
-  #   volumes:
-  #     - ''
+  images:
+    image: notch8/yul-dc-iiif-imageserver
+    ports:
+      - '8182:8182'
 
-  # manifests:
-  #   image:
-  #   env_file:
-  #     - .env
-  #   ports:
-  #     - ''
-  #   volumes:
-  #     - ''
-
-  # blacklight:
-  #   image:
-  #   env_file:
-  #     - .env
-  #   ports:
-  #     - ''
-  #   volumes:
-  #     - ''
+  manifests:
+    image: notch8/yul-dc-iiif-manifest
+    ports:
+      - '80:80'
 
 volumes:
   postgres:
