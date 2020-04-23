@@ -1,0 +1,69 @@
+version: '3.0'
+services:
+  web:
+    image: "notch8/blacklight-yul:latest"
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: mml
+        awslogs-region: us-east-2
+        awslogs-stream-prefix: web
+    env_file:
+      - .env
+    ports:
+      - "80:80"
+    volumes:
+      - web:/home/app/webapp
+    # Keep the stdin open, so we can attach to our app container's process
+    # and do things such as byebug, etc:
+
+  db:
+    image: postgres
+    env_file:
+      - .env
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: mml
+        awslogs-region: us-east-2
+        awslogs-stream-prefix: db
+    ports:
+      - "5432:5432"
+    volumes:
+      - "db:/var/lib/postgresql/data"
+
+  iiif:
+    image: notch8/yul-dc-iiif-imageserver
+    env_file:
+      - .env
+    ports:
+      - "8182:8182"
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: mml
+        awslogs-region: us-east-2
+        awslogs-stream-prefix: iiif
+
+  solr:
+    image: solr:8
+    ports:
+      - "8983:8983"
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: mml
+        awslogs-region: us-east-2
+        awslogs-stream-prefix: solr
+    volumes:
+      - "solr:/opt/solr/server/solr/mycores"
+    env_file:
+      - .env
+    command: bash -c "precreate-core blacklight-development /opt/config; precreate-core blacklight-test /opt/config; exec solr -f"
+
+volumes:
+  postgres:
+  web:
+  solr:
+  db:
+  

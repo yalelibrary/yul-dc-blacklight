@@ -1,0 +1,1 @@
+ecs-cli compose --project-name mml --file ecs-compose.yml service up --cluster-config mml-cluster --ecs-profile mml-cluster-profile -r us-east-2 --private-dns-namespace local --vpc vpc-09f1f13fcece6423a --enable-service-discovery
