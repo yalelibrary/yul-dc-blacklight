@@ -2,20 +2,20 @@ version: '2.1'
 services:
 
   base:
-    image: "${REGISTRY_HOST}${REGISTRY_URI}-base:latest"
+    image: '${REGISTRY_HOST}${REGISTRY_URI}-base:latest'
     env_file:
       - .env
     build:
       context: .
       dockerfile: Dockerfile.base
 
-  web:
+  web: # blacklight app
     build: .
-    image: "${REGISTRY_HOST}${REGISTRY_URI}:${TAG:-master}"
+    image: '${REGISTRY_HOST}${REGISTRY_URI}:${TAG:-master}'
     env_file:
       - .env
     ports:
-      - "80:80"
+      - '3000:3000'
     volumes:
       - .:/home/app/webapp
     # Keep the stdin open, so we can attach to our app container's process
@@ -26,6 +26,8 @@ services:
     depends_on:
       - solr
       - db
+      - images
+      - manifests
 
   # https://hub.docker.com/_/postgres
   db:
@@ -33,7 +35,7 @@ services:
     env_file:
       - .env
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
       - 'postgres:/var/lib/postgresql/data'
   iiif:
@@ -46,13 +48,23 @@ services:
   solr:
     image: solr:8
     ports:
-      - "8983:8983"
+      - '8983:8983'
     volumes:
       - './solr/conf:/opt/config:delegated'
       - solr:/opt/solr/server/solr/mycores
     env_file:
       - .env
-    command: bash -c "precreate-core blacklight-development /opt/config; precreate-core blacklight-test /opt/config; exec solr -f"
+    command: bash -c 'precreate-core blacklight-development /opt/config; precreate-core blacklight-test /opt/config; exec solr -f'
+
+  images:
+    image: notch8/yul-dc-iiif-imageserver
+    ports:
+      - '8182:8182'
+
+  manifests:
+    image: notch8/yul-dc-iiif-manifest
+    ports:
+      - '80:80'
 
 volumes:
   postgres:
