@@ -1,0 +1,15 @@
+<div class="card show-links">
+  <div class="card-header">
+    <h2 class="mb-0 h6"><%= t('blacklight.sidebar.links') %></h2>
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item manifest">
+      <div class='nav-link'>
+        <% oid = @document['oid_ssm'].first %>
+        <%= link_to image_tag('iiif.png'), manifest_url(oid), target: '_blank', class: 'iiif-logo' %>
+        <%= link_to t('blacklight.sidebar.manifest'), manifest_url(oid), target: '_blank', id: 'manifestLink'%> 
+      <div>
+    </li>
+  </ul>
+</div>
