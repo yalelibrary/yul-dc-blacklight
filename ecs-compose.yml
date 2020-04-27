@@ -11,7 +11,7 @@ services:
     env_file:
       - .env
     ports:
-      - "80:80"
+      - "3000:3000"
     volumes:
       - web:/home/app/webapp
     # Keep the stdin open, so we can attach to our app container's process
@@ -57,9 +57,15 @@ services:
         awslogs-stream-prefix: solr
     volumes:
       - "solr:/opt/solr/server/solr/mycores"
+      - './solr/conf:/opt/config:delegated'
     env_file:
       - .env
-    command: bash -c "precreate-core blacklight-development /opt/config; precreate-core blacklight-test /opt/config; exec solr -f"
+    command: bash -c "precreate-core blacklight-development /opt/config && precreate-core blacklight-test /opt/config && exec solr -f"
+
+  manifests:
+    image: notch8/yul-dc-iiif-manifest
+    ports:
+      - '80:80'
 
 volumes:
   postgres:
