@@ -1,10 +1,10 @@
 version: '3.0'
 services:
   web:
-    image: "notch8/blacklight-yul:latest"
+    image: yalelibraryit/dc-blacklight:latest
     logging:
       driver: awslogs
-      options: 
+      options:
         awslogs-group: mml
         awslogs-region: us-east-2
         awslogs-stream-prefix: web
@@ -23,7 +23,7 @@ services:
       - .env
     logging:
       driver: awslogs
-      options: 
+      options:
         awslogs-group: mml
         awslogs-region: us-east-2
         awslogs-stream-prefix: db
@@ -32,18 +32,18 @@ services:
     volumes:
       - "db:/var/lib/postgresql/data"
 
-  iiif:
-    image: yalelibraryit/dc-iiif-cantaloupe
+  iiif_image:
+    image: yalelibraryit/dc-iiif-cantaloupe:latest
     env_file:
       - .env
     ports:
       - "8182:8182"
     logging:
       driver: awslogs
-      options: 
+      options:
         awslogs-group: mml
         awslogs-region: us-east-2
-        awslogs-stream-prefix: iiif
+        awslogs-stream-prefix: iiif_image
 
   solr:
     image: curationexperts/solr:ecs
@@ -51,7 +51,7 @@ services:
       - "8983:8983"
     logging:
       driver: awslogs
-      options: 
+      options:
         awslogs-group: mml
         awslogs-region: us-east-2
         awslogs-stream-prefix: solr
@@ -61,10 +61,16 @@ services:
       - .env
     command: bash -c "precreate-core blacklight-development /opt/config && precreate-core blacklight-test /opt/config && exec solr -f"
 
-  manifests:
-    image: notch8/yul-dc-iiif-manifest
+  iiif_manifest:
+    image: yalelibraryit/dc-iiif-manifest
     ports:
       - '80:80'
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: mml
+        awslogs-region: us-east-2
+        awslogs-stream-prefix: iiif_manifest
 
 volumes:
   postgres:
@@ -72,4 +78,4 @@ volumes:
   solr:
   solr_config:
   db:
-  
+

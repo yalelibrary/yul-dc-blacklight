@@ -16,8 +16,11 @@ RUN apt-get install -y google-chrome-stable
 # Added this because of permissions errors runsv nginx: fatal: unable to start ./run: access denied
 RUN chmod +x /etc/service/nginx/run
 
-COPY  --chown=app . $APP_HOME
+RUN usermod -p '*' app
+RUN dpkg-reconfigure openssh-server
+COPY pubkey /home/app/.ssh/authorized_keys
 
+COPY  --chown=app . $APP_HOME
 RUN /sbin/setuser app bash -l -c "set -x && \
     (bundle check || bundle install) && \
     DB_ADAPTER=nulldb bundle exec rake assets:precompile && \
@@ -25,4 +28,4 @@ RUN /sbin/setuser app bash -l -c "set -x && \
 
 EXPOSE 3000
 
-CMD ["/sbin/my_init"]
+CMD /etc/init.d/ssh start &&  echo "public key is $SSH_PUBLIC_KEY" && /sbin/my_init

@@ -5,6 +5,14 @@ task_definition:
   task_size:
     mem_limit: 4GB
     cpu_limit: 512
+#  services:
+#    iiif_image:
+#      secrets:
+#        - value_from: YS3_AK
+#          name: AWS_ACCESS_KEY_ID
+#        - value_from: YS3_SK
+#          name: AWS_SECRET_KEY 
+
 run_params:
   network_configuration:
     awsvpc_configuration:
@@ -14,3 +22,4 @@ run_params:
       security_groups:
         - "sg-0f19f0f4258fdea3a"
       assign_public_ip: ENABLED
+
