@@ -26,8 +26,8 @@ services:
     depends_on:
       - solr
       - db
-      - images
-      - manifests
+      - iiif_image
+      - iiif_manifest
 
   # https://hub.docker.com/_/postgres
   db:
@@ -38,12 +38,6 @@ services:
       - '5432:5432'
     volumes:
       - 'postgres:/var/lib/postgresql/data'
-  iiif:
-    image: notch8/yul-dc-iiif-imageserver
-    env_file:
-      - .env
-    ports:
-      - "8182:8182"
 
   solr:
     image: solr:8
@@ -56,13 +50,15 @@ services:
       - .env
     command: bash -c 'precreate-core blacklight-development /opt/config; precreate-core blacklight-test /opt/config; exec solr -f'
 
-  images:
-    image: notch8/yul-dc-iiif-imageserver
+  iiif_image:
+    image: yalelibraryit/dc-iiif-cantaloupe
+    env_file:
+      - .env
     ports:
       - '8182:8182'
 
-  manifests:
-    image: notch8/yul-dc-iiif-manifest
+  iiif_manifest:
+    image: yalelibraryit/dc-iiif-manifest
     ports:
       - '80:80'
 
