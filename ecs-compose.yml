@@ -10,6 +10,7 @@ services:
         awslogs-stream-prefix: web
     env_file:
       - .env
+      - .secrets
     ports:
       - "3000:3000"
     volumes:
@@ -36,6 +37,7 @@ services:
     image: yalelibraryit/dc-iiif-cantaloupe:latest
     env_file:
       - .env
+      - .secrets
     ports:
       - "8182:8182"
     logging:
@@ -62,7 +64,7 @@ services:
     command: bash -c "precreate-core blacklight-development /opt/config && precreate-core blacklight-test /opt/config && exec solr -f"
 
   iiif_manifest:
-    image: yalelibraryit/dc-iiif-manifest
+    image: yalelibraryit/dc-iiif-manifest:demo
     ports:
       - '80:80'
     logging:
