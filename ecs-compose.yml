@@ -2,6 +2,7 @@ version: '3.0'
 services:
   web:
     image: yalelibraryit/dc-blacklight:latest
+    command: /bin/sh -c "cd /home/app/webapp && sleep 10 && rake yale:load_voyager_sample_data && /sbin/my_init"
     logging:
       driver: awslogs
       options:
@@ -15,8 +16,6 @@ services:
       - "3000:3000"
     volumes:
       - web:/home/app/webapp
-    # Keep the stdin open, so we can attach to our app container's process
-    # and do things such as byebug, etc:
 
   db:
     image: postgres
