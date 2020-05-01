@@ -58,7 +58,7 @@ services:
       - '8182:8182'
 
   iiif_manifest:
-    image: yalelibraryit/dc-iiif-manifest
+    image: yalelibraryit/dc-iiif-manifest:demo
     ports:
       - '80:80'
 

@@ -1,6 +1,8 @@
+<% oid = @document['oid_ssm'].first %>
+
 <iframe
     class="universal-viewer-iframe"
-    src="<%= request&.base_url %>/uv/uv.html#?manifest=<%= Rails.application.config.iiif_url %>/<%= document.id %>/manifest"
+    src="<%= request&.base_url %>/uv/uv.html#?manifest=<%= manifest_url(oid) %>"
     width="640"
     height="480"
     allowfullscreen

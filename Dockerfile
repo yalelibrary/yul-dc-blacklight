@@ -7,7 +7,7 @@ COPY ops/env.conf /etc/nginx/main.d/env.conf
 
 # Install Chrome so we can run system specs for Blacklight
 RUN apt-get update
-RUN apt-get install xdg-utils libxtst6 libxss1 libxrender1 libxfixes3 \
+RUN apt-get install -y xdg-utils libxtst6 libxss1 libxrender1 libxfixes3 \
     libxi6 libxext6 libxdamage1 libxcursor1 libxcomposite1 libxcb-dri3-0 \
     libxcb-dri3-0 libx11-xcb1 libpangocairo-1.0-0 libpango-1.0-0 libnss3 \
     libnspr4 libgtk-3-0 libgdk-pixbuf2.0-0 libgbm1 libdrm2 fonts-liberation \
