@@ -48,7 +48,8 @@ class CatalogController < ApplicationController
 
     config.add_nav_action(:bookmark, partial: 'blacklight/nav/bookmark', if: :render_bookmarks_control?)
     config.add_nav_action(:search_history, partial: 'blacklight/nav/search_history')
-
+    config.show.partials.insert(1, :uv)
+    
     # solr field configuration for document/show views
     #config.show.title_field = 'title_tsim'
     #config.show.display_type_field = 'format'
