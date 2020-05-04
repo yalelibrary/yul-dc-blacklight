@@ -37,10 +37,10 @@
     ```
     bundle exec rails c
     ```
-
-
-# Indexing sample data
-`bundle exec rake yale:load_voyager_sample_data`
+  - Index sample data (if you press "search" and don't have data, run this command)
+    ```
+    bundle exec rake yale:load_voyager_sample_data
+    ```
 
 
 # Customizing Blacklight:
@@ -50,8 +50,3 @@ There are many ways to override specific behaviors and views in Blacklight. Beca
 to your own application: `/home/app/webapp/app/views/catalog/_home_text.html.erb`
 - [Index your own data](https://github.com/projectblacklight/blacklight/wiki/Indexing-your-data-into-solr) into Solr
 - [Configure Blacklight](https://github.com/projectblacklight/blacklight/wiki#blacklight-configuration) to match your data and user-experience needs
-
-
-# Troubleshooting
-- Error: "PG::UnableToSend: no connection to the server"
-  - Solution: Make sure that you pressed "start" in the Postgresql app. If you open it, it should say "running" and there should be 2 three tiered images. Once for the blacklight_yul_development db and one for the blacklight_yul_test db
