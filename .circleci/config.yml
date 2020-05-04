@@ -5,7 +5,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: notch8/blacklight-yul
+      - image: yalelibraryit/dc-blacklight
         environment:
             POSTGRES_DB: blacklight_yul_test
             POSTGRES_USER: postgres
