@@ -7,14 +7,11 @@ COPY ops/env.conf /etc/nginx/main.d/env.conf
 
 # Install Chrome so we can run system specs for Blacklight
 RUN apt-get update
-RUN apt-get install -y xdg-utils libxtst6 libxss1 libxrender1 libxfixes3 \
-    libxi6 libxext6 libxdamage1 libxcursor1 libxcomposite1 libxcb-dri3-0 \
-    libxcb-dri3-0 libx11-xcb1 libpangocairo-1.0-0 libpango-1.0-0 libnss3 \
-    libnspr4 libgtk-3-0 libgdk-pixbuf2.0-0 libgbm1 libdrm2 fonts-liberation \
-    wget
-RUN rm -rf /var/lib/apt/lists/*
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
+RUN apt-get install -y wget
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+RUN apt-get update
+RUN apt-get install -y google-chrome-stable
 
 # Added this because of permissions errors runsv nginx: fatal: unable to start ./run: access denied
 RUN chmod +x /etc/service/nginx/run
