@@ -5,13 +5,6 @@ task_definition:
   task_size:
     mem_limit: 4GB
     cpu_limit: 512
-#  services:
-#    iiif_image:
-#      secrets:
-#        - value_from: YS3_AK
-#          name: AWS_ACCESS_KEY_ID
-#        - value_from: YS3_SK
-#          name: AWS_SECRET_KEY 
 
 run_params:
   network_configuration:
