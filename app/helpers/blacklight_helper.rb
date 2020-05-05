@@ -10,5 +10,4 @@ module BlacklightHelper
   def manifest_base_url
     ENV.fetch('IIIF_MANIFESTS_BASE_URL', "#{request.protocol}localhost/manifests")
   end
-
 end

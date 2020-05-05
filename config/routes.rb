@@ -1,5 +1,6 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
 
+Rails.application.routes.draw do
   concern :marc_viewable, Blacklight::Marc::Routes::MarcViewable.new
   devise_for :users
   mount Blacklight::Engine => '/'

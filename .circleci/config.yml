@@ -19,15 +19,6 @@ jobs:
             POSTGRES_PASSWORD: password
     executor: docker/docker
     steps:
-      # - run:
-      #     name: Install Docker Compose
-      #     command: |
-      #       set -x
-      #       curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-      #       chmod +x /usr/local/bin/docker-compose
-      # - run:
-      #     name: install docker
-      #     command: apt-get update && apt-get install -y docker.io
       - run:
           name: install zip
           command: apt-get update && apt-get install -y zip
@@ -41,14 +32,8 @@ jobs:
             curl -H "Content-type:application/octet-stream" --data-binary @solr_blacklight_config.zip "http://localhost:8983/solr/admin/configs?action=UPLOAD&name=blacklight"
             curl -H 'Content-type: application/json' http://localhost:8983/api/collections/ -d '{create: {name: blacklight-test, config: blacklight, numShards: 1}}'
       - run:
-          name: install bundler
-          command: |
-            gem update --system
-            gem install bundler
-            bundle config set path 'vendor/bundle'
-      - run:
-          name: bundle install
-          command: bundle install
+          name: Rubocop
+          command: bundle exec rubocop --parallel
       - run:
           name: rspec
           command:  |
