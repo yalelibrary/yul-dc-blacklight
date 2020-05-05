@@ -1,5 +1,6 @@
-RSpec.describe VoyagerIndexingService, clean: true do
+# frozen_string_literal: true
 
+RSpec.describe VoyagerIndexingService, clean: true do
   let(:vis) { VoyagerIndexingService.new }
   let(:voyager_metadata_path) { File.join(fixture_path, 'voyager') }
   let(:ladybird_metadata_path) { File.join(fixture_path, 'ladybird') }
@@ -41,7 +42,7 @@ RSpec.describe VoyagerIndexingService, clean: true do
     vis.ladybird_metadata_path = ladybird_metadata_path
     vis.index_voyager_json_file(voyager_json_file)
     solr = Blacklight.default_index.connection
-    response = solr.get 'select', :params => {:q => '*:*'}
+    response = solr.get 'select', params: { q: '*:*' }
     expect(response["response"]["numFound"]).to eq 1
     solr_doc = response["response"]["docs"][0]
     expect(solr_doc["id"]).to eq "752400"

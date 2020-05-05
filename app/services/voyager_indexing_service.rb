@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 require 'json'
 class VoyagerIndexingService
-
   # Define a location for voyager and ladybird metadata.
   # We expect the metadata to be a directory of .json files
   attr_accessor :voyager_metadata_path
@@ -9,7 +10,7 @@ class VoyagerIndexingService
   # Index a directory of voyager json files
   def index_voyager_metadata
     Dir.foreach(voyager_metadata_path) do |filename|
-      next if filename == '.' or filename == '..'
+      next if (filename == '.') || (filename == '..')
       index_voyager_json_file(File.join(voyager_metadata_path, filename))
     end
   end
@@ -20,12 +21,12 @@ class VoyagerIndexingService
 
   ##
   # Read in a directory of ladybird json files and create a hash mapping orbisBibId to oid
-  # Blacklight will need the oid in order to fetch the image for display. 
+  # Blacklight will need the oid in order to fetch the image for display.
   def build_oid_hash
     oid_hash = {}
     Dir.foreach(ladybird_metadata_path) do |filename|
       begin
-        next if filename == '.' or filename == '..' or filename.match(/.swp/)
+        next if (filename == '.') || (filename == '..') || filename.match(/.swp/)
         file = File.read(File.join(ladybird_metadata_path, filename))
         data_hash = JSON.parse(file)
         orbis_bib_id = data_hash["orbisBibId"].to_s
