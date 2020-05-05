@@ -1,0 +1,82 @@
+version: '3.0'
+services:
+  web:
+    image: yalelibraryit/dc-blacklight:latest
+    command: /bin/sh -c "cd /home/app/webapp && sleep 10 && rake yale:load_voyager_sample_data && /sbin/my_init"
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: mml
+        awslogs-region: us-east-2
+        awslogs-stream-prefix: web
+    env_file:
+      - .env
+      - .secrets
+    ports:
+      - "3000:3000"
+    volumes:
+      - web:/home/app/webapp
+
+  db:
+    image: postgres
+    env_file:
+      - .env
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: mml
+        awslogs-region: us-east-2
+        awslogs-stream-prefix: db
+    ports:
+      - "5432:5432"
+    volumes:
+      - "db:/var/lib/postgresql/data"
+
+  iiif_image:
+    image: yalelibraryit/dc-iiif-cantaloupe:latest
+    env_file:
+      - .env
+      - .secrets
+    ports:
+      - "8182:8182"
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: mml
+        awslogs-region: us-east-2
+        awslogs-stream-prefix: iiif_image
+
+  solr:
+    image: curationexperts/solr:ecs
+    ports:
+      - "8983:8983"
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: mml
+        awslogs-region: us-east-2
+        awslogs-stream-prefix: solr
+    volumes:
+      - "solr:/opt/solr/server/solr/mycores"
+    env_file:
+      - .env
+    command: bash -c "precreate-core blacklight-development /opt/config && precreate-core blacklight-test /opt/config && exec solr -f"
+
+  iiif_manifest:
+    image: yalelibraryit/dc-iiif-manifest:demo
+    ports:
+      - '80:80'
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: mml
+        awslogs-region: us-east-2
+        awslogs-stream-prefix: iiif_manifest
+
+volumes:
+  postgres:
+  web:
+  solr:
+  solr_config:
+  db:
+

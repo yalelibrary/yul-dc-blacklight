@@ -17,7 +17,6 @@ RUN apt-get install -y google-chrome-stable
 RUN chmod +x /etc/service/nginx/run
 
 COPY  --chown=app . $APP_HOME
-
 RUN /sbin/setuser app bash -l -c "set -x && \
     (bundle check || bundle install) && \
     DB_ADAPTER=nulldb bundle exec rake assets:precompile && \
@@ -25,4 +24,4 @@ RUN /sbin/setuser app bash -l -c "set -x && \
 
 EXPOSE 3000
 
-CMD ["/sbin/my_init"]
+CMD /sbin/my_init

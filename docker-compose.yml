@@ -9,7 +9,7 @@ services:
       context: .
       dockerfile: Dockerfile.base
 
-  web: # blacklight app
+  web: 
     build: .
     image: '${REGISTRY_HOST}${REGISTRY_URI}:${TAG:-master}'
     env_file:
@@ -29,7 +29,6 @@ services:
       - iiif_image
       - iiif_manifest
 
-  # https://hub.docker.com/_/postgres
   db:
     image: postgres
     env_file:
@@ -51,7 +50,7 @@ services:
     command: bash -c 'precreate-core blacklight-development /opt/config; precreate-core blacklight-test /opt/config; exec solr -f'
 
   iiif_image:
-    image: yalelibraryit/dc-iiif-cantaloupe
+    image: yalelibraryit/dc-iiif-cantaloupe:latest
     env_file:
       - .env
     ports:

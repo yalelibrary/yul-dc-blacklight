@@ -1,0 +1,1 @@
+ecs-cli compose --project-name mml --file ecs-compose.yml service ps --cluster-config mml-cluster  --ecs-profile mml-cluster-profile
