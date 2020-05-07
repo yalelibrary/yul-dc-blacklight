@@ -24,7 +24,7 @@ RSpec.describe VoyagerIndexingService, clean: true do
     vis.voyager_metadata_path = voyager_metadata_path
     vis.ladybird_metadata_path = ladybird_metadata_path
     oid_hash = vis.oid_hash
-    expect(oid_hash["13881242"]).to eq "16685691"
+    expect(oid_hash["13881242"]).to eq ["16685691"]
   end
 
   # it "indexes a directory of voyager metadata" do
@@ -45,8 +45,8 @@ RSpec.describe VoyagerIndexingService, clean: true do
     response = solr.get 'select', params: { q: '*:*' }
     expect(response["response"]["numFound"]).to eq 1
     solr_doc = response["response"]["docs"][0]
-    expect(solr_doc["id"]).to eq "752400"
+    expect(solr_doc["id"]).to eq "2034600"
     expect(solr_doc["title_tsim"]).to eq ["Ebony"]
-    expect(solr_doc["oid_ssm"]).to contain_exactly("2034600")
+    expect(solr_doc["bib_id_ssm"]).to contain_exactly("752400")
   end
 end

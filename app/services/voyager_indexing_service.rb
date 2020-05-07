@@ -49,17 +49,17 @@ class VoyagerIndexingService
     data_hash = JSON.parse(file)
     orbis_bib_id = data_hash["orbisBibId"].to_s
     oid_hash[orbis_bib_id].flatten.each do |oid|
-    solr_doc =     {
-      id: oid,
-      title_tsim: data_hash["title"],
-      language_ssim: data_hash["language"],
-      description_tesim: data_hash["description"],
-      author_tsim: data_hash["creator"],
-      bib_id_ssm: orbis_bib_id
-    }
-    solr = Blacklight.default_index.connection
-    solr.add([solr_doc])
-    solr.commit
-      end
+      solr_doc = {
+        id: oid,
+        title_tsim: data_hash["title"],
+        language_ssim: data_hash["language"],
+        description_tesim: data_hash["description"],
+        author_tsim: data_hash["creator"],
+        bib_id_ssm: orbis_bib_id
+      }
+      solr = Blacklight.default_index.connection
+      solr.add([solr_doc])
+      solr.commit
+    end
   end
 end
