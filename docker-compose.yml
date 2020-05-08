@@ -5,6 +5,7 @@ services:
     image: '${REGISTRY_HOST}${REGISTRY_URI}-base:latest'
     env_file:
       - .env
+      - .env.development
     build:
       context: .
       dockerfile: Dockerfile.base
@@ -14,6 +15,7 @@ services:
     image: '${REGISTRY_HOST}${REGISTRY_URI}:${TAG:-master}'
     env_file:
       - .env
+      - .env.development
     ports:
       - '3000:3000'
     volumes:
