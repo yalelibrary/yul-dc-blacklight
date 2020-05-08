@@ -10,7 +10,7 @@ services:
         awslogs-region: us-east-2
         awslogs-stream-prefix: web
     env_file:
-      - .env
+      - .env_ecs
       - .secrets
     ports:
       - "3000:3000"
@@ -20,7 +20,7 @@ services:
   db:
     image: postgres
     env_file:
-      - .env
+      - .env_ecs
     logging:
       driver: awslogs
       options:
@@ -35,7 +35,7 @@ services:
   iiif_image:
     image: yalelibraryit/dc-iiif-cantaloupe:latest
     env_file:
-      - .env
+      - .env_ecs
       - .secrets
     ports:
       - "8182:8182"
@@ -56,10 +56,8 @@ services:
         awslogs-group: mml
         awslogs-region: us-east-2
         awslogs-stream-prefix: solr
-    volumes:
-      - "solr:/opt/solr/server/solr/mycores"
     env_file:
-      - .env
+      - .env_ecs
     command: bash -c "precreate-core blacklight-development /opt/config && precreate-core blacklight-test /opt/config && exec solr -f"
 
   iiif_manifest:
@@ -77,6 +75,5 @@ volumes:
   postgres:
   web:
   solr:
-  solr_config:
   db:
 
