@@ -31,7 +31,8 @@ class VoyagerIndexingService
         data_hash = JSON.parse(file)
         orbis_bib_id = data_hash["orbisBibId"].to_s
         oid = data_hash["oid"].to_s
-        oid_hash[orbis_bib_id] = oid
+        oid_hash[orbis_bib_id] ||= []
+        oid_hash[orbis_bib_id] << oid
       # TODO: We need a better way to surface parsing errors
       # Ideally these would go to an error tracking service that someone would review
       rescue JSON::ParserError => e
@@ -47,16 +48,18 @@ class VoyagerIndexingService
     file = File.read(File.join(filename))
     data_hash = JSON.parse(file)
     orbis_bib_id = data_hash["orbisBibId"].to_s
-    solr_doc =     {
-      id: orbis_bib_id,
-      title_tsim: data_hash["title"],
-      language_ssim: data_hash["language"],
-      description_tesim: data_hash["description"],
-      author_tsim: data_hash["creator"],
-      oid_ssm: oid_hash[orbis_bib_id]
-    }
-    solr = Blacklight.default_index.connection
-    solr.add([solr_doc])
-    solr.commit
+    oid_hash[orbis_bib_id].flatten.each do |oid|
+      solr_doc = {
+        id: oid,
+        title_tsim: data_hash["title"],
+        language_ssim: data_hash["language"],
+        description_tesim: data_hash["description"],
+        author_tsim: data_hash["creator"],
+        bib_id_ssm: orbis_bib_id
+      }
+      solr = Blacklight.default_index.connection
+      solr.add([solr_doc])
+      solr.commit
+    end
   end
 end

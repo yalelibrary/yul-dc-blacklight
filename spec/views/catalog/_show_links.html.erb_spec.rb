@@ -3,7 +3,7 @@
 RSpec::Mocks.configuration.allow_message_expectations_on_nil = true
 
 RSpec.describe 'catalog/_show_tools.html.erb' do
-  let(:document) { SolrDocument.new id: '123', oid_ssm: ['xyz'] }
+  let(:document) { SolrDocument.new id: 'xyz', bib_id_ssm: ['123'] }
 
   before do
     assign :document, document
