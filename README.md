@@ -14,6 +14,14 @@
   ``` bash
   docker-compose build web
   ```
+### Environment Variables for Development
+
+Create the following file to override anything in .env. The following two values must be overridden.
+```
+SOLR_URL=http://solr:8983/solr/blacklight-development
+POSTGRES_HOST=db
+```
+
 
 ### Starting the app
 - Start the web service
