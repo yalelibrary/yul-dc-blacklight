@@ -10,8 +10,8 @@ jobs:
             POSTGRES_DB: blacklight_yul_test
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: password
-      - image: solr:8.3-slim
-        command: bin/solr -cloud -noprompt -f -p 8983
+      # - image: solr:8.3-slim
+        # command: bin/solr -cloud -noprompt -f -p 8983
       - image: circleci/postgres:9.5-alpine-ram
         environment:
             POSTGRES_DB: blacklight_yul_test
@@ -19,18 +19,18 @@ jobs:
             POSTGRES_PASSWORD: password
     executor: docker/docker
     steps:
-      - run:
-          name: install zip
-          command: apt-get update && apt-get install -y zip
+      # - run:
+      #     name: install zip
+      #     command: apt-get update && apt-get install -y zip
       - setup_remote_docker
       - checkout
-      - run:
-          name: Load config into SolrCloud
-          command: |
-            cd ./solr/conf
-            zip -1 -r solr_blacklight_config.zip ./*
-            curl -H "Content-type:application/octet-stream" --data-binary @solr_blacklight_config.zip "http://localhost:8983/solr/admin/configs?action=UPLOAD&name=blacklight"
-            curl -H 'Content-type: application/json' http://localhost:8983/api/collections/ -d '{create: {name: blacklight-test, config: blacklight, numShards: 1}}'
+      # - run:
+      #     name: Load config into SolrCloud
+      #     command: |
+      #       cd ./solr/conf
+      #       zip -1 -r solr_blacklight_config.zip ./*
+      #       curl -H "Content-type:application/octet-stream" --data-binary @solr_blacklight_config.zip "http://localhost:8983/solr/admin/configs?action=UPLOAD&name=blacklight"
+      #       curl -H 'Content-type: application/json' http://localhost:8983/api/collections/ -d '{create: {name: blacklight-test, config: blacklight, numShards: 1}}'
       - run:
           name: Rubocop
           command: bundle exec rubocop --parallel
