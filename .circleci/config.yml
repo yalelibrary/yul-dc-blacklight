@@ -10,8 +10,8 @@ jobs:
             POSTGRES_DB: blacklight_yul_test
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: password
-      # - image: solr:8.3-slim
-        # command: bin/solr -cloud -noprompt -f -p 8983
+      - image: yalelibraryit/dc-solr:${SOLR_TAG:-latest}
+        command: bash -c 'precreate-core ${SOLR_CORE} /opt/config; precreate-core ${SOLR_TEST_CORE} /opt/config; exec solr -f'
       - image: circleci/postgres:9.5-alpine-ram
         environment:
             POSTGRES_DB: blacklight_yul_test
