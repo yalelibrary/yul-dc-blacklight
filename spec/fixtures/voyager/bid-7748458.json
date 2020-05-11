@@ -102,5 +102,6 @@
   "createDate": "2006-11-30T21:58:33.000+0000",
   "updateDate": "2019-10-23T20:51:00.000+0000",
   "holdingCount": 1,
-  "children": []
+  "children": [],
+  "public": 1
 }

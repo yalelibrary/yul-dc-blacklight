@@ -50,5 +50,6 @@
   "createDate": "2008-10-15T15:01:44.000+0000",
   "updateDate": "2018-11-28T16:47:49.000+0000",
   "holdingCount": 1,
-  "children": []
+  "children": [],
+  "public": 1
 }
