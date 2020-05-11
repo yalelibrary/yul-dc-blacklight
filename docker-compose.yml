@@ -10,9 +10,9 @@ services:
       context: .
       dockerfile: Dockerfile.base
 
-  web: 
+  web:
     build: .
-    image: '${REGISTRY_HOST}${REGISTRY_URI}:${TAG:-master}'
+    image: '${REGISTRY_HOST}${REGISTRY_URI}:${TAG:-latest}'
     env_file:
       - .env
       - .env.development
@@ -40,16 +40,17 @@ services:
     volumes:
       - 'postgres:/var/lib/postgresql/data'
 
+
   solr:
-    image: solr:8
+    image: yalelibraryit/dc-solr:${SOLR_TAG:-latest}
     ports:
       - '8983:8983'
     volumes:
-      - './solr/conf:/opt/config:delegated'
+      # think this may need to be changed to /var/solr/data
       - solr:/opt/solr/server/solr/mycores
     env_file:
       - .env
-    command: bash -c 'precreate-core blacklight-development /opt/config; precreate-core blacklight-test /opt/config; exec solr -f'
+    command: bash -c 'precreate-core ${SOLR_CORE} /opt/config; precreate-core ${SOLR_TEST_CORE} /opt/config; exec solr -f'
 
   iiif_image:
     image: yalelibraryit/dc-iiif-cantaloupe:latest

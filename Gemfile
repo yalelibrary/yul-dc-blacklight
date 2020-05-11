@@ -25,6 +25,7 @@ gem 'webpacker', '~> 4.0'
 group :development, :test do
   gem 'bixby'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'dotenv-rails'
   gem 'rspec-rails', '~> 4.0.0'
   gem 'solr_wrapper', '>= 0.3'
 end
