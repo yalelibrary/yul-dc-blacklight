@@ -16,7 +16,7 @@
   ```
 ### Environment Variables for Development
 
-Create the following file to override anything in .env. The following two values must be overridden.
+Create .env.development to override anything in .env. The following values must be overridden.
 ```
 SOLR_URL=http://solr:8983/solr/blacklight-core
 POSTGRES_HOST=db
