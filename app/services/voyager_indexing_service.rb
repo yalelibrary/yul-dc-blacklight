@@ -19,7 +19,8 @@ class VoyagerIndexingService
     @oid_hash ||= build_oid_hash
   end
 
-  ##since we currently use bib to loop for oids we need storage for format
+  ##
+  # since we currently use bib to loop for oids we need storage for format
   def format_hash
     @format_hash ||= {}
   end
