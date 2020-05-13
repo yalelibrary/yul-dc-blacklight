@@ -1,0 +1,64 @@
+{
+  "source_ssim": "ladybird",
+  "recordType_ssim": "id",
+  "uri_ssim": "/ladybird/oid/16371272",
+  "identifierShelfMark_ssim": "Takamiya MS 104",
+  "title_tsim": [
+    "Bible (Proverbs to Apocalypse)."
+  ],
+  "extentOfDigitization_ssim": "Complete work digitized.",
+  "publicationPlace_ssim": [
+    "England,"
+  ],
+  "date_ssim": "[between 1200 and 1299]",
+  "extent_ssim": "218 l. : parchment ; 212 x 145 mm.",
+  "language_ssim": [
+    "Latin"
+  ],
+  "description_ssim": [
+    "Binding: modern goatskin.",
+    "Decoration: red and blue penwork initials.",
+    "Ex libris Ronald A. Coates; Eric Millar; Brian S. Cron. From the collection of Toshiyuki Takamiya, 2013-.",
+    "Layout: double columns of 49 lines.",
+    "Script: small gothic script.",
+    "With an Oxford pledge note for the Selton Loan Chest dated 1469 and the mark of the stationer John More. There is also a note by M. Paris, possibly Master Thomas Paris of Oriel College."
+  ],
+  "subjectName_ssim": [
+    "Coates, Ronald A.--Autograph.",
+    "Cron, Brian S.--Ownership.",
+    "Millar, Eric George--Bookplate.",
+    "Oriel College.",
+    "University of Oxford."
+  ],
+  "subjectTopic_ssim": [
+    "Bible.--Latin.",
+    "Bible.--Latin--Versions--Vulgate.",
+    "Manuscripts, Medieval--Connecticut--New Haven.",
+    "Medieval and Renaissance Manuscripts in Beinecke Library.",
+    "Universities and colleges--Great Britain."
+  ],
+  "genre_ssim": [
+    "Decorated initials",
+    "Manuscripts, Medieval--England--13th century."
+  ],
+  "format_ssim": "text",
+  "partOf_ssim": "Beinecke Library",
+  "rights_ssim": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "bib_id_ssm": "12329381",
+  "orbisBarcode_ssim": "39002104624045",
+  "references_ssim": [
+    "A handlist of western Medieval manuscripts in the Takamiya collection / Toshiyuki Takamiya, in The Medieval book: glosses from friends & colleagues of Christopher de Hamel, ed. by Richard Linenthal, James Marrow and William Noel. 't Goy-Houten: Hes & De Graff, 2010, pp. 421-437.",
+    "Bible (Proverbs to Apocalypse). Takamiya MS 104."
+  ],
+  "dateStructured_ssim": "1200-00-00T00:00:00Z",
+  "resourceType_ssim": "Archives or Manuscripts",
+  "illustrativeMatter_ssim": "141215i12001299ctu                 lat d",
+  "id": 16371272,
+  "collectionId_ssim": 1,
+  "children_ssim": [],
+  "abstract_ssim": "Manuscript, on parchment, of the books of the Bible from Proverbs through the Apocalypse."
+  ,
+  "public_bsi": true
+}

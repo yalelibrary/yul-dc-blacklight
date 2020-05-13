@@ -1,0 +1,46 @@
+{
+  "source_ssim": "ladybird",
+  "recordType_ssim": "id",
+  "uri_ssim": "/ladybird/oid/16189097",
+  "identifierShelfMark_ssim": "Lanman Covers 56 189x",
+  "title_tsim": [
+    "[Map of China]."
+  ],
+  "extentOfDigitization_ssim": "Complete work digitized.",
+  "publicationPlace_ssim": [
+    "Kyoto [Japan] :"
+  ],
+  "publisher_ssim": [
+    "Umemura Yahaku,"
+  ],
+  "date_ssim": "[189x?]",
+  "extent_ssim": "1 map ; folded in covers 25 x 16 cm.",
+  "language_ssim": [
+    "Japanese"
+  ],
+  "description_ssim": [
+    "In Japanese.",
+    "Japanese reprint of a Chinese map published in 1663.",
+    "Transliteration supplied by cataloger."
+  ],
+  "geoSubject_ssim": "China--Maps.",
+  "scale_ssim": "Scale not given.",
+  "coordinates_ssim": "a",
+  "genre_ssim": [
+    "Maps."
+  ],
+  "format_ssim": "cartographic",
+  "partOf_ssim": "Beinecke Library",
+  "rights_ssim": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "bib_id_ssm": "8330740",
+  "orbisBarcode_ssim": "39002113593819",
+  "resourceType_ssim": "Maps, Atlases & Globes",
+  "illustrativeMatter_ssim": "080815s189u    ja ",
+  "id": 16189097,
+  "collectionId_ssim": 1,
+  "children_ssim": []
+  ,
+  "public_bsi": true
+}

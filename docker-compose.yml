@@ -48,6 +48,8 @@ services:
     volumes:
       # think this may need to be changed to /var/solr/data
       - solr:/opt/solr/server/solr/mycores
+      # samples for solr bin/post load
+      - ./spec/fixtures/solr:/home/samples/solr:delegated
     env_file:
       - .env
     command: bash -c 'precreate-core ${SOLR_CORE} /opt/config; precreate-core ${SOLR_TEST_CORE} /opt/config; exec solr -f'

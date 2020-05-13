@@ -1,0 +1,59 @@
+{
+  "source_ssim": "ladybird",
+  "recordType_ssim": "id",
+  "uri_ssim": "/ladybird/oid/16057777",
+  "identifierShelfMark_ssim": "WA MSS S-3019",
+  "box_ssim": "Box 1",
+  "sourceTitle_ssim": "[Objects associated with Buffalo Bill]",
+  "sourceDate_ssim": "[circa 1870-1895]",
+  "author_tsim": [
+    "James Dalziel Dougall and Sons"
+  ],
+  "title_tsim": [
+    "Double-barrel shotgun"
+  ],
+  "date_ssim": "ca. 1874",
+  "extent_ssim": "1 shotgun ; 121 cm.",
+  "description_ssim": [
+    "One double-barrel shotgun made by James Dalziel Dougall and Sons, and owned by John Burwell \"Texas Jack\" Omohundro, as a gift from the Irish game hunter Windham Thomas Wyndham-Quin, 4th Earl of Dunraven. The gun is 121 cm in length and was engraved by the maker in several places: \"J. D. Dougall. Gun and Rifle Manufacturer to H. R. H. The Prince of Wales. 59 St. James's St. London\" on low concave game rib, \"J. D. Dougall's Patent Lockfast\" on the bottom of the action, \"J. D. Dougall\" on each lockplate, and the serial number \"3303\" on the tang. An oval copper plate set in the bottom edge of the European walnut straight grip buttstock is engraved: \"From / Earl Dunraven / to / Texas Jack / 1874.\""
+  ],
+  "subjectName_ssim": [
+    "Buffalo Bill,--1846-1917.",
+    "Buffalo Bill's Wild West Company.",
+    "Buffalo Bill's Wild West Show.",
+    "Dunraven, Windham Thomas Wyndham-Quin,--Earl of,--1841-1926.",
+    "Dunraven, Windham Thomas Wyndham-Quin,--Earl of,--1841-1926--Presentation inscription to John Burwell Omohundro.",
+    "James Dalziel Dougall and Sons",
+    "Omohundro, John Burwell,--1846-1880.",
+    "Omohundro, John Burwell,--1846-1880--Presentation inscription from Windham Thomas Wyndham-Quin.",
+    "Salsbury, Nathan,--1846-1902.",
+    "Sitting Bull,--1831-1890."
+  ],
+  "subjectTopic_ssim": [
+    "Theatrical managers--United States.",
+    "Wild west shows."
+  ],
+  "genre_ssim": [
+    "Shotguns--England--19th century."
+  ],
+  "format_ssim": "three dimensional object",
+  "partOf_ssim": "Beinecke Library",
+  "rights_ssim": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement"
+  ],
+  "bib_id_ssm": "12442385",
+  "importUrl_ssim": "http://beinecke.library.yale.edu/dl_crosscollex/callnumSRCHXC.asp?&amp;CN=WA_MSS_S-3019",
+  "references_ssim": [
+    "Nathan Salsbury, Objects Associated with Buffalo Bill. Yale Collection of Western Americana, Beinecke Rare Book and Manuscript Library."
+  ],
+  "dateStructured_ssim": "1870-00-00T00:00:00Z",
+  "resourceType_ssim": "Tools, Equipment & Instruments",
+  "illustrativeMatter_ssim": "150424i18701895vp nnn            rneng d",
+  "copyrightDate_ssim": "[circa 1870-1895]",
+  "id": 16057777,
+  "collectionId_ssim": 1,
+  "children_ssim": [],
+  "abstract_ssim": "Nathan Salsbury (1846-1902), Civil War veteran, actor, and theatrical entrepreneur; after 1884 co-owner, producer and manager of \"Buffalo Bill's Wild West Show.\""
+  ,
+  "public_bsi": true
+}

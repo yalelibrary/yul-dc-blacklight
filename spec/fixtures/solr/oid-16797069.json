@@ -1,0 +1,53 @@
+{
+  "source_ssim": "ladybird",
+  "recordType_ssim": "id",
+  "uri_ssim": "/ladybird/oid/16797069",
+  "identifierMfhd_ssim": "/repositories/11/archival_objects/608223",
+  "identifierShelfMark_ssim": "YCAL MSS 42",
+  "box_ssim": "25",
+  "folder_ssim": "787-93",
+  "sourceTitle_ssim": "Edith Wharton collection",
+  "sourceDate_ssim": "1868-1981 (inclusive)",
+  "sourceNote_ssim": "Series II:. Personal Correspondence",
+  "author_tsim": [
+    "Wharton, Edith, 1862-1937"
+  ],
+  "title_tsim": [
+    "Grant, Robert\n\n"
+  ],
+  "extentOfDigitization_ssim": "Complete folder digitized.",
+  "date_ssim": "1905-39",
+  "extent_ssim": "7 folders",
+  "language_ssim": [
+    "English"
+  ],
+  "description_ssim": [
+    "Folder 790 includes an undated letter from \"L.J.G.\", Jamestown, N.Y."
+  ],
+  "subjectName_ssim": [
+    "Grant, Robert, 1852-1940--Correspondence",
+    "Lapsley, Gaillard Thomas--Correspondence",
+    "Wharton, Edith, 1862-1937 --Correspondence"
+  ],
+  "genre_ssim": [
+    "correspondence (AAT)"
+  ],
+  "format_ssim": "text",
+  "partOf_ssim": "Beinecke Library",
+  "rights_ssim": [
+    "Copyright to material created by Edith Wharton may be held by her estate. To learn more, consult the WATCH file (http://norman.hrc.utexas.edu/watch/)."
+  ],
+  "bib_id_ssm": "3435140",
+  "orbisBarcode_ssim": "39002075038423",
+  "findingAid_ssim": "http://hdl.handle.net/10079/fa/beinecke.wharton",
+  "references_ssim": [
+    "Edith Wharton Collection. Yale Collection of American Literature. Beinecke Rare Book and Manuscript Library."
+  ],
+  "dateStructured_ssim": "1902-00-00T00:00:00Z",
+  "resourceType_ssim": "Archives or Manuscripts",
+  "id": 16797069,
+  "collectionId_ssim": 1,
+  "children_ssim": []
+  ,
+  "public_bsi": true
+}

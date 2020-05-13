@@ -1,0 +1,56 @@
+{
+  "source_ssim": "ladybird",
+  "recordType_ssim": "id",
+  "uri_ssim": "/ladybird/oid/16700283",
+  "identifierShelfMark_ssim": "Takamiya MS 142",
+  "title_tsim": [
+    "Book of hours (fragment)"
+  ],
+  "extentOfDigitization_ssim": "Complete work digitized.",
+  "publicationPlace_ssim": [
+    "Flanders,"
+  ],
+  "date_ssim": "[ca. 1300]",
+  "extent_ssim": "1 l. : parchment ; 65 x 85 mm",
+  "language_ssim": [
+    "Latin"
+  ],
+  "description_ssim": [
+    "Byname: Ghistelles Hours.",
+    "Decoration: decorated border showing two hounds chasing a stag.",
+    "Previously owned by Sir Sydney Cockerell? Previously owned by Alan G. Thomas. From the collection of Toshiyuki Takamiya, 2013-.",
+    "Script: Gothic."
+  ],
+  "subjectName_ssim": [
+    "Cockerell, Sydney Carlyle,--Sir,--1867-1962--Ownership.",
+    "Thomas, Alan G.--Ownership."
+  ],
+  "subjectTopic_ssim": [
+    "Books of hours--Early works to 1800",
+    "Manuscripts, Medieval--Connecticut--New Haven",
+    "Medieval and Renaissance Manuscripts in Beinecke Library"
+  ],
+  "genre_ssim": [
+    "Manuscripts, Medieval--Flanders--14th century"
+  ],
+  "format_ssim": "text",
+  "partOf_ssim": "Beinecke Library",
+  "rights_ssim": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "bib_id_ssm": "13640726",
+  "orbisBarcode_ssim": "39002094365690",
+  "references_ssim": [
+    "A handlist of western Medieval manuscripts in the Takamiya collection / Toshiyuki Takamiya, in The Medieval book: glosses from friends & colleagues of Christopher de Hamel, ed. by Richard Linenthal, James Marrow and William Noel. 't Goy-Houten: Hes & De Graff, 2010, pp. 421-437.",
+    "Book of Hours (Fragment). Takamiya MS 142."
+  ],
+  "dateStructured_ssim": "1300-00-00T00:00:00Z",
+  "resourceType_ssim": "Archives or Manuscripts",
+  "illustrativeMatter_ssim": "180618s1400    ctu                 lat d",
+  "id": 16700283,
+  "collectionId_ssim": 1,
+  "children_ssim": [],
+  "abstract_ssim": "Lower half of a single manuscript leaf, on parchment, containing five lines of text and marginal decoration. From the \"Ghistelles Hours.\""
+  ,
+  "public_bsi": true
+}

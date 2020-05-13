@@ -1,0 +1,52 @@
+{
+  "source_ssim": "ladybird",
+  "recordType_ssim": "id",
+  "uri_ssim": "/ladybird/oid/2012036",
+  "identifierMfhd_ssim": "/repositories/11/archival_objects/555049",
+  "identifierShelfMark_ssim": "YCAL MSS 202",
+  "box_ssim": "4",
+  "folder_ssim": "201",
+  "sourceTitle_ssim": "Walt Whitman collection",
+  "sourceDate_ssim": "1842-1949",
+  "sourceNote_ssim": "Series V. Adrian Van Sinderen Gift. OTHER PAPERS",
+  "title_tsim": [
+    "[Gold?] coin"
+  ],
+  "date_ssim": "n.d.",
+  "extent_ssim": "2 cm.",
+  "language_ssim": [
+    "English"
+  ],
+  "description_ssim": [
+    "Inscribed: Walt Whitman to Mary Davis Xmas 1891."
+  ],
+  "subjectName_ssim": [
+    "Whitman, Walt, 1819-1892"
+  ],
+  "subjectTopic_ssim": [
+    "American literature --19th century",
+    "Authors, American --19th century --Archives"
+  ],
+  "genre_ssim": [
+    "Artifacts"
+  ],
+  "format_ssim": "three dimensional object",
+  "partOf_ssim": "Beinecke Library",
+  "rights_ssim": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "bib_id_ssm": "6805375",
+  "orbisBarcode_ssim": "39002091459793",
+  "findingAid_ssim": "http://hdl.handle.net/10079/fa/beinecke.whitman",
+  "references_ssim": [
+    "Walt Whitman Collection. Yale Collection of American Literature, Beinecke Rare Book and Manuscript Library.\n\n"
+  ],
+  "digital_ssim": "Walt Whitman Collection",
+  "dateStructured_ssim": "1891-00-00T00:00:00Z",
+  "resourceType_ssim": "Archives or Manuscripts",
+  "id": 2012036,
+  "collectionId_ssim": 1,
+  "children_ssim": []
+  ,
+  "public_bsi": true
+}

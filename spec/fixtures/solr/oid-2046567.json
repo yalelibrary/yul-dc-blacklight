@@ -1,0 +1,46 @@
+{
+  "source_ssim": "ladybird",
+  "recordType_ssim": "id",
+  "uri_ssim": "/ladybird/oid/2046567",
+  "identifierShelfMark_ssim": "GEN MSS VOL 728 (Oversize)",
+  "author_tsim": [
+    "Johnson, Samuel, 1709-1784"
+  ],
+  "title_tsim": [
+    "A General dictionary of the English language"
+  ],
+  "numberOfPages_ssim": "Vol. 2",
+  "extentOfDigitization_ssim": "Complete work digitized.",
+  "publicationPlace_ssim": [
+    "London"
+  ],
+  "publisher_ssim": [
+    "Printed by W. Strahan, for J. and P. Knapton [etc.]"
+  ],
+  "date_ssim": "1755",
+  "extent_ssim": "43 cm.",
+  "language_ssim": [
+    "English"
+  ],
+  "description_ssim": [
+    "Four volume printer's proof with manuscript notes throughout."
+  ],
+  "genre_ssim": [
+    "Dictionaries"
+  ],
+  "format_ssim": "text",
+  "partOf_ssim": "Beinecke Library",
+  "rights_ssim": [
+    "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+  ],
+  "bib_id_ssm": "1169354",
+  "orbisBarcode_ssim": "39002094045136",
+  "dateStructured_ssim": "1755-00-00T00:00:00Z",
+  "resourceType_ssim": "Books, Journals & Pamphlets",
+  "id": 2046567,
+  "collectionId_ssim": 1,
+  "children_ssim": [],
+  "abstract_ssim": "Published on April 15, 1755 and written largely single-handedly by Samuel Johnson. Sometimes published as \"Johnson's Dictionary.\" The first edition was published in two folio volumes; later editions were published in four volumes."
+  ,
+  "public_bsi": true
+}
