@@ -12,7 +12,7 @@ services:
 
   web:
     build: .
-    image: '${REGISTRY_HOST}${REGISTRY_URI}:105ac'
+    image: '${REGISTRY_HOST}${REGISTRY_URI}:504b'
     env_file:
       - .env
       - .env.development
