@@ -55,7 +55,8 @@ class VoyagerIndexingService
         language_ssim: data_hash["language"],
         description_tesim: data_hash["description"],
         author_tsim: data_hash["creator"],
-        bib_id_ssm: orbis_bib_id
+        bib_id_ssm: orbis_bib_id,
+        public_bsi: data_hash["public"].presence || 0
       }
       solr = Blacklight.default_index.connection
       solr.add([solr_doc])

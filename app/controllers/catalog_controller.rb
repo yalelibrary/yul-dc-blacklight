@@ -8,7 +8,7 @@ class CatalogController < ApplicationController
     # config.repository_class = Blacklight::Solr::Repository
     #
     ## Class for converting Blacklight's url parameters to into request parameters for the search index
-    # config.search_builder_class = ::SearchBuilder
+    config.search_builder_class = ::SearchBuilder
     #
     ## Model that maps search index responses to the blacklight response model
     # config.response_model = Blacklight::Solr::Response
@@ -17,9 +17,9 @@ class CatalogController < ApplicationController
     # config.raw_endpoint.enabled = false
 
     ## Default parameters to send to solr for all search-like requests. See also SearchBuilder#processed_parameters
-    config.default_solr_params = {
-      rows: 10
-    }
+    # config.default_solr_params = {
+    #   rows: 10
+    # }
 
     # solr path which will be added to solr base url before the other solr params.
     # config.solr_path = 'select'

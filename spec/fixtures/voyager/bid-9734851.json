@@ -1,5 +1,4 @@
-{
-  "source": "ils",
+  {"source": "ils",
   "recordType": "bib",
   "uri": "/ils/bib/9734851",
   "title": [
@@ -50,5 +49,6 @@
   "createDate": "2011-04-20T15:43:05.000+0000",
   "updateDate": "2018-10-01T19:00:20.000+0000",
   "holdingCount": 1,
-  "children": []
+  "children": [],
+  "public": 0
 }

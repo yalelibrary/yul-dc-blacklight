@@ -1,7 +1,7 @@
 [![CircleCI](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master.svg?style=svg)](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master)
 
 # Prerequisites
-- Download [Docker Dekstop](https://www.docker.com/products/docker-desktop) and log in
+- Download [Docker Desktop](https://www.docker.com/products/docker-desktop) and log in
 
 
 # Docker Development Setup
@@ -16,10 +16,11 @@
   ```
 ### Environment Variables for Development
 
-Create the following file to override anything in .env. The following two values must be overridden.
+Create .env.development to override anything in .env. The following values must be overridden.
 ```
-SOLR_URL=http://solr:8983/solr/blacklight-development
+SOLR_URL=http://solr:8983/solr/blacklight-core
 POSTGRES_HOST=db
+IIIF_MANIFESTS_BASE_URL=http://localhost/manifests/
 ```
 
 
