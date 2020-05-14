@@ -9,6 +9,11 @@
                 "fullscreenEnabled": true,
                 "shareEnabled": true
             }
+        },
+        "pagingHeaderPanel": {
+            "options": {
+                "pagingToggleEnabled": true
+            }
         }
     }
 }
