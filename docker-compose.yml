@@ -2,7 +2,7 @@ version: '2.1'
 services:
 
   base:
-    image: '${REGISTRY_HOST}${REGISTRY_URI}-base:latest'
+    image: '${REGISTRY_HOST}${REGISTRY_URI}-base:105ac'
     env_file:
       - .env
       - .env.development
@@ -12,7 +12,7 @@ services:
 
   web:
     build: .
-    image: '${REGISTRY_HOST}${REGISTRY_URI}:${TAG:-latest}'
+    image: '${REGISTRY_HOST}${REGISTRY_URI}:105ac'
     env_file:
       - .env
       - .env.development

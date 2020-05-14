@@ -1,7 +1,7 @@
 version: '3.0'
 services:
   web:
-    image: yalelibraryit/dc-blacklight:ecs
+    image: yalelibraryit/dc-blacklight:105ac
     command: /bin/sh -c "cd /home/app/webapp && sleep 10 && rake yale:load_voyager_sample_data && /sbin/my_init"
     logging:
       driver: awslogs
