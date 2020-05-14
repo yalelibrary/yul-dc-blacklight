@@ -26,7 +26,7 @@ ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
   BUNDLE_JOBS=4
 
 COPY --chown=app Gemfile* $APP_HOME/
-RUN gem install bundler -v 2.1.2
+RUN gem install bundler -v 2.1.4
 RUN /sbin/setuser app bash -l -c "bundle check || bundle install"
 
 COPY --chown=app . $APP_HOME

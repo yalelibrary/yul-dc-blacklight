@@ -1,7 +1,7 @@
 version: '3.0'
 services:
   web:
-    image: yalelibraryit/dc-blacklight:ecs
+    image: yalelibraryit/dc-blacklight:105ac
     command: /bin/sh -c "cd /home/app/webapp && sleep 10 && rake yale:load_voyager_sample_data && /sbin/my_init"
     logging:
       driver: awslogs
@@ -47,7 +47,7 @@ services:
         awslogs-stream-prefix: iiif_image
 
   solr:
-    image: yalelibraryit/dc-solr:${SOLR_TAG:-latest}
+    image: yalelibraryit/dc-solr:${SOLR_TAG}
     ports:
       - "8983:8983"
     logging:
@@ -58,7 +58,7 @@ services:
         awslogs-stream-prefix: solr
     env_file:
       - .env_ecs
-    command: bash -c 'precreate-core ${SOLR_CORE} /opt/config; exec solr -f'
+    command: bash -c "precreate-core ${SOLR_CORE} /opt/config && exec solr -f"
 
   iiif_manifest:
     image: yalelibraryit/dc-iiif-manifest:demo
