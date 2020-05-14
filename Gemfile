@@ -4,12 +4,14 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
+
 gem 'blacklight'
 gem 'blacklight-marc', '>= 7.0.0.rc1', '< 8'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap', '~> 4.0'
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
+gem 'dotenv-rails', groups: [:development, :test]
 gem 'jbuilder', '~> 2.7'
 gem 'jquery-rails'
 gem 'pg'
@@ -25,7 +27,6 @@ gem 'webpacker', '~> 4.0'
 group :development, :test do
   gem 'bixby'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'dotenv-rails'
   gem 'rspec-rails', '~> 4.0.0'
   gem 'solr_wrapper', '>= 0.3'
 end
