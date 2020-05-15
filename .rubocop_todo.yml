@@ -20,6 +20,9 @@ Metrics/AbcSize:
 # ExcludedMethods: refine
 Metrics/BlockLength:
   Max: 33
+  Exclude:
+    - 'spec/**/*'
+    - 'app/controllers/catalog_controller.rb'
 
 # Offense count: 1
 # Configuration parameters: CountComments.
