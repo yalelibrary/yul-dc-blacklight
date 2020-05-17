@@ -2,7 +2,7 @@ version: '2.1'
 services:
 
   base:
-    image: '${REGISTRY_HOST}${REGISTRY_URI}-base:105ac'
+    image: '${REGISTRY_HOST}${REGISTRY_URI}-base:d14ca'
     env_file:
       - .env
       - .env.development
@@ -60,7 +60,7 @@ services:
       - '8182:8182'
 
   iiif_manifest:
-    image: yalelibraryit/dc-iiif-manifest:demo
+    image: yalelibraryit/dc-iiif-manifest:97181
     ports:
       - '80:80'
 

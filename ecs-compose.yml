@@ -1,7 +1,7 @@
 version: '3.0'
 services:
   web:
-    image: yalelibraryit/dc-blacklight:504b
+    image: yalelibraryit/dc-blacklight:d14ca
     command: /bin/sh -c "cd /home/app/webapp && sleep 10 && rake yale:load_voyager_sample_data && /sbin/my_init"
     logging:
       driver: awslogs
@@ -61,7 +61,7 @@ services:
     command: bash -c "precreate-core ${SOLR_CORE} /opt/config && exec solr -f"
 
   iiif_manifest:
-    image: yalelibraryit/dc-iiif-manifest:demo
+    image: yalelibraryit/dc-iiif-manifest:97181
     ports:
       - '80:80'
     logging:
