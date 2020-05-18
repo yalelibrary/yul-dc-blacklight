@@ -20,6 +20,12 @@ class VoyagerIndexingService
   end
 
   ##
+  # since we currently use bib to loop for oids we need storage for format
+  def format_hash
+    @format_hash ||= {}
+  end
+
+  ##
   # Read in a directory of ladybird json files and create a hash mapping orbisBibId to oid
   # Blacklight will need the oid in order to fetch the image for display.
   def build_oid_hash
@@ -33,6 +39,7 @@ class VoyagerIndexingService
         oid = data_hash["oid"].to_s
         oid_hash[orbis_bib_id] ||= []
         oid_hash[orbis_bib_id] << oid
+        format_hash[oid] = data_hash['format']
       # TODO: We need a better way to surface parsing errors
       # Ideally these would go to an error tracking service that someone would review
       rescue JSON::ParserError => e
@@ -56,7 +63,8 @@ class VoyagerIndexingService
         description_tesim: data_hash["description"],
         author_tsim: data_hash["creator"],
         bib_id_ssm: orbis_bib_id,
-        public_bsi: data_hash["public"].presence || 0
+        public_bsi: data_hash["public"].presence || 0,
+        format: format_hash[oid]
       }
       solr = Blacklight.default_index.connection
       solr.add([solr_doc])
