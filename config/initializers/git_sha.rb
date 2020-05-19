@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 revisions_logfile = "/opt/#{ENV['PROJECT_NAME']}/revisions.log"
 
-sha = `git rev-parse HEAD`.strip
+sha = `git log -1 --pretty=%h`.strip
 GIT_SHA =
   if $CHILD_STATUS == 0
     sha
