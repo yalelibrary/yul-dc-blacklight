@@ -33,7 +33,7 @@ services:
       - "db:/var/lib/postgresql/data"
 
   iiif_image:
-    image: yalelibraryit/dc-iiif-cantaloupe:latest
+    image: yalelibraryit/dc-iiif-cantaloupe:f4dab1
     env_file:
       - .env_ecs
       - .secrets
