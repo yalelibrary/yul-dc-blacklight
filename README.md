@@ -13,7 +13,28 @@
 ### If this is your first time working in this repo or the Dockerfile has been updated you will need to (re)build your services
   ``` bash
   docker-compose build web
+
   ```
+
+### Using the Makefile
+
+You can also use the Makefile to build an image locally, and/or push it to dockerhub:
+
+```
+make build <- build the blacklight image
+
+make push <-push an already build image
+
+make build push <-build and then push the image up to dockerhub
+```
+When you use make build, a new blacklight image is built, and tagged as both :latest, and the current git sha.  When
+pushing to dockerhub, only the git sha version is pushed.
+```
+yalelibraryit/dc-blacklight        d915b32 <-git sha   1c2d8977cf5b <- note same image id
+yalelibraryit/dc-blacklight        latest              1c2d8977cf5b
+```
+In the case above, only  yalelibraryit/dc-blacklight:d915b32 will be available on dockerhub.
+
 ### Environment Variables for Development
 
 Create .env.development to override anything in .env. The following values must be overridden.
