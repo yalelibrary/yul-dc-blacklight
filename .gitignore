@@ -36,3 +36,7 @@
 yarn-debug.log*
 .yarn-integrity
 .secrets
+
+GIT_SHA
+GIT_BRANCH
+DEPLOYED_AT
