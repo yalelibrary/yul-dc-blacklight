@@ -27,5 +27,4 @@ LAST_DEPLOYED =
     "Not in deployed environment"
   end
 
-
-  
+# comment
