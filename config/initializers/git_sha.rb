@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-# note: cmd -  date -u +%FT%TZ
-# note: output - 2020-05-19T23:47:41Z
+# The DEPLOYED_AT file should contain the iso8601 timestamp of when it was deployed
+# can be done by running: date -u +%FT%TZ
+# which gives output that looks like: 2020-05-19T23:47:41Z
 
 GITSHA_FILENAME = Rails.root.join('GIT_SHA')
 GITBRANCH_FILENAME = Rails.root.join('GIT_BRANCH')
@@ -31,12 +32,10 @@ GIT_BRANCH =
     end
   end
 
-# TODO: Will need updating. Needs to be handled by deployment code
-# Can just dump simple timestamp to be read here
 DEPLOYED_AT =
   if File.exist?(DEPLOYEDAT_FILENAME)
     timestamp = File.read(DEPLOYEDAT_FILENAME).strip
-    Time.iso8601(timestamp).to_formatted_s(:rfc822)
+    Time.iso8601(timestamp).in_time_zone('Eastern Time (US & Canada)').to_formatted_s(:iso8601)
   else
     "Not in deployed environment"
   end
