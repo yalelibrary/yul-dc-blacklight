@@ -85,6 +85,14 @@ IIIF_MANIFESTS_BASE_URL=http://localhost/manifests/
     ```
     bundle exec rake yale:load_voyager_sample_data
     ```
+  - Run rubocop
+    ```
+    bundle exec rubocop -a
+    ```
+  - Run rspec
+    ```
+    bundle exec rspec
+    ```
 
 # Customizing Blacklight:
 
