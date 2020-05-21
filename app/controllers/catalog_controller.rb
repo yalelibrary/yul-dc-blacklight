@@ -81,6 +81,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true
     config.add_facet_field 'subject_ssim', label: 'Topic', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'language_ssim', label: 'Language', limit: true
+    config.add_facet_field 'extentOfDigitization_ssim', label: 'Extent of Digitization'
     config.add_facet_field 'lc_1letter_ssim', label: 'Call Number'
     config.add_facet_field 'subject_geo_ssim', label: 'Region'
     config.add_facet_field 'subject_era_ssim', label: 'Era'
@@ -104,6 +105,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'title_vern_ssim', label: 'Title'
     config.add_index_field 'author_tsim', label: 'Author'
     config.add_index_field 'author_vern_ssim', label: 'Author'
+    config.add_index_field 'extentOfDigitization_ssim', label: 'Extent of Digitization'
     config.add_index_field 'format', label: 'Format'
     config.add_index_field 'language_ssim', label: 'Language'
     config.add_index_field 'published_ssim', label: 'Published'
