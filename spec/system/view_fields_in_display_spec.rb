@@ -27,7 +27,14 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       language_ssim: 'en',
       isbn_ssim: '2321321389',
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
-      public_bsi: 1
+      public_bsi: 1,
+      abstract_ssim: "this is an abstract",
+      alternativeTitle_ssim: "this is an alternative title",
+      genre_ssim: "this is the genre",
+      geoSubject_ssim: "this is the geo subject",
+      resourceType_ssim: "this is the resource type",
+      subjectName_ssim: "this is the subject name",
+      subjectTopic_ssim: "this is the subject topic"
     }
   end
 
@@ -60,5 +67,26 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   end
   it 'displays description in results' do
     expect(page).to have_content("Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.")
+  end
+  it 'displays the Abstract in results' do
+    expect(page).to have_content("this is an abstract")
+  end
+  it 'displays the Alternative Title in results' do
+    expect(page).to have_content("this is an alternative title")
+  end
+  it 'displays the Genre in results' do
+    expect(page).to have_content("this is the genre")
+  end
+  it 'displays the Geo Subject in results' do
+    expect(page).to have_content("this is the geo subject")
+  end
+  it 'displays the Resource Type in results' do
+    expect(page).to have_content("this is the resource type")
+  end
+  it 'displays the Subject Name in results' do
+    expect(page).to have_content("this is the subject name")
+  end
+  it 'displays the Subject Topic in results' do
+    expect(page).to have_content("this is the subject topic")
   end
 end
