@@ -127,6 +127,13 @@ class CatalogController < ApplicationController
     config.add_show_field 'lc_callnum_ssim', label: 'Call number'
     config.add_show_field 'isbn_ssim', label: 'ISBN'
     config.add_show_field 'description_tesim', label: 'Description'
+    config.add_show_field 'abstract_ssim', label: 'Abstract'
+    config.add_show_field 'alternativeTitle_ssim', label: 'Alternative Title'
+    config.add_show_field 'genre_ssim', label: 'Genre'
+    config.add_show_field 'geoSubject_ssim', label: 'Geo Subject'
+    config.add_show_field 'resourceType_ssim', label: 'Resource Type'
+    config.add_show_field 'subjectName_ssim', label: 'Subject Name'
+    config.add_show_field 'subjectTopic_ssim', label: 'Subject Topic'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
