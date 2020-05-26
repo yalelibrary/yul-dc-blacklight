@@ -147,7 +147,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceTitle_ssim', label: 'Source Title'
     config.add_show_field 'sourceDate_ssim', label: 'Source Date'
     config.add_show_field 'sourceNote_ssim', label: 'Source Note'
-    config.add_show_field 'references_ssim', label: 'Refernces'
+    config.add_show_field 'references_ssim', label: 'References'
     config.add_show_field 'dateStructured_ssim', label: 'Date Structured'
     config.add_show_field 'children_ssim', label: 'Children'
     config.add_show_field 'importUrl_ssim', label: 'Import URL'
