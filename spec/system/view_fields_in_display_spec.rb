@@ -35,7 +35,12 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       resourceType_ssim: "this is the resource type",
       subjectName_ssim: "this is the subject name",
       subjectTopic_ssim: "this is the subject topic",
-      extentOfDigitization_ssim: 'this is the extent of digitization'
+      extentOfDigitization_ssim: 'this is the extent of digitization',
+      rights_ssim: "these are the rights",
+      publicationPlace_ssim: "this is the publication place",
+      sourceCreated_ssim: "this is the source created",
+      publisher_ssim: "this is the publisher",
+      copyrightDate_ssim: "this is the copyright date"
     }
   end
 
@@ -92,5 +97,20 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   end
   it 'displays the Extend of Digitization in results' do
     expect(page).to have_content("this is the extent of digitization")
+  end
+  it 'displays the Rights in results' do
+    expect(page).to have_content("these are the rights")
+  end
+  it 'displays the Publication Place in results' do
+    expect(page).to have_content("this is the publication place")
+  end
+  it 'displays the Source Created in results' do
+    expect(page).to have_content("this is the source created")
+  end
+  it 'displays the Publisher in results' do
+    expect(page).to have_content("this is the publisher")
+  end
+  it 'displays the Copyright Date in results' do
+    expect(page).to have_content("this is the copyright date")
   end
 end

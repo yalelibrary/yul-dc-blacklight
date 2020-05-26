@@ -137,6 +137,11 @@ class CatalogController < ApplicationController
     config.add_show_field 'subjectName_ssim', label: 'Subject Name'
     config.add_show_field 'subjectTopic_ssim', label: 'Subject Topic'
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization'
+    config.add_show_field 'rights_ssim', label: 'Rights'
+    config.add_show_field 'publicationPlace_ssim', label: 'Publication Place'
+    config.add_show_field 'sourceCreated_ssim', label: 'Source Created'
+    config.add_show_field 'publisher_ssim', label: 'Publisher'
+    config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
