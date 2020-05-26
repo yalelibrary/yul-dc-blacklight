@@ -47,6 +47,8 @@ RSpec.configure do |config|
     solr.commit
   end
 
+  config.include Warden::Test::Helpers
+
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 
