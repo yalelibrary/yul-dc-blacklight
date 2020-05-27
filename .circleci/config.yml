@@ -20,8 +20,8 @@ jobs:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: password
             SOLR_CORE: blacklight-core
-            SOLR_URL: http://solr:8983/solr/blacklight-core
-      - image: yalelibraryit/dc-solr:131249d
+            SOLR_URL: http://localhost:8983/solr/blacklight-core
+      - image: yalelibraryit/dc-solr:79a71ec
         command: bash -c 'precreate-core blacklight-core /opt/config; exec solr -f'
       - image: circleci/postgres:9.5-alpine-ram
         environment:
