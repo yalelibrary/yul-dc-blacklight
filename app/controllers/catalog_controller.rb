@@ -138,10 +138,10 @@ class CatalogController < ApplicationController
     config.add_show_field 'partOf_ssim', label: 'this is the part of'
     config.add_show_field 'numberOfPages_ssim', label: 'this is the number of pages'
     config.add_show_field 'material_ssim', label: 'this is the material'
-    config.add_show_field 'scale_ssim', label:'this is the scale'
-    config.add_show_field 'digital_ssim', label:'this is the digital'
+    config.add_show_field 'scale_ssim', label: 'this is the scale'
+    config.add_show_field 'digital_ssim', label: 'this is the digital'
     config.add_show_field 'coordinates_ssim', label: 'this is the coordinates'
-    config.add_show_field 'projection_ssim', label:'this is the projection'
+    config.add_show_field 'projection_ssim', label: 'this is the projection'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields

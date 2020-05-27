@@ -72,7 +72,7 @@ class VoyagerIndexingService
         scale_ssim: "this is the scale, using ssim",
         digital_ssim: "this is the digital, using ssim",
         coordinates_ssim: "this is the coordinates, using ssim",
-        projection_ssim: "this is the projection, using ssim",
+        projection_ssim: "this is the projection, using ssim"
       }
       solr = Blacklight.default_index.connection
       solr.add([solr_doc])
