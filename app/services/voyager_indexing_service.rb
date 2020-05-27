@@ -64,7 +64,15 @@ class VoyagerIndexingService
         author_tsim: data_hash["creator"],
         bib_id_ssm: orbis_bib_id,
         public_bsi: data_hash["public"].presence || 0,
-        format: format_hash[oid]
+        format: format_hash[oid],
+        extent_ssim: 'this is an example of extent, using ssim',
+        partOf_ssim: "this is the part of, using ssim",
+        numberOfPages_ssim: "this is the number of pages, using ssim",
+        material_ssim: "this is the material, using ssim",
+        scale_ssim: "this is the scale, using ssim",
+        digital_ssim: "this is the digital, using ssim",
+        coordinates_ssim: "this is the coordinates, using ssim",
+        projection_ssim: "this is the projection, using ssim",
       }
       solr = Blacklight.default_index.connection
       solr.add([solr_doc])

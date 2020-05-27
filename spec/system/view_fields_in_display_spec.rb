@@ -51,7 +51,15 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       findingAid_ssim: 'this is the finding aid',
       collectionId_ssim: 'this is the collection ID',
       edition_ssim: 'this is the edition',
-      uri_ssim: 'this is the URI'
+      uri_ssim: 'this is the URI',
+      partOf_ssim: "this is the part of",
+      numberOfPages_ssim: "this is the number of pages",
+      material_ssim: "this is the material",
+      scale_ssim: "this is the scale",
+      digital_ssim: "this is the digital",
+      coordinates_ssim: "this is the coordinates",
+      projection_ssim: "this is the projection",
+      extent_ssim: "this is the extent"
     }
   end
 
@@ -72,6 +80,9 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   end
   it 'displays format in results' do
     expect(page).to have_content("three dimensional object")
+  end
+  it 'displays extent in results' do
+    expect(page).to have_content("this is the extent")
   end
   it 'displays call number in results' do
     expect(page).to have_content("123213213")
