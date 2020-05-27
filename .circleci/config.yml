@@ -47,9 +47,11 @@ jobs:
       - checkout
       - docker/check
       - docker/build:
-          image: yalelibraryit/dc-blacklight:master
+          image: yalelibraryit/dc-blacklight
+          tag: master
       - docker/push:
-          image: yalelibraryit/dc-blacklight:master
+          image: yalelibraryit/dc-blacklight
+          tag: master
 orbs:
   docker: circleci/docker@1.0.1
 version: 2.1
