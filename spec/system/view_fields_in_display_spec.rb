@@ -35,7 +35,23 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       resourceType_ssim: "this is the resource type",
       subjectName_ssim: "this is the subject name",
       subjectTopic_ssim: "this is the subject topic",
-      extentOfDigitization_ssim: 'this is the extent of digitization'
+      extentOfDigitization_ssim: 'this is the extent of digitization',
+      rights_ssim: "these are the rights",
+      publicationPlace_ssim: "this is the publication place",
+      sourceCreated_ssim: "this is the source created",
+      publisher_ssim: "this is the publisher",
+      copyrightDate_ssim: "this is the copyright date",
+      oid_ssim: 'this is the OID',
+      identifierMfhd_ssim: 'this is the identifier MFHD',
+      identifierShelfMark_ssim: 'this is the identifier shelf mark',
+      box_ssim: 'this is the box',
+      folder_ssim: 'this is the folder',
+      orbisBibId_ssim: 'this is the orbis bib ID',
+      orbisBarcode_ssim: 'this is the orbis bar code',
+      findingAid_ssim: 'this is the finding aid',
+      collectionId_ssim: 'this is the collection ID',
+      edition_ssim: 'this is the edition',
+      uri_ssim: 'this is the URI'
     }
   end
 
@@ -92,5 +108,53 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   end
   it 'displays the Extend of Digitization in results' do
     expect(page).to have_content("this is the extent of digitization")
+  end
+  it 'displays the Rights in results' do
+    expect(page).to have_content("these are the rights")
+  end
+  it 'displays the Publication Place in results' do
+    expect(page).to have_content("this is the publication place")
+  end
+  it 'displays the Source Created in results' do
+    expect(page).to have_content("this is the source created")
+  end
+  it 'displays the Publisher in results' do
+    expect(page).to have_content("this is the publisher")
+  end
+  it 'displays the Copyright Date in results' do
+    expect(page).to have_content("this is the copyright date")
+  end
+  it 'displays the OID in results' do
+    expect(page).to have_content("this is the OID")
+  end
+  it 'displays the Identifier MFHD in results' do
+    expect(page).to have_content("this is the identifier MFHD")
+  end
+  it 'displays the Identifier Shelf Mark in results' do
+    expect(page).to have_content("this is the identifier shelf mark")
+  end
+  it 'displays the Box in results' do
+    expect(page).to have_content("this is the box")
+  end
+  it 'displays the Folder in results' do
+    expect(page).to have_content("this is the folder")
+  end
+  it 'displays the Orbis Bib ID in results' do
+    expect(page).to have_content("this is the orbis bib ID")
+  end
+  it 'displays the Orbis Bar Code in results' do
+    expect(page).to have_content("this is the orbis bar code")
+  end
+  it 'displays the Finding Aid in results' do
+    expect(page).to have_content("this is the finding aid")
+  end
+  it 'displays the Collection ID in results' do
+    expect(page).to have_content("this is the collection ID")
+  end
+  it 'displays the Edition in results' do
+    expect(page).to have_content("this is the edition")
+  end
+  it 'displays the URI in results' do
+    expect(page).to have_content("this is the URI")
   end
 end

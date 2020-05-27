@@ -137,6 +137,22 @@ class CatalogController < ApplicationController
     config.add_show_field 'subjectName_ssim', label: 'Subject Name'
     config.add_show_field 'subjectTopic_ssim', label: 'Subject Topic'
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization'
+    config.add_show_field 'rights_ssim', label: 'Rights'
+    config.add_show_field 'publicationPlace_ssim', label: 'Publication Place'
+    config.add_show_field 'sourceCreated_ssim', label: 'Source Created'
+    config.add_show_field 'publisher_ssim', label: 'Publisher'
+    config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date'
+    config.add_show_field 'oid_ssim', label: 'OID'
+    config.add_show_field 'identifierMfhd_ssim', label: 'Identifier MFHD'
+    config.add_show_field 'identifierShelfMark_ssim', label: 'Identifier Shelf Mark'
+    config.add_show_field 'box_ssim', label: 'Box'
+    config.add_show_field 'folder_ssim', label: 'Folder'
+    config.add_show_field 'orbisBibId_ssim', label: 'Orbis Bib ID'
+    config.add_show_field 'orbisBarcode_ssim', label: 'Orbis Bar Code'
+    config.add_show_field 'findingAid_ssim', label: 'Finding Aid'
+    config.add_show_field 'collectionId_ssim', label: 'Collection ID'
+    config.add_show_field 'edition_ssim', label: 'Edition'
+    config.add_show_field 'uri_ssim', label: 'URI'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
