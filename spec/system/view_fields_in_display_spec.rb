@@ -35,6 +35,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       resourceType_ssim: "this is the resource type",
       subjectName_ssim: "this is the subject name",
       subjectTopic_ssim: "this is the subject topic",
+<<<<<<< HEAD
       extentOfDigitization_ssim: 'this is the extent of digitization',
       rights_ssim: "these are the rights",
       publicationPlace_ssim: "this is the publication place",
@@ -60,6 +61,16 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       coordinates_ssim: "this is the coordinates",
       projection_ssim: "this is the projection",
       extent_ssim: "this is the extent"
+=======
+      partOf_ssim: "this is the part of, using ssim",
+      numberOfPages_ssim: "this is the number of pages, using ssim",
+      material_ssim: "this is the material, using ssim",
+      scale_ssim: "this is the scale, using ssim",
+      digital_ssim: "this is the digital, using ssim",
+      coordinates_ssim: "this is the coordinates, using ssim",
+      projection_ssim: "this is the projection, using ssim",
+      extent_ssim: "this is the extent, using ssim"
+>>>>>>> 'fixes rubocop and creates additional test'
     }
   end
 
@@ -82,7 +93,28 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     expect(page).to have_content("three dimensional object")
   end
   it 'displays extent in results' do
-    expect(page).to have_content("this is the extent")
+    expect(page).to have_content("this is the extent, using ssim")
+  end
+  it 'displays part of in results' do
+    expect(page).to have_content("this is the part of, using ssim")
+  end
+  it 'displays number of page in results' do
+    expect(page).to have_content("this is the number of pages, using ssim")
+  end
+  it 'displays material in results' do
+    expect(page).to have_content("this is the material, using ssim")
+  end
+  it 'displays scale in results' do
+    expect(page).to have_content("this is the scale, using ssim")
+  end
+  it 'displays digital in results' do
+    expect(page).to have_content("this is the digital, using ssim")
+  end
+  it 'displays coordinates in results' do
+    expect(page).to have_content("this is the coordinates, using ssim")
+  end
+  it 'displays projection in results' do
+    expect(page).to have_content("this is the projection, using ssim")
   end
   it 'displays call number in results' do
     expect(page).to have_content("123213213")
