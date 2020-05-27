@@ -41,6 +41,16 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       sourceCreated_ssim: "this is the source created",
       publisher_ssim: "this is the publisher",
       copyrightDate_ssim: "this is the copyright date",
+      source_ssim: "this is the source",
+      recordType_ssim: "this is the record type",
+      sourceTitle_ssim: "this is the source title",
+      sourceDate_ssim: "this is the source date",
+      sourceNote_ssim: "this is the source note",
+      references_ssim: "these are the references",
+      dateStructured_ssim: "this is the date structured",
+      children_ssim: "these are the children",
+      importUrl_ssim: "this is the import URL",
+      illustrativeMatter_ssim: "this is the illustrative matter",
       oid_ssim: 'this is the OID',
       identifierMfhd_ssim: 'this is the identifier MFHD',
       identifierShelfMark_ssim: 'this is the identifier shelf mark',
@@ -155,6 +165,36 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   end
   it 'displays the Copyright Date in results' do
     expect(page).to have_content("this is the copyright date")
+  end
+  it 'displays the Source in results' do
+    expect(page).to have_content("this is the source")
+  end
+  it 'displays the Record Type in results' do
+    expect(page).to have_content("this is the record type")
+  end
+  it 'displays the Source Title in results' do
+    expect(page).to have_content("this is the source title")
+  end
+  it 'displays the Source Date in results' do
+    expect(page).to have_content("this is the source date")
+  end
+  it 'displays the Source Note in results' do
+    expect(page).to have_content("this is the source note")
+  end
+  it 'displays the References in results' do
+    expect(page).to have_content("these are the references")
+  end
+  it 'displays the Date Structured in results' do
+    expect(page).to have_content("this is the date structured")
+  end
+  it 'displays the Children in results' do
+    expect(page).to have_content("these are the children")
+  end
+  it 'displays the import URL in results' do
+    expect(page).to have_content("this is the import URL")
+  end
+  it 'displays the Illustrative Matter in results' do
+    expect(page).to have_content("this is the illustrative matter")
   end
   it 'displays the OID in results' do
     expect(page).to have_content("this is the OID")
