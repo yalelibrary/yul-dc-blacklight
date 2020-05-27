@@ -62,13 +62,13 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       collectionId_ssim: 'this is the collection ID',
       edition_ssim: 'this is the edition',
       uri_ssim: 'this is the URI',
-      partOf_ssim: "this is the part of",
-      numberOfPages_ssim: "this is the number of pages",
-      material_ssim: "this is the material",
-      scale_ssim: "this is the scale",
-      digital_ssim: "this is the digital",
-      coordinates_ssim: "this is the coordinates",
-      projection_ssim: "this is the projection",
+      partOf_ssim: "this is the part of, using ssim",
+      numberOfPages_ssim: "this is the number of pages, using ssim",
+      material_ssim: "this is the material, using ssim",
+      scale_ssim: "this is the scale, using ssim",
+      digital_ssim: "this is the digital, using ssim",
+      coordinates_ssim: "this is the coordinates, using ssim",
+      projection_ssim: "this is the projection, using ssim",
       extent_ssim: "this is the extent, using ssim"
     }
   end
