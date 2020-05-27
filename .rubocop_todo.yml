@@ -54,11 +54,6 @@ Naming/FileName:
     - 'ops/solr-setup.rb'
 
 # Offense count: 1
-RSpec/DescribeClass:
-  Exclude:
-    - 'spec/views/catalog/_show_links.html.erb_spec.rb'
-
-# Offense count: 1
 # Configuration parameters: Max.
 RSpec/ExampleLength:
   Exclude:
