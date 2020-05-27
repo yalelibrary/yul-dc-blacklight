@@ -50,7 +50,18 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       dateStructured_ssim: "this is the date structured",
       children_ssim: "these are the children",
       importUrl_ssim: "this is the import URL",
-      illustrativeMatter_ssim: "this is the illustrative matter"
+      illustrativeMatter_ssim: "this is the illustrative matter",
+      oid_ssim: 'this is the OID',
+      identifierMfhd_ssim: 'this is the identifier MFHD',
+      identifierShelfMark_ssim: 'this is the identifier shelf mark',
+      box_ssim: 'this is the box',
+      folder_ssim: 'this is the folder',
+      orbisBibId_ssim: 'this is the orbis bib ID',
+      orbisBarcode_ssim: 'this is the orbis bar code',
+      findingAid_ssim: 'this is the finding aid',
+      collectionId_ssim: 'this is the collection ID',
+      edition_ssim: 'this is the edition',
+      uri_ssim: 'this is the URI'
     }
   end
 
@@ -152,5 +163,38 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   end
   it 'displays the Illustrative Matter in results' do
     expect(page).to have_content("this is the illustrative matter")
+  end
+  it 'displays the OID in results' do
+    expect(page).to have_content("this is the OID")
+  end
+  it 'displays the Identifier MFHD in results' do
+    expect(page).to have_content("this is the identifier MFHD")
+  end
+  it 'displays the Identifier Shelf Mark in results' do
+    expect(page).to have_content("this is the identifier shelf mark")
+  end
+  it 'displays the Box in results' do
+    expect(page).to have_content("this is the box")
+  end
+  it 'displays the Folder in results' do
+    expect(page).to have_content("this is the folder")
+  end
+  it 'displays the Orbis Bib ID in results' do
+    expect(page).to have_content("this is the orbis bib ID")
+  end
+  it 'displays the Orbis Bar Code in results' do
+    expect(page).to have_content("this is the orbis bar code")
+  end
+  it 'displays the Finding Aid in results' do
+    expect(page).to have_content("this is the finding aid")
+  end
+  it 'displays the Collection ID in results' do
+    expect(page).to have_content("this is the collection ID")
+  end
+  it 'displays the Edition in results' do
+    expect(page).to have_content("this is the edition")
+  end
+  it 'displays the URI in results' do
+    expect(page).to have_content("this is the URI")
   end
 end

@@ -152,6 +152,17 @@ class CatalogController < ApplicationController
     config.add_show_field 'children_ssim', label: 'Children'
     config.add_show_field 'importUrl_ssim', label: 'Import URL'
     config.add_show_field 'illustrativeMatter_ssim', label: 'Illustrative Matter'
+    config.add_show_field 'oid_ssim', label: 'OID'
+    config.add_show_field 'identifierMfhd_ssim', label: 'Identifier MFHD'
+    config.add_show_field 'identifierShelfMark_ssim', label: 'Identifier Shelf Mark'
+    config.add_show_field 'box_ssim', label: 'Box'
+    config.add_show_field 'folder_ssim', label: 'Folder'
+    config.add_show_field 'orbisBibId_ssim', label: 'Orbis Bib ID'
+    config.add_show_field 'orbisBarcode_ssim', label: 'Orbis Bar Code'
+    config.add_show_field 'findingAid_ssim', label: 'Finding Aid'
+    config.add_show_field 'collectionId_ssim', label: 'Collection ID'
+    config.add_show_field 'edition_ssim', label: 'Edition'
+    config.add_show_field 'uri_ssim', label: 'URI'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
