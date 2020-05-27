@@ -53,14 +53,14 @@ services:
     command: bash -c 'precreate-core ${SOLR_CORE} /opt/config; precreate-core ${SOLR_TEST_CORE} /opt/config; exec solr -f'
 
   iiif_image:
-    image: yalelibraryit/dc-iiif-cantaloupe:latest
+    image: yalelibraryit/dc-iiif-cantaloupe:${IIIF_IMAGE_VERSION:-latest}
     env_file:
       - .env
     ports:
       - '8182:8182'
 
   iiif_manifest:
-    image: yalelibraryit/dc-iiif-manifest:97181
+    image: yalelibraryit/dc-iiif-manifest:${IIIF_MANIFEST_VERSION:-latest}
     ports:
       - '80:80'
 
