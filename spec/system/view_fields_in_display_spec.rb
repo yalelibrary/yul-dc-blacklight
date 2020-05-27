@@ -35,7 +35,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       resourceType_ssim: "this is the resource type",
       subjectName_ssim: "this is the subject name",
       subjectTopic_ssim: "this is the subject topic",
-<<<<<<< HEAD
       extentOfDigitization_ssim: 'this is the extent of digitization',
       rights_ssim: "these are the rights",
       publicationPlace_ssim: "this is the publication place",
@@ -60,17 +59,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       digital_ssim: "this is the digital",
       coordinates_ssim: "this is the coordinates",
       projection_ssim: "this is the projection",
-      extent_ssim: "this is the extent"
-=======
-      partOf_ssim: "this is the part of, using ssim",
-      numberOfPages_ssim: "this is the number of pages, using ssim",
-      material_ssim: "this is the material, using ssim",
-      scale_ssim: "this is the scale, using ssim",
-      digital_ssim: "this is the digital, using ssim",
-      coordinates_ssim: "this is the coordinates, using ssim",
-      projection_ssim: "this is the projection, using ssim",
       extent_ssim: "this is the extent, using ssim"
->>>>>>> 'fixes rubocop and creates additional test'
     }
   end
 
