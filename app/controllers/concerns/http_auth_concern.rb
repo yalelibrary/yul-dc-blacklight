@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module HttpAuthConcern
   extend ActiveSupport::Concern
   included do
