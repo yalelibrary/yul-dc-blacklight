@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+gem 'awesome_print'
 gem 'blacklight'
 gem 'blacklight-marc', '>= 7.0.0.rc1', '< 8'
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -12,10 +13,11 @@ gem 'bootstrap', '~> 4.0'
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
 gem 'dotenv-rails', groups: [:development, :test]
+gem 'iso-639'
 gem 'jbuilder', '~> 2.7'
 gem 'jquery-rails'
 gem 'pg'
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 4.3'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 gem 'rsolr', '>= 1.0', '< 3'
 gem 'sass-rails', '>= 6'

@@ -22,4 +22,35 @@ RSpec.describe BlacklightHelper do
       end
     end
   end
+
+  describe '#language_code' do
+    context 'with a valid language code' do
+      it 'returns the English name of the language' do
+        expect(helper.language_code('en')).to eq 'English (en)'
+      end
+    end
+
+    context 'with an invalid language code' do
+      it 'returns the the invalid language code' do
+        expect(helper.language_code('zz')).to eq 'zz'
+      end
+    end
+  end
+
+  describe '#language_codes' do
+    context 'with a list of language code values' do
+      let(:document) { SolrDocument.new(id: 'xyz', language_ssim: ['en', 'eng', 'zz']) }
+      let(:args) do
+        {
+          document: document,
+          field: 'language_ssim',
+          value: ['en', 'eng', 'zz']
+        }
+      end
+
+      it 'returns a list of English names of the languages, if available' do
+        expect(helper.language_codes(args)).to eq 'English (en), English (eng), zz'
+      end
+    end
+  end
 end
