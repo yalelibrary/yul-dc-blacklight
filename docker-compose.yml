@@ -20,7 +20,7 @@ services:
       - '3000:3000'
     volumes:
       - .:/home/app/webapp
-    # command: bash -c "date > DEPLOYED_AT && /sbin/my_init"
+    command: bash -c "echo $$(date -u +%FT%TZ) > DEPLOYED_AT && /sbin/my_init"
     # Keep the stdin open, so we can attach to our app container's process
     # and do things such as byebug, etc:
     stdin_open: true
