@@ -20,26 +20,33 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       published_ssim: "1997",
       published_vern_ssim: "1997",
       lc_callnum_ssim: "123213213",
-      language_ssim: 'en',
+      language_ssim: ['en', 'eng', 'zz'],
       public_bsi: 1
     }
   end
-  it 'displays Author in results' do
-    expect(page).to have_content("Me and You").twice
-  end
-  it 'displays Title in results' do
-    expect(page).to have_content("HandsomeDan Bulldog", count: 3)
-  end
-  it 'displays Publishing in results' do
-    expect(page).to have_content("1997").twice
-  end
-  it 'displays format in results' do
-    expect(page).to have_content("three dimensional object")
-  end
-  it 'displays call number in results' do
-    expect(page).to have_content("123213213")
-  end
-  it 'displays language in results' do
-    expect(page).to have_content("en")
+
+  context 'Within search results' do
+    subject(:content) { find(:css, '#content') }
+
+    it 'displays language in results' do
+      expect(content).to have_content("English (en)")
+      expect(content).to have_content("English (eng)")
+      expect(content).to have_content("zz")
+    end
+    it 'displays Author in results' do
+      expect(content).to have_content("Me and You").twice
+    end
+    it 'displays Title in results' do
+      expect(content).to have_content("HandsomeDan Bulldog", count: 3)
+    end
+    it 'displays Publishing in results' do
+      expect(content).to have_content("1997").twice
+    end
+    it 'displays format in results' do
+      expect(content).to have_content("three dimensional object")
+    end
+    it 'displays call number in results' do
+      expect(content).to have_content("123213213")
+    end
   end
 end

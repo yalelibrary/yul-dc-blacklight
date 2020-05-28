@@ -10,4 +10,23 @@ module BlacklightHelper
   def manifest_base_url
     ENV.fetch('IIIF_MANIFESTS_BASE_URL', "#{request.protocol}localhost/manifests")
   end
+
+  def language_codes(args)
+    language_values = args[:document][args[:field]]
+    language_values.map do |language_code|
+      language_code_to_english(language_code)
+    end.join(', ')
+  end
+
+  def language_code(args)
+    language_value = args
+    language_code_to_english(language_value)
+  end
+
+  private
+
+    def language_code_to_english(language_code)
+      language_name_in_english = ISO_639.find_by_code(language_code)&.english_name
+      language_name_in_english.present? ? "#{language_name_in_english} (#{language_code})" : language_code
+    end
 end
