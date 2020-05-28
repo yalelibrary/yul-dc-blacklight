@@ -40,6 +40,9 @@ jobs:
           # Excludes tests that require Yale VPN access
           command:  |
             bundle exec rspec --tag ~vpn_only:true
+      - run:
+          name: timestamp
+          command: echo $(date -u +%FT%TZ) >> DEPLOYED_AT
   publish-latest:
     executor: docker/docker
     steps:
