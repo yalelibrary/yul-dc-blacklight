@@ -62,7 +62,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
 
   it 'can filter results with language facets' do
     click_on 'Language'
-    click_on 'la'
+    click_on 'Latin (la)'
     expect(page).to have_content('Amor Llama')
     expect(page).not_to have_content('Aquila Eccellenza')
     expect(page).not_to have_content('HandsomeDan Bulldog')

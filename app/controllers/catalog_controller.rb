@@ -80,7 +80,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'format', label: 'Format'
     config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true
     config.add_facet_field 'subject_ssim', label: 'Topic', limit: 20, index_range: 'A'..'Z'
-    config.add_facet_field 'language_ssim', label: 'Language', limit: true
+    config.add_facet_field 'language_ssim', label: 'Language', limit: true, helper_method: :language_code
     config.add_facet_field 'extentOfDigitization_ssim', label: 'Extent of Digitization'
     config.add_facet_field 'lc_1letter_ssim', label: 'Call Number'
     config.add_facet_field 'subject_geo_ssim', label: 'Region'
@@ -107,7 +107,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'author_vern_ssim', label: 'Author'
     config.add_index_field 'extentOfDigitization_ssim', label: 'Extent of Digitization'
     config.add_index_field 'format', label: 'Format'
-    config.add_index_field 'language_ssim', label: 'Language'
+    config.add_index_field 'language_ssim', label: 'Language', helper_method: :language_codes
     config.add_index_field 'published_ssim', label: 'Published'
     config.add_index_field 'published_vern_ssim', label: 'Published'
     config.add_index_field 'lc_callnum_ssim', label: 'Call number'
@@ -124,7 +124,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'format', label: 'Format'
     config.add_show_field 'url_fulltext_ssim', label: 'URL'
     config.add_show_field 'url_suppl_ssim', label: 'More Information'
-    config.add_show_field 'language_ssim', label: 'Language'
+    config.add_show_field 'language_ssim', label: 'Language', helper_method: :language_codes
     config.add_show_field 'published_ssim', label: 'Published'
     config.add_show_field 'published_vern_ssim', label: 'Published'
     config.add_show_field 'lc_callnum_ssim', label: 'Call number'
