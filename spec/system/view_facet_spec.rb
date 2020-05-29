@@ -67,12 +67,4 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     expect(page).not_to have_content('Aquila Eccellenza')
     expect(page).not_to have_content('HandsomeDan Bulldog')
   end
-
-  it 'can filter results with pivot field facets' do
-    click_on 'Pivot Field'
-    click_on 'la'
-
-    expect(page).to have_content('Amor Llama')
-    expect(page).not_to have_content('Rhett Lecheire')
-  end
 end
