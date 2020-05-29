@@ -1,4 +1,4 @@
-FROM yalelibraryit/dc-blacklight-base:v1.0.1
+FROM yalelibraryit/dc-blacklight-base:v1.0.4
 
 ADD https://time.is/just build-time
 COPY ops/nginx.sh /etc/service/nginx/run
