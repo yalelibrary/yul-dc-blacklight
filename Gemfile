@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+gem "actionpack", ">= 6.0.3.1"
 gem 'awesome_print'
 gem 'blacklight'
 gem 'blacklight-marc', '>= 7.0.0.rc1', '< 8'
