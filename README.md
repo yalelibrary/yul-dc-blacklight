@@ -81,19 +81,19 @@ Then, on that running management container:
   docker push yalelibraryit/dc-blacklight-base:v1.0.1
   ```
 
-5. Build the web services
+5. Build the blacklight services
 
   ```bash
-  docker-compose build web
+  docker-compose build
   ```
 
-  - When the web services are complete there will be a line that says "Successfully tagged yalelibraryit/dc-blacklight:`<image-name>`". e.g.:
+  - When the blacklight services are complete there will be a line that says "Successfully tagged yalelibraryit/dc-blacklight:`<image-name>`". e.g.:
 
     ```bash
     Successfully tagged yalelibraryit/dc-blacklight:master
     ```
 
-6. Create a new image tag from the updated web services build
+6. Create a new image tag from the updated blacklight services build
 
   - Your first argument is the full tag that you saw in step 5
   - The secomd argument replaces the `master` image name, with the image name we used in step 2\. e.g.:
@@ -102,7 +102,7 @@ Then, on that running management container:
     docker tag yalelibraryit/dc-blacklight:master yalelibraryit/dc-blacklight:v1.0.1
     ```
 
-7. Push the web image with your incremented version tag. e.g.:
+7. Push the blacklight image with your incremented version tag. e.g.:
 
   ```bash
   docker push yalelibraryit/dc-blacklight:v1.0.1
@@ -145,13 +145,13 @@ In order to prevent search engine crawling of the system before it's ready to la
 
 ## Starting the app
 
-- Start the web service
+- Start the blacklight service
 
   ```bash
-  docker-compose up web
+  docker-compose up blacklight
   ```
 
-- Access the web app at `http://localhost:3000`
+- Access the blacklight app at `http://localhost:3000`
 
 - Access the solr instance at `http://localhost:8983`
 
@@ -159,12 +159,12 @@ In order to prevent search engine crawling of the system before it's ready to la
 
 - Access the manifests instance at `http://localhost`
 
-### Accessing the web container
+### Accessing the blacklight container
 
 - Navigate to the app root directory in another tab and run:
 
   ```bash
-  docker-compose exec web bash
+  docker-compose exec blacklight bash
   ```
 
 - You will need to be inside the container to:
