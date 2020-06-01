@@ -17,6 +17,10 @@
 ```bash
   docker-compose build
 ```
+## To Start Container
+```bash
+  docker-compose up
+```
 
 ## To index data
 

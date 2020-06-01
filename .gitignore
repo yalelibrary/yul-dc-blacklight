@@ -40,3 +40,5 @@ yarn-debug.log*
 GIT_SHA
 GIT_BRANCH
 DEPLOYED_AT
+
+.idea/
