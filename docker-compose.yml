@@ -3,23 +3,36 @@ services:
 
   base:
     image: '${REGISTRY_HOST}${REGISTRY_URI}-base:v1.0.4'
-    env_file:
-      - .env
-      - .env.development
+    # env_file:
+    #   - .env
+    #   - .env.development
+    environment:
+      POSTGRES_DB: blacklight_yul_development
+      POSTGRES_HOST: db_blacklight
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
     build:
       context: .
       dockerfile: Dockerfile.base
 
-  web:
+  blacklight:
     build: .
     image: '${REGISTRY_HOST}${REGISTRY_URI}:master'
-    env_file:
-      - .env
-      - .env.development
+    # env_file:
+    #   - .env
+    #   - .env.development
+    environment:
+      POSTGRES_DB: blacklight_yul_development
+      POSTGRES_HOST: db_blacklight
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      SOLR_URL: http://solr:8983/solr/blacklight-core
+      IIIF_MANIFESTS_BASE_URL: /manifests/
+      PASSENGER_APP_ENV: development
     ports:
       - '3000:3000'
     volumes:
-      - .:/home/app/webapp
+      - blacklight:/home/app/webapp
     command: bash -c "echo $$(date -u +%FT%TZ) > DEPLOYED_AT && /sbin/my_init"
     # Keep the stdin open, so we can attach to our app container's process
     # and do things such as byebug, etc:
@@ -27,23 +40,63 @@ services:
     # Enable sending signals (CTRL+C, CTRL+P + CTRL+Q) into the container:
     tty: true
     depends_on:
+    depends_on:
+      - db_blacklight
       - solr
-      - db
-      - iiif_image
       - iiif_manifest
+      - iiif_image
 
-  db:
-    image: postgres
+
+  management:
+    image: yalelibraryit/dc-management:${MANAGEMENT_VERSION}
     env_file:
       - .env
+      - .secrets
+    environment:
+      POSTGRES_DB: yul_dc_management_development
+      POSTGRES_HOST: db_management
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      SOLR_URL: http://solr:8983/solr
+      SOLR_CORE: blacklight-core
+      PASSENGER_APP_ENV: development
     ports:
-      - '5432:5432'
+      - "3001:3000"
+    depends_on:
+      - db_management
+      - solr
+
+  db_blacklight:
+    image: postgres:${POSTGRES_VERSION}
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: blacklight_yul_development
+      POSTGRES_HOST: db_blacklight
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
     volumes:
-      - 'postgres:/var/lib/postgresql/data'
+      - "db_blacklight:/var/lib/postgresql/data"
+
+  db_management:
+    image: postgres:${POSTGRES_VERSION}
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: yul_dc_management_development
+      POSTGRES_HOST: db_management
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5434:5432"
+    volumes:
+      - "db_management:/var/lib/postgresql/data"
 
 
   solr:
-    image: yalelibraryit/dc-solr:${SOLR_TAG:-latest}
+    image: yalelibraryit/dc-solr:${SOLR_VERSION}
     ports:
       - '8983:8983'
     volumes:
@@ -68,3 +121,6 @@ services:
 volumes:
   postgres:
   solr:
+  blacklight:
+  db_blacklight:
+  db_management:

@@ -15,59 +15,98 @@
 ## If this is your first time working in this repo or the Dockerfile has been updated you will need to (re)build your services
 
 ```bash
-  docker-compose build web
+  docker-compose build
+```
+
+## To index data
+
+First, connect to the running management application container:
+
+```bash
+  docker-compose exec management bash
+```
+
+Then, on that running management container:
+
+```bash
+  SOLR_CORE=blacklight-core bundle exec rake yale:index_fixture_data
 ```
 
 ## Pushing new images to Dockerhub
-#### If you've made modifications to Dockerfile.base:
+
+### If you've made modifications to Dockerfile.base:
+
 1. Update the base services
+
+  ```bash
+  docker-compose build base
+  ```
+
+  - When the base services are finished building the last line should say "Successfully tagged yalelibraryit/dc-blacklight-base:`<image-name>`". e.g.:
+
     ```bash
-    docker-compose build base
+    Successfully tagged yalelibraryit/dc-blacklight-base:v1.0.0
     ```
-    - When the base services are finished building the last line should say "Successfully tagged yalelibraryit/dc-blacklight-base:`<image-name>`". e.g.:
-      ```bash
-      Successfully tagged yalelibraryit/dc-blacklight-base:v1.0.0
-      ```
-    - That tagged image being referenced is the newest image that's currently available on DockerHub. You can verify that by:
-      - Going to https://hub.docker.com/orgs/yalelibraryit/repositories
-      - Clicking the arrow icon at the far right of the line that says "yalelibraryit / dc-blacklight-base"
-      - Selecting the "Tags" button next to "General"
-      - Sort by "Newest" in the drop down on the right side of the window
+
+  - That tagged image being referenced is the newest image that's currently available on DockerHub. You can verify that by:
+
+    - Going to <https://hub.docker.com/orgs/yalelibraryit/repositories>
+    - Clicking the arrow icon at the far right of the line that says "yalelibraryit / dc-blacklight-base"
+    - Selecting the "Tags" button next to "General"
+    - Sort by "Newest" in the drop down on the right side of the window
+
 2. Create a new image tag from the updated base services build
-    - The `docker tag` command takes 2 arguments:
-      - The first argument is the newest tag that's currently in DockerHub that you saw above in step 1
-      - The second argument is the tag you want to assign the new image
-      - In order to properly tag the new image, increment the appropriate place value by one. e.g.:
-        ```bash
-        docker tag yalelibraryit/dc-blacklight-base:v1.0.0 yalelibraryit/dc-blacklight-base:v1.0.1
-        ```
-3. Sign in to Docker from your command line
-    ```bash
-    docker login
-    ```
-    - You'll be prompted to enter your Docker username and password
-4. Push the base image with your incremented version tag. e.g.:
-    ```bash
-    docker push yalelibraryit/dc-blacklight-base:v1.0.1
-    ```
-5. Build the web services
-    ```bash
-    docker-compose build web
-    ```
-    - When the web services are complete there will be a line that says "Successfully tagged yalelibraryit/dc-blacklight:`<image-name>`". e.g.:
+
+  - The `docker tag` command takes 2 arguments:
+
+    - The first argument is the newest tag that's currently in DockerHub that you saw above in step 1
+    - The second argument is the tag you want to assign the new image
+    - In order to properly tag the new image, increment the appropriate place value by one. e.g.:
+
       ```bash
-      Successfully tagged yalelibraryit/dc-blacklight:master
+      docker tag yalelibraryit/dc-blacklight-base:v1.0.0 yalelibraryit/dc-blacklight-base:v1.0.1
       ```
-6. Create a new image tag from the updated web services build
-    - Your first argument is the full tag that you saw in step 5
-    - The secomd argument replaces the `master` image name, with the image name we used in step 2. e.g.:
-        ```bash
-        docker tag yalelibraryit/dc-blacklight:master yalelibraryit/dc-blacklight:v1.0.1
-        ```
-7. Push the web image with your incremented version tag. e.g.:
+
+3. Sign in to Docker from your command line
+
+  ```bash
+  docker login
+  ```
+
+  - You'll be prompted to enter your Docker username and password
+
+4. Push the base image with your incremented version tag. e.g.:
+
+  ```bash
+  docker push yalelibraryit/dc-blacklight-base:v1.0.1
+  ```
+
+5. Build the web services
+
+  ```bash
+  docker-compose build web
+  ```
+
+  - When the web services are complete there will be a line that says "Successfully tagged yalelibraryit/dc-blacklight:`<image-name>`". e.g.:
+
     ```bash
-    docker push yalelibraryit/dc-blacklight:v1.0.1
+    Successfully tagged yalelibraryit/dc-blacklight:master
     ```
+
+6. Create a new image tag from the updated web services build
+
+  - Your first argument is the full tag that you saw in step 5
+  - The secomd argument replaces the `master` image name, with the image name we used in step 2\. e.g.:
+
+    ```bash
+    docker tag yalelibraryit/dc-blacklight:master yalelibraryit/dc-blacklight:v1.0.1
+    ```
+
+7. Push the web image with your incremented version tag. e.g.:
+
+  ```bash
+  docker push yalelibraryit/dc-blacklight:v1.0.1
+  ```
 
 ## Using the Makefile
 
@@ -101,10 +140,8 @@ IIIF_MANIFESTS_BASE_URL=http://localhost/manifests/
 ```
 
 ## HTTP password protection
-In order to prevent search engine crawling of the system before it's ready to launch, we use HTTP password protection. This is set via environment variables.
-Set `HTTP_PASSWORD_PROTECT='true'` to enable this feature.
-Set `HTTP_PASSWORD_PROTECT='false'` to disable this feature.
-Set the login and password via environment variables `HTTP_USERNAME` and `HTTP_PASSWORD`
+
+In order to prevent search engine crawling of the system before it's ready to launch, we use HTTP password protection. This is set via environment variables. Set `HTTP_PASSWORD_PROTECT='true'` to enable this feature. Set `HTTP_PASSWORD_PROTECT='false'` to disable this feature. Set the login and password via environment variables `HTTP_USERNAME` and `HTTP_PASSWORD`
 
 ## Starting the app
 
@@ -115,8 +152,11 @@ Set the login and password via environment variables `HTTP_USERNAME` and `HTTP_P
   ```
 
 - Access the web app at `http://localhost:3000`
+
 - Access the solr instance at `http://localhost:8983`
+
 - Access the image instance at `http://localhost:8182`
+
 - Access the manifests instance at `http://localhost`
 
 ### Accessing the web container
@@ -142,11 +182,15 @@ Set the login and password via environment variables `HTTP_USERNAME` and `HTTP_P
     ```
     bundle exec rake yale:load_voyager_sample_data
     ```
+
   - Run rubocop
+
     ```
     bundle exec rubocop -a
     ```
+
   - Run rspec
+
     ```
     bundle exec rspec
     ```
