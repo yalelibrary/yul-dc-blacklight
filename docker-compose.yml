@@ -51,7 +51,6 @@ services:
     image: yalelibraryit/dc-management:${MANAGEMENT_VERSION}
     env_file:
       - .env
-      - .secrets
     environment:
       POSTGRES_DB: yul_dc_management_development
       POSTGRES_HOST: db_management
