@@ -6,32 +6,57 @@
 
 # Docker Development Setup
 
-## If this is your first time working in this repo, build the base service (dependencies, etc. that don't change)
+## If this is your first time working in this repo or the Dockerfile.base has been updated, (re)build the base service (dependencies, etc. that don't change often)
 
 ```bash
   docker-compose build base
 ```
 
-## If this is your first time working in this repo or the Dockerfile has been updated you will need to (re)build your services
+## If this is your first time working in this repo or the Dockerfile has been updated you will need to (re)build those services
 
 ```bash
   docker-compose build
 ```
-## To Start Container
-```bash
+
+## Starting the app
+- Start the blacklight service
+  ```bash
   docker-compose up
-```
+  ```
 
-## To index data
+- Access the blacklight app at `http://localhost:3000`
+- Access the solr instance at `http://localhost:8983`
+- Access the image instance at `http://localhost:8182`
+- Access the manifests instance at `http://localhost`
 
-First, connect to the running management application container:
+### Accessing the blacklight container
+- Navigate to the app root directory in another tab and run:
+  ```bash
+  docker-compose exec blacklight bash
+  ```
 
-```bash
-  docker-compose exec management bash
-```
+- You will need to be inside the container to:
+  - Run migrations
+  - Access the seed file
+  - Access the rails console for debugging
+    ```
+    bundle exec rails c
+    ```
+  - Run rubocop
+    ```
+    bundle exec rubocop -a
+    ```
+  - Run rspec
+    ```
+    bundle exec rspec
+    ```
 
-Then, on that running management container:
-
+### Indexing data
+- First, connect to the running management application container:
+  ```bash
+    docker-compose exec management bash
+  ```
+- Then, on that running management container:
 ```bash
   SOLR_CORE=blacklight-core bundle exec rake yale:index_fixture_data
 ```
@@ -146,58 +171,6 @@ IIIF_MANIFESTS_BASE_URL=http://localhost/manifests/
 ## HTTP password protection
 
 In order to prevent search engine crawling of the system before it's ready to launch, we use HTTP password protection. This is set via environment variables. Set `HTTP_PASSWORD_PROTECT='true'` to enable this feature. Set `HTTP_PASSWORD_PROTECT='false'` to disable this feature. Set the login and password via environment variables `HTTP_USERNAME` and `HTTP_PASSWORD`
-
-## Starting the app
-
-- Start the blacklight service
-
-  ```bash
-  docker-compose up blacklight
-  ```
-
-- Access the blacklight app at `http://localhost:3000`
-
-- Access the solr instance at `http://localhost:8983`
-
-- Access the image instance at `http://localhost:8182`
-
-- Access the manifests instance at `http://localhost`
-
-### Accessing the blacklight container
-
-- Navigate to the app root directory in another tab and run:
-
-  ```bash
-  docker-compose exec blacklight bash
-  ```
-
-- You will need to be inside the container to:
-
-  - Run migrations
-  - Access the seed file
-  - Access the rails console for debugging
-
-    ```
-    bundle exec rails c
-    ```
-
-  - Index sample data (if you press "search" and don't have data, run this command)
-
-    ```
-    bundle exec rake yale:load_voyager_sample_data
-    ```
-
-  - Run rubocop
-
-    ```
-    bundle exec rubocop -a
-    ```
-
-  - Run rspec
-
-    ```
-    bundle exec rspec
-    ```
 
 # Customizing Blacklight:
 
