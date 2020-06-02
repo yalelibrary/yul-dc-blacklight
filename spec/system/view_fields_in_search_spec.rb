@@ -34,9 +34,6 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     it 'displays Author in results' do
       expect(content).to have_content("Me and You").twice
     end
-    it 'displays Title in results' do
-      expect(content).to have_content("HandsomeDan Bulldog", count: 3)
-    end
     it 'displays Publishing in results' do
       expect(content).to have_content("1997").twice
     end
