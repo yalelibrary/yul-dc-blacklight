@@ -21,7 +21,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       published_vern_ssim: "1997",
       lc_callnum_ssim: "123213213",
       language_ssim: ['en', 'eng', 'zz'],
-      public_bsi: 1
+      visibility_ssi: 'Public'
     }
   end
 

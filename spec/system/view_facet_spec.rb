@@ -18,7 +18,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       title_tsim: ['Amor Llama'],
       format: 'text',
       language_ssim: 'la',
-      public_bsi: 1
+      visibility_ssi: 'Public'
     }
   end
 
@@ -28,7 +28,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       title_tsim: ['HandsomeDan Bulldog'],
       format: 'three dimensional object',
       language_ssim: 'en',
-      public_bsi: 1
+      visibility_ssi: 'Public'
     }
   end
 
@@ -38,7 +38,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       title_tsim: ['Aquila Eccellenza'],
       format: 'still image',
       language_ssim: 'it',
-      public_bsi: 1
+      visibility_ssi: 'Public'
     }
   end
 
@@ -48,7 +48,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       title_tsim: ['Rhett Lecheire'],
       format: 'text',
       language_ssim: 'fr',
-      public_bsi: 1
+      visibility_ssi: 'Public'
     }
   end
 

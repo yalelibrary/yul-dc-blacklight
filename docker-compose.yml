@@ -103,7 +103,7 @@ services:
       - solr:/opt/solr/server/solr/mycores
     env_file:
       - .env
-    command: bash -c 'precreate-core blacklight-core /opt/config; precreate-core ${SOLR_TEST_CORE} /opt/config; exec solr -f'
+    command: bash -c 'precreate-core blacklight-core /opt/config; precreate-core blacklight-test /opt/config; exec solr -f'
 
   iiif_image:
     image: yalelibraryit/dc-iiif-cantaloupe:${IIIF_IMAGE_VERSION:-latest}
