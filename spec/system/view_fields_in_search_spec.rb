@@ -12,8 +12,6 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
   let(:dog) do
     {
       id: '111',
-      title_tsim: ['HandsomeDan Bulldog'],
-      title_vern_ssim: ['HandsomeDan Bulldog'],
       author_tsim: 'Me and You',
       author_vern_ssim: 'Me and You',
       format: 'three dimensional object',
