@@ -3,7 +3,12 @@ inherit_from: .rubocop_todo.yml
 inherit_gem:
   bixby: bixby_default.yml
 
+
+Metrics/LineLength:
+  Exclude:
+    - spec/support/solr_documents/metadata_cloud_with_visibility.rb
+
 # Views do not have classes or modules
 RSpec/DescribeClass:
-  Exclude: 
+  Exclude:
     - spec/views/**/*

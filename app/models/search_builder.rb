@@ -8,7 +8,7 @@ class SearchBuilder < Blacklight::SearchBuilder
   def show_only_public_records(solr_parameters)
     # add a new solr facet query ('fq') parameter that limits results to those with a 'public_b' field of 1
     solr_parameters[:fq] ||= []
-    solr_parameters[:fq] << 'public_bsi:1'
+    solr_parameters[:fq] << "visibility_ssi:Public"
   end
 
   ##

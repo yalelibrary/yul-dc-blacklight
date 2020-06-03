@@ -25,7 +25,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       language_ssim: ['en', 'eng', 'zz'],
       isbn_ssim: '2321321389',
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
-      public_bsi: 1,
+      visibility_ssi: 'Public',
       abstract_ssim: "this is an abstract",
       alternativeTitle_ssim: "this is an alternative title",
       genre_ssim: "this is the genre",
