@@ -18,7 +18,8 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       title_tsim: ['Amor Llama'],
       format: 'text',
       language_ssim: 'la',
-      visibility_ssi: 'Public'
+      visibility_ssi: 'Public',
+      author_tsim: ['Anna Elizabeth Dewdney']
     }
   end
 
@@ -28,7 +29,8 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       title_tsim: ['HandsomeDan Bulldog'],
       format: 'three dimensional object',
       language_ssim: 'en',
-      visibility_ssi: 'Public'
+      visibility_ssi: 'Public',
+      author_tsim: ['Andy Graves']
     }
   end
 
@@ -38,7 +40,8 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       title_tsim: ['Aquila Eccellenza'],
       format: 'still image',
       language_ssim: 'it',
-      visibility_ssi: 'Public'
+      visibility_ssi: 'Public',
+      author_tsim: ['Andrew Norriss']
     }
   end
 
@@ -48,7 +51,8 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       title_tsim: ['Rhett Lecheire'],
       format: 'text',
       language_ssim: 'fr',
-      visibility_ssi: 'Public'
+      visibility_ssi: 'Public',
+      author_tsim: ['Paulo Coelho']
     }
   end
 
@@ -66,5 +70,13 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     expect(page).to have_content('Amor Llama')
     expect(page).not_to have_content('Aquila Eccellenza')
     expect(page).not_to have_content('HandsomeDan Bulldog')
+  end
+
+  it 'can filter results with author facets' do
+    click_on 'Author'
+    click_on 'Andy Graves'
+    expect(page).to have_content('HandsomeDan Bulldog')
+    expect(page).not_to have_content('Aquila Eccellenza')
+    expect(page).not_to have_content('Amor Llama')
   end
 end
