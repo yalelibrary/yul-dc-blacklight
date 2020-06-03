@@ -19,7 +19,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       format: 'text',
       language_ssim: 'la',
       visibility_ssi: 'Public',
-      author_tsim: ['Anna Elizabeth Dewdney']
+      author_ssim: ['Anna Elizabeth Dewdney']
     }
   end
 
@@ -30,7 +30,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       format: 'three dimensional object',
       language_ssim: 'en',
       visibility_ssi: 'Public',
-      author_tsim: ['Andy Graves']
+      author_ssim: ['Andy Graves']
     }
   end
 
@@ -41,7 +41,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       format: 'still image',
       language_ssim: 'it',
       visibility_ssi: 'Public',
-      author_tsim: ['Andrew Norriss']
+      author_ssim: ['Andrew Norriss']
     }
   end
 
@@ -52,7 +52,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       format: 'text',
       language_ssim: 'fr',
       visibility_ssi: 'Public',
-      author_tsim: ['Paulo Coelho']
+      author_ssim: ['Paulo Coelho']
     }
   end
 

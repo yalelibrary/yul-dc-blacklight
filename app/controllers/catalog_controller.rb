@@ -85,7 +85,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'lc_1letter_ssim', label: 'Call Number'
     config.add_facet_field 'subject_geo_ssim', label: 'Region'
     config.add_facet_field 'subject_era_ssim', label: 'Era'
-    config.add_facet_field 'author_tsim', label: 'Author', limit: true, sort: 'index'
+    config.add_facet_field 'author_ssim', label: 'Author', limit: true, sort: 'index'
 
     config.add_facet_field 'example_query_facet_field', label: 'Publish Date', query: {
       years_5: { label: 'within 5 Years', fq: "pub_date_ssim:[#{Time.zone.now.year - 5} TO *]" },
@@ -100,7 +100,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field 'author_tsim', label: 'Author'
+    config.add_index_field 'author_ssim', label: 'Author'
     config.add_index_field 'author_vern_ssim', label: 'Author'
     config.add_index_field 'extentOfDigitization_ssim', label: 'Extent of Digitization'
     config.add_index_field 'format', label: 'Format'
@@ -113,7 +113,7 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_show_field 'subtitle_tsim', label: 'Subtitle'
     config.add_show_field 'subtitle_vern_ssim', label: 'Subtitle'
-    config.add_show_field 'author_tsim', label: 'Author'
+    config.add_show_field 'author_ssim', label: 'Author'
     config.add_show_field 'author_vern_ssim', label: 'Author'
     config.add_show_field 'extent_ssim', label: 'Extent'
     config.add_show_field 'format', label: 'Format'

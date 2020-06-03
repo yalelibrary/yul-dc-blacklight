@@ -73,7 +73,7 @@ class MarcIndexer < Blacklight::Marc::Indexer
 
     # Author fields
 
-    to_field 'author_tsim', extract_marc("100abcegqu:110abcdegnu:111acdegjnqu")
+    to_field 'author_ssim', extract_marc("100abcegqu:110abcdegnu:111acdegjnqu")
     to_field 'author_addl_tsim', extract_marc("700abcegqu:710abcdegnu:711acdegjnqu")
     to_field 'author_ssm', extract_marc("100abcdq:110#{ATOZ}:111#{ATOZ}", alternate_script: false)
     to_field 'author_vern_ssm', extract_marc("100abcdq:110#{ATOZ}:111#{ATOZ}", alternate_script: :only)
