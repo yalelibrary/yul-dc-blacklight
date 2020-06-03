@@ -12,8 +12,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   let(:test_record) do
     {
       id: '111',
-      title_tsim: ['HandsomeDan Bulldog'],
-      title_vern_ssim: ['HandsomeDan Bulldog'],
       subtitle_tsim: "He's handsome",
       subtitle_vern_ssim: "He's handsome",
       author_tsim: 'Eric & Frederick',
@@ -77,9 +75,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
 
     it 'displays Author in results' do
       expect(document).to have_content("Eric & Frederick").twice
-    end
-    it 'displays Title in results' do
-      expect(document).to have_content("HandsomeDan Bulldog", count: 3)
     end
     it 'displays Subtitle in results' do
       expect(document).to have_content("He's handsome").twice

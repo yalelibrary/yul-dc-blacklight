@@ -12,8 +12,6 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
   let(:dog) do
     {
       id: '111',
-      title_tsim: ['HandsomeDan Bulldog'],
-      title_vern_ssim: ['HandsomeDan Bulldog'],
       author_tsim: 'Me and You',
       author_vern_ssim: 'Me and You',
       format: 'three dimensional object',
@@ -35,9 +33,6 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     end
     it 'displays Author in results' do
       expect(content).to have_content("Me and You").twice
-    end
-    it 'displays Title in results' do
-      expect(content).to have_content("HandsomeDan Bulldog", count: 3)
     end
     it 'displays Publishing in results' do
       expect(content).to have_content("1997").twice
