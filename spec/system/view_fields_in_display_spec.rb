@@ -228,6 +228,9 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the URI in results' do
       expect(document).to have_content("this is the URI")
     end
+    it 'contains a link on genre to its facet' do
+      expect(page).to have_link('this is the genre', href: '/?f%5Bgenre_ssim%5D%5B%5D=this+is+the+genre')
+    end
     it 'contains a link on format to its facet' do
       expect(page).to have_link('three dimensional object', href: '/?f%5Bformat%5D%5B%5D=three+dimensional+object')
     end
