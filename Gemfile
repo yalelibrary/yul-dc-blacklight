@@ -26,6 +26,7 @@ gem 'turbolinks', '~> 5'
 gem 'twitter-typeahead-rails', '0.11.1.pre.corejavascript'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'webpacker', '~> 4.0'
+gem 'yard'
 
 group :development, :test do
   gem 'bixby'

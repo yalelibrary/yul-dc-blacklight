@@ -1,65 +1,94 @@
 [![CircleCI](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master.svg?style=svg)](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master) ![Docker Image CI](https://github.com/yalelibrary/yul-dc-blacklight/workflows/Docker%20Image%20CI/badge.svg)
 
-# Prerequisites
+# Yale Digital Library Discovery Application
+
+This is one of the microservices applications that form the Yale digital library.
+
+## Development guide
+
+### Prerequisites
 
 - Download [Docker Desktop](https://www.docker.com/products/docker-desktop) and log in
 
-# Docker Development Setup
+### Docker Development Setup
 
-## If this is your first time working in this repo or the Dockerfile.base has been updated, (re)build the base service (dependencies, etc. that don't change often)
+- If this is your first time working in this repo or the Dockerfile.base has been updated, (re)build the base service (dependencies, etc. that don't change often)
 
-```bash
-  docker-compose build base
-```
+  ```bash
+      docker-compose build base
+  ```
 
-## If this is your first time working in this repo or the Dockerfile has been updated you will need to (re)build those services
+- If this is your first time working in this repo or the Dockerfile has been updated you will need to (re)build those services
 
-```bash
-  docker-compose build
-```
+  ```bash
+    docker-compose build
+  ```
 
-## Starting the app
+### Starting the app
+
 - Start the blacklight service
+
   ```bash
   docker-compose up
   ```
 
 - Access the blacklight app at `http://localhost:3000`
+
 - Access the solr instance at `http://localhost:8983`
+
 - Access the image instance at `http://localhost:8182`
+
 - Access the manifests instance at `http://localhost`
 
 ### Accessing the blacklight container
+
 - Navigate to the app root directory in another tab and run:
+
   ```bash
   docker-compose exec blacklight bash
   ```
 
 - You will need to be inside the container to:
+
   - Run migrations
   - Access the seed file
   - Access the rails console for debugging
+
     ```
     bundle exec rails c
     ```
+
   - Run rubocop
+
     ```
     bundle exec rubocop -a
     ```
+
   - Run rspec
+
     ```
     bundle exec rspec
     ```
 
+  - Rebuild the code documentation
+
+    ```
+    bundle exec rake yale:docs:blacklight
+    ```
+
 ### Indexing data
+
 - First, connect to the running management application container:
+
   ```bash
     docker-compose exec management bash
   ```
+
 - Then, on that running management container:
-```bash
+
+  ```bash
   SOLR_CORE=blacklight-core bundle exec rake yale:index_fixture_data
-```
+  ```
 
 ## Pushing new images to Dockerhub
 
