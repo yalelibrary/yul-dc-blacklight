@@ -85,6 +85,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'lc_1letter_ssim', label: 'Call Number'
     config.add_facet_field 'subject_geo_ssim', label: 'Region'
     config.add_facet_field 'subject_era_ssim', label: 'Era'
+    config.add_facet_field 'genre_ssim', label: 'Genre'
     config.add_facet_field 'resourceType_ssim', label: 'Resource Type'
 
     config.add_facet_field 'example_query_facet_field', label: 'Publish Date', query: {
@@ -108,6 +109,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'published_ssim', label: 'Published'
     config.add_index_field 'published_vern_ssim', label: 'Published'
     config.add_index_field 'lc_callnum_ssim', label: 'Call number'
+    config.add_index_field 'genre_ssim', label: 'Genre'
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -127,7 +129,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'description_tesim', label: 'Description'
     config.add_show_field 'abstract_ssim', label: 'Abstract'
     config.add_show_field 'alternativeTitle_ssim', label: 'Alternative Title'
-    config.add_show_field 'genre_ssim', label: 'Genre'
+    config.add_show_field 'genre_ssim', label: 'Genre', link_to_facet: true
     config.add_show_field 'geoSubject_ssim', label: 'Geo Subject'
     config.add_show_field 'resourceType_ssim', label: 'Resource Type'
     config.add_show_field 'subjectName_ssim', label: 'Subject Name'
