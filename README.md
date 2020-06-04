@@ -201,6 +201,11 @@ IIIF_MANIFESTS_BASE_URL=http://localhost/manifests/
 
 In order to prevent search engine crawling of the system before it's ready to launch, we use HTTP password protection. This is set via environment variables. Set `HTTP_PASSWORD_PROTECT='true'` to enable this feature. Set `HTTP_PASSWORD_PROTECT='false'` to disable this feature. Set the login and password via environment variables `HTTP_USERNAME` and `HTTP_PASSWORD`
 
+## Auto-generate changelog
+
+1. Increment the version number in `.github_changelog_generator`
+2. github_changelog_generator --user yalelibrary --project yul-dc-blacklight --token $YOUR_GITHUB_TOKEN
+
 # Customizing Blacklight:
 
 There are many ways to override specific behaviors and views in Blacklight. Because Blacklight is distributed as a Rails engine-based gem, all customization of Blacklight behavior should be done within your application by overriding Blacklight-provided behaviors with your own.
