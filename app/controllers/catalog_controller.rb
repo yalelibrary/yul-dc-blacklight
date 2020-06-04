@@ -83,6 +83,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'language_ssim', label: 'Language', limit: true, helper_method: :language_code
     config.add_facet_field 'extentOfDigitization_ssim', label: 'Extent of Digitization'
     config.add_facet_field 'lc_1letter_ssim', label: 'Call Number'
+    config.add_facet_field 'publicationPlace_ssim', label: 'Publication Place', limit: true, sort: 'index'
     config.add_facet_field 'subject_geo_ssim', label: 'Region'
     config.add_facet_field 'subject_era_ssim', label: 'Era'
 
