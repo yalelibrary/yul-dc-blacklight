@@ -12,3 +12,7 @@ Metrics/LineLength:
 RSpec/DescribeClass:
   Exclude:
     - spec/views/**/*
+
+RSpec/RepeatedExample:
+  Exclude:
+    - spec/system/access_restrictions_spec.rb
