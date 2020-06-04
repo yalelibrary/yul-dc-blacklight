@@ -18,7 +18,8 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       title_tsim: ['Amor Llama'],
       format: 'text',
       language_ssim: 'la',
-      visibility_ssi: 'Public'
+      visibility_ssi: 'Public',
+      resourceType_ssim: 'Maps, Atlases & Globes'
     }
   end
 
@@ -28,7 +29,8 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       title_tsim: ['HandsomeDan Bulldog'],
       format: 'three dimensional object',
       language_ssim: 'en',
-      visibility_ssi: 'Public'
+      visibility_ssi: 'Public',
+      resourceType_ssim: 'Books, Journals & Pamphlets'
     }
   end
 
@@ -38,7 +40,8 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       title_tsim: ['Aquila Eccellenza'],
       format: 'still image',
       language_ssim: 'it',
-      visibility_ssi: 'Public'
+      visibility_ssi: 'Public',
+      resourceType_ssim: 'Archives or Manuscripts'
     }
   end
 
@@ -48,7 +51,8 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       title_tsim: ['Rhett Lecheire'],
       format: 'text',
       language_ssim: 'fr',
-      visibility_ssi: 'Public'
+      visibility_ssi: 'Public',
+      resourceType_ssim: 'Archives or Manuscripts'
     }
   end
 
@@ -65,6 +69,14 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     click_on 'Latin (la)'
     expect(page).to have_content('Amor Llama')
     expect(page).not_to have_content('Aquila Eccellenza')
+    expect(page).not_to have_content('HandsomeDan Bulldog')
+  end
+
+  it 'can filter results with resource type facets' do
+    click_on 'Resource Type'
+    click_on 'Archives or Manuscripts'
+    expect(page).to have_content('Aquila Eccellenza')
+    expect(page).not_to have_content('Amor Llama')
     expect(page).not_to have_content('HandsomeDan Bulldog')
   end
 end
