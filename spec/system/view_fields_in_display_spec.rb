@@ -67,8 +67,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       digital_ssim: "this is the digital, using ssim",
       coordinates_ssim: "this is the coordinates, using ssim",
       projection_ssim: "this is the projection, using ssim",
-      extent_ssim: "this is the extent, using ssim",
-      genre_ssim: 'this is the genre'
+      extent_ssim: "this is the extent, using ssim"
     }
   end
   context 'Within main document' do
