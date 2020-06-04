@@ -115,7 +115,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'author_tsim', label: 'Author'
     config.add_show_field 'author_vern_ssim', label: 'Author'
     config.add_show_field 'extent_ssim', label: 'Extent'
-    config.add_show_field 'format', label: 'Format'
+    config.add_show_field 'format', label: 'Format', link_to_facet: true
     config.add_show_field 'url_fulltext_ssim', label: 'URL'
     config.add_show_field 'url_suppl_ssim', label: 'More Information'
     config.add_show_field 'language_ssim', label: 'Language', helper_method: :language_codes
