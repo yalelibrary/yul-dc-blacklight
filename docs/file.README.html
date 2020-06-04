@@ -72,16 +72,16 @@
 </li></ul>
 
 <h3 id="label-Docker+Development+Setup">Docker Development Setup</h3>
+<ul><li>
+<p>If this is your first time working in this repo or the Dockerfile.base has been updated, (re)build the base service (dependencies, etc. that don&#39;t change often)</p>
+</li></ul>
 
-<h4 id="label-If+this+is+your+first+time+working+in+this+repo+or+the+Dockerfile.base+has+been+updated-2C+-28re-29build+the+base+service+-28dependencies-2C+etc.+that+don-27t+change+often-29">If this is your first time working in this repo or the Dockerfile.base has been updated, (re)build the base service (dependencies, etc. that don&#39;t change often)</h4>
+<p><code>bash       docker-compose build base </code></p>
+<ul><li>
+<p>If this is your first time working in this repo or the Dockerfile has been updated you will need to (re)build those services</p>
+</li></ul>
 
-<pre class="code ruby"><code class="ruby">docker-compose build base
-</code></pre>
-
-<h4 id="label-If+this+is+your+first+time+working+in+this+repo+or+the+Dockerfile+has+been+updated+you+will+need+to+-28re-29build+those+services">If this is your first time working in this repo or the Dockerfile has been updated you will need to (re)build those services</h4>
-
-<pre class="code ruby"><code class="ruby">docker-compose build
-</code></pre>
+<p><code>bash     docker-compose build </code></p>
 
 <h3 id="label-Starting+the+app">Starting the app</h3>
 <ul><li>
@@ -264,7 +264,7 @@ IIIF_MANIFESTS_BASE_URL=http://localhost/manifests/
 </div></div>
 
       <div id="footer">
-  Generated on Wed Jun  3 13:40:45 2020 by
+  Generated on Thu Jun  4 12:39:21 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.25 (ruby-2.6.6).
 </div>
