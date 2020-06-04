@@ -234,5 +234,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'contains a link on format to its facet' do
       expect(page).to have_link('three dimensional object', href: '/?f%5Bformat%5D%5B%5D=three+dimensional+object')
     end
+    it 'contains a link on resource type to its facet' do
+      expect(page).to have_link('this is the resource type', href: '/?f%5BresourceType_ssim%5D%5B%5D=this+is+the+resource+type')
+    end
   end
 end

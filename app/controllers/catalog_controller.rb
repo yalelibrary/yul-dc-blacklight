@@ -132,7 +132,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'alternativeTitle_ssim', label: 'Alternative Title'
     config.add_show_field 'genre_ssim', label: 'Genre', link_to_facet: true
     config.add_show_field 'geoSubject_ssim', label: 'Geo Subject'
-    config.add_show_field 'resourceType_ssim', label: 'Resource Type'
+    config.add_show_field 'resourceType_ssim', label: 'Resource Type', link_to_facet: true
     config.add_show_field 'subjectName_ssim', label: 'Subject Name'
     config.add_show_field 'subjectTopic_ssim', label: 'Subject Topic'
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization'
