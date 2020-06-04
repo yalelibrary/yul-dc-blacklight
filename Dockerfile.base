@@ -1,4 +1,4 @@
-FROM phusion/passenger-ruby26
+FROM phusion/passenger-ruby26:1.0.10
 
 RUN echo 'Downloading Packages' && \
   curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
@@ -11,12 +11,14 @@ RUN echo 'Downloading Packages' && \
   echo 'Packages Downloaded'
 
 # Install Chrome so we can run system specs for Blacklight
-RUN apt-get update
-RUN apt-get install -y wget
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-RUN apt-get update
-RUN apt-get install -y google-chrome-stable
+RUN apt-get update && apt-get install -y wget && \
+  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+  sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' && \
+  apt-get update && \
+  apt-get install -y google-chrome-stable && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+  echo 'Chrome installed'
 
 RUN yarn && \
   yarn config set no-progress && \
