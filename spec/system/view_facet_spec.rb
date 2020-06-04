@@ -19,6 +19,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       format: 'text',
       language_ssim: 'la',
       visibility_ssi: 'Public',
+      publicationPlace_ssim: 'Spain',
       resourceType_ssim: 'Maps, Atlases & Globes'
     }
   end
@@ -30,6 +31,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       format: 'three dimensional object',
       language_ssim: 'en',
       visibility_ssi: 'Public',
+      publicationPlace_ssim: 'New Haven',
       resourceType_ssim: 'Books, Journals & Pamphlets'
     }
   end
@@ -41,6 +43,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       format: 'still image',
       language_ssim: 'it',
       visibility_ssi: 'Public',
+      publicationPlace_ssim: 'White-Hall, printed upon the ice, on the River Thames',
       resourceType_ssim: 'Archives or Manuscripts'
     }
   end
@@ -52,6 +55,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       format: 'text',
       language_ssim: 'fr',
       visibility_ssi: 'Public',
+      publicationPlace_ssim: 'Constantinople or southern Italy',
       resourceType_ssim: 'Archives or Manuscripts'
     }
   end
@@ -70,6 +74,14 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     expect(page).to have_content('Amor Llama')
     expect(page).not_to have_content('Aquila Eccellenza')
     expect(page).not_to have_content('HandsomeDan Bulldog')
+  end
+
+  it 'can filter results with publication place facets' do
+    click_on 'Publication Place'
+    click_on 'New Haven'
+    expect(page).to have_content('HandsomeDan Bulldog')
+    expect(page).not_to have_content('Amor Llama')
+    expect(page).not_to have_content('Aquila Eccellenza')
   end
 
   it 'can filter results with resource type facets' do
