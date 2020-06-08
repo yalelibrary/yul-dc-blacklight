@@ -123,7 +123,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'format', label: 'Format', link_to_facet: true
     config.add_show_field 'url_fulltext_ssim', label: 'URL'
     config.add_show_field 'url_suppl_ssim', label: 'More Information'
-    config.add_show_field 'language_ssim', label: 'Language', helper_method: :language_codes
+    config.add_show_field 'language_ssim', label: 'Language', helper_method: :language_codes_as_links
     config.add_show_field 'published_ssim', label: 'Published'
     config.add_show_field 'published_vern_ssim', label: 'Published'
     config.add_show_field 'lc_callnum_ssim', label: 'Call number'
