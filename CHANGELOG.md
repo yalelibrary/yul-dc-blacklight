@@ -1,11 +1,24 @@
 # Changelog
 
-## [1.2.1](https://github.com/yalelibrary/yul-dc-blacklight/tree/1.2.1) (2020-06-05)
+## [1.2.2](https://github.com/yalelibrary/yul-dc-blacklight/tree/1.2.2) (2020-06-08)
 
-[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.2.0...1.2.1)
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.2.1...1.2.2)
 
 **Merged pull requests:**
 
+- Silence deprecations from Blacklight [\#92](https://github.com/yalelibrary/yul-dc-blacklight/pull/92) ([tilthouse](https://github.com/tilthouse))
+- Add a link for Language on the show page [\#91](https://github.com/yalelibrary/yul-dc-blacklight/pull/91) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Bump websocket-extensions from 0.1.3 to 0.1.4 [\#90](https://github.com/yalelibrary/yul-dc-blacklight/pull/90) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump websocket-extensions from 0.1.4 to 0.1.5 [\#89](https://github.com/yalelibrary/yul-dc-blacklight/pull/89) ([dependabot[bot]](https://github.com/apps/dependabot))
+- 190 add author facet [\#88](https://github.com/yalelibrary/yul-dc-blacklight/pull/88) ([K8Sewell](https://github.com/K8Sewell))
+
+## [v1.2.1](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.2.1) (2020-06-05)
+
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.2.0...v1.2.1)
+
+**Merged pull requests:**
+
+- Release prep for 1.2.1 [\#87](https://github.com/yalelibrary/yul-dc-blacklight/pull/87) ([bess](https://github.com/bess))
 - Put the blacklight version in the footer [\#86](https://github.com/yalelibrary/yul-dc-blacklight/pull/86) ([bess](https://github.com/bess))
 - Collapse chrome installation into a single docker layer [\#85](https://github.com/yalelibrary/yul-dc-blacklight/pull/85) ([bess](https://github.com/bess))
 - Autogenerate changelog and release notes [\#84](https://github.com/yalelibrary/yul-dc-blacklight/pull/84) ([bess](https://github.com/bess))
