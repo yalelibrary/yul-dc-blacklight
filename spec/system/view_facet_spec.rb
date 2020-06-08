@@ -20,7 +20,8 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       language_ssim: 'la',
       visibility_ssi: 'Public',
       publicationPlace_ssim: 'Spain',
-      resourceType_ssim: 'Maps, Atlases & Globes'
+      resourceType_ssim: 'Maps, Atlases & Globes',
+      author_tsim: ['Anna Elizabeth Dewdney']
     }
   end
 
@@ -32,7 +33,8 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       language_ssim: 'en',
       visibility_ssi: 'Public',
       publicationPlace_ssim: 'New Haven',
-      resourceType_ssim: 'Books, Journals & Pamphlets'
+      resourceType_ssim: 'Books, Journals & Pamphlets',
+      author_tsim: ['Andy Graves']
     }
   end
 
@@ -44,7 +46,8 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       language_ssim: 'it',
       visibility_ssi: 'Public',
       publicationPlace_ssim: 'White-Hall, printed upon the ice, on the River Thames',
-      resourceType_ssim: 'Archives or Manuscripts'
+      resourceType_ssim: 'Archives or Manuscripts',
+      author_tsim: ['Andrew Norriss']
     }
   end
 
@@ -56,7 +59,8 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       language_ssim: 'fr',
       visibility_ssi: 'Public',
       publicationPlace_ssim: 'Constantinople or southern Italy',
-      resourceType_ssim: 'Archives or Manuscripts'
+      resourceType_ssim: 'Archives or Manuscripts',
+      author_tsim: ['Paulo Coelho']
     }
   end
 
@@ -90,5 +94,13 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     expect(page).to have_content('Aquila Eccellenza')
     expect(page).not_to have_content('Amor Llama')
     expect(page).not_to have_content('HandsomeDan Bulldog')
+  end
+
+  it 'can filter results with author facets' do
+    click_on 'Author'
+    click_on 'andy'
+    expect(page).to have_content('HandsomeDan Bulldog')
+    expect(page).not_to have_content('Aquila Eccellenza')
+    expect(page).not_to have_content('Amor Llama')
   end
 end
