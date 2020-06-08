@@ -65,4 +65,3 @@ RSpec/ExampleLength:
 Rails/Output:
   Exclude:
     - 'app/services/voyager_indexing_service.rb'
-    - 'app/helpers/blacklight_helper.rb'
