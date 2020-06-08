@@ -70,6 +70,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       extent_ssim: "this is the extent, using ssim"
     }
   end
+
   context 'Within main document' do
     subject(:document) { find(:css, '#document') }
 
@@ -236,6 +237,11 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'contains a link on resource type to its facet' do
       expect(page).to have_link('this is the resource type', href: '/?f%5BresourceType_ssim%5D%5B%5D=this+is+the+resource+type')
+    end
+    it 'contains a link on language to its facet' do
+      expect(page).to have_link('English (en)', href: '/?f%5Blanguage_ssim%5D%5B%5D=English (en)')
+      expect(page).to have_link('English (eng)', href: '/?f%5Blanguage_ssim%5D%5B%5D=English (eng)')
+      expect(page).to have_link('zz', href: '/?f%5Blanguage_ssim%5D%5B%5D=zz')
     end
   end
 end
