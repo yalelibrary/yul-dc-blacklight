@@ -18,6 +18,19 @@ module BlacklightHelper
     end.join(', ')
   end
 
+  def language_codes_as_links(args)
+    out = []
+
+    language_values = args[:document][args[:field]]
+    language_values.map do |language_code|
+      converted_code = language_code_to_english(language_code)
+      link = "/?f%5Blanguage_ssim%5D%5B%5D=#{converted_code}"
+      out << link_to(converted_code, link)
+      out << content_tag(:br)
+    end
+    safe_join(out)
+  end
+
   def language_code(args)
     language_value = args
     language_code_to_english(language_value)
