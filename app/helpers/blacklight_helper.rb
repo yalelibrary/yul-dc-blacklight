@@ -24,11 +24,17 @@ module BlacklightHelper
     language_values = args[:document][args[:field]]
     language_values.map do |language_code|
       converted_code = language_code_to_english(language_code)
-      link = "/?f%5Blanguage_ssim%5D%5B%5D=#{converted_code}"
-      out << link_to(converted_code, link)
+      link_text = "/?f%5Blanguage_ssim%5D%5B%5D=#{converted_code}"
+      out << link_to(converted_code, link_text)
       out << content_tag(:br)
     end
     safe_join(out)
+  end
+
+  def search_field_value_link(args)
+    field_value = args[:document][args[:field]]
+    link_text = "/?q=#{field_value}&search_field=#{args[:field]}"
+    link_to(field_value.join, link_text)
   end
 
   def language_code(args)

@@ -154,7 +154,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'illustrativeMatter_ssim', label: 'Illustrative Matter'
     config.add_show_field 'oid_ssim', label: 'OID'
     config.add_show_field 'identifierMfhd_ssim', label: 'Identifier MFHD'
-    config.add_show_field 'identifierShelfMark_ssim', label: 'Identifier Shelf Mark'
+    config.add_show_field 'identifierShelfMark_ssim', label: 'Identifier Shelf Mark', link_to_facet: true
     config.add_show_field 'box_ssim', label: 'Box'
     config.add_show_field 'folder_ssim', label: 'Folder'
     config.add_show_field 'orbisBibId_ssim', label: 'Orbis Bib ID'
