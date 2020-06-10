@@ -69,10 +69,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     }
   end
 
-  context 'Within main document' do
-    subject(:document) { find(:css, '#document') }
-  end
-
   it 'gets correct search results using year ranges' do
     visit root_path
     click_on 'search'
