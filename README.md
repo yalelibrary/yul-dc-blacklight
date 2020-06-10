@@ -21,7 +21,7 @@ This is one of the microservices applications that form the Yale digital library
 - If this is your first time working in this repo or the Dockerfile has been updated you will need to (re)build those services
 
   ```bash
-    docker-compose build
+    docker-compose build blacklight
   ```
 
 ### Starting the app
