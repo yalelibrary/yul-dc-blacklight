@@ -60,15 +60,17 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    ast (2.4.0)
+    ast (2.4.1)
     autoprefixer-rails (9.7.6)
       execjs
     awesome_print (1.8.0)
     bcrypt (3.1.13)
     bindex (0.8.1)
-    bixby (2.0.0)
-      rubocop (= 0.63.1)
-      rubocop-rspec (= 1.31.0)
+    bixby (3.0.0)
+      rubocop (= 0.85.1)
+      rubocop-performance
+      rubocop-rails
+      rubocop-rspec
     blacklight (7.8.0)
       deprecation
       globalid
@@ -161,7 +163,6 @@ GEM
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     iso-639 (0.3.5)
-    jaro_winkler (1.5.4)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
     jquery-rails (4.4.0)
@@ -217,7 +218,6 @@ GEM
       ast (~> 2.4.0)
     pg (1.2.3)
     popper_js (1.16.0)
-    powerpack (0.1.2)
     public_suffix (4.0.5)
     puma (4.3.5)
       nio4r (~> 2.0)
@@ -262,6 +262,7 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     retriable (3.1.2)
+    rexml (3.2.4)
     rsolr (2.3.0)
       builder (>= 2.1.2)
       faraday (>= 0.9.0)
@@ -282,16 +283,25 @@ GEM
       rspec-mocks (~> 3.9)
       rspec-support (~> 3.9)
     rspec-support (3.9.3)
-    rubocop (0.63.1)
-      jaro_winkler (~> 1.5.1)
+    rubocop (0.85.1)
       parallel (~> 1.10)
-      parser (>= 2.5, != 2.5.1.1)
-      powerpack (~> 0.1)
+      parser (>= 2.7.0.1)
       rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.7)
+      rexml
+      rubocop-ast (>= 0.0.3)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (~> 1.4.0)
-    rubocop-rspec (1.31.0)
-      rubocop (>= 0.60.0)
+      unicode-display_width (>= 1.4.0, < 2.0)
+    rubocop-ast (0.0.3)
+      parser (>= 2.7.0.1)
+    rubocop-performance (1.6.1)
+      rubocop (>= 0.71.0)
+    rubocop-rails (2.6.0)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 0.82.0)
+    rubocop-rspec (1.39.0)
+      rubocop (>= 0.68.1)
     ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
     rubyzip (2.3.0)
@@ -355,7 +365,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.7)
-    unicode-display_width (1.4.1)
+    unicode-display_width (1.7.0)
     view_component (2.7.0)
       activesupport (>= 5.0.0, < 7.0)
     warden (1.2.8)
@@ -389,7 +399,7 @@ DEPENDENCIES
   actionpack (>= 6.0.3.1)
   activerecord-nulldb-adapter
   awesome_print
-  bixby
+  bixby (~> 3.0.0)
   blacklight
   blacklight-marc (>= 7.0.0.rc1, < 8)
   bootsnap (>= 1.4.2)
