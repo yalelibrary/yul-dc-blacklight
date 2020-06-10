@@ -246,5 +246,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'contains a link on the Orbis Bib ID to the Orbis catalog record' do
       expect(page).to have_link('this is the orbis bib ID', href: 'http://hdl.handle.net/10079/bibid/this is the orbis bib ID')
     end
+    it 'contains a link on the Finding Aid to the Finding Aid catalog record' do
+      expect(page).to have_link('this is the finding aid', href: 'this is the finding aid')
+    end
   end
 end

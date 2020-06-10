@@ -43,6 +43,10 @@ module BlacklightHelper
     link_to(bib_id[0], link)
   end
 
+  def link_to_find_aid(arg)
+    link_to(arg[:value][0], arg[:value][0])
+  end
+
   private
 
     def language_code_to_english(language_code)
