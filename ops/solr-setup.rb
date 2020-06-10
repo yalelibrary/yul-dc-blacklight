@@ -22,24 +22,24 @@ class CreateSolrCollection
 
   private
 
-    def collections_url
-      "#{ENV.fetch('SOLR_BASE_URL')}/admin/collections"
-    end
+  def collections_url
+    "#{ENV.fetch('SOLR_BASE_URL')}/admin/collections"
+  end
 
-    def collection_options
-      {
-        'collection.configName' => @name,
-        'numShards' => 1,
-        action: 'CREATE',
-        name: @name
-      }
-    end
+  def collection_options
+    {
+      'collection.configName' => @name,
+      'numShards' => 1,
+      action: 'CREATE',
+      name: @name
+    }
+  end
 
-    def collection_exists?
-      response = Faraday.get collections_url, action: 'LIST'
-      collections = JSON.parse(response.body)['collections']
-      collections.include? @name
-    end
+  def collection_exists?
+    response = Faraday.get collections_url, action: 'LIST'
+    collections = JSON.parse(response.body)['collections']
+    collections.include? @name
+  end
 end
 
 # Upload solr configuration from the local filesystem into the zookeeper configs path for solr
@@ -72,38 +72,38 @@ class SolrConfigUploader
 
   private
 
-    def zookeeper_path_for_file(file)
-      zookeeper_path(File.basename(file.path))
+  def zookeeper_path_for_file(file)
+    zookeeper_path(File.basename(file.path))
+  end
+
+  def zookeeper_path(*path)
+    "/#{([collection_path] + path).compact.join('/')}"
+  end
+
+  def salient_files(config_dir)
+    return to_enum(:salient_files, config_dir) unless block_given?
+
+    Dir.new(config_dir).each do |file_name|
+      full_path = File.expand_path(file_name, config_dir)
+
+      next unless File.file? full_path
+
+      yield File.new(full_path)
     end
+  end
 
-    def zookeeper_path(*path)
-      "/#{([collection_path] + path).compact.join('/')}"
-    end
+  def with_client(&block)
+    ensure_chroot!
+    ::ZK.open(connection_str, &block)
+  end
 
-    def salient_files(config_dir)
-      return to_enum(:salient_files, config_dir) unless block_given?
+  def connection_str
+    "#{ENV.fetch('ZOOKEEPER_ENDPOINT')}/configs"
+  end
 
-      Dir.new(config_dir).each do |file_name|
-        full_path = File.expand_path(file_name, config_dir)
-
-        next unless File.file? full_path
-
-        yield File.new(full_path)
-      end
-    end
-
-    def with_client(&block)
-      ensure_chroot!
-      ::ZK.open(connection_str, &block)
-    end
-
-    def connection_str
-      "#{ENV.fetch('ZOOKEEPER_ENDPOINT')}/configs"
-    end
-
-    def ensure_chroot!
-      raise ArgumentError, 'Zookeeper connection string must include a chroot path' unless connection_str =~ %r{/[^/]}
-    end
+  def ensure_chroot!
+    raise ArgumentError, 'Zookeeper connection string must include a chroot path' unless %r{/[^/]}.match?(connection_str)
+  end
 end
 
 puts 'Loading the Solr Config to Zookeeper'
