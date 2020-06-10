@@ -88,7 +88,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'subject_era_ssim', label: 'Era'
     config.add_facet_field 'genre_ssim', label: 'Genre'
     config.add_facet_field 'resourceType_ssim', label: 'Resource Type'
-    config.add_facet_field 'author_tsim', label: 'Author', limit: true, sort: 'index'
+    config.add_facet_field 'author_ssim', label: 'Author', limit: true, sort: 'index'
 
     config.add_facet_field 'example_query_facet_field', label: 'Publish Date', query: {
       years_5: { label: 'within 5 Years', fq: "pub_date_ssim:[#{Time.zone.now.year - 5} TO *]" },
