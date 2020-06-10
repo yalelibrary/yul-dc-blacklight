@@ -45,6 +45,7 @@ services:
       - solr
       - iiif_manifest
       - iiif_image
+      - management
 
 
   management:
