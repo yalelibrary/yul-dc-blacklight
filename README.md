@@ -12,25 +12,24 @@ This is one of the microservices applications that form the Yale digital library
 
 ### Docker Development Setup
 
-- If this is your first time working in this repo or the Dockerfile.base has been updated, (re)build the base service (dependencies, etc. that don't change often)
-
+- Checkout the project
   ```bash
-      docker-compose build base
-  ```
-
-- If this is your first time working in this repo or the Dockerfile has been updated you will need to (re)build those services
-
-  ```bash
-    docker-compose build blacklight
+  git clone https://github.com/yalelibrary/yul-dc-blacklight.git
+  cd yul-dc-blacklight
   ```
 
 ### Starting the app
 
-- Start the blacklight service
+- Start the blacklight service and it's dependencies
+  This command reads the docker-compose.yml file and starts all the containers described by it
+  including blacklight, solr, the manifest service, the management app, and a iiif image server.
 
   ```bash
-  docker-compose up
+  docker-compose up blacklight
   ```
+  
+  Output from the blackight container will display in your terminal window with Solr, Cantaloupe (IIIF),
+  and Manifest services running in the background
 
 - Access the blacklight app at `http://localhost:3000`
 
@@ -42,7 +41,7 @@ This is one of the microservices applications that form the Yale digital library
 
 ### Accessing the blacklight container
 
-- Navigate to the app root directory in another tab and run:
+- In a separate terminal window or tab, run:
 
   ```bash
   docker-compose exec blacklight bash
