@@ -77,17 +77,22 @@ This is one of the microservices applications that form the Yale digital library
 
 ### Indexing data
 
-- First, connect to the running management application container:
+- First, connect to the running management application:
 
-  ```bash
-    docker-compose exec management bash
-  ```
+ * http://localhost:3001/management/
 
-- Then, on that running management container:
+- Second, pull up http://0.0.0.0:8983 in your browser
 
-  ```bash
-  SOLR_CORE=blacklight-core bundle exec rake yale:index_fixture_data
-  ```
+ * Connect to the blacklight-core and execute a query to confirm no data present
+
+- Then, in the running management application(:3001), click the button 'Index Ladybird Records to Solr'
+
+ * When the message appears above the buttons the data has been indexed
+
+ * Visit :8983 and run the same query again and confirm data is present
+
+ * Connect to the running blacklight app at localhost:3000
+
 
 ## Using the Makefile
 
@@ -140,3 +145,11 @@ In order to prevent search engine crawling of the system before it's ready to la
   ```
 
 7. Update `yul-dc-camerata` with the new version of blacklight and submit a PR.
+
+# Using a New Release of the Management App
+
+1. Go to Management app on Github and check the latest release number
+
+2. Edit your .env file to match the Management version to the latest release number
+
+3. Run ```docker-compose up```
