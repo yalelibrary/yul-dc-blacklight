@@ -30,7 +30,7 @@ gem 'webpacker', '~> 4.0'
 gem 'yard'
 
 group :development, :test do
-  gem 'bixby'
+  gem 'bixby', '3.0.0.pre2'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 4.0.0'
   gem 'solr_wrapper', '>= 0.3'
