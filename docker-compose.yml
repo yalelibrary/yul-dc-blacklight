@@ -40,7 +40,6 @@ services:
     # Enable sending signals (CTRL+C, CTRL+P + CTRL+Q) into the container:
     tty: true
     depends_on:
-    depends_on:
       - db_blacklight
       - solr
       - iiif_manifest
@@ -57,14 +56,13 @@ services:
       POSTGRES_HOST: db_management
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      SOLR_URL: http://solr:8983/solr
+      SOLR_BASE_URL: http://solr:8983/solr
       SOLR_CORE: blacklight-core
       PASSENGER_APP_ENV: development
     ports:
-      - "3001:3000"
+      - "3001:3001"
     depends_on:
       - db_management
-      - solr
 
   db_blacklight:
     image: postgres:${POSTGRES_VERSION}
