@@ -169,7 +169,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'folder_ssim', label: 'Folder'
     config.add_show_field 'orbisBibId_ssim', label: 'Orbis Bib ID', helper_method: :link_to_orbis_bib_id
     config.add_show_field 'orbisBarcode_ssim', label: 'Orbis Bar Code'
-    config.add_show_field 'findingAid_ssim', label: 'Finding Aid'
+    config.add_show_field 'findingAid_ssim', label: 'Finding Aid', helper_method: :link_to_url
     config.add_show_field 'collectionId_ssim', label: 'Collection ID'
     config.add_show_field 'edition_ssim', label: 'Edition'
     config.add_show_field 'uri_ssim', label: 'URI'
