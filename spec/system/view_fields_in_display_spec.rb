@@ -45,7 +45,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       sourceDate_ssim: "this is the source date",
       sourceNote_ssim: "this is the source note",
       references_ssim: "these are the references",
-      dateStructured_ssim: "this is the date structured",
+      date_tsim: "this is the date",
       children_ssim: "these are the children",
       importUrl_ssim: "this is the import URL",
       illustrativeMatter_ssim: "this is the illustrative matter",
