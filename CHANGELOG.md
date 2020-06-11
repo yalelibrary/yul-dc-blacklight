@@ -1,16 +1,38 @@
 # Changelog
 
-## [1.2.2](https://github.com/yalelibrary/yul-dc-blacklight/tree/1.2.2) (2020-06-08)
+## [1.3.0](https://github.com/yalelibrary/yul-dc-blacklight/tree/1.3.0) (2020-06-11)
 
-[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.2.1...1.2.2)
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.2.2...1.3.0)
 
 **Merged pull requests:**
 
+- Remove DataStructure field and replaced with Date field [\#110](https://github.com/yalelibrary/yul-dc-blacklight/pull/110) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Revert "Use a different date Solr field" [\#109](https://github.com/yalelibrary/yul-dc-blacklight/pull/109) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Align management version with previous changes to docker-compose [\#108](https://github.com/yalelibrary/yul-dc-blacklight/pull/108) ([maxkadel](https://github.com/maxkadel))
+- Use a different date Solr field [\#107](https://github.com/yalelibrary/yul-dc-blacklight/pull/107) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Replace the default blacklight logo with a Yale logo [\#106](https://github.com/yalelibrary/yul-dc-blacklight/pull/106) ([mark-dce](https://github.com/mark-dce))
+- Add date slider facet [\#105](https://github.com/yalelibrary/yul-dc-blacklight/pull/105) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Align style with latest samvera expectations [\#104](https://github.com/yalelibrary/yul-dc-blacklight/pull/104) ([bess](https://github.com/bess))
+- Make finding aid a link [\#103](https://github.com/yalelibrary/yul-dc-blacklight/pull/103) ([K8Sewell](https://github.com/K8Sewell))
+- Change field used by author facet [\#101](https://github.com/yalelibrary/yul-dc-blacklight/pull/101) ([K8Sewell](https://github.com/K8Sewell))
+- Update solr docker config for 1.4.0 release of mgmt app [\#98](https://github.com/yalelibrary/yul-dc-blacklight/pull/98) ([K8Sewell](https://github.com/K8Sewell))
+- Remove unused code [\#97](https://github.com/yalelibrary/yul-dc-blacklight/pull/97) ([bess](https://github.com/bess))
+- Link the Orbis Bib ID to the Orbis catalog record [\#95](https://github.com/yalelibrary/yul-dc-blacklight/pull/95) ([alishaevn](https://github.com/alishaevn))
+- Add a link to other items with the same call number [\#94](https://github.com/yalelibrary/yul-dc-blacklight/pull/94) ([edejesusyale](https://github.com/edejesusyale))
+
+## [v1.2.2](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.2.2) (2020-06-08)
+
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.2.1...v1.2.2)
+
+**Merged pull requests:**
+
+- Prep for v1.2.2 release [\#93](https://github.com/yalelibrary/yul-dc-blacklight/pull/93) ([bess](https://github.com/bess))
 - Silence deprecations from Blacklight [\#92](https://github.com/yalelibrary/yul-dc-blacklight/pull/92) ([tilthouse](https://github.com/tilthouse))
 - Add a link for Language on the show page [\#91](https://github.com/yalelibrary/yul-dc-blacklight/pull/91) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Bump websocket-extensions from 0.1.3 to 0.1.4 [\#90](https://github.com/yalelibrary/yul-dc-blacklight/pull/90) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump websocket-extensions from 0.1.4 to 0.1.5 [\#89](https://github.com/yalelibrary/yul-dc-blacklight/pull/89) ([dependabot[bot]](https://github.com/apps/dependabot))
 - 190 add author facet [\#88](https://github.com/yalelibrary/yul-dc-blacklight/pull/88) ([K8Sewell](https://github.com/K8Sewell))
+- adds publication place facet and spec [\#79](https://github.com/yalelibrary/yul-dc-blacklight/pull/79) ([K8Sewell](https://github.com/K8Sewell))
 
 ## [v1.2.1](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.2.1) (2020-06-05)
 
@@ -31,7 +53,6 @@
 
 - i197-resource-type-link [\#83](https://github.com/yalelibrary/yul-dc-blacklight/pull/83) ([alishaevn](https://github.com/alishaevn))
 - For Yale-only objects, require auth for image display [\#81](https://github.com/yalelibrary/yul-dc-blacklight/pull/81) ([bess](https://github.com/bess))
-- adds publication place facet and spec [\#79](https://github.com/yalelibrary/yul-dc-blacklight/pull/79) ([K8Sewell](https://github.com/K8Sewell))
 - i192-resource-type-facet [\#78](https://github.com/yalelibrary/yul-dc-blacklight/pull/78) ([alishaevn](https://github.com/alishaevn))
 - adds Genre Facet [\#77](https://github.com/yalelibrary/yul-dc-blacklight/pull/77) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - 194 Added link on format to its facet [\#76](https://github.com/yalelibrary/yul-dc-blacklight/pull/76) ([edejesusyale](https://github.com/edejesusyale))
