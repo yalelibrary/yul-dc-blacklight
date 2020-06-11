@@ -45,7 +45,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       sourceDate_ssim: "this is the source date",
       sourceNote_ssim: "this is the source note",
       references_ssim: "these are the references",
-      date_tsim: "this is the date",
+      dateStructured_ssim: "this is the date structured",
       children_ssim: "these are the children",
       importUrl_ssim: "this is the import URL",
       illustrativeMatter_ssim: "this is the illustrative matter",
@@ -184,8 +184,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the References in results' do
       expect(document).to have_content("these are the references")
     end
-    it 'displays the Date in results' do
-      expect(document).to have_content("this is the date")
+    it 'displays the Date Structured in results' do
+      expect(document).to have_content("this is the date structured")
     end
     it 'displays the Children in results' do
       expect(document).to have_content("these are the children")
