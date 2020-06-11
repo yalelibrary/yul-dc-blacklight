@@ -89,7 +89,6 @@ class CatalogController < ApplicationController
     config.add_facet_field 'subject_era_ssim', label: 'Era'
     config.add_facet_field 'genre_ssim', label: 'Genre'
     config.add_facet_field 'resourceType_ssim', label: 'Resource Type'
-    config.add_facet_field 'author_tsim', label: 'Author', limit: true, sort: 'index'
     config.add_facet_field 'dateStructured_ssim', label: 'Publication Year',
                                                   range: {
                                                     num_segments: 6,
