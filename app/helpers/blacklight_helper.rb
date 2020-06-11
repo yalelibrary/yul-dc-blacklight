@@ -24,9 +24,9 @@ module BlacklightHelper
     language_values = args[:document][args[:field]]
     language_values.map do |language_code|
       converted_code = language_code_to_english(language_code)
-      link_text = "/?f%5Blanguage_ssim%5D%5B%5D=#{converted_code}"
-      out << link_to(converted_code, link_text)
-      out << content_tag(:br)
+      link = "/?f%5Blanguage_ssim%5D%5B%5D=#{converted_code}"
+      out << link_to(converted_code, link)
+      out << tag.br
     end
     safe_join(out)
   end
@@ -55,8 +55,8 @@ module BlacklightHelper
 
   private
 
-    def language_code_to_english(language_code)
-      language_name_in_english = ISO_639.find_by_code(language_code)&.english_name
-      language_name_in_english.present? ? "#{language_name_in_english} (#{language_code})" : language_code
-    end
+  def language_code_to_english(language_code)
+    language_name_in_english = ISO_639.find_by_code(language_code)&.english_name
+    language_name_in_english.present? ? "#{language_name_in_english} (#{language_code})" : language_code
+  end
 end

@@ -4,7 +4,7 @@ inherit_gem:
   bixby: bixby_default.yml
 
 
-Metrics/LineLength:
+Layout/LineLength:
   Exclude:
     - spec/support/solr_documents/metadata_cloud_with_visibility.rb
 
