@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 class CatalogController < ApplicationController
+  include BlacklightRangeLimit::ControllerOverride
   include Blacklight::Catalog
   include Blacklight::Marc::Catalog
 
@@ -88,13 +89,22 @@ class CatalogController < ApplicationController
     config.add_facet_field 'subject_era_ssim', label: 'Era'
     config.add_facet_field 'genre_ssim', label: 'Genre'
     config.add_facet_field 'resourceType_ssim', label: 'Resource Type'
+    config.add_facet_field 'author_tsim', label: 'Author', limit: true, sort: 'index'
+    config.add_facet_field 'dateStructured_ssim', label: 'Publication Year',
+                                                  range: {
+                                                    num_segments: 6,
+                                                    assumed_boundaries: [1100, Time.current.year + 2],
+                                                    segments: true,
+                                                    maxlength: 4
+                                                  }
     config.add_facet_field 'author_ssim', label: 'Author', limit: true, sort: 'index'
 
-    config.add_facet_field 'example_query_facet_field', label: 'Publish Date', query: {
-      years_5: { label: 'within 5 Years', fq: "pub_date_ssim:[#{Time.zone.now.year - 5} TO *]" },
-      years_10: { label: 'within 10 Years', fq: "pub_date_ssim:[#{Time.zone.now.year - 10} TO *]" },
-      years_25: { label: 'within 25 Years', fq: "pub_date_ssim:[#{Time.zone.now.year - 25} TO *]" }
-    }
+    # This was example code after running rails generate blacklight_range_limit:install
+    # config.add_facet_field 'example_query_facet_field', label: 'Publish Date', query: {
+    #    years_5: { label: 'within 5 Years', fq: "pub_date_ssim:[#{Time.zone.now.year - 5} TO *]" },
+    #    years_10: { label: 'within 10 Years', fq: "pub_date_ssim:[#{Time.zone.now.year - 10} TO *]" },
+    #    years_25: { label: 'within 25 Years', fq: "pub_date_ssim:[#{Time.zone.now.year - 25} TO *]" }
+    # }
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -148,13 +158,13 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceDate_ssim', label: 'Source Date'
     config.add_show_field 'sourceNote_ssim', label: 'Source Note'
     config.add_show_field 'references_ssim', label: 'References'
-    config.add_show_field 'dateStructured_ssim', label: 'Date Structured'
+    config.add_show_field 'date_tsim', label: 'Date'
     config.add_show_field 'children_ssim', label: 'Children'
     config.add_show_field 'importUrl_ssim', label: 'Import URL'
     config.add_show_field 'illustrativeMatter_ssim', label: 'Illustrative Matter'
     config.add_show_field 'oid_ssim', label: 'OID'
     config.add_show_field 'identifierMfhd_ssim', label: 'Identifier MFHD'
-    config.add_show_field 'identifierShelfMark_ssim', label: 'Identifier Shelf Mark'
+    config.add_show_field 'identifierShelfMark_ssim', label: 'Identifier Shelf Mark', link_to_facet: true
     config.add_show_field 'box_ssim', label: 'Box'
     config.add_show_field 'folder_ssim', label: 'Folder'
     config.add_show_field 'orbisBibId_ssim', label: 'Orbis Bib ID', helper_method: :link_to_orbis_bib_id
