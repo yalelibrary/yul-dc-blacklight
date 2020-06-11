@@ -38,12 +38,12 @@ module CitationStringProcessor
 
   def formatted_apa_author
     return joined_apa_author_names unless abnormal_chars? || obj[:author_ssim].blank?
-    "#{author_name_no_period&.join(', & ')}. " unless obj[:author_ssim].blank?
+    "#{author_name_no_period&.join(', & ')}. " if obj[:author_ssim].present?
   end
 
   def formatted_mla_author
     return joined_mla_author_names unless abnormal_chars? || obj[:author_ssim].blank?
-    "#{author_name_no_period&.join(', ')}. " unless obj[:author_ssim].blank?
+    "#{author_name_no_period&.join(', ')}. " if obj[:author_ssim].present?
   end
 
   def apa_default_citation
