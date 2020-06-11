@@ -4,9 +4,27 @@ require 'rails_helper'
 RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   before do
     solr = Blacklight.default_index.connection
-    solr.add([test_record])
+    solr.add([test_record,
+              same_call_record,
+              diff_call_record])
     solr.commit
     visit '/catalog/111'
+  end
+
+  let(:same_call_record) do
+    {
+      id: '222',
+      visibility_ssi: 'Public',
+      identifierShelfMark_ssim: 'this is the identifier shelf mark'
+    }
+  end
+
+  let(:diff_call_record) do
+    {
+      id: '333',
+      visibility_ssi: 'Public',
+      identifierShelfMark_ssim: 'this is the identifier shelf mark, but different'
+    }
   end
 
   let(:test_record) do
@@ -45,7 +63,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       sourceDate_ssim: "this is the source date",
       sourceNote_ssim: "this is the source note",
       references_ssim: "these are the references",
-      dateStructured_ssim: "this is the date structured",
+      date_tsim: "this is the date",
       children_ssim: "these are the children",
       importUrl_ssim: "this is the import URL",
       illustrativeMatter_ssim: "this is the illustrative matter",
@@ -184,8 +202,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the References in results' do
       expect(document).to have_content("these are the references")
     end
-    it 'displays the Date Structured in results' do
-      expect(document).to have_content("this is the date structured")
+    it 'displays the Date in results' do
+      expect(document).to have_content("this is the date")
     end
     it 'displays the Children in results' do
       expect(document).to have_content("these are the children")
@@ -201,9 +219,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays the Identifier MFHD in results' do
       expect(document).to have_content("this is the identifier MFHD")
-    end
-    it 'displays the Identifier Shelf Mark in results' do
-      expect(document).to have_content("this is the identifier shelf mark")
     end
     it 'displays the Box in results' do
       expect(document).to have_content("this is the box")
@@ -228,6 +243,14 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays the URI in results' do
       expect(document).to have_content("this is the URI")
+    end
+    it 'displays the Identifier Shelf Mark in results as link' do
+      expect(document).to have_link("this is the identifier shelf mark", href: '/?f%5BidentifierShelfMark_ssim%5D%5B%5D=this+is+the+identifier+shelf+mark')
+      click_link 'this is the identifier shelf mark'
+
+      expect(page).to have_link('111')
+      expect(page).to have_link('222')
+      expect(page).not_to have_link('333')
     end
     it 'contains a link on genre to its facet' do
       expect(page).to have_link('this is the genre', href: '/?f%5Bgenre_ssim%5D%5B%5D=this+is+the+genre')

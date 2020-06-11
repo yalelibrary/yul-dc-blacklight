@@ -85,6 +85,8 @@ GEM
       marc-fastxmlwriter
       rails
       traject (~> 3.0)
+    blacklight_range_limit (7.8.1)
+      blacklight (>= 7.0)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
     bootstrap (4.5.0)
@@ -402,6 +404,7 @@ DEPENDENCIES
   bixby (~> 3.0.0)
   blacklight
   blacklight-marc (>= 7.0.0.rc1, < 8)
+  blacklight_range_limit
   bootsnap (>= 1.4.2)
   bootstrap (~> 4.0)
   byebug

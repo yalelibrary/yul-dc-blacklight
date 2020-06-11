@@ -31,6 +31,12 @@ module BlacklightHelper
     safe_join(out)
   end
 
+  def search_field_value_link(args)
+    field_value = args[:document][args[:field]]
+    link_text = "/?q=#{field_value}&search_field=#{args[:field]}"
+    link_to(field_value.join, link_text)
+  end
+
   def language_code(args)
     language_value = args
     language_code_to_english(language_value)
