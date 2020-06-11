@@ -184,8 +184,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the References in results' do
       expect(document).to have_content("these are the references")
     end
-    it 'displays the Date Structured in results' do
-      expect(document).to have_content("this is the date structured")
+    it 'displays the Date in results' do
+      expect(document).to have_content("this is the date")
     end
     it 'displays the Children in results' do
       expect(document).to have_content("these are the children")
