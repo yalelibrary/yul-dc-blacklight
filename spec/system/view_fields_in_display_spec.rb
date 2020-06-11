@@ -266,5 +266,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(page).to have_link('English (eng)', href: '/?f%5Blanguage_ssim%5D%5B%5D=English (eng)')
       expect(page).to have_link('zz', href: '/?f%5Blanguage_ssim%5D%5B%5D=zz')
     end
+    it 'contains a link on the Orbis Bib ID to the Orbis catalog record' do
+      expect(page).to have_link('this is the orbis bib ID', href: 'http://hdl.handle.net/10079/bibid/this is the orbis bib ID')
+    end
   end
 end

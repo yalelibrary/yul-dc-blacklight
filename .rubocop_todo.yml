@@ -59,6 +59,7 @@ RSpec/ExampleLength:
   Exclude:
     - 'spec/services/voyager_indexing_service_spec.rb'
     - 'spec/system/user_authentication_spec.rb'
+    - 'spec/system/facet_by_year_spec.rb'
 # Offense count: 1
 # Configuration parameters: Include.
 # Include: app/**/*.rb, config/**/*.rb, db/**/*.rb, lib/**/*.rb

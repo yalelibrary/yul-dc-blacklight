@@ -42,6 +42,13 @@ module BlacklightHelper
     language_code_to_english(language_value)
   end
 
+  def link_to_orbis_bib_id(arg)
+    bib_id = arg[:document][arg[:field]]
+    link = "http://hdl.handle.net/10079/bibid/#{bib_id[0]}"
+
+    link_to(bib_id[0], link)
+  end
+
   private
 
     def language_code_to_english(language_code)

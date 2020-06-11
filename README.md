@@ -12,25 +12,24 @@ This is one of the microservices applications that form the Yale digital library
 
 ### Docker Development Setup
 
-- If this is your first time working in this repo or the Dockerfile.base has been updated, (re)build the base service (dependencies, etc. that don't change often)
-
+- Checkout the project
   ```bash
-      docker-compose build base
-  ```
-
-- If this is your first time working in this repo or the Dockerfile has been updated you will need to (re)build those services
-
-  ```bash
-    docker-compose build
+  git clone https://github.com/yalelibrary/yul-dc-blacklight.git
+  cd yul-dc-blacklight
   ```
 
 ### Starting the app
 
-- Start the blacklight service
+- Start the blacklight service and it's dependencies
+  This command reads the docker-compose.yml file and starts all the containers described by it
+  including blacklight, solr, the manifest service, the management app, and a iiif image server.
 
   ```bash
-  docker-compose up
+  docker-compose up blacklight
   ```
+  
+  Output from the blackight container will display in your terminal window with Solr, Cantaloupe (IIIF),
+  and Manifest services running in the background
 
 - Access the blacklight app at `http://localhost:3000`
 
@@ -42,7 +41,7 @@ This is one of the microservices applications that form the Yale digital library
 
 ### Accessing the blacklight container
 
-- Navigate to the app root directory in another tab and run:
+- In a separate terminal window or tab, run:
 
   ```bash
   docker-compose exec blacklight bash
@@ -78,17 +77,22 @@ This is one of the microservices applications that form the Yale digital library
 
 ### Indexing data
 
-- First, connect to the running management application container:
+- First, connect to the running management application:
 
-  ```bash
-    docker-compose exec management bash
-  ```
+ * http://localhost:3001/management/
 
-- Then, on that running management container:
+- Second, pull up http://0.0.0.0:8983 in your browser
 
-  ```bash
-  SOLR_CORE=blacklight-core bundle exec rake yale:index_fixture_data
-  ```
+ * Connect to the blacklight-core and execute a query to confirm no data present
+
+- Then, in the running management application(:3001), click the button 'Index Ladybird Records to Solr'
+
+ * When the message appears above the buttons the data has been indexed
+
+ * Visit :8983 and run the same query again and confirm data is present
+
+ * Connect to the running blacklight app at localhost:3000
+
 
 ## Using the Makefile
 
@@ -141,3 +145,11 @@ In order to prevent search engine crawling of the system before it's ready to la
   ```
 
 7. Update `yul-dc-camerata` with the new version of blacklight and submit a PR.
+
+# Using a New Release of the Management App
+
+1. Go to Management app on Github and check the latest release number
+
+2. Edit your .env file to match the Management version to the latest release number
+
+3. Run ```docker-compose up```
