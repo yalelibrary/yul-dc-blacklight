@@ -1,14 +1,13 @@
 # frozen_string_literal: true
-
 require 'citeproc'
 require 'csl/styles'
-require './lib/yale/citation_string_processor.rb'
 
 module Yale
   class CitationFormatter
-    include CitationStringProcessor
+    include Yale::CitationStringProcessor
     attr_accessor :obj, :default_citations
 
+    # @param obj [SolrDocument], a document from Solr
     def initialize(obj)
       @obj = obj
       @default_citations = {
@@ -17,6 +16,8 @@ module Yale
       }
     end
 
+    # @param style [String], a string containing a style from the @default_citations hash
+    # @return [String], returns the citation for the requested style
     def citation_for(style)
       sanitized_citation(CiteProc::Processor.new(style: style, format: 'html').import(item).render(:bibliography, id: :item).first)
     rescue CiteProc::Error, TypeError, ArgumentError
@@ -25,23 +26,17 @@ module Yale
 
     private
 
+    # @return [CiteProc::Item],a CiteProc::Item instance containing values from the key_value_* chunks
     def item
       CiteProc::Item.new(key_value_chunk_1.merge(key_value_chunk_2).merge(key_value_chunk_3))
     end
 
-    def mla_url_test
-      [
-        obj[:partOf_ssim],
-        obj[:edition_tesim],
-        obj[:publisher_ssim],
-        obj[:date_tsim]
-      ].any?(&:present?)
-    end
-
+    # @return [Boolean],returns true if author_ssim has a character that not in any language, else false
     def abnormal_chars?
       obj[:author_ssim]&.any? { |a| a.match(/[^\p{L}\s]+/) }
     end
 
+    # @return [Hash], a hash with a Solr Document's fields and values as key,value pairs
     def key_value_chunk_1
       {
         id: :item,
@@ -54,6 +49,7 @@ module Yale
       }
     end
 
+    # @return [Hash], a hash with a Solr Document's fields and values as key,value pairs
     def key_value_chunk_2
       {
         archive: obj[:holding_repository_tesim]&.join(', '),
@@ -66,6 +62,7 @@ module Yale
       }
     end
 
+    # @return [Hash], a hash with a Solr Document's fields and values as key,value pairs
     def key_value_chunk_3
       {
         dimensions: obj[:extent_ssim]&.join(', '),
