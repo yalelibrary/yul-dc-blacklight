@@ -1,5 +1,20 @@
-jobs:
+commands:
+  docker-tag:
+    description: "Add a new tag to a docker image that has already been pulled"
+    parameters:
+      from_tag:
+        type: string
+        default: $CIRCLE_SHA1
+      to_tag:
+        type: string
+        default: "master"
+      image:
+        type: string
+    steps:
+      - run: >
+          docker tag <<parameters.image>>:<<parameters.from_tag>> <<parameters.image>>:<<parameters.to_tag>>
 
+jobs:
   build-and-push:
     executor: docker/docker
     steps:
@@ -44,14 +59,31 @@ jobs:
     executor: docker/docker
     steps:
       - setup_remote_docker
-      - checkout
       - docker/check
-      - docker/build:
+      - docker/pull:
+          images: yalelibraryit/dc-blacklight:$CIRCLE_SHA1
+      - docker-tag:
           image: yalelibraryit/dc-blacklight
-          tag: master
+          from_tag: $CIRCLE_SHA1
+          to_tag: $CIRCLE_BRANCH 
       - docker/push:
           image: yalelibraryit/dc-blacklight
-          tag: master
+          tag: $CIRCLE_BRANCH
+  publish-github-release:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - docker/check
+      - docker/pull:
+          images: yalelibraryit/dc-blacklight:$CIRCLE_SHA1
+      - docker-tag:
+          image: yalelibraryit/dc-blacklight
+          from_tag: $CIRCLE_SHA1
+          to_tag: $CIRCLE_TAG
+      - docker/push:
+          image: yalelibraryit/dc-blacklight
+          tag: $CIRCLE_TAG
+
 orbs:
   docker: circleci/docker@1.0.1
 version: 2.1
@@ -68,6 +100,11 @@ workflows:
           requires:
             - build-and-push
             - run-tests
+      - publish-github-release:
+          context: yul-dc
           filters:
             branches:
-              only: master
+              ignore: /.*/
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
+
