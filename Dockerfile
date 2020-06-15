@@ -1,4 +1,4 @@
-FROM yalelibraryit/dc-base:v0.0.1
+FROM yalelibraryit/dc-base:v1.0.0
 
 COPY ops/webapp.conf /etc/nginx/sites-enabled/webapp.conf
 COPY ops/env.conf /etc/nginx/main.d/env.conf
