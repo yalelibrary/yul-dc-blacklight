@@ -16,6 +16,7 @@ This is one of the microservices applications that form the Yale digital library
   ```bash
   git clone https://github.com/yalelibrary/yul-dc-blacklight.git
   cd yul-dc-blacklight
+  docker-compose pull blacklight
   ```
 
 ### Starting the app
@@ -93,27 +94,16 @@ This is one of the microservices applications that form the Yale digital library
 
  * Connect to the running blacklight app at localhost:3000
 
+## Pulling or Building Docker Images
+   Any time you pull a branch with a Gemfile change you need to pull or build a new Docker image. If you change the Dockerfile, you
+   need to build a new Docker image. If you change a file in ./ops you need to build a new Docker image. These are the primary
+   times in which you need to pull or build.
 
-## Using the Makefile
-
-You can also use the Makefile to build an image locally, and/or push it to dockerhub:
-
-```
-make build <- build the blacklight image
-
-make push <-push an already build image
-
-make build push <-build and then push the image up to dockerhub
-```
-
-When you use make build, a new blacklight image is built, and tagged as both :latest, and the current git sha. When pushing to dockerhub, only the git sha version is pushed.
-
-```
-yalelibraryit/dc-blacklight        d915b32 <-git sha   1c2d8977cf5b <- note same image id
-yalelibraryit/dc-blacklight        latest              1c2d8977cf5b
-```
-
-In the case above, only yalelibraryit/dc-blacklight:d915b32 will be available on dockerhub.
+## When Installing a New Gem
+   For the most part images are created and maintained by the CI process. However, if you change the Gemfile you need
+   to take a few extra steps.  Make sure the application is running before you make your Gemfile change. Once you've
+   updated the Gemfile, inside the container, run `bundle && nginx -s reload`. The next time you stop your running containers
+   you need to rebuild.
 
 ## Environment Variables for Development
 
