@@ -4,3 +4,6 @@ en:
     sidebar:
       links: Links 
       manifest: Manifest Link
+    citation:
+      apa: 'APA, 6th edition'
+      modern-language-association: 'MLA'

@@ -12,6 +12,8 @@ gem 'blacklight-marc', '>= 7.0.0.rc1', '< 8'
 gem 'blacklight_range_limit'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap', '~> 4.0'
+gem 'citeproc-ruby'
+gem 'csl-styles'
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
 gem 'dotenv-rails', groups: [:development, :test]

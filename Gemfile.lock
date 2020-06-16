@@ -104,8 +104,17 @@ GEM
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
     childprocess (3.0.0)
+    citeproc (1.0.10)
+      namae (~> 1.0)
+    citeproc-ruby (1.1.12)
+      citeproc (~> 1.0, >= 1.0.9)
+      csl (~> 1.5)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
+    csl (1.5.1)
+      namae (~> 1.0)
+    csl-styles (1.0.1.10)
+      csl (~> 1.0)
     deprecation (1.0.0)
       activesupport
     devise (4.7.1)
@@ -208,6 +217,7 @@ GEM
     msgpack (1.3.3)
     multi_json (1.14.1)
     multipart-post (2.1.1)
+    namae (1.0.1)
     nio4r (2.5.2)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
@@ -409,6 +419,8 @@ DEPENDENCIES
   bootstrap (~> 4.0)
   byebug
   capybara (>= 2.15)
+  citeproc-ruby
+  csl-styles
   devise
   devise-guests (~> 0.6)
   dotenv-rails
