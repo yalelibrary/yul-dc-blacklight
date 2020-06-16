@@ -9,7 +9,7 @@ services:
     #   - .env.development
     environment:
       POSTGRES_DB: blacklight_yul_development
-      POSTGRES_HOST: db_blacklight
+      POSTGRES_HOST: db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       SOLR_URL: http://solr:8983/solr/blacklight-core
@@ -26,7 +26,7 @@ services:
     # Enable sending signals (CTRL+C, CTRL+P + CTRL+Q) into the container:
     tty: true
     depends_on:
-      - db_blacklight
+      - db
       - solr
       - iiif_manifest
       - iiif_image
@@ -39,7 +39,7 @@ services:
       - .env
     environment:
       POSTGRES_DB: yul_dc_management_development
-      POSTGRES_HOST: db_management
+      POSTGRES_HOST: db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       SOLR_BASE_URL: http://solr:8983/solr
@@ -47,37 +47,20 @@ services:
       PASSENGER_APP_ENV: development
     ports:
       - "3001:3001"
-    depends_on:
-      - db_management
 
-  db_blacklight:
-    image: postgres:${POSTGRES_VERSION}
+  db:
+    image: yalelibraryit/dc-postgres:${POSTGRES_VERSION}
     env_file:
       - .env
     environment:
-      POSTGRES_DB: blacklight_yul_development
-      POSTGRES_HOST: db_blacklight
+      POSTGRES_MULTIPLE_DATABASES: blacklight_yul_development,yul_dc_management_development
+      POSTGRES_HOST: db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
     volumes:
-      - "db_blacklight:/var/lib/postgresql/data"
-
-  db_management:
-    image: postgres:${POSTGRES_VERSION}
-    env_file:
-      - .env
-    environment:
-      POSTGRES_DB: yul_dc_management_development
-      POSTGRES_HOST: db_management
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-    ports:
-      - "5434:5432"
-    volumes:
-      - "db_management:/var/lib/postgresql/data"
-
+      - "db:/var/lib/postgresql/data"
 
   solr:
     image: yalelibraryit/dc-solr:${SOLR_VERSION}
@@ -106,5 +89,4 @@ volumes:
   postgres:
   solr:
   blacklight:
-  db_blacklight:
-  db_management:
+  db:
