@@ -272,5 +272,13 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'contains a link on the Finding Aid to the Finding Aid catalog record' do
       expect(page).to have_link('this is the finding aid', href: 'this is the finding aid')
     end
+
+    describe 'search fields' do
+      let(:search_fields) { controller.blacklight_config.search_fields.keys }
+      let(:expected_search_fields) do
+        ['all_fields', 'orbisBibId_ssim']
+      end
+      it { expect(search_fields).to contain_exactly(*expected_search_fields) }
+    end
   end
 end
