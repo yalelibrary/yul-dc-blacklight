@@ -53,4 +53,18 @@ RSpec.describe BlacklightHelper do
       end
     end
   end
+
+  describe '#render_thumbnail' do
+    context 'with public record and oid with images' do
+      let(:valid_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Public', oid_ssim: ['2055095']) }
+      let(:non_valid_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Public', oid_ssim: ['2055095']) }
+
+      it 'returns an image_tag for oids that have images' do
+        expect(helper.render_thumbnail(valid_document, { alt: "" })).to eq "<img src=\"https://collections-test.curationexperts.com/iiif/2/1234822/full/,200/0/default.jpg\" />"
+      end
+      xit 'returns an image_tag pointing to image_not_found.png for oids without images' do
+        expect(helper.render_thumbnail(non_valid_document, {})).to eq 'image tag pointing to image_not_found.png'
+      end
+    end
+  end
 end
