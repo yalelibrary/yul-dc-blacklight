@@ -32,7 +32,7 @@ class CatalogController < ApplicationController
     # solr field configuration for search results/index views
     config.index.title_field = 'title_tsim'
     # config.index.display_type_field = 'format'
-    # config.index.thumbnail_field = 'thumbnail_path_ss'
+    config.index.thumbnail_method = :render_thumbnail
 
     config.add_results_document_tool(:bookmark, partial: 'bookmark_control', if: :render_bookmarks_control?)
 

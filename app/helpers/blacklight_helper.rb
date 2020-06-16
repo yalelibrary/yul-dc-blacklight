@@ -53,7 +53,36 @@ module BlacklightHelper
     link_to(arg[:value][0], arg[:value][0])
   end
 
+  def render_thumbnail(document, _options)
+    request = get_child_img_url(document[:oid_ssim]&.join)
+    return if request.blank?
+    image_tag(request) if document[:visibility_ssi].eql? 'Public'
+  end
+
   private
+
+  def get_child_img_url(oid)
+    return '' if oid.blank?
+    begin
+      uri = URI("https://collections-test.curationexperts.com/manifests/#{oid}.json")
+      json = Net::HTTP.get_response(uri)
+      json = Net::HTTP.get_response(URI.parse(json.header['location'])) if json.code.eql? "301"
+
+      result = JSON(json.body)
+      request = result['sequences'].first['canvases'].first['images'].first['resource']['service']['@id']
+      height = result['sequences'].first['canvases'].first['height']
+      width = result['sequences'].first['canvases'].first['width']
+
+      dim = if width.to_i > height.to_i
+              '200,'
+            else
+              ',200'
+            end
+      "#{request}/full/#{dim}/0/default.jpg"
+    rescue
+      ''
+    end
+  end
 
   def language_code_to_english(language_code)
     language_name_in_english = ISO_639.find_by_code(language_code)&.english_name
