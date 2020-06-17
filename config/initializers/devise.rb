@@ -41,6 +41,14 @@ Devise.setup do |config|
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
   # config.authentication_keys = [:email]
+  require "omniauth-cas"
+
+  config.omniauth :cas,
+                  host: 'secure.its.yale.edu',
+                  login_url: '/cas/login',
+                  service_validate_url: '/cas/serviceValidate',
+                  disable_ssl_verification: true
+
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
