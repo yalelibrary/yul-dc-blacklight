@@ -21,7 +21,9 @@ jobs:
       - setup_remote_docker
       - checkout
       - docker/check
-      - docker/build:
+      - docker/pull:
+          images: yalelibraryit/dc-blacklight:master
+       - docker/build:
           image: yalelibraryit/dc-blacklight
       - docker/push:
           image: yalelibraryit/dc-blacklight
@@ -46,7 +48,6 @@ jobs:
     executor: docker/docker
     steps:
       - setup_remote_docker
-      - checkout
       - run:
           name: Rubocop
           command: bundle exec rubocop --parallel
