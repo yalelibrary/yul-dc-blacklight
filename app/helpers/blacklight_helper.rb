@@ -66,6 +66,8 @@ module BlacklightHelper
 
   private
 
+  # @return [String], strips anything added to the oid
+  # needed for yale-only works which have '-yale' appended to the oid_ssim
   def sanitize_oid_ssim(oid_ssim)
     if (oid = oid_ssim&.first).present?
       oid = oid.match(%r{(?<oid_clean>\d+)}).try(:[], :oid_clean) if oid_ssim.present?
