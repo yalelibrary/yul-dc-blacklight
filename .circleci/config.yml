@@ -23,7 +23,7 @@ jobs:
       - docker/check
       - docker/pull:
           images: yalelibraryit/dc-blacklight:master
-       - docker/build:
+      - docker/build:
           image: yalelibraryit/dc-blacklight
       - docker/push:
           image: yalelibraryit/dc-blacklight
