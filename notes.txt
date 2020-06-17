@@ -1,4 +1,0 @@
-vpc: vpc-09f1f13fcece6423a
-private dns namespace: xkuew54uka2542my4v6zgomgj5s5ztz4-k9ei46gz
-sg and subnets in ecs-params.yml
-ns-6eguprvssvggjv7z

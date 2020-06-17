@@ -72,23 +72,18 @@
 </li></ul>
 
 <h3 id="label-Docker+Development+Setup">Docker Development Setup</h3>
-
-<h4 id="label-If+this+is+your+first+time+working+in+this+repo+or+the+Dockerfile.base+has+been+updated-2C+-28re-29build+the+base+service+-28dependencies-2C+etc.+that+don-27t+change+often-29">If this is your first time working in this repo or the Dockerfile.base has been updated, (re)build the base service (dependencies, etc. that don&#39;t change often)</h4>
-
-<pre class="code ruby"><code class="ruby">docker-compose build base
-</code></pre>
-
-<h4 id="label-If+this+is+your+first+time+working+in+this+repo+or+the+Dockerfile+has+been+updated+you+will+need+to+-28re-29build+those+services">If this is your first time working in this repo or the Dockerfile has been updated you will need to (re)build those services</h4>
-
-<pre class="code ruby"><code class="ruby">docker-compose build
-</code></pre>
+<ul><li>
+<p>Checkout the project  <code>bash   git clone https://github.com/yalelibrary/yul-dc-blacklight.git   cd yul-dc-blacklight   docker-compose pull blacklight </code></p>
+</li></ul>
 
 <h3 id="label-Starting+the+app">Starting the app</h3>
 <ul><li>
-<p>Start the blacklight service</p>
+<p>Start the blacklight service and it&#39;s dependencies  This command reads the docker-compose.yml file and starts all the containers described by it  including blacklight, solr, the manifest service, the management app, and a iiif image server.</p>
 </li></ul>
 
-<p><code>bash   docker-compose up </code></p>
+<p><code>bash   docker-compose up blacklight </code></p>
+
+<p>Output from the blackight container will display in your terminal window with Solr, Cantaloupe (IIIF),  and Manifest services running in the background</p>
 <ul><li>
 <p>Access the blacklight app at <code>http://localhost:3000</code></p>
 </li><li>
@@ -101,7 +96,7 @@
 
 <h3 id="label-Accessing+the+blacklight+container">Accessing the blacklight container</h3>
 <ul><li>
-<p>Navigate to the app root directory in another tab and run:</p>
+<p>In a separate terminal window or tab, run:</p>
 </li></ul>
 
 <p><code>bash   docker-compose exec blacklight bash </code></p>
@@ -135,108 +130,30 @@
 
 <h3 id="label-Indexing+data">Indexing data</h3>
 <ul><li>
-<p>First, connect to the running management application container:</p>
+<p>First, connect to the running management application:</p>
+</li><li>
+<p><a href="http://localhost:3001/management">localhost:3001/management</a>/</p>
+</li><li>
+<p>Second, pull up <a href="http://0.0.0.0:8983">0.0.0.0:8983</a> in your browser</p>
+</li><li>
+<p>Connect to the blacklight-core and execute a query to confirm no data present</p>
+</li><li>
+<p>Then, in the running management application(:3001), click the button &#39;Index Ladybird Records to Solr&#39;</p>
+</li><li>
+<p>When the message appears above the buttons the data has been indexed</p>
+</li><li>
+<p>Visit :8983 and run the same query again and confirm data is present</p>
+</li><li>
+<p>Connect to the running blacklight app at localhost:3000</p>
 </li></ul>
 
-<p><code>bash     docker-compose exec management bash </code></p>
-<ul><li>
-<p>Then, on that running management container:</p>
-</li></ul>
+<h2 id="label-Pulling+or+Building+Docker+Images">Pulling or Building Docker Images</h2>
 
-<p><code>bash   SOLR_CORE=blacklight-core bundle exec rake yale:index_fixture_data </code></p>
+<p>Any time you pull a branch with a Gemfile change you need to pull or build a new Docker image. If you change the Dockerfile, you  need to build a new Docker image. If you change a file in ./ops you need to build a new Docker image. These are the primary  times in which you need to pull or build.</p>
 
-<h2 id="label-Pushing+new+images+to+Dockerhub">Pushing new images to Dockerhub</h2>
+<h2 id="label-When+Installing+a+New+Gem">When Installing a New Gem</h2>
 
-<h3 id="label-If+you-27ve+made+modifications+to+Dockerfile.base-3A">If you&#39;ve made modifications to Dockerfile.base:</h3>
-<ol><li>
-<p>Update the base services</p>
-</li></ol>
-
-<p><code>bash   docker-compose build base </code></p>
-<ul><li>
-<p>When the base services are finished building the last line should say "Successfully tagged yalelibraryit/dc-blacklight-base:<code>&lt;image-name&gt;</code>". e.g.:</p>
-
-<pre class="code ruby"><code class="ruby">Successfully tagged yalelibraryit/dc-blacklight-base:v1.0.0
-</code></pre>
-</li><li>
-<p>That tagged image being referenced is the newest image that&#39;s currently available on DockerHub. You can verify that by:</p>
-<ul><li>
-<p>Going to <a href="https://hub.docker.com/orgs/yalelibraryit/repositories">hub.docker.com/orgs/yalelibraryit/repositories</a></p>
-</li><li>
-<p>Clicking the arrow icon at the far right of the line that says "yalelibraryit / dc-blacklight-base"</p>
-</li><li>
-<p>Selecting the "Tags" button next to "General"</p>
-</li><li>
-<p>Sort by "Newest" in the drop down on the right side of the window</p>
-</li></ul>
-</li><li>
-<p>Create a new image tag from the updated base services build</p>
-</li><li>
-<p>The <code>docker tag</code> command takes 2 arguments:</p>
-<ul><li>
-<p>The first argument is the newest tag that&#39;s currently in DockerHub that you saw above in step 1</p>
-</li><li>
-<p>The second argument is the tag you want to assign the new image</p>
-</li><li>
-<p>In order to properly tag the new image, increment the appropriate place value by one. e.g.:</p>
-</li></ul>
-
-<p> <code>bash   docker tag yalelibraryit/dc-blacklight-base:v1.0.0 yalelibraryit/dc-blacklight-base:v1.0.1 </code></p>
-</li><li>
-<p>Sign in to Docker from your command line</p>
-</li></ul>
-
-<p><code>bash   docker login </code></p>
-<ul><li>
-<p>You&#39;ll be prompted to enter your Docker username and password</p>
-</li><li>
-<p>Push the base image with your incremented version tag. e.g.:</p>
-</li></ul>
-
-<p><code>bash   docker push yalelibraryit/dc-blacklight-base:v1.0.1 </code></p>
-<ol><li>
-<p>Build the blacklight services</p>
-</li></ol>
-
-<p><code>bash   docker-compose build </code></p>
-<ul><li>
-<p>When the blacklight services are complete there will be a line that says "Successfully tagged yalelibraryit/dc-blacklight:<code>&lt;image-name&gt;</code>". e.g.:</p>
-
-<pre class="code ruby"><code class="ruby">Successfully tagged yalelibraryit/dc-blacklight:master
-</code></pre>
-</li><li>
-<p>Create a new image tag from the updated blacklight services build</p>
-</li><li>
-<p>Your first argument is the full tag that you saw in step 5</p>
-</li><li>
-<p>The secomd argument replaces the <code>master</code> image name, with the image name we used in step 2. e.g.:</p>
-
-<pre class="code ruby"><code class="ruby">docker tag yalelibraryit/dc-blacklight:master yalelibraryit/dc-blacklight:v1.0.1
-</code></pre>
-</li><li>
-<p>Push the blacklight image with your incremented version tag. e.g.:</p>
-</li></ul>
-
-<p><code>bash   docker push yalelibraryit/dc-blacklight:v1.0.1 </code></p>
-
-<h2 id="label-Using+the+Makefile">Using the Makefile</h2>
-
-<p>You can also use the Makefile to build an image locally, and/or push it to dockerhub:</p>
-
-<pre class="code ruby"><code class="ruby">make build &lt;- build the blacklight image
-
-make push &lt;-push an already build image
-
-make build push &lt;-build and then push the image up to dockerhub
-</code></pre>
-
-<p>When you use make build, a new blacklight image is built, and tagged as both :latest, and the current git sha. When pushing to dockerhub, only the git sha version is pushed.</p>
-
-<pre class="code ruby"><code class="ruby">yalelibraryit/dc-blacklight        d915b32 &lt;-git sha   1c2d8977cf5b &lt;- note same image id
-yalelibraryit/dc-blacklight        latest              1c2d8977cf5b
-</code></pre>
-
-<p>In the case above, only yalelibraryit/dc-blacklight:d915b32 will be available on dockerhub.</p>
+<p>For the most part images are created and maintained by the CI process. However, if you change the Gemfile you need  to take a few extra steps. Make sure the application is running before you make your Gemfile change. Once you&#39;ve  updated the Gemfile, inside the container, run <code>bundle &amp;&amp; nginx -s reload</code>. The next time you stop your running containers  you need to rebuild.</p>
 
 <h2 id="label-Environment+Variables+for+Development">Environment Variables for Development</h2>
 
@@ -251,20 +168,38 @@ IIIF_MANIFESTS_BASE_URL=http://localhost/manifests/
 
 <p>In order to prevent search engine crawling of the system before it&#39;s ready to launch, we use HTTP password protection. This is set via environment variables. Set <code>HTTP_PASSWORD_PROTECT=&#39;true&#39;</code> to enable this feature. Set <code>HTTP_PASSWORD_PROTECT=&#39;false&#39;</code> to disable this feature. Set the login and password via environment variables <code>HTTP_USERNAME</code> and <code>HTTP_PASSWORD</code></p>
 
-<h1 id="label-Customizing+Blacklight-3A">Customizing Blacklight:</h1>
+<h2 id="label-Releasing+a+new+version">Releasing a new version</h2>
+<ol><li>
+<p>Decide on a new version number. We use <a href="https://semver.org/">semantic versioning</a>.</p>
+</li><li>
+<p>Update the version number in <code>.github_changelog_generator</code></p>
+</li><li>
+<p>github_changelog_generator –user yalelibrary –project yul-dc-blacklight –token $YOUR_GITHUB_TOKEN</p>
+</li><li>
+<p>Commit and merge the changes you just made.</p>
+</li><li>
+<p>Once those changes are merged to the <code>master</code> branch, in the github web UI go to <code>Releases</code> and tag a new release with the right version number. Paste in the release notes for this version from the changelog you generated. In the release notes, split out <code>Features</code>, <code>Bug Fixes</code>, and <code>Other</code></p>
+</li><li>
+<p>Once the CI build has completed for <code>master</code>, tag and push a docker hub image with the same release number:</p>
+</li></ol>
 
-<p>There are many ways to override specific behaviors and views in Blacklight. Because Blacklight is distributed as a Rails engine-based gem, all customization of Blacklight behavior should be done within your application by overriding Blacklight-provided behaviors with your own.</p>
-<ul><li>
-<p>To modify this text, you need to <a href="http://guides.rubyonrails.org/engines.html#improving-engine-functionality">override the Blacklight-provided view</a>. You can copy this file, located in the blacklight gem: <code>/usr/local/rvm/gems/ruby-2.6.5/gems/blacklight-7.7.0/app/views/catalog/_home_text.html.erb</code> to your own application: <code>/home/app/webapp/app/views/catalog/_home_text.html.erb</code></p>
+<p><code>   docker pull yalelibraryit/dc-blacklight:f93089f70e18d6c6d77ee1a6b3b4866b6d284078 &lt;-- the tag created by circleci   docker tag yalelibraryit/dc-blacklight:f93089f70e18d6c6d77ee1a6b3b4866b6d284078 yalelibraryit/dc-blacklight:v1.2.1 &lt;-- the new, semantically versioned tag   docker push yalelibraryit/dc-blacklight:v1.2.1 &lt;-- now our semantically versioned tag will be available from docker hub </code></p>
+<ol><li>
+<p>Update <code>yul-dc-camerata</code> with the new version of blacklight and submit a PR.</p>
+</li></ol>
+
+<h1 id="label-Using+a+New+Release+of+the+Management+App">Using a New Release of the Management App</h1>
+<ol><li>
+<p>Go to Management app on Github and check the latest release number</p>
 </li><li>
-<p><a href="https://github.com/projectblacklight/blacklight/wiki/Indexing-your-data-into-solr">Index your own data</a> into Solr</p>
+<p>Edit your .env file to match the Management version to the latest release number</p>
 </li><li>
-<p><a href="https://github.com/projectblacklight/blacklight/wiki#blacklight-configuration">Configure Blacklight</a> to match your data and user-experience needs</p>
-</li></ul>
+<p>Run <code>docker-compose up</code></p>
+</li></ol>
 </div></div>
 
       <div id="footer">
-  Generated on Wed Jun  3 13:40:45 2020 by
+  Generated on Wed Jun 17 19:07:57 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.25 (ruby-2.6.6).
 </div>

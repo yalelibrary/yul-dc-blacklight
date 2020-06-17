@@ -91,7 +91,7 @@
   
   <dl>
       <dt>Includes:</dt>
-      <dd>Blacklight::Solr::SearchBuilderBehavior</dd>
+      <dd>Blacklight::Solr::SearchBuilderBehavior, BlacklightRangeLimit::RangeLimitBuilder</dd>
   </dl>
   
   
@@ -106,7 +106,37 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Build the search query that is passed to solr. This is where we can configure the search “processor chain”, i.e., anything that should be appended to the search. For Yale, we are limiting searches to only records that are marked Public or Yale Community Only.</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_solr_parameters'>solr_parameters</span><span class='lbracket'>[</span><span class='symbol'>:fq</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>((visibility_ssi:Public) OR (visibility_ssi:&quot;Yale Community Only&quot;))</span><span class='tstring_end'>&#39;</span></span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Adding a new step to the processor chain</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_default_processor_chain'>default_processor_chain</span> <span class='op'>+=</span> <span class='lbracket'>[</span><span class='symbol'>:add_custom_data_to_query</span><span class='rbracket'>]</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_custom_data_to_query'>add_custom_data_to_query</span><span class='lparen'>(</span><span class='id identifier rubyid_solr_parameters'>solr_parameters</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_solr_parameters'>solr_parameters</span><span class='lbracket'>[</span><span class='symbol'>:custom</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_blacklight_params'>blacklight_params</span><span class='lbracket'>[</span><span class='symbol'>:user_value</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+
+</div>
 
 
 
@@ -138,7 +168,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Use the solr fq (filter query) parameter to limit search results to only those items explicitly marked Public or Yale Community Only.</p>
+</div></span>
   
 </li>
 
@@ -147,6 +179,7 @@
   
 
 
+  
   
   
 
@@ -166,6 +199,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+<p>Use the solr fq (filter query) parameter to limit search results to only those items explicitly marked Public or Yale Community Only. This should ensure that only records explicitly cleared for display are ever shown.</p>
+
 
   </div>
 </div>
@@ -198,19 +233,19 @@
       <pre class="lines">
 
 
-8
-9
-10
-11
-12</pre>
+26
+27
+28
+29
+30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/search_builder.rb', line 8</span>
+      <pre class="code"><span class="info file"># File 'app/models/search_builder.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show_only_public_records'>show_only_public_records</span><span class='lparen'>(</span><span class='id identifier rubyid_solr_parameters'>solr_parameters</span><span class='rparen'>)</span>
   <span class='comment'># add a new solr facet query (&#39;fq&#39;) parameter that limits results to those with a &#39;public_b&#39; field of 1
 </span>  <span class='id identifier rubyid_solr_parameters'>solr_parameters</span><span class='lbracket'>[</span><span class='symbol'>:fq</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-  <span class='id identifier rubyid_solr_parameters'>solr_parameters</span><span class='lbracket'>[</span><span class='symbol'>:fq</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>visibility_ssi:Public</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_solr_parameters'>solr_parameters</span><span class='lbracket'>[</span><span class='symbol'>:fq</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>((visibility_ssi:Public) OR (visibility_ssi:&quot;Yale Community Only&quot;))</span><span class='tstring_end'>&#39;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -222,7 +257,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jun  3 13:40:45 2020 by
+  Generated on Wed Jun 17 19:07:57 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.25 (ruby-2.6.6).
 </div>
