@@ -19,10 +19,11 @@ jobs:
     executor: docker/docker
     steps:
       - setup_remote_docker
+          docker_layer_caching: true 
       - checkout
       - docker/check
       - docker/pull:
-          images: yalelibraryit/dc-blacklight:master
+          images: yalelibraryit/dc-blacklight:eb43a170ae513c81e5aaa9533bd5ea4482e0b1a8
       - docker/build:
           image: yalelibraryit/dc-blacklight
       - docker/push:
