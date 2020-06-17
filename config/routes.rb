@@ -3,7 +3,8 @@
 Rails.application.routes.draw do
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   concern :marc_viewable, Blacklight::Marc::Routes::MarcViewable.new
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
+  get '/auth/:provider/callback', to: 'sessions#create'
   mount Blacklight::Engine => '/'
   root to: "catalog#index"
   concern :searchable, Blacklight::Routes::Searchable.new
