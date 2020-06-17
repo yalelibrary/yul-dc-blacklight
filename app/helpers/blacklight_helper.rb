@@ -54,12 +54,27 @@ module BlacklightHelper
   end
 
   def render_thumbnail(document, _options)
-    request = get_child_img_url(document[:oid_ssim]&.join)
+    # return placeholder image if not logged in for yale only works
+    return image_tag('placeholder_restricted.png') if (document[:visibility_ssi].eql? 'Yale Community Only') && !user_signed_in?
+
+    oid = sanitize_oid_ssim(document[:oid_ssim])
+    request = get_child_img_url(oid)
     return if request.blank?
-    image_tag(request) if document[:visibility_ssi].eql? 'Public'
+
+    image_tag(request) if ['Public', 'Yale Community Only'].include? document[:visibility_ssi]
   end
 
   private
+
+  def sanitize_oid_ssim(oid_ssim)
+    if (oid = oid_ssim&.first).present?
+      oid = oid.match(%r{(?<oid_clean>\d+)}).try(:[], :oid_clean) if oid_ssim.present?
+    else
+      oid = ''
+    end
+
+    oid
+  end
 
   def get_child_img_url(oid)
     return '' if oid.blank?
@@ -70,15 +85,8 @@ module BlacklightHelper
 
       result = JSON(json.body)
       request = result['sequences'].first['canvases'].first['images'].first['resource']['service']['@id']
-      height = result['sequences'].first['canvases'].first['height']
-      width = result['sequences'].first['canvases'].first['width']
 
-      dim = if width.to_i > height.to_i
-              '200,'
-            else
-              ',200'
-            end
-      "#{request}/full/#{dim}/0/default.jpg"
+      "#{request}/full/!200,200/0/default.jpg"
     rescue
       ''
     end
