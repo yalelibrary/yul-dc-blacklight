@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.feature "Citation Helper", clean: true, system: true do
+RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
   before do
     solr = Blacklight.default_index.connection
     solr.add([test_record])

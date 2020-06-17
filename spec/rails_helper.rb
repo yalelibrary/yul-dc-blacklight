@@ -47,6 +47,7 @@ RSpec.configure do |config|
     solr.commit
   end
 
+  config.include Devise::TestHelpers, type: :helper
   config.include Warden::Test::Helpers
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
