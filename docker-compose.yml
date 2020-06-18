@@ -85,7 +85,9 @@ services:
     image: yalelibraryit/dc-iiif-manifest:${IIIF_MANIFEST_VERSION:-latest}
     ports:
       - '80:80'
-
+    environment:
+      IIIF_MANIFESTS_BASE_URL: http://localhost/manifests/
+      IIIF_IMAGE_BASE_URL: http://localhost:8182/iiif
 volumes:
   postgres:
   solr:
