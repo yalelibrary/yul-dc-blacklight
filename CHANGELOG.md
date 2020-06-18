@@ -1,11 +1,26 @@
 # Changelog
 
-## [1.3.1](https://github.com/yalelibrary/yul-dc-blacklight/tree/1.3.1) (2020-06-12)
+## [1.4.0](https://github.com/yalelibrary/yul-dc-blacklight/tree/1.4.0) (2020-06-16)
 
-[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.3.0...1.3.1)
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.3.1...1.4.0)
 
 **Merged pull requests:**
 
+- Add thumbnails for public works in search [\#123](https://github.com/yalelibrary/yul-dc-blacklight/pull/123) ([edejesusyale](https://github.com/edejesusyale))
+- Use Yale postgres image [\#122](https://github.com/yalelibrary/yul-dc-blacklight/pull/122) ([maxkadel](https://github.com/maxkadel))
+- yul-dc-base 1.0 version bump, no feature changes [\#121](https://github.com/yalelibrary/yul-dc-blacklight/pull/121) ([orangewolf](https://github.com/orangewolf))
+- We have moved docker image building to CI, remove legacy Makefile [\#120](https://github.com/yalelibrary/yul-dc-blacklight/pull/120) ([orangewolf](https://github.com/orangewolf))
+- Dockerfile Consolidation [\#118](https://github.com/yalelibrary/yul-dc-blacklight/pull/118) ([orangewolf](https://github.com/orangewolf))
+- CI Image Tag instead of Rebuild for Branches and Image Tag on Releases [\#117](https://github.com/yalelibrary/yul-dc-blacklight/pull/117) ([orangewolf](https://github.com/orangewolf))
+- Add suggestive MLA and APA citations for records [\#114](https://github.com/yalelibrary/yul-dc-blacklight/pull/114) ([edejesusyale](https://github.com/edejesusyale))
+
+## [v1.3.1](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.3.1) (2020-06-12)
+
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.3.0...v1.3.1)
+
+**Merged pull requests:**
+
+- Prep for v1.3.1 [\#116](https://github.com/yalelibrary/yul-dc-blacklight/pull/116) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Replace credentials.yml.enc with new file encoded with a known key [\#115](https://github.com/yalelibrary/yul-dc-blacklight/pull/115) ([mark-dce](https://github.com/mark-dce))
 - Remove duplicate author facet [\#111](https://github.com/yalelibrary/yul-dc-blacklight/pull/111) ([K8Sewell](https://github.com/K8Sewell))
 
@@ -29,6 +44,7 @@
 - Remove unused code [\#97](https://github.com/yalelibrary/yul-dc-blacklight/pull/97) ([bess](https://github.com/bess))
 - Link the Orbis Bib ID to the Orbis catalog record [\#95](https://github.com/yalelibrary/yul-dc-blacklight/pull/95) ([alishaevn](https://github.com/alishaevn))
 - Add a link to other items with the same call number [\#94](https://github.com/yalelibrary/yul-dc-blacklight/pull/94) ([edejesusyale](https://github.com/edejesusyale))
+- Bump websocket-extensions from 0.1.3 to 0.1.4 [\#90](https://github.com/yalelibrary/yul-dc-blacklight/pull/90) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [v1.2.2](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.2.2) (2020-06-08)
 
@@ -39,7 +55,6 @@
 - Prep for v1.2.2 release [\#93](https://github.com/yalelibrary/yul-dc-blacklight/pull/93) ([bess](https://github.com/bess))
 - Silence deprecations from Blacklight [\#92](https://github.com/yalelibrary/yul-dc-blacklight/pull/92) ([tilthouse](https://github.com/tilthouse))
 - Add a link for Language on the show page [\#91](https://github.com/yalelibrary/yul-dc-blacklight/pull/91) ([FCRodriguez7](https://github.com/FCRodriguez7))
-- Bump websocket-extensions from 0.1.3 to 0.1.4 [\#90](https://github.com/yalelibrary/yul-dc-blacklight/pull/90) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump websocket-extensions from 0.1.4 to 0.1.5 [\#89](https://github.com/yalelibrary/yul-dc-blacklight/pull/89) ([dependabot[bot]](https://github.com/apps/dependabot))
 - 190 add author facet [\#88](https://github.com/yalelibrary/yul-dc-blacklight/pull/88) ([K8Sewell](https://github.com/K8Sewell))
 

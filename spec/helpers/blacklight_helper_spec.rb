@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
-RSpec.describe BlacklightHelper do
+RSpec.describe BlacklightHelper, helper: true do
+  include Devise::TestHelpers
+
+  # used so render_thumbnail can get user info from rspec
+  def user_signed_in?
+    user.present?
+  end
+
   describe '#manifest_url' do
     context 'when IIIF_MANIFESTS_BASE_URL is set' do
       before do
@@ -60,10 +67,25 @@ RSpec.describe BlacklightHelper do
       let(:non_valid_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Public', oid_ssim: ['2055095']) }
 
       it 'returns an image_tag for oids that have images' do
-        expect(helper.render_thumbnail(valid_document, { alt: "" })).to eq "<img src=\"https://collections-test.curationexperts.com/iiif/2/1234822/full/,200/0/default.jpg\" />"
+        expect(helper.render_thumbnail(valid_document, { alt: "" })).to eq "<img src=\"https://collections-test.curationexperts.com/iiif/2/1234822/full/!200,200/0/default.jpg\" />"
       end
       xit 'returns an image_tag pointing to image_not_found.png for oids without images' do
         expect(helper.render_thumbnail(non_valid_document, {})).to eq 'image tag pointing to image_not_found.png'
+      end
+    end
+
+    context 'with Yale only records' do
+      let(:yale_only_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Yale Community Only', oid_ssim: ['2055095-yale']) }
+
+      it 'returns placeholder when logged out' do
+        expect(helper.render_thumbnail(yale_only_document, {})).to include("<img src=\"/assets/placeholder_restricted-")
+      end
+
+      it 'returns image when logged in' do
+        user = FactoryBot.create(:user)
+        sign_in(user) # sign_in so user_signed_in? works in method
+
+        expect(helper.render_thumbnail(yale_only_document, {})).to include("<img src=\"https://collections-test.curationexperts.com/iiif/2/1234822/full/!200,200/0/default.jpg\" />")
       end
     end
   end
