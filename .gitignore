@@ -25,7 +25,8 @@
 /public/assets
 /public/uv
 .byebug_history
-
+# Ignore dynamically generated yard docs
+/docs
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 

@@ -28,7 +28,7 @@ This is one of the microservices applications that form the Yale digital library
   ```bash
   docker-compose up blacklight
   ```
-  
+
   Output from the blackight container will display in your terminal window with Solr, Cantaloupe (IIIF),
   and Manifest services running in the background
 
@@ -51,6 +51,7 @@ This is one of the microservices applications that form the Yale digital library
 - You will need to be inside the container to:
 
   - Run migrations
+  - Run bundle install
   - Access the seed file
   - Access the rails console for debugging
 
@@ -105,19 +106,13 @@ This is one of the microservices applications that form the Yale digital library
    updated the Gemfile, inside the container, run `bundle && nginx -s reload`. The next time you stop your running containers
    you need to rebuild.
 
-## Environment Variables for Development
-
-Create .env.development to override anything in .env. The following values must be overridden.
-
-```
-SOLR_URL=http://solr:8983/solr/blacklight-core
-POSTGRES_HOST=db
-IIIF_MANIFESTS_BASE_URL=http://localhost/manifests/
-```
-
 ## HTTP password protection
 
-In order to prevent search engine crawling of the system before it's ready to launch, we use HTTP password protection. This is set via environment variables. Set `HTTP_PASSWORD_PROTECT='true'` to enable this feature. Set `HTTP_PASSWORD_PROTECT='false'` to disable this feature. Set the login and password via environment variables `HTTP_USERNAME` and `HTTP_PASSWORD`
+In order to prevent search engine crawling of the system before it's ready to launch, we use HTTP password protection. This is set via environment variables. Set `HTTP_PASSWORD_PROTECT='true'` to enable this feature. Set `HTTP_PASSWORD_PROTECT='false'` to disable this feature. Set the login and password via environment variables `HTTP_USERNAME` and `HTTP_PASSWORD` in the .secrets file
+
+## Secrets
+
+For the image instance to properly access images, you must also create a .secrets file with valid S3 credentials and basic auth credentials; see secrets-template for the correct format.
 
 ## Releasing a new version
 
@@ -136,10 +131,10 @@ In order to prevent search engine crawling of the system before it's ready to la
 
 7. Update `yul-dc-camerata` with the new version of blacklight and submit a PR.
 
-# Using a New Release of the Management App
+## Using a New Release of the Management App or other microservices
 
-1. Go to Management app on Github and check the latest release number
+1. Go to the yul-dc-camerata repository on Github and check the latest release number in the [.env file.](https://github.com/yalelibrary/yul-dc-camerata/blob/master/.env)
 
-2. Edit your .env file to match the Management version to the latest release number
+2. Edit your .env file to match
 
-3. Run ```docker-compose up```
+3. Run ```docker-compose up blacklight```

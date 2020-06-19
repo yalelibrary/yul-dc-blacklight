@@ -13,7 +13,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       SOLR_URL: http://solr:8983/solr/blacklight-core
-      IIIF_MANIFESTS_BASE_URL: /manifests/
+      IIIF_MANIFESTS_BASE_URL: ${IIIF_MANIFESTS_BASE_URL}
       PASSENGER_APP_ENV: development
     ports:
       - '3000:3000'
@@ -77,6 +77,7 @@ services:
     image: yalelibraryit/dc-iiif-cantaloupe:${IIIF_IMAGE_VERSION:-latest}
     env_file:
       - .env
+      - .secrets
     ports:
       - '8182:8182'
 
@@ -84,7 +85,9 @@ services:
     image: yalelibraryit/dc-iiif-manifest:${IIIF_MANIFEST_VERSION:-latest}
     ports:
       - '80:80'
-
+    environment:
+      IIIF_MANIFESTS_BASE_URL: http://localhost/manifests/
+      IIIF_IMAGE_BASE_URL: http://localhost:8182/iiif
 volumes:
   postgres:
   solr:
