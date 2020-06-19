@@ -23,6 +23,7 @@ jobs:
       - docker/check
       - docker/build:
           image: yalelibraryit/dc-blacklight
+          cache_from: yalelibraryit/dc-blacklight:master
       - docker/push:
           image: yalelibraryit/dc-blacklight
   run-tests:
@@ -46,7 +47,6 @@ jobs:
     executor: docker/docker
     steps:
       - setup_remote_docker
-      - checkout
       - run:
           name: Rubocop
           command: bundle exec rubocop --parallel
