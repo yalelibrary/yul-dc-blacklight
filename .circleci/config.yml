@@ -21,10 +21,9 @@ jobs:
       - setup_remote_docker
       - checkout
       - docker/check
-      - docker/pull:
-          images: yalelibraryit/dc-blacklight:447ef4db1878656af89de323ad1c1f117c7301a4
       - docker/build:
           image: yalelibraryit/dc-blacklight
+          cache_from: yalelibraryit/dc-blacklight:447ef4db1878656af89de323ad1c1f117c7301a4
       - docker/push:
           image: yalelibraryit/dc-blacklight
   run-tests:
