@@ -1,11 +1,27 @@
 # Changelog
 
-## [1.4.0](https://github.com/yalelibrary/yul-dc-blacklight/tree/1.4.0) (2020-06-16)
+## [v1.5.0](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.5.0) (2020-06-19)
 
-[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.3.1...1.4.0)
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.4.0...v1.5.0)
 
 **Merged pull requests:**
 
+- Add Honeybadger for execption reporting in production [\#136](https://github.com/yalelibrary/yul-dc-blacklight/pull/136) ([mark-dce](https://github.com/mark-dce))
+- Only bundle when we have to so that CI is fast again [\#135](https://github.com/yalelibrary/yul-dc-blacklight/pull/135) ([orangewolf](https://github.com/orangewolf))
+- Search filters display user friendly names [\#134](https://github.com/yalelibrary/yul-dc-blacklight/pull/134) ([alishaevn](https://github.com/alishaevn))
+- Prepare for yul-dc-iiif-manifest version 2.0.0 [\#133](https://github.com/yalelibrary/yul-dc-blacklight/pull/133) ([fnibbit](https://github.com/fnibbit))
+- Change Blacklight version in .env file [\#131](https://github.com/yalelibrary/yul-dc-blacklight/pull/131) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Move host lock from development to production enviroments [\#130](https://github.com/yalelibrary/yul-dc-blacklight/pull/130) ([orangewolf](https://github.com/orangewolf))
+- Add placeholder for yale-only works as guest and sign in required for their image [\#127](https://github.com/yalelibrary/yul-dc-blacklight/pull/127) ([edejesusyale](https://github.com/edejesusyale))
+- Search by  BibID [\#126](https://github.com/yalelibrary/yul-dc-blacklight/pull/126) ([FCRodriguez7](https://github.com/FCRodriguez7))
+
+## [v1.4.0](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.4.0) (2020-06-16)
+
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.3.1...v1.4.0)
+
+**Merged pull requests:**
+
+- Release v1.4.0 [\#125](https://github.com/yalelibrary/yul-dc-blacklight/pull/125) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Add thumbnails for public works in search [\#123](https://github.com/yalelibrary/yul-dc-blacklight/pull/123) ([edejesusyale](https://github.com/edejesusyale))
 - Use Yale postgres image [\#122](https://github.com/yalelibrary/yul-dc-blacklight/pull/122) ([maxkadel](https://github.com/maxkadel))
 - yul-dc-base 1.0 version bump, no feature changes [\#121](https://github.com/yalelibrary/yul-dc-blacklight/pull/121) ([orangewolf](https://github.com/orangewolf))
@@ -44,7 +60,6 @@
 - Remove unused code [\#97](https://github.com/yalelibrary/yul-dc-blacklight/pull/97) ([bess](https://github.com/bess))
 - Link the Orbis Bib ID to the Orbis catalog record [\#95](https://github.com/yalelibrary/yul-dc-blacklight/pull/95) ([alishaevn](https://github.com/alishaevn))
 - Add a link to other items with the same call number [\#94](https://github.com/yalelibrary/yul-dc-blacklight/pull/94) ([edejesusyale](https://github.com/edejesusyale))
-- Bump websocket-extensions from 0.1.3 to 0.1.4 [\#90](https://github.com/yalelibrary/yul-dc-blacklight/pull/90) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [v1.2.2](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.2.2) (2020-06-08)
 
@@ -55,6 +70,7 @@
 - Prep for v1.2.2 release [\#93](https://github.com/yalelibrary/yul-dc-blacklight/pull/93) ([bess](https://github.com/bess))
 - Silence deprecations from Blacklight [\#92](https://github.com/yalelibrary/yul-dc-blacklight/pull/92) ([tilthouse](https://github.com/tilthouse))
 - Add a link for Language on the show page [\#91](https://github.com/yalelibrary/yul-dc-blacklight/pull/91) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Bump websocket-extensions from 0.1.3 to 0.1.4 [\#90](https://github.com/yalelibrary/yul-dc-blacklight/pull/90) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump websocket-extensions from 0.1.4 to 0.1.5 [\#89](https://github.com/yalelibrary/yul-dc-blacklight/pull/89) ([dependabot[bot]](https://github.com/apps/dependabot))
 - 190 add author facet [\#88](https://github.com/yalelibrary/yul-dc-blacklight/pull/88) ([K8Sewell](https://github.com/K8Sewell))
 
