@@ -49,12 +49,13 @@ jobs:
       - setup_remote_docker
       - run:
           name: Rubocop
-          command: bundle exec rubocop --parallel
+          command: |
+            cd /home/app/webapp && bundle exec rubocop --parallel
       - run:
           name: rspec
           # Excludes tests that require Yale VPN access
-          command:  |
-            bundle exec rspec --tag ~vpn_only:true
+          command: |
+            cd /home/app/webapp && bundle exec rspec --tag ~vpn_only:true
   publish-latest:
     executor: docker/docker
     steps:
