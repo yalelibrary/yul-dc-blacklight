@@ -98,6 +98,10 @@ class CatalogController < ApplicationController
                                                   }
     config.add_facet_field 'author_ssim', label: 'Author', limit: true, sort: 'index'
 
+    # the facets below are set to false because we aren't filtering on them from the main search page
+    # but we need to be able to provide a label when they are filtered upon from an individual show page
+    config.add_facet_field 'identifierShelfMark_ssim', label: 'Identifier Shelf Mark', show: false
+
     # This was example code after running rails generate blacklight_range_limit:install
     # config.add_facet_field 'example_query_facet_field', label: 'Publish Date', query: {
     #    years_5: { label: 'within 5 Years', fq: "pub_date_ssim:[#{Time.zone.now.year - 5} TO *]" },
