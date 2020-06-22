@@ -248,6 +248,8 @@ class CatalogController < ApplicationController
     # except in the relevancy case).
     config.add_sort_field 'score desc, pub_date_si desc, title_si asc', label: 'relevance'
     config.add_sort_field 'pub_date_si desc, title_si asc', label: 'year'
+    config.add_sort_field 'dateStructured_ssim asc, title_si asc', label: 'date (oldest first)'
+    config.add_sort_field 'dateStructured_ssim desc, title_si asc', label: 'date (newest first)'
     config.add_sort_field 'author_si asc, title_si asc', label: 'author'
     config.add_sort_field 'title_si asc, pub_date_si desc', label: 'title'
 
