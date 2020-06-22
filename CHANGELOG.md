@@ -1,11 +1,22 @@
 # Changelog
 
+## [v1.6.0](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.6.0) (2020-06-22)
+
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.5.0...v1.6.0)
+
+**Merged pull requests:**
+
+- Don't set hosts, breaks production, can re-add for security once runn… [\#141](https://github.com/yalelibrary/yul-dc-blacklight/pull/141) ([maxkadel](https://github.com/maxkadel))
+- Add link in "Sign In" page to authenticate using Yale CAS [\#139](https://github.com/yalelibrary/yul-dc-blacklight/pull/139) ([edejesusyale](https://github.com/edejesusyale))
+- Sort search results by date from newest to oldest and oldest to newest [\#137](https://github.com/yalelibrary/yul-dc-blacklight/pull/137) ([tilthouse](https://github.com/tilthouse))
+
 ## [v1.5.0](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.5.0) (2020-06-19)
 
 [Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.4.0...v1.5.0)
 
 **Merged pull requests:**
 
+- Add changelog for release v1.5.0 [\#138](https://github.com/yalelibrary/yul-dc-blacklight/pull/138) ([mark-dce](https://github.com/mark-dce))
 - Add Honeybadger for execption reporting in production [\#136](https://github.com/yalelibrary/yul-dc-blacklight/pull/136) ([mark-dce](https://github.com/mark-dce))
 - Only bundle when we have to so that CI is fast again [\#135](https://github.com/yalelibrary/yul-dc-blacklight/pull/135) ([orangewolf](https://github.com/orangewolf))
 - Search filters display user friendly names [\#134](https://github.com/yalelibrary/yul-dc-blacklight/pull/134) ([alishaevn](https://github.com/alishaevn))
@@ -28,6 +39,7 @@
 - We have moved docker image building to CI, remove legacy Makefile [\#120](https://github.com/yalelibrary/yul-dc-blacklight/pull/120) ([orangewolf](https://github.com/orangewolf))
 - Dockerfile Consolidation [\#118](https://github.com/yalelibrary/yul-dc-blacklight/pull/118) ([orangewolf](https://github.com/orangewolf))
 - CI Image Tag instead of Rebuild for Branches and Image Tag on Releases [\#117](https://github.com/yalelibrary/yul-dc-blacklight/pull/117) ([orangewolf](https://github.com/orangewolf))
+- Replace credentials.yml.enc with new file encoded with a known key [\#115](https://github.com/yalelibrary/yul-dc-blacklight/pull/115) ([mark-dce](https://github.com/mark-dce))
 - Add suggestive MLA and APA citations for records [\#114](https://github.com/yalelibrary/yul-dc-blacklight/pull/114) ([edejesusyale](https://github.com/edejesusyale))
 
 ## [v1.3.1](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.3.1) (2020-06-12)
@@ -37,7 +49,6 @@
 **Merged pull requests:**
 
 - Prep for v1.3.1 [\#116](https://github.com/yalelibrary/yul-dc-blacklight/pull/116) ([FCRodriguez7](https://github.com/FCRodriguez7))
-- Replace credentials.yml.enc with new file encoded with a known key [\#115](https://github.com/yalelibrary/yul-dc-blacklight/pull/115) ([mark-dce](https://github.com/mark-dce))
 - Remove duplicate author facet [\#111](https://github.com/yalelibrary/yul-dc-blacklight/pull/111) ([K8Sewell](https://github.com/K8Sewell))
 
 ## [v1.3.0](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.3.0) (2020-06-11)
