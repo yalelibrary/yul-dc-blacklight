@@ -12,6 +12,8 @@ RSpec.describe "access restrictions", type: :system, clean: true do
   # "[Map of China]. [yale-only copy]"
   let(:yale_work) { WORK_WITH_YALE_ONLY_VISIBILITY }
 
+  let(:cas) { WORK_WITH_YALE_ONLY_VISIBILITY }
+
   before do
     solr = Blacklight.default_index.connection
     solr.add(public_work)
