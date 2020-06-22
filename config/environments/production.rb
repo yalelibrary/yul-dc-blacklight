@@ -2,9 +2,6 @@
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.hosts << ".library.yale.edu"
-  config.hosts << ".curationexperts.com"
-  config.hosts << ".elb.amazonaws.com"
 
   # Code is not reloaded between requests.
   config.cache_classes = true
