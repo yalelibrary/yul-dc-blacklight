@@ -135,6 +135,8 @@ For the image instance to properly access images, you must also create a .secret
 
 1. Go to the yul-dc-camerata repository on Github and check the latest release number in the [.env file.](https://github.com/yalelibrary/yul-dc-camerata/blob/master/.env)
 
-2. Edit your .env file to match
+1. Edit your .env file to match
 
-3. Run ```docker-compose up blacklight```
+1. Pull the new version of the relevant container.  ```docker-compose pull management
+
+1. Run ```docker-compose up blacklight```
