@@ -35,7 +35,7 @@ jobs:
             POSTGRES_DB: blacklight_yul_test
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: password
-            SOLR_CORE: blacklight-core
+            SOLR_CORE: blacklight-test
             SOLR_URL: http://localhost:8983/solr/blacklight-core
             SOLR_TEST_URL: http://localhost:8983/solr/blacklight-test
       - image: yalelibraryit/dc-solr:79a71ec
