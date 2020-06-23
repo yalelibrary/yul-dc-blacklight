@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master.svg?style=svg)](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master) ![Docker Image CI](https://github.com/yalelibrary/yul-dc-blacklight/workflows/Docker%20Image%20CI/badge.svg)
+[![CircleCI](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master.svg?style=svg)](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master) ![Docker Image CI](https://github.com/yalelibrary/yul-dc-blacklight/workflows/Docker%20Image%20CI/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/yalelibrary/yul-dc-blacklight/badge.svg?branch=master)](https://coveralls.io/github/yalelibrary/yul-dc-blacklight?branch=master)
 
 # Yale Digital Library Discovery Application
 
@@ -13,6 +13,7 @@ This is one of the microservices applications that form the Yale digital library
 ### Docker Development Setup
 
 - Checkout the project
+
   ```bash
   git clone https://github.com/yalelibrary/yul-dc-blacklight.git
   cd yul-dc-blacklight
@@ -21,16 +22,13 @@ This is one of the microservices applications that form the Yale digital library
 
 ### Starting the app
 
-- Start the blacklight service and it's dependencies
-  This command reads the docker-compose.yml file and starts all the containers described by it
-  including blacklight, solr, the manifest service, the management app, and a iiif image server.
+- Start the blacklight service and it's dependencies This command reads the docker-compose.yml file and starts all the containers described by it including blacklight, solr, the manifest service, the management app, and a iiif image server.
 
   ```bash
   docker-compose up blacklight
   ```
 
-  Output from the blackight container will display in your terminal window with Solr, Cantaloupe (IIIF),
-  and Manifest services running in the background
+  Output from the blackight container will display in your terminal window with Solr, Cantaloupe (IIIF), and Manifest services running in the background
 
 - Access the blacklight app at `http://localhost:3000`
 
@@ -81,30 +79,27 @@ This is one of the microservices applications that form the Yale digital library
 
 - First, connect to the running management application:
 
- * http://localhost:3001/management/
+  - <http://localhost:3001/management/>
 
-- Second, pull up http://0.0.0.0:8983 in your browser
+- Second, pull up <http://0.0.0.0:8983> in your browser
 
- * Connect to the blacklight-core and execute a query to confirm no data present
+  - Connect to the blacklight-core and execute a query to confirm no data present
 
 - Then, in the running management application(:3001), click the button 'Index Ladybird Records to Solr'
 
- * When the message appears above the buttons the data has been indexed
+  - When the message appears above the buttons the data has been indexed
 
- * Visit :8983 and run the same query again and confirm data is present
+  - Visit :8983 and run the same query again and confirm data is present
 
- * Connect to the running blacklight app at localhost:3000
+  - Connect to the running blacklight app at localhost:3000
 
 ## Pulling or Building Docker Images
-   Any time you pull a branch with a Gemfile change you need to pull or build a new Docker image. If you change the Dockerfile, you
-   need to build a new Docker image. If you change a file in ./ops you need to build a new Docker image. These are the primary
-   times in which you need to pull or build.
+
+Any time you pull a branch with a Gemfile change you need to pull or build a new Docker image. If you change the Dockerfile, you need to build a new Docker image. If you change a file in ./ops you need to build a new Docker image. These are the primary times in which you need to pull or build.
 
 ## When Installing a New Gem
-   For the most part images are created and maintained by the CI process. However, if you change the Gemfile you need
-   to take a few extra steps.  Make sure the application is running before you make your Gemfile change. Once you've
-   updated the Gemfile, inside the container, run `bundle && nginx -s reload`. The next time you stop your running containers
-   you need to rebuild.
+
+For the most part images are created and maintained by the CI process. However, if you change the Gemfile you need to take a few extra steps. Make sure the application is running before you make your Gemfile change. Once you've updated the Gemfile, inside the container, run `bundle && nginx -s reload`. The next time you stop your running containers you need to rebuild.
 
 ## HTTP password protection
 
@@ -137,4 +132,4 @@ For the image instance to properly access images, you must also create a .secret
 
 2. Edit your .env file to match
 
-3. Run ```docker-compose up blacklight```
+3. Run `docker-compose up blacklight`

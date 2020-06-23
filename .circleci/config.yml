@@ -56,6 +56,9 @@ jobs:
           # Excludes tests that require Yale VPN access
           command: |
             cd /home/app/webapp && bundle exec rspec --tag ~vpn_only:true
+      - deploy:
+          command: curl -k https://coveralls.io/webhook?repo_token=${COVERALLS_API_KEY} -d "payload[build_num]=${CIRCLE_BUILD_NUM}&payload[status]=done"
+
   publish-latest:
     executor: docker/docker
     steps:
