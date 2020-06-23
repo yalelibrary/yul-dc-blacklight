@@ -3,7 +3,7 @@ development:
   url: <%= ENV['SOLR_URL'] || "http://127.0.0.1:8983/solr/blacklight-development" %>
 test: &test
   adapter: solr
-  url: <%= ENV['SOLR_TEST_URL'] || "http://solr:8983/solr/blacklight-test" %>
+  url: <%= "http://solr:8983/solr/blacklight-test" %>
 production:
   adapter: solr
   url: <%= ENV['SOLR_URL'] || "http://127.0.0.1:8983/solr/blacklight-core" %>
