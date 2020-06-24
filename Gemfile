@@ -52,6 +52,7 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
+  gem 'coveralls', require: false
   gem 'factory_bot_rails'
   gem 'ffaker'
   gem 'selenium-webdriver'

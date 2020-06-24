@@ -43,3 +43,6 @@ GIT_BRANCH
 DEPLOYED_AT
 
 .idea/
+
+# Ignore coverage report
+coverage
