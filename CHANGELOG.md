@@ -1,11 +1,23 @@
 # Changelog
 
+## [v1.6.1](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.6.1) (2020-06-26)
+
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.6.0...v1.6.1)
+
+**Merged pull requests:**
+
+- Update gems to latest - bug fix [\#149](https://github.com/yalelibrary/yul-dc-blacklight/pull/149) ([maxkadel](https://github.com/maxkadel))
+- Run rspec in parallel to speed up CI runs [\#146](https://github.com/yalelibrary/yul-dc-blacklight/pull/146) ([bess](https://github.com/bess))
+- Calculate and report code coverage metrics  [\#145](https://github.com/yalelibrary/yul-dc-blacklight/pull/145) ([bess](https://github.com/bess))
+- Segregate automated tests to use their own solr index [\#144](https://github.com/yalelibrary/yul-dc-blacklight/pull/144) ([bess](https://github.com/bess))
+
 ## [v1.6.0](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.6.0) (2020-06-22)
 
 [Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.5.0...v1.6.0)
 
 **Merged pull requests:**
 
+- Prep for v1.6.0 release [\#142](https://github.com/yalelibrary/yul-dc-blacklight/pull/142) ([maxkadel](https://github.com/maxkadel))
 - Don't set hosts, breaks production, can re-add for security once runn… [\#141](https://github.com/yalelibrary/yul-dc-blacklight/pull/141) ([maxkadel](https://github.com/maxkadel))
 - Add link in "Sign In" page to authenticate using Yale CAS [\#139](https://github.com/yalelibrary/yul-dc-blacklight/pull/139) ([edejesusyale](https://github.com/edejesusyale))
 - Sort search results by date from newest to oldest and oldest to newest [\#137](https://github.com/yalelibrary/yul-dc-blacklight/pull/137) ([tilthouse](https://github.com/tilthouse))
@@ -39,7 +51,6 @@
 - We have moved docker image building to CI, remove legacy Makefile [\#120](https://github.com/yalelibrary/yul-dc-blacklight/pull/120) ([orangewolf](https://github.com/orangewolf))
 - Dockerfile Consolidation [\#118](https://github.com/yalelibrary/yul-dc-blacklight/pull/118) ([orangewolf](https://github.com/orangewolf))
 - CI Image Tag instead of Rebuild for Branches and Image Tag on Releases [\#117](https://github.com/yalelibrary/yul-dc-blacklight/pull/117) ([orangewolf](https://github.com/orangewolf))
-- Replace credentials.yml.enc with new file encoded with a known key [\#115](https://github.com/yalelibrary/yul-dc-blacklight/pull/115) ([mark-dce](https://github.com/mark-dce))
 - Add suggestive MLA and APA citations for records [\#114](https://github.com/yalelibrary/yul-dc-blacklight/pull/114) ([edejesusyale](https://github.com/edejesusyale))
 
 ## [v1.3.1](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.3.1) (2020-06-12)
@@ -49,7 +60,7 @@
 **Merged pull requests:**
 
 - Prep for v1.3.1 [\#116](https://github.com/yalelibrary/yul-dc-blacklight/pull/116) ([FCRodriguez7](https://github.com/FCRodriguez7))
-- Remove duplicate author facet [\#111](https://github.com/yalelibrary/yul-dc-blacklight/pull/111) ([K8Sewell](https://github.com/K8Sewell))
+- Replace credentials.yml.enc with new file encoded with a known key [\#115](https://github.com/yalelibrary/yul-dc-blacklight/pull/115) ([mark-dce](https://github.com/mark-dce))
 
 ## [v1.3.0](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.3.0) (2020-06-11)
 
@@ -58,6 +69,7 @@
 **Merged pull requests:**
 
 - Releasing version 1.3.0 [\#112](https://github.com/yalelibrary/yul-dc-blacklight/pull/112) ([alishaevn](https://github.com/alishaevn))
+- Remove duplicate author facet [\#111](https://github.com/yalelibrary/yul-dc-blacklight/pull/111) ([K8Sewell](https://github.com/K8Sewell))
 - Remove DataStructure field and replaced with Date field [\#110](https://github.com/yalelibrary/yul-dc-blacklight/pull/110) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Revert "Use a different date Solr field" [\#109](https://github.com/yalelibrary/yul-dc-blacklight/pull/109) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Align management version with previous changes to docker-compose [\#108](https://github.com/yalelibrary/yul-dc-blacklight/pull/108) ([maxkadel](https://github.com/maxkadel))
