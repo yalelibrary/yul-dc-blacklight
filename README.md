@@ -133,3 +133,7 @@ For the image instance to properly access images, you must also create a .secret
 2. Edit your .env file to match
 
 3. Run `docker-compose up blacklight`
+
+## Test coverage
+
+We use [coveralls](https://coveralls.io/github/yalelibrary/yul-dc-blacklight) to measure test coverage. More details [here](https://github.com/yalelibrary/yul-dc-blacklight/wiki/code-coverage).

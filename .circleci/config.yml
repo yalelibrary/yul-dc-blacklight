@@ -52,10 +52,11 @@ jobs:
           command: |
             cd /home/app/webapp && bundle exec rubocop --parallel
       - run:
-          name: Run rspec in parallel
+          name: rspec
+          # Excludes tests that require Yale VPN access
           command: |
             mkdir /tmp/test-results
-            bundle exec rspec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+            cd /home/app/webapp && bundle exec rspec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
       # collect reports
       - store_test_results:
           path: /tmp/test-results
@@ -63,7 +64,7 @@ jobs:
           path: /tmp/test-results
           destination: test-results
       - deploy:
-          command: curl -k https://coveralls.io/webhook?repo_token=${COVERALLS_API_KEY} -d "payload[build_num]=${CIRCLE_BUILD_NUM}&payload[status]=done"
+          command: curl -k https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN -d "payload[build_num]=$CIRCLE_BUILD_NUM&payload[status]=done"
 
   publish-latest:
     executor: docker/docker
