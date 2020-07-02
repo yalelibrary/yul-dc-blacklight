@@ -59,9 +59,8 @@ module BlacklightHelper
 
     oid = sanitize_oid_ssim(document[:oid_ssim])
     request = get_child_img_url(oid)
-    return if request.blank?
-
-    image_tag(request) if ['Public', 'Yale Community Only'].include? document[:visibility_ssi]
+    return image_tag('no_preview_available_dan.png') unless image_exists?(request)
+    return image_tag(request) if ['Public', 'Yale Community Only'].include? document[:visibility_ssi]
   end
 
   private
@@ -76,6 +75,14 @@ module BlacklightHelper
     end
 
     oid
+  end
+
+  def image_exists?(url)
+    return false if url.blank?
+    url = URI.parse(url)
+    http = Net::HTTP.get_response(url)
+
+    http.content_type.include? 'image'
   end
 
   def get_child_img_url(oid)

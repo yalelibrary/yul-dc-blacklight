@@ -43,17 +43,41 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
     end
   end
 
-  context 'Yale community only records' do
-    it 'displays the placeholder_restricted.png when logged out' do
-      visit '?q=&search_field=all_fields'
-      expect(page).to have_css("img[src ^= '/assets/placeholder_restricted']")
-    end
-    it 'displays the image when logged in' do
-      user = FactoryBot.create(:user)
-      login_as(user, scope: :user)
+  describe 'Yale community only records' do
+    context 'as a logged out user' do
+      it 'displays the placeholder_restricted.png' do
+        visit '?q=&search_field=all_fields'
+        expect(page).to have_css("img[src ^= '/assets/placeholder_restricted']")
+      end
 
-      visit '?q=&search_field=all_fields'
-      expect(page).to have_xpath("//img[@src = 'https://collections-test.curationexperts.com/iiif/2/1329643/full/!200,200/0/default.jpg']")
+      it 'displays yale only restricted messaging' do
+        visit '?q=&search_field=all_fields'
+        click_link 'test_record_2'
+
+        expect(page).to have_content('The digital version of this work is restricted to the Yale Community.')
+        expect(page).to have_content('Please login using your Yale NetID or contact library staff to inquire about access to a physical copy.')
+      end
+    end
+
+    context 'as a logged in user' do
+      it 'displays the image' do
+        user = FactoryBot.create(:user)
+        login_as(user, scope: :user)
+
+        visit '?q=&search_field=all_fields'
+        expect(page).to have_xpath("//img[@src = 'https://collections-test.curationexperts.com/iiif/2/1329643/full/!200,200/0/default.jpg']")
+      end
+
+      it 'does not display yale only restricted messaging' do
+        user = FactoryBot.create(:user)
+        login_as(user, scope: :user)
+
+        visit '?q=&search_field=all_fields'
+        click_link 'test_record_2'
+
+        expect(page).not_to have_content('The digital version of this work is restricted to the Yale Community.')
+        expect(page).not_to have_content('Please login using your Yale NetID or contact library staff to inquire about access to a physical copy.')
+      end
     end
   end
 end

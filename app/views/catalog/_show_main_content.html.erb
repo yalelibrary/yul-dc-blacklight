@@ -9,7 +9,10 @@
     <% if @document["visibility_ssi"] == "Public" || user_signed_in? %>
       <%= render_document_partials @document, [:show_header, :uv, :show] %>
     <% else %>
-      <%= render_document_partials @document, [:show_header, :show] %>
+      <%= render_document_partials @document, [:show_header] %>
+      <h5>The digital version of this work is restricted to the Yale Community.</h5>
+      <p>Please login using your Yale NetID or contact library staff to inquire about access to a physical copy.</p>
+      <%= render_document_partials @document, [:show] %>
     <% end %>
   </div>
 </div>
