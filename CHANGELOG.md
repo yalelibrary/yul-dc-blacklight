@@ -1,20 +1,21 @@
 # Changelog
 
-## [v1.6.2](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.6.2) (2020-07-01)
+## [v1.6.2](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.6.2) (2020-07-06)
 
 [Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.6.1...v1.6.2)
 
 No user facing changes in this release.
 
-**Fixed bugs:**
-
-- Syntax fix for coveralls coverage reporting [\#151](https://github.com/yalelibrary/yul-dc-blacklight/pull/151) ([bess](https://github.com/bess))
-
 **Technical Enhancements:**
 
+- Management DB name now follows Blacklight DB name pattern [\#159](https://github.com/yalelibrary/yul-dc-blacklight/pull/159) ([maxkadel](https://github.com/maxkadel))
+- Add thumbnail for objects with no images [\#158](https://github.com/yalelibrary/yul-dc-blacklight/pull/158) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Display a message when images are "Yale Only" [\#157](https://github.com/yalelibrary/yul-dc-blacklight/pull/157) ([alishaevn](https://github.com/alishaevn))
+- Further automate generating release notes [\#156](https://github.com/yalelibrary/yul-dc-blacklight/pull/156) ([bess](https://github.com/bess))
 - Update readme with test coverage info [\#154](https://github.com/yalelibrary/yul-dc-blacklight/pull/154) ([bess](https://github.com/bess))
 - Use only one name for the coveralls token [\#153](https://github.com/yalelibrary/yul-dc-blacklight/pull/153) ([fnibbit](https://github.com/fnibbit))
 - Add specs for search\_history\_controller.rb [\#152](https://github.com/yalelibrary/yul-dc-blacklight/pull/152) ([alishaevn](https://github.com/alishaevn))
+- Syntax fix for coveralls coverage reporting [\#151](https://github.com/yalelibrary/yul-dc-blacklight/pull/151) ([bess](https://github.com/bess))
 
 ## [v1.6.1](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.6.1) (2020-06-26)
 
@@ -35,15 +36,12 @@ No user facing changes in this release.
 
 [Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.5.0...v1.6.0)
 
-**New Features:**
-
-- Add link in "Sign In" page to authenticate using Yale CAS [\#139](https://github.com/yalelibrary/yul-dc-blacklight/pull/139) ([edejesusyale](https://github.com/edejesusyale))
-- Sort search results by date from newest to oldest and oldest to newest [\#137](https://github.com/yalelibrary/yul-dc-blacklight/pull/137) ([tilthouse](https://github.com/tilthouse))
-
 **Technical Enhancements:**
 
 - Prep for v1.6.0 release [\#142](https://github.com/yalelibrary/yul-dc-blacklight/pull/142) ([maxkadel](https://github.com/maxkadel))
 - Don't set hosts, breaks production, can re-add for security once runn… [\#141](https://github.com/yalelibrary/yul-dc-blacklight/pull/141) ([maxkadel](https://github.com/maxkadel))
+- Add link in "Sign In" page to authenticate using Yale CAS [\#139](https://github.com/yalelibrary/yul-dc-blacklight/pull/139) ([edejesusyale](https://github.com/edejesusyale))
+- Sort search results by date from newest to oldest and oldest to newest [\#137](https://github.com/yalelibrary/yul-dc-blacklight/pull/137) ([tilthouse](https://github.com/tilthouse))
 
 ## [v1.5.0](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.5.0) (2020-06-19)
 
@@ -65,10 +63,6 @@ No user facing changes in this release.
 
 [Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.3.1...v1.4.0)
 
-**New Features:**
-
-- Add suggestive MLA and APA citations for records [\#114](https://github.com/yalelibrary/yul-dc-blacklight/pull/114) ([edejesusyale](https://github.com/edejesusyale))
-
 **Technical Enhancements:**
 
 - Release v1.4.0 [\#125](https://github.com/yalelibrary/yul-dc-blacklight/pull/125) ([FCRodriguez7](https://github.com/FCRodriguez7))
@@ -78,7 +72,7 @@ No user facing changes in this release.
 - We have moved docker image building to CI, remove legacy Makefile [\#120](https://github.com/yalelibrary/yul-dc-blacklight/pull/120) ([orangewolf](https://github.com/orangewolf))
 - Dockerfile Consolidation [\#118](https://github.com/yalelibrary/yul-dc-blacklight/pull/118) ([orangewolf](https://github.com/orangewolf))
 - CI Image Tag instead of Rebuild for Branches and Image Tag on Releases [\#117](https://github.com/yalelibrary/yul-dc-blacklight/pull/117) ([orangewolf](https://github.com/orangewolf))
-- Remove DataStructure field and replaced with Date field [\#110](https://github.com/yalelibrary/yul-dc-blacklight/pull/110) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Add suggestive MLA and APA citations for records [\#114](https://github.com/yalelibrary/yul-dc-blacklight/pull/114) ([edejesusyale](https://github.com/edejesusyale))
 
 ## [v1.3.1](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.3.1) (2020-06-12)
 
@@ -94,23 +88,21 @@ No user facing changes in this release.
 
 [Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.2.2...v1.3.0)
 
-**New Features:**
-
-- Replace the default blacklight logo with a Yale logo [\#106](https://github.com/yalelibrary/yul-dc-blacklight/pull/106) ([mark-dce](https://github.com/mark-dce))
-- Add date slider facet [\#105](https://github.com/yalelibrary/yul-dc-blacklight/pull/105) ([FCRodriguez7](https://github.com/FCRodriguez7))
-- Make finding aid a link [\#103](https://github.com/yalelibrary/yul-dc-blacklight/pull/103) ([K8Sewell](https://github.com/K8Sewell))
-- Link the Orbis Bib ID to the Orbis catalog record [\#95](https://github.com/yalelibrary/yul-dc-blacklight/pull/95) ([alishaevn](https://github.com/alishaevn))
-
 **Technical Enhancements:**
 
 - Releasing version 1.3.0 [\#112](https://github.com/yalelibrary/yul-dc-blacklight/pull/112) ([alishaevn](https://github.com/alishaevn))
+- Remove DataStructure field and replaced with Date field [\#110](https://github.com/yalelibrary/yul-dc-blacklight/pull/110) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Revert "Use a different date Solr field" [\#109](https://github.com/yalelibrary/yul-dc-blacklight/pull/109) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Align management version with previous changes to docker-compose [\#108](https://github.com/yalelibrary/yul-dc-blacklight/pull/108) ([maxkadel](https://github.com/maxkadel))
 - Use a different date Solr field [\#107](https://github.com/yalelibrary/yul-dc-blacklight/pull/107) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Replace the default blacklight logo with a Yale logo [\#106](https://github.com/yalelibrary/yul-dc-blacklight/pull/106) ([mark-dce](https://github.com/mark-dce))
+- Add date slider facet [\#105](https://github.com/yalelibrary/yul-dc-blacklight/pull/105) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Align style with latest samvera expectations [\#104](https://github.com/yalelibrary/yul-dc-blacklight/pull/104) ([bess](https://github.com/bess))
+- Make finding aid a link [\#103](https://github.com/yalelibrary/yul-dc-blacklight/pull/103) ([K8Sewell](https://github.com/K8Sewell))
 - Change field used by author facet [\#101](https://github.com/yalelibrary/yul-dc-blacklight/pull/101) ([K8Sewell](https://github.com/K8Sewell))
 - Update solr docker config for 1.4.0 release of mgmt app [\#98](https://github.com/yalelibrary/yul-dc-blacklight/pull/98) ([K8Sewell](https://github.com/K8Sewell))
 - Remove unused code [\#97](https://github.com/yalelibrary/yul-dc-blacklight/pull/97) ([bess](https://github.com/bess))
+- Link the Orbis Bib ID to the Orbis catalog record [\#95](https://github.com/yalelibrary/yul-dc-blacklight/pull/95) ([alishaevn](https://github.com/alishaevn))
 - Add a link to other items with the same call number [\#94](https://github.com/yalelibrary/yul-dc-blacklight/pull/94) ([edejesusyale](https://github.com/edejesusyale))
 
 ## [v1.2.2](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.2.2) (2020-06-08)
@@ -133,13 +125,10 @@ No user facing changes in this release.
 
 [Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.2.0...v1.2.1)
 
-**New Features:**
-
-- Put the blacklight version in the footer [\#86](https://github.com/yalelibrary/yul-dc-blacklight/pull/86) ([bess](https://github.com/bess))
-
 **Technical Enhancements:**
 
 - Release prep for 1.2.1 [\#87](https://github.com/yalelibrary/yul-dc-blacklight/pull/87) ([bess](https://github.com/bess))
+- Put the blacklight version in the footer [\#86](https://github.com/yalelibrary/yul-dc-blacklight/pull/86) ([bess](https://github.com/bess))
 - Collapse chrome installation into a single docker layer [\#85](https://github.com/yalelibrary/yul-dc-blacklight/pull/85) ([bess](https://github.com/bess))
 - Autogenerate changelog and release notes [\#84](https://github.com/yalelibrary/yul-dc-blacklight/pull/84) ([bess](https://github.com/bess))
 
@@ -147,20 +136,17 @@ No user facing changes in this release.
 
 [Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.1.1...v1.2.0)
 
-**New Features:**
-
-- For Yale-only objects, require auth for image display [\#81](https://github.com/yalelibrary/yul-dc-blacklight/pull/81) ([bess](https://github.com/bess))
-- adds Genre Facet [\#77](https://github.com/yalelibrary/yul-dc-blacklight/pull/77) ([FCRodriguez7](https://github.com/FCRodriguez7))
-- Only display public visibility for unauthenticated users [\#72](https://github.com/yalelibrary/yul-dc-blacklight/pull/72) ([bess](https://github.com/bess))
-
 **Technical Enhancements:**
 
 - i197-resource-type-link [\#83](https://github.com/yalelibrary/yul-dc-blacklight/pull/83) ([alishaevn](https://github.com/alishaevn))
+- For Yale-only objects, require auth for image display [\#81](https://github.com/yalelibrary/yul-dc-blacklight/pull/81) ([bess](https://github.com/bess))
 - adds publication place facet and spec [\#79](https://github.com/yalelibrary/yul-dc-blacklight/pull/79) ([K8Sewell](https://github.com/K8Sewell))
 - i192-resource-type-facet [\#78](https://github.com/yalelibrary/yul-dc-blacklight/pull/78) ([alishaevn](https://github.com/alishaevn))
+- adds Genre Facet [\#77](https://github.com/yalelibrary/yul-dc-blacklight/pull/77) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - 194 Added link on format to its facet [\#76](https://github.com/yalelibrary/yul-dc-blacklight/pull/76) ([edejesusyale](https://github.com/edejesusyale))
 - I189 remove deprecated indexing [\#74](https://github.com/yalelibrary/yul-dc-blacklight/pull/74) ([K8Sewell](https://github.com/K8Sewell))
 - Add YARD documentation [\#73](https://github.com/yalelibrary/yul-dc-blacklight/pull/73) ([bess](https://github.com/bess))
+- Only display public visibility for unauthenticated users [\#72](https://github.com/yalelibrary/yul-dc-blacklight/pull/72) ([bess](https://github.com/bess))
 - Fix local mount [\#71](https://github.com/yalelibrary/yul-dc-blacklight/pull/71) ([bess](https://github.com/bess))
 - Upgrade to ruby-2.6.6 [\#70](https://github.com/yalelibrary/yul-dc-blacklight/pull/70) ([bess](https://github.com/bess))
 - i179-remove-title-label-from-search-results [\#69](https://github.com/yalelibrary/yul-dc-blacklight/pull/69) ([alishaevn](https://github.com/alishaevn))
@@ -198,10 +184,6 @@ No user facing changes in this release.
 
 [Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/b5ac2c54de3920737d1510881631814e83327e0a...v1.0.0)
 
-**New Features:**
-
-- restrict access to non public records [\#31](https://github.com/yalelibrary/yul-dc-blacklight/pull/31) ([K8Sewell](https://github.com/K8Sewell))
-
 **Closed issues:**
 
 - Rails config.hosts when deploying [\#18](https://github.com/yalelibrary/yul-dc-blacklight/issues/18)
@@ -230,6 +212,7 @@ No user facing changes in this release.
 - add format to Solr indexing for tickets 128-130 [\#35](https://github.com/yalelibrary/yul-dc-blacklight/pull/35) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - add version info footer [\#33](https://github.com/yalelibrary/yul-dc-blacklight/pull/33) ([K8Sewell](https://github.com/K8Sewell))
 - Set up blacklight to use standalone Solr image [\#32](https://github.com/yalelibrary/yul-dc-blacklight/pull/32) ([maxkadel](https://github.com/maxkadel))
+- restrict access to non public records [\#31](https://github.com/yalelibrary/yul-dc-blacklight/pull/31) ([K8Sewell](https://github.com/K8Sewell))
 - Config hosts [\#30](https://github.com/yalelibrary/yul-dc-blacklight/pull/30) ([mlooney](https://github.com/mlooney))
 - ecs .env file, dev .env file [\#29](https://github.com/yalelibrary/yul-dc-blacklight/pull/29) ([mlooney](https://github.com/mlooney))
 - Support .env.development for overrides [\#28](https://github.com/yalelibrary/yul-dc-blacklight/pull/28) ([geekscruff](https://github.com/geekscruff))
