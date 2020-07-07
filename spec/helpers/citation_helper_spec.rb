@@ -59,6 +59,7 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
       findingAid_ssim: 'this is the finding aid',
       collectionId_ssim: 'this is the collection ID',
       edition_ssim: 'this is the edition',
+      # edition_tesim: 'this is the edition',
       uri_ssim: 'this is the URI',
       partOf_ssim: "this is the part of, using ssim",
       numberOfPages_ssim: "this is the number of pages, using ssim",
@@ -81,6 +82,7 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
         expect(page).to have_content("Eric, and Frederick. this is the publisher, 0AD. http://collections-demo.curationexperts.com/catalog/111.")
       end
     end
+
     it 'displays correct APA citation' do
       click_on "Cite"
       expect(page).to have_css('#mla-citation')
@@ -88,6 +90,8 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
       within('#apa-citation') do
         expect(page).to have_content('APA, 6th edition')
         expect(page).to have_content("E., & F. (0 C.E.). [This is the genre]. this is the publisher. http://collections-demo.curationexperts.com/catalog/111.")
+
+        expect(page).not_to have_content('this is the edition')
       end
     end
   end
