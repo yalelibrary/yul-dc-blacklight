@@ -72,19 +72,31 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
   end
 
   context 'Clicking on cite' do
+    # it 'displays the title' do
+    #   click_on "Cite"
+    # #   expect(page).to have_css('#mla-citation')
+    # #   within('#mla-citation') do
+    #     expect(page).to have_content('APA, 6th edition')
+    # #     expect(page).to have_content('MLA')
+    # #   end
+    # end
+
     it 'displays correct MLA citation' do
       click_on "Cite"
       expect(page).to have_css('#mla-citation')
+
       within('#mla-citation') do
-      expect(page).to have_content('MLA')
+        expect(page).to have_content('MLA')
         expect(page).to have_content("Eric, and Frederick. this is the publisher, 0AD. http://collections-demo.curationexperts.com/catalog/111.")
       end
     end
+
     it 'displays correct APA citation' do
       click_on "Cite"
       expect(page).to have_css('#mla-citation')
+
       within('#apa-citation') do
-      expect(page).to have_content('APA, 6th edition')
+        expect(page).to have_content('APA, 6th edition')
         expect(page).to have_content("E., & F. (0 C.E.). [This is the genre]. this is the publisher. http://collections-demo.curationexperts.com/catalog/111.")
       end
     end
