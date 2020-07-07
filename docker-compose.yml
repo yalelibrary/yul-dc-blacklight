@@ -38,7 +38,7 @@ services:
     env_file:
       - .env
     environment:
-      POSTGRES_DB: yul_dc_management_development
+      POSTGRES_DB: management_yul_development
       POSTGRES_HOST: db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
@@ -53,7 +53,7 @@ services:
     env_file:
       - .env
     environment:
-      POSTGRES_MULTIPLE_DATABASES: blacklight_yul_development,yul_dc_management_development
+      POSTGRES_MULTIPLE_DATABASES: blacklight_yul_development,management_yul_development
       POSTGRES_HOST: db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
