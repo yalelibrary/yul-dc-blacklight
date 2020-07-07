@@ -5,10 +5,6 @@ module Yale
       "http://collections-demo.curationexperts.com/catalog/#{obj[:id]}" if obj[:id].present?
     end
 
-    def append_string_with_comma(field)
-      "#{field&.first}, " if field.present?
-    end
-
     def append_string_with_period(field)
       "#{field&.first}. " if field.present?
     end
