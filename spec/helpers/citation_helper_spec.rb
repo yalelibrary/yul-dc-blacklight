@@ -92,6 +92,7 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
         expect(page).to have_content("E., & F. (0 C.E.). [This is the genre]. this is the publisher. http://collections-demo.curationexperts.com/catalog/111.")
 
         expect(page).not_to have_content('this is the edition')
+        expect(page).not_to have_content('this is the publisher http://collections-demo.curationexperts.com/catalog/111.')
       end
     end
   end
