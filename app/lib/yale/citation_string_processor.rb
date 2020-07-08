@@ -18,9 +18,7 @@ module Yale
     end
 
     def sanitized_citation(citation)
-      if !citation.include?(url) && citation.last != "."
-        citation << ". #{url}."
-      elsif !citation.include?(url) && citation.last == "."
+      if !citation.include?(url)
         citation << " #{url}."
       else
         citation
