@@ -1,8 +1,8 @@
+# frozen_string_literal: true
 require 'rails_helper'
 require 'net/http'
 
 RSpec.describe HttpAuthConcern, type: :request do
-
   before do
     @controller = controller
     ENV['HTTP_PASSWORD_PROTECT'] = true.to_s
@@ -17,8 +17,8 @@ RSpec.describe HttpAuthConcern, type: :request do
   end
 
   it 'after sign-in user has access' do
-  http_auth = http_login
-  get '/', headers: { 'HTTP_AUTHORIZATION' => http_auth }
+    http_auth = http_login
+    get '/', headers: { 'HTTP_AUTHORIZATION' => http_auth }
     response.status.should == 200
   end
 end
