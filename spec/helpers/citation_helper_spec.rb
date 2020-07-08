@@ -2,16 +2,11 @@
 require 'rails_helper'
 
 RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
-  before do
-    solr = Blacklight.default_index.connection
-    solr.add([test_record])
-    solr.commit
-    visit '/catalog/111'
-  end
-
   let(:test_record) do
     {
       id: '111',
+      title_tsim: 'Handsome Dan',
+      edition_tesim: 'First Edition',
       subtitle_tsim: "He's handsome",
       subtitle_vern_ssim: "He's handsome",
       author_tsim: 'Eric & Frederick',
@@ -72,18 +67,60 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
   end
 
   context 'Clicking on cite' do
+    before do
+      solr = Blacklight.default_index.connection
+      solr.add([test_record])
+      solr.commit
+      visit '/catalog/111'
+    end
+
     it 'displays correct MLA citation' do
       click_on "Cite"
       expect(page).to have_css('#mla-citation')
+
       within('#mla-citation') do
-        expect(page).to have_content("Eric, and Frederick. this is the publisher, 0AD. http://collections-demo.curationexperts.com/catalog/111.")
+        expect(page).to have_content('MLA')
+        expect(page).to have_content("Eric, and Frederick. Handsome Dan. First Edition, this is the publisher, 0AD. http://collections-demo.curationexperts.com/catalog/111.")
       end
     end
+
     it 'displays correct APA citation' do
       click_on "Cite"
-      expect(page).to have_css('#mla-citation')
+      expect(page).to have_css('#apa-citation')
+
       within('#apa-citation') do
-        expect(page).to have_content("E., & F. (0 C.E.). [This is the genre]. this is the publisher. http://collections-demo.curationexperts.com/catalog/111.")
+        expect(page).to have_content('APA, 6th edition')
+        expect(page).to have_content("E., & F. (0 C.E.). Handsome Dan (First Edition) [This is the genre]. this is the publisher. http://collections-demo.curationexperts.com/catalog/111.")
+
+        expect(page).not_to have_content('this is the publisher http://collections-demo.curationexperts.com/catalog/111.')
+      end
+    end
+
+    context 'with authors that do not have abnormal characters' do
+      before do
+        solr = Blacklight.default_index.connection
+        test_record[:author_ssim] = 'Alisha Evans'
+        solr.add([test_record])
+        solr.commit
+        visit '/catalog/111'
+      end
+
+      it 'displays correct MLA citation' do
+        click_on "Cite"
+        expect(page).to have_css('#mla-citation')
+
+        within('#mla-citation') do
+          expect(page).to have_content('Evans, Alisha.')
+        end
+      end
+
+      it 'displays correct APA citation' do
+        click_on "Cite"
+        expect(page).to have_css('#apa-citation')
+
+        within('#apa-citation') do
+          expect(page).to have_content('Evans, A.')
+        end
       end
     end
   end
