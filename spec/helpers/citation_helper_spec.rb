@@ -2,13 +2,6 @@
 require 'rails_helper'
 
 RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
-  before do
-    solr = Blacklight.default_index.connection
-    solr.add([test_record])
-    solr.commit
-    visit '/catalog/111'
-  end
-
   let(:test_record) do
     {
       id: '111',
@@ -59,7 +52,6 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
       findingAid_ssim: 'this is the finding aid',
       collectionId_ssim: 'this is the collection ID',
       edition_ssim: 'this is the edition',
-      # edition_tesim: 'this is the edition',
       uri_ssim: 'this is the URI',
       partOf_ssim: "this is the part of, using ssim",
       numberOfPages_ssim: "this is the number of pages, using ssim",
@@ -73,6 +65,13 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
   end
 
   context 'Clicking on cite' do
+    before do
+      solr = Blacklight.default_index.connection
+      solr.add([test_record])
+      solr.commit
+      visit '/catalog/111'
+    end
+
     it 'displays correct MLA citation' do
       click_on "Cite"
       expect(page).to have_css('#mla-citation')
@@ -85,7 +84,7 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
 
     it 'displays correct APA citation' do
       click_on "Cite"
-      expect(page).to have_css('#mla-citation')
+      expect(page).to have_css('#apa-citation')
 
       within('#apa-citation') do
         expect(page).to have_content('APA, 6th edition')
@@ -93,6 +92,34 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
 
         expect(page).not_to have_content('this is the edition')
         expect(page).not_to have_content('this is the publisher http://collections-demo.curationexperts.com/catalog/111.')
+      end
+    end
+
+    context 'with authors that do not have abnormal characters' do
+      before do
+        solr = Blacklight.default_index.connection
+        test_record[:author_ssim] = 'Alisha Evans'
+        solr.add([test_record])
+        solr.commit
+        visit '/catalog/111'
+      end
+
+      it 'displays correct APA citation' do
+        click_on "Cite"
+        expect(page).to have_css('#apa-citation')
+
+        within('#apa-citation') do
+          expect(page).to have_content('Evans, A.')
+        end
+      end
+
+      it 'displays correct MLA citation' do
+        click_on "Cite"
+        expect(page).to have_css('#mla-citation')
+
+        within('#mla-citation') do
+          expect(page).to have_content('Evans, Alisha.')
+        end
       end
     end
   end
