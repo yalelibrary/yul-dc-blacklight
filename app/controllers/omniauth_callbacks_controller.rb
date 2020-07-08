@@ -18,7 +18,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
 
     if @user
-      sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
+      sign_in @user, event: :authentication # this will throw if @user is not activated
+      redirect_to request.env['omniauth.origin'] || root_path
       set_flash_message(:notice, :success, kind: "CAS") if is_navigational_format?
     else
       redirect_to new_user_registration_url
