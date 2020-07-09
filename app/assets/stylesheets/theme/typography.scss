@@ -1,26 +1,6 @@
 @font-face {
-    font-family: 'MalloryMP-Bold';
-    src:  local('fonts/MalloryMP-Bold.woff2') format('woff2'),
-          local('fonts/MalloryMP-Bold.woff') format('woff');
-}
-@font-face {
-    font-family: 'MalloryMP-BoldItalic';
-    src:  local('fonts/MalloryMP-BoldItalic.woff2') format('woff2'),
-          local('fonts/MalloryMP-BoldItalic.woff') format('woff');
-}
-@font-face {
-    font-family: 'MalloryMP-Book';
-    src:  local('fonts/MalloryMP-Book.woff2') format('woff2'),
-          local('fonts/MalloryMP-Book.woff') format('woff');
-}
-@font-face {
-    font-family: 'MalloryMP-BookItalic';
-    src:  local('fonts/MalloryMP-BookItalic.woff2') format('woff2'),
-          local('fonts/MalloryMP-BookItalic.woff') format('woff');
+  font-family: 'Mallory-Light';
+  src:  url(https://www.yale.edu/sites/all/themes/yale_blue/fonts_new/Mallory/Mallory/Mallory-Light.woff);
 }
 
-$malloryBold: MalloryMP-Bold;
-$malloryBoldItalic: MalloryMP-BoldItalic;
-$malloryBook: MalloryMP-Book;
-$malloryBookItalic: MalloryMP-BookItalic;
-// $yaleDisplay: YaleDisplay-Roman;
+$malloryLight: Mallory-Light
