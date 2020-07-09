@@ -2,9 +2,21 @@
 
 @import 'blacklight/blacklight';
 @import 'blacklight_marc';
-
+@import 'theme/colors';
+@import 'theme/typography';
 
 .iiif-logo img {
 	height: 30px;
 }
 
+.bg-dark {
+	background-color: $yale_blue !important;
+}
+
+body {
+	font-family: $malloryBold, $malloryBoldItalic, $malloryBook, $malloryBookItalic, Arial, Helvetica, sans-serif;
+}
+
+h1, h2 {
+	font-family: $malloryBold;
+}

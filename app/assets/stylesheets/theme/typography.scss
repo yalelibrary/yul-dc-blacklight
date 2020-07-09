@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'MalloryMP-Bold';
+    src:  url('MalloryMP-Bold.woff2') format('woff2'),
+          url('MalloryMP-Bold.woff') format('woff');
+}
+@font-face {
+    font-family: 'MalloryMP-BoldItalic';
+    src:  url('MalloryMP-BoldItalic.woff2') format('woff2'),
+          url('MalloryMP-BoldItalic.woff') format('woff');
+}
+@font-face {
+    font-family: 'MalloryMP-Book';
+    src:  url('MalloryMP-Book.woff2') format('woff2'),
+          url('MalloryMP-Book.woff') format('woff');
+}
+@font-face {
+    font-family: 'MalloryMP-BookItalic';
+    src:  url('MalloryMP-BookItalic.woff2') format('woff2'),
+          url('MalloryMP-BookItalic.woff') format('woff');
+}
+
+$malloryBold: MalloryMP-Bold;
+$malloryBoldItalic: MalloryMP-BoldItalic;
+$malloryBook: MalloryMP-Book;
+$malloryBookItalic: MalloryMP-BookItalic;
+// $yaleDisplay: YaleDisplay-Roman;
