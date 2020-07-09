@@ -1,0 +1,21 @@
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
+@import 'helpers/breakpoints';
+@import 'theme/colors', 'theme/typography';
+
+.iiif-logo img {
+	height: 30px;
+}
+
+.bg-dark {
+	background-color: $yale_blue !important;
+}
+
+
+@media screen and (min-width: $tablet) {
+}
+
+
+@media screen and (min-width: $desktop) {
+}
