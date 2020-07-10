@@ -17,6 +17,7 @@ class SearchBuilder < Blacklight::SearchBuilder
 
   # Add the `show_only_public_records` method to the processor chain
   self.default_processor_chain += [:show_only_public_records]
+  self.default_processor_chain += [:highlight_fields]
 
   ##
   # Use the solr fq (filter query) parameter to limit search results to only those items
@@ -27,5 +28,17 @@ class SearchBuilder < Blacklight::SearchBuilder
     # add a new solr facet query ('fq') parameter that limits results to those with a 'public_b' field of 1
     solr_parameters[:fq] ||= []
     solr_parameters[:fq] << '((visibility_ssi:Public) OR (visibility_ssi:"Yale Community Only"))'
+  end
+
+  def highlight_fields(solr_parameters)
+    solr_parameters[:hl] ||= []
+    solr_parameters['hl.fl'] ||= []
+
+    solr_parameters[:hl] = true
+    #solr_parameters['hl.usePhraseHighlighter'] = false
+    solr_parameters['hl.preserveMulti'] = true
+    solr_parameters['hl.fl'] << "*"
+    solr_parameters["hl.simple.pre"] = "<span class='search-highlight'>"
+    solr_parameters["hl.simple.post"] = "</span>"
   end
 end
