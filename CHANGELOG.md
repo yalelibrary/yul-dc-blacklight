@@ -1,5 +1,18 @@
 # Changelog
 
+## [v1.6.3](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.6.3) (2020-07-10)
+
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.6.2...v1.6.3)
+
+**Technical Enhancements:**
+
+- Add Yale branded typefaces and colors [\#168](https://github.com/yalelibrary/yul-dc-blacklight/pull/168) ([alishaevn](https://github.com/alishaevn))
+- Do not hard code Blacklight application version [\#166](https://github.com/yalelibrary/yul-dc-blacklight/pull/166) ([bess](https://github.com/bess))
+- Add Test for basic http status codes 401 and 200 [\#165](https://github.com/yalelibrary/yul-dc-blacklight/pull/165) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Modify auth redirect and add tests [\#164](https://github.com/yalelibrary/yul-dc-blacklight/pull/164) ([K8Sewell](https://github.com/K8Sewell))
+- Increase code coverage for citation\_string\_processor.rb [\#163](https://github.com/yalelibrary/yul-dc-blacklight/pull/163) ([alishaevn](https://github.com/alishaevn))
+- Remove unnecessary file: Sessions\_Controller.rb [\#161](https://github.com/yalelibrary/yul-dc-blacklight/pull/161) ([FCRodriguez7](https://github.com/FCRodriguez7))
+
 ## [v1.6.2](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.6.2) (2020-07-06)
 
 [Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.6.1...v1.6.2)
@@ -8,6 +21,7 @@ No user facing changes in this release.
 
 **Technical Enhancements:**
 
+- Prep for 1.6.2 release [\#160](https://github.com/yalelibrary/yul-dc-blacklight/pull/160) ([bess](https://github.com/bess))
 - Management DB name now follows Blacklight DB name pattern [\#159](https://github.com/yalelibrary/yul-dc-blacklight/pull/159) ([maxkadel](https://github.com/maxkadel))
 - Add thumbnail for objects with no images [\#158](https://github.com/yalelibrary/yul-dc-blacklight/pull/158) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Display a message when images are "Yale Only" [\#157](https://github.com/yalelibrary/yul-dc-blacklight/pull/157) ([alishaevn](https://github.com/alishaevn))
