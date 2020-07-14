@@ -116,7 +116,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field 'author_tsim', label: 'Author'
+    config.add_index_field 'author_tsim', label: 'Author', highlight: true
     config.add_index_field 'author_vern_ssim', label: 'Author'
     config.add_index_field 'extentOfDigitization_ssim', label: 'Extent of Digitization'
     config.add_index_field 'format', label: 'Format'
@@ -184,6 +184,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'coordinates_ssim', label: 'this is the coordinates'
     config.add_show_field 'projection_ssim', label: 'this is the projection'
 
+    config.add_field_configuration_to_solr_request!
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
     #
