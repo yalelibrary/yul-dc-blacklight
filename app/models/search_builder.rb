@@ -35,7 +35,7 @@ class SearchBuilder < Blacklight::SearchBuilder
     solr_parameters['hl.fl'] ||= []
 
     solr_parameters[:hl] = true
-    #solr_parameters['hl.usePhraseHighlighter'] = false
+    # solr_parameters['hl.usePhraseHighlighter'] = false
     solr_parameters['hl.preserveMulti'] = true
     solr_parameters['hl.fl'] << "*"
     solr_parameters["hl.simple.pre"] = "<span class='search-highlight'>"
