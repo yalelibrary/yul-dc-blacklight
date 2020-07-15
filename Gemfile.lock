@@ -60,10 +60,20 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    apparition (0.6.0)
+      capybara (~> 3.13, < 4)
+      websocket-driver (>= 0.6.5)
     ast (2.4.1)
     autoprefixer-rails (9.7.6)
       execjs
     awesome_print (1.8.0)
+    axe-matchers (2.6.1)
+      dumb_delegator (~> 0.8)
+      virtus (~> 1.0)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.13)
     bindex (0.8.1)
     bixby (3.0.0)
@@ -109,6 +119,8 @@ GEM
     citeproc-ruby (1.1.12)
       citeproc (~> 1.0, >= 1.0.9)
       csl (~> 1.5)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.1.6)
     coveralls (0.8.23)
       json (>= 1.8, < 3)
@@ -123,6 +135,8 @@ GEM
       csl (~> 1.0)
     deprecation (1.0.0)
       activesupport
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -140,6 +154,8 @@ GEM
     dotenv-rails (2.7.5)
       dotenv (= 2.7.5)
       railties (>= 3.2, < 6.1)
+    dumb_delegator (0.8.1)
+    equalizer (0.0.11)
     erubi (1.9.0)
     execjs (2.7.0)
     factory_bot (5.2.0)
@@ -181,6 +197,7 @@ GEM
     httpclient (2.8.3)
     i18n (1.8.3)
       concurrent-ruby (~> 1.0)
+    ice_nine (0.11.2)
     iso-639 (0.3.5)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
@@ -410,6 +427,11 @@ GEM
     unicode-display_width (1.7.0)
     view_component (2.7.0)
       activesupport (>= 5.0.0, < 7.0)
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (4.0.2)
@@ -440,7 +462,9 @@ PLATFORMS
 DEPENDENCIES
   actionpack (>= 6.0.3.1)
   activerecord-nulldb-adapter
+  apparition
   awesome_print
+  axe-matchers
   bixby (~> 3.0.0)
   blacklight
   blacklight-marc (>= 7.0.0.rc1, < 8)
