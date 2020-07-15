@@ -1,0 +1,2 @@
+---
+api_key:  <%= ENV.fetch('HONEYBADGER_API_KEY_BLACKLIGHT', '') %>
