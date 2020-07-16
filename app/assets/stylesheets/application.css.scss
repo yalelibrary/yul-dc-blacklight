@@ -19,11 +19,10 @@
  */
 
 @import 'bootstrap';
-
 @import 'blacklight/blacklight', 'blacklight_marc';
 
-// Import each of folder where we have created custom style updates
+// Import each folder in assets/stylesheets that has a .scss file
+//  using the folder name and the universal selector
+@import 'customOverrides/*';
 @import 'helpers/*';
 @import 'theme/*';
-@import 'customOverrides/*';
-
