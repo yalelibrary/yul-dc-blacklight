@@ -13,12 +13,12 @@ RSpec.describe HttpAuthConcern, type: :request do
 
   it "protects sensitive pages" do
     get '/'
-    response.status.should == 401
+    expect(response.status).to eq 401
   end
 
   it 'after sign-in user has access' do
     http_auth = http_login
     get '/', headers: { 'HTTP_AUTHORIZATION' => http_auth }
-    response.status.should == 200
+    expect(response.status).to eq 200
   end
 end
