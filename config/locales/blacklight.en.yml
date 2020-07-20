@@ -7,3 +7,6 @@ en:
     citation:
       apa: 'APA, 6th edition'
       modern-language-association: 'MLA'
+    header_links:
+      login: Sign in
+      logout: Sign out

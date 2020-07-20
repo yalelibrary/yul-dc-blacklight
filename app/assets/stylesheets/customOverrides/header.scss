@@ -12,6 +12,19 @@ DEFAULT MOBILE STYLING
   background-color: $yale_blue !important;
 }
 
+.nav-link{
+  margin-left: 5px;
+  margin-right: 5px;
+  font-family: $malloryMedium !important;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  font-size: small;
+  line-height: 2.25;
+  letter-spacing: normal;
+  text-align: right;
+  color: $light_grey !important;
+}
 
 @media screen and (min-width: $tablet) {
 }

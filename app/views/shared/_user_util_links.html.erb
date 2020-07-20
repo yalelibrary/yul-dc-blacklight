@@ -1,0 +1,17 @@
+<ul class="navbar-nav">
+  <% if has_user_authentication_provider? %>
+    <% if current_user %>
+      <li class="nav-item">
+        <%= link_to "#{current_user} , #{t('blacklight.header_links.logout')}", destroy_user_session_path, class: 'nav-link' %>
+      </li>
+    <% else %>
+      <li class="nav-item">
+        <%= link_to t('blacklight.header_links.login'), new_user_session_path, class: 'nav-link' %>
+      </li>
+    <% end %>
+  <% end %>
+
+  <%= render_nav_actions do |config, action|%>
+    <li class="nav-item"><%= action %></li>
+  <% end %>
+</ul>
