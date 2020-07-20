@@ -1,0 +1,57 @@
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
+
+a {
+  color: $yale_blue;
+}
+
+.btn {
+	border-radius: 0;
+}
+  
+.btn-primary {
+	color: $yale_blue;
+	background-color: $white;
+	border-color: $medium_grey;
+}
+
+.btn-primary:hover {
+	color: $yale_blue;
+	background-color: $light_grey;
+	border-color: $medium_grey;
+}
+  
+.btn-outline-secondary {
+	color: $dark_grey;
+	border-color: $medium_grey;
+}
+
+.btn-outline-secondary:hover {
+	color: $white;
+	background-color: $dark_grey;
+	border-color: $medium_grey;
+}
+	
+#citationLink {
+	color: $yale_blue !important;
+}
+
+#emailLink {
+	color: $yale_blue !important;
+}
+
+.page-link { 
+	color: $yale_blue;
+}
+
+#smsLink {
+	color: $yale_blue !important;
+}
+
+@media screen and (min-width: $tablet) {
+}
+
+
+@media screen and (min-width: $desktop) {
+}
