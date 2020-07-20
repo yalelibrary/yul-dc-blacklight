@@ -3,27 +3,10 @@ require 'rails_helper'
 
 RSpec.describe 'User Authentication', type: :system, js: false, clean: true do
   context 'as a guest user' do
-    it 'guest can register account' do
-      visit root_path
-      click_on "Login"
-      click_on "Sign up"
-
-      # fill in account details
-      within('#new_user') do
-        fill_in 'user_email', with: 'test@gmail.com'
-
-        fill_in 'user_password', with: 'password'
-        fill_in 'user_password_confirmation', with: 'password'
-      end
-
-      click_on 'Sign up'
-
-      expect(page).to have_content('Welcome! You have signed up successfully.')
-    end
     it 'guest can sign in to an already made account' do
       user = FactoryBot.create(:user)
       visit root_path
-      click_on "Login"
+      click_on "Sign in"
 
       within('#new_user') do
         fill_in 'user_email', with: user.email
