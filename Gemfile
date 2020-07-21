@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.6'
 
+gem "rails_semantic_logger", ">=4.4.4"
 gem "actionpack", ">= 6.0.3.1"
 gem 'awesome_print'
 gem 'blacklight'
@@ -44,6 +45,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "amazing_print", ">=1.2.1"
   gem 'activerecord-nulldb-adapter'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
