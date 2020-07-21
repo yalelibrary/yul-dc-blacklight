@@ -24,6 +24,19 @@ DEFAULT MOBILE STYLING
   color: $lightest_grey !important;
 }
 
+.navbar-brand{
+  color: transparent !important;
+}
+
+.navbar-logo{
+  background-image: url(yul_logo/yul-logo@3x.png);
+  background-size: 341.25px 37.5px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  flex: auto;
+  text-indent: 0px;
+}
+
 @media screen and (min-width: $tablet) {
 }
 
