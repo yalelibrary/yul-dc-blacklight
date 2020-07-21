@@ -13,7 +13,7 @@ module BlacklightYul
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
     config.log_level = :debug
-    STDOUT.sync=true #turn off log buffering
+    STDOUT.sync = true # turn off log buffering
     config.rails_semantic_logger.add_file_appender = false # turn off regular file appenders
     config.semantic_logger.add_appender(io: STDOUT, level: config.log_level, formatter: config.rails_semantic_logger.format)
 

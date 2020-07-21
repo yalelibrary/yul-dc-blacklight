@@ -50,7 +50,7 @@ Rails.application.configure do
 
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
-  config.colorize_logging = false #don't colorize in prod
+  config.colorize_logging = false # don't colorize in prod
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -71,7 +71,6 @@ Rails.application.configure do
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
-
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
