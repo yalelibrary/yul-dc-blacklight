@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.configure do
+  config.rails_semantic_logger.semantic = false # turn off semantic logging conversion in dev
+  config.colorize_logging = true # turn on fancy colorized logs in dev
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
