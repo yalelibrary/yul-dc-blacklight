@@ -1,24 +1,30 @@
 # Changelog
 
+## [v1.7.1](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.7.1) (2020-07-21)
+
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.7.0...v1.7.1)
+
+**Technical Enhancements:**
+
+- Update Logo to Yale University Library [\#184](https://github.com/yalelibrary/yul-dc-blacklight/pull/184) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Improve color contrast for accessibility [\#183](https://github.com/yalelibrary/yul-dc-blacklight/pull/183) ([K8Sewell](https://github.com/K8Sewell))
+- Add links to nav bar including style [\#182](https://github.com/yalelibrary/yul-dc-blacklight/pull/182) ([FCRodriguez7](https://github.com/FCRodriguez7))
+
 ## [v1.7.0](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.7.0) (2020-07-20)
 
 [Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.6.3...v1.7.0)
-
-**New Features:**
-
-- Add names and labels to elements for accessibility [\#179](https://github.com/yalelibrary/yul-dc-blacklight/pull/179) ([K8Sewell](https://github.com/K8Sewell))
 
 **Security fixes:**
 
 - Bump lodash from 4.17.15 to 4.17.19 [\#176](https://github.com/yalelibrary/yul-dc-blacklight/pull/176) ([dependabot[bot]](https://github.com/apps/dependabot))
 
-**Fixed bugs:**
-- Bug in Manifest.js File [\#177](https://github.com/yalelibrary/yul-dc-blacklight/pull/177) ([FCRodriguez7](https://github.com/FCRodriguez7))
-
 **Technical Enhancements:**
 
+- Prep for v1.7.0 release [\#181](https://github.com/yalelibrary/yul-dc-blacklight/pull/181) ([maxkadel](https://github.com/maxkadel))
 - Update rspec syntax to address deprecation warnings [\#180](https://github.com/yalelibrary/yul-dc-blacklight/pull/180) ([bess](https://github.com/bess))
+- Add names and labels to elements for accessibility [\#179](https://github.com/yalelibrary/yul-dc-blacklight/pull/179) ([K8Sewell](https://github.com/K8Sewell))
 - Update the app's styling architecture [\#178](https://github.com/yalelibrary/yul-dc-blacklight/pull/178) ([alishaevn](https://github.com/alishaevn))
+- Bug in Manifest.js File [\#177](https://github.com/yalelibrary/yul-dc-blacklight/pull/177) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Bundle accessibilty test dependencies [\#175](https://github.com/yalelibrary/yul-dc-blacklight/pull/175) ([JzGo](https://github.com/JzGo))
 - Set honeybadger key using env var [\#174](https://github.com/yalelibrary/yul-dc-blacklight/pull/174) ([JzGo](https://github.com/JzGo))
 - Remove unused nav bar links 342 [\#173](https://github.com/yalelibrary/yul-dc-blacklight/pull/173) ([FCRodriguez7](https://github.com/FCRodriguez7))
@@ -161,7 +167,6 @@ No user facing changes in this release.
 - Silence deprecations from Blacklight [\#92](https://github.com/yalelibrary/yul-dc-blacklight/pull/92) ([tilthouse](https://github.com/tilthouse))
 - Add a link for Language on the show page [\#91](https://github.com/yalelibrary/yul-dc-blacklight/pull/91) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - 190 add author facet [\#88](https://github.com/yalelibrary/yul-dc-blacklight/pull/88) ([K8Sewell](https://github.com/K8Sewell))
-- Release prep for 1.2.1 [\#87](https://github.com/yalelibrary/yul-dc-blacklight/pull/87) ([bess](https://github.com/bess))
 
 ## [v1.2.1](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.2.1) (2020-06-05)
 
@@ -169,6 +174,7 @@ No user facing changes in this release.
 
 **Technical Enhancements:**
 
+- Release prep for 1.2.1 [\#87](https://github.com/yalelibrary/yul-dc-blacklight/pull/87) ([bess](https://github.com/bess))
 - Put the blacklight version in the footer [\#86](https://github.com/yalelibrary/yul-dc-blacklight/pull/86) ([bess](https://github.com/bess))
 - Collapse chrome installation into a single docker layer [\#85](https://github.com/yalelibrary/yul-dc-blacklight/pull/85) ([bess](https://github.com/bess))
 - Autogenerate changelog and release notes [\#84](https://github.com/yalelibrary/yul-dc-blacklight/pull/84) ([bess](https://github.com/bess))
