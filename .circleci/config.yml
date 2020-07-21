@@ -73,13 +73,18 @@ jobs:
       - docker/check
       - docker/pull:
           images: yalelibraryit/dc-blacklight:$CIRCLE_SHA1
+            # Dockerhub tags allow alphanumeric characters, periods, underscores, and hyphens.
+      # This run step makes CLEAN_BRANCH, the branch name with all forbidden characters removed,
+      # available to subsequent steps.
+      - run: |
+          echo "export CLEAN_BRANCH=`echo $CIRCLE_BRANCH |sed 's#[^[:alnum:]._-]##g'`" >> $BASH_ENV
       - docker-tag:
           image: yalelibraryit/dc-blacklight
           from_tag: $CIRCLE_SHA1
-          to_tag: $CIRCLE_BRANCH
+          to_tag: $CLEAN_BRANCH
       - docker/push:
           image: yalelibraryit/dc-blacklight
-          tag: $CIRCLE_BRANCH
+          tag: $CLEAN_BRANCH
   publish-github-release:
     executor: docker/docker
     steps:
