@@ -28,7 +28,6 @@ gem 'pg'
 gem 'puma', '~> 4.3'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 gem 'rails-controller-testing'
-gem "rails_semantic_logger", ">=4.4.4"
 gem 'rsolr', '>= 1.0', '< 3'
 gem 'sass-rails', '>= 6'
 gem 'turbolinks', '~> 5'
@@ -46,7 +45,6 @@ end
 
 group :development do
   gem 'activerecord-nulldb-adapter'
-  gem "amazing_print", ">=1.2.1"
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
