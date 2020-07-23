@@ -119,13 +119,10 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_index_field 'author_tsim', label: 'Author', highlight: true
     config.add_index_field 'author_vern_ssim', label: 'Author'
-    config.add_index_field 'extentOfDigitization_ssim', label: 'Extent of Digitization'
-    config.add_index_field 'format', label: 'Format'
-    config.add_index_field 'language_ssim', label: 'Language', helper_method: :language_codes
-    config.add_index_field 'published_ssim', label: 'Published'
-    config.add_index_field 'published_vern_ssim', label: 'Published'
-    config.add_index_field 'lc_callnum_ssim', label: 'Call number'
-    config.add_index_field 'genre_ssim', label: 'Genre'
+    config.add_index_field 'date_tsim', label: 'Date'
+    config.add_index_field 'resourceType_ssim', label: 'Resource Type'
+    config.add_index_field 'partOf_ssim', label: 'Collection Name'
+    config.add_index_field 'identifierShelfMark_ssim', label: 'Identifier Shelf Mark'
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
