@@ -119,13 +119,11 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_index_field 'author_tsim', label: 'Author', highlight: true
     config.add_index_field 'author_vern_ssim', label: 'Author'
-    config.add_index_field 'extentOfDigitization_ssim', label: 'Extent of Digitization'
-    config.add_index_field 'format', label: 'Format'
-    config.add_index_field 'language_ssim', label: 'Language', helper_method: :language_codes
-    config.add_index_field 'published_ssim', label: 'Published'
-    config.add_index_field 'published_vern_ssim', label: 'Published'
-    config.add_index_field 'lc_callnum_ssim', label: 'Call number'
-    config.add_index_field 'genre_ssim', label: 'Genre'
+    config.add_index_field 'date_tsim', label: 'Date'
+    config.add_index_field 'imageCount_isi', label: 'Image Count'
+    config.add_index_field 'resourceType_ssim', label: 'Resource Type'
+    config.add_index_field 'partOf_ssim', label: 'Collection Name'
+    config.add_index_field 'identifierShelfMark_ssim', label: 'Identifier Shelf Mark'
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -177,13 +175,13 @@ class CatalogController < ApplicationController
     config.add_show_field 'collectionId_ssim', label: 'Collection ID'
     config.add_show_field 'edition_ssim', label: 'Edition'
     config.add_show_field 'uri_ssim', label: 'URI'
-    config.add_show_field 'partOf_ssim', label: 'this is the part of'
-    config.add_show_field 'numberOfPages_ssim', label: 'this is the number of pages'
-    config.add_show_field 'material_ssim', label: 'this is the material'
-    config.add_show_field 'scale_ssim', label: 'this is the scale'
-    config.add_show_field 'digital_ssim', label: 'this is the digital'
-    config.add_show_field 'coordinates_ssim', label: 'this is the coordinates'
-    config.add_show_field 'projection_ssim', label: 'this is the projection'
+    config.add_show_field 'partOf_ssim', label: 'Collection Name'
+    config.add_show_field 'numberOfPages_ssim', label: 'Number of Pages'
+    config.add_show_field 'material_ssim', label: 'Material'
+    config.add_show_field 'scale_ssim', label: 'Scale'
+    config.add_show_field 'digital_ssim', label: 'Digital'
+    config.add_show_field 'coordinates_ssim', label: 'Coordinates'
+    config.add_show_field 'projection_ssim', label: 'Projection'
 
     config.add_field_configuration_to_solr_request!
     # "fielded" search configuration. Used by pulldown among other places.
