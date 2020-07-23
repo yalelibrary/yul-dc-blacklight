@@ -120,6 +120,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'author_tsim', label: 'Author', highlight: true
     config.add_index_field 'author_vern_ssim', label: 'Author'
     config.add_index_field 'date_tsim', label: 'Date'
+    config.add_index_field 'imageCount_isi', label: 'Image Count'
     config.add_index_field 'resourceType_ssim', label: 'Resource Type'
     config.add_index_field 'partOf_ssim', label: 'Collection Name'
     config.add_index_field 'identifierShelfMark_ssim', label: 'Identifier Shelf Mark'

@@ -18,6 +18,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       resourceType_ssim: 'Archives or Manuscripts',
       partOf_ssim: 'Beinecke Library',
       identifierShelfMark_ssim: 'Beinecke MS 801',
+      imageCount_isi: '23',
       visibility_ssi: 'Public'
     }
   end
@@ -39,6 +40,9 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     end
     it 'displays Call Number in results' do
       expect(content).to have_content('Beinecke MS 801')
+    end
+    it 'displays Image Count in results' do
+      expect(content).to have_content('23')
     end
   end
 end
