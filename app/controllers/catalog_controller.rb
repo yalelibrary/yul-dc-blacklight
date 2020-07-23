@@ -174,13 +174,13 @@ class CatalogController < ApplicationController
     config.add_show_field 'collectionId_ssim', label: 'Collection ID'
     config.add_show_field 'edition_ssim', label: 'Edition'
     config.add_show_field 'uri_ssim', label: 'URI'
-    config.add_show_field 'partOf_ssim', label: 'this is the part of'
-    config.add_show_field 'numberOfPages_ssim', label: 'this is the number of pages'
-    config.add_show_field 'material_ssim', label: 'this is the material'
-    config.add_show_field 'scale_ssim', label: 'this is the scale'
-    config.add_show_field 'digital_ssim', label: 'this is the digital'
-    config.add_show_field 'coordinates_ssim', label: 'this is the coordinates'
-    config.add_show_field 'projection_ssim', label: 'this is the projection'
+    config.add_show_field 'partOf_ssim', label: 'Collection Name'
+    config.add_show_field 'numberOfPages_ssim', label: 'Number of Pages'
+    config.add_show_field 'material_ssim', label: 'Material'
+    config.add_show_field 'scale_ssim', label: 'Scale'
+    config.add_show_field 'digital_ssim', label: 'Digital'
+    config.add_show_field 'coordinates_ssim', label: 'Coordinates'
+    config.add_show_field 'projection_ssim', label: 'Projection'
 
     config.add_field_configuration_to_solr_request!
     # "fielded" search configuration. Used by pulldown among other places.
