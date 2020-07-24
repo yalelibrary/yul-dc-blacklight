@@ -5,13 +5,12 @@ RSpec.describe 'User Authentication', type: :system, js: false, clean: true do
   let(:user) { FactoryBot.create(:user) }
 
   context 'an unauthenticated user' do
-    it 'redirects to Yale CAS for authentication' do
+    it 'gets the omniauth redirect endpoing for Yale CAS authentication' do
       visit root_path
-      click_on "Sign in"
-      expect(page.current_url).to eq "/users/auth/cas"
+      expect(page).to have_link('Sign in', href: '/users/auth/cas')
     end
   end
-  
+
   context 'as a logged in user', js: true do
     before do
       solr = Blacklight.default_index.connection

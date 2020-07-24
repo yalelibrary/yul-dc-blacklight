@@ -9,6 +9,6 @@ class User < ApplicationRecord
   # user class to get a user-displayable login/identifier for
   # the account.
   def to_s
-    email
+    uid
   end
 end
