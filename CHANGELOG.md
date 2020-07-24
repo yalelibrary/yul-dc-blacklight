@@ -1,11 +1,26 @@
 # Changelog
 
+## [v1.7.2](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.7.2) (2020-07-24)
+
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.7.1...v1.7.2)
+
+**Technical Enhancements:**
+
+- Fix sort search RSpec [\#195](https://github.com/yalelibrary/yul-dc-blacklight/pull/195) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Add YUL footer style and links [\#194](https://github.com/yalelibrary/yul-dc-blacklight/pull/194) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Change displayed search result fields [\#193](https://github.com/yalelibrary/yul-dc-blacklight/pull/193) ([K8Sewell](https://github.com/K8Sewell))
+- Have nginx log everything to stdout [\#192](https://github.com/yalelibrary/yul-dc-blacklight/pull/192) ([mlooney](https://github.com/mlooney))
+- Sanitize branch name in CI [\#188](https://github.com/yalelibrary/yul-dc-blacklight/pull/188) ([fnibbit](https://github.com/fnibbit))
+- Rename png files and update image scss header path [\#187](https://github.com/yalelibrary/yul-dc-blacklight/pull/187) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Add support for semantic logging [\#186](https://github.com/yalelibrary/yul-dc-blacklight/pull/186) ([mlooney](https://github.com/mlooney))
+
 ## [v1.7.1](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.7.1) (2020-07-21)
 
 [Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.7.0...v1.7.1)
 
 **Technical Enhancements:**
 
+- Prep for v1.7.1 release [\#185](https://github.com/yalelibrary/yul-dc-blacklight/pull/185) ([bess](https://github.com/bess))
 - Update Logo to Yale University Library [\#184](https://github.com/yalelibrary/yul-dc-blacklight/pull/184) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Improve color contrast for accessibility [\#183](https://github.com/yalelibrary/yul-dc-blacklight/pull/183) ([K8Sewell](https://github.com/K8Sewell))
 - Add links to nav bar including style [\#182](https://github.com/yalelibrary/yul-dc-blacklight/pull/182) ([FCRodriguez7](https://github.com/FCRodriguez7))
