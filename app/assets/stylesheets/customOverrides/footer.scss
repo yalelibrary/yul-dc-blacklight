@@ -2,6 +2,71 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 
+.footer-container {
+  background-color: $yale_blue;
+  display: grid;
+  height:165px;
+  font-family:$malloryMedium!important;
+  color:$white !important;
+  justify-items: center;
+  padding-top: 1rem;
+}
+.footer-logo {
+  grid-area: logo;
+  width: 100%;
+  background-size: 341.25px 37.5px;
+  margin-left: 7.75rem;
+  background-image: url(yul_logo/yul_logo3x.png);
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+.footer-logo > img{
+  width: 100%;
+}
+
+.footer-links {
+  grid-area: links;
+  text-transform: uppercase;
+  line-break:loose;
+  align-self: center;
+  font-size: smaller;
+  text-align: right;
+}
+
+.footer-links a{
+  color: $white !important;
+  margin-left: 1rem;
+}
+.footer-socmedia{
+  display:table;
+  grid-area: sm;
+  background-position: left !important;
+}
+
+.footer-socmedia img{
+  width: 1.5rem;
+  margin-left: 0.5rem;
+  position: relative; right: 40px;
+}
+
+.branch-name{
+  background-color:$yale_blue!important;
+  color:$white !important;
+  font-size: xx-small;
+}
+
+@media screen and (min-width: $desktop) {
+  .footer-container {
+      display: grid;
+      grid-template-columns: 15% 20% 50% 15%;
+      grid-template-rows: auto;
+      grid-template-areas:
+          ". logo links ."
+          ". sm . .";
+      gap: 10px 10px;
+  }
+}
 
 
 @media screen and (min-width: $tablet) {
