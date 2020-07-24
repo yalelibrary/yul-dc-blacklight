@@ -69,7 +69,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
   end
 
   it 'sorts by date from oldest to newest' do
-    click_on 'Search'
+    click_on 'search'
     click_on 'Sort by relevance'
     click_on 'date (oldest first)'
 
@@ -81,7 +81,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
   end
 
   it 'sorts by date from newest to oldest' do
-    click_on 'Search'
+    click_on 'search'
     click_on 'Sort by relevance'
     click_on 'date (newest first)'
 
