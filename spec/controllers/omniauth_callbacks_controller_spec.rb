@@ -6,18 +6,14 @@ RSpec.describe OmniauthCallbacksController do
 
   before do
     User.create(provider: 'cas',
-                uid: '8783401',
-                email: "8783401@yale.edu",
-                password: Devise.friendly_token[0, 20])
+                uid: 'handsome_dan')
     request.env["devise.mapping"] = Devise.mappings[:user]
     request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:cas]
   end
   OmniAuth.config.mock_auth[:cas] =
     OmniAuth::AuthHash.new(
       provider: 'cas',
-      uid: "8783401",
-      email: "8783401@yale.edu",
-      password: Devise.friendly_token[0, 20]
+      uid: "handsome_dan"
     )
 
   # If a user logs in and we can tell what page they were on before logging in it will redirect them to the page they were previously on

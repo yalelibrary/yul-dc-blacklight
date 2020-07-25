@@ -11,9 +11,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @user.nil?
       @user = User.create(
           provider: auth.provider,
-          uid: auth.uid,
-          email: auth.uid + "@yale.edu",
-          password: Devise.friendly_token[0, 20]
+          uid: auth.uid
         )
     end
 
@@ -22,7 +20,13 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to request.env['omniauth.origin'] || root_path
       set_flash_message(:notice, :success, kind: "CAS") if is_navigational_format?
     else
-      redirect_to new_user_registration_url
+      redirect_to root_path
     end
+  end
+
+  protected
+
+  def after_omniauth_failure_path_for(_resource)
+    root_path
   end
 end

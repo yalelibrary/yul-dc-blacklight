@@ -2,22 +2,15 @@
 require 'rails_helper'
 
 RSpec.describe 'User Authentication', type: :system, js: false, clean: true do
-  context 'as a guest user' do
-    it 'guest can sign in to an already made account' do
-      user = FactoryBot.create(:user)
+  let(:user) { FactoryBot.create(:user) }
+
+  context 'an unauthenticated user' do
+    it 'gets the omniauth redirect endpoing for Yale CAS authentication' do
       visit root_path
-      click_on "Sign in"
-
-      within('#new_user') do
-        fill_in 'user_email', with: user.email
-        fill_in 'user_password', with: user.password
-      end
-      click_on 'Log in'
-
-      expect(page).to have_content('Signed in successfully.')
-      expect(page).to have_content(user.email)
+      expect(page).to have_link('Sign in', href: '/users/auth/cas')
     end
   end
+
   context 'as a logged in user', js: true do
     before do
       solr = Blacklight.default_index.connection
