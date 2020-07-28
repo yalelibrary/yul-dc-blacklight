@@ -32,6 +32,10 @@ a {
 	background-color: $dark_grey;
 	border-color: $medium_grey;
 }
+
+.card-header {
+	background-color: $white !important;
+}
 	
 #citationLink {
 	color: $yale_blue !important;
@@ -39,6 +43,22 @@ a {
 
 #emailLink {
 	color: $yale_blue !important;
+}
+
+.bg-success, .facet-limit-active .card-header {
+	background-color: $white !important;
+	border-color: $white !important;
+}
+
+#facets .btn {
+	border-top: 1px solid $medium_grey;
+	color: $medium_grey;
+	padding-top: 1.25rem !important;
+}
+
+#facets .card {
+	border: none;
+	border-radius: 0;
 }
 
 .page-link { 
