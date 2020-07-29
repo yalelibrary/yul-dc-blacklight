@@ -17,7 +17,7 @@ DEFAULT MOBILE STYLING
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
-  font-size: small;
+  font-size: x-small;
   line-height: 2.25;
   letter-spacing: normal;
   text-align: right;
@@ -30,16 +30,26 @@ DEFAULT MOBILE STYLING
 
 .navbar-logo{
   background-image: url(yul_logo/yul_logo3x.png);
-  background-size: 341.25px 37.5px;
-  margin-top: 10px;
-  margin-bottom: 15px;
-  flex: auto;
-  text-indent: 0px;
+  flex: 0 1 50%;
+  background-size: contain;
+  background-position-y: center;
 }
 
-@media screen and (min-width: $tablet) {
+@media screen and (min-width: $medium_device) {
+  .navbar > .container {
+    flex-direction: column;
+    align-items: start;
+  }
+  .navbar-logo {
+    width: 45%;
+  }
 }
 
-
-@media screen and (min-width: $desktop) {
+@media screen and (min-width: $xlarge_device) {
+  .navbar > .container {
+    flex-direction: initial;
+  }
+  .navbar-logo {
+    flex: 0 1 25%;
+  }
 }
