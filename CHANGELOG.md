@@ -1,11 +1,22 @@
 # Changelog
 
+## [v1.7.3](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.7.3) (2020-07-29)
+
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.7.2...v1.7.3)
+
+**Technical Enhancements:**
+
+- Make the header responsive [\#199](https://github.com/yalelibrary/yul-dc-blacklight/pull/199) ([alishaevn](https://github.com/alishaevn))
+- YUL Recompressed Logo [\#198](https://github.com/yalelibrary/yul-dc-blacklight/pull/198) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Sign into cas [\#197](https://github.com/yalelibrary/yul-dc-blacklight/pull/197) ([orangewolf](https://github.com/orangewolf))
+
 ## [v1.7.2](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.7.2) (2020-07-24)
 
 [Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.7.1...v1.7.2)
 
 **Technical Enhancements:**
 
+- Prep for v1.7.2 release [\#196](https://github.com/yalelibrary/yul-dc-blacklight/pull/196) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Fix sort search RSpec [\#195](https://github.com/yalelibrary/yul-dc-blacklight/pull/195) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Add YUL footer style and links [\#194](https://github.com/yalelibrary/yul-dc-blacklight/pull/194) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Change displayed search result fields [\#193](https://github.com/yalelibrary/yul-dc-blacklight/pull/193) ([K8Sewell](https://github.com/K8Sewell))
