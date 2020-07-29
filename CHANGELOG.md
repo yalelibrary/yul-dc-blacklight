@@ -114,7 +114,6 @@ No user facing changes in this release.
 - Prep for v1.6.0 release [\#142](https://github.com/yalelibrary/yul-dc-blacklight/pull/142) ([maxkadel](https://github.com/maxkadel))
 - Don't set hosts, breaks production, can re-add for security once runn… [\#141](https://github.com/yalelibrary/yul-dc-blacklight/pull/141) ([maxkadel](https://github.com/maxkadel))
 - Add link in "Sign In" page to authenticate using Yale CAS [\#139](https://github.com/yalelibrary/yul-dc-blacklight/pull/139) ([edejesusyale](https://github.com/edejesusyale))
-- Sort search results by date from newest to oldest and oldest to newest [\#137](https://github.com/yalelibrary/yul-dc-blacklight/pull/137) ([tilthouse](https://github.com/tilthouse))
 
 ## [v1.5.0](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.5.0) (2020-06-19)
 
@@ -123,6 +122,7 @@ No user facing changes in this release.
 **Technical Enhancements:**
 
 - Add changelog for release v1.5.0 [\#138](https://github.com/yalelibrary/yul-dc-blacklight/pull/138) ([mark-dce](https://github.com/mark-dce))
+- Sort search results by date from newest to oldest and oldest to newest [\#137](https://github.com/yalelibrary/yul-dc-blacklight/pull/137) ([tilthouse](https://github.com/tilthouse))
 - Add Honeybadger for execption reporting in production [\#136](https://github.com/yalelibrary/yul-dc-blacklight/pull/136) ([mark-dce](https://github.com/mark-dce))
 - Only bundle when we have to so that CI is fast again [\#135](https://github.com/yalelibrary/yul-dc-blacklight/pull/135) ([orangewolf](https://github.com/orangewolf))
 - Search filters display user friendly names [\#134](https://github.com/yalelibrary/yul-dc-blacklight/pull/134) ([alishaevn](https://github.com/alishaevn))
