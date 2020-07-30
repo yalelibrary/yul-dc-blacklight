@@ -2,12 +2,31 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 
+
+
+.bg-dark {
+  background-color: $yale_blue !important;
+}
+
+.dropdown-menu.show {
+  display: contents;
+}
+
+.dropdown-menu {
+  color: $white!important;
+  text-transform: capitalize!important;
+}
+
 .iiif-logo img {
   height: 30px;
 }
 
-.bg-dark {
-  background-color: $yale_blue !important;
+.info-header {
+  text-transform: uppercase;
+  border-bottom: $white thin solid;
+  margin-right: -10rem;
+  margin-left: -15%;
+  padding-left: 18%;
 }
 
 .nav-link {
@@ -58,36 +77,22 @@ DEFAULT MOBILE STYLING
   font-family: $yaleRoman!important;
 }
 
-.dropdown-menu.show {
-  display: contents;
-}
-
-.dropdown-menu {
-  color: $white!important;
-  text-transform: capitalize!important;
-}
-
-.info-header {
-  text-transform: uppercase;
-  border-bottom: $white thin solid;
-  margin-right: -10rem;
-  margin-left: -15%;
-  padding-left: 18%;
-}
-
 
 @media screen and (min-width: $small_device) {
-  .secondary-nav > .row {
-    max-width: 540px;
-  }
   .info-header {
     margin-left: -26%;
     padding-left: 27%;
+  }
+  .secondary-nav > .row {
+    max-width: 540px;
   }
 }
 
 
 @media screen and (min-width: $medium_device) {
+  .info-header {
+    padding-left: 30%;
+  }
   .navbar > .container {
     flex-direction: column;
     align-items: start;
@@ -97,9 +102,6 @@ DEFAULT MOBILE STYLING
   }
   .secondary-nav > .row {
     max-width: 720px;
-  }
-  .info-header {
-    padding-left: 30%;
   }
 }
 
@@ -112,6 +114,14 @@ DEFAULT MOBILE STYLING
 
 
 @media screen and (min-width: $xlarge_device) {
+  .info-header {
+    padding-left: 26.5%;
+    margin-right: 1rem;
+    border-bottom: none;
+  }
+  .menu-block {
+    width: 250px;
+  }
   .navbar > .container {
     flex-direction: initial;
   }
@@ -124,9 +134,5 @@ DEFAULT MOBILE STYLING
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom:0.15rem;
-  }
-  .info-header {
-    margin-right: 1rem;
-    border-bottom: none;
   }
 }
