@@ -33,7 +33,7 @@ touch .secrets
 ```bash
   docker-compose pull blacklight
 ```
-## Install
+## Install Camerata
 
 Clone the yul-dc-camerata repo and install the gem.
 
@@ -44,7 +44,7 @@ cd yul-dc-camerata
 bundle install
 rake install
 ```
-## Updates
+## Update Camerata
 
 - You can get the latest version at any point by updating the code and reinstalling
 
@@ -65,8 +65,8 @@ tasks common to the various applications in the yul-dc application stack.
 
 All buildin commands can be listed with `cam help` and individual usage 
 information is available with `cam help COMMAND`.  Please note that deployment 
-commands (found in the `./bin` directory) are pass through and are therefor not 
-listed by the help command.  See th usage for those below. 
+commands (found in the `./bin` directory) are passed through and are therefore not 
+listed by the help command.  See the usage for those below. 
 
 To start the application stack, run `cam up` in the blacklight directory. This starts all of the applications as they are 
 all dependencies of yul-blacklight. Camerata is smart. If you start `cam up` from 
@@ -91,7 +91,7 @@ code checkouts.
 
 ## Troubleshooting
 
-If you receive an `please set your AWS_PROFILE and AWS_DEFAULT_REGION (RuntimeError)` error when you `cam up`, you will need to set your AWS credentials. Credentials can be set in the `~/.aws/credentials` file in the following format:
+If you receive a `please set your AWS_PROFILE and AWS_DEFAULT_REGION (RuntimeError)` error when you `cam up`, you will need to set your AWS credentials. Credentials can be set in the `~/.aws/credentials` file in the following format:
 ```bash
 [dce-hosting]
 aws_access_key_id=YOUR_ACCESS_KEY
