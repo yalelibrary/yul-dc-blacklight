@@ -10,7 +10,7 @@ DEFAULT MOBILE STYLING
   background-color: $yale_blue !important;
 }
 
-.nav-link{
+.nav-link {
   margin-left: 5px;
   margin-right: 5px;
   font-family: $malloryMedium !important;
@@ -24,17 +24,17 @@ DEFAULT MOBILE STYLING
   color: $lightest_grey !important;
 }
 
-.navbar-brand{
+.navbar-brand {
   color: transparent !important;
 }
 
-.navbar-logo{
+.navbar-logo {
   background-image: url(yul_logo/yul_logo3x.png);
   flex: 0 1 50%;
   background-size: contain;
   background-position-y: center;
 }
-.secondary-nav{
+.secondary-nav {
   background-color: $yale_blue;
   font-family:$malloryMedium!important;
   color:$white !important;
@@ -59,7 +59,6 @@ DEFAULT MOBILE STYLING
 }
 
 .dropdown-menu.show {
-  // position: absolute;
   display: contents;
 }
 
@@ -68,36 +67,26 @@ DEFAULT MOBILE STYLING
   text-transform: capitalize!important;
 }
 
-// .dropdown-submenu{
-  // color: $white!important;
-  // text-transform: capitalize!important;
-// }
-
 .info-header {
   text-transform: uppercase;
   border-bottom: $white thin solid;
-  margin-right: -4rem;
-  margin-left: -1rem;
-  padding-left: 2rem;
+  margin-right: -10rem;
+  margin-left: -15%;
+  padding-left: 18%;
 }
 
-.dropdown-toggle-yul{
-}
-.accordion:hover{
-  background-color: #0000FF;
-}
-.active, .accordion:hover {
-  background-color: #ccc;
-}
 
 @media screen and (min-width: $small_device) {
   .secondary-nav > .row {
     max-width: 540px;
   }
-  .dropdown-toggle-yul{
-
+  .info-header {
+    margin-left: -26%;
+    padding-left: 27%;
   }
 }
+
+
 @media screen and (min-width: $medium_device) {
   .navbar > .container {
     flex-direction: column;
@@ -109,15 +98,18 @@ DEFAULT MOBILE STYLING
   .secondary-nav > .row {
     max-width: 720px;
   }
-
+  .info-header {
+    padding-left: 30%;
+  }
 }
+
 
 @media screen and (min-width: $large_device) {
   .secondary-nav > .row {
     max-width: 960px;
   }
-
 }
+
 
 @media screen and (min-width: $xlarge_device) {
   .navbar > .container {
@@ -133,11 +125,8 @@ DEFAULT MOBILE STYLING
     padding-right: 15px;
     padding-bottom:0.15rem;
   }
-  .dropdown-toggle-yul{
-    border-bottom: transparent;
-    margin-right: 0rem;
-    margin-left: 0rem;
-    margin-bottom: 0rem;
-    padding-left: 0rem;
+  .info-header {
+    margin-right: 1rem;
+    border-bottom: none;
   }
 }
