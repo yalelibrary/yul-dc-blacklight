@@ -34,7 +34,70 @@ DEFAULT MOBILE STYLING
   background-size: contain;
   background-position-y: center;
 }
+.secondary-nav{
+  background-color: $yale_blue;
+  font-family:$malloryMedium!important;
+  color:$white !important;
+  font-size: small;
+  border-top: $white thin solid;
+  align-items: center;
+}
 
+.secondary-nav > .row {
+  width: 100%;
+  flex-direction: column;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.secondary-nav a {
+  color:$white !important;
+  font-size: large;
+  font-family: $yaleRoman!important;
+}
+
+.dropdown-menu.show {
+  // position: absolute;
+  display: contents;
+}
+
+.dropdown-menu {
+  color: $white!important;
+  text-transform: capitalize!important;
+}
+
+// .dropdown-submenu{
+  // color: $white!important;
+  // text-transform: capitalize!important;
+// }
+
+.info-header {
+  text-transform: uppercase;
+  border-bottom: $white thin solid;
+  margin-right: -4rem;
+  margin-left: -1rem;
+  padding-left: 2rem;
+}
+
+.dropdown-toggle-yul{
+}
+.accordion:hover{
+  background-color: #0000FF;
+}
+.active, .accordion:hover {
+  background-color: #ccc;
+}
+
+@media screen and (min-width: $small_device) {
+  .secondary-nav > .row {
+    max-width: 540px;
+  }
+  .dropdown-toggle-yul{
+
+  }
+}
 @media screen and (min-width: $medium_device) {
   .navbar > .container {
     flex-direction: column;
@@ -43,6 +106,17 @@ DEFAULT MOBILE STYLING
   .navbar-logo {
     width: 45%;
   }
+  .secondary-nav > .row {
+    max-width: 720px;
+  }
+
+}
+
+@media screen and (min-width: $large_device) {
+  .secondary-nav > .row {
+    max-width: 960px;
+  }
+
 }
 
 @media screen and (min-width: $xlarge_device) {
@@ -51,5 +125,19 @@ DEFAULT MOBILE STYLING
   }
   .navbar-logo {
     flex: 0 1 25%;
+  }
+  .secondary-nav > .row {
+    flex-direction: initial;
+    max-width: 1140px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom:0.15rem;
+  }
+  .dropdown-toggle-yul{
+    border-bottom: transparent;
+    margin-right: 0rem;
+    margin-left: 0rem;
+    margin-bottom: 0rem;
+    padding-left: 0rem;
   }
 }
