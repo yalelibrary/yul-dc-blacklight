@@ -3,8 +3,11 @@
 Rails.application.routes.draw do
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   concern :marc_viewable, Blacklight::Marc::Routes::MarcViewable.new
-  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
-  get '/auth/:provider/callback', to: 'sessions#create'
+  devise_for :users, skip: [:sessions, :registrations, :passwords], controllers: { omniauth_callbacks: "omniauth_callbacks" }
+  devise_scope :user do
+    delete 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
+  end
+
   mount Blacklight::Engine => '/'
   root to: "catalog#index"
   concern :searchable, Blacklight::Routes::Searchable.new

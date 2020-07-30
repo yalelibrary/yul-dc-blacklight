@@ -56,7 +56,7 @@ DEFAULT MOBILE STYLING
   font-size: xx-small;
 }
 
-@media screen and (min-width: $desktop) {
+@media screen and (min-width: $xlarge_device) {
   .footer-container {
       display: grid;
       grid-template-columns: 15% 20% 50% 15%;
@@ -69,9 +69,9 @@ DEFAULT MOBILE STYLING
 }
 
 
-@media screen and (min-width: $tablet) {
+@media screen and (min-width: $medium_device) {
 }
 
 
-@media screen and (min-width: $desktop) {
+@media screen and (min-width: $xlarge_device) {
 }
