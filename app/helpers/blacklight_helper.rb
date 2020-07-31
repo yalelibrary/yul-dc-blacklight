@@ -44,9 +44,9 @@ module BlacklightHelper
 
   def link_to_orbis_bib_id(arg)
     bib_id = arg[:document][arg[:field]]
-    link = "http://hdl.handle.net/10079/bibid/#{bib_id[0]}"
+    link = "http://hdl.handle.net/10079/bibid/#{bib_id}"
 
-    link_to(bib_id[0], link)
+    link_to(bib_id, link)
   end
 
   def link_to_url(arg)
@@ -57,7 +57,7 @@ module BlacklightHelper
     # return placeholder image if not logged in for yale only works
     return image_tag('placeholder_restricted.png') if (document[:visibility_ssi].eql? 'Yale Community Only') && !user_signed_in?
 
-    oid = sanitize_oid_ssim(document[:oid_ssim])
+    oid = sanitize_oid_ssi(document[:oid_ssi])
     request = get_child_img_url(oid)
     return image_tag('no_preview_available_dan.png') unless image_exists?(request)
     return image_tag(request) if ['Public', 'Yale Community Only'].include? document[:visibility_ssi]
@@ -66,10 +66,10 @@ module BlacklightHelper
   private
 
   # @return [String], strips anything added to the oid
-  # needed for yale-only works which have '-yale' appended to the oid_ssim
-  def sanitize_oid_ssim(oid_ssim)
-    if (oid = oid_ssim&.first).present?
-      oid = oid.match(%r{(?<oid_clean>\d+)}).try(:[], :oid_clean) if oid_ssim.present?
+  # needed for yale-only works which have '-yale' appended to the oid_ssi
+  def sanitize_oid_ssi(oid_ssi)
+    if (oid = oid_ssi&.first).present?
+      oid = oid.match(%r{(?<oid_clean>\d+)}).try(:[], :oid_clean) if oid_ssi.present?
     else
       oid = ''
     end
