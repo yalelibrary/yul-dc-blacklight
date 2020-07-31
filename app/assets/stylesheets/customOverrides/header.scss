@@ -93,13 +93,16 @@ DEFAULT MOBILE STYLING
   .info-header {
     padding-left: 30%;
   }
+
   .navbar > .container {
     flex-direction: column;
     align-items: start;
   }
+
   .navbar-logo {
     width: 45%;
   }
+
   .secondary-nav > .row {
     max-width: 720px;
   }
@@ -119,15 +122,30 @@ DEFAULT MOBILE STYLING
     margin-right: 1rem;
     border-bottom: none;
   }
-  .menu-block {
-    width: 250px;
+  .menu-block-wrapper {
+    position: absolute;
+    width: max-content;
   }
+
   .navbar > .container {
     flex-direction: initial;
   }
+
   .navbar-logo {
     flex: 0 1 25%;
   }
+
+  .secondary-nav .content {
+    // TODO(alishaevn): figure out how to dynamically adjust this height property
+    height: 575px !important;
+  }
+
+  .secondary-nav .dropdown-menu > li {
+    position: relative;
+    float: none;
+    display: block;
+  }
+
   .secondary-nav > .row {
     flex-direction: initial;
     max-width: 1140px;
