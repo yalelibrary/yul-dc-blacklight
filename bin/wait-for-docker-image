@@ -13,7 +13,7 @@ do
     echo "Docker image found"
     break
   else 
-    echo not exists
+    echo "Docker image does not exist"
   fi
   sleep 60
   echo LOOP_COUNT: $LOOP_COUNT
