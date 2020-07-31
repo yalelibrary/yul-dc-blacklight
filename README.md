@@ -12,72 +12,23 @@ This is one of the microservices applications that form the Yale digital library
 
 ### Docker Development Setup
 
-```bash
-git clone https://github.com/yalelibrary/yul-dc-blacklight.git
-```
+- Checkout the project
 
-## Change to the application directory
-
-```bash
-cd ./yul-dc-blacklight
-```
-
-## Create needed files on your command line
-
-```bash
-touch .secrets
-```
-
-## If this is your first time working in this repo or the Dockerfile has been updated you will need to pull your services
-
-```bash
+  ```bash
+  git clone https://github.com/yalelibrary/yul-dc-blacklight.git
+  cd yul-dc-blacklight
   docker-compose pull blacklight
-```
-## Install Camerata
+  ```
 
-Clone the yul-dc-camerata repo and install the gem.
+### Starting the app
 
+- Start the blacklight service and it's dependencies This command reads the docker-compose.yml file and starts all the containers described by it including blacklight, solr, the manifest service, the management app, and a iiif image server.
 
-```bash
-git clone git@github.com:yalelibrary/yul-dc-camerata.git
-cd yul-dc-camerata
-bundle install
-rake install
-```
-## Update Camerata
+  ```bash
+  docker-compose up blacklight
+  ```
 
-- You can get the latest version at any point by updating the code and reinstalling
-
-```bash
-cd yul-dc-camerata
-git pull origin master
-bundle install
-rake install
-```
-
-## General Use
-
-Once camerata is installed on your system, interactions happen through the 
-camerata command-line tool or through its alias `cam`.  The camerata tool can be 
-used to bring the development stack up and down locally, interact with the 
-docker containers, deploy, run the smoke tests and otherwise do development 
-tasks common to the various applications in the yul-dc application stack.
-
-All buildin commands can be listed with `cam help` and individual usage 
-information is available with `cam help COMMAND`.  Please note that deployment 
-commands (found in the `./bin` directory) are passed through and are therefore not 
-listed by the help command.  See the usage for those below. 
-
-To start the application stack, run `cam up` in the blacklight directory. This starts all of the applications as they are 
-all dependencies of yul-blacklight. Camerata is smart. If you start `cam up` from 
-a blacklight code check out it will mount that code for local development 
-(changes to the outside code will affect the inside container). If you start the 
-`cam up` from the blacklight application you will get the blacklight code mounted
-for local development and the blacklight code will run as it is in the downloaded 
-image. You can also start the two applications both mounted for development by 
-starting the blacklight application with `--without management` and the 
-managment application `--without solr --withouth db` each from their respective 
-code checkouts.
+  Output from the blackight container will display in your terminal window with Solr, Cantaloupe (IIIF), and Manifest services running in the background
 
 - Access the blacklight app at `http://localhost:3000`
 
@@ -87,31 +38,12 @@ code checkouts.
 
 - Access the manifests instance at `http://localhost`
 
-- Access the management app at `http://localhost:3001/management`
-
-## Troubleshooting
-
-If you receive a `please set your AWS_PROFILE and AWS_DEFAULT_REGION (RuntimeError)` error when you `cam up`, you will need to set your AWS credentials. Credentials can be set in the `~/.aws/credentials` file in the following format:
-```bash
-[dce-hosting]
-aws_access_key_id=YOUR_ACCESS_KEY
-aws_secret_access_key=YOUR_SECRET_ACCESS_KEY
-```
-After the credentials have been set, you will need to export the following settings via the command line:
-```bash
-export AWS_PROFILE=dce-hosting && export AWS_DEFAULT_REGION=us-east-1
-```
-Note: AWS_PROFILE name needs to match the credentials profile name (`[dce-hosting]`). After you set the credentials, you will need to re-install camerata: `rake install`
-
-If you use rbenv, you must run the following command after installing camerata:
-`rbenv rehash`
-
 ### Accessing the blacklight container
 
 - In a separate terminal window or tab, run:
 
   ```bash
-  docker exec -it yul-dc-blacklight_blacklight_1 /bin/bash
+  docker-compose exec blacklight bash
   ```
 
 - You will need to be inside the container to:
