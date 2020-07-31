@@ -122,10 +122,6 @@ DEFAULT MOBILE STYLING
     margin-right: 1rem;
     border-bottom: none;
   }
-  .menu-block-wrapper {
-    position: absolute;
-    width: max-content;
-  }
 
   .navbar > .container {
     flex-direction: initial;
@@ -137,7 +133,8 @@ DEFAULT MOBILE STYLING
 
   .secondary-nav .content {
     // TODO(alishaevn): figure out how to dynamically adjust this height property
-    height: 575px !important;
+    // height: 575px !important;
+    // height: max-content;
   }
 
   .secondary-nav .dropdown-menu > li {
