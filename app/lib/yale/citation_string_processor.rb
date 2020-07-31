@@ -44,8 +44,8 @@ module Yale
       [
         formatted_apa_author,
         apa_box,
-        ("(#{obj[:date_tsim]&.first})" unless obj[:date_tsim].nil?),
-        ("[#{obj[:title_tsim]&.first}#{apa_edition}]. " unless obj[:title_tsim].nil?),
+        ("(#{obj[:date_ssim]&.first})" unless obj[:date_ssim].nil?),
+        ("[#{obj[:title_tesim]&.first}#{apa_edition}]. " unless obj[:title_tesim].nil?),
         append_string_with_period(obj[:partOf_ssim]),
         url,
         "."
@@ -55,9 +55,9 @@ module Yale
     def mla_default_citation
       [
         formatted_mla_author,
-        append_string_with_period(obj[:title_tsim]),
+        append_string_with_period(obj[:title_tesim]),
         append_string_with_period(obj[:box_ssim]),
-        append_string_with_period(obj[:date_tsim]),
+        append_string_with_period(obj[:date_ssim]),
         append_string_with_period(obj[:partOf_ssim]),
         url,
         "."

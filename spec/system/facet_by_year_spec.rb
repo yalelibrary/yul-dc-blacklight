@@ -12,7 +12,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   let(:test_record_0) do
     {
       id: '211',
-      subtitle_tsim: "He's Handsome",
+      subtitle_tesim: "He's Handsome",
       author_tsim: 'Eric & Frederick',
       author_vern_ssim: 'Eric & Frederick',
       format: 'three dimensional object',
@@ -32,7 +32,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   let(:test_record_1) do
     {
       id: '311',
-      subtitle_tsim: "He's Dan",
+      subtitle_tesim: "He's Dan",
       author_tsim: 'Eric & Frederick',
       author_vern_ssim: 'Eric & Frederick',
       format: 'three dimensional object',
@@ -52,7 +52,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   let(:test_record_2) do
     {
       id: '411',
-      subtitle_tsim: "He's Handsome Dan",
+      subtitle_tesim: "He's Handsome Dan",
       author_tsim: 'Eric & Frederick',
       author_vern_ssim: 'Eric & Frederick',
       format: 'three dimensional object',

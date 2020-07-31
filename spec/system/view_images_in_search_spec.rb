@@ -12,21 +12,21 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
   let(:document_with_image) do
     {
       id: 'test_record_1',
-      oid_ssim: ['2055095'],
+      oid_ssi: ['2055095'],
       visibility_ssi: 'Public'
     }
   end
   let(:document_yale_only_image) do
     {
       id: 'test_record_2',
-      oid_ssim: ['2107188'],
+      oid_ssi: ['2107188'],
       visibility_ssi: 'Yale Community Only'
     }
   end
   let(:document_without_image) do
     {
       id: 'test_record_3',
-      oid_ssim: [''],
+      oid_ssi: [''],
       visibility_ssi: 'Public'
     }
   end
