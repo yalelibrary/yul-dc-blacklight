@@ -123,18 +123,17 @@ DEFAULT MOBILE STYLING
     border-bottom: none;
   }
 
+  .menu-block-wrapper {
+    position: absolute;
+    width: max-content;
+  }
+
   .navbar > .container {
     flex-direction: initial;
   }
 
   .navbar-logo {
     flex: 0 1 25%;
-  }
-
-  .secondary-nav .content {
-    // TODO(alishaevn): figure out how to dynamically adjust this height property
-    // height: 575px !important;
-    // height: max-content;
   }
 
   .secondary-nav .dropdown-menu > li {
