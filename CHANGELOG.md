@@ -1,5 +1,19 @@
 # Changelog
 
+## [v1.7.6](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.7.6) (2020-08-03)
+
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.7.6...v1.7.6)
+
+**Technical Enhancements:**
+
+- Circle ci wait on release [\#215](https://github.com/yalelibrary/yul-dc-blacklight/pull/215) ([JzGo](https://github.com/JzGo))
+- Use image-url so that asset pipeline works properly [\#213](https://github.com/yalelibrary/yul-dc-blacklight/pull/213) ([orangewolf](https://github.com/orangewolf))
+- Prep for v1.7.5 release [\#212](https://github.com/yalelibrary/yul-dc-blacklight/pull/212) ([bess](https://github.com/bess))
+
+## [v1.7.6](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.7.6) (2020-08-03)
+
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.7.5...v1.7.6)
+
 ## [v1.7.5](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.7.5) (2020-08-03)
 
 [Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.7.4...v1.7.5)
@@ -22,7 +36,6 @@
 - Added new recompression logo image [\#208](https://github.com/yalelibrary/yul-dc-blacklight/pull/208) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Circle ci wait on release [\#206](https://github.com/yalelibrary/yul-dc-blacklight/pull/206) ([JzGo](https://github.com/JzGo))
 - Update allfields search behavior 388 [\#205](https://github.com/yalelibrary/yul-dc-blacklight/pull/205) ([FCRodriguez7](https://github.com/FCRodriguez7))
-- increase management version for blacklight [\#204](https://github.com/yalelibrary/yul-dc-blacklight/pull/204) ([orangewolf](https://github.com/orangewolf))
 - Added camerata instructions to blacklight readme [\#202](https://github.com/yalelibrary/yul-dc-blacklight/pull/202) ([dylansalay](https://github.com/dylansalay))
 
 ## [v1.7.3](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.7.3) (2020-07-29)
@@ -42,6 +55,7 @@
 
 **Technical Enhancements:**
 
+- increase management version for blacklight [\#204](https://github.com/yalelibrary/yul-dc-blacklight/pull/204) ([orangewolf](https://github.com/orangewolf))
 - Prep for v1.7.2 release [\#196](https://github.com/yalelibrary/yul-dc-blacklight/pull/196) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Fix sort search RSpec [\#195](https://github.com/yalelibrary/yul-dc-blacklight/pull/195) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Add YUL footer style and links [\#194](https://github.com/yalelibrary/yul-dc-blacklight/pull/194) ([FCRodriguez7](https://github.com/FCRodriguez7))
