@@ -90,8 +90,6 @@ jobs:
     steps:
       - setup_remote_docker
       - docker/check
-      - run: |
-          ./bin/wait-for-docker-image yalelibraryit/dc-blacklight $CIRCLE_SHA1
       - docker/pull:
           images: yalelibraryit/dc-blacklight:$CIRCLE_SHA1
       - docker-tag:
