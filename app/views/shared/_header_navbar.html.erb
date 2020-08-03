@@ -16,10 +16,10 @@
         <div class="row">
             <section class="info-header">
                 <div class="dropdown">
-                    <h2 data-toggle="dropdown">
-                        <a class="nav-link-title" href="#" role="button" aria-expanded="true">Research</a>
+                    <h2 class="nav-link-title" data-toggle="dropdown">
+                        <a href="#" role="button" aria-expanded="true">Research</a><p class="nav-link-caret">^</p>
                     </h2>
-                    <div class="content">
+                    <div class="content-yul">
                         <div class="menu-block-wrapper">
                             <ul class="dropdown-menu">
                                 <li>
@@ -65,10 +65,10 @@
 
             <section class="info-header">
                 <div class="dropdown">
-                    <h2 data-toggle="dropdown">
-                        <a class="nav-link-title" href="#" role="button" aria-expanded="false">Services</a>
+                    <h2 class="nav-link-title" data-toggle="dropdown">
+                        <a href="#" role="button" aria-expanded="false">Services</a><p class="nav-link-caret">^</p>
                     </h2>
-                    <div class="content">
+                    <div class="content-yul">
                         <div class="menu-block-wrapper">
                             <ul class="dropdown-menu">
                                 <li>
@@ -112,10 +112,10 @@
 
             <section class="info-header">
                 <div class="dropdown">
-                    <h2 data-toggle="dropdown">
-                        <a class="nav-link-title" href="#" role="button" aria-expanded="false">Libraries & Collections</a>
+                    <h2 class="nav-link-title" data-toggle="dropdown">
+                        <a href="#" role="button" aria-expanded="false">Libraries & Collections</a><p class="nav-link-caret">^</p>
                     </h2>
-                    <div class="content">
+                    <div class="content-yul">
                         <div class="menu-block-wrapper">
                             <ul class="dropdown-menu">
                                 <li>
@@ -185,10 +185,10 @@
 
             <section class="info-header">
                 <div class="dropdown">
-                    <h2 data-toggle="dropdown">
-                        <a class="nav-link-title" href="#" role="button" aria-expanded="false">Information & Policies</a>
+                    <h2 class="nav-link-title" data-toggle="dropdown">
+                        <a href="#" role="button" aria-expanded="false">Information & Policies</a><p class="nav-link-caret">^</p>
                     </h2>
-                    <div class="content">
+                    <div class="content-yul">
                         <div class="menu-block-wrapper">
                             <ul class="dropdown-menu">
                                 <li>
@@ -266,15 +266,21 @@
   // show and hide the dropdown links properly
   $(document).ready(function() {
     $('.secondary-nav .nav-link-title').click(function(e) {
-      $('.secondary-nav .content').addClass('content-show', function() {
-          $('.content').height($('.secondary-nav .dropdown.show .menu-block-wrapper')[0].offsetHeight + 20)
+      $('.secondary-nav .content-yul').addClass('content-show', function() {
+        const contentBlock = $('.secondary-nav .dropdown.show .menu-block-wrapper')[0]
+
+        if (contentBlock) {
+          $('.content-yul').height(contentBlock.offsetHeight + 20)
+        } else {
+          $('.content-yul').height(0)
+        }
       })
     })
 
     $('body').on('click', function(e) {
       if (!$(e.target).is('.secondary-nav .nav-link-title') && !$(e.target).is('.secondary-nav .nav-link-title li a')) {
-        $('.secondary-nav .content').removeClass('content-show')
-        $('.content').height(0)
+        $('.secondary-nav .content-yul').removeClass('content-show')
+        $('.content-yul').height(0)
       }
     })
   })

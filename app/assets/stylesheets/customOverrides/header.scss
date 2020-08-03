@@ -136,6 +136,23 @@ DEFAULT MOBILE STYLING
     flex: 0 1 25%;
   }
 
+  .nav-link-caret {
+    transform: rotate(180deg);
+    -ms-transform: rotate(180deg);  /*  for IE  */
+    -webkit-transform: rotate(180deg); /* for browsers supporting webkit (such as chrome, firefox, safari etc.). */
+    font-size: 16px;
+    display: inline-block;
+    padding: 3px 3px 0px 0px;
+  }
+
+  .nav-link-title {
+    margin-bottom: 0px;
+  }
+
+  .nav-link-title > a {
+    display: inline-block;
+  }
+
   .secondary-nav .dropdown-menu > li {
     position: relative;
     float: none;
