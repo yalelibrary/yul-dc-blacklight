@@ -1,5 +1,5 @@
 unreleased=true
-future-release=v1.7.4
+future-release=v1.7.5
 enhancement-labels=Features
 bug-labels=Bugs
 pr-label=**Technical Enhancements:**

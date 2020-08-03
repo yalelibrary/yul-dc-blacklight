@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.7.5](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.7.5) (2020-08-03)
+
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.7.4...v1.7.5)
+
+**Technical Enhancements:**
+
+- Revert "Circle ci wait on release" [\#211](https://github.com/yalelibrary/yul-dc-blacklight/pull/211) ([bess](https://github.com/bess))
+
 ## [v1.7.4](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.7.4) (2020-08-03)
 
 [Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.7.3...v1.7.4)
@@ -10,6 +18,7 @@
 
 **Technical Enhancements:**
 
+- Prep for v1.7.4 release [\#210](https://github.com/yalelibrary/yul-dc-blacklight/pull/210) ([bess](https://github.com/bess))
 - Added new recompression logo image [\#208](https://github.com/yalelibrary/yul-dc-blacklight/pull/208) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Circle ci wait on release [\#206](https://github.com/yalelibrary/yul-dc-blacklight/pull/206) ([JzGo](https://github.com/JzGo))
 - Update allfields search behavior 388 [\#205](https://github.com/yalelibrary/yul-dc-blacklight/pull/205) ([FCRodriguez7](https://github.com/FCRodriguez7))
@@ -85,6 +94,7 @@
 - Add Yale branded typefaces and colors [\#168](https://github.com/yalelibrary/yul-dc-blacklight/pull/168) ([alishaevn](https://github.com/alishaevn))
 - Do not hard code Blacklight application version [\#166](https://github.com/yalelibrary/yul-dc-blacklight/pull/166) ([bess](https://github.com/bess))
 - Add Test for basic http status codes 401 and 200 [\#165](https://github.com/yalelibrary/yul-dc-blacklight/pull/165) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Modify auth redirect and add tests [\#164](https://github.com/yalelibrary/yul-dc-blacklight/pull/164) ([K8Sewell](https://github.com/K8Sewell))
 - Increase code coverage for citation\_string\_processor.rb [\#163](https://github.com/yalelibrary/yul-dc-blacklight/pull/163) ([alishaevn](https://github.com/alishaevn))
 - Remove unnecessary file: Sessions\_Controller.rb [\#161](https://github.com/yalelibrary/yul-dc-blacklight/pull/161) ([FCRodriguez7](https://github.com/FCRodriguez7))
 
@@ -96,7 +106,6 @@ No user facing changes in this release.
 
 **Technical Enhancements:**
 
-- Modify auth redirect and add tests [\#164](https://github.com/yalelibrary/yul-dc-blacklight/pull/164) ([K8Sewell](https://github.com/K8Sewell))
 - Prep for 1.6.2 release [\#160](https://github.com/yalelibrary/yul-dc-blacklight/pull/160) ([bess](https://github.com/bess))
 - Management DB name now follows Blacklight DB name pattern [\#159](https://github.com/yalelibrary/yul-dc-blacklight/pull/159) ([maxkadel](https://github.com/maxkadel))
 - Add thumbnail for objects with no images [\#158](https://github.com/yalelibrary/yul-dc-blacklight/pull/158) ([FCRodriguez7](https://github.com/FCRodriguez7))
