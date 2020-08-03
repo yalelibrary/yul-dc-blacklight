@@ -4,7 +4,7 @@ en:
       quicksearch:
         title: Quicksearch
         url: http://search.library.yale.edu
-        description:
+        description: ''
       searchLibraryCatalogOrbis:
         title: Search Library Catalog (Orbis)
         url: http://orbis.library.yale.edu/vwebv/
@@ -66,20 +66,20 @@ en:
       guideUsingSpecialCollections:
         title: Guide to Using Special Collections
         url: http://guides.library.yale.edu/specialcollections
-        description:
+        description: ''
     services:
       yourPersonalLibrarian:
         title: Your Personal Librarian
         url: https://library.yale.edu/pl
-        description:
+        description: ''
       subjectSpecialists:
         title: Subject Specialists
         url: https://library.yale.edu/subject-specialists
-        description:
+        description: ''
       researchSupportandWorkshops:
         title: Research Support and Workshops
         url: http://guides.library.yale.edu/research-help
-        description:
+        description: ''
       citationTools:
         title: Citation Tools
         url: http://guides.library.yale.edu/citationmanagement
@@ -87,7 +87,7 @@ en:
       getIt@Yale:
         title: Get It @ Yale (Borrow Direct, Interlibrary Loan, Scan & Deliver)
         url: http://guides.library.yale.edu/getit
-        description:
+        description: ''
       courseReserves:
         title: Course Reserves
         url: http://guides.library.yale.edu/reserves
@@ -110,7 +110,7 @@ en:
       bassMediaEquipment:
         title: Bass Media Equipment
         url: https://reservations.yale.edu/bmec/
-        description:
+        description: ''
     librariesCollections:
       artsLibrary:
         title: Arts Library
@@ -127,7 +127,7 @@ en:
       classicsLibrary:
         title: Classics Library
         url: https://library.yale.edu/building/classics-library
-        description:
+        description: ''
       divinityLibrary:
         title: Divinity Library
         url: https://library.yale.edu/building/divinity-library
@@ -135,7 +135,7 @@ en:
       filmStudyCenter:
         title: Film Study Center
         url: https://library.yale.edu/film
-        description:
+        description: ''
       fortunoffArchive:
         title: Fortunoff Archive
         url: http://www.library.yale.edu/testimonies/
@@ -143,11 +143,11 @@ en:
       humanitiesCollections:
         title: Humanities Collections
         url: https://library.yale.edu/humanities
-        description:
+        description: ''
       internationalCollections:
         title: International Collections
         url: https://library.yale.edu/international-collections
-        description:
+        description: ''
       lawLibrary:
         title: Law Library
         url: https://library.yale.edu/building/law-library
@@ -155,27 +155,27 @@ en:
       lewisWalpoleLibrary:
         title: Lewis Walpole Library
         url: https://library.yale.edu/building/lewis-walpole-library
-        description:
+        description: ''
       libraryCollectionServices:
         title: Library Collection Services
         url: https://library.yale.edu/departments/lcs
-        description:
+        description: ''
       manuScriptsArchives:
         title: Manuscripts & Archives
         url: https://library.yale.edu/mssa
-        description:
+        description: ''
       mapCollection:
         title: Map Collection
         url: http://www.library.yale.edu/maps
-        description:
+        description: ''
       marxScienceSocialScienceLibrary:
         title: Marx Science & Social Science Library
         url: https://library.yale.edu/building/marx-science-and-social-science-library
-        description:
+        description: ''
       mathematicsLibrary:
         title: Mathematics Library
         url: https://library.yale.edu/building/math-library
-        description:
+        description: ''
       medicalLibrary:
         title: Medical Library
         url: https://library.yale.edu/building/medical-library
@@ -191,7 +191,7 @@ en:
       yaleCenterBritishArt:
         title: Yale Center for British Art
         url: https://library.yale.edu/building/yale-center-for-british-art
-        description:
+        description: ''
     informationPolicies:
       libraryHours:
         title: Library Hours
@@ -200,7 +200,7 @@ en:
       departmentsStaff:
         title: Departments & Staff
         url: https://library.yale.edu/sd
-        description:
+        description: ''
       borrowingCirculation:
         title: Borrowing & Circulation
         url: http://guides.library.yale.edu/borrow
@@ -208,41 +208,41 @@ en:
       servicesPersonsWithDisabilities:
         title: Services for Persons with Disabilities
         url: https://library.yale.edu/services-persons-disabilities
-        description:
+        description: ''
       copyrightBasics:
         title: Copyright Basics
         url: http://guides.library.yale.edu/copyright-guidance/copyright-basics
-        description:
+        description: ''
       scanningPrintingCopying:
         title: Scanning, Printing & Copying
         url: https://library.yale.edu/help/scanning-printing-copying
-        description:
+        description: ''
       computersWireless:
         title: Computers Wireless
         url: https://library.yale.edu/help/computers-and-wireless
-        description:
+        description: ''
       libraryPolicies:
         title: Library Policies
         url: http://guides.library.yale.edu/about/policies
-        description:
+        description: ''
       aboutLibrary:
         title: About the Library
         url: http://guides.library.yale.edu/about
-        description:
+        description: ''
       givingtoLibrary:
         title: Giving to the Library
         url: https://library.yale.edu/development
-        description:
+        description: ''
       purchaseRequest:
         title: Purchase Request
         url: https://library.yale.edu/form/purchase-request
-        description:
+        description: ''
       workingAtTheLibrary:
         title: Working at the Library
         url: http://guides.library.yale.edu/work
-        description:
+        description: ''
       termsGoverningMaterialsUse:
         title: Terms Governing Use of Materials
         url: https://guides.library.yale.edu/about/policies/access
-        description:
+        description: ''
 
