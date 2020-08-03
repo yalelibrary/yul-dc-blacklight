@@ -89,6 +89,7 @@ jobs:
     executor: docker/docker
     steps:
       - setup_remote_docker
+      - checkout
       - docker/check
       - run: |
           ./bin/wait-for-docker-image yalelibraryit/dc-blacklight $CIRCLE_SHA1
