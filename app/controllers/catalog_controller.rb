@@ -143,7 +143,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'description_tesim', label: 'Description'
     config.add_show_field 'abstract_tesim', label: 'Abstract'
     config.add_show_field 'alternativeTitle_tesim', label: 'Alternative Title'
-    config.add_show_field 'alternativeTitleDisplay_tesim', label: 'Alternative Title'
     config.add_show_field 'genre_ssim', label: 'Genre', link_to_facet: true
     config.add_show_field 'geoSubject_ssim', label: 'Geo Subject'
     config.add_show_field 'resourceType_ssim', label: 'Resource Type', link_to_facet: true
