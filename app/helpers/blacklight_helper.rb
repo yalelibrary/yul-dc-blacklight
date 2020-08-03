@@ -68,11 +68,11 @@ module BlacklightHelper
   # @return [String], strips anything added to the oid
   # needed for yale-only works which have '-yale' appended to the oid_ssi
   def sanitize_oid_ssi(oid_ssi)
-    if (oid = oid_ssi&.first).present?
-      oid = oid.match(%r{(?<oid_clean>\d+)}).try(:[], :oid_clean) if oid_ssi.present?
-    else
-      oid = ''
-    end
+    oid = if (oid = oid_ssi).present?
+            oid.to_s.match(%r{(?<oid_clean>\d+)}).try(:[], :oid_clean)
+          else
+            ''
+          end
 
     oid
   end
