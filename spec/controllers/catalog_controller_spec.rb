@@ -12,7 +12,7 @@ RSpec.describe CatalogController, type: :controller do
       let(:search_fields) { controller.blacklight_config.search_fields.keys }
 
       let(:expected_search_fields) do
-        ['all_fields', 'author_tsim', 'orbisBibId_ssim', 'subjectName_ssim', 'title_tsim']
+        ['all_fields', 'author_tsim', 'orbisBibId_ssi', 'subjectName_ssim', 'title_tesim']
       end
 
       it { expect(search_fields).to contain_exactly(*expected_search_fields) }
