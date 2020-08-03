@@ -205,7 +205,21 @@ class CatalogController < ApplicationController
     # solr request handler? The one set in config[:default_solr_parameters][:qt],
     # since we aren't specifying it otherwise.
 
-    config.add_search_field 'all_fields', label: 'All Fields'
+    # Blacklight 'out of box code'
+    # config.add_search_field 'all_fields', label: 'All Fields'
+
+    # Array allows for only listed Solr fields to be searched in the 'All Fields'
+    search_fields = ['abstract_ssim', 'author_tsim', 'alternativeTitle_ssim', 'orbisBidId_ssim', 'description_tesim',
+                     'publicatonPlace_ssim', 'publisher_ssim', 'sourceCreated_ssim', 'geo_subject_ssim',
+                     'subjectName_ssim', 'subject_topic_tsim', 'title_tsim']
+
+    config.add_search_field('all_fields', label: 'All Fields') do |field|
+      field.qt = 'search'
+      field.solr_parameters = {
+        qf: search_fields,
+        pf: ''
+      }
+    end
 
     # Now we see how to over-ride Solr request handler defaults, in this
     # case for a BL "search field", which is really a dismax aggregate
