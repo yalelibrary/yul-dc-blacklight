@@ -14,15 +14,72 @@ RSpec.describe 'header', type: :system do
     expect(page).to have_css '.navbar-brand'
     expect(page).to have_css '.navbar-logo'
     expect(page).to have_css '.secondary-nav'
-    expect(page).to have_css 'div#secondary-nav row'
     expect(page).to have_css '.secondary-nav a'
   end
 
-  it 'has expected links' do
+  it 'has expected links on the main header' do
     expect(page).to have_link('Ask Yale Library', href: 'http://ask.library.yale.edu/')
     expect(page).to have_link('Reserve Rooms', href: 'https://schedule.yale.edu/')
     expect(page).to have_link('Places to Study', href: 'https://web.library.yale.edu/places/to-study')
     expect(page).to have_link('Yale University Library', href: '/')
+  end
+
+  it 'has expected links in the submenu' do
+    expect(page).to have_link('Quicksearch', href: 'http://search.library.yale.edu')
+    expect(page).to have_link('Search Library Catalog (Orbis)', href: 'http://orbis.library.yale.edu/vwebv/')
+    expect(page).to have_link('Search Law Library Catalog (MORRIS)', href: 'http://morris.law.yale.edu/')
+    expect(page).to have_link('Search Borrow Direct', href: 'https://resources.library.yale.edu/cas/borrowdirect.aspx')
+    expect(page).to have_link('Search WorldCat', href: 'http://firstsearch.oclc.org/dbname=WorldCat;autho=100157622;FSIP')
+    expect(page).to have_link('Search Articles+', href: 'http://yale.summon.serialssolutions.com/')
+    expect(page).to have_link('Search Digital Collections', href: 'http://web.library.yale.edu/digital-collections')
+    expect(page).to have_link('Search Archives at Yale', href: 'http://archives.yale.edu')
+    expect(page).to have_link('Research Guides', href: 'http://guides.library.yale.edu/')
+    expect(page).to have_link('Find Databases by Title', href: 'http://search.library.yale.edu/databases')
+    expect(page).to have_link('Find eJournals by Title', href: 'http://wa4py6yj8t.search.serialssolutions.com')
+    expect(page).to have_link('Guide to Using Special Collections', href: 'http://guides.library.yale.edu/specialcollections')
+    expect(page).to have_link('Your Personal Librarian', href: 'https://library.yale.edu/pl')
+    expect(page).to have_link('Subject Specialists', href: 'https://library.yale.edu/subject-specialists')
+    expect(page).to have_link('Research Support and Workshops', href: 'http://guides.library.yale.edu/research-help')
+    expect(page).to have_link('Citation Tools', href: 'http://guides.library.yale.edu/citationmanagement')
+    expect(page).to have_link('Get It @ Yale (Borrow Direct, Interlibrary Loan, Scan & Deliver)', href: 'http://guides.library.yale.edu/getit')
+    expect(page).to have_link('Course Reserves', href: 'http://guides.library.yale.edu/reserves')
+    expect(page).to have_link('Off-Campus Access', href: 'https://library.yale.edu/help/off-campus-access-vpn')
+    expect(page).to have_link('EliScholar', href: 'http://elischolar.library.yale.edu')
+    expect(page).to have_link('OverDrive: Popular Audio and eBooks', href: 'http://yale.lib.overdrive.com/')
+    expect(page).to have_link('Bass Media Equipment', href: 'https://reservations.yale.edu/bmec/')
+    expect(page).to have_link('Arts Library', href: 'https://library.yale.edu/building/arts-library')
+    expect(page).to have_link('Bass Library', href: 'https://library.yale.edu/building/bass-library')
+    expect(page).to have_link('Beinecke Library', href: 'https://library.yale.edu/building/beinecke-library')
+    expect(page).to have_link('Classics Library', href: 'https://library.yale.edu/building/classics-library')
+    expect(page).to have_link('Divinity Library', href: 'https://library.yale.edu/building/divinity-library')
+    expect(page).to have_link('Film Study Center', href: 'https://library.yale.edu/film')
+    expect(page).to have_link('Fortunoff Archive', href: 'http://www.library.yale.edu/testimonies/')
+    expect(page).to have_link('Humanities Collections', href: 'https://library.yale.edu/humanities')
+    expect(page).to have_link('International Collections', href: 'https://library.yale.edu/international-collections')
+    expect(page).to have_link('Law Library', href: 'https://library.yale.edu/building/law-library')
+    expect(page).to have_link('Lewis Walpole Library', href: 'https://library.yale.edu/building/lewis-walpole-library')
+    expect(page).to have_link('Library Collection Services', href: 'https://library.yale.edu/departments/lcs')
+    expect(page).to have_link('Manuscripts & Archives', href: 'https://library.yale.edu/mssa')
+    expect(page).to have_link('Map Collection', href: 'http://www.library.yale.edu/maps')
+    expect(page).to have_link('Marx Science & Social Science Library', href: 'https://library.yale.edu/building/marx-science-and-social-science-library')
+    expect(page).to have_link('Mathematics Library', href: 'https://library.yale.edu/building/math-library')
+    expect(page).to have_link('Medical Library', href: 'https://library.yale.edu/building/medical-library')
+    expect(page).to have_link('Music Library', href: 'https://library.yale.edu/music')
+    expect(page).to have_link('Sterling Library', href: 'https://library.yale.edu/building/sterling-library')
+    expect(page).to have_link('Yale Center for British Art', href: 'https://library.yale.edu/building/yale-center-for-british-art')
+    expect(page).to have_link('Library Hours', href: 'https://library.yale.edu/buildings')
+    expect(page).to have_link('Departments & Staff', href: 'https://library.yale.edu/sd')
+    expect(page).to have_link('Borrowing & Circulation', href: 'http://guides.library.yale.edu/borrow')
+    expect(page).to have_link('Services for Persons with Disabilities', href: 'https://library.yale.edu/services-persons-disabilities')
+    expect(page).to have_link('Copyright Basics', href: 'http://guides.library.yale.edu/copyright-guidance/copyright-basics')
+    expect(page).to have_link('Scanning, Printing & Copying', href: 'https://library.yale.edu/help/scanning-printing-copying')
+    expect(page).to have_link('Computers Wireless', href: 'https://library.yale.edu/help/computers-and-wireless')
+    expect(page).to have_link('Library Policies', href: 'http://guides.library.yale.edu/about/policies')
+    expect(page).to have_link('About the Library', href: 'http://guides.library.yale.edu/about')
+    expect(page).to have_link('Giving to the Library', href: 'https://library.yale.edu/development')
+    expect(page).to have_link('Purchase Request', href: 'https://library.yale.edu/form/purchase-request')
+    expect(page).to have_link('Working at the Library', href: 'http://guides.library.yale.edu/work')
+    expect(page).to have_link('Terms Governing Use of Materials', href: 'https://guides.library.yale.edu/about/policies/access')
   end
 
   it 'has expected Yale log branding' do
