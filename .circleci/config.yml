@@ -67,9 +67,11 @@ jobs:
           command: curl -k https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN -d "payload[build_num]=$CIRCLE_BUILD_NUM&payload[status]=done"
 
   publish-latest:
+    # Testing fix in publish latest (it will run automatically)
     executor: docker/docker
     steps:
       - setup_remote_docker
+      - checkout # New step added to github-release workflow (to remedy no such file)
       - docker/check
       - docker/pull:
           images: yalelibraryit/dc-blacklight:$CIRCLE_SHA1
@@ -85,6 +87,11 @@ jobs:
       - docker/push:
           image: yalelibraryit/dc-blacklight
           tag: $CLEAN_BRANCH
+      # Test running script and pulling image
+      - run: |
+          ./bin/wait-for-docker-image yalelibraryit/dc-blacklight $CIRCLE_SHA1
+      - docker/pull:
+          images: yalelibraryit/dc-blacklight:$CIRCLE_SHA1
   publish-github-release:
     executor: docker/docker
     steps:
