@@ -15,7 +15,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   let(:llama) do
     {
       id: '111',
-      title_tsim: ['Amor Llama'],
+      title_tesim: ['Amor Llama'],
       format: 'text',
       language_ssim: 'la',
       visibility_ssi: 'Public',
@@ -28,7 +28,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   let(:dog) do
     {
       id: '222',
-      title_tsim: ['HandsomeDan Bulldog'],
+      title_tesim: ['HandsomeDan Bulldog'],
       format: 'three dimensional object',
       language_ssim: 'en',
       visibility_ssi: 'Public',
@@ -41,7 +41,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   let(:eagle) do
     {
       id: '333',
-      title_tsim: ['Aquila Eccellenza'],
+      title_tesim: ['Aquila Eccellenza'],
       format: 'still image',
       language_ssim: 'it',
       visibility_ssi: 'Public',
@@ -54,7 +54,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   let(:puppy) do
     {
       id: '444',
-      title_tsim: ['Rhett Lecheire'],
+      title_tesim: ['Rhett Lecheire'],
       format: 'text',
       language_ssim: 'fr',
       visibility_ssi: 'Public',

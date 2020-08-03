@@ -30,7 +30,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   let(:test_record) do
     {
       id: '111',
-      subtitle_tsim: "He's handsome",
+      subtitle_tesim: "He's handsome",
       subtitle_vern_ssim: "He's handsome",
       author_tsim: 'Eric & Frederick',
       author_vern_ssim: 'Eric & Frederick',
@@ -44,8 +44,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       isbn_ssim: '2321321389',
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       visibility_ssi: 'Public',
-      abstract_ssim: "this is an abstract",
-      alternativeTitle_ssim: "this is an alternative title",
+      abstract_tesim: "this is an abstract",
+      alternativeTitle_tesim: "this is an alternative title",
       genre_ssim: "this is the genre",
       geoSubject_ssim: "this is the geo subject",
       resourceType_ssim: "this is the resource type",
@@ -54,37 +54,37 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       extentOfDigitization_ssim: 'this is the extent of digitization',
       rights_ssim: "these are the rights",
       publicationPlace_ssim: "this is the publication place",
-      sourceCreated_ssim: "this is the source created",
+      sourceCreated_tesim: "this is the source created",
       publisher_ssim: "this is the publisher",
       copyrightDate_ssim: "this is the copyright date",
       source_ssim: "this is the source",
-      recordType_ssim: "this is the record type",
-      sourceTitle_ssim: "this is the source title",
-      sourceDate_ssim: "this is the source date",
-      sourceNote_ssim: "this is the source note",
-      references_ssim: "these are the references",
-      date_tsim: "this is the date",
+      recordType_ssi: "this is the record type",
+      sourceTitle_tesim: "this is the source title",
+      sourceDate_tesim: "this is the source date",
+      sourceNote_tesim: "this is the source note",
+      references_tesim: "these are the references",
+      date_ssim: "this is the date",
       children_ssim: "these are the children",
       importUrl_ssim: "this is the import URL",
-      illustrativeMatter_ssim: "this is the illustrative matter",
-      oid_ssim: 'this is the OID',
+      illustrativeMatter_tesim: "this is the illustrative matter",
+      oid_ssi: '2345678',
       identifierMfhd_ssim: 'this is the identifier MFHD',
       identifierShelfMark_ssim: 'this is the identifier shelf mark',
       box_ssim: 'this is the box',
       folder_ssim: 'this is the folder',
-      orbisBibId_ssim: 'this is the orbis bib ID',
-      orbisBarcode_ssim: 'this is the orbis bar code',
+      orbisBibId_ssi: '1234567',
+      orbisBarcode_ssi: 'this is the orbis bar code',
       findingAid_ssim: 'this is the finding aid',
       collectionId_ssim: 'this is the collection ID',
       edition_ssim: 'this is the edition',
       uri_ssim: 'this is the URI',
       partOf_ssim: "this is the part of, using ssim",
       numberOfPages_ssim: "this is the number of pages, using ssim",
-      material_ssim: "this is the material, using ssim",
-      scale_ssim: "this is the scale, using ssim",
+      material_tesim: "this is the material, using ssim",
+      scale_tesim: "this is the scale, using ssim",
       digital_ssim: "this is the digital, using ssim",
       coordinates_ssim: "this is the coordinates, using ssim",
-      projection_ssim: "this is the projection, using ssim",
+      projection_tesim: "this is the projection, using ssim",
       extent_ssim: "this is the extent, using ssim"
     }
   end
@@ -215,7 +215,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("this is the illustrative matter")
     end
     it 'displays the OID in results' do
-      expect(document).to have_content("this is the OID")
+      expect(document).to have_content("2345678")
     end
     it 'displays the Identifier MFHD in results' do
       expect(document).to have_content("this is the identifier MFHD")
@@ -227,7 +227,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("this is the folder")
     end
     it 'displays the Orbis Bib ID in results' do
-      expect(document).to have_content("this is the orbis bib ID")
+      expect(document).to have_content("1234567")
     end
     it 'displays the Orbis Bar Code in results' do
       expect(document).to have_content("this is the orbis bar code")
@@ -266,8 +266,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(page).to have_link('English (eng)', href: '/?f%5Blanguage_ssim%5D%5B%5D=English (eng)')
       expect(page).to have_link('zz', href: '/?f%5Blanguage_ssim%5D%5B%5D=zz')
     end
-    it 'contains a link on the Orbis Bib ID to the Orbis catalog record' do
-      expect(page).to have_link('this is the orbis bib ID', href: 'http://hdl.handle.net/10079/bibid/this is the orbis bib ID')
+    it 'contains a link on the Orbis Bib ID to the Orbis catalog record' do
+      expect(page).to have_link('1234567', href: 'http://hdl.handle.net/10079/bibid/1234567')
     end
     it 'contains a link on the Finding Aid to the Finding Aid catalog record' do
       expect(page).to have_link('this is the finding aid', href: 'this is the finding aid')

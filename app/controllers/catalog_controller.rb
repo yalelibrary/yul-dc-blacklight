@@ -30,7 +30,7 @@ class CatalogController < ApplicationController
     # config.per_page = [10,20,50,100]
 
     # solr field configuration for search results/index views
-    config.index.title_field = 'title_tsim'
+    config.index.title_field = 'title_tesim'
     # config.index.display_type_field = 'format'
     config.index.thumbnail_method = :render_thumbnail
 
@@ -51,7 +51,7 @@ class CatalogController < ApplicationController
     config.show.partials.insert(1, :uv)
 
     # solr field configuration for document/show views
-    # config.show.title_field = 'title_tsim'
+    # config.show.title_field = 'title_tesim'
     # config.show.display_type_field = 'format'
     # config.show.thumbnail_field = 'thumbnail_path_ss'
 
@@ -119,7 +119,7 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_index_field 'author_tsim', label: 'Author', highlight: true
     config.add_index_field 'author_vern_ssim', label: 'Author'
-    config.add_index_field 'date_tsim', label: 'Date'
+    config.add_index_field 'date_ssim', label: 'Date'
     config.add_index_field 'imageCount_isi', label: 'Image Count'
     config.add_index_field 'resourceType_ssim', label: 'Resource Type'
     config.add_index_field 'partOf_ssim', label: 'Collection Name'
@@ -127,7 +127,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    config.add_show_field 'subtitle_tsim', label: 'Subtitle'
+    config.add_show_field 'subtitle_tesim', label: 'Subtitle'
     config.add_show_field 'subtitle_vern_ssim', label: 'Subtitle'
     config.add_show_field 'author_tsim', label: 'Author'
     config.add_show_field 'author_vern_ssim', label: 'Author'
@@ -141,47 +141,49 @@ class CatalogController < ApplicationController
     config.add_show_field 'lc_callnum_ssim', label: 'Call number'
     config.add_show_field 'isbn_ssim', label: 'ISBN'
     config.add_show_field 'description_tesim', label: 'Description'
-    config.add_show_field 'abstract_ssim', label: 'Abstract'
-    config.add_show_field 'alternativeTitle_ssim', label: 'Alternative Title'
+    config.add_show_field 'abstract_tesim', label: 'Abstract'
+    config.add_show_field 'alternativeTitle_tesim', label: 'Alternative Title'
     config.add_show_field 'genre_ssim', label: 'Genre', link_to_facet: true
     config.add_show_field 'geoSubject_ssim', label: 'Geo Subject'
     config.add_show_field 'resourceType_ssim', label: 'Resource Type', link_to_facet: true
     config.add_show_field 'subjectName_ssim', label: 'Subject Name'
     config.add_show_field 'subjectTopic_ssim', label: 'Subject Topic'
+    config.add_show_field 'subjectTopic_tesim', label: 'Subject Topic'
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization'
     config.add_show_field 'rights_ssim', label: 'Rights'
     config.add_show_field 'publicationPlace_ssim', label: 'Publication Place'
-    config.add_show_field 'sourceCreated_ssim', label: 'Source Created'
+    config.add_show_field 'sourceCreated_tesim', label: 'Source Created'
     config.add_show_field 'publisher_ssim', label: 'Publisher'
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date'
     config.add_show_field 'source_ssim', label: 'Source'
-    config.add_show_field 'recordType_ssim', label: 'Record Type'
-    config.add_show_field 'sourceTitle_ssim', label: 'Source Title'
-    config.add_show_field 'sourceDate_ssim', label: 'Source Date'
-    config.add_show_field 'sourceNote_ssim', label: 'Source Note'
-    config.add_show_field 'references_ssim', label: 'References'
-    config.add_show_field 'date_tsim', label: 'Date'
+    config.add_show_field 'recordType_ssi', label: 'Record Type'
+    config.add_show_field 'sourceTitle_tesim', label: 'Source Title'
+    config.add_show_field 'sourceDate_tesim', label: 'Source Date'
+    config.add_show_field 'sourceEdition_tesim', label: 'Source Edition'
+    config.add_show_field 'sourceNote_tesim', label: 'Source Note'
+    config.add_show_field 'references_tesim', label: 'References'
+    config.add_show_field 'date_ssim', label: 'Date'
     config.add_show_field 'children_ssim', label: 'Children'
     config.add_show_field 'importUrl_ssim', label: 'Import URL'
-    config.add_show_field 'illustrativeMatter_ssim', label: 'Illustrative Matter'
-    config.add_show_field 'oid_ssim', label: 'OID'
+    config.add_show_field 'illustrativeMatter_tesim', label: 'Illustrative Matter'
+    config.add_show_field 'oid_ssi', label: 'OID'
     config.add_show_field 'identifierMfhd_ssim', label: 'Identifier MFHD'
     config.add_show_field 'identifierShelfMark_ssim', label: 'Identifier Shelf Mark', link_to_facet: true
     config.add_show_field 'box_ssim', label: 'Box'
     config.add_show_field 'folder_ssim', label: 'Folder'
-    config.add_show_field 'orbisBibId_ssim', label: 'Orbis Bib ID', helper_method: :link_to_orbis_bib_id
-    config.add_show_field 'orbisBarcode_ssim', label: 'Orbis Bar Code'
+    config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID', helper_method: :link_to_orbis_bib_id
+    config.add_show_field 'orbisBarcode_ssi', label: 'Orbis Bar Code'
     config.add_show_field 'findingAid_ssim', label: 'Finding Aid', helper_method: :link_to_url
     config.add_show_field 'collectionId_ssim', label: 'Collection ID'
     config.add_show_field 'edition_ssim', label: 'Edition'
     config.add_show_field 'uri_ssim', label: 'URI'
     config.add_show_field 'partOf_ssim', label: 'Collection Name'
     config.add_show_field 'numberOfPages_ssim', label: 'Number of Pages'
-    config.add_show_field 'material_ssim', label: 'Material'
-    config.add_show_field 'scale_ssim', label: 'Scale'
+    config.add_show_field 'material_tesim', label: 'Material'
+    config.add_show_field 'scale_tesim', label: 'Scale'
     config.add_show_field 'digital_ssim', label: 'Digital'
     config.add_show_field 'coordinates_ssim', label: 'Coordinates'
-    config.add_show_field 'projection_ssim', label: 'Projection'
+    config.add_show_field 'projection_tesim', label: 'Projection'
 
     config.add_field_configuration_to_solr_request!
     # "fielded" search configuration. Used by pulldown among other places.
@@ -222,10 +224,10 @@ class CatalogController < ApplicationController
     # case for a BL "search field", which is really a dismax aggregate
     # of Solr search fields.
 
-    config.add_search_field('title_tsim', label: 'Title') do |field|
+    config.add_search_field('title_tesim', label: 'Title') do |field|
       field.qt = 'search'
       field.solr_parameters = {
-        qf: 'title_tsim',
+        qf: 'title_tesim',
         pf: ''
       }
     end
@@ -248,11 +250,11 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('orbisBibId_ssim', label: 'BibID') do |field|
+    config.add_search_field('orbisBibId_ssi', label: 'BibID') do |field|
       field.qt = 'search'
       field.solr_parameters = {
-        qf: '',
-        pf: 'orbisBibId_ssim'
+        qf: 'orbisBibId_ssi',
+        pf: ''
       }
     end
 
