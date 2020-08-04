@@ -37,14 +37,17 @@ services:
     image: yalelibraryit/dc-management:${MANAGEMENT_VERSION}
     env_file:
       - .env
+      - .secrets
     environment:
+      AWS_DEFAULT_REGION: us-east-1
+      PASSENGER_APP_ENV: development
       POSTGRES_DB: management_yul_development
       POSTGRES_HOST: db
-      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
       SOLR_BASE_URL: http://solr:8983/solr
       SOLR_CORE: blacklight-core
-      PASSENGER_APP_ENV: development
+      SAMPLE_BUCKET: yul-development-samples
     ports:
       - "3001:3001"
 
