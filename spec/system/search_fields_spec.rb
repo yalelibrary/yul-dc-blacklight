@@ -11,17 +11,17 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
 
   let(:search_fields) { CatalogController.blacklight_config.search_fields.keys }
   let(:expected_search_fields) do
-    ["all_fields", "author_tsim", "orbisBibId_ssim", "subjectName_ssim", "title_tsim"]
+    ["all_fields", "author_tsim", "orbisBibId_ssi", "subjectName_ssim", "title_tesim"]
   end
 
   let(:dog) do
     {
       id: '111',
-      title_tsim: 'Handsome Dan is a bull dog.',
+      title_tesim: 'Handsome Dan is a bull dog.',
       author_tsim: 'Eric & Frederick',
       subjectName_ssim: "this is the subject name",
-      sourceTitle_ssim: "this is the source title",
-      orbisBibId_ssim: '1238901',
+      sourceTitle_tesim: "this is the source title",
+      orbisBibId_ssi: '1238901',
       visibility_ssi: 'Public'
     }
   end
@@ -29,10 +29,10 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
   let(:cat) do
     {
       id: '212',
-      title_tsim: 'Handsome Dan is not a cat.',
+      title_tesim: 'Handsome Dan is not a cat.',
       author_tsim: 'Frederick & Eric',
-      sourceTitle_ssim: "this is the source title",
-      orbisBibId_ssim: '1234567',
+      sourceTitle_tesim: "this is the source title",
+      orbisBibId_ssi: '1234567',
       visibility_ssi: 'Public'
     }
   end
@@ -43,7 +43,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
     end
 
     it 'contains displays the correct record when searching by BibId' do
-      visit '/?search_field=orbisBibId_ssim&q=1238901'
+      visit '/?search_field=orbisBibId_ssi&q=1238901'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).not_to have_content 'Handsome Dan is not a cat.'
     end
@@ -61,7 +61,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
     end
 
     it 'contains displays the correct record when searching by title' do
-      visit '/?search_field=title_tsim&q=handsome'
+      visit '/?search_field=title_tesim&q=handsome'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).to have_content 'Handsome Dan is not a cat.'
     end
