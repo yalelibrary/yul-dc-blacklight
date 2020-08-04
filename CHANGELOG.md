@@ -6,9 +6,9 @@
 
 **Technical Enhancements:**
 
-- 338 title result highlighting [\#218](https://github.com/yalelibrary/yul-dc-blacklight/pull/218) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Add highlighting to title result [\#218](https://github.com/yalelibrary/yul-dc-blacklight/pull/218) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Add highlighting to search result [\#217](https://github.com/yalelibrary/yul-dc-blacklight/pull/217) ([FCRodriguez7](https://github.com/FCRodriguez7))
-- Management with direct app start [\#214](https://github.com/yalelibrary/yul-dc-blacklight/pull/214) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Change to directly start the management app [\#214](https://github.com/yalelibrary/yul-dc-blacklight/pull/214) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Change field suffix for updated metadata  [\#207](https://github.com/yalelibrary/yul-dc-blacklight/pull/207) ([K8Sewell](https://github.com/K8Sewell))
 - Add yul submenu links header [\#201](https://github.com/yalelibrary/yul-dc-blacklight/pull/201) ([FCRodriguez7](https://github.com/FCRodriguez7))
 
