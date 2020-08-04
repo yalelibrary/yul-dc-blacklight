@@ -63,8 +63,8 @@ RSpec.describe BlacklightHelper, helper: true do
 
   describe '#render_thumbnail' do
     context 'with public record and oid with images' do
-      let(:valid_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Public', oid_ssim: ['2055095']) }
-      let(:non_valid_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Public', oid_ssim: ['9999999999999999']) }
+      let(:valid_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Public', oid_ssi: ['2055095']) }
+      let(:non_valid_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Public', oid_ssi: ['9999999999999999']) }
 
       it 'returns an image_tag for oids that have images' do
         expect(helper.render_thumbnail(valid_document, { alt: "" })).to eq "<img src=\"https://collections-test.curationexperts.com/iiif/2/1234822/full/!200,200/0/default.jpg\" />"
@@ -75,7 +75,7 @@ RSpec.describe BlacklightHelper, helper: true do
     end
 
     context 'with Yale only records' do
-      let(:yale_only_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Yale Community Only', oid_ssim: ['2055095-yale']) }
+      let(:yale_only_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Yale Community Only', oid_ssi: ['2055095-yale']) }
 
       it 'returns placeholder when logged out' do
         expect(helper.render_thumbnail(yale_only_document, {})).to include("<img src=\"/assets/placeholder_restricted-")
