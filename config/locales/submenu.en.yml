@@ -1,0 +1,248 @@
+en:
+  submenu:
+    research:
+      quicksearch:
+        title: Quicksearch
+        url: http://search.library.yale.edu
+        description: ''
+      searchLibraryCatalogOrbis:
+        title: Search Library Catalog (Orbis)
+        url: http://orbis.library.yale.edu/vwebv/
+        description: Records for approximately 13 million volumes located across the University
+          Library system.
+      searchLawLibraryCatalog:
+        title: Search Law Library Catalog (MORRIS)
+        url: http://morris.law.yale.edu/
+        description: Records for items located in Yale's Lillian Goldman Law Library. The
+          extensive law collection is not represented in Orbis.
+      searchBorrowDirect:
+        title: Search Borrow Direct
+        url: https://resources.library.yale.edu/cas/borrowdirect.aspx
+        description: Borrow Direct is a service that allows Yale patrons to check the availability
+          of and request books from the combined catalogs of Harvard, Princeton, Dartmouth,
+          Cornell, Columbia, Penn, Brown, University of Chicago, and MIT within four
+          business days. It can be used to obtain items that are currently unavailable
+          for checkout at Yale, not held by the Yale library, or on course reserve.
+      searchWorldCat:
+        title: Search WorldCat
+        url: http://firstsearch.oclc.org/dbname=WorldCat;autho=100157622;FSIP
+        description: Includes more than 50 million records of books and other materials held
+          in thousands of academic, public, special and national libraries around the
+          world.
+      searchArticlesPlus:
+        title: Search Articles+
+        url: http://yale.summon.serialssolutions.com/
+        description: Search Articles+ provides a fast way to search across the fulltext of
+          articles from thousands of published journals.
+      searchDigitalCollections:
+        title: Search Digital Collections
+        url: http://web.library.yale.edu/digital-collections
+        description: Access to digital image and text collections available from the Yale
+          University Library.
+      searchArchivesYale:
+        title: Search Archives at Yale
+        url: http://archives.yale.edu
+        description: Finding aids describe archival and manuscript collections at Arts, Beinecke,
+          Divinity, and Music libraries, and the Manuscripts and Archives department
+          in Sterling.
+      researchGuides:
+        title: Research Guides
+        url: http://guides.library.yale.edu/
+        description: Use these subject guides to get started in your research, formulate a
+          research strategy for a topic, and find information about print and electronic
+          resources.
+      findDatabases:
+        title: Find Databases by Title
+        url: http://search.library.yale.edu/databases
+        description: 'Find subject-specific databases by description. Direct links to subscribed
+          and freely available research databases and other resources, such as encyclopedias,
+          bibliographies and dictionaries. Some databases are also "cross-searchable";
+          that is, they may be searched at one time in combination with other databases'
+      findeJournalsTitle:
+        title: Find eJournals by Title
+        url: http://wa4py6yj8t.search.serialssolutions.com
+        description: Browse or search for the descriptions of online journals and newspapers to
+          which the library subscribes or has access to free on the Web.
+      guideUsingSpecialCollections:
+        title: Guide to Using Special Collections
+        url: http://guides.library.yale.edu/specialcollections
+        description: ''
+    services:
+      yourPersonalLibrarian:
+        title: Your Personal Librarian
+        url: https://library.yale.edu/pl
+        description: ''
+      subjectSpecialists:
+        title: Subject Specialists
+        url: https://library.yale.edu/subject-specialists
+        description: ''
+      researchSupportandWorkshops:
+        title: Research Support and Workshops
+        url: http://guides.library.yale.edu/research-help
+        description: ''
+      citationTools:
+        title: Citation Tools
+        url: http://guides.library.yale.edu/citationmanagement
+        description: Create Bibliographies
+      getIt@Yale:
+        title: Get It @ Yale (Borrow Direct, Interlibrary Loan, Scan & Deliver)
+        url: http://guides.library.yale.edu/getit
+        description: ''
+      courseReserves:
+        title: Course Reserves
+        url: http://guides.library.yale.edu/reserves
+        description:
+      off-CampusAccess:
+        title: Off-Campus Access
+        url: https://library.yale.edu/help/off-campus-access-vpn
+        description: Connect your computer to the Yale VPN (network) while off-campus.
+      eliScholar:
+        title: EliScholar
+        url: http://elischolar.library.yale.edu
+        description: A digital repository of scholarly publications at Yale
+      overDrive:
+        title: 'OverDrive: Popular Audio and eBooks'
+        url: http://yale.lib.overdrive.com/
+        description: 'OverDrive is a distribution platform through which users of our library
+          can download popular eBooks and audiobooks.  From our personalized Yale University
+          OverDrive site, we offer access to a variety of fiction and non-fiction descriptions
+          in many different formats. '
+      bassMediaEquipment:
+        title: Bass Media Equipment
+        url: https://reservations.yale.edu/bmec/
+        description: ''
+    librariesCollections:
+      artsLibrary:
+        title: Arts Library
+        url: https://library.yale.edu/building/arts-library
+        description: Robert B. Haas Family Arts Library
+      bassLibrary:
+        title: Bass Library
+        url: https://library.yale.edu/building/bass-library
+        description: Anne T. and Robert M. Bass Library
+      beineckeLibrary:
+        title: Beinecke Library
+        url: https://library.yale.edu/building/beinecke-library
+        description: Beinecke Rare Book & Manuscript Library
+      classicsLibrary:
+        title: Classics Library
+        url: https://library.yale.edu/building/classics-library
+        description: ''
+      divinityLibrary:
+        title: Divinity Library
+        url: https://library.yale.edu/building/divinity-library
+        description: Divinity School Library
+      filmStudyCenter:
+        title: Film Study Center
+        url: https://library.yale.edu/film
+        description: ''
+      fortunoffArchive:
+        title: Fortunoff Archive
+        url: http://www.library.yale.edu/testimonies/
+        description: Fortunoff Video Archive for Holocaust Testimonies
+      humanitiesCollections:
+        title: Humanities Collections
+        url: https://library.yale.edu/humanities
+        description: ''
+      internationalCollections:
+        title: International Collections
+        url: https://library.yale.edu/international-collections
+        description: ''
+      lawLibrary:
+        title: Law Library
+        url: https://library.yale.edu/building/law-library
+        description: Lillian Goldman Law Library in Memory of Sol Goldman
+      lewisWalpoleLibrary:
+        title: Lewis Walpole Library
+        url: https://library.yale.edu/building/lewis-walpole-library
+        description: ''
+      libraryCollectionServices:
+        title: Library Collection Services
+        url: https://library.yale.edu/departments/lcs
+        description: ''
+      manuScriptsArchives:
+        title: Manuscripts & Archives
+        url: https://library.yale.edu/mssa
+        description: ''
+      mapCollection:
+        title: Map Collection
+        url: http://www.library.yale.edu/maps
+        description: ''
+      marxScienceSocialScienceLibrary:
+        title: Marx Science & Social Science Library
+        url: https://library.yale.edu/building/marx-science-and-social-science-library
+        description: ''
+      mathematicsLibrary:
+        title: Mathematics Library
+        url: https://library.yale.edu/building/math-library
+        description: ''
+      medicalLibrary:
+        title: Medical Library
+        url: https://library.yale.edu/building/medical-library
+        description: Harvey Cushing / John Hay Whitney Medical Library
+      musicLibrary:
+        title: Music Library
+        url: https://library.yale.edu/music
+        description: Irving S. Gilmore Music Library
+      sterlingLibrary:
+        title: Sterling Library
+        url: https://library.yale.edu/building/sterling-library
+        description: Sterling Memorial Library
+      yaleCenterBritishArt:
+        title: Yale Center for British Art
+        url: https://library.yale.edu/building/yale-center-for-british-art
+        description: ''
+    informationPolicies:
+      libraryHours:
+        title: Library Hours
+        url: https://library.yale.edu/buildings
+        description: ''
+      departmentsStaff:
+        title: Departments & Staff
+        url: https://library.yale.edu/sd
+        description: ''
+      borrowingCirculation:
+        title: Borrowing & Circulation
+        url: http://guides.library.yale.edu/borrow
+        description: Information about accessing and borrowing print material
+      servicesPersonsWithDisabilities:
+        title: Services for Persons with Disabilities
+        url: https://library.yale.edu/services-persons-disabilities
+        description: ''
+      copyrightBasics:
+        title: Copyright Basics
+        url: http://guides.library.yale.edu/copyright-guidance/copyright-basics
+        description: ''
+      scanningPrintingCopying:
+        title: Scanning, Printing & Copying
+        url: https://library.yale.edu/help/scanning-printing-copying
+        description: ''
+      computersWireless:
+        title: Computers Wireless
+        url: https://library.yale.edu/help/computers-and-wireless
+        description: ''
+      libraryPolicies:
+        title: Library Policies
+        url: http://guides.library.yale.edu/about/policies
+        description: ''
+      aboutLibrary:
+        title: About the Library
+        url: http://guides.library.yale.edu/about
+        description: ''
+      givingtoLibrary:
+        title: Giving to the Library
+        url: https://library.yale.edu/development
+        description: ''
+      purchaseRequest:
+        title: Purchase Request
+        url: https://library.yale.edu/form/purchase-request
+        description: ''
+      workingAtTheLibrary:
+        title: Working at the Library
+        url: http://guides.library.yale.edu/work
+        description: ''
+      termsGoverningMaterialsUse:
+        title: Terms Governing Use of Materials
+        url: https://guides.library.yale.edu/about/policies/access
+        description: ''
+
