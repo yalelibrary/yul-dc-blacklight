@@ -11,6 +11,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
   let(:dog) do
     {
       id: '111',
+      title_tesim: "It's All About Us!",
       author_tsim: 'Me and You',
       format: 'three dimensional object',
       identifierShelfMark_tesim: 'Osborn Music MS 4',
@@ -25,6 +26,11 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
 
   context 'Within search results' do
     subject(:content) { find(:css, '#content') }
+
+    it 'highlights title when a term is queried' do
+      visit '/?search_field=all_fields&q=All'
+      expect(page.html).to include "It's <span class='search-highlight'>All</span> About Us!"
+    end
 
     it 'highlights author when a term is queried' do
       visit '/?search_field=all_fields&q=You'
