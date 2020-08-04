@@ -121,9 +121,9 @@ class CatalogController < ApplicationController
     config.add_index_field 'author_vern_ssim', label: 'Author'
     config.add_index_field 'date_tsim', label: 'Date'
     config.add_index_field 'imageCount_isi', label: 'Image Count'
-    config.add_index_field 'resourceType_ssim', label: 'Resource Type'
+    config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true
     config.add_index_field 'partOf_ssim', label: 'Collection Name'
-    config.add_index_field 'identifierShelfMark_ssim', label: 'Identifier Shelf Mark'
+    config.add_index_field 'identifierShelfMark_tesim', label: 'Identifier Shelf Mark', highlight: true
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -206,8 +206,8 @@ class CatalogController < ApplicationController
     # config.add_search_field 'all_fields', label: 'All Fields'
 
     # Array allows for only listed Solr fields to be searched in the 'All Fields'
-    search_fields = ['abstract_ssim', 'author_tsim', 'alternativeTitle_ssim', 'orbisBidId_ssim', 'description_tesim',
-                     'publicatonPlace_ssim', 'publisher_ssim', 'sourceCreated_ssim', 'geo_subject_ssim',
+    search_fields = ['abstract_ssim', 'author_tsim', 'alternativeTitle_ssim', 'description_tesim', 'geo_subject_ssim',
+                     'orbisBidId_ssim','publicatonPlace_ssim', 'publisher_ssim', 'sourceCreated_ssim',
                      'subjectName_ssim', 'subject_topic_tsim', 'title_tsim']
 
     config.add_search_field('all_fields', label: 'All Fields') do |field|
