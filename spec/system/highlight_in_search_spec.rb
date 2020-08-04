@@ -37,7 +37,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     end
 
     it 'highlights the call number when a term is queried' do
-      visit '/?search_field=all_fields&q=Music'
+      visit '/?search_field=all_fields&q=music'
       expect(page.html).to include "Osborn <span class='search-highlight'>Music</span> MS 4"
     end
   end
