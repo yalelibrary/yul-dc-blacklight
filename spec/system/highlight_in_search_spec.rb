@@ -13,12 +13,12 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       id: '111',
       author_tsim: 'Me and You',
       format: 'three dimensional object',
+      identifierShelfMark_tesim: 'Osborn Music MS 4',
       published_ssim: "1997",
       published_vern_ssim: "1997",
       lc_callnum_ssim: "123213213",
       language_ssim: ['en', 'eng', 'zz'],
       resourceType_tesim: "Music (Printed & Manuscript)",
-      identifierShelfMark_tesim: "Osborn Music MS 4",
       visibility_ssi: 'Public'
     }
   end
