@@ -43,6 +43,19 @@ DEFAULT MOBILE STYLING
   color: $lightest_grey !important;
 }
 
+.nav-link-caret {
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);  /*  for IE  */
+  -webkit-transform: rotate(180deg); /* for browsers supporting webkit (such as chrome, firefox, safari etc.). */
+  font-size: 16px;
+  display: inline-block;
+  padding: 3px 3px 0px 0px;
+}
+
+.nav-link-title {
+  margin-bottom: 0px;
+}
+
 .navbar-brand {
   color: transparent !important;
 }
@@ -134,19 +147,6 @@ DEFAULT MOBILE STYLING
 
   .navbar-logo {
     flex: 0 1 25%;
-  }
-
-  .nav-link-caret {
-    transform: rotate(180deg);
-    -ms-transform: rotate(180deg);  /*  for IE  */
-    -webkit-transform: rotate(180deg); /* for browsers supporting webkit (such as chrome, firefox, safari etc.). */
-    font-size: 16px;
-    display: inline-block;
-    padding: 3px 3px 0px 0px;
-  }
-
-  .nav-link-title {
-    margin-bottom: 0px;
   }
 
   .nav-link-title > a {
