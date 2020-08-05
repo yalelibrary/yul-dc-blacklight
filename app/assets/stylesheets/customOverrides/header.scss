@@ -13,8 +13,8 @@ DEFAULT MOBILE STYLING
 }
 
 .dropdown-menu {
-  color: $white!important;
-  text-transform: capitalize!important;
+  color: $white !important;
+  text-transform: capitalize !important;
 }
 
 .iiif-logo img {
@@ -36,7 +36,7 @@ DEFAULT MOBILE STYLING
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
-  font-size: x-small;
+  font-size: 12px;
   line-height: 2.25;
   letter-spacing: normal;
   text-align: right;
@@ -47,9 +47,9 @@ DEFAULT MOBILE STYLING
   transform: rotate(180deg);
   -ms-transform: rotate(180deg);  /*  for IE  */
   -webkit-transform: rotate(180deg); /* for browsers supporting webkit (such as chrome, firefox, safari etc.). */
-  font-size: 16px;
+  font-size: 14px;
   display: inline-block;
-  padding: 3px 3px 0px 0px;
+  padding-top: 3px;
 }
 
 .nav-link-title {
@@ -68,8 +68,8 @@ DEFAULT MOBILE STYLING
 }
 .secondary-nav {
   background-color: $yale_blue;
-  font-family:$malloryMedium!important;
-  color:$white !important;
+  font-family: $malloryMedium !important;
+  color: $white !important;
   font-size: small;
   border-top: $white thin solid;
   align-items: center;
@@ -85,9 +85,9 @@ DEFAULT MOBILE STYLING
 }
 
 .secondary-nav a {
-  color:$white !important;
-  font-size: large;
-  font-family: $yaleRoman!important;
+  color: $white !important;
+  font-size: 16px;
+  font-family: $yaleRoman !important;
 }
 
 
@@ -113,7 +113,7 @@ DEFAULT MOBILE STYLING
   }
 
   .navbar-logo {
-    width: 45%;
+    width: 215px;
   }
 
   .secondary-nav > .row {
