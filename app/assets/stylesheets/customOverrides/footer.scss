@@ -4,21 +4,27 @@ DEFAULT MOBILE STYLING
 
 .footer-container {
   background-color: $yale_blue;
-  display: grid;
+  //display: grid;
   height:165px;
   font-family:$malloryMedium!important;
   color:$white !important;
   justify-items: center;
-  padding-top: 1rem;
+  padding: 8px 16px;
+
 }
 .footer-logo {
-  grid-area: logo;
-  width: 100%;
-  background-size: 341.25px 37.5px;
-  margin-left: 7.75rem;
+  //grid-area: logo;
+  //width: 83%;
+  ////background-size: 100%;
+  //margin-left: -6px;
+  //padding-left: 25%;
+  //margin-left: 7.75rem;
+  background-size: contain;
+  background-position-y: center;
+  color: transparent;
   background-image: image-url('yul_logo/yul_logo3x.png');
-  background-position: center;
-  background-repeat: no-repeat;
+  //background-position: center;
+  //background-repeat: no-repeat;
 
 }
 .footer-logo > img{
@@ -26,7 +32,7 @@ DEFAULT MOBILE STYLING
 }
 
 .footer-links {
-  grid-area: links;
+  //grid-area: links;
   text-transform: uppercase;
   line-break:loose;
   align-self: center;
@@ -40,14 +46,15 @@ DEFAULT MOBILE STYLING
 }
 .footer-socmedia{
   display:table;
-  grid-area: sm;
+  //grid-area: sm;
   background-position: left !important;
 }
 
 .footer-socmedia img{
   width: 1.5rem;
   margin-left: 0.5rem;
-  position: relative; right: 40px;
+  //position: relative;
+  //right: 40px;
 }
 
 .branch-name{
@@ -55,23 +62,54 @@ DEFAULT MOBILE STYLING
   color:$white !important;
   font-size: xx-small;
 }
-
-@media screen and (min-width: $xlarge_device) {
-  .footer-container {
-      display: grid;
-      grid-template-columns: 15% 20% 50% 15%;
-      grid-template-rows: auto;
-      grid-template-areas:
-          ". logo links ."
-          ". sm . .";
-      gap: 10px 10px;
-  }
+@media screen and (min-width: $small_device) {
+  //.footer-container {
+  //  display: grid;
+  //  grid-template-columns: 15% 20% 50% 15%;
+  //  grid-template-rows: auto;
+  //  grid-template-areas:
+  //        ". logo links ."
+  //        ". sm . .";
+  //  gap: 10px 10px;
+  //}
 }
-
 
 @media screen and (min-width: $medium_device) {
+  //.footer-container {
+  //  display: grid;
+  //  grid-template-columns: 15% 20% 50% 15%;
+  //  grid-template-rows: auto;
+  //  grid-template-areas:
+  //        ". logo links ."
+  //        ". sm . .";
+  //  gap: 10px 10px;
+  //}
 }
 
+@media screen and (min-width: $large_device) {
+  //.footer-container {
+  //  display: grid;
+  //  grid-template-columns: 15% 20% 50% 15%;
+  //  grid-template-rows: auto;
+  //  grid-template-areas:
+  //        ". logo links ."
+  //        ". sm . .";
+  //  gap: 10px 10px;
+  //}
+}
 
 @media screen and (min-width: $xlarge_device) {
+  .footer-logo {
+    flex: 0 1 25%;
+  }
+  //.footer-container {
+  //    display: grid;
+  //    grid-template-columns: 35% 65%;
+  //    grid-template-rows: auto;
+  //    grid-template-areas:
+  //        " logo links . "
+  //        " sm . ";
+  //    gap: 10px 10px;
+  //  padding-left: 10px;
+  //}
 }
