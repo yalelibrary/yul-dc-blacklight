@@ -37,9 +37,9 @@ RSpec.describe 'footer', type: :system do
   end
 
   it 'has expected social media icons images' do
-    expect(page.html).to include('<img id="tumblr" src="/assets/soc_media/icon_tumblr-')
-    expect(page.html).to include('<img id="instagram" src="/assets/soc_media/icon_instagram-')
-    expect(page.html).to include('<img id="twitter" src="/assets/soc_media/icon_twitter-')
-    expect(page.html).to include('<img id="facebook" src="/assets/soc_media/icon_facebook-')
+    expect(page.html).to include('<img id="tumblr" alt="Yale University Tumblr" src="/assets/soc_media/icon_tumblr-')
+    expect(page.html).to include('<img id="instagram" alt="Yale Library Instagram" src="/assets/soc_media/icon_instagram-')
+    expect(page.html).to include('<img id="twitter" alt="Yale Library Twitter" src="/assets/soc_media/icon_twitter-')
+    expect(page.html).to include('<img id="facebook" alt="Yale Library Facebook" src="/assets/soc_media/icon_facebook-')
   end
 end
