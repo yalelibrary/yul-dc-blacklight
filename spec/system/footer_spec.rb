@@ -7,13 +7,14 @@ RSpec.describe 'footer', type: :system do
   end
 
   it 'has css' do
+    expect(page).to have_css '.branch-name'
     expect(page).to have_css '.footer-container'
     expect(page).to have_css '.footer-logo'
     expect(page).to have_css '.footer-links'
     expect(page).to have_css '.footer-links a'
     expect(page).to have_css '.footer-socmedia'
     expect(page).to have_css '.footer-socmedia img'
-    expect(page).to have_css '.branch-name'
+    expect(page).to have_css '.footer-logo-wrapper a'
   end
 
   it 'has links' do
