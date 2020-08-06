@@ -367,10 +367,10 @@
 <script>
     // override the addClass method so that a callback can be used
     (function($) {
-        var oldAddClass = $.fn.addClass;
+        let oldAddClass = $.fn.addClass;
         $.fn.addClass = function() {
-            for (var i in arguments) {
-                var arg = arguments[i]
+            for (let i in arguments) {
+                let arg = arguments[i]
                 if (!!(arg && arg.constructor && arg.call && arg.apply)) {
                     setTimeout(arg.bind(this))
                     delete arguments[i]
@@ -395,7 +395,9 @@
                     if (width >= 1200) {
                         $('.content-yul').height(contentBlock.offsetHeight + 20)
                     } else {
+                        // on devices smaller than 1200px wide, only show the item that was clicked on
                         $('.secondary-nav .dropdown.show .content-yul').height(contentBlock.offsetHeight + 20)
+                        $('.secondary-nav .dropdown:not(.show) .content-yul').height(0)
                     }
                 } else {
                     $('.content-yul').height(0)
