@@ -1,35 +1,37 @@
 <div class="footer-container">
   <div class="<%= container_classes %>">
-    <%= link_to application_name, root_path, class: 'footer-logo'%>
-    <div class="footer-links">
-      <ul>
-        <li>
-          <a href="http://web.library.yale.edu/gsearch" target="_blank">Search</a>
-        </li>
-        <li>
-          <a href="http://www.library.yale.edu/librarynews" target="_blank">News</a>
-        </li>
-        <li>
-          <a href="http://status.library.yale.edu" target="_blank">Systems Status</a>
-        </li>
-        <li>
-          <a href="http://www.yale.edu/privacy.html" target="_blank">Privacy Policy</a>
-        </li>
-        <li>
-          <a href="https://guides.library.yale.edu/about/policies/access" target="_blank">Terms</a>
-        </li>
-        <!--<% url = request.path() %>-->
-        <% url = request.original_url %>
-        <li>
-          <%= link_to(:"Feedback", "http://web.library.yale.edu/form/findit-feedback?findITURL=#{url}", :target => '_blank' ) %>
-        </li>
-        <li>
-          <a href="https://web.library.yale.edu/data-use" target="_blank">Data Use</a>
-        </li>
-        <li>
-          <a href="https://usability.yale.edu/web-accessibility/accessibility-yale" target="_blank">Accessibility</a>
-        </li>
-      </ul>
+    <div class="footer-logo-wrapper">
+     <%= link_to application_name, root_path, class: 'footer-logo'%>
+      <div class="footer-links">
+        <ul>
+          <li>
+            <a href="http://web.library.yale.edu/gsearch" target="_blank">Search</a>
+          </li>
+          <li>
+            <a href="http://www.library.yale.edu/librarynews" target="_blank">News</a>
+          </li>
+          <li>
+            <a href="http://status.library.yale.edu" target="_blank">Systems Status</a>
+          </li>
+          <li>
+            <a href="http://www.yale.edu/privacy.html" target="_blank">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="https://guides.library.yale.edu/about/policies/access" target="_blank">Terms</a>
+          </li>
+          <!--<% url = request.path() %>-->
+          <% url = request.original_url %>
+          <li>
+            <%= link_to(:"Feedback", "http://web.library.yale.edu/form/findit-feedback?findITURL=#{url}", :target => '_blank' ) %>
+          </li>
+          <li>
+            <a href="https://web.library.yale.edu/data-use" target="_blank">Data Use</a>
+          </li>
+          <li>
+            <a href="https://usability.yale.edu/web-accessibility/accessibility-yale" target="_blank">Accessibility</a>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="footer-socmedia">
       <a href="http://yaleuniversity.tumblr.com/" target="_blank">

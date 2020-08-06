@@ -95,4 +95,13 @@ DEFAULT MOBILE STYLING
   .footer-logo {
     flex: 0 1 25%;
   }
+
+  .footer-logo-wrapper {
+    display: flex;
+  }
+
+  .footer-links{
+    -webkit-margin-before: 2em;
+    padding-inline-start: 145px;
+  }
 }
