@@ -370,25 +370,33 @@
         var oldAddClass = $.fn.addClass;
         $.fn.addClass = function() {
             for (var i in arguments) {
-                var arg = arguments[i];
+                var arg = arguments[i]
                 if (!!(arg && arg.constructor && arg.call && arg.apply)) {
-                    setTimeout(arg.bind(this));
-                    delete arguments[i];
+                    setTimeout(arg.bind(this))
+                    delete arguments[i]
                 }
             }
-            return oldAddClass.apply(this, arguments);
+            return oldAddClass.apply(this, arguments)
         }
 
-    })(jQuery);
+    })(jQuery)
 
     // show and hide the dropdown links properly
     $(document).ready(function() {
         $('.secondary-nav .nav-link-title').click(function(e) {
+            const width = window.innerWidth
+                || document.documentElement.clientWidth
+                || document.body.clientWidth
+
             $('.secondary-nav .content-yul').addClass('content-show', function() {
                 const contentBlock = $('.secondary-nav .dropdown.show .menu-block-wrapper')[0]
 
                 if (contentBlock) {
-                    $('.content-yul').height(contentBlock.offsetHeight + 20)
+                    if (width >= 1200) {
+                        $('.content-yul').height(contentBlock.offsetHeight + 20)
+                    } else {
+                        $('.secondary-nav .dropdown.show .content-yul').height(contentBlock.offsetHeight + 20)
+                    }
                 } else {
                     $('.content-yul').height(0)
                 }
