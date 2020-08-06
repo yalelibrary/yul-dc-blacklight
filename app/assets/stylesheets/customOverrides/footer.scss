@@ -3,15 +3,15 @@ DEFAULT MOBILE STYLING
 ********************************************************/
 
 .branch-name {
-  background-color:$yale_blue!important;
-  color:$white !important;
-  font-size: xx-small;
+  background-color: $yale_blue !important;
+  color: $white !important;
+  font-size: 8px;
   padding: 0px 30px 10px;
 }
 
 .footer-container {
   background-color: $yale_blue;
-  font-family: $malloryMedium!important;
+  font-family: $malloryMedium !important;
   margin-top: 15px;
   position: relative;
   display: flex;
@@ -30,20 +30,18 @@ DEFAULT MOBILE STYLING
   margin: 0px !important;
 }
 
+// hides the link and hover text of the footer logo only
+.footer-logo-wrapper a {
+  color: transparent;
+}
+
 .footer-logo {
   background-size: contain;
   background-position-y: center;
-  color: transparent;
   background-image: image-url('yul_logo/yul_logo3x.png');
   width: 150px;
   background-repeat: no-repeat;
-  display: inline-block;
   height: 50px;
-}
-
-// TODO(alishaevn): disable all hover events on this element
-.footer-logo:hover {
-  pointer-events: none;
 }
 
 .footer-logo > img {
@@ -52,9 +50,8 @@ DEFAULT MOBILE STYLING
 
 .footer-links {
   text-transform: uppercase;
-  line-break:loose;
-  font-size: x-small;
 }
+
 .footer-links a {
   color: $white !important;
   margin-left: 1rem;
@@ -92,16 +89,16 @@ DEFAULT MOBILE STYLING
     padding: 0.5rem 1rem;
   }
 
+  .footer-links li {
+    margin: 15px 0px 0px 16px;
+  }
+
   .footer-logo {
     flex: 0 1 25%;
   }
 
   .footer-logo-wrapper {
     display: flex;
-  }
-
-  .footer-links{
-    -webkit-margin-before: 2em;
-    padding-inline-start: 145px;
+    justify-content: space-between;
   }
 }
