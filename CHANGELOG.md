@@ -1,18 +1,37 @@
 # Changelog
 
+## [v1.9.0](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.9.0) (2020-08-07)
+
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/vv1.8.0...v1.9.0)
+
+**New Features:**
+
+- Make the footer responsive [\#222](https://github.com/yalelibrary/yul-dc-blacklight/pull/222) ([alishaevn](https://github.com/alishaevn))
+- Add alt tags to social media icons [\#221](https://github.com/yalelibrary/yul-dc-blacklight/pull/221) ([K8Sewell](https://github.com/K8Sewell))
+- Add an aria label to search form [\#220](https://github.com/yalelibrary/yul-dc-blacklight/pull/220) ([K8Sewell](https://github.com/K8Sewell))
+
+**Technical Enhancements:**
+
+- Fix header content height on condensed view [\#223](https://github.com/yalelibrary/yul-dc-blacklight/pull/223) ([alishaevn](https://github.com/alishaevn))
+
+## [vv1.8.0](https://github.com/yalelibrary/yul-dc-blacklight/tree/vv1.8.0) (2020-08-04)
+
+[Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.8.0...vv1.8.0)
+
 ## [v1.8.0](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.8.0) (2020-08-04)
 
 [Full Changelog](https://github.com/yalelibrary/yul-dc-blacklight/compare/v1.7.6...v1.8.0)
 
 **New Features:**
 
-- Add highlighting to search result for title [\#218](https://github.com/yalelibrary/yul-dc-blacklight/pull/218) ([FCRodriguez7](https://github.com/FCRodriguez7))
-- Add highlighting to search result for call number and resource [\#217](https://github.com/yalelibrary/yul-dc-blacklight/pull/217) ([FCRodriguez7](https://github.com/FCRodriguez7))
-- Add YUL submenu links header [\#201](https://github.com/yalelibrary/yul-dc-blacklight/pull/201) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- 338 title result highlighting [\#218](https://github.com/yalelibrary/yul-dc-blacklight/pull/218) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Add highlighting to search result [\#217](https://github.com/yalelibrary/yul-dc-blacklight/pull/217) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Add yul submenu links header [\#201](https://github.com/yalelibrary/yul-dc-blacklight/pull/201) ([FCRodriguez7](https://github.com/FCRodriguez7))
 
 **Technical Enhancements:**
 
-- Change VPN value to directly start the management app [\#214](https://github.com/yalelibrary/yul-dc-blacklight/pull/214) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Prep for v1.8.0 release [\#219](https://github.com/yalelibrary/yul-dc-blacklight/pull/219) ([FCRodriguez7](https://github.com/FCRodriguez7))
+- Management with direct app start [\#214](https://github.com/yalelibrary/yul-dc-blacklight/pull/214) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - Change field suffix for updated metadata  [\#207](https://github.com/yalelibrary/yul-dc-blacklight/pull/207) ([K8Sewell](https://github.com/K8Sewell))
 
 ## [v1.7.6](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.7.6) (2020-08-03)
@@ -244,7 +263,6 @@ No user facing changes in this release.
 - Update solr docker config for 1.4.0 release of mgmt app [\#98](https://github.com/yalelibrary/yul-dc-blacklight/pull/98) ([K8Sewell](https://github.com/K8Sewell))
 - Remove unused code [\#97](https://github.com/yalelibrary/yul-dc-blacklight/pull/97) ([bess](https://github.com/bess))
 - Add a link to other items with the same call number [\#94](https://github.com/yalelibrary/yul-dc-blacklight/pull/94) ([edejesusyale](https://github.com/edejesusyale))
-- Silence deprecations from Blacklight [\#92](https://github.com/yalelibrary/yul-dc-blacklight/pull/92) ([tilthouse](https://github.com/tilthouse))
 
 ## [v1.2.2](https://github.com/yalelibrary/yul-dc-blacklight/tree/v1.2.2) (2020-06-08)
 
@@ -258,6 +276,7 @@ No user facing changes in this release.
 **Technical Enhancements:**
 
 - Prep for v1.2.2 release [\#93](https://github.com/yalelibrary/yul-dc-blacklight/pull/93) ([bess](https://github.com/bess))
+- Silence deprecations from Blacklight [\#92](https://github.com/yalelibrary/yul-dc-blacklight/pull/92) ([tilthouse](https://github.com/tilthouse))
 - Add a link for Language on the show page [\#91](https://github.com/yalelibrary/yul-dc-blacklight/pull/91) ([FCRodriguez7](https://github.com/FCRodriguez7))
 - 190 add author facet [\#88](https://github.com/yalelibrary/yul-dc-blacklight/pull/88) ([K8Sewell](https://github.com/K8Sewell))
 
