@@ -14,10 +14,10 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       id: '111',
       author_tsim: 'Me and You',
       author_vern_ssim: 'Me and You',
-      date_tsim: '1999',
+      date_ssim: '1999',
       resourceType_ssim: 'Archives or Manuscripts',
       partOf_ssim: 'Beinecke Library',
-      identifierShelfMark_ssim: 'Beinecke MS 801',
+      identifierShelfMark_tesim: 'Beinecke MS 801',
       imageCount_isi: '23',
       visibility_ssi: 'Public'
     }

@@ -40,7 +40,7 @@ module Yale
     def key_value_chunk_1
       {
         id: :item,
-        abstract: obj[:abstract_ssim]&.join(', '),
+        abstract: obj[:abstract_tesim]&.join(', '),
         archive_location: obj[:sublocation_tesim]&.join(', '),
         author: obj[:author_ssim]&.join(', '),
         "call-number": obj[:identifierShelfMark_ssim]&.join(', '),
@@ -54,11 +54,11 @@ module Yale
       {
         archive: obj[:holding_repository_tesim]&.join(', '),
         publisher: obj[:publisher_ssim]&.join(', '),
-        title: obj[:title_tsim]&.join(', '),
+        title: obj[:title_tesim]&.join(', '),
         "collection-title": obj[:member_of_collections_ssim]&.join(', '),
         type: [obj[:format]&.first&.downcase]&.join(', '),
         url: url,
-        issued: (obj[:date_tsim] || obj[:year_issued_isim] || obj[:year_created_isim] || [0])&.first&.to_i
+        issued: (obj[:date_ssim] || obj[:year_issued_isim] || obj[:year_created_isim] || [0])&.first&.to_i
       }
     end
 

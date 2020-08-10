@@ -7,13 +7,14 @@ RSpec.describe 'footer', type: :system do
   end
 
   it 'has css' do
+    expect(page).to have_css '.branch-name'
     expect(page).to have_css '.footer-container'
     expect(page).to have_css '.footer-logo'
     expect(page).to have_css '.footer-links'
     expect(page).to have_css '.footer-links a'
     expect(page).to have_css '.footer-socmedia'
     expect(page).to have_css '.footer-socmedia img'
-    expect(page).to have_css '.branch-name'
+    expect(page).to have_css '.footer-logo-wrapper a'
   end
 
   it 'has links' do
@@ -36,9 +37,9 @@ RSpec.describe 'footer', type: :system do
   end
 
   it 'has expected social media icons images' do
-    expect(page.html).to include('<img id="tumblr" src="/assets/soc_media/icon_tumblr-')
-    expect(page.html).to include('<img id="instagram" src="/assets/soc_media/icon_instagram-')
-    expect(page.html).to include('<img id="twitter" src="/assets/soc_media/icon_twitter-')
-    expect(page.html).to include('<img id="facebook" src="/assets/soc_media/icon_facebook-')
+    expect(page.html).to include('<img id="tumblr" alt="Yale University Tumblr" src="/assets/soc_media/icon_tumblr-')
+    expect(page.html).to include('<img id="instagram" alt="Yale Library Instagram" src="/assets/soc_media/icon_instagram-')
+    expect(page.html).to include('<img id="twitter" alt="Yale Library Twitter" src="/assets/soc_media/icon_twitter-')
+    expect(page.html).to include('<img id="facebook" alt="Yale Library Facebook" src="/assets/soc_media/icon_facebook-')
   end
 end

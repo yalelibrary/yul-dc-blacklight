@@ -14,7 +14,7 @@ RSpec.describe 'User Authentication', type: :system, js: false, clean: true do
   context 'as a logged in user', js: true do
     before do
       solr = Blacklight.default_index.connection
-      solr.add([{ id: 1, title_tsim: 'bookmark me', visibility_ssi: 'Public' }])
+      solr.add([{ id: 1, title_tesim: 'bookmark me', visibility_ssi: 'Public' }])
       solr.commit
     end
     it 'bookmark will persist after logging-out' do

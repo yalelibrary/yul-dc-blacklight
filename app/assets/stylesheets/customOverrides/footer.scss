@@ -2,76 +2,103 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 
+.branch-name {
+  background-color: $yale_blue !important;
+  color: $white !important;
+  font-size: 8px;
+  padding: 0px 30px 10px;
+}
+
 .footer-container {
   background-color: $yale_blue;
-  display: grid;
-  height:165px;
-  font-family:$malloryMedium!important;
-  color:$white !important;
-  justify-items: center;
-  padding-top: 1rem;
+  font-family: $malloryMedium !important;
+  margin-top: 15px;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
 }
-.footer-logo {
-  grid-area: logo;
-  width: 100%;
-  background-size: 341.25px 37.5px;
-  margin-left: 7.75rem;
-  background-image: url(yul_logo/yul_logo3x.png);
-  background-position: center;
-  background-repeat: no-repeat;
 
+.footer-links > ul {
+  padding: 0px;
+  list-style-type: none;
 }
-.footer-logo > img{
+
+.footer-links a {
+  margin: 0px !important;
+  font-size: 12px;
+}
+
+// hides the link and hover text of the footer logo only
+.footer-logo-wrapper a {
+  color: transparent;
+}
+
+.footer-logo {
+  background-size: contain;
+  background-position-y: center;
+  background-image: image-url('yul_logo/yul_logo3x.png');
+  width: 150px;
+  background-repeat: no-repeat;
+  height: 50px;
+}
+
+.footer-logo > img {
   width: 100%;
 }
 
 .footer-links {
-  grid-area: links;
   text-transform: uppercase;
-  line-break:loose;
-  align-self: center;
-  font-size: smaller;
-  text-align: right;
 }
 
-.footer-links a{
+.footer-links a {
   color: $white !important;
   margin-left: 1rem;
 }
-.footer-socmedia{
-  display:table;
-  grid-area: sm;
-  background-position: left !important;
+
+.footer-socmedia img {
+  width: 1rem;
+  margin-right: 3px;
 }
 
-.footer-socmedia img{
-  width: 1.5rem;
-  margin-left: 0.5rem;
-  position: relative; right: 40px;
-}
 
-.branch-name{
-  background-color:$yale_blue!important;
-  color:$white !important;
-  font-size: xx-small;
-}
+@media screen and (min-width: $medium_device) {
+  .footer-links > ul {
+    display: flex;
+  }
 
-@media screen and (min-width: $desktop) {
-  .footer-container {
-      display: grid;
-      grid-template-columns: 15% 20% 50% 15%;
-      grid-template-rows: auto;
-      grid-template-areas:
-          ". logo links ."
-          ". sm . .";
-      gap: 10px 10px;
+  .footer-links li {
+    margin-right: 16px;
+  }
+
+  .footer-logo {
+    width: 215px;
   }
 }
 
 
-@media screen and (min-width: $tablet) {
-}
+@media screen and (min-width: $xlarge_device) {
+  .footer-container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+  }
 
+  .footer-links li {
+    margin: 15px 0px 0px 16px;
+  }
 
-@media screen and (min-width: $desktop) {
+  .footer-logo {
+    flex: 0 1 25%;
+  }
+
+  .footer-logo-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
 }

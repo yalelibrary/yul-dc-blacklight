@@ -1,6 +1,6 @@
 unreleased=true
-future-release=v1.7.2
-enhancement-labels=Features
+future-release=v1.9.0
+enhancement-labels=Feature
 bug-labels=Bugs
 pr-label=**Technical Enhancements:**
 enhancement_prefix=**New Features:**
