@@ -65,7 +65,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   end
 
   it 'can filter results with format facets' do
-    click_on 'Format'
+    click_on 'FORMAT'
     click_on 'text'
     expect(page).to have_content('Amor Llama')
     expect(page).not_to have_content('Aquila Eccellenza')
@@ -73,7 +73,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   end
 
   it 'can filter results with language facets' do
-    click_on 'Language'
+    click_on 'LANGUAGE'
     click_on 'Latin (la)'
     expect(page).to have_content('Amor Llama')
     expect(page).not_to have_content('Aquila Eccellenza')
@@ -81,7 +81,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   end
 
   it 'can filter results with publication place facets' do
-    click_on 'Publication Place'
+    click_on 'PUBLICATION PLACE'
     click_on 'New Haven'
     expect(page).to have_content('HandsomeDan Bulldog')
     expect(page).not_to have_content('Amor Llama')
@@ -89,7 +89,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   end
 
   it 'can filter results with resource type facets' do
-    click_on 'Resource Type'
+    click_on 'RESOURCE TYPE'
     click_on 'Archives or Manuscripts'
     expect(page).to have_content('Aquila Eccellenza')
     expect(page).not_to have_content('Amor Llama')
@@ -97,7 +97,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   end
 
   it 'can filter results with author facets' do
-    click_on 'Author'
+    click_on 'AUTHOR'
     click_on 'Andy Graves'
     expect(page).to have_content('HandsomeDan Bulldog')
     expect(page).not_to have_content('Aquila Eccellenza')
