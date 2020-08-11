@@ -2,12 +2,10 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 
-#sortAndPerPage .page-links {
+#sortAndPerPage .page-links,
+#sortAndPerPage .page-links a {
   font-family: $mallory_medium;
   font-size: 12px;
-}
-
-#sortAndPerPage .page-links a {
   color: $light_blue;
 }
 
