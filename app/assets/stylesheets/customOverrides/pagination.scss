@@ -25,6 +25,18 @@ DEFAULT MOBILE STYLING
   padding: 0px 12px;
 }
 
+.page-item.active .page-link {
+  background-color: $light_blue;
+}
+
+.page-item.disabled .page-link {
+  color: $medium_grey;
+}
+
+.page-item:last-child .page-link {
+  border-radius: 0px;
+}
+
 .pagination {
   padding: 8px 0px;
 }
@@ -34,10 +46,7 @@ DEFAULT MOBILE STYLING
   text-transform: uppercase;
 }
 
-.page-item:nth-child(n+3) {
+// add a right border to all page numbers except the last page
+.page-item:nth-child(n+3):not(:last-child) {
   border-right: 1px solid $medium_grey;
-}
-
-.page-item:last-child {
-  border: none;
 }
