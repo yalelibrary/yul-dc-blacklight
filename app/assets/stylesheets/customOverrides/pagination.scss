@@ -1,0 +1,43 @@
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
+
+// Pagination at the top of the page
+#sortAndPerPage .page-links,
+#sortAndPerPage .page-links a {
+  font-family: $mallory_medium;
+  font-size: 12px;
+  color: $light_blue;
+}
+
+#sortAndPerPage .page-entries {
+  color: $medium_grey;
+}
+
+
+// Pagination at the bottom of the page
+.page-item .page-link {
+  font-family: $mallory_medium;
+  font-size: 15px;
+  color: $light_blue;
+  border: none;
+  margin-left: 0px;
+  padding: 0px 12px;
+}
+
+.pagination {
+  padding: 8px 0px;
+}
+
+.pagination .page-item:nth-child(1),
+.pagination .page-item:nth-child(2) {
+  text-transform: uppercase;
+}
+
+.page-item:nth-child(n+3) {
+  border-right: 1px solid $medium_grey;
+}
+
+.page-item:last-child {
+  border: none;
+}
