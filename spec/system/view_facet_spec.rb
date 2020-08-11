@@ -19,7 +19,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       format: 'text',
       language_ssim: 'la',
       visibility_ssi: 'Public',
-      publicationPlace_ssim: 'Spain',
+      genre_ssim: 'Maps',
       resourceType_ssim: 'Maps, Atlases & Globes',
       author_ssim: ['Anna Elizabeth Dewdney']
     }
@@ -32,7 +32,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       format: 'three dimensional object',
       language_ssim: 'en',
       visibility_ssi: 'Public',
-      publicationPlace_ssim: 'New Haven',
+      genre_ssim: 'Artifacts',
       resourceType_ssim: 'Books, Journals & Pamphlets',
       author_ssim: ['Andy Graves']
     }
@@ -45,7 +45,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       format: 'still image',
       language_ssim: 'it',
       visibility_ssi: 'Public',
-      publicationPlace_ssim: 'White-Hall, printed upon the ice, on the River Thames',
+      genre_ssim: 'Manuscripts',
       resourceType_ssim: 'Archives or Manuscripts',
       author_ssim: ['Andrew Norriss']
     }
@@ -58,7 +58,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       format: 'text',
       language_ssim: 'fr',
       visibility_ssi: 'Public',
-      publicationPlace_ssim: 'Constantinople or southern Italy',
+      genre_ssim: 'Animation',
       resourceType_ssim: 'Archives or Manuscripts',
       author_ssim: ['Paulo Coelho']
     }
@@ -80,10 +80,10 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     expect(page).not_to have_content('HandsomeDan Bulldog')
   end
 
-  it 'can filter results with publication place facets' do
-    click_on 'PUBLICATION PLACE'
-    click_on 'New Haven'
-    expect(page).to have_content('HandsomeDan Bulldog')
+  it 'can filter results with genre facets' do
+    click_on 'GENRE'
+    click_on 'Animation'
+    expect(page).to have_content('Rhett Lecheire')
     expect(page).not_to have_content('Amor Llama')
     expect(page).not_to have_content('Aquila Eccellenza')
   end

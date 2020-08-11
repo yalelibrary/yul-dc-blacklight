@@ -81,25 +81,24 @@ class CatalogController < ApplicationController
     #  (useful when user clicks "more" on a large facet and wants to navigate alphabetically across a large set of results)
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case sensitive when searching values)
 
-    config.add_facet_field 'format', label: 'FORMAT'
-    config.add_facet_field 'pub_date_ssim', label: 'PUBLICATION YEAR', single: true
-    config.add_facet_field 'subject_ssim', label: 'TOPIC', limit: 20, index_range: 'A'..'Z'
-    config.add_facet_field 'language_ssim', label: 'LANGUAGE', limit: true, helper_method: :language_code
     config.add_facet_field 'extentOfDigitization_ssim', label: 'EXTENT OF DIGITIZATION'
-    config.add_facet_field 'lc_1letter_ssim', label: 'CALL NUMBER'
-    config.add_facet_field 'publicationPlace_ssim', label: 'PUBLICATION PLACE', limit: true, sort: 'index'
-    config.add_facet_field 'subject_geo_ssim', label: 'REGION'
-    config.add_facet_field 'subject_era_ssim', label: 'ERA'
+    config.add_facet_field 'format', label: 'FORMAT'
     config.add_facet_field 'genre_ssim', label: 'GENRE'
     config.add_facet_field 'resourceType_ssim', label: 'RESOURCE TYPE'
-    config.add_facet_field 'dateStructured_ssim', label: 'PUBLICATION YEAR',
+    config.add_facet_field 'language_ssim', label: 'LANGUAGE', limit: true, helper_method: :language_code
+    config.add_facet_field 'author_ssim', label: 'AUTHOR', limit: true, sort: 'index'
+    config.add_facet_field 'subjectTopic_ssim', label: 'SUBJECT TOPIC'
+    config.add_facet_field 'subjectName_ssim', label: 'SUBJECT NAME'
+    config.add_facet_field 'lc_1letter_ssim', label: 'CALL NUMBER'
+    config.add_facet_field 'partOf_ssim', label: 'DIGITAL COLLECTION'
+    config.add_facet_field 'pub_date_ssim', label: 'PUBLICATION YEAR', single: true
+    config.add_facet_field 'dateStructured_ssim', label: 'PUBLICATION DATE',
                                                   range: {
                                                     num_segments: 6,
                                                     assumed_boundaries: [1100, Time.current.year + 2],
                                                     segments: true,
                                                     maxlength: 4
                                                   }
-    config.add_facet_field 'author_ssim', label: 'AUTHOR', limit: true, sort: 'index'
 
     # the facets below are set to false because we aren't filtering on them from the main search page
     # but we need to be able to provide a label when they are filtered upon from an individual show page
