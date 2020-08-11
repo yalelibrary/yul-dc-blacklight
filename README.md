@@ -57,26 +57,26 @@ rake install
 
 ## General Use
 
-Once camerata is installed on your system, interactions happen through the 
-camerata command-line tool or through its alias `cam`.  The camerata tool can be 
-used to bring the development stack up and down locally, interact with the 
-docker containers, deploy, run the smoke tests and otherwise do development 
+Once camerata is installed on your system, interactions happen through the
+camerata command-line tool or through its alias `cam`.  The camerata tool can be
+used to bring the development stack up and down locally, interact with the
+docker containers, deploy, run the smoke tests and otherwise do development
 tasks common to the various applications in the yul-dc application stack.
 
-All buildin commands can be listed with `cam help` and individual usage 
-information is available with `cam help COMMAND`.  Please note that deployment 
-commands (found in the `./bin` directory) are passed through and are therefore not 
-listed by the help command.  See the usage for those below. 
+All buildin commands can be listed with `cam help` and individual usage
+information is available with `cam help COMMAND`.  Please note that deployment
+commands (found in the `./bin` directory) are passed through and are therefore not
+listed by the help command.  See the usage for those below.
 
-To start the application stack, run `cam up` in the blacklight directory. This starts all of the applications as they are 
-all dependencies of yul-blacklight. Camerata is smart. If you start `cam up` from 
-a blacklight code check out it will mount that code for local development 
-(changes to the outside code will affect the inside container). If you start the 
+To start the application stack, run `cam up` in the blacklight directory. This starts all of the applications as they are
+all dependencies of yul-blacklight. Camerata is smart. If you start `cam up` from
+a blacklight code check out it will mount that code for local development
+(changes to the outside code will affect the inside container). If you start the
 `cam up` from the blacklight application you will get the blacklight code mounted
-for local development and the blacklight code will run as it is in the downloaded 
-image. You can also start the two applications both mounted for development by 
-starting the blacklight application with `--without management` and the 
-managment application `--without solr --withouth db` each from their respective 
+for local development and the blacklight code will run as it is in the downloaded
+image. You can also start the two applications both mounted for development by
+starting the blacklight application with `--without management` and the
+managment application `--without solr --withouth db` each from their respective
 code checkouts.
 
 - Access the blacklight app at `http://localhost:3000`
@@ -186,6 +186,7 @@ For the image instance to properly access images, you must also create a .secret
 5. Commit and merge the changes you just made with a message like "Prep for vX.Y.Z release"
 6. Once those changes are merged to the `master` branch, in the github web UI go to `Releases` and tag a new release with the right version number. Paste in the release notes for this release from the top of `CHANGELOG.md`
 7. Update `yul-dc-camerata` with the new version of blacklight and submit a PR.
+8. Move any tickets that were included in this release from `For Release` to `Ready for Acceptance`
 
 ## Using a New Release of the Management App or other microservices
 
