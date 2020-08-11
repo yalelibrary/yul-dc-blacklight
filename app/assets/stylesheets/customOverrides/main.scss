@@ -33,6 +33,10 @@ a {
 	border-color: $medium_grey;
 }
 
+.card-header {
+	background-color: $white !important;
+}
+	
 #citationLink {
 	color: $yale_blue !important;
 }
@@ -41,12 +45,46 @@ a {
 	color: $yale_blue !important;
 }
 
+.bg-success, .facet-limit-active .card-header {
+	background-color: $white !important;
+	border-color: $white !important;
+}
+
+#facets .btn {
+	border-top: 1px solid $medium_grey;
+	color: $medium_grey;
+	padding-top: 1.25rem !important;
+}
+
+#facets .card {
+	border: none;
+	border-radius: 0;
+}
+
+.facets-heading {
+	text-transform: uppercase;
+	color: $medium_grey;
+	font-size: 1rem;
+}
+
 .page-link {
 	color: $yale_blue;
 }
 
+.remove-icon {
+	display: none;
+}
+
+.remove::before {
+	content: url(x2x.png);
+}
+
 #smsLink {
 	color: $yale_blue !important;
+}
+
+.text-success, .facet-values li .selected {
+	color: $light_blue !important;
 }
 
 @media screen and (min-width: $medium_device) {
