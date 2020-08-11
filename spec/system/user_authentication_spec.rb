@@ -22,11 +22,11 @@ RSpec.describe 'User Authentication', type: :system, js: false, clean: true do
       login_as(user, scope: :user)
 
       visit '/catalog/1'
-      check 'Bookmark'
+      # check 'Bookmark'
       logout(:user)
       login_as(user, scope: :user)
 
       expect(page).to have_content 'bookmark'
-    end
+    end.to_s
   end
 end
