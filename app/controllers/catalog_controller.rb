@@ -125,7 +125,6 @@ class CatalogController < ApplicationController
     config.add_index_field 'imageCount_isi', label: 'Image Count'
     config.add_index_field 'partOf_ssim', label: 'Collection Name'
     config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true
-    config.add_index_field 'title_tesim', label: 'Title', highlight: true
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
