@@ -2,16 +2,16 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 
-.dt{
-  position: relative;
-}
-
-.dd{
+.dd {
   margin-left:  22%;
   text-align: justify;
 }
 
-.document-metadata{
+.dt {
+  position: relative;
+}
+
+.document-metadata {
   display: contents;
   position: static;
   max-width: 55%;
@@ -24,8 +24,19 @@ DEFAULT MOBILE STYLING
 
 
 @media screen and (min-width: $medium_device) {
-}
+  .dl-invert dt {
+    position: absolute;
+  }
 
+  .document-metadata {
+    max-width: 55%;
+    margin-bottom: 3%;
+  }
+
+  .col-md-9 {
+    padding-left: 25%;
+  }
+}
 
 @media screen and (min-width: $xlarge_device) {
 
@@ -33,12 +44,12 @@ DEFAULT MOBILE STYLING
     position: absolute;
   }
 
-  .col-md-9{
-    padding-left: 25%;
-  }
-
-  .document-metadata{
+  .document-metadata {
     max-width: 55%;
     margin-bottom: 3%;
+  }
+
+  .col-md-9 {
+    padding-left: 25%;
   }
 }

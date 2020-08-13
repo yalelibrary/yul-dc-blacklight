@@ -7,6 +7,7 @@ RSpec.describe 'search result', type: :system do
   end
 
   it 'has expected css' do
+    expect(page).to have_css '.dl-invert'
     expect(page).to have_css '.document-metadata'
   end
 end
