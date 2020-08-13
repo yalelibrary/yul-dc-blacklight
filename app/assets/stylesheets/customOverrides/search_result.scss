@@ -2,14 +2,76 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 
+.dd {
+  margin-left:  22%;
+  text-align: justify;
+}
+
+.dt {
+  position: relative;
+}
+
+.document-metadata {
+  display: contents;
+  position: static;
+  max-width: 55%;
+  margin-bottom: 3%;
+}
+
 .search-highlight {
   background-color: yellow;
 }
 
 
 @media screen and (min-width: $medium_device) {
+  .dl-invert dt {
+    position: absolute;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 0px!important;
+  }
+
+  .document-metadata {
+    max-width: 55%;
+    margin-bottom: 3%;
+  }
+
+  .col-md-9 {
+    padding-left: 25%;
+  }
 }
 
+@media screen and (min-width: $large_device) {
+
+  .dl-invert dt {
+    position: absolute;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 0px!important;
+  }
+
+  .document-metadata {
+    max-width: 55%;
+    margin-bottom: 3%;
+  }
+
+  .col-md-9 {
+    padding-left: 25%;
+  }
+}
 
 @media screen and (min-width: $xlarge_device) {
+
+  .dl-invert dt {
+    position: absolute;
+  }
+
+  .document-metadata {
+    max-width: 55%;
+    margin-bottom: 3%;
+  }
+
+  .col-md-9 {
+    padding-left: 25%;
+  }
 }
