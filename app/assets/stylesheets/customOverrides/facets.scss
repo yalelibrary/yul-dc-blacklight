@@ -1,0 +1,40 @@
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
+
+a.facet-select {
+  color: $light_blue;
+  font-size: 12px;
+}
+
+div.card {
+  margin-bottom: 5px;
+}
+
+.facet-limit .card-body {
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+#facet-panel-collapse {
+  font-family: $mallory_medium;
+  line-height: 1.69;
+}
+
+.facet-values .facet-label {
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 10px;
+}
+
+.facet-values .facet-count {
+  font-size: 12px;
+  color: $medium_grey;
+}
+
+h2.facets-heading {
+  font-family: $mallory_medium;
+  font-size: 0.9rem;
+  font-weight: 900;
+  line-height: 1.71;
+}
