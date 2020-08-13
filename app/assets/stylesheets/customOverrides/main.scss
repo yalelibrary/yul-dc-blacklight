@@ -50,6 +50,18 @@ a {
 	border-color: $white !important;
 }
 
+.facet-count {
+	display: flex !important;
+}
+
+.facet-count:after {
+	content: ')';
+}
+
+.facet-count:before {
+	content: '(';
+}
+
 #facets .btn {
 	border-top: 1px solid $medium_grey;
 	color: $medium_grey;
@@ -83,6 +95,11 @@ a {
 
 .remove-icon {
 	display: none;
+}
+
+.remove {
+	position: absolute;
+	right: 0;
 }
 
 .remove::before {
