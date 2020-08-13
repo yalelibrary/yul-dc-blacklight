@@ -2,10 +2,20 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 
-.document-metadata {
-  position: absolute;
-  flex: 0 0 75%;
-  max-width: 75%;
+.dt{
+  position: relative;
+}
+
+.dd{
+  margin-left:  22%;
+  text-align: justify;
+}
+
+.document-metadata{
+  display: contents;
+  position: static;
+  max-width: 55%;
+  margin-bottom: 3%;
 }
 
 .search-highlight {
