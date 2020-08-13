@@ -28,4 +28,17 @@ DEFAULT MOBILE STYLING
 
 
 @media screen and (min-width: $xlarge_device) {
+
+  .dl-invert dt {
+    position: absolute;
+  }
+
+  .col-md-9{
+    padding-left: 25%;
+  }
+
+  .document-metadata{
+    max-width: 55%;
+    margin-bottom: 3%;
+  }
 }
