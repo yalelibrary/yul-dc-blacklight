@@ -64,6 +64,20 @@ a {
 	content: '(';
 }
 
+// facet caret custom rotation
+.facet-field-heading button.collapsed::after {
+    transform: rotate(-90deg);
+    transition: transform 0.1s ease;
+        transition-property: transform;
+        transition-duration: 0.1s;
+        transition-timing-function: ease;
+        transition-delay: 0s;
+}
+
+.facet-label {
+	width: 90%;
+}
+
 #facets .btn {
 	border-top: 1px solid $medium_grey;
 	color: $medium_grey;
@@ -79,16 +93,6 @@ a {
 	text-transform: uppercase;
 	color: $medium_grey;
 	font-size: 1rem;
-}
-
-// facet caret custom rotation
-.facet-field-heading button.collapsed::after {
-    transform: rotate(-90deg);
-    transition: transform 0.1s ease;
-        transition-property: transform;
-        transition-duration: 0.1s;
-        transition-timing-function: ease;
-        transition-delay: 0s;
 }
 
 .page-link {
