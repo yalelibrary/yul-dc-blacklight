@@ -67,7 +67,7 @@ a {
 	font-size: 1rem;
 }
 
-// facet caret
+// facet caret custom rotation
 .facet-field-heading button.collapsed::after {
     transform: rotate(-90deg);
     transition: transform 0.1s ease;
