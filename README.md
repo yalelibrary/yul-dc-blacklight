@@ -167,6 +167,8 @@ For the image instance to properly access images, you must also create a .secret
 
 ## Releasing a new version of yul-dc-blacklight
 
+**Note:** This process does not yet support major (i.e., breaking) version increments
+
 ### 1\. Ensure you have a github personal access token.
 
 Instructions here: <https://github.com/github-changelog-generator/github-changelog-generator#github-token> You will need to make your token available via an environment variable called `CHANGELOG_GITHUB_TOKEN`, e.g.:
