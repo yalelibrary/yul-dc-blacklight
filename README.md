@@ -183,7 +183,16 @@ Instructions here: <https://github.com/github-changelog-generator/github-changel
     rake yale:release:blacklight
 ```
 
-### 3\. Move any tickets that were included in this release from `For Release` to `Ready for Acceptance`
+### 3\. Use the camerata gem to increment the blacklight version and deploy:
+
+See [the camerata readme](https://github.com/yalelibrary/yul-dc-camerata) for more details on setting this up.
+
+```
+    cam release blacklight NEW_BLACKLIGHT_VERSION_NUMBER
+    cam deploy-main CLUSTER_NAME (e.g., yul-test)
+```
+
+### 4\. Move any tickets that were included in this release from `For Release` to `Ready for Acceptance`
 
 ## Using a New Release of the Management App or other microservices
 
