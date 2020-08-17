@@ -73,6 +73,7 @@ To start the application stack, run `cam up` in the blacklight directory. This s
 - Access the manifests instance at `http://localhost`
 
 - Access the management app at `http://localhost:3001/management`
+  - If you cannot access this url, try the [troubleshooting steps](#accessing-the-management-app)
 
 ## Troubleshooting
 
@@ -130,6 +131,14 @@ If you use rbenv, you must run the following command after installing camerata: 
     ```
     bundle exec rake yale:docs:blacklight
     ```
+
+### Accessing the management app
+If you're unable to load the [management app](http://localhost:3001/management) try the following:
+  - Stop the blacklight app from running with `ctrl + c`
+  - Run `cam down` followed by `cam up`
+  - In a new tab, cd into the management repo and run `git pull`
+  - In the same tab, cd into the blacklight repo and run `cam bundle management`
+  - Once that completes, refresh the [management app](http://localhost:3001/management) and the [blacklight app](http://localhost:3000)
 
 ### Indexing data
 
