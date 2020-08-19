@@ -1,80 +1,71 @@
 <%# app/views/catalog/_index_header.html.erb -%>
-<%-
-  # Main values for an item entry on the index in a search results page.
+    <%-
+      # Main values for an item entry on the index in a search results page.
 
-  doc = document ||= nil
-  return unless doc.present?
-  byebug
-  doc.lens ||= lens_key_for(doc)
+      doc = document ||= nil
+      return unless doc.present?
+      # doc.lens ||= lens_key_for(doc)
 
-  # Position of the document in search results.
-  document_counter ||= -1
-  document_counter = document_counter_with_offset(document_counter)
+      # Position of the document in search results.
+      document_counter ||= -1
+      document_counter = document_counter_with_offset(document_counter)
 
-  # Format counter number that comes before the entry title.
-  #
-  # The caller may provide additional CSS classes to the counter element via
-  # the :counter_class option or eliminate the element with
-  # "counter_class: :none".
-  #
-  counter_class ||= nil
-  counter =
-      unless counter_class == :none
-        counter_class =
-            # css_classes(counter_class) { |classes| classes << 'document-counter' }
-        content_tag(:span, class: counter_class) {
-          t('blacklight.search.documents.counter', counter: document_counter)
-        }
-      end
+      # Format counter number that comes before the entry title.
+      #
+      # The caller may provide additional CSS classes to the counter element via
+      # the :counter_class option or eliminate the element with
+      # "counter_class: :none".
+      #
+      counter_class ||= nil
+      counter =
+          unless counter_class == :none
+            counter_class =
+                # css_classes(counter_class) { |classes| classes << 'document-counter' }
+            content_tag(:span, class: counter_class) {
+              t('blacklight.search.documents.counter', counter: document_counter)
+            }
+          end
 
+      # Main title container for document partial.
+      #
+      # The caller may provide additional CSS classes to the title via the
+      # :title_class option.  If document action(s) are present, the width of the
+      # title is reduced to make room for them.
+      #
+      title_class ||= nil
+      title_class =
+          unless title_class == :none
+            # # css_classes(title_class) { |classes|
+            #   if document_actions.present?
+            #     title_width = 12 - actions_width
+            #     classes << "col-sm-#{title_width}"
+            #     classes << "col-lg-#{title_width + 1}"
+            #   else
+            #     classes << 'col-md-12'
+            #   end
+            # # }
+          end
 
-  # # Bookmark functions for items/docs.
-  # #
-  # # The caller may provide additional CSS classes to the document actions
-  # # element via the :actions_class option or eliminate the element with
-  # # "actions_class: :none" or "actions_width: 0".
-  # #
-  # actions_class ||= nil
-  # actions_width ||= 3
-  # document_actions =
-  #     unless (actions_class == :none) || actions_width.zero?
-  #       actions_class =
-  #             css_classes(actions_class) { |classes|
-  #             classes << 'index-document-functions'
-  #             classes << "col-sm-#{actions_width}"
-  #             classes << "col-lg-#{actions_width - 1}"
-  #             }
-  #       render_index_doc_actions(doc, wrapping_class: actions_class)
-  #     end
-
-  # Main title container for document partial.
-  #
-  # The caller may provide additional CSS classes to the title via the
-  # :title_class option.  If document action(s) are present, the width of the
-  # title is reduced to make room for them.
-  #
-  # title_class ||= nil
-  # title_class =
-  #     unless title_class == :none
-  #       css_classes(title_class) { |classes|
-  #         if document_actions.present?
-  #           title_width = 12 - actions_width
-  #           classes << "col-sm-#{title_width}"
-  #           classes << "col-lg-#{title_width + 1}"
-  #         else
-  #           classes << 'col-md-12'
-  #         end
-  #       }
-  #     end
-
--%>
-<div class="documentHeader row">
-  <h3 class="index_title document-title-heading">
-    <%= counter %>
-    <div class="document-title">
-      <%= link_to_document document, document.highlight_field('title_tesim')[0], counter: document_counter  %>
-      <%#= link_to_document(doc, counter: document_counter) %>
+    -%>
+    <div class="documentHeader row">
+      <h3 class="index_title document-title-heading <%= title_class %>">
+        <%= counter %>
+        <div class="document-title">
+          <%= link_to_document document, document.highlight_field('title_tesim')[0] %>
+          <%#= link_to_document(doc, counter: document_counter, document.highlight_field('title_tesim')[0]) %>
+        </div>
+      </h3>
+      <%#= document_actions %>
     </div>
-  </h3>
-  <%#= document_actions %>
-</div>
+
+
+<!--<div class="documentHeader row">-->
+<!--  <h3 class="index_title document-title-heading">-->
+<%#= document_counter %>
+<!--    <div class="document-title">-->
+<%#= link_to_document document, document.highlight_field('title_tesim')[0] %>
+
+<!--    </div>-->
+<!--  </h3>-->
+<%#= document_actions %>
+<!--</div>-->
