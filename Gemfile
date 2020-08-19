@@ -8,6 +8,7 @@ ruby '2.6.6'
 gem "actionpack", ">= 6.0.3.1"
 gem 'awesome_print'
 gem 'blacklight'
+gem 'blacklight-gallery'
 gem 'blacklight-marc', '>= 7.0.0.rc1', '< 8'
 gem 'blacklight_range_limit'
 gem 'bootsnap', '>= 1.4.2', require: false
