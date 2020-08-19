@@ -121,6 +121,11 @@ a {
 	color: $light_blue !important;
 }
 
+.universal-viewer-iframe {
+	position: relative;
+	z-index: 1;
+}
+
 @media screen and (min-width: $medium_device) {
 }
 

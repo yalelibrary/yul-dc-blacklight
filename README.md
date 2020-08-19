@@ -33,10 +33,10 @@ touch .secrets
 ```bash
   docker-compose pull blacklight
 ```
+
 ## Install Camerata
 
 Clone the yul-dc-camerata repo and install the gem.
-
 
 ```bash
 git clone git@github.com:yalelibrary/yul-dc-camerata.git
@@ -44,6 +44,7 @@ cd yul-dc-camerata
 bundle install
 rake install
 ```
+
 ## Update Camerata
 
 - You can get the latest version at any point by updating the code and reinstalling
@@ -57,27 +58,11 @@ rake install
 
 ## General Use
 
-Once camerata is installed on your system, interactions happen through the
-camerata command-line tool or through its alias `cam`.  The camerata tool can be
-used to bring the development stack up and down locally, interact with the
-docker containers, deploy, run the smoke tests and otherwise do development
-tasks common to the various applications in the yul-dc application stack.
+Once camerata is installed on your system, interactions happen through the camerata command-line tool or through its alias `cam`. The camerata tool can be used to bring the development stack up and down locally, interact with the docker containers, deploy, run the smoke tests and otherwise do development tasks common to the various applications in the yul-dc application stack.
 
-All buildin commands can be listed with `cam help` and individual usage
-information is available with `cam help COMMAND`.  Please note that deployment
-commands (found in the `./bin` directory) are passed through and are therefore not
-listed by the help command.  See the usage for those below.
+All buildin commands can be listed with `cam help` and individual usage information is available with `cam help COMMAND`. Please note that deployment commands (found in the `./bin` directory) are passed through and are therefore not listed by the help command. See the usage for those below.
 
-To start the application stack, run `cam up` in the blacklight directory. This starts all of the applications as they are
-all dependencies of yul-blacklight. Camerata is smart. If you start `cam up` from
-a blacklight code check out it will mount that code for local development
-(changes to the outside code will affect the inside container). If you start the
-`cam up` from the blacklight application you will get the blacklight code mounted
-for local development and the blacklight code will run as it is in the downloaded
-image. You can also start the two applications both mounted for development by
-starting the blacklight application with `--without management` and the
-managment application `--without solr --withouth db` each from their respective
-code checkouts.
+To start the application stack, run `cam up` in the blacklight directory. This starts all of the applications as they are all dependencies of yul-blacklight. Camerata is smart. If you start `cam up` from a blacklight code check out it will mount that code for local development (changes to the outside code will affect the inside container). If you start the `cam up` from the blacklight application you will get the blacklight code mounted for local development and the blacklight code will run as it is in the downloaded image. You can also start the two applications both mounted for development by starting the blacklight application with `--without management` and the managment application `--without solr --withouth db` each from their respective code checkouts.
 
 - Access the blacklight app at `http://localhost:3000`
 
@@ -88,23 +73,27 @@ code checkouts.
 - Access the manifests instance at `http://localhost`
 
 - Access the management app at `http://localhost:3001/management`
+  - If you cannot access this url, try the [troubleshooting steps](#accessing-the-management-app)
 
 ## Troubleshooting
 
 If you receive a `please set your AWS_PROFILE and AWS_DEFAULT_REGION (RuntimeError)` error when you `cam up`, you will need to set your AWS credentials. Credentials can be set in the `~/.aws/credentials` file in the following format:
+
 ```bash
 [dce-hosting]
 aws_access_key_id=YOUR_ACCESS_KEY
 aws_secret_access_key=YOUR_SECRET_ACCESS_KEY
 ```
+
 After the credentials have been set, you will need to export the following settings via the command line:
+
 ```bash
 export AWS_PROFILE=dce-hosting && export AWS_DEFAULT_REGION=us-east-1
 ```
+
 Note: AWS_PROFILE name needs to match the credentials profile name (`[dce-hosting]`). After you set the credentials, you will need to re-install camerata: `rake install`
 
-If you use rbenv, you must run the following command after installing camerata:
-`rbenv rehash`
+If you use rbenv, you must run the following command after installing camerata: `rbenv rehash`
 
 ### Accessing the blacklight container
 
@@ -143,6 +132,14 @@ If you use rbenv, you must run the following command after installing camerata:
     bundle exec rake yale:docs:blacklight
     ```
 
+### Accessing the management app
+If you're unable to load the [management app](http://localhost:3001/management) try the following:
+  - Stop the blacklight app from running with `ctrl + c`
+  - Run `cam down` followed by `cam up`
+  - In a new tab, cd into the management repo and run `git pull`
+  - In the same tab, cd into the blacklight repo and run `cam bundle management`
+  - Once that completes, refresh the [management app](http://localhost:3001/management) and the [blacklight app](http://localhost:3000)
+
 ### Indexing data
 
 - First, connect to the running management application:
@@ -177,16 +174,34 @@ In order to prevent search engine crawling of the system before it's ready to la
 
 For the image instance to properly access images, you must also create a .secrets file with valid S3 credentials and basic auth credentials; see secrets-template for the correct format.
 
-## Releasing a new version
+## Releasing a new version of yul-dc-blacklight
 
-1. Decide on a new version number. We use [semantic versioning](https://semver.org/).
-2. Update the version number in `.github_changelog_generator`
-3. Go through all PRs since the last release and ensure that any **features** and **bug fixes** have been tagged with the appropriate label. No need to label it unless it is a feature or a bug fix.
-4. Run this command: `github_changelog_generator --token $YOUR_GITHUB_TOKEN`. This will re-generate `CHANGELOG.md`.
-5. Commit and merge the changes you just made with a message like "Prep for vX.Y.Z release"
-6. Once those changes are merged to the `master` branch, in the github web UI go to `Releases` and tag a new release with the right version number. Paste in the release notes for this release from the top of `CHANGELOG.md`
-7. Update `yul-dc-camerata` with the new version of blacklight and submit a PR.
-8. Move any tickets that were included in this release from `For Release` to `Ready for Acceptance`
+**Note:** This process does not yet support major (i.e., breaking) version increments
+
+### 1\. Ensure you have a github personal access token.
+
+Instructions here: <https://github.com/github-changelog-generator/github-changelog-generator#github-token> You will need to make your token available via an environment variable called `CHANGELOG_GITHUB_TOKEN`, e.g.:
+
+```
+    export CHANGELOG_GITHUB_TOKEN=YOUR_TOKEN_HERE
+```
+
+### 2\. Run the release rake task
+
+```
+    rake yale:release:blacklight
+```
+
+### 3\. Use the camerata gem to increment the blacklight version and deploy:
+
+See [the camerata readme](https://github.com/yalelibrary/yul-dc-camerata) for more details on setting this up.
+
+```
+    cam release blacklight NEW_BLACKLIGHT_VERSION_NUMBER
+    cam deploy-main CLUSTER_NAME (e.g., yul-test)
+```
+
+### 4\. Move any tickets that were included in this release from `For Release` to `Ready for Acceptance`
 
 ## Using a New Release of the Management App or other microservices
 
