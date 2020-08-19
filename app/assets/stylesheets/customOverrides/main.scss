@@ -45,72 +45,8 @@ a {
 	color: $yale_blue !important;
 }
 
-.bg-success, .facet-limit-active .card-header {
-	background-color: $white !important;
-	border-color: $white !important;
-}
-
-.facet-count {
-	position: absolute;
-	right: 18px;
-	width: 5ch !important;
-}
-
-.facet-count:after {
-	content: ')';
-}
-
-.facet-count:before {
-	content: '(';
-}
-
-// facet caret custom rotation
-.facet-field-heading button.collapsed::after {
-    transform: rotate(-90deg);
-    transition: transform 0.1s ease;
-        transition-property: transform;
-        transition-duration: 0.1s;
-        transition-timing-function: ease;
-        transition-delay: 0s;
-}
-
-.facet-label {
-	width: 90%;
-}
-
-#facets .btn {
-	border-top: 1px solid $medium_grey;
-	color: $medium_grey;
-	padding-top: 1.25rem !important;
-}
-
-#facets .card {
-	border: none;
-	border-radius: 0;
-}
-
-.facets-heading {
-	text-transform: uppercase;
-	color: $medium_grey;
-	font-size: 1rem;
-}
-
 .page-link {
 	color: $yale_blue;
-}
-
-.remove-icon {
-	display: none;
-}
-
-.remove {
-	position: absolute;
-	right: 0;
-	padding-top: 2px;
-}
-
-.remove::before {
-	content: url(x2x.png);
 }
 
 #smsLink {
