@@ -107,4 +107,7 @@ a {
 
 
 @media screen and (min-width: $xlarge_device) {
+  #main-container {
+    max-width: 85%;
+  }
 }
