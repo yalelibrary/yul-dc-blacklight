@@ -26,7 +26,7 @@ DEFAULT MOBILE STYLING
   border-bottom: $white thin solid;
   margin-right: -10rem;
   margin-left: -15%;
-  padding-left: 18%;
+  padding-left: 15.5%;
 }
 
 .nav-link {
@@ -60,12 +60,14 @@ DEFAULT MOBILE STYLING
   color: transparent !important;
 }
 
-.navbar-logo{
+.navbar-logo {
   background-image: image-url('yul_logo/yul_logo3x.png');
-  flex: 0 1 50%;
+  flex: 0 1 210px;
   background-size: contain;
   background-position-y: center;
+  margin-top: 5px;
 }
+
 .secondary-nav {
   background-color: $yale_blue;
   font-family: $mallory_medium !important;
@@ -76,7 +78,6 @@ DEFAULT MOBILE STYLING
 }
 
 .secondary-nav > .row {
-  width: 100%;
   flex-direction: column;
   margin-right: auto;
   margin-left: auto;
@@ -94,17 +95,24 @@ DEFAULT MOBILE STYLING
 @media screen and (min-width: $small_device) {
   .info-header {
     margin-left: -26%;
-    padding-left: 27%;
+    padding-left: 21%;
   }
+
+  .navbar > div.container {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 95%;
+  }
+
   .secondary-nav > .row {
-    max-width: 540px;
+    max-width: 85%;
   }
 }
 
 
 @media screen and (min-width: $medium_device) {
   .info-header {
-    padding-left: 30%;
+    padding-left: 26%;
   }
 
   .navbar > .container {
@@ -112,26 +120,51 @@ DEFAULT MOBILE STYLING
     align-items: start;
   }
 
+  .navbar-expand-md .navbar-nav .nav-link {
+    padding-left: 0px;
+    padding-right: 28px;
+    margin-left: 0px;
+  }
+
   .navbar-logo {
+    flex: 0 1 50%;
     width: 215px;
   }
 
   .secondary-nav > .row {
-    max-width: 720px;
+    max-width: 87%;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 }
 
 
 @media screen and (min-width: $large_device) {
-  .secondary-nav > .row {
-    max-width: 960px;
+  .info-header {
+    padding-left: 26%;
+  }
+
+  .navbar > div.container,
+  .secondary-nav > .row,
+  #main-container {
+    max-width: 85%;
+  }
+
+  .navbar-collapse {
+    margin-top: 5px;
+    padding-top: 5px;
+  }
+
+  .navbar-expand-md,
+  .navbar-expand-md > .container {
+    padding-left: 0px;
+    padding-right: 0px;
   }
 }
 
 
 @media screen and (min-width: $xlarge_device) {
   .info-header {
-    padding-left: 26.5%;
     margin-right: 1rem;
     border-bottom: none;
   }
@@ -143,6 +176,12 @@ DEFAULT MOBILE STYLING
 
   .navbar > .container {
     flex-direction: initial;
+  }
+
+  .navbar-expand-md .navbar-nav .nav-link {
+    padding-right: 0px;
+    padding-left: 28px;
+    margin-right: 0px;
   }
 
   .navbar-logo {
@@ -161,9 +200,6 @@ DEFAULT MOBILE STYLING
 
   .secondary-nav > .row {
     flex-direction: initial;
-    max-width: 1140px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom:0.15rem;
+    padding-bottom: 0.15rem;
   }
 }
