@@ -6,6 +6,11 @@ a {
   color: $yale_blue;
 }
 
+.bg-success, .facet-limit-active .card-header {
+  background-color: $white !important;
+  border-color: $white !important;
+}
+
 .btn {
   border-radius: 0;
 }
@@ -43,11 +48,6 @@ a {
 
 #emailLink {
   color: $yale_blue !important;
-}
-
-.bg-success, .facet-limit-active .card-header {
-  background-color: $white !important;
-  border-color: $white !important;
 }
 
 #facets .btn {
@@ -92,7 +92,17 @@ a {
   z-index: 1;
 }
 
+@media screen and (min-width: $small_device) {
+  #main-container {
+  max-width: 93%;
+  }
+}
+
 @media screen and (min-width: $medium_device) {
+  #main-container {
+    padding: 0px;
+    max-width: 87%;
+  }
 }
 
 
