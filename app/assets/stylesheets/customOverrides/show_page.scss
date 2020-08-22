@@ -1,0 +1,85 @@
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
+
+.card{
+  border: none;
+}
+
+.card-header {
+  color: $medium_grey;
+  font: $mallory_medium;
+  font-size: 12px!important;
+  text-transform: uppercase;
+}
+
+.list-group{
+  display: -webkit-box;
+}
+
+.list-group-item {
+  border: none;
+  color: $light_blue!important;
+  display: flex;
+  text-align: left;
+  padding: 0 0 0 0;
+}
+#emailLink {
+  color: $light_blue !important;
+  font: $mallory_medium;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+#emailLink:after{
+  content: '>';
+}
+
+#citationLink {
+  color: $light_blue !important;
+  font: $mallory_medium;
+  font-size: 11px;
+  text-transform: uppercase;
+  padding-left: 0px;
+}
+
+#citationLink:after{
+  content: '>';
+}
+
+#smsLink {
+  color: $light_blue !important;
+  flex-wrap: wrap;
+  font: $mallory_medium;
+  font-size: 11px;
+  text-transform: uppercase;
+  padding-left: 0px;
+}
+
+#smsLink:after{
+  content: '>';
+}
+
+#manifestLink {
+  color: $light_blue !important;
+  font: $mallory_medium;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+#manifestLink:after{
+  content: '>';
+}
+
+.iiif-logo img {
+  display: none;
+}
+
+@media screen and (min-width: $medium_device) {
+}
+
+@media screen and (min-width: $large_device) {
+}
+
+@media screen and (min-width: $xlarge_device) {
+}
