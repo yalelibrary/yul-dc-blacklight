@@ -209,9 +209,9 @@ class CatalogController < ApplicationController
     # config.add_search_field 'all_fields', label: 'All Fields'
 
     # Array allows for only listed Solr fields to be searched in the 'All Fields'
-    search_fields = ['abstract_ssim', 'author_tsim', 'alternativeTitle_ssim', 'description_tesim', 'geo_subject_ssim',
-                     'identifierShelfMark_tesim', 'orbisBidId_ssim', 'publicatonPlace_ssim', 'publisher_ssim',
-                     'resourceType_tesim', 'sourceCreated_ssim', 'subjectName_ssim', 'subject_topic_tsim',
+    search_fields = ['abstract_tesim', 'author_tsim', 'alternativeTitle_ssim', 'description_tesim', 'subjectGeographic_tesim',
+                     'identifierShelfMark_tesim', 'orbisBidId_ssi', 'publicatonPlace_tesim', 'publisher_tesim',
+                     'resourceType_tesim', 'sourceCreated_tesim', 'subjectName_tesim', 'subject_topic_tsim',
                      'title_tesim']
 
     config.add_search_field('all_fields', label: 'All Fields') do |field|
