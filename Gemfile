@@ -7,7 +7,7 @@ ruby '2.6.6'
 
 gem "actionpack", ">= 6.0.3.1"
 gem 'awesome_print'
-gem 'blacklight'
+gem 'blacklight', '>= 7.0'
 gem 'blacklight-gallery'
 gem 'blacklight-marc', '>= 7.0.0.rc1', '< 8'
 gem 'blacklight_range_limit'
@@ -27,8 +27,7 @@ gem 'omniauth'
 gem 'omniauth-cas'
 gem 'pg'
 gem 'puma', '~> 4.3'
-gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
-gem 'rails-controller-testing'
+gem 'rails', '~> 6.0.2', '>= 6.0.3.2'
 gem "rails_semantic_logger", ">=4.4.4"
 gem 'rsolr', '>= 1.0', '< 3'
 gem 'sass-rails', '>= 6'
@@ -48,7 +47,7 @@ end
 group :development do
   gem 'activerecord-nulldb-adapter'
   gem "amazing_print", ">=1.2.1"
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen', '~> 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
@@ -61,6 +60,7 @@ group :test do
   gem 'coveralls', require: false
   gem 'factory_bot_rails'
   gem 'ffaker'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
