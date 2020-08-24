@@ -189,7 +189,7 @@ For the image instance to properly access images, you must also create a .secret
 
 2. Use the camerata gem to increment the blacklight version and deploy:
 
-  See [the camerata readme](https://github.com/yalelibrary/yul-dc-camerata) for more details on setting this up.
+  Note: See [the camerata readme](https://github.com/yalelibrary/yul-dc-camerata) for details on installing camerata.
 
   ```
   cam release blacklight
