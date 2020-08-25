@@ -1,0 +1,27 @@
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
+
+.custom-select,
+.form-control,
+.search-btn {
+  padding-top: 11px;
+  padding-bottom: 11px;
+  height: 50px;
+}
+
+.custom-select {
+  color: $yale_blue;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-family: $mallory_medium;
+  border: 1px solid $border_grey;
+  border-radius: 0px;
+}
+
+.form-control {
+  font-size: 20px;
+  color: $black;
+  font-family: $mallory_book $mallory_light, Arial, Helvetica, sans-serif !important;
+}
+
