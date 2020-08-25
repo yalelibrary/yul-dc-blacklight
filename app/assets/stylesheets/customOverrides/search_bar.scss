@@ -26,7 +26,14 @@ bg-light {
 }
 
 .custom-select,
-.navbar-search .submit-search-text {
+.form-control,
+.search-btn {
+  padding-top: 11px;
+  padding-bottom: 11px;
+  height: 50px;
+}
+
+.custom-select {
   color: $yale_blue;
   text-transform: uppercase;
   font-size: 20px;
@@ -34,9 +41,14 @@ bg-light {
 }
 
 .custom-select,
+.form-control,
 .search-btn {
   border: 1px solid $border_grey;
   border-radius: 0px;
+}
+
+.form-control {
+  border-top: none;
 }
 
 .input-group {
@@ -71,6 +83,11 @@ bg-light {
 
 
 @media screen and (min-width: $small_device) {
+  .form-control {
+    border-left: none;
+    border-top: 1px solid $border_grey;
+  }
+
   .navbar-search .search-field {
     width: 221px;
   }
