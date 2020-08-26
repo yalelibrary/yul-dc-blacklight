@@ -11,7 +11,7 @@ DEFAULT MOBILE STYLING
 
 .footer-container {
   background-color: $yale_blue;
-  font-family: $mallory_medium !important;
+  font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif !important;
   margin-top: 15px;
   position: relative;
   display: flex;
@@ -86,11 +86,16 @@ DEFAULT MOBILE STYLING
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0px;
   }
 
   .footer-links li {
     margin: 15px 0px 0px 16px;
+  }
+
+  .footer-container > .container {
+    max-width: 85%;
+    padding: 0px
   }
 
   .footer-logo {

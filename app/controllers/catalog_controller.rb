@@ -5,6 +5,10 @@ class CatalogController < ApplicationController
   include Blacklight::Marc::Catalog
 
   configure_blacklight do |config|
+    config.view.gallery.partials = [:index_header]
+    config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
+    config.show.partials.insert(1, :openseadragon)
+
     ## Class for sending and receiving requests from a search index
     # config.repository_class = Blacklight::Solr::Repository
     #
