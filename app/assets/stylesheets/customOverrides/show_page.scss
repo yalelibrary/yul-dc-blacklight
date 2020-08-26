@@ -6,11 +6,8 @@ DEFAULT MOBILE STYLING
   border: none;
 }
 
-.card-header {
-  color: $medium_grey;
-  font: $mallory_medium;
-  font-size: 12px!important;
-  text-transform: uppercase;
+.iiif-logo img {
+  display: none;
 }
 
 .list-group{
@@ -24,6 +21,21 @@ DEFAULT MOBILE STYLING
   text-align: left;
   padding: 0 0 0 0;
 }
+
+.show-links {
+  color: $medium_grey;
+  font: $mallory_medium;
+  font-size: 12px!important;
+  text-transform: uppercase;
+}
+
+.show-tools {
+  color: $medium_grey;
+  font: $mallory_medium;
+  font-size: 12px!important;
+  text-transform: uppercase;
+}
+
 #emailLink {
   color: $light_blue !important;
   font: $mallory_medium;
@@ -71,15 +83,24 @@ DEFAULT MOBILE STYLING
   content: '>';
 }
 
-.iiif-logo img {
-  display: none;
-}
 
 @media screen and (min-width: $medium_device) {
 }
 
 @media screen and (min-width: $large_device) {
+  .show-tools{
+    margin-right: -34%;
+  }
+  .show-links{
+    margin-right: -34%;
+  }
 }
 
 @media screen and (min-width: $xlarge_device) {
+  .show-tools{
+    margin-right: -13%;
+  }
+  .show-links{
+    margin-right: -13%;
+  }
 }
