@@ -28,12 +28,12 @@ bg-light {
 .custom-select,
 .form-control,
 .search-btn {
-  padding-top: 11px;
-  padding-bottom: 11px;
-  height: 50px;
+  padding: 11px 17px;
+  line-height: 1;
 }
 
-.custom-select {
+.custom-select,
+.navbar-search .submit-search-text {
   color: $yale_blue;
   text-transform: uppercase;
   font-size: 20px;
