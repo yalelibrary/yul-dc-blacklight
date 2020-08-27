@@ -114,7 +114,15 @@ class CatalogController < ApplicationController
     #    years_10: { label: 'within 10 Years', fq: "pub_date_ssim:[#{Time.zone.now.year - 10} TO *]" },
     #    years_25: { label: 'within 25 Years', fq: "pub_date_ssim:[#{Time.zone.now.year - 25} TO *]" }
     # }
-
+    disp_highlight_on_search_params = {
+        'hl': true,
+        'hl.method': 'original',
+        'hl.usePhraseHighlighter':true,
+        'hl.preserveMulti': false,
+        "hl.simple.pre":  "<span class='search-highlight'>",
+        "hl.simple.post": "</span>",
+        "hl.fragsize": 40,
+    }
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
     # handler defaults, or have no facets.
@@ -129,6 +137,16 @@ class CatalogController < ApplicationController
     config.add_index_field 'imageCount_isi', label: 'Image Count'
     config.add_index_field 'partOf_ssim', label: 'Collection Name'
     config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true
+    config.add_index_field 'abstract_tesim', label: 'Abstract', highlight:true ,solr_params: disp_highlight_on_search_params
+    config.add_index_field 'alternativeTitle_tesim', label: 'Alternative Title', highlight:true ,solr_params: disp_highlight_on_search_params
+    config.add_index_field 'description_tesim', label: 'Description', highlight:true ,solr_params: disp_highlight_on_search_params
+    config.add_index_field 'subjectGeographic_tesim', label: 'Subject Geographic', highlight:true ,solr_params: disp_highlight_on_search_params
+    config.add_index_field 'orbisBidId_ssi', label: 'Orbis BidId', highlight:true ,solr_params: disp_highlight_on_search_params
+    config.add_index_field 'publicatonPlace_tesim', label: 'Publication Place', highlight:true ,solr_params: disp_highlight_on_search_params
+    config.add_index_field 'publisher_tesim', label: 'Publisher', highlight:true ,solr_params: disp_highlight_on_search_params
+    config.add_index_field 'sourceCreated_tesim', label: 'Created Source', highlight:true ,solr_params: disp_highlight_on_search_params
+    config.add_index_field 'subjectName_tesim', label: 'Subject Name', highlight:true ,solr_params: disp_highlight_on_search_params
+    config.add_index_field 'subject_topic_tesim', label: 'Subject Topic', highlight:true ,solr_params: disp_highlight_on_search_params
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -191,6 +209,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'projection_tesim', label: 'Projection'
 
     config.add_field_configuration_to_solr_request!
+
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
     #
@@ -213,9 +232,9 @@ class CatalogController < ApplicationController
     # config.add_search_field 'all_fields', label: 'All Fields'
 
     # Array allows for only listed Solr fields to be searched in the 'All Fields'
-    search_fields = ['abstract_tesim', 'author_tsim', 'alternativeTitle_ssim', 'description_tesim', 'subjectGeographic_tesim',
+    search_fields = ['abstract_tesim', 'author_tesim', 'alternativeTitle_tesim', 'description_tesim', 'subjectGeographic_tesim',
                      'identifierShelfMark_tesim', 'orbisBidId_ssi', 'publicatonPlace_tesim', 'publisher_tesim',
-                     'resourceType_tesim', 'sourceCreated_tesim', 'subjectName_tesim', 'subject_topic_tsim',
+                     'resourceType_tesim', 'sourceCreated_tesim', 'subjectName_tesim', 'subject_topic_tesim',
                      'title_tesim']
 
     config.add_search_field('all_fields', label: 'All Fields') do |field|
