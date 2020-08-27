@@ -121,6 +121,8 @@ bg-light {
 @media screen and (min-width: $large_device) {
   .input-group {
     max-width: 918px;
+    width: 910px;
+    max-width: 910px;
     justify-content: center;
   }
 
@@ -151,6 +153,11 @@ bg-light {
 @media screen and (min-width: $xlarge_device) {
   .input-group {
     width: 918px;
+  }
+
+  .navbar-search .search-field {
+    flex: 0;
+    max-width: 221px;
   }
 
   .twitter-typeahead {
