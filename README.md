@@ -73,6 +73,7 @@ To start the application stack, run `cam up` in the blacklight directory. This s
 - Access the manifests instance at `http://localhost`
 
 - Access the management app at `http://localhost:3001/management`
+
   - If you cannot access this url, try the [troubleshooting steps](#accessing-the-management-app)
 
 ## Troubleshooting
@@ -133,12 +134,14 @@ If you use rbenv, you must run the following command after installing camerata: 
     ```
 
 ### Accessing the management app
+
 If you're unable to load the [management app](http://localhost:3001/management) try the following:
-  - Stop the blacklight app from running with `ctrl + c`
-  - Run `cam down` followed by `cam up`
-  - In a new tab, cd into the management repo and run `git pull`
-  - In the same tab, cd into the blacklight repo and run `cam bundle management`
-  - Once that completes, refresh the [management app](http://localhost:3001/management) and the [blacklight app](http://localhost:3000)
+
+- Stop the blacklight app from running with `ctrl + c`
+- Run `cam down` followed by `cam up`
+- In a new tab, cd into the management repo and run `git pull`
+- In the same tab, cd into the blacklight repo and run `cam bundle management`
+- Once that completes, refresh the [management app](http://localhost:3001/management) and the [blacklight app](http://localhost:3000)
 
 ### Indexing data
 
@@ -176,32 +179,25 @@ For the image instance to properly access images, you must also create a .secret
 
 ## Releasing a new version of yul-dc-blacklight
 
-**Note:** This process does not yet support major (i.e., breaking) version increments
+1. Ensure you have a github personal access token.
 
-### 1\. Ensure you have a github personal access token.
+  Instructions here: <https://github.com/github-changelog-generator/github-changelog-generator#github-token> You will need to make your token available via an environment variable called `CHANGELOG_GITHUB_TOKEN`, e.g.:
 
-Instructions here: <https://github.com/github-changelog-generator/github-changelog-generator#github-token> You will need to make your token available via an environment variable called `CHANGELOG_GITHUB_TOKEN`, e.g.:
+  ```
+  export CHANGELOG_GITHUB_TOKEN=YOUR_TOKEN_HERE
+  ```
 
-```
-    export CHANGELOG_GITHUB_TOKEN=YOUR_TOKEN_HERE
-```
+2. Use the camerata gem to increment the blacklight version and deploy:
 
-### 2\. Run the release rake task
+  Note: See [the camerata readme](https://github.com/yalelibrary/yul-dc-camerata) for details on installing camerata.
 
-```
-    rake yale:release:blacklight
-```
+  ```
+  cam release blacklight
+  cam push_version blacklight NEW_BLACKLIGHT_VERSION_NUMBER
+  cam deploy-main CLUSTER_NAME (e.g., yul-test)
+  ```
 
-### 3\. Use the camerata gem to increment the blacklight version and deploy:
-
-See [the camerata readme](https://github.com/yalelibrary/yul-dc-camerata) for more details on setting this up.
-
-```
-    cam release blacklight NEW_BLACKLIGHT_VERSION_NUMBER
-    cam deploy-main CLUSTER_NAME (e.g., yul-test)
-```
-
-### 4\. Move any tickets that were included in this release from `For Release` to `Ready for Acceptance`
+3. Move any tickets that were included in this release from `For Release` to `Ready for Acceptance`
 
 ## Using a New Release of the Management App or other microservices
 
