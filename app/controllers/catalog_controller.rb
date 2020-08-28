@@ -132,7 +132,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    
+
     # Description Group
     config.add_show_field 'abstract_tesim', label: 'Abstract'
     config.add_show_field 'alternativeTitle_tesim', label: 'Alternative Title'
