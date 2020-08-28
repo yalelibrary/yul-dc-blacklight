@@ -38,6 +38,34 @@ DEFAULT MOBILE STYLING
   background-color: yellow;
 }
 
+//.name{
+//  font: $yale_roman;
+//  font-size: 24px;
+//}
+//.itemprop name{
+//  font-size: 24px!important;
+//  color:$yale_blue
+//}
+
+.h1 {
+  font-size: 24px!important;
+  color:$yale_blue;
+  font: $yale_roman;
+}
+
+
+.name{
+  font-size: 24px!important;
+  color:$yale_blue;
+  font: $yale_roman;
+}
+
+.universal-viewer-iframe{
+  width: 90%;
+  padding-left: 8%;
+  align-content: center;
+}
+
 
 @media screen and (min-width: $medium_device) {
   .dl-invert dt {
@@ -54,6 +82,12 @@ DEFAULT MOBILE STYLING
 
   .col-md-9 {
     padding-left: 25%;
+  }
+
+  .uv-container{
+    width: 100%;
+    padding-left: 8%;
+    align-content: center;
   }
 }
 
@@ -74,6 +108,7 @@ DEFAULT MOBILE STYLING
   .col-md-9 {
     padding-left: 25%;
   }
+
 }
 
 @media screen and (min-width: $xlarge_device) {
@@ -89,5 +124,11 @@ DEFAULT MOBILE STYLING
 
   .col-md-9 {
     padding-left: 25%;
+  }
+
+  .uv-container{
+    width: none;
+    padding-left: 15%;
+    align-content: center;
   }
 }
