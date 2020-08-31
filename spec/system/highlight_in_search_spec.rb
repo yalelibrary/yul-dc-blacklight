@@ -36,8 +36,8 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     subject(:content) { find(:css, '#content') }
 
     it 'highlights title when a term is queried' do
-      visit '/?search_field=all_fields&q=You'
-      expect(page.html).to include "Me and <span class='search-highlight'>You</span>"
+      visit '/?search_field=all_fields&q=Dan'
+      expect(page.html).to include "Jack or <span class='search-highlight'>Dan</span> the Bulldog"
     end
 
     it 'highlights abstract when a term is queried' do
