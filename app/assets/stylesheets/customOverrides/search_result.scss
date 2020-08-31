@@ -11,6 +11,22 @@ DEFAULT MOBILE STYLING
   position: relative;
 }
 
+.document-title{
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+.document-title-heading {
+  display: contents;
+  position: static;
+  max-width: 45%;
+  margin-bottom: 3%;
+}
+
+.documentHeader{
+  padding-left: 19px!important;
+  display: -webkit-box;
+}
+
 .document-metadata {
   display: contents;
   position: static;
