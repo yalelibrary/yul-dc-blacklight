@@ -11,7 +11,6 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
   let(:dog) do
     {
       id: '111',
-      #title_tesim: 'Jack or Dan the Bulldog',
       author_tesim: 'Me and You',
       abstract_tesim: 'Binding: white with gold embossing.',
       alternativeTitle_tesim: 'The Yale Bulldogs',
@@ -34,11 +33,6 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
 
   context 'Within search results' do
     subject(:content) { find(:css, '#content') }
-
-    # it 'highlights title when a term is queried' do
-    #   visit '/?search_field=all_fields&q=Dan'
-    #   expect(page.html).to include "Jack or <span class='search-highlight'>Dan</span> the Bulldog"
-    # end
 
     it 'highlights abstract when a term is queried' do
       visit '/?search_field=all_fields&q=white'
