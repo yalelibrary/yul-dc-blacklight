@@ -97,12 +97,12 @@ class CatalogController < ApplicationController
     config.add_facet_field 'partOf_ssim', label: 'DIGITAL COLLECTION'
     config.add_facet_field 'pub_date_ssim', label: 'PUBLICATION YEAR', single: true
     config.add_facet_field 'dateStructured_ssim', label: 'PUBLICATION DATE',
-                           range: {
-                               num_segments: 6,
-                               assumed_boundaries: [1100, Time.current.year + 2],
-                               segments: true,
-                               maxlength: 4
-                           }
+                                                  range: {
+                                                    num_segments: 6,
+                                                    assumed_boundaries: [1100, Time.current.year + 2],
+                                                    segments: true,
+                                                    maxlength: 4
+                                                  }
 
     # the facets below are set to false because we aren't filtering on them from the main search page
     # but we need to be able to provide a label when they are filtered upon from an individual show page
@@ -115,13 +115,13 @@ class CatalogController < ApplicationController
     #    years_25: { label: 'within 25 Years', fq: "pub_date_ssim:[#{Time.zone.now.year - 25} TO *]" }
     # }
     disp_highlight_on_search_params = {
-        'hl': true,
-        'hl.method': 'original',
-        'hl.usePhraseHighlighter': true,
-        'hl.preserveMulti': false,
-        "hl.simple.pre": "<span class='search-highlight'>",
-        "hl.simple.post": "</span>",
-        "hl.fragsize": 40
+      'hl': true,
+      'hl.method': 'original',
+      'hl.usePhraseHighlighter': true,
+      'hl.preserveMulti': false,
+      "hl.simple.pre": "<span class='search-highlight'>",
+      "hl.simple.post": "</span>",
+      "hl.fragsize": 40
     }
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -239,8 +239,8 @@ class CatalogController < ApplicationController
     config.add_search_field('all_fields', label: 'All Fields') do |field|
       field.qt = 'search'
       field.solr_parameters = {
-          qf: search_fields,
-          pf: ''
+        qf: search_fields,
+        pf: ''
       }
     end
 
@@ -251,15 +251,15 @@ class CatalogController < ApplicationController
     config.add_search_field('title_tesim', label: 'Title') do |field|
       field.qt = 'search'
       field.solr_parameters = {
-          qf: 'title_tesim',
-          pf: ''
+        qf: 'title_tesim',
+        pf: ''
       }
     end
 
     config.add_search_field('author_tesim', label: 'Author') do |field|
       field.solr_parameters = {
-          qf: 'author_tesim',
-          pf: ''
+        qf: 'author_tesim',
+        pf: ''
       }
     end
 
@@ -269,16 +269,16 @@ class CatalogController < ApplicationController
     config.add_search_field('subjectName_ssim', label: 'Subject') do |field|
       field.qt = 'search'
       field.solr_parameters = {
-          qf: '',
-          pf: 'subjectName_ssim'
+        qf: '',
+        pf: 'subjectName_ssim'
       }
     end
 
     config.add_search_field('orbisBibId_ssi', label: 'BibID') do |field|
       field.qt = 'search'
       field.solr_parameters = {
-          qf: 'orbisBibId_ssi',
-          pf: ''
+        qf: 'orbisBibId_ssi',
+        pf: ''
       }
     end
 
