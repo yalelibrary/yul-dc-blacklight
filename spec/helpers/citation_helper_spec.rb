@@ -9,7 +9,7 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
       edition_tesim: 'First Edition',
       subtitle_tesim: "He's handsome",
       subtitle_vern_ssim: "He's handsome",
-      author_tsim: 'Eric & Frederick',
+      author_tesim: 'Eric & Frederick',
       author_ssim: 'Eric & Frederick',
       format: 'three dimensional object',
       url_fulltext_ssim: 'http://0.0.0.0:3000/catalog/111',

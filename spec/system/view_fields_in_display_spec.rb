@@ -32,7 +32,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       id: '111',
       subtitle_tesim: "He's handsome",
       subtitle_vern_ssim: "He's handsome",
-      author_tsim: 'Eric & Frederick',
+      author_tesim: 'Eric & Frederick',
       author_vern_ssim: 'Eric & Frederick',
       format: 'three dimensional object',
       url_fulltext_ssim: 'http://0.0.0.0:3000/catalog/111',

@@ -12,6 +12,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     {
       id: '111',
       title_tesim: 'Jack or Dan the Bulldog',
+      author_tesim: 'Me and You',
       abstract_tesim: 'Binding: white with gold embossing.',
       alternativeTitle_tesim: 'The Yale Bulldogs',
       description_tesim: 'in black ink on thin white paper',
@@ -67,6 +68,11 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     it 'highlights topic subject when a term is queried' do
       visit '/?search_field=all_fields&q=Phrenology'
       expect(page.html).to include "<span class='search-highlight'>Phrenology</span>--United States"
+    end
+
+    it 'highlights author when a term is queried' do
+      visit '/?search_field=all_fields&q=You'
+      expect(page.html).to include "Me and <span class='search-highlight'>You</span>"
     end
 
     it 'highlights name subject when a term is queried' do

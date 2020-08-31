@@ -130,7 +130,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field 'author_tsim', label: 'Author', highlight: true
+    config.add_index_field 'author_tesim', label: 'Author', highlight: true
     config.add_index_field 'author_vern_ssim', label: 'Author'
     config.add_index_field 'date_ssim', label: 'Date'
     config.add_index_field 'identifierShelfMark_tesim', label: 'Identifier Shelf Mark', highlight: true
@@ -152,7 +152,7 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_show_field 'subtitle_tesim', label: 'Subtitle'
     config.add_show_field 'subtitle_vern_ssim', label: 'Subtitle'
-    config.add_show_field 'author_tsim', label: 'Author'
+    config.add_show_field 'author_tesim', label: 'Author'
     config.add_show_field 'author_vern_ssim', label: 'Author'
     config.add_show_field 'extent_ssim', label: 'Extent'
     config.add_show_field 'format', label: 'Format', link_to_facet: true
@@ -256,9 +256,9 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('author_tsim', label: 'Author') do |field|
+    config.add_search_field('author_tesim', label: 'Author') do |field|
       field.solr_parameters = {
-        qf: 'author_tsim',
+        qf: 'author_tesim',
         pf: ''
       }
     end
