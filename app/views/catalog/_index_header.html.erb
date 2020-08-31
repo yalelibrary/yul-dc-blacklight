@@ -1,0 +1,34 @@
+<%# app/views/catalog/_index_header.html.erb -%>
+<%-
+  # Main values for an item entry on the index in a search results page.
+  doc = document ||= nil
+  return unless doc.present?
+
+  # Position of the document in search results.
+  document_counter ||= -1
+  document_counter = document_counter_with_offset(document_counter)
+
+  # Format counter number that comes before the entry title.
+  counter_class ||= nil
+  counter =
+      unless counter_class == :none
+        content_tag(:span, class: counter_class) {
+          t('blacklight.search.documents.counter', counter: document_counter)
+        }
+      end
+
+  # Main title container for document partial.
+  title_class ||= nil
+  title_class = 'title_tesim'
+  unless title_class == :none
+  end
+
+-%>
+<div class="documentHeader row">
+  <h3 class="index_title document-title-heading <%= title_class %>">
+    <%= counter %>
+    <div class="document-title">
+      <%= link_to_document document, document.highlight_field('title_tesim').try(:[],0) ||document['title_tesim'] %>
+    </div>
+  </h3>
+</div>
