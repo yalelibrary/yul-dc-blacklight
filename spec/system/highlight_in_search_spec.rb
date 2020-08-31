@@ -11,7 +11,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
   let(:dog) do
     {
       id: '111',
-      author_tsim: 'Me and You',
+      author_tesim: 'Me and You',
       format: 'three dimensional object',
       identifierShelfMark_tesim: 'Osborn Music MS 4',
       published_ssim: "1997",

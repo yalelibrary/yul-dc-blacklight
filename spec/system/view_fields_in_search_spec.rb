@@ -12,7 +12,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
   let(:dog) do
     {
       id: '111',
-      author_tsim: 'Me and You',
+      author_tesim: 'Me and You',
       author_vern_ssim: 'Me and You',
       date_ssim: '1999',
       resourceType_ssim: 'Archives or Manuscripts',

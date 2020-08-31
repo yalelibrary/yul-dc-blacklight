@@ -13,7 +13,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     {
       id: '211',
       subtitle_tesim: "He's Handsome",
-      author_tsim: 'Eric & Frederick',
+      author_tesim: 'Eric & Frederick',
       author_vern_ssim: 'Eric & Frederick',
       format: 'three dimensional object',
       url_fulltext_ssim: 'http://0.0.0.0:3000/catalog/211',
@@ -33,7 +33,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     {
       id: '311',
       subtitle_tesim: "He's Dan",
-      author_tsim: 'Eric & Frederick',
+      author_tesim: 'Eric & Frederick',
       author_vern_ssim: 'Eric & Frederick',
       format: 'three dimensional object',
       url_fulltext_ssim: 'http://0.0.0.0:3000/catalog/311',
@@ -53,7 +53,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     {
       id: '411',
       subtitle_tesim: "He's Handsome Dan",
-      author_tsim: 'Eric & Frederick',
+      author_tesim: 'Eric & Frederick',
       author_vern_ssim: 'Eric & Frederick',
       format: 'three dimensional object',
       url_fulltext_ssim: 'http://0.0.0.0:3000/catalog/411',
