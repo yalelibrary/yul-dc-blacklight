@@ -11,12 +11,13 @@
   <div id="doc_<%= @document.id.to_s.parameterize %>">
     <!-- Only render universal viewer if the work is public OR if the user is authenticated -->
     <% if @document["visibility_ssi"] == "Public" || user_signed_in? %>
-      <%= render_document_partials @document, [:show_header, :uv, :show] %>
+      <%= render_document_partials @document, [:show_header, :uv] %>
+      <%= render "grouped_metadata" %>
     <% else %>
       <%= render_document_partials @document, [:show_header] %>
       <h5>The digital version of this work is restricted to the Yale Community.</h5>
       <p>Please login using your Yale NetID or contact library staff to inquire about access to a physical copy.</p>
-      <%= render_document_partials @document, [:show] %>
+      <%= render "grouped_metadata" %>
     <% end %>
   </div>
 </div>

@@ -1,6 +1,18 @@
 <%= render_document_partials @document, [:show] %>
+
 <script>
-  $(document).ready(function() {
-		$('.blacklight-abstract_tesim .blacklight-description_tesim .blacklight-extentOfDigitization_ssim').removeClass('col-md-3')
-	}
+	$(document).ready(function() {
+		$('dt.blacklight-extent_ssim').before("<h2>Description</h2>")
+		$('dd.blacklight-extent_ssim').before("<h2></h2>")
+		$('dt.blacklight-format').before("<h2>Keywords</h2>")
+		$('dd.blacklight-format').before("<h2></h2>")
+		$('dt.blacklight-author_tsim').before("<h2>Origin</h2>")
+		$('dd.blacklight-author_tsim').before("<h2></h2>")
+		$('dt.blacklight-box_ssim').before("<h2>Identifiers</h2>")
+		$('dd.blacklight-box_ssim').before("<h2></h2>")
+		$('dt.blacklight-rights_ssim').before("<h2>Usage</h2>")
+		$('dd.blacklight-rights_ssim').before("<h2></h2>")
+		$('dt.blacklight-recordtype_ssi').before("<h2>Migration Source</h2>")
+		$('dd.blacklight-recordtype_ssi').before("<h2></h2>")
+	});
 </script>
