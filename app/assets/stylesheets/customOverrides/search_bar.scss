@@ -34,6 +34,7 @@ bg-light {
 }
 
 .custom-select,
+.form-control,
 .search-btn {
   border: 1px solid $border_grey;
   border-radius: 0px;
@@ -71,6 +72,10 @@ bg-light {
 
 
 @media screen and (min-width: $small_device) {
+  .form-control {
+    border-left: none;
+  }
+
   .navbar-search .search-field {
     width: 221px;
   }
