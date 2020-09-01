@@ -40,7 +40,8 @@ bg-light {
 }
 
 .input-group {
-  margin: 30px 0px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .navbar-search .container,
@@ -58,11 +59,6 @@ bg-light {
   position: initial;
 }
 
-// ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-//   color: red;
-//   opacity: 1; /* Firefox */
-// }
-
 .search-btn {
   margin-top: 8px;
 }
@@ -72,7 +68,6 @@ bg-light {
   color: $black;
   font-family: $mallory_book $mallory_light, Arial, Helvetica, sans-serif !important;
 }
-
 
 
 @media screen and (min-width: $small_device) {
@@ -108,8 +103,7 @@ bg-light {
 
 @media screen and (min-width: $large_device) {
   .input-group {
-    width: 910px;
-    max-width: 910px;
+    max-width: 918px;
     justify-content: center;
   }
 
@@ -119,9 +113,27 @@ bg-light {
     max-width: 129px;
   }
 
+  .navbar.navbar-search > div.container {
+    max-width: 918px;
+  }
+
   .navbar-search .search-field {
-    flex: 0;
     max-width: 221px;
+  }
+
+  .navbar-search .search-query-form {
+    max-width: 100%;
+  }
+
+  .twitter-typeahead {
+    max-width: 500px;
+  }
+}
+
+
+@media screen and (min-width: $xlarge_device) {
+  .input-group {
+    width: 918px;
   }
 
   .twitter-typeahead {
