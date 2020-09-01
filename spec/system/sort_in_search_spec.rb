@@ -74,10 +74,10 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
     click_on 'date (oldest first)'
 
     content = find(:css, '#content')
-    expect(content).to have_content('1. Aquila Eccellenza')
-    expect(content).to have_content('2. HandsomeDan Bulldog')
-    expect(content).to have_content('3. Amor Llama')
-    expect(content).to have_content('4. Rhett Lecheire')
+    expect(content).to have_content("1.\nAquila Eccellenza")
+    expect(content).to have_content("2.\nHandsomeDan Bulldog")
+    expect(content).to have_content("3.\nAmor Llama")
+    expect(content).to have_content("4.\nRhett Lecheire")
   end
 
   it 'sorts by date from newest to oldest' do
@@ -86,9 +86,9 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
     click_on 'date (newest first)'
 
     content = find(:css, '#content')
-    expect(content).to have_content('1. Rhett Lecheire')
-    expect(content).to have_content('2. Amor Llama')
-    expect(content).to have_content('3. HandsomeDan Bulldog')
-    expect(content).to have_content('4. Aquila Eccellenza')
+    expect(content).to have_content("1.\nRhett Lecheire")
+    expect(content).to have_content("2.\nAmor Llama")
+    expect(content).to have_content("3.\nHandsomeDan Bulldog")
+    expect(content).to have_content("4.\nAquila Eccellenza")
   end
 end

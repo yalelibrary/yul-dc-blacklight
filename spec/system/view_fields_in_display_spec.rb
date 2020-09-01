@@ -32,7 +32,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       id: '111',
       subtitle_tesim: "He's handsome",
       subtitle_vern_ssim: "He's handsome",
-      author_tsim: 'Eric & Frederick',
+      author_tesim: 'Eric & Frederick',
       author_vern_ssim: 'Eric & Frederick',
       format: 'three dimensional object',
       url_fulltext_ssim: 'http://0.0.0.0:3000/catalog/111',
@@ -93,7 +93,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     subject(:document) { find(:css, '#document') }
 
     it 'displays Author in results' do
-      expect(document).to have_content("Eric & Frederick").twice
+      expect(document).to have_content("Eric & Frederick")
     end
     it 'displays Subtitle in results' do
       expect(document).to have_content("He's handsome").twice
@@ -162,9 +162,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays the Subject Name in results' do
       expect(document).to have_content("this is the subject name")
-    end
-    it 'displays the Subject Topic in results' do
-      expect(document).to have_content("this is the subject topic")
     end
     it 'displays the Extend of Digitization in results' do
       expect(document).to have_content("this is the extent of digitization")
