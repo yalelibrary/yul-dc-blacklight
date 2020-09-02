@@ -11,11 +11,12 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     solr.commit
     visit root_path
   end
+  # NOTE(alishaevn): "tesim" values may need the new line reference "/n"
 
   let(:llama) do
     {
       id: '111',
-      title_tesim: ['Amor Llama'],
+      title_tesim: ['/nAmor Llama'],
       format: 'text',
       language_ssim: 'la',
       visibility_ssi: 'Public',
@@ -28,7 +29,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   let(:dog) do
     {
       id: '222',
-      title_tesim: ['HandsomeDan Bulldog'],
+      title_tesim: ['/nHandsomeDan Bulldog'],
       format: 'three dimensional object',
       language_ssim: 'en',
       visibility_ssi: 'Public',
@@ -41,7 +42,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   let(:eagle) do
     {
       id: '333',
-      title_tesim: ['Aquila Eccellenza'],
+      title_tesim: ['/nAquila Eccellenza'],
       format: 'still image',
       language_ssim: 'it',
       visibility_ssi: 'Public',
@@ -54,7 +55,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   let(:puppy) do
     {
       id: '444',
-      title_tesim: ['Rhett Lecheire'],
+      title_tesim: ['/nRhett Lecheire'],
       format: 'text',
       language_ssim: 'fr',
       visibility_ssi: 'Public',
