@@ -54,3 +54,21 @@ DEFAULT MOBILE STYLING
 .page-item:nth-child(n+3):not(:last-child) {
   border-right: 1px solid $medium_grey;
 }
+
+//single item page pagination
+.page-links-show {
+  padding-top: 10px;
+}
+
+.page-items-show {
+  font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: $light_blue;
+}
+
+.page-info-show {
+  font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: $medium_grey;
+}
+
