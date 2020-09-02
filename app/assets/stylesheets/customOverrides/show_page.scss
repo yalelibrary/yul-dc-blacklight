@@ -1,6 +1,17 @@
 /********************************************************
 DEFAULT MOBILE STYLING
 ********************************************************/
+.btn-show {
+  text-transform: uppercase;
+  color: $yale_blue;
+  font-size: 12px;
+  font-family: $mallory_medium;
+  border-color: $light_grey;
+  border-width: 1.15px;
+  height: 37px;
+  padding: 8px 10px 8px 10px;
+  margin: 4px 4px 4px 0px;
+}
 
 .card{
   border: none;
@@ -20,6 +31,18 @@ DEFAULT MOBILE STYLING
   display: flex;
   text-align: left;
   padding: 0 0 0 0;
+}
+.constraints-container {
+  margin-left: 8%;
+  justify-self: center;
+  justify-content: space-between;
+  margin-right: 8%;
+  display: flex;
+}
+
+.show-buttons {
+  justify-self: center;
+  margin-right: 25px;
 }
 
 .show-links {
@@ -103,6 +126,13 @@ DEFAULT MOBILE STYLING
 
 
 @media screen and (min-width: $medium_device) {
+  .constraints-container {
+    margin-left: 8%;
+    width: 118%;
+    justify-self: center;
+    justify-content: space-between;
+    display: flex;
+  }
   .universal-viewer-iframe{
     width: 100%!important;
     padding-left: 8%;
@@ -115,6 +145,14 @@ DEFAULT MOBILE STYLING
 }
 
 @media screen and (min-width: $large_device) {
+  .constraints-container {
+    margin-left: 19%;
+    margin-right: 19%;
+    width: 126%;
+    justify-self: center;
+    justify-content: space-between;
+    display: flex;
+  }
   .show-tools{
     margin-right: -34%;
   }
@@ -133,6 +171,14 @@ DEFAULT MOBILE STYLING
 }
 
 @media screen and (min-width: $xlarge_device) {
+  .constraints-container {
+    margin-left: 19%;
+    margin-right: 19%;
+    width: 136%;
+    justify-self: center;
+    justify-content: space-between;
+    display: flex;
+  }
   .show-tools{
     margin-right: -13%;
   }
