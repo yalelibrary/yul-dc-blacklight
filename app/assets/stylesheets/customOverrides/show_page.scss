@@ -83,8 +83,35 @@ DEFAULT MOBILE STYLING
   content: ' >';
 }
 
+//Title on Single Items and Search Result pages
+//Replace Yale Roman with Yale Display when its available.
+.show-header {
+  font-size: 1.5rem;
+  font: $yale_roman;
+  color:$yale_blue;
+  padding-left: 8%;
+  padding-bottom: 1.5%;
+  padding-top: 1.5%;
+  width: 450px;
+}
+
+.universal-viewer-iframe{
+  width: 90%;
+  padding-left: 8%;
+  align-content: center;
+}
+
 
 @media screen and (min-width: $medium_device) {
+  .universal-viewer-iframe{
+    width: 100%!important;
+    padding-left: 8%;
+    align-content: center;
+  }
+  .show-header {
+    padding-left: 10%;
+    width: 640px;
+  }
 }
 
 @media screen and (min-width: $large_device) {
@@ -94,6 +121,15 @@ DEFAULT MOBILE STYLING
   .show-links{
     margin-right: -34%;
   }
+  .universal-viewer-iframe {
+    width: 115%!important;
+    padding-left: 19%;
+    align-content: center;
+  }
+  .show-header {
+    padding-left: 19%;
+    width: 790px;
+  }
 }
 
 @media screen and (min-width: $xlarge_device) {
@@ -102,5 +138,15 @@ DEFAULT MOBILE STYLING
   }
   .show-links{
     margin-right: -13%;
+  }
+
+  .universal-viewer-iframe {
+    width: 115%!important;
+    padding-left: 19%;
+    align-content: center;
+  }
+  .show-header {
+    padding-left: 19%;
+    width: 895px;
   }
 }
