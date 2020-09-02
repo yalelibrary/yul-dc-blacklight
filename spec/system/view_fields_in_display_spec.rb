@@ -30,6 +30,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   let(:test_record) do
     {
       id: '111',
+      title_tesim: "Diversity Bull Dogs",
       subtitle_tesim: "He's handsome",
       subtitle_vern_ssim: "He's handsome",
       author_tesim: 'Eric & Frederick',
@@ -91,7 +92,9 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
 
   context 'Within main document' do
     subject(:document) { find(:css, '#document') }
-
+    it 'displays Title in results' do
+      expect(document).to have_content("Diversity Bull Dogs")
+    end
     it 'displays Author in results' do
       expect(document).to have_content("Eric & Frederick").twice
     end
@@ -242,12 +245,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("this is the URI")
     end
     it 'displays the Identifier Shelf Mark in results as link' do
-      expect(document).to have_link("this is the identifier shelf mark", href: '/?f%5BidentifierShelfMark_ssim%5D%5B%5D=this+is+the+identifier+shelf+mark')
-      click_link 'this is the identifier shelf mark'
-
-      expect(page).to have_link('111')
-      expect(page).to have_link('222')
-      expect(page).not_to have_link('333')
+      expect(page).to have_link("this is the identifier shelf mark", href: '/?f%5BidentifierShelfMark_ssim%5D%5B%5D=this+is+the+identifier+shelf+mark')
+      expect(page).not_to have_link("this is the identifier shelf mark", href: '/?f%5BidentifierShelfMark_ssim%5D%5B%5D=this+is+the+identifier+shelf+mark+but+different')
     end
     it 'contains a link on genre to its facet' do
       expect(page).to have_link('this is the genre', href: '/?f%5Bgenre_ssim%5D%5B%5D=this+is+the+genre')
@@ -269,5 +268,16 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'contains a link on the Finding Aid to the Finding Aid catalog record' do
       expect(page).to have_link('this is the finding aid', href: 'this is the finding aid')
     end
+  end
+
+  it 'has expected css' do
+    expect(page).to have_css '.card'
+    expect(page).to have_css '.iiif-logo'
+    expect(page).to have_css '.list-group'
+    expect(page).to have_css '.list-group-item'
+    expect(page).to have_css '.show-links'
+    expect(page).to have_css '.show-tools'
+    expect(page).to have_css '.show-header'
+    expect(page).to have_css '.universal-viewer-iframe'
   end
 end

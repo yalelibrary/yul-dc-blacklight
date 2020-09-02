@@ -46,7 +46,7 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
       illustrativeMatter_tesim: "this is the illustrative matter",
       oid_ssi: 'this is the OID',
       identifierMfhd_ssim: 'this is the identifier MFHD',
-      identifierShelfMark_ssim: 'this is the identifier shelf mark',
+      identifierShelfMark_tesim: 'this is the identifier shelf mark',
       box_ssim: 'this is the box',
       folder_ssim: 'this is the folder',
       orbisBibId_ssi: 'this is the orbis bib ID',
