@@ -45,17 +45,17 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
 
   describe 'Yale community only records' do
     context 'as a logged out user' do
-      it 'displays the placeholder_restricted.png' do
-        visit '?q=&search_field=all_fields'
-        expect(page).to have_css("img[src ^= '/assets/placeholder_restricted']")
-      end
-
-      it 'displays yale only restricted messaging' do
+      it 'trying to view a record, it displays yale only restricted messaging' do
         visit '?q=&search_field=all_fields'
         click_link 'test_record_2'
 
         expect(page).to have_content('The digital version of this work is restricted to the Yale Community.')
         expect(page).to have_content('Please login using your Yale NetID or contact library staff to inquire about access to a physical copy.')
+      end
+
+      it 'displays the placeholder_restricted.png' do
+        visit '?q=&search_field=all_fields'
+        expect(page).to have_css("img[src ^= '/assets/placeholder_restricted']")
       end
     end
 
