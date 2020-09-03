@@ -24,7 +24,6 @@ DEFAULT MOBILE STYLING
 .info-header {
   text-transform: uppercase;
   border-bottom: $white thin solid;
-  margin-right: -10rem;
   margin-left: -15%;
   padding-left: 15.5%;
 }
@@ -81,7 +80,6 @@ DEFAULT MOBILE STYLING
   margin-right: auto;
   margin-left: auto;
   padding-left: 15px;
-  padding-right: 15px;
 }
 
 .secondary-nav a {
@@ -104,7 +102,7 @@ DEFAULT MOBILE STYLING
   }
 
   .secondary-nav > .row {
-    max-width: 85%;
+    padding-left: 9.5%;
   }
 }
 
@@ -131,9 +129,7 @@ DEFAULT MOBILE STYLING
   }
 
   .secondary-nav > .row {
-    max-width: 87%;
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 6.5%;
   }
 }
 
@@ -144,7 +140,6 @@ DEFAULT MOBILE STYLING
   }
 
   .navbar > div.container,
-  .secondary-nav > .row,
   #main-container {
     max-width: 85%;
   }
@@ -158,6 +153,10 @@ DEFAULT MOBILE STYLING
   .navbar-expand-md > .container {
     padding-left: 0px;
     padding-right: 0px;
+  }
+
+  .secondary-nav > .row {
+    padding-left: 7.5%;
   }
 }
 
