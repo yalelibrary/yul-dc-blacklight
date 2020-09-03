@@ -3,6 +3,10 @@ DEFAULT MOBILE STYLING
 ********************************************************/
 
 // Pagination at the top of the page
+#sortAndPerPage {
+  align-items: center;
+}
+
 #sortAndPerPage .page-links,
 #sortAndPerPage .page-links a {
   font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;

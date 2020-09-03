@@ -12,6 +12,11 @@ DEFAULT MOBILE STYLING
   border-color: $light_grey;
 }
 
+.btn-outline-secondary:not(:disabled):not(.disabled):active {
+  background-color: $dark_grey;
+  border-color: $dark_grey;
+}
+
 .caret {
   padding-left: 15px;
 }
@@ -28,6 +33,11 @@ DEFAULT MOBILE STYLING
 
 .dropdown-toggle::after {
   content: none;
+}
+
+.search-widgets {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .search-widgets .btn {
