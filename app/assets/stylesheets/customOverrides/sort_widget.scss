@@ -1,0 +1,40 @@
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
+
+.btn-outline-secondary.active:not(:disabled):not(.disabled) {
+  background-color: $yale_blue;
+  border-color: $yale_blue;
+}
+
+.btn-outline-secondary:hover {
+  background-color: $light_grey;
+  border-color: $light_grey;
+}
+
+.caret {
+  padding-left: 15px;
+}
+
+.dropdown-toggle {
+  background-image: image-url('light-blue-down-arrow.png');
+  background-size: 11px;
+  background-position-x: right;
+  background-position-y: center;
+  background-origin: content-box;
+  border-bottom: none;
+  background-repeat: no-repeat;
+}
+
+.dropdown-toggle::after {
+  content: none;
+}
+
+.search-widgets .btn {
+  border: none;
+  padding: 15px;
+  text-transform: uppercase;
+  color: $yale_blue;
+  font-family: $mallory_medium;
+  font-size: 16px;
+}
