@@ -1,0 +1,26 @@
+<% doc_presenter = show_presenter(document) %>
+<% usage = Yul::UsageMetadataPresenter.new(document: doc_presenter.fields_to_render).usage_terms %>
+
+<% if usage.length > 0 %>
+  <div class='metadata-block'>
+    <h4 class='metadata-block__title'>Usage</h4>
+    <dl class='metadata-block__group'>
+      <% usage.each do |field_name, field| -%>
+        <dt class="blacklight-<%= field_name.parameterize %> metadata-block__label-key">
+          <!-- KEY -->
+          <%= (render_document_show_field_label document, field: field_name).tr(':', '') %>
+          <!-- VALUE -->
+        </dt>
+        <dd class="blacklight-<%= field_name.parameterize %> metadata-block__label-value metadata-block__label-value--yul">
+          <% if !field.respond_to?('doc_presenter') && field.respond_to?('to_sentence') %>
+            <%= field.to_sentence %>
+          <% elsif !field.respond_to?('doc_presenter') %>
+            <%= field.to_s %>
+          <% else %>
+            <%= doc_presenter.field_value field %>
+          <% end %>
+        </dd>
+      <% end %>
+    </dl>
+  </div>
+<% end %>
