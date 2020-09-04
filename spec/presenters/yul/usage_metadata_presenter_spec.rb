@@ -18,7 +18,6 @@ RSpec.describe Yul::UsageMetadataPresenter do
     end
 
     describe "#usage terms" do
-
       it "are a Hash" do
         expect(presenter_object.usage_terms).to be_instance_of(Hash)
       end

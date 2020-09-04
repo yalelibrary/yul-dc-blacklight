@@ -53,7 +53,6 @@ RSpec.describe Yul::KeywordMetadataPresenter do
     end
 
     describe "#keyword terms" do
-
       it "are a Hash" do
         expect(presenter_object.keyword_terms).to be_instance_of(Hash)
       end

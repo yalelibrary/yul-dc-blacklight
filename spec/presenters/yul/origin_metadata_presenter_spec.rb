@@ -98,7 +98,6 @@ RSpec.describe Yul::OriginMetadataPresenter do
     end
 
     describe "#origin terms" do
-
       it "are a Hash" do
         expect(presenter_object.origin_terms).to be_instance_of(Hash)
       end

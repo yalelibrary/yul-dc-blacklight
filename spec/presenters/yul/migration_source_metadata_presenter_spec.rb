@@ -18,7 +18,6 @@ RSpec.describe Yul::MigrationSourceMetadataPresenter do
     end
 
     describe "#migration_source terms" do
-
       it "are a Hash" do
         expect(presenter_object.migration_source_terms).to be_instance_of(Hash)
       end

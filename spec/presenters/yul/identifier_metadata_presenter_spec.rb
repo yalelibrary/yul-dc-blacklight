@@ -98,7 +98,6 @@ RSpec.describe Yul::IdentifierMetadataPresenter do
     end
 
     describe "#identifier terms" do
-
       it "are a Hash" do
         expect(presenter_object.identifier_terms).to be_instance_of(Hash)
       end

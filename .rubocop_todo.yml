@@ -63,6 +63,32 @@ RSpec/ExampleLength:
     - 'spec/system/facet_by_year_spec.rb'
     - 'spec/system/sort_in_search_spec.rb'
 
+# Offense count: 6
+RSpec/RepeatedDescription:
+  Exclude:
+    - 'spec/presenters/yul/description_metadata_presenter_spec.rb'
+    - 'spec/presenters/yul/identifier_metadata_presenter_spec.rb'
+    - 'spec/presenters/yul/keyword_metadata_presenter_spec.rb'
+    - 'spec/presenters/yul/migration_source_metadata_presenter_spec.rb'
+    - 'spec/presenters/yul/origin_metadata_presenter_spec.rb'
+    - 'spec/presenters/yul/usage_metadata_presenter_spec.rb'
+
+# Offense count: 12
+Rails/FilePath:
+  Exclude:
+    - 'spec/presenters/yul/description_metadata_presenter_spec.rb'
+    - 'spec/presenters/yul/identifier_metadata_presenter_spec.rb'
+    - 'spec/presenters/yul/keyword_metadata_presenter_spec.rb'
+    - 'spec/presenters/yul/migration_source_metadata_presenter_spec.rb'
+    - 'spec/presenters/yul/origin_metadata_presenter_spec.rb'
+    - 'spec/presenters/yul/usage_metadata_presenter_spec.rb'
+    - 'app/presenters/yul/description_metadata_presenter.rb'
+    - 'app/presenters/yul/identifier_metadata_presenter.rb'
+    - 'app/presenters/yul/keyword_metadata_presenter.rb'
+    - 'app/presenters/yul/migration_source_metadata_presenter.rb'
+    - 'app/presenters/yul/origin_metadata_presenter.rb'
+    - 'app/presenters/yul/usage_metadata_presenter.rb'
+
 # Offense count: 1
 # Configuration parameters: Include.
 # Include: app/**/*.rb, config/**/*.rb, db/**/*.rb, lib/**/*.rb
