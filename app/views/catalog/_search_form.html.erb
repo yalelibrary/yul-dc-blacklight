@@ -15,6 +15,7 @@
     <% end %>
 
     <label for="q" class="sr-only"><%= t('blacklight.search.form.search.label') %></label>
+    <%#= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}", id: "q", autocomplete: presenter.autocomplete_enabled? ? "off" : "", autofocus: presenter.autofocus?, data: { autocomplete_enabled: presenter.autocomplete_enabled?, autocomplete_path: search_action_path(action: :suggest) }  %>
     <%= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}", id: "q", aria: { label: 'search' }, autocomplete: presenter.autocomplete_enabled? ? "off" : "", autofocus: presenter.autofocus?, data: { autocomplete_enabled: presenter.autocomplete_enabled?, autocomplete_path: search_action_path(action: :suggest) }  %>
 
     <span class="input-group-append">
@@ -25,3 +26,9 @@
     </span>
   </div>
 <% end %>
+
+
+
+<div>
+  <%= link_to 'More Options', blacklight_advanced_search_engine.advanced_search_path(search_state.to_h), class: 'advanced_search btn btn-secondary'%>
+</div>
