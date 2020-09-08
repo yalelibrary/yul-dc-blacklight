@@ -12,7 +12,19 @@
           <!-- VALUE -->
         </dt>
         <dd class="blacklight-<%= field_name.parameterize %> metadata-block__label-value metadata-block__label-value--yul">
-          <% if !field.respond_to?('doc_presenter') && field.respond_to?('to_sentence') %>
+          <% if field_name == 'format' %>
+            <% field.map do |f| %>
+              <%= link_to "#{f}", "#{'/?f%5Bformat%5D%5B%5D=' + f.to_s.split().join('+')}" %>
+            <% end %>
+          <% elsif field_name == 'genre_ssim' %>
+            <% field.map do |f| %>
+              <%= link_to "#{f}", "#{'/?f%5Bgenre_ssim%5D%5B%5D=' + f.to_s.split().join('+')}" %>
+            <% end %>
+          <% elsif field_name == 'resourceType_ssim' %>
+            <% field.map do |f| %>
+              <%= link_to "#{f}", "#{'/?f%5BresourceType_ssim%5D%5B%5D=' + f.to_s.split().join('+')}" %>
+            <% end %>
+          <% elsif !field.respond_to?('doc_presenter') && field.respond_to?('to_sentence') %>
             <%= field.to_sentence %>
           <% elsif !field.respond_to?('doc_presenter') %>
             <%= field.to_s %>

@@ -96,7 +96,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("Eric & Frederick")
     end
     it 'displays Subtitle in results' do
-      expect(document).to have_content("He's handsome").twice
+      expect(document).to have_content("He's handsome")
     end
     it 'displays Url Fulltext in results' do
       expect(document).to have_content("http://0.0.0.0:3000/catalog/111").twice

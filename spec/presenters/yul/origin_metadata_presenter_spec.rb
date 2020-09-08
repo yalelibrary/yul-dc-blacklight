@@ -11,6 +11,7 @@ RSpec.describe Yul::OriginMetadataPresenter do
       'date_ssim' => 'Date',
       'digital_ssim' => 'Digital',
       'edition_ssim' => 'Edition',
+      'language_ssim' => 'Language',
       'publicationPlace_ssim' => 'Publication Place',
       'publisher_ssim' => 'Publisher',
       'published_ssim' => 'Published',
@@ -54,6 +55,10 @@ RSpec.describe Yul::OriginMetadataPresenter do
 
       it 'returns the Edition Key' do
         expect(config['edition_ssim'].to_s).to eq 'Edition'
+      end
+
+      it 'returns the Language Key' do
+        expect(config['language_ssim'].to_s).to eq 'Language'
       end
 
       it 'returns the Publication Place Key' do
