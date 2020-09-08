@@ -21,7 +21,7 @@ module BlacklightHelper
   def language_codes_as_links(args)
     out = []
 
-    language_values = args[:document][args[:field]]
+    language_values = args
     language_values.map do |language_code|
       converted_code = language_code_to_english(language_code)
       link = "/?f%5Blanguage_ssim%5D%5B%5D=#{converted_code}"
@@ -40,13 +40,6 @@ module BlacklightHelper
   def language_code(args)
     language_value = args
     language_code_to_english(language_value)
-  end
-
-  def link_to_orbis_bib_id(arg)
-    bib_id = arg[:document][arg[:field]]
-    link = "http://hdl.handle.net/10079/bibid/#{bib_id}"
-
-    link_to(bib_id, link)
   end
 
   def render_thumbnail(document, _options)

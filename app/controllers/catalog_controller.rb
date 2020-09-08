@@ -166,11 +166,11 @@ class CatalogController < ApplicationController
     config.add_show_field 'subtitle_vern_ssim', label: 'Subtitle'
 
     # Keywords Group
-    config.add_show_field 'format', label: 'Format', link_to_facet: true
-    config.add_show_field 'genre_ssim', label: 'Genre', link_to_facet: true
+    config.add_show_field 'format', label: 'Format'
+    config.add_show_field 'genre_ssim', label: 'Genre'
     config.add_show_field 'geoSubject_ssim', label: 'Geo Subject'
     config.add_show_field 'material_tesim', label: 'Material'
-    config.add_show_field 'resourceType_ssim', label: 'Resource Type', link_to_facet: true
+    config.add_show_field 'resourceType_ssim', label: 'Resource Type'
     config.add_show_field 'subjectName_ssim', label: 'Subject Name'
     config.add_show_field 'subjectTopic_tesim', label: 'Subject Topic'
 
@@ -182,7 +182,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'date_ssim', label: 'Date'
     config.add_show_field 'digital_ssim', label: 'Digital'
     config.add_show_field 'edition_ssim', label: 'Edition'
-    config.add_show_field 'language_ssim', label: 'Language', helper_method: :language_codes_as_links
+    config.add_show_field 'language_ssim', label: 'Language'
     config.add_show_field 'publicationPlace_ssim', label: 'Publication Place'
     config.add_show_field 'publisher_ssim', label: 'Publisher'
     config.add_show_field 'published_ssim', label: 'Published'
@@ -201,12 +201,12 @@ class CatalogController < ApplicationController
     config.add_show_field 'findingAid_ssim', label: 'Finding Aid'
     config.add_show_field 'folder_ssim', label: 'Folder'
     config.add_show_field 'identifierMfhd_ssim', label: 'Identifier MFHD'
-    config.add_show_field 'identifierShelfMark_ssim', label: 'Identifier Shelf Mark', link_to_facet: true
+    config.add_show_field 'identifierShelfMark_ssim', label: 'Identifier Shelf Mark'
     config.add_show_field 'importUrl_ssim', label: 'Import URL'
     config.add_show_field 'isbn_ssim', label: 'ISBN'
     config.add_show_field 'lc_callnum_ssim', label: 'Call number'
     config.add_show_field 'orbisBarcode_ssi', label: 'Orbis Bar Code'
-    config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID', helper_method: :link_to_orbis_bib_id
+    config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID'
     config.add_show_field 'oid_ssi', label: 'OID'
     config.add_show_field 'partOf_ssim', label: 'Collection Name'
     config.add_show_field 'uri_ssim', label: 'URI'
