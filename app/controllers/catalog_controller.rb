@@ -1,10 +1,19 @@
 # frozen_string_literal: true
 class CatalogController < ApplicationController
+  include BlacklightAdvancedSearch::Controller
   include BlacklightRangeLimit::ControllerOverride
   include Blacklight::Catalog
   include Blacklight::Marc::Catalog
 
   configure_blacklight do |config|
+    # default advanced config values
+    config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
+    # config.advanced_search[:qt] ||= 'advanced'
+    config.advanced_search[:url_key] ||= 'advanced'
+    config.advanced_search[:query_parser] ||= 'edismax'
+    config.advanced_search[:form_solr_parameters] ||= {}
+
+    ## Gallery View
     config.view.gallery.partials = [:index_header]
     config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
     config.show.partials.insert(1, :openseadragon)
@@ -102,7 +111,7 @@ class CatalogController < ApplicationController
                                                     assumed_boundaries: [1100, Time.current.year + 2],
                                                     segments: true,
                                                     maxlength: 4
-                                                  }
+                                                  }, include_in_advanced_search: false
 
     # the facets below are set to false because we aren't filtering on them from the main search page
     # but we need to be able to provide a label when they are filtered upon from an individual show page
@@ -232,14 +241,24 @@ class CatalogController < ApplicationController
 
     # Array allows for only listed Solr fields to be searched in the 'All Fields'
     search_fields = ['abstract_tesim', 'author_tesim', 'alternativeTitle_tesim', 'description_tesim', 'subjectGeographic_tesim',
-                     'identifierShelfMark_tesim', 'orbisBidId_ssi', 'publicatonPlace_tesim', 'publisher_tesim',
+                     'identifierShelfMark_tesim', 'orbisBibId_ssi', 'publicatonPlace_tesim', 'publisher_tesim',
                      'resourceType_tesim', 'sourceCreated_tesim', 'subjectName_tesim', 'subject_topic_tesim',
                      'title_tesim']
 
     config.add_search_field('all_fields', label: 'All Fields') do |field|
       field.qt = 'search'
+      field.include_in_advanced_search = false
       field.solr_parameters = {
         qf: search_fields,
+        pf: ''
+      }
+    end
+
+    config.add_search_field('all_fields_advanced', label: 'All Fields') do |field|
+      field.qt = 'search'
+      field.include_in_simple_select = false
+      field.solr_parameters = {
+        qf: search_fields.join(' '),
         pf: ''
       }
     end
@@ -268,6 +287,7 @@ class CatalogController < ApplicationController
     # config[:default_solr_parameters][:qt], so isn't actually neccesary.
     config.add_search_field('subjectName_ssim', label: 'Subject') do |field|
       field.qt = 'search'
+      field.include_in_advanced_search = false
       field.solr_parameters = {
         qf: '',
         pf: 'subjectName_ssim'
@@ -282,6 +302,23 @@ class CatalogController < ApplicationController
       }
     end
 
+    config.add_search_field('oid_ssi', label: 'OID') do |field|
+      field.qt = 'search'
+      field.include_in_simple_select = false
+      field.solr_parameters = {
+        qf: 'oid_ssi',
+        pf: ''
+      }
+    end
+
+    config.add_search_field('identifierShelfMark_tesim', label: 'Identifier Shelf Mark') do |field|
+      field.qt = 'search'
+      field.include_in_simple_select = false
+      field.solr_parameters = {
+        qf: 'identifierShelfMark_tesim',
+        pf: ''
+      }
+    end
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
