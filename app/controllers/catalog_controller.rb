@@ -198,7 +198,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'box_ssim', label: 'Box'
     config.add_show_field 'children_ssim', label: 'Children'
     config.add_show_field 'collectionId_ssim', label: 'Collection ID'
-    config.add_show_field 'findingAid_ssim', label: 'Finding Aid', helper_method: :link_to_url
+    config.add_show_field 'findingAid_ssim', label: 'Finding Aid'
     config.add_show_field 'folder_ssim', label: 'Folder'
     config.add_show_field 'identifierMfhd_ssim', label: 'Identifier MFHD'
     config.add_show_field 'identifierShelfMark_ssim', label: 'Identifier Shelf Mark', link_to_facet: true

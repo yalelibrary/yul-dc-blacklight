@@ -49,10 +49,6 @@ module BlacklightHelper
     link_to(bib_id, link)
   end
 
-  def link_to_url(arg)
-    link_to(arg[:value][0], arg[:value][0])
-  end
-
   def render_thumbnail(document, _options)
     # return placeholder image if not logged in for yale only works
     return image_tag('placeholder_restricted.png') if (document[:visibility_ssi].eql? 'Yale Community Only') && !user_signed_in?
