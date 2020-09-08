@@ -6,7 +6,7 @@ inherit_gem:
 
 Layout/LineLength:
   Exclude:
-    - spec/support/solr_documents/metadata_cloud_with_visibility.rb
+    - spec/support/solr_documents/*
 
 # Views do not have classes or modules
 RSpec/DescribeClass:

@@ -1,4 +1,7 @@
 //= require jquery
+//= require 'blacklight_advanced_search'
+
+
 //= require jquery3
 //= require rails-ujs
 //= require turbolinks
