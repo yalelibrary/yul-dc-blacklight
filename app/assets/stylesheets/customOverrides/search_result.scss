@@ -27,17 +27,17 @@ DEFAULT MOBILE STYLING
   display: -webkit-box;
 }
 
-.document-metadata {
+.search-highlight {
+  background-color: yellow;
+}
+
+//Fields on Single Items and Search Result pages
+.document-metadata{
   display: contents;
   position: static;
   max-width: 55%;
   margin-bottom: 3%;
 }
-
-.search-highlight {
-  background-color: yellow;
-}
-
 
 @media screen and (min-width: $medium_device) {
   .dl-invert dt {

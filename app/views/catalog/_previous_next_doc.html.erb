@@ -1,0 +1,9 @@
+<% if @search_context[:prev] || @search_context[:next] %>
+  <div class="page-links-show">
+    <%= link_to_document( @search_context[:prev],  "< Previous ", class: "page-items-show", counter: @search_context[:counter].to_i - 1 ) if @search_context[:prev]  %>
+
+    <span class="page-info-show">|<%= item_page_entry_info %>|</span>
+
+    <%= link_to_document(@search_context[:next] , " Next >",class: "page-items-show", counter: @search_context[:counter].to_i + 1) if @search_context[:next] %>
+  </div>
+<% end %>
