@@ -29,20 +29,28 @@ Metrics/BlockLength:
 Metrics/ClassLength:
   Max: 118
 
-# Offense count: 2
+# Offense count: 3
 Metrics/CyclomaticComplexity:
   Max: 10
+  Exclude:
+    - 'app/helpers/blacklight_helper.rb'
 
 # Offense count: 1
 # Configuration parameters: CountComments, ExcludedMethods.
 Metrics/MethodLength:
   Max: 114
 
-# Offense count: 2
+# Offense count: 1
+Metrics/ModuleLength:
+  Exclude:
+    - 'app/helpers/blacklight_helper.rb'
+    
+# Offense count: 3
 Metrics/PerceivedComplexity:
   Max: 8
   Exclude:
     - 'app/controllers/concerns/blacklight/search_context.rb'
+    - 'app/helpers/blacklight_helper.rb'
 
 # Offense count: 1
 # Configuration parameters: ExpectMatchingDefinition, Regex, IgnoreExecutableScripts, AllowedAcronyms.
