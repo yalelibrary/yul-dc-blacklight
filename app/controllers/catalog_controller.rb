@@ -111,7 +111,7 @@ class CatalogController < ApplicationController
                                                     assumed_boundaries: [1100, Time.current.year + 2],
                                                     segments: true,
                                                     maxlength: 4
-                                                  }, include_in_advanced_search: false
+                                                  }
 
     # the facets below are set to false because we aren't filtering on them from the main search page
     # but we need to be able to provide a label when they are filtered upon from an individual show page
