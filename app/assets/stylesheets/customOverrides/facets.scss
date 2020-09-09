@@ -11,6 +11,49 @@ div.card {
   margin-bottom: 5px;
 }
 
+.facet-count.selected {
+  font-size: 12px;
+  padding-right: 22px;
+  padding-top: 2px;
+}
+
+.facet-count {
+  width: 5ch !important;
+  position: relative;
+  right: -10px;
+}
+
+.facet-count:after {
+  content: ')';
+}
+
+.facet-count:before {
+  content: '(';
+}
+
+.facet-field-heading button::after {
+  width: 11px;
+  height: 8px;
+  color: $medium_grey;
+  content: "^";
+  transform: rotate(180deg);
+  /* Legacy vendor prefixes */
+  /* Safari */
+  -webkit-transform: rotate(180deg);
+  /* Firefox */
+  -moz-transform: rotate(180deg);
+  /* IE */
+  -ms-transform: rotate(180deg);
+  /* Opera */
+  -o-transform: rotate(180deg);
+  /* Internet Explorer */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+}
+
+.facet-field-heading button::after[aria-expanded="true"] {
+  margin-top: 12px;
+}
+
 .facet-limit .card-body {
   padding-bottom: 5px;
   padding-top: 5px;
@@ -32,9 +75,23 @@ div.card {
   color: $medium_grey;
 }
 
+.facet-values .selected {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+#facets .btn {
+  border-top: 1px solid $light_grey !important;
+}
+
 h2.facets-heading {
   font-family: $mallory_mp_black, $mallory_medium, Arial, Helvetica, sans-serif;
   font-size: 0.9rem;
   font-weight: 900;
   line-height: 1.71;
+}
+
+#facets .remove {
+  position: absolute;
+  right: 6px;
 }
