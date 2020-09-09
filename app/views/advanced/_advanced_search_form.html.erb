@@ -23,17 +23,6 @@
 
   </div>
 
-  <div class="form-group advanced-search-facet">
-    <%= label_tag "publication_date", :class => "col-sm-3 control-label" do %>
-      Publication Year
-    <% end %>
-
-    <div class="col-sm-9">
-      <%= render_range_input("pub_date_sort", :begin) %> - <%= render_range_input("pub_date_sort", :end) %>
-    </div>
-  </div>
-
-  <hr>
 
   <div class="sort-submit-buttons clearfix">
     <%= render 'advanced_search_submit_btns' %>
