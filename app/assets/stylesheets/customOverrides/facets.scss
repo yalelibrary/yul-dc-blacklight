@@ -31,11 +31,12 @@ div.card {
   content: '(';
 }
 
-.facet-field-heading button::after {
+.facet-field-heading button.collapsed::after {
   width: 11px;
   height: 8px;
   color: $medium_grey;
   content: "^";
+  margin-top: 12px;
   transform: rotate(180deg);
   /* Legacy vendor prefixes */
   /* Safari */
@@ -51,7 +52,22 @@ div.card {
 }
 
 .facet-field-heading button::after[aria-expanded="true"] {
-  margin-top: 12px;
+  width: 11px;
+  height: 8px;
+  color: $medium_grey;
+  content: "^";
+  transform: rotate(0deg);
+  /* Legacy vendor prefixes */
+  /* Safari */
+  -webkit-transform: rotate(0deg);
+  /* Firefox */
+  -moz-transform: rotate(0deg);
+  /* IE */
+  -ms-transform: rotate(0deg);
+  /* Opera */
+  -o-transform: rotate(0deg);
+  /* Internet Explorer */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
 }
 
 .facet-limit .card-body {
