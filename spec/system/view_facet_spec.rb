@@ -133,4 +133,11 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     click_on 'Animation'
     expect(page).to have_css('.remove')
   end
+
+  it 'removes the facet constraint when the x png is clicked' do
+    click_on 'GENRE'
+    click_on 'Animation'
+    click_on 'remove'
+    expect(page).to have_no_css('.selected')
+  end
 end
