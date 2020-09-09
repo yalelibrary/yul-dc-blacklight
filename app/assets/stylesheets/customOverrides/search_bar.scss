@@ -3,7 +3,7 @@ DEFAULT MOBILE STYLING
 ********************************************************/
 
 .bg-light {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .blacklight-icon-search {
@@ -16,13 +16,6 @@ DEFAULT MOBILE STYLING
   background-position-x: right;
   background-origin: content-box;
   border-bottom: none;
-}
-
-.custom-select,
-.form-control,
-.search-btn {
-  padding: 11px 17px;
-  line-height: 1;
 }
 
 .custom-select,
@@ -108,8 +101,9 @@ DEFAULT MOBILE STYLING
     max-width: 91%;
   }
 
+  // fails for './spec/system/view_images_in_search_spec.rb:53'
   .search-btn {
-    margin-top: 0px;
+    margin-top: initial;
   }
 
   .twitter-typeahead {
