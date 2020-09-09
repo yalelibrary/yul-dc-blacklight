@@ -6,6 +6,7 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
               same_call_record,
               diff_call_record])
     solr.commit
+    visit root_path
     visit '?search_field=all_fields&q='
   end
 
@@ -33,7 +34,8 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
   end
 
   it 'has expected css' do
-    click_on '111'
+    ensure_click_link '111', page
+
     expect(page).to have_css '.page-links-show'
     expect(page).to have_css '.page-items-show'
     expect(page).to have_css '.page-info-show'
@@ -41,25 +43,27 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
 
   context "in the first item" do
     it 'does not have "Previous" and should have "Next"' do
-      click_on '111'
+      ensure_click_link '111', page
 
       expect(page).not_to have_link("< Previous")
       expect(page).to have_link("Next >", href: '/catalog/222')
       expect(page).to have_content("1 of 3")
     end
   end
+
   context "in the second item" do
     it 'has "Previous" and "Next"' do
-      click_on '222'
+      ensure_click_link '222', page
 
       expect(page).to have_link("< Previous", href: '/catalog/111')
       expect(page).to have_link("Next >", href: '/catalog/333')
       expect(page).to have_content("2 of 3")
     end
   end
+
   context "in the third item" do
-    it 'has "Previous" and but not "Next"' do
-      click_on '333'
+    it 'has "Previous", but not "Next"' do
+      ensure_click_link '333', page
 
       expect(page).to have_link("< Previous", href: '/catalog/222')
       expect(page).not_to have_link("Next >")

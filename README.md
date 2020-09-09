@@ -96,41 +96,48 @@ Note: AWS_PROFILE name needs to match the credentials profile name (`[dce-hostin
 
 If you use rbenv, you must run the following command after installing camerata: `rbenv rehash`
 
-### Accessing the blacklight container
+### Running `bundle install`
 
-- In a separate terminal window or tab, run:
+- In a separate terminal window or tab than the running blacklight server, run:
 
   ```bash
-  docker exec -it yul-dc-blacklight_blacklight_1 /bin/bash
+  cam bundle blacklight
+  ```
+
+### Accessing the blacklight container
+
+- In a separate terminal window or tab than the running blacklight server, run:
+
+  ```bash
+  cam sh blacklight
   ```
 
 - You will need to be inside the container to:
 
   - Run migrations
-  - Run bundle install
   - Access the seed file
   - Access the rails console for debugging
 
     ```
-    bundle exec rails c
+    rails c
     ```
 
   - Run rubocop
 
     ```
-    bundle exec rubocop -a
+    rubocop -a
     ```
 
   - Run rspec
 
     ```
-    bundle exec rspec
+    rspec
     ```
 
   - Rebuild the code documentation
 
     ```
-    bundle exec rake yale:docs:blacklight
+    rake yale:docs:blacklight
     ```
 
 ### Accessing the management app

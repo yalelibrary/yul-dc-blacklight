@@ -51,8 +51,9 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
       end
 
       it 'displays yale only restricted messaging' do
+        visit root_path
         visit '?q=&search_field=all_fields'
-        click_link 'test_record_2'
+        ensure_click_link 'test_record_2', page
 
         expect(page).to have_content('The digital version of this work is restricted to the Yale Community.')
         expect(page).to have_content('Please login using your Yale NetID or contact library staff to inquire about access to a physical copy.')
@@ -72,8 +73,9 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
         user = FactoryBot.create(:user)
         login_as(user, scope: :user)
 
+        visit root_path
         visit '?q=&search_field=all_fields'
-        click_link 'test_record_2'
+        ensure_click_link 'test_record_2', page
 
         expect(page).not_to have_content('The digital version of this work is restricted to the Yale Community.')
         expect(page).not_to have_content('Please login using your Yale NetID or contact library staff to inquire about access to a physical copy.')

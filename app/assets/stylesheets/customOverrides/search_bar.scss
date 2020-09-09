@@ -1,0 +1,154 @@
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
+
+.bg-light {
+  background-color: transparent !important;
+}
+
+.blacklight-icon-search {
+  display: none;
+}
+
+.custom-select {
+  background-image: image-url('light-blue-double-arrow.png');
+  background-size: 11px;
+  background-position-x: right;
+  background-origin: content-box;
+  border-bottom: none;
+}
+
+.custom-select,
+.form-control,
+.search-btn {
+  padding: 11px 17px;
+  line-height: 1;
+}
+
+.custom-select,
+.navbar-search .submit-search-text {
+  color: $yale_blue;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-family: $mallory_medium;
+}
+
+.custom-select,
+.form-control,
+.search-btn {
+  border: 1px solid $border_grey;
+  border-radius: 0px;
+}
+
+.form-control {
+  border-top: none;
+}
+
+.input-group {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.navbar-search .container,
+.navbar-search .search-query-form {
+  padding: 0px;
+}
+
+.navbar-search .search-field,
+.twitter-typeahead {
+  width: 100%;
+  min-width: 9em;
+}
+
+.navbar-search .submit-search-text {
+  position: initial;
+}
+
+.search-btn {
+  margin-top: 8px;
+}
+
+.search-q {
+  font-size: 20px;
+  color: $black;
+  font-family: $mallory_book $mallory_light, Arial, Helvetica, sans-serif !important;
+}
+
+
+@media screen and (min-width: $small_device) {
+  .form-control {
+    border-left: none;
+    border-top: 1px solid $border_grey;
+  }
+
+  .navbar-search .search-field {
+    width: 221px;
+  }
+
+  .twitter-typeahead {
+    width: 52%;
+    min-width: 250px;
+  }
+}
+
+
+@media screen and (min-width: $medium_device) {
+  .input-group-append {
+    margin-left: 8px;
+  }
+
+  .navbar.navbar-search > div.container {
+    max-width: 91%;
+  }
+
+  // fails for './spec/system/view_images_in_search_spec.rb:53'
+  .search-btn {
+    margin-top: initial;
+  }
+
+  .twitter-typeahead {
+    width: 45%;
+  }
+}
+
+
+@media screen and (min-width: $large_device) {
+  .input-group {
+    max-width: 918px;
+    justify-content: center;
+  }
+
+  .input-group-append,
+  .search-btn {
+    width: 129px;
+    max-width: 129px;
+  }
+
+  .navbar.navbar-search > div.container {
+    max-width: 918px;
+  }
+
+  .navbar-search .search-field {
+    max-width: 221px;
+  }
+
+  .navbar-search .search-query-form {
+    max-width: 100%;
+  }
+
+  .twitter-typeahead {
+    max-width: 500px;
+  }
+}
+
+
+@media screen and (min-width: $xlarge_device) {
+  .input-group {
+    width: 918px;
+  }
+
+  .twitter-typeahead {
+    width: 560px;
+    max-width: 560px;
+  }
+}
