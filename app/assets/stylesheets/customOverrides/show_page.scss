@@ -106,6 +106,12 @@ DEFAULT MOBILE STYLING
   content: ' >';
 }
 
+
+// metadata grouping
+.dl-invert dt {
+  text-align: left;
+}
+
 //Title on Single Items and Search Result pages
 //Replace Yale Roman with Yale Display when its available.
 .show-header {
@@ -123,6 +129,7 @@ DEFAULT MOBILE STYLING
   padding-left: 8%;
   align-content: center;
 }
+
 
 
 @media screen and (min-width: $medium_device) {
@@ -185,7 +192,6 @@ DEFAULT MOBILE STYLING
   .show-links{
     margin-right: -13%;
   }
-
   .universal-viewer-iframe {
     width: 115%!important;
     padding-left: 19%;

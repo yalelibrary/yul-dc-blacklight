@@ -1,0 +1,20 @@
+<% doc_presenter = show_presenter(document) %>
+<% migration_source = Yul::MigrationSourceMetadataPresenter.new(document: doc_presenter.fields_to_render).migration_source_terms %>
+
+<% if migration_source.length > 0 %>
+  <div class='metadata-block'>
+    <h4 class='metadata-block__title'>Migration Source</h4>
+    <dl class='metadata-block__group'>
+      <% migration_source.each do |field_name, field| -%>
+        <dt class="blacklight-<%= field_name.parameterize %> metadata-block__label-key">
+          <!-- KEY -->
+          <%= (render_document_show_field_label document, field: field_name).tr(':', '') %>
+          <!-- VALUE -->
+        </dt>
+        <dd class="blacklight-<%= field_name.parameterize %> metadata-block__label-value metadata-block__label-value--yul">
+          <%= format_field(field, field_name) %>
+        </dd>
+      <% end %>
+    </dl>
+  </div>
+<% end %>

@@ -29,7 +29,8 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
   let(:test_record) do
     {
       id: '111',
-      visibility_ssi: "Public"
+      visibility_ssi: "Public",
+      identifierShelfMark_ssim: 'this is the identifier shelf mark, but moderately different'
     }
   end
 

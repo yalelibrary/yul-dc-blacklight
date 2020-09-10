@@ -1,0 +1,8 @@
+format: 'Format'
+genre_ssim: 'Genre'
+geoSubject_ssim: 'Geo Subject'
+material_tesim: 'Material'
+resourceType_ssim: 'Resource Type'
+subjectName_ssim: 'Subject Name'
+subjectTopic_ssim: 'Subject Topic'
+subjectTopic_tesim: 'Subject Topic'
