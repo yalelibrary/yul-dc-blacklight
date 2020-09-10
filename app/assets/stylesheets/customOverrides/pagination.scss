@@ -22,7 +22,7 @@ DEFAULT MOBILE STYLING
 // Pagination at the bottom of the page
 .page-item .page-link {
   font-family: $mallory_medium, Arial, Helvetica, sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   color: $light_blue;
   border: none;
   margin-left: 0px;
@@ -43,6 +43,7 @@ DEFAULT MOBILE STYLING
 
 .pagination {
   padding: 8px 0px;
+  justify-content: center;
 }
 
 .pagination .page-item:nth-child(1),
@@ -72,3 +73,45 @@ DEFAULT MOBILE STYLING
   color: $medium_grey;
 }
 
+@media screen and (min-width: $small_device) {
+  .page-item .page-link[aria-label="Go to previous page"] {
+    position: absolute;
+    left: 0;
+    top: 40px;
+  }
+  
+  .page-item .page-link[aria-label="Go to next page"] {
+    position: absolute;
+    right: 0;
+    top: 40px;
+  }    
+}
+
+@media screen and (min-width: $medium_device) {
+  .page-item .page-link[aria-label="Go to previous page"] {
+    position: absolute;
+    left: 0;
+    top: 18px;
+  }
+  
+  .page-item .page-link[aria-label="Go to next page"] {
+    position: absolute;
+    right: 0;
+    top: 18px;
+  }    
+}
+
+
+@media screen and (min-width: $xlarge_device) {
+  .page-item .page-link[aria-label="Go to previous page"] {
+    position: absolute;
+    left: 0;
+    top: 18px;
+  }
+  
+  .page-item .page-link[aria-label="Go to next page"] {
+    position: absolute;
+    right: 0;
+    top: 18px;
+  }      
+}
