@@ -107,4 +107,37 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   it 'does not show the Identifier Shelf Mark facet' do
     expect(page).not_to have_content('Identifier Shelf Mark')
   end
+
+  it 'renders the facet header' do
+    expect(page).to have_css('.facet-field-heading')
+  end
+
+  it 'renders the facet label' do
+    click_on 'RESOURCE TYPE'
+    expect(page).to have_css('.facet-label')
+  end
+
+  it 'renders the facet count' do
+    click_on 'RESOURCE TYPE'
+    expect(page).to have_css('.facet-count')
+  end
+
+  it 'does not render the x as text' do
+    click_on 'RESOURCE TYPE'
+    click_on 'Archives or Manuscripts'
+    expect(page).to have_no_css('.remove-icon')
+  end
+
+  it 'renders the x png' do
+    click_on 'GENRE'
+    click_on 'Animation'
+    expect(page).to have_css('.remove')
+  end
+
+  it 'removes the facet constraint when the x png is clicked' do
+    click_on 'GENRE'
+    click_on 'Animation'
+    click_on 'remove'
+    expect(page).to have_no_css('.selected')
+  end
 end
