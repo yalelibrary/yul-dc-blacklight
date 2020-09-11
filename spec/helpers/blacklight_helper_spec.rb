@@ -8,6 +8,13 @@ RSpec.describe BlacklightHelper, helper: true do
     user.present?
   end
 
+  describe 'image_exists?' do
+    context 'when URL is given but is invalid' do
+      it "treats it as a non-existent image" do
+        expect(helper.send(:image_exists?, "nonsense:8182")).to be_falsey
+      end
+    end
+  end
   describe '#manifest_url' do
     context 'when IIIF_MANIFESTS_BASE_URL is set' do
       before do

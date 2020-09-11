@@ -68,9 +68,12 @@ module BlacklightHelper
 
   def image_exists?(url)
     return false if url.blank?
-    url = URI.parse(url)
-    http = Net::HTTP.get_response(url)
-
+    begin
+      url = URI.parse(url)
+      http = Net::HTTP.get_response(url)
+    rescue
+      return false
+    end
     http.content_type.include? 'image'
   end
 
