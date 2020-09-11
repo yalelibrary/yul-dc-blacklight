@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe 'User Subheader', type: :system, js: true, clean: true do
+RSpec.describe 'User Subheader', type: :system, js: true, style: true, clean: true do
   context "User logged out" do
     before do
       visit '/'

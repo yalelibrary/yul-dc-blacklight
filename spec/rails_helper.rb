@@ -47,6 +47,13 @@ RSpec.configure do |config|
     solr.commit
   end
 
+  config.before(:each, style: true) do
+    ENV["NO_STYLE"] = nil
+  end
+  config.after(:each, style: true) do
+    ENV["NO_STYLE"] = "true"
+  end
+
   config.include Devise::Test::ControllerHelpers, type: :helper
   config.include Warden::Test::Helpers
 

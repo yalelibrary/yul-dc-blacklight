@@ -35,7 +35,7 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
   end
 
   it 'has expected css' do
-    ensure_click_link '111', page
+    click_link '111'
 
     expect(page).to have_css '.page-links-show'
     expect(page).to have_css '.page-items-show'
@@ -44,7 +44,7 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
 
   context "in the first item" do
     it 'does not have "Previous" and should have "Next"' do
-      ensure_click_link '111', page
+      click_link '111'
 
       expect(page).not_to have_link("< Previous")
       expect(page).to have_link("Next >", href: '/catalog/222')
@@ -54,7 +54,7 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
 
   context "in the second item" do
     it 'has "Previous" and "Next"' do
-      ensure_click_link '222', page
+      click_link '222'
 
       expect(page).to have_link("< Previous", href: '/catalog/111')
       expect(page).to have_link("Next >", href: '/catalog/333')
@@ -64,7 +64,7 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
 
   context "in the third item" do
     it 'has "Previous", but not "Next"' do
-      ensure_click_link '333', page
+      click_link '333'
 
       expect(page).to have_link("< Previous", href: '/catalog/222')
       expect(page).not_to have_link("Next >")
