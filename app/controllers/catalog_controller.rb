@@ -323,6 +323,15 @@ class CatalogController < ApplicationController
       }
     end
 
+    config.add_search_field('child_oids_ssim', label: 'Child OID') do |field|
+      field.qt = 'search'
+      field.include_in_simple_select = false
+      field.solr_parameters = {
+        qf: 'child_oids_ssim',
+        pf: ''
+      }
+    end
+
     config.add_search_field('identifierShelfMark_tesim', label: 'Identifier Shelf Mark') do |field|
       field.qt = 'search'
       field.include_in_simple_select = false
