@@ -2,92 +2,33 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 
-.dd {
-  margin-left:  22%;
-  text-align: justify;
-}
-
-.dt {
-  position: relative;
-}
-
-.document-title{
-  padding-left: 10px;
-  padding-bottom: 10px;
-}
-.document-title-heading {
-  display: contents;
-  position: static;
-  max-width: 45%;
-  margin-bottom: 3%;
-}
-
-.documentHeader{
-  padding-left: 19px!important;
-  display: -webkit-box;
-}
-
 .search-highlight {
   background-color: yellow;
 }
 
-//Fields on Single Items and Search Result pages
-.document-metadata{
-  display: contents;
-  position: static;
-  max-width: 55%;
-  margin-bottom: 3%;
+.search-results dt {
+  font-size: 12px;
+  color: $medium_grey;
+  font-family: $mallory_medium, Arial, Helvetica, sans-serif !important;
+  font-weight: 900;
 }
 
-@media screen and (min-width: $medium_device) {
-  .dl-invert dt {
-    position: absolute;
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 0px!important;
-  }
-
-  .document-metadata {
-    max-width: 55%;
-    margin-bottom: 3%;
-  }
-
-  .col-md-9 {
-    padding-left: 25%;
-  }
+.search-results dd {
+  font-size: 12px;
+  color: $medium_grey;
+  font-family: $mallory_medium, Arial, Helvetica, sans-serif !important;
+  font-weight: 500;
 }
 
-@media screen and (min-width: $large_device) {
-
-  .dl-invert dt {
-    position: absolute;
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 0px!important;
-  }
-
-  .document-metadata {
-    max-width: 55%;
-    margin-bottom: 3%;
-  }
-
-  .col-md-9 {
-    padding-left: 25%;
-  }
+.search-results .document-title {
+  font-size: 14px;
+  color: $light_blue;
+  font-family: $mallory_medium, Arial, Helvetica, sans-serif !important;
+  font-weight: 500;
 }
 
-@media screen and (min-width: $xlarge_device) {
-
-  .dl-invert dt {
-    position: absolute;
-  }
-
-  .document-metadata {
-    max-width: 55%;
-    margin-bottom: 3%;
-  }
-
-  .col-md-9 {
-    padding-left: 25%;
-  }
+.search-results .document-thumbnail {
+  height: 200px;
+  padding: 0px 25px;
 }
+
