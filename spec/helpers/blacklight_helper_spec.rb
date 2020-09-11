@@ -70,7 +70,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
         expect(helper.render_thumbnail(valid_document, { alt: "" })).to eq "<img src=\"https://collections-test.curationexperts.com/iiif/2/1234822/full/!200,200/0/default.jpg\" />"
       end
       it 'returns an image_tag pointing to image_not_found.png for oids without images' do
-        expect(helper.render_thumbnail(non_valid_document, {})).to include("<img src=\"/assets/no_preview_available_dan-")
+        expect(helper.render_thumbnail(non_valid_document, {})).to include("<img src=\"/assets/image_not_found-")
       end
     end
 

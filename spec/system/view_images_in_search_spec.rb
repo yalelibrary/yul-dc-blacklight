@@ -37,9 +37,9 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
       expect(page).to have_xpath("//img[@src = 'https://collections-test.curationexperts.com/iiif/2/1234822/full/!200,200/0/default.jpg']")
     end
 
-    xit 'displays the image_not_found.png for records without images' do
+    it 'displays the image_not_found.png for records without images' do
       visit '?q=&search_field=all_fields'
-      expect(page).to have_xpath("//img[@src = 'path-to-image-not-found.png']")
+      expect(page).to have_css("img[src ^= '/assets/image_not_found']")
     end
   end
 
