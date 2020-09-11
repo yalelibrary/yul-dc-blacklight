@@ -60,3 +60,22 @@ DEFAULT MOBILE STYLING
   flex: 0 0 100%;
 }
 
+
+@media screen and (min-width: $small_device) {
+  #documents .thumbnail > a {
+    height: 200px;
+  }
+
+  .row-cols-2 > * {
+    max-width: 50%;
+    flex: 0 0 50%;
+  }
+}
+
+
+@media screen and (min-width: $xlarge_device) {
+  .row-cols-2 > * {
+    max-width: 33%;
+    flex: 0 0 33%;
+  }
+}
