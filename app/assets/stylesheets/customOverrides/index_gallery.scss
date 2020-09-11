@@ -1,0 +1,81 @@
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
+
+.caption,
+.documentHeader {
+  width: 200px;
+}
+
+.document {
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.document .caption span,
+.document > .index .document-title {
+  display: none;
+}
+
+.document .caption .documentHeader {
+  padding-left: 15px !important;
+}
+
+.document > .index {
+  width: 27px;
+}
+
+.document > .index .documentHeader {
+  line-height: 14px;
+  position: absolute;
+  top: -3px;
+}
+
+.caption .document-title {
+  font-size: 14px;
+  font-family: $mallory_mp_medium;
+  padding-left: 0;
+  padding-bottom: 0;
+  width: 200px;
+  margin-top: 14px;
+}
+
+.document-title > a {
+  color: $light_blue;
+}
+
+.document-title-heading > span {
+  color: $medium_grey;
+  font-family: $mallory_mp_black;
+  font-size: 14px;
+}
+
+#documents .thumbnail > a {
+  width: 200px;
+  display: block;
+}
+
+.row-cols-2 > * {
+  max-width: 100%;
+  flex: 0 0 100%;
+}
+
+
+@media screen and (min-width: $small_device) {
+  #documents .thumbnail > a {
+    height: 200px;
+  }
+
+  .row-cols-2 > * {
+    max-width: 50%;
+    flex: 0 0 50%;
+  }
+}
+
+
+@media screen and (min-width: $xlarge_device) {
+  .row-cols-2 > * {
+    max-width: 33%;
+    flex: 0 0 33%;
+  }
+}
