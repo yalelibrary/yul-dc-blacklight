@@ -214,6 +214,11 @@ For the image instance to properly access images, you must also create a .secret
 
 3. Run `docker-compose up blacklight`
 
+## Writing Integration Tests
+Integration tests run without styling by default. This allows for more stable tests involving Capybara and loads the pages faster. 
+
+If styling is needed for a test to pass, tag the test with `style:true`
+
 ## Test coverage
 
 We use [coveralls](https://coveralls.io/github/yalelibrary/yul-dc-blacklight) to measure test coverage. More details [here](https://github.com/yalelibrary/yul-dc-blacklight/wiki/code-coverage).

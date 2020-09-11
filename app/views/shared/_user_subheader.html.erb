@@ -1,0 +1,18 @@
+<div class="user-subheader">
+  <div class="user-subheader-title">
+    Digital Collections
+  </div>
+  <%if user_signed_in? %>
+    <div class="user-subheader-options" >
+      <div class="user-subheader-current-user">
+       <div class="user-logo"></div>
+        <%= current_user.email.presence || current_user.uid%>
+      </div>
+      <div class="user-subheader-logout">
+        <%= link_to(destroy_user_session_path, method: :delete, class: 'user-subheader-logout-link') do %>
+          <div class="logout-logo"></div> Logout
+        <%end %>
+      </div>
+    </div>
+  <%end%>
+</div>

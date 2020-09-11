@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe BlacklightHelper, helper: true do
+RSpec.describe BlacklightHelper, helper: true, style: true do
   include Devise::Test::ControllerHelpers
 
   # used so render_thumbnail can get user info from rspec

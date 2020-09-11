@@ -33,16 +33,14 @@ DEFAULT MOBILE STYLING
   padding: 0 0 0 0;
 }
 .constraints-container {
-  margin-left: 8%;
+  margin-left: 1%;
   justify-self: center;
-  justify-content: space-between;
-  margin-right: 8%;
   display: flex;
 }
 
 .show-buttons {
   justify-self: center;
-  margin-right: 25px;
+  margin-right: 137px;
 }
 
 .show-links {
@@ -167,7 +165,7 @@ DEFAULT MOBILE STYLING
 
 @media screen and (min-width: $medium_device) {
   .constraints-container {
-    margin-left: 8%;
+    margin-left: -.5%;
     width: 118%;
     justify-self: center;
     justify-content: space-between;
@@ -185,13 +183,15 @@ DEFAULT MOBILE STYLING
   .item-page__metadata-wrapper {
     padding-left: 8%;
   }
+  .show-buttons {
+    justify-self: center;
+    margin-right: 176px;
+  }
 }
 
 @media screen and (min-width: $large_device) {
   .constraints-container {
-    margin-left: 19%;
-    margin-right: 19%;
-    width: 126%;
+    width: 140%;
     justify-self: center;
     justify-content: space-between;
     display: flex;
@@ -214,13 +214,16 @@ DEFAULT MOBILE STYLING
   .item-page__metadata-wrapper {
     padding-left: 19%;
   }
+  .show-buttons {
+    justify-self: center;
+    margin-right: 52%;
+  }
 }
 
 @media screen and (min-width: $xlarge_device) {
   .constraints-container {
-    margin-left: 19%;
-    margin-right: 19%;
-    width: 136%;
+    margin-left: -1%;
+    width: 144%;
     justify-self: center;
     justify-content: space-between;
     display: flex;
