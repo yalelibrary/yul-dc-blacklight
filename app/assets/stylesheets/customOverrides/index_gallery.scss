@@ -3,29 +3,29 @@ DEFAULT MOBILE STYLING
 ********************************************************/
 
 .caption,
-.documentHeader {
+.caption > .documentHeader {
   width: 200px;
 }
 
-.document {
+.document.col {
   display: flex;
   margin-bottom: 50px;
 }
 
-.document .caption span,
-.document > .index .document-title {
+.document.col .caption span,
+.document.col > .index .document-title {
   display: none;
 }
 
-.document .caption .documentHeader {
+.document.col .caption .documentHeader {
   padding-left: 15px !important;
 }
 
-.document > .index {
+.document.col > .index {
   width: 27px;
 }
 
-.document > .index .documentHeader {
+.document.col > .index .documentHeader {
   line-height: 14px;
   position: absolute;
   top: -3px;
@@ -44,7 +44,7 @@ DEFAULT MOBILE STYLING
   color: $light_blue;
 }
 
-.document-title-heading > span {
+.index .document-title-heading > span {
   color: $medium_grey;
   font-family: $mallory_mp_black;
   font-size: 14px;
