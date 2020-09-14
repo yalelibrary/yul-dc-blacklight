@@ -76,7 +76,7 @@ a {
 }
 
 .remove::before {
-  content: url(x2x.png);
+  content: image-url("x2x.png");
 }
 
 .text-success, .facet-values li .selected {
