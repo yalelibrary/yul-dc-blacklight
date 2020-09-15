@@ -45,9 +45,8 @@ module BlacklightHelper
   def render_thumbnail(document, _options)
     # return placeholder image if not logged in for yale only works
     return image_tag('placeholder_restricted.png') if (document[:visibility_ssi].eql? 'Yale Community Only') && !user_signed_in?
-
     oid = sanitize_oid_ssi(document[:oid_ssi])
-    request = get_child_img_url(oid)
+    request = document[:thumbnail_path_ss]
     return image_tag('image_not_found.png') unless image_exists?(request)
     return image_tag(request) if ['Public', 'Yale Community Only'].include? document[:visibility_ssi]
   end
@@ -74,23 +73,8 @@ module BlacklightHelper
     rescue
       return false
     end
+
     http.content_type.include? 'image'
-  end
-
-  def get_child_img_url(oid)
-    return '' if oid.blank?
-    begin
-      uri = URI("https://collections-test.curationexperts.com/manifests/#{oid}.json")
-      json = Net::HTTP.get_response(uri)
-      json = Net::HTTP.get_response(URI.parse(json.header['location'])) if json.code.eql? "301"
-
-      result = JSON(json.body)
-      request = result['sequences'].first['canvases'].first['images'].first['resource']['service']['@id']
-
-      "#{request}/full/!200,200/0/default.jpg"
-    rescue
-      ''
-    end
   end
 
   def language_code_to_english(language_code)
