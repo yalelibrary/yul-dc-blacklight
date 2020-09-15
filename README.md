@@ -215,7 +215,7 @@ For the image instance to properly access images, you must also create a .secret
   PUBLIC_IP=ENABLED cam get-params yul-demo
   - This will create 3 "yul-demo...yml" files
   YUL_DC_SERVER=collections-demo.curationexperts.com cam smoke
-  NOTE: Make sure the expected changes show on collections-test.curationexperts.com after the smoke tests pass
+  NOTE: Make sure the expected changes show on collections-demo.curationexperts.com after the smoke tests pass
   NOTE: You can delete all 6 untracked yml files
   ```
 
