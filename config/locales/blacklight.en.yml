@@ -1,4 +1,8 @@
 en:
+  views:
+    pagination:
+      previous: 'Previous'
+      next: 'Next'
   blacklight:
     application_name: 'Yale University Library'
     sidebar:
