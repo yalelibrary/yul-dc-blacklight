@@ -18,7 +18,8 @@ div.card {
 }
 
 .facet-count {
-  width: 5ch !important;
+  width: 7ch !important;
+  white-space: nowrap;
   position: relative;
   right: -10px;
 }
