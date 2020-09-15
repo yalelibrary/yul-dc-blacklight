@@ -45,25 +45,12 @@ module BlacklightHelper
   def render_thumbnail(document, _options)
     # return placeholder image if not logged in for yale only works
     return image_tag('placeholder_restricted.png') if (document[:visibility_ssi].eql? 'Yale Community Only') && !user_signed_in?
-    oid = sanitize_oid_ssi(document[:oid_ssi])
-    request = document[:thumbnail_path_ss]
-    return image_tag('image_not_found.png') unless image_exists?(request)
-    return image_tag(request) if ['Public', 'Yale Community Only'].include? document[:visibility_ssi]
+    url = document[:thumbnail_path_ss]
+    return image_tag('image_not_found.png') unless image_exists?(url)
+    return image_tag(url) if ['Public', 'Yale Community Only'].include? document[:visibility_ssi]
   end
 
   private
-
-  # @return [String], strips anything added to the oid
-  # needed for yale-only works which have '-yale' appended to the oid_ssi
-  def sanitize_oid_ssi(oid_ssi)
-    oid = if (oid = oid_ssi).present?
-            oid.to_s.match(%r{(?<oid_clean>\d+)}).try(:[], :oid_clean)
-          else
-            ''
-          end
-
-    oid
-  end
 
   def image_exists?(url)
     return false if url.blank?

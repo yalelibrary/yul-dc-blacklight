@@ -76,10 +76,12 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
 
   describe '#render_thumbnail' do
     context 'with public record and oid with images' do
-
       let(:valid_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Public', oid_ssi: ['2055095'], thumbnail_path_ss: "http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg") }
       let(:non_valid_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Public', oid_ssi: ['9999999999999999']) }
-
+      before do
+        stub_request(:get, "http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg")
+          .to_return(status: 200, body: File.open("spec/fixtures/images/Sun.png").read, headers: { "Content-Type" => /image\/.+/ })
+      end
       it 'returns an image_tag for oids that have images' do
         expect(helper.render_thumbnail(valid_document, { alt: "" })).to eq "<img src=\"http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg\" />"
       end
@@ -89,7 +91,18 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     end
 
     context 'with Yale only records' do
-      let(:yale_only_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Yale Community Only', oid_ssi: ['2055095-yale']) }
+      let(:yale_only_document) do
+        SolrDocument.new(
+          id: 'test',
+          visibility_ssi: 'Yale Community Only',
+          oid_ssi: ['2055095'],
+          thumbnail_path_ss: "http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg"
+        )
+      end
+      before do
+        stub_request(:get, "http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg")
+          .to_return(status: 200, body: File.open("spec/fixtures/images/Sun.png").read, headers: { "Content-Type" => /image\/.+/ })
+      end
 
       it 'returns placeholder when logged out' do
         expect(helper.render_thumbnail(yale_only_document, {})).to include("<img src=\"/assets/placeholder_restricted-")
