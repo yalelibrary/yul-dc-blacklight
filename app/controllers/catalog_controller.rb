@@ -5,6 +5,8 @@ class CatalogController < ApplicationController
   include Blacklight::Catalog
   include Blacklight::Marc::Catalog
 
+  before_action :determine_per_page
+
   configure_blacklight do |config|
     # default advanced config values
     config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
@@ -40,7 +42,7 @@ class CatalogController < ApplicationController
     # config.document_solr_path = 'get'
 
     # items to show per page, each number in the array represent another option to choose from.
-    # config.per_page = [10,20,50,100]
+    # config.per_page = params[:view] == 'list' ? [10,20,50,100] : [9, 30, 60, 99]
 
     # solr field configuration for search results/index views
     config.index.title_field = 'title_tesim'
@@ -361,5 +363,10 @@ class CatalogController < ApplicationController
     # if the name of the solr.SuggestComponent provided in your solrcongig.xml is not the
     # default 'mySuggester', uncomment and provide it below
     # config.autocomplete_suggester = 'mySuggester'
+  end
+
+  def determine_per_page
+    grouping = params[:view] == 'list' ? [10, 20, 50, 100] : [9, 30, 60, 99]
+    blacklight_config[:per_page] = grouping
   end
 end
