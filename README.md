@@ -200,8 +200,23 @@ For the image instance to properly access images, you must also create a .secret
 
   ```
   cam release blacklight
+  PUBLIC_IP=ENABLED cam get-params yul-test
+    - This will create 3 "yul-test...yml" files
+  BLACKLIGHT_VERSION=NEW_BLACKLIGHT_VERSION_NUMBER cam deploy-main yul-test
+  - e.g. `BLACKLIGHT_VERSION=v1.23.4 cam deploy-main yul-test
+  YUL_DC_SERVER=collections-test.curationexperts.com cam smoke
+    - This command must be run from the camerata repo
+    - You'll need "chromedriver" for it to work. If you don't already have it installed, run `brew cask install chromedriver`
+    - Afterwards, you'll need to give the app permission to run in your system preferences
+  NOTE: Make sure the expected changes show on collections-test.curationexperts.com after the smoke tests pass
   cam push_version blacklight NEW_BLACKLIGHT_VERSION_NUMBER
-  cam deploy-main CLUSTER_NAME (e.g., yul-test)
+
+  cam deploy-main yul-demo
+  PUBLIC_IP=ENABLED cam get-params yul-demo
+  - This will create 3 "yul-demo...yml" files
+  YUL_DC_SERVER=collections-demo.curationexperts.com cam smoke
+  NOTE: Make sure the expected changes show on collections-demo.curationexperts.com after the smoke tests pass
+  NOTE: You can delete all 6 untracked yml files
   ```
 
 3. Move any tickets that were included in this release from `For Release` to `Ready for Acceptance`
@@ -215,7 +230,7 @@ For the image instance to properly access images, you must also create a .secret
 3. Run `docker-compose up blacklight`
 
 ## Writing Integration Tests
-Integration tests run without styling by default. This allows for more stable tests involving Capybara and loads the pages faster. 
+Integration tests run without styling by default. This allows for more stable tests involving Capybara and loads the pages faster.
 
 If styling is needed for a test to pass, tag the test with `style:true`
 
