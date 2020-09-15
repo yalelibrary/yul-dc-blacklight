@@ -18,7 +18,7 @@
   },
   "version": "0.1.0",
   "devDependencies": {
-    "webpack-dev-server": "^3.10.3",
-    "shx": "^0.3.2"
+    "shx": "^0.3.2",
+    "webpack-dev-server": "^3.10.3"
   }
 }
