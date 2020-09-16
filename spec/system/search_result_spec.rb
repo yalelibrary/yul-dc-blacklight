@@ -17,7 +17,7 @@ RSpec.describe 'search result', type: :system do
     end
 
     it 'shows the index number' do
-      expect(find('#documents > .document-position-0 span')).to be_visible
+      expect(page).to have_selector '#documents > .document-position-0 span', visible: true
     end
   end
 
@@ -32,6 +32,10 @@ RSpec.describe 'search result', type: :system do
 
     it 'has the correct "per page" options' do
       expect(page).to have_text '9 per page 30 per page 60 per page 99 per page'
+    end
+
+    it 'does not show the index number' do
+      expect(page).to have_selector '#documents > .document.col:first-child span', visible: false
     end
   end
 end
