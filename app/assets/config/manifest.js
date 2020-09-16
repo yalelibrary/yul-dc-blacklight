@@ -2,5 +2,3 @@
 //= link_directory ../stylesheets
 //= link application.js
 //= link application.css
-
-//= link x2x.png
