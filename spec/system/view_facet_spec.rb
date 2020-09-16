@@ -104,10 +104,6 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     expect(page).not_to have_content('Amor Llama')
   end
 
-  it 'does not show the Identifier Shelf Mark facet' do
-    expect(page).not_to have_content('Identifier Shelf Mark')
-  end
-
   it 'renders the facet header' do
     expect(page).to have_css('.facet-field-heading')
   end

@@ -5,6 +5,8 @@ class CatalogController < ApplicationController
   include Blacklight::Catalog
   include Blacklight::Marc::Catalog
 
+  before_action :determine_per_page
+
   configure_blacklight do |config|
     # default advanced config values
     config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
@@ -332,9 +334,8 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('identifierShelfMark_tesim', label: 'Identifier Shelf Mark') do |field|
+    config.add_search_field('identifierShelfMark_tesim', label: 'Call Number') do |field|
       field.qt = 'search'
-      field.include_in_simple_select = false
       field.solr_parameters = {
         qf: 'identifierShelfMark_tesim',
         pf: ''
@@ -361,5 +362,10 @@ class CatalogController < ApplicationController
     # if the name of the solr.SuggestComponent provided in your solrcongig.xml is not the
     # default 'mySuggester', uncomment and provide it below
     # config.autocomplete_suggester = 'mySuggester'
+  end
+
+  def determine_per_page
+    grouping = params[:view] == 'gallery' ? [9, 30, 60, 99] : [10, 20, 50, 100]
+    blacklight_config[:per_page] = grouping
   end
 end

@@ -12,6 +12,10 @@ RSpec.describe 'search result', type: :system do
       expect(page).to have_css '.document-metadata'
     end
 
+    it 'has the correct "per page" options' do
+      expect(page).to have_text '10 per page 20 per page 50 per page 100 per page'
+    end
+
     it 'shows the index number' do
       expect(find('#documents > .document-position-0 span')).to be_visible
     end
@@ -23,8 +27,11 @@ RSpec.describe 'search result', type: :system do
     end
 
     it 'has expected css' do
-      expect(page).to have_css '.index'
       expect(page).to have_css '.caption'
+    end
+
+    it 'has the correct "per page" options' do
+      expect(page).to have_text '9 per page 30 per page 60 per page 99 per page'
     end
   end
 end

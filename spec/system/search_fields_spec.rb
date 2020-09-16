@@ -21,6 +21,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       author_tesim: 'Eric & Frederick',
       subjectName_ssim: "this is the subject name",
       sourceTitle_tesim: "this is the source title",
+      identifierShelfMark_tesim: 'WA MSS 987',
       orbisBibId_ssi: '1238901',
       visibility_ssi: 'Public'
     }
@@ -33,6 +34,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       author_tesim: 'Frederick & Eric',
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
+      identifierShelfMark_tesim: 'Yale MS 123',
       visibility_ssi: 'Public'
     }
   end
@@ -40,6 +42,12 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
   context 'search fields' do
     it ' contains all search fields in the view' do
       expect(search_fields).to contain_exactly(*expected_search_fields)
+    end
+
+    it 'contains displays the correct record when searching by Identifier Shelf Mark' do
+      visit '/?search_field=identifierShelfMark_tesim&q=WA+MSS+987'
+      expect(page).to have_content 'Handsome Dan is a bull dog.'
+      expect(page).not_to have_content 'Handsome Dan is not a cat.'
     end
 
     it 'contains displays the correct record when searching by BibId' do

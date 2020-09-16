@@ -5,7 +5,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.6'
 
-gem "actionpack", ">= 6.0.3.1"
 gem 'awesome_print'
 gem 'blacklight', '>= 7.0'
 gem 'blacklight-gallery'
@@ -27,7 +26,7 @@ gem 'omniauth'
 gem 'omniauth-cas'
 gem 'pg'
 gem 'puma', '~> 4.3'
-gem 'rails', '~> 6.0.2', '>= 6.0.3.2'
+gem 'rails', '~> 6.0.3'
 gem "rails_semantic_logger", ">=4.4.4"
 gem 'rsolr', '>= 1.0', '< 3'
 gem 'sass-rails', '>= 6'
@@ -63,4 +62,5 @@ group :test do
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'webmock'
 end

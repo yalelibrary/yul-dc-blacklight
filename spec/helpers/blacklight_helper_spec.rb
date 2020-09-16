@@ -17,8 +17,11 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
   end
   describe '#manifest_url' do
     context 'when IIIF_MANIFESTS_BASE_URL is set' do
-      before do
+      around do |example|
+        original_iiif_manifests_url = ENV['IIIF_MANIFESTS_BASE_URL']
         ENV['IIIF_MANIFESTS_BASE_URL'] = 'http://example.com'
+        example.run
+        ENV['IIIF_MANIFESTS_BASE_URL'] = original_iiif_manifests_url
       end
 
       it "defaults to 'Blacklight'" do
@@ -27,8 +30,11 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     end
 
     context 'when IIIF_MANIFESTS_BASE_URL is not set' do
-      before do
+      around do |example|
+        original_iiif_manifests_url = ENV['IIIF_MANIFESTS_BASE_URL']
         ENV['IIIF_MANIFESTS_BASE_URL'] = nil
+        example.run
+        ENV['IIIF_MANIFESTS_BASE_URL'] = original_iiif_manifests_url
       end
 
       it "defaults to 'Blacklight'" do
@@ -70,11 +76,14 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
 
   describe '#render_thumbnail' do
     context 'with public record and oid with images' do
-      let(:valid_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Public', oid_ssi: ['2055095']) }
+      let(:valid_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Public', oid_ssi: ['2055095'], thumbnail_path_ss: "http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg") }
       let(:non_valid_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Public', oid_ssi: ['9999999999999999']) }
-
+      before do
+        stub_request(:get, "http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg")
+          .to_return(status: 200, body: File.open("spec/fixtures/images/Sun.png").read, headers: { "Content-Type" => /image\/.+/ })
+      end
       it 'returns an image_tag for oids that have images' do
-        expect(helper.render_thumbnail(valid_document, { alt: "" })).to eq "<img src=\"https://collections-test.curationexperts.com/iiif/2/1234822/full/!200,200/0/default.jpg\" />"
+        expect(helper.render_thumbnail(valid_document, { alt: "" })).to eq "<img src=\"http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg\" />"
       end
       it 'returns an image_tag pointing to image_not_found.png for oids without images' do
         expect(helper.render_thumbnail(non_valid_document, {})).to include("<img src=\"/assets/image_not_found-")
@@ -82,7 +91,18 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     end
 
     context 'with Yale only records' do
-      let(:yale_only_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Yale Community Only', oid_ssi: ['2055095-yale']) }
+      let(:yale_only_document) do
+        SolrDocument.new(
+          id: 'test',
+          visibility_ssi: 'Yale Community Only',
+          oid_ssi: ['2055095'],
+          thumbnail_path_ss: "http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg"
+        )
+      end
+      before do
+        stub_request(:get, "http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg")
+          .to_return(status: 200, body: File.open("spec/fixtures/images/Sun.png").read, headers: { "Content-Type" => /image\/.+/ })
+      end
 
       it 'returns placeholder when logged out' do
         expect(helper.render_thumbnail(yale_only_document, {})).to include("<img src=\"/assets/placeholder_restricted-")
@@ -92,7 +112,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
         user = FactoryBot.create(:user)
         sign_in(user) # sign_in so user_signed_in? works in method
 
-        expect(helper.render_thumbnail(yale_only_document, {})).to include("<img src=\"https://collections-test.curationexperts.com/iiif/2/1234822/full/!200,200/0/default.jpg\" />")
+        expect(helper.render_thumbnail(yale_only_document, {})).to include("<img src=\"http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg\" />")
       end
     end
   end

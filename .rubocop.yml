@@ -12,6 +12,7 @@ Layout/LineLength:
 RSpec/DescribeClass:
   Exclude:
     - spec/views/**/*
+    - spec/system/search_result_pagination_spec.rb
 
 RSpec/RepeatedExample:
   Exclude:
