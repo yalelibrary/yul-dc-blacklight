@@ -467,7 +467,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionpack (>= 6.0.3.1)
   activerecord-nulldb-adapter
   amazing_print (>= 1.2.1)
   apparition
@@ -500,7 +499,7 @@ DEPENDENCIES
   omniauth-cas
   pg
   puma (~> 4.3)
-  rails (~> 6.0.2, >= 6.0.3.2)
+  rails (~> 6.0.3)
   rails-controller-testing
   rails_semantic_logger (>= 4.4.4)
   rsolr (>= 1.0, < 3)
