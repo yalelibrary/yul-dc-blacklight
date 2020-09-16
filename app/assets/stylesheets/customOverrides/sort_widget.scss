@@ -2,19 +2,22 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 
-.btn-outline-secondary.active:not(:disabled):not(.disabled) {
-  background-color: $yale_blue;
-  border-color: $yale_blue;
+.dropdown-menu {
+  background-color: transparent;
 }
 
-.btn-outline-secondary:hover {
-  background-color: $light_grey;
-  border-color: $light_grey;
+.btn-outline-secondary,
+.btn-outline-secondary.active:not(:disabled):not(.disabled),
+.btn-outline-secondary:not(:disabled):not(.disabled):active,
+.btn-outline-secondary:hover,
+.show > .btn-outline-secondary.dropdown-toggle {
+  background-color: $lightest_grey;
+  border-color: $lightest_grey;
+  color: $yale_blue;
 }
 
-.btn-outline-secondary:not(:disabled):not(.disabled):active {
-  background-color: $dark_grey;
-  border-color: $dark_grey;
+.btn-outline-secondary:first-child {
+  margin-right: 8px;
 }
 
 .caret {
@@ -33,6 +36,16 @@ DEFAULT MOBILE STYLING
 
 .dropdown-toggle::after {
   content: none;
+}
+
+#per_page-dropdown {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+#per_page-dropdown,
+#sort-dropdown {
+  background-color: $lightest_grey;
 }
 
 .search-widgets {
