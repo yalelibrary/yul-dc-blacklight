@@ -366,7 +366,7 @@ class CatalogController < ApplicationController
   end
 
   def determine_per_page
-    grouping = params[:view] == 'list' ? [10, 20, 50, 100] : [9, 30, 60, 99]
+    grouping = params[:view] == 'gallery' ? [9, 30, 60, 99] : [10, 20, 50, 100]
     blacklight_config[:per_page] = grouping
   end
 end
