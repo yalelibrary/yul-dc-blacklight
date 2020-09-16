@@ -15,6 +15,7 @@ RSpec.describe 'search result', type: :system do
     it 'has the correct "per page" options' do
       expect(page).to have_text '10 per page 20 per page 50 per page 100 per page'
     end
+  end
 
   context 'in gallery view' do
     before do
