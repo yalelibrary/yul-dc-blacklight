@@ -55,6 +55,9 @@ module BlacklightHelper
   def image_exists?(url)
     return false if url.blank?
     begin
+      # In local development, this is checked inside the container (iiif_image); however, the external browser
+      # needs to be able to resolve it, meaning it needs to be localhost
+      url = url.gsub("localhost", "iiif_image")
       url = URI.parse(url)
       http = Net::HTTP.get_response(url)
     rescue
