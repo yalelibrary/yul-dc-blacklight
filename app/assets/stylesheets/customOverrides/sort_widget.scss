@@ -6,6 +6,10 @@ DEFAULT MOBILE STYLING
   background-color: transparent;
 }
 
+.view-type-group > .btn-outline-secondary:first-child {
+  margin-right: 8px;
+}
+
 .btn-outline-secondary,
 .btn-outline-secondary.active:not(:disabled):not(.disabled),
 .btn-outline-secondary:not(:disabled):not(.disabled):active,
@@ -16,36 +20,37 @@ DEFAULT MOBILE STYLING
   color: $yale_blue;
 }
 
-.btn-outline-secondary:first-child {
-  margin-right: 8px;
-}
-
 .caret {
   padding-left: 15px;
-}
-
-.dropdown-toggle {
-  background-image: image-url('light-blue-down-arrow.png');
   background-size: 11px;
   background-position-x: right;
   background-position-y: center;
   background-origin: content-box;
-  border-bottom: none;
   background-repeat: no-repeat;
+}
+
+.dropdown-toggle {
+  border-bottom: none;
 }
 
 .dropdown-toggle::after {
   content: none;
 }
 
-#per_page-dropdown {
-  margin-left: 8px;
-  margin-right: 8px;
-}
-
 #per_page-dropdown,
 #sort-dropdown {
   background-color: $lightest_grey;
+  margin-right: 8px;
+}
+
+#per_page-dropdown .caret,
+#sort-dropdown .caret {
+  background-image: image-url('light-blue-down-arrow.png');
+}
+
+#per_page-dropdown.show .caret,
+#sort-dropdown.show .caret {
+  background-image: image-url('light-blue-up-arrow.png');
 }
 
 .search-widgets {
