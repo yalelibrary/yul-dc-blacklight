@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe "search result pagination", type: :system, clean: true, js: true do
-
-	before do
+  before do
     solr = Blacklight.default_index.connection
     solr.add([dog, cat, bird])
     solr.commit
@@ -29,8 +28,8 @@ RSpec.describe "search result pagination", type: :system, clean: true, js: true 
       orbisBibId_ssi: '1234567',
       visibility_ssi: 'Public'
     }
-	end
-	
+  end
+
   let(:bird) do
     {
       id: '313',
