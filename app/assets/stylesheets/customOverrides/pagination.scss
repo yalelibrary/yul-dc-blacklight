@@ -20,6 +20,20 @@ DEFAULT MOBILE STYLING
 
 
 // Pagination at the bottom of the page
+
+#first-page-arrows.disabled {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#last-page-arrows.disabled {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#last-page-arrows::marker {
+  display: none;
+}
 .page-item .page-link {
   font-family: $mallory_medium, Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -51,8 +65,8 @@ DEFAULT MOBILE STYLING
   text-transform: uppercase;
 }
 
-// add a right border to all page numbers except the last page
-.page-item:nth-child(n+3):not(:last-child) {
+// add a right border to all page numbers except the last page double arrows and Next button
+.page-item:nth-child(n+3):not(:nth-last-child(1)):not(:nth-last-child(2)):not(:nth-last-child(3)) {
   border-right: 1px solid $medium_grey;
 }
 
