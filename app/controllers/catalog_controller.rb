@@ -334,7 +334,6 @@ class CatalogController < ApplicationController
 
     config.add_search_field('identifierShelfMark_tesim', label: 'Identifier Shelf Mark') do |field|
       field.qt = 'search'
-      field.include_in_simple_select = false
       field.solr_parameters = {
         qf: 'identifierShelfMark_tesim',
         pf: ''
