@@ -11,6 +11,10 @@ RSpec.describe 'search result', type: :system do
       expect(page).to have_css '.dl-invert'
       expect(page).to have_css '.document-metadata'
     end
+
+    it 'shows the index number' do
+      expect(find('#documents > .document-position-0 span')).to be_visible
+    end
   end
 
   context 'in gallery view' do
