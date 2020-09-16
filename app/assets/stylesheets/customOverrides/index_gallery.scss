@@ -12,23 +12,12 @@ DEFAULT MOBILE STYLING
   margin-bottom: 50px;
 }
 
-.document.col .caption span,
-.document.col > .index .document-title {
+.document.col .caption span {
   display: none;
 }
 
 .document.col .caption .documentHeader {
   padding-left: 15px !important;
-}
-
-.document.col > .index {
-  width: 27px;
-}
-
-.document.col > .index .documentHeader {
-  line-height: 14px;
-  position: absolute;
-  top: -3px;
 }
 
 .caption .document-title {
@@ -42,12 +31,6 @@ DEFAULT MOBILE STYLING
 
 .document-title > a {
   color: $light_blue;
-}
-
-.index .document-title-heading > span {
-  color: $medium_grey;
-  font-family: $mallory_mp_black;
-  font-size: 14px;
 }
 
 #documents .thumbnail > a {
