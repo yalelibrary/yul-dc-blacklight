@@ -15,7 +15,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
 
   it 'gets correct search results from all fields' do
     visit root_path
-    click_on "More Options"
+    click_on "Advanced Search"
     # Search for something
     fill_in 'all_fields_advanced', with: 'Record 1'
     click_on 'advanced-search-submit'
@@ -27,7 +27,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
   end
   it 'gets correct search results from author_tesim' do
     visit root_path
-    click_on 'More Options'
+    click_on 'Advanced Search'
     # Search for something
     fill_in 'author_tesim', with: 'Me and Frederick'
     click_on 'advanced-search-submit'
@@ -38,7 +38,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
   end
   it 'gets correct search results from identifierShelfMark_tesim' do
     visit root_path
-    click_on 'More Options'
+    click_on 'Advanced Search'
     # Search for something
     fill_in 'identifierShelfMark_tesim', with: '["Landberg MSS 596"]'
     click_on 'advanced-search-submit'
@@ -49,7 +49,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
   end
   it 'gets correct search results from orbisBibId_ssi' do
     visit root_path
-    click_on 'More Options'
+    click_on 'Advanced Search'
     # Search for something
     fill_in 'orbisBibId_ssi', with: '3832098'
     click_on 'advanced-search-submit'
@@ -60,7 +60,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
   end
   it 'gets correct search results from title_tesim' do
     visit root_path
-    click_on 'More Options'
+    click_on 'Advanced Search'
     # Search for something
     fill_in 'title_tesim', with: '["Record 1"]'
     click_on 'advanced-search-submit'
@@ -71,7 +71,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
   end
   it 'gets correct search results from oid_ssi' do
     visit root_path
-    click_on 'More Options'
+    click_on 'Advanced Search'
     # Search for something
     fill_in 'oid_ssi', with: '11607445'
     click_on 'advanced-search-submit'
@@ -82,7 +82,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
   end
   it 'gets correct search results from child oid_ssim' do
     visit root_path
-    click_on 'More Options'
+    click_on 'Advanced Search'
     # Search for something
     fill_in 'child_oids_ssim', with: '11'
     click_on 'advanced-search-submit'

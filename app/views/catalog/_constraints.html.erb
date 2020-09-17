@@ -1,0 +1,52 @@
+<%# if Deprecation.silence(Blacklight::RenderConstraintsHelperBehavior) { query_has_constraints? } %>
+<!--  <div id="appliedParams" class="clearfix constraints-container"></div>-->
+<!--    <span class="sr-only"><%#= t('blacklight.search.search_constraints_header') %></span>-->
+<%# end %>
+  <%#= render 'start_over' %>
+
+<!--  <span class=" constraints-label"><%#= t('blacklight.search.filters.title') %> </span>-->
+
+<%#= render_constraints(controller.params != params ? params : search_state) %>
+
+<!--<button type="button" class="catalog_startOverResultPage" onclikhref="/" style="display:contents; ">Start Over [icon]</button>-->
+<!--<div>-->
+<!--  New Constraints Design-->
+<!--</div>-->
+
+<!--https://github.com/uvalib/virgo4/blob/e9ac8e97b4c77a07d922766c02fa20dd7b15df13/app/views/catalog/_constraints.html.erb-->
+<%# app/views/catalog/_constraints.html.erb -%>
+<%#-
+<!--  has_constraints  ||= query_has_constraints?-->
+<!--  aria_hidden      ||= (' aria-hidden="true"' unless has_constraints)-->
+<!--  label            ||= t('blacklight.search.filters.title')-->
+<!--  start_over_label ||= t('blacklight.search.start_over')-->
+<!--  start_over_opt   ||= { class: 'catalog_startOverLink btn btn-primary' }-->
+-%>
+
+<!--<div class="clearfix search-constraints-container">-->
+<!--  <div id="appliedParams" class="constraints-container"<%#= aria_hidden -%>>-->
+    <%#- if has_constraints -%>
+      <%#= label %>
+<!--      <span class="constraints-label sr-only"><%#= label -%></span>-->
+      <%#= render_constraints(params) %>
+    <%# if query_has_constraints?(params) %>
+<!--      <span class="constraints-label"><%#= t('blacklight.search.simple_filters.title') %></span>-->
+    <%#= render_simple_constraints(params) %>
+      <%#- end -%>
+<!--  </div>-->
+
+
+<!--  <div class="start-over-container">-->
+    <%#= link_to start_over_label, start_over_opt %>
+<!--  </div>-->
+<!--</div>-->
+
+<!--------->
+
+<%# if query_has_constraints?(params) %>
+<!--  <span class="constraints-label"><%#= t('blacklight.search.simple_filters.title') %></span>-->
+  <%#= render_simple_constraints(params) %>
+<%# end %>
+
+
+<!--https://github.com/sul-dlss/colligo/search?q=constraints&unscoped_q=constraints-->
