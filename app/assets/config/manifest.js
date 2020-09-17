@@ -4,3 +4,4 @@
 //= link application.css
 
 //= link x2x.png
+//= link bugherd.png
