@@ -2,14 +2,8 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 
-
-
 .bg-dark {
   background-color: $yale_blue !important;
-}
-
-.dropdown-menu.show {
-  display: contents;
 }
 
 .dropdown-menu {
@@ -26,6 +20,10 @@ DEFAULT MOBILE STYLING
   border-bottom: $white thin solid;
   margin-left: -15%;
   padding-left: 15.5%;
+}
+
+.menu-block-wrapper > .dropdown-menu.show {
+  display: contents;
 }
 
 .nav-link {
