@@ -10,7 +10,7 @@ RSpec.describe Yul::IdentifierMetadataPresenter do
       'findingAid_ssim' => 'Finding Aid',
       'folder_ssim' => 'Folder',
       'identifierMfhd_ssim' => 'Identifier MFHD',
-      'identifierShelfMark_ssim' => 'Identifier Shelf Mark',
+      'identifierShelfMark_ssim' => 'Call Number',
       'importUrl_ssim' => 'Import URL',
       'isbn_ssim' => 'ISBN',
       'lc_callnum_ssim' => 'Call number',
@@ -52,8 +52,8 @@ RSpec.describe Yul::IdentifierMetadataPresenter do
         expect(config['identifierMfhd_ssim'].to_s).to eq 'Identifier MFHD'
       end
 
-      it 'returns the Identifier Shelf Mark Key' do
-        expect(config['identifierShelfMark_ssim'].to_s).to eq 'Identifier Shelf Mark'
+      it 'returns the Call Number Key' do
+        expect(config['identifierShelfMark_ssim'].to_s).to eq 'Call Number'
       end
 
       it 'returns the Import URL Key' do
