@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 class CatalogController < ApplicationController
   include BlacklightAdvancedSearch::Controller
-  include BlacklightRangeLimit::ControllerOverride
   include Blacklight::Catalog
   include Blacklight::Marc::Catalog
+  include BlacklightRangeLimit::ControllerOverride
 
   before_action :determine_per_page
 
