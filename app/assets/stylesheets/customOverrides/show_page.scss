@@ -58,15 +58,16 @@ DEFAULT MOBILE STYLING
   text-transform: uppercase;
 }
 
-#emailLink {
-  color: $light_blue !important;
-  font: $mallory_medium;
-  font-size: 11px;
-  text-transform: uppercase;
+.link-card-header{
+  display: none;
 }
 
-#emailLink:after {
-  content: ' >';
+.manifest{
+  position: absolute;
+  top: -47px;
+  padding-left: 55px;
+  background: transparent;
+
 }
 
 #citationLink {
@@ -74,23 +75,10 @@ DEFAULT MOBILE STYLING
   font: $mallory_medium;
   font-size: 11px;
   text-transform: uppercase;
-  padding-left: 0px;
+  padding-left: 19px;
 }
 
 #citationLink:after {
-  content: ' >';
-}
-
-#smsLink {
-  color: $light_blue !important;
-  flex-wrap: wrap;
-  font: $mallory_medium;
-  font-size: 11px;
-  text-transform: uppercase;
-  padding-left: 0px;
-}
-
-#smsLink:after {
   content: ' >';
 }
 
