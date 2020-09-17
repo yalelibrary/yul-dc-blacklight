@@ -4,7 +4,8 @@ require 'rails_helper'
 RSpec.describe Yul::MigrationSourceMetadataPresenter do
   let(:solr_doc) do
     {
-      'recordType_ssi' => 'Record Type'
+      'recordType_ssi' => 'Record Type',
+      'source_ssim' => 'Source'
     }
   end
   let(:presenter_object) { described_class.new(document: solr_doc) }
@@ -14,6 +15,10 @@ RSpec.describe Yul::MigrationSourceMetadataPresenter do
     describe 'config' do
       it 'returns the Record Type Key' do
         expect(config['recordType_ssi'].to_s).to eq 'Record Type'
+      end
+
+      it 'returns the Source Key' do
+        expect(config['source_ssim'].to_s).to eq 'Source'
       end
     end
 

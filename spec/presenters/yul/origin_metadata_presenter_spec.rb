@@ -18,7 +18,6 @@ RSpec.describe Yul::OriginMetadataPresenter do
       'published_vern_ssim' => 'Published',
       'sourceCreated_tesim' => 'Source Created',
       'sourceDate_tesim' => 'Source Date',
-      'source_ssim' => 'Source',
       'sourceEdition_tesim' => 'Source Edition',
       'sourceNote_tesim' => 'Source Note',
       'sourceTitle_tesim' => 'Source Title'
@@ -83,10 +82,6 @@ RSpec.describe Yul::OriginMetadataPresenter do
 
       it 'returns the Source Date Key' do
         expect(config['sourceDate_tesim'].to_s).to eq 'Source Date'
-      end
-
-      it 'returns the Source Key' do
-        expect(config['source_ssim'].to_s).to eq 'Source'
       end
 
       it 'returns the Source Edition Key' do
