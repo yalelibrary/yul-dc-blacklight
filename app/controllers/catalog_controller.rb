@@ -200,7 +200,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'published_vern_ssim', label: 'Published'
     config.add_show_field 'sourceCreated_tesim', label: 'Source Created'
     config.add_show_field 'sourceDate_tesim', label: 'Source Date'
-    config.add_show_field 'source_ssim', label: 'Source'
     config.add_show_field 'sourceEdition_tesim', label: 'Source Edition'
     config.add_show_field 'sourceNote_tesim', label: 'Source Note'
     config.add_show_field 'sourceTitle_tesim', label: 'Source Title'
@@ -229,6 +228,7 @@ class CatalogController < ApplicationController
 
     # Migration Source Group
     config.add_show_field 'recordType_ssi', label: 'Record Type'
+    config.add_show_field 'source_ssim', label: 'Source'
 
     config.add_field_configuration_to_solr_request!
 
