@@ -117,7 +117,7 @@ class CatalogController < ApplicationController
 
     # the facets below are set to false because we aren't filtering on them from the main search page
     # but we need to be able to provide a label when they are filtered upon from an individual show page
-    config.add_facet_field 'identifierShelfMark_ssim', label: 'IDENTIFIER SHELF MARK', show: false
+    config.add_facet_field 'identifierShelfMark_ssim', label: 'Call Number', show: false
 
     # This was example code after running rails generate blacklight_range_limit:install
     # config.add_facet_field 'example_query_facet_field', label: 'Publish Date', query: {
@@ -144,7 +144,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'author_tesim', label: 'Author', highlight: true
     config.add_index_field 'author_vern_ssim', label: 'Author'
     config.add_index_field 'date_ssim', label: 'Date'
-    config.add_index_field 'identifierShelfMark_tesim', label: 'Identifier Shelf Mark', highlight: true
+    config.add_index_field 'identifierShelfMark_tesim', label: 'Call Number', highlight: true
     config.add_index_field 'imageCount_isi', label: 'Image Count'
     config.add_index_field 'partOf_ssim', label: 'Collection Name'
     config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true
@@ -212,7 +212,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'findingAid_ssim', label: 'Finding Aid'
     config.add_show_field 'folder_ssim', label: 'Folder'
     config.add_show_field 'identifierMfhd_ssim', label: 'Identifier MFHD'
-    config.add_show_field 'identifierShelfMark_ssim', label: 'Identifier Shelf Mark'
+    config.add_show_field 'identifierShelfMark_ssim', label: 'Call Number'
     config.add_show_field 'importUrl_ssim', label: 'Import URL'
     config.add_show_field 'isbn_ssim', label: 'ISBN'
     config.add_show_field 'lc_callnum_ssim', label: 'Call number'

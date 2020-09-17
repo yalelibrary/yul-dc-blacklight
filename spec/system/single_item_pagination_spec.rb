@@ -14,7 +14,7 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
     {
       id: '222',
       visibility_ssi: 'Public',
-      identifierShelfMark_ssim: 'this is the identifier shelf mark'
+      identifierShelfMark_ssim: 'this is the call number'
     }
   end
 
@@ -22,7 +22,7 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
     {
       id: '333',
       visibility_ssi: 'Public',
-      identifierShelfMark_ssim: 'this is the identifier shelf mark, but different'
+      identifierShelfMark_ssim: 'this is the call number, but different'
     }
   end
 
@@ -30,7 +30,7 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
     {
       id: '111',
       visibility_ssi: "Public",
-      identifierShelfMark_ssim: 'this is the identifier shelf mark, but moderately different'
+      identifierShelfMark_ssim: 'this is the call number, but moderately different'
     }
   end
 

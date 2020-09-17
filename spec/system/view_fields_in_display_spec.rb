@@ -15,7 +15,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     {
       id: '222',
       visibility_ssi: 'Public',
-      identifierShelfMark_ssim: 'this is the identifier shelf mark'
+      identifierShelfMark_ssim: 'this is the call number'
     }
   end
 
@@ -23,7 +23,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     {
       id: '333',
       visibility_ssi: 'Public',
-      identifierShelfMark_ssim: 'this is the identifier shelf mark, but different'
+      identifierShelfMark_ssim: 'this is the call number, but different'
     }
   end
 
@@ -70,7 +70,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       illustrativeMatter_tesim: "this is the illustrative matter",
       oid_ssi: '2345678',
       identifierMfhd_ssim: 'this is the identifier MFHD',
-      identifierShelfMark_ssim: 'this is the identifier shelf mark',
+      identifierShelfMark_ssim: 'this is the call number',
       box_ssim: 'this is the box',
       folder_ssim: 'this is the folder',
       orbisBibId_ssi: '1234567',
@@ -244,9 +244,9 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the URI in results' do
       expect(document).to have_content("this is the URI")
     end
-    it 'displays the Identifier Shelf Mark in results as link' do
-      expect(page).to have_link("this is the identifier shelf mark", href: '/?f%5BidentifierShelfMark_ssim%5D%5B%5D=this+is+the+identifier+shelf+mark')
-      expect(page).not_to have_link("this is the identifier shelf mark", href: '/?f%5BidentifierShelfMark_ssim%5D%5B%5D=this+is+the+identifier+shelf+mark+but+different')
+    it 'displays the call number in results as link' do
+      expect(page).to have_link("this is the call number", href: '/?f%5BidentifierShelfMark_ssim%5D%5B%5D=this+is+the+identifier+shelf+mark')
+      expect(page).not_to have_link("this is the call number", href: '/?f%5BidentifierShelfMark_ssim%5D%5B%5D=this+is+the+identifier+shelf+mark+but+different')
     end
     it 'contains a link on genre to its facet' do
       expect(page).to have_link('this is the genre', href: '/?f%5Bgenre_ssim%5D%5B%5D=this+is+the+genre')

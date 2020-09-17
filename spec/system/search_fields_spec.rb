@@ -44,7 +44,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       expect(search_fields).to contain_exactly(*expected_search_fields)
     end
 
-    it 'contains displays the correct record when searching by Identifier Shelf Mark' do
+    it 'contains displays the correct record when searching by call number' do
       visit '/?search_field=identifierShelfMark_tesim&q=WA+MSS+987'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).not_to have_content 'Handsome Dan is not a cat.'
