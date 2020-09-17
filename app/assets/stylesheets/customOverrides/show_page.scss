@@ -37,6 +37,8 @@ DEFAULT MOBILE STYLING
   margin-left: 1%;
   justify-self: center;
   display: flex;
+  z-index: 1;
+  position: relative;
 }
 
 .show-buttons {
@@ -159,6 +161,8 @@ DEFAULT MOBILE STYLING
     justify-self: center;
     justify-content: space-between;
     display: flex;
+    z-index: 1;
+    position: relative;
   }
 
   .universal-viewer-iframe {
@@ -190,6 +194,8 @@ DEFAULT MOBILE STYLING
     justify-self: center;
     justify-content: space-between;
     display: flex;
+    z-index: 1;
+    position: relative;
   }
 
   .show-tools {
@@ -230,6 +236,8 @@ DEFAULT MOBILE STYLING
     justify-self: center;
     justify-content: space-between;
     display: flex;
+    z-index: 1;
+    position: relative;
   }
 
   .show-tools {
