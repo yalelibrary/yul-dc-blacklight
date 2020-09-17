@@ -2,37 +2,55 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 
-.btn-outline-secondary.active:not(:disabled):not(.disabled) {
-  background-color: $yale_blue;
-  border-color: $yale_blue;
+.dropdown-menu {
+  background-color: transparent;
 }
 
-.btn-outline-secondary:hover {
-  background-color: $light_grey;
-  border-color: $light_grey;
+.view-type-group > .btn-outline-secondary:first-child {
+  margin-right: 8px;
 }
 
-.btn-outline-secondary:not(:disabled):not(.disabled):active {
-  background-color: $dark_grey;
-  border-color: $dark_grey;
+.btn-outline-secondary,
+.btn-outline-secondary.active:not(:disabled):not(.disabled),
+.btn-outline-secondary:not(:disabled):not(.disabled):active,
+.btn-outline-secondary:hover,
+.show > .btn-outline-secondary.dropdown-toggle {
+  background-color: $lightest_grey;
+  border-color: $lightest_grey;
+  color: $yale_blue;
 }
 
 .caret {
   padding-left: 15px;
-}
-
-.dropdown-toggle {
-  background-image: image-url('light-blue-down-arrow.png');
   background-size: 11px;
   background-position-x: right;
   background-position-y: center;
   background-origin: content-box;
-  border-bottom: none;
   background-repeat: no-repeat;
+}
+
+.dropdown-toggle {
+  border-bottom: none;
 }
 
 .dropdown-toggle::after {
   content: none;
+}
+
+#per_page-dropdown,
+#sort-dropdown {
+  background-color: $lightest_grey;
+  margin-right: 8px;
+}
+
+#per_page-dropdown .caret,
+#sort-dropdown .caret {
+  background-image: image-url('light-blue-down-arrow.png');
+}
+
+#per_page-dropdown.show .caret,
+#sort-dropdown.show .caret {
+  background-image: image-url('light-blue-up-arrow.png');
 }
 
 .search-widgets {
