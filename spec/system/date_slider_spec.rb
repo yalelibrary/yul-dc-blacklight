@@ -65,7 +65,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     visit root_path
     click_button 'PUBLICATION DATE'
     within '.card.facet-limit.blacklight-dateStructured_ssim' do
-			source = page.find('.slider-handle.round').last
+      source = page.find('.slider-handle.round').last
       source.drag_by(30, 0)
     end
 
