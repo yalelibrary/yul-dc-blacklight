@@ -1,0 +1,103 @@
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
+
+.advanced_search {
+  position: absolute;
+  margin-left: -260px;
+  margin-top: 30px;
+  color: $light_blue;
+  background: transparent;
+  border: transparent;
+  font-size: 16px;
+  font: $mallory_medium;
+  text-transform: uppercase;
+}
+
+.advanced_search:hover {
+  background: none !important;
+  color: $light_blue;
+  border-color: transparent;
+}
+
+@media screen and (min-width: $small_device) {
+  .advanced_search {
+    position: absolute;
+    margin-left: -392px;
+    margin-top: 8px;
+    color: $light_blue;
+    background: transparent;
+    border: transparent;
+    font-size: 16px;
+    font: $mallory_medium;
+    text-transform: uppercase;
+  }
+
+  .advanced_search:hover {
+    background: none !important;
+    color: $light_blue;
+    border-color: transparent;
+  }
+}
+
+
+@media screen and (min-width: $medium_device) {
+  .advanced_search {
+    position: absolute;
+    margin-left: 11px;
+    margin-top: -23px;
+    color: $light_blue;
+    background: transparent;
+    border: transparent;
+    font-size: 16px;
+    font: $mallory_medium;
+    text-transform: uppercase;
+  }
+
+  .advanced_search:hover {
+    background: none !important;
+    color: $light_blue;
+    border-color: transparent;
+  }
+}
+
+
+@media screen and (min-width: $large_device) {
+  .advanced_search {
+    position: absolute;
+    margin-left: 38px;
+    margin-top: -23px;
+    color: $light_blue;
+    background: transparent;
+    border: transparent;
+    font-size: 16px;
+    font: $mallory_medium;
+    text-transform: uppercase;
+  }
+
+  .advanced_search:hover {
+    background: none !important;
+    color: $light_blue;
+    border-color: transparent;
+  }
+}
+
+@media screen and (min-width: $xlarge_device) {
+  .advanced_search {
+    position: absolute;
+    margin-left: 6px;
+    margin-top: 34px;
+    color: $light_blue;
+    background: transparent;
+    border: transparent;
+    font-size: 16px;
+    font: $mallory_medium;
+    text-transform: uppercase;
+  }
+
+  .advanced_search:hover {
+    background: none !important;
+    color: $light_blue;
+    border-color: transparent;
+  }
+}

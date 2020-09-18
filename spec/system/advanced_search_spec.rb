@@ -13,6 +13,14 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
 
   let(:cat) { ADVANCED_SEARCH_TESTING_2 }
 
+  it 'has css for the button' do
+    visit root_path
+    page.should have_content "Advanced Search"
+    expect(page).to have_css '.advanced_search'
+    expect(page).to have_link('Advanced Search', href: '/advanced')
+    find('.advanced_search').hover
+  end
+
   it 'gets correct search results from all fields' do
     visit root_path
     click_on "Advanced Search"
