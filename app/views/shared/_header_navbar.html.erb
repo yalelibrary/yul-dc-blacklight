@@ -410,11 +410,12 @@
         })
 
         $('body').on('click', function(e) {
+            console.log('TARGET::', e.target)
 
             if (
                 !$(e.target).is('.secondary-nav .nav-link-title') && !$(e.target).is('.secondary-nav .nav-link-title li a')||
-                $(e.target).is('.sort-dropdown.show') ||
-                $(e.target).is('.per-page-dropdown.show')
+                $(e.target).is('.sort-dropdown') ||
+                $(e.target).is('.per-page-dropdown')
             ) {
                 $('.secondary-nav .content-yul').removeClass('content-show')
                 $('.content-yul').height(0)
