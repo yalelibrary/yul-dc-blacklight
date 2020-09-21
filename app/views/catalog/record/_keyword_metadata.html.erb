@@ -2,7 +2,7 @@
 <% keyword = Yul::KeywordMetadataPresenter.new(document: doc_presenter.fields_to_render).keyword_terms %>
 
 <% if keyword.length > 0 %>
-  <div class='metadata-block'>
+  <div class='metadata-block single-item-show'>
     <h4 class='metadata-block__title'>Keywords</h4>
     <dl class='metadata-block__group'>
       <% keyword.each do |field_name, field| -%>

@@ -2,7 +2,7 @@
 <% migration_source = Yul::MigrationSourceMetadataPresenter.new(document: doc_presenter.fields_to_render).migration_source_terms %>
 
 <% if migration_source.length > 0 %>
-  <div class='metadata-block'>
+  <div class='metadata-block single-item-show'>
     <h4 class='metadata-block__title'>Migration Source</h4>
     <dl class='metadata-block__group'>
       <% migration_source.each do |field_name, field| -%>

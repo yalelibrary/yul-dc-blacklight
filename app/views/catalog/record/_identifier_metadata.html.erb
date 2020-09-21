@@ -2,7 +2,7 @@
 <% identifier = Yul::IdentifierMetadataPresenter.new(document: doc_presenter.fields_to_render).identifier_terms %>
 
 <% if identifier.length > 0 %>
-  <div class='metadata-block'>
+  <div class='metadata-block single-item-show'>
     <h4 class='metadata-block__title'>Identifier</h4>
     <dl class='metadata-block__group'>
       <% identifier.each do |field_name, field| -%>

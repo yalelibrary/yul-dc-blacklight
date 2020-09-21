@@ -103,13 +103,12 @@ DEFAULT MOBILE STYLING
 //Title on Single Items and Search Result pages
 //Replace Yale Roman with Yale Display when its available.
 .show-header {
+  font-family: $yale_roman, $mallory_medium, Arial, Helvetica, sans-serif !important;
   font-size: 1.5rem;
-  font: $yale_roman;
-  color:$yale_blue;
+  color: $yale_blue;
   padding-left: 8%;
   padding-bottom: 1.5%;
   padding-top: 1.5%;
-  width: 450px;
 }
 
 .universal-viewer-iframe {
@@ -118,12 +117,7 @@ DEFAULT MOBILE STYLING
   align-content: center;
 }
 
-.metadata-block h4 {
-  color: $medium_grey;
-  font-family: $mallory_medium, Arial, Helvetica, sans-serif !important;
-  font-weight: 900;
-}
-
+// metadata-block is shared class on search results page
 .metadata-block dt {
   font-size: 14px;
   color: $medium_grey;
@@ -153,6 +147,35 @@ DEFAULT MOBILE STYLING
   width: 70%;
 }
 
+.single-item-show {
+  border-bottom: 1px solid $light_grey;
+  margin-bottom: 45px;
+  padding-bottom: 25px;
+}
+
+.single-item-show.metadata-block h4 {
+  color: $yale_blue;
+  font-family: $yale_roman, $mallory_medium, Arial, Helvetica, sans-serif !important;
+  font-size: 28px;
+}
+
+.single-item-show.metadata-block a {
+  color: $light_blue;
+}
+
+.single-item-show .metadata-block dt {
+  font-size: 14px;
+  color: $medium_grey;
+  font-family: $mallory_mp_black, $mallory_medium, Arial, Helvetica, sans-serif !important;
+  font-weight: 900;
+}
+
+.single-item-show .metadata-block dd {
+  font-size: 14px;
+  color: $medium_grey;
+  font-family: $mallory_mp_black, $mallory_medium, Arial, Helvetica, sans-serif !important;
+  font-weight: 300;
+}
 
 @media screen and (min-width: $medium_device) {
   .constraints-container {
@@ -175,6 +198,10 @@ DEFAULT MOBILE STYLING
   .yale-restricted-work-text {
     padding-left: 10%;
     width: 640px;
+  }
+
+  .single-item-show {
+    width: 625px;
   }
 
   .item-page__metadata-wrapper {
@@ -218,6 +245,10 @@ DEFAULT MOBILE STYLING
     width: 790px;
   }
 
+  .single-item-show {
+    width: 735px;
+  }
+
   .item-page__metadata-wrapper {
     padding-left: 19%;
   }
@@ -258,6 +289,10 @@ DEFAULT MOBILE STYLING
   .yale-restricted-work-text {
     padding-left: 19%;
     width: 895px;
+  }
+
+  .single-item-show {
+    width: 880px;
   }
 
   .item-page__metadata-wrapper {

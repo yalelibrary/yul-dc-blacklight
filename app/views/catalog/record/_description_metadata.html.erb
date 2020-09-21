@@ -2,7 +2,7 @@
 <% description = Yul::DescriptionMetadataPresenter.new(document: doc_presenter.fields_to_render).description_terms %>
 
 <% if description.length > 0 %>
-  <div class='metadata-block'>
+  <div class='metadata-block single-item-show'>
     <h4 class='metadata-block__title'>Description</h4>
     <dl class='metadata-block__group'>
       <% description.each do |field_name, field| -%>

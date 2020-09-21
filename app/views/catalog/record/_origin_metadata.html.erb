@@ -2,7 +2,7 @@
 <% origin = Yul::OriginMetadataPresenter.new(document: doc_presenter.fields_to_render).origin_terms %>
 
 <% if origin.length > 0 %>
-  <div class='metadata-block'>
+  <div class='metadata-block single-item-show'>
     <h4 class='metadata-block__title'>Origin</h4>
     <dl class='metadata-block__group'>
       <% origin.each do |field_name, field| -%>
