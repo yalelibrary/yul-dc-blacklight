@@ -23,12 +23,26 @@
   unless title_class == :none
   end
 
+  original_url = request.original_url
+  parsed_url = Addressable::URI.parse(original_url)
+  view = parsed_url.query_values['view']
 -%>
-<div class="documentHeader row">
-  <h3 class="index_title document-title-heading <%= title_class %>">
-    <%= counter %>
-    <div class="document-title">
-      <%= link_to_document document, document.highlight_field('title_tesim').try(:[],0) ||document['title_tesim'], counter:document_counter %>
-    </div>
-  </h3>
-</div>
+
+<%if view == 'list' %>
+  <div class="documentHeader row">
+    <h3 class="index_title document-title-heading <%= title_class %>">
+      <%= counter %>
+      <div class="document-title">
+        <%= link_to_document document, document.highlight_field('title_tesim').try(:[],0) || document['title_tesim'], counter:document_counter %>
+      </div>
+    </h3>
+  </div>
+<%elsif view == 'gallery' %>
+  <div class="documentHeader row">
+    <h3 class="index_title document-title-heading <%= title_class %>">
+      <div class="document-title">
+        <%= link_to_document document, document.highlight_field('title_tesim').try(:[],0) || document['title_tesim'] %>
+      </div>
+    </h3>
+  </div>
+<%end%>
