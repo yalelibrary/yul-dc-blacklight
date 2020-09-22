@@ -42,7 +42,7 @@ DEFAULT MOBILE STYLING
 
 .nav-link-caret {
   transform: rotate(180deg);
-  -ms-transform: rotate(180deg);  /*  for IE  */
+  -ms-transform: rotate(180deg); /* for IE */
   -webkit-transform: rotate(180deg); /* for browsers supporting webkit (such as chrome, firefox, safari etc.). */
   font-size: 14px;
   display: inline-block;
@@ -71,6 +71,12 @@ DEFAULT MOBILE STYLING
   font-size: small;
   border-top: $white thin solid;
   align-items: center;
+}
+
+.secondary-nav .dropdown.show .nav-link-caret {
+  transform: rotate(0deg);
+  -ms-transform: rotate(0deg); /* for IE */
+  -webkit-transform: rotate(0deg); /* for browsers supporting webkit (such as chrome, firefox, safari etc.). */
 }
 
 .secondary-nav > .row {
