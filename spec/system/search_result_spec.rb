@@ -35,7 +35,7 @@ RSpec.describe 'search result', type: :system do
     end
 
     it 'does not show the index number' do
-      expect(page).to have_selector '#documents > .document.col:first-child span', visible: false
+      expect(page).not_to have_selector '#documents > .document.col:first-child span'
     end
   end
 end
