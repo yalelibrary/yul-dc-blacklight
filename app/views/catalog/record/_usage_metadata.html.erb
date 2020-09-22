@@ -2,7 +2,7 @@
 <% usage = Yul::UsageMetadataPresenter.new(document: doc_presenter.fields_to_render).usage_terms %>
 
 <% if usage.length > 0 %>
-  <div class='metadata-block'>
+  <div class='metadata-block single-item-show'>
     <h4 class='metadata-block__title'>Usage</h4>
     <dl class='metadata-block__group'>
       <% usage.each do |field_name, field| -%>
