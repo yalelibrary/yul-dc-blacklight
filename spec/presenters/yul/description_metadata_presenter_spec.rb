@@ -14,8 +14,7 @@ RSpec.describe Yul::DescriptionMetadataPresenter do
       'projection_tesim' => 'Projection',
       'references_tesim' => 'References',
       'scale_tesim' => 'Scale',
-      'subtitle_tesim' => 'Subtitle',
-      'subtitle_vern_tesim' => 'Subtitle'
+      'subtitle_tesim' => 'Subtitle'
     }
   end
   let(:presenter_object) { described_class.new(document: solr_doc) }
@@ -65,10 +64,6 @@ RSpec.describe Yul::DescriptionMetadataPresenter do
 
       it 'returns the Subtitle Key' do
         expect(config['subtitle_tesim'].to_s).to eq 'Subtitle'
-      end
-
-      it 'returns the Subtitle Key' do
-        expect(config['subtitle_vern_tesim'].to_s).to eq 'Subtitle'
       end
     end
 

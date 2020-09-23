@@ -13,7 +13,6 @@ RSpec.describe Yul::IdentifierMetadataPresenter do
       'identifierShelfMark_ssim' => 'Call Number',
       'importUrl_ssim' => 'Import URL',
       'isbn_ssim' => 'ISBN',
-      'lc_callnum_ssim' => 'Call number',
       'orbisBarcode_ssi' => 'Orbis Bar Code',
       'orbisBibId_ssi' => 'Orbis Bib ID',
       'oid_ssi' => 'OID',
@@ -62,10 +61,6 @@ RSpec.describe Yul::IdentifierMetadataPresenter do
 
       it 'returns the ISBN Key' do
         expect(config['isbn_ssim'].to_s).to eq 'ISBN'
-      end
-
-      it 'returns the Call number Key' do
-        expect(config['lc_callnum_ssim'].to_s).to eq 'Call number'
       end
 
       it 'returns the Orbis Barcode Key' do

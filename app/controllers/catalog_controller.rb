@@ -142,7 +142,6 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
     config.add_index_field 'author_tesim', label: 'Author', highlight: true
-    config.add_index_field 'author_vern_ssim', label: 'Author'
     config.add_index_field 'date_ssim', label: 'Date'
     config.add_index_field 'identifierShelfMark_tesim', label: 'Call Number', highlight: true
     config.add_index_field 'imageCount_isi', label: 'Image Count'
@@ -187,7 +186,6 @@ class CatalogController < ApplicationController
 
     # Origin Group
     config.add_show_field 'author_tsim', label: 'Author'
-    config.add_show_field 'author_vern_ssim', label: 'Author'
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date'
     config.add_show_field 'coordinates_ssim', label: 'Coordinates'
     config.add_show_field 'date_ssim', label: 'Date'
@@ -197,7 +195,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'publicationPlace_ssim', label: 'Publication Place'
     config.add_show_field 'publisher_ssim', label: 'Publisher'
     config.add_show_field 'published_ssim', label: 'Published'
-    config.add_show_field 'published_vern_ssim', label: 'Published'
     config.add_show_field 'sourceCreated_tesim', label: 'Source Created'
     config.add_show_field 'sourceDate_tesim', label: 'Source Date'
     config.add_show_field 'sourceEdition_tesim', label: 'Source Edition'
@@ -214,7 +211,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'identifierShelfMark_ssim', label: 'Call Number'
     config.add_show_field 'importUrl_ssim', label: 'Import URL'
     config.add_show_field 'isbn_ssim', label: 'ISBN'
-    config.add_show_field 'lc_callnum_ssim', label: 'Call number'
     config.add_show_field 'orbisBarcode_ssi', label: 'Orbis Bar Code'
     config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID'
     config.add_show_field 'oid_ssi', label: 'OID'

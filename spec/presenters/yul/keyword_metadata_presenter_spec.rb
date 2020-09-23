@@ -10,7 +10,6 @@ RSpec.describe Yul::KeywordMetadataPresenter do
       'material_tesim' => 'Material',
       'resourceType_ssim' => 'Resource Type',
       'subjectName_ssim' => 'Subject Name',
-      'subjectTopic_ssim' => 'Subject Topic',
       'subjectTopic_tesim' => 'Subject Topic'
     }
   end
@@ -41,10 +40,6 @@ RSpec.describe Yul::KeywordMetadataPresenter do
 
       it 'returns the Subject Name Key' do
         expect(config['subjectName_ssim'].to_s).to eq 'Subject Name'
-      end
-
-      it 'returns the Subject Topic Key' do
-        expect(config['subjectTopic_ssim'].to_s).to eq 'Subject Topic'
       end
 
       it 'returns the Subject Topic Key' do
