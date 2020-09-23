@@ -2,7 +2,9 @@
   <div class="user-subheader-title">
     Digital Collections
   </div>
-  <%if user_signed_in? %>
+  <%
+=begin%>
+ <%if user_signed_in? %>
     <div class="user-subheader-options" >
       <div class="user-subheader-current-user">
        <div class="user-logo"></div>
@@ -15,4 +17,6 @@
       </div>
     </div>
   <%end%>
+<%
+=end%>
 </div>
