@@ -10,7 +10,7 @@ DEFAULT MOBILE STYLING
   background: transparent;
   border: transparent;
   font-size: 16px;
-  font: $mallory_medium;
+  font-family: $mallory_medium, Arial, Helvetica, sans-serif;
   text-transform: uppercase;
 }
 
@@ -19,6 +19,22 @@ DEFAULT MOBILE STYLING
   color: $light_blue;
   border-color: transparent;
 }
+
+.sort-submit-buttons {
+  display: none;
+}
+
+.adv-search-sort-submit-buttons {
+  border-top: 1px solid $light_grey;
+  padding-top: 20px;
+}
+
+.adv-search-sort-submit-buttons .btn-primary:hover {
+  background-color: $white;
+  color: $yale_blue;
+  border-color: $medium_grey;
+}
+
 
 @media screen and (min-width: $small_device) {
   .advanced_search {
@@ -29,7 +45,6 @@ DEFAULT MOBILE STYLING
     background: transparent;
     border: transparent;
     font-size: 16px;
-    font: $mallory_medium;
     text-transform: uppercase;
   }
 
@@ -50,7 +65,6 @@ DEFAULT MOBILE STYLING
     background: transparent;
     border: transparent;
     font-size: 16px;
-    font: $mallory_medium;
     text-transform: uppercase;
   }
 
@@ -71,7 +85,6 @@ DEFAULT MOBILE STYLING
     background: transparent;
     border: transparent;
     font-size: 16px;
-    font: $mallory_medium;
     text-transform: uppercase;
   }
 
@@ -91,7 +104,6 @@ DEFAULT MOBILE STYLING
     background: transparent;
     border: transparent;
     font-size: 16px;
-    font: $mallory_medium;
     text-transform: uppercase;
   }
 
