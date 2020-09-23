@@ -33,14 +33,11 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       title_tesim: "Diversity Bull Dogs",
       subtitle_tesim: "He's handsome",
       subtitle_vern_ssim: "He's handsome",
-      author_tesim: 'Eric & Frederick',
-      author_vern_ssim: 'Eric & Frederick',
+      author_tsim: 'Eric & Frederick',
       format: 'three dimensional object',
       url_fulltext_ssim: 'http://0.0.0.0:3000/catalog/111',
       url_suppl_ssim: 'http://0.0.0.0:3000/catalog/111',
       published_ssim: "1997",
-      published_vern_ssim: "1997",
-      lc_callnum_ssim: "123213213",
       language_ssim: ['en', 'eng', 'zz'],
       isbn_ssim: '2321321389',
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
@@ -51,7 +48,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       geoSubject_ssim: "this is the geo subject",
       resourceType_ssim: "this is the resource type",
       subjectName_ssim: "this is the subject name",
-      subjectTopic_ssim: "this is the subject topic",
+      subjectTopic_tesim: "this is the subject topic",
       extentOfDigitization_ssim: 'this is the extent of digitization',
       rights_ssim: "these are the rights",
       publicationPlace_ssim: "this is the publication place",
@@ -105,7 +102,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("http://0.0.0.0:3000/catalog/111").twice
     end
     it 'displays Publishing in results' do
-      expect(document).to have_content("1997").twice
+      expect(document).to have_content("1997")
     end
     it 'displays format in results' do
       expect(document).to have_content("three dimensional object")
@@ -133,9 +130,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays projection in results' do
       expect(document).to have_content("this is the projection, using ssim")
-    end
-    it 'displays call number in results' do
-      expect(document).to have_content("123213213")
     end
     it 'displays language in results' do
       expect(document).to have_content("English (en)")

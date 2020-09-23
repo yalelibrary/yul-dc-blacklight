@@ -5,7 +5,6 @@ RSpec.describe Yul::OriginMetadataPresenter do
   let(:solr_doc) do
     {
       'author_tsim' => 'Author',
-      'author_vern_ssim' => 'Author',
       'coordinates_ssim' => 'Coordinates',
       'copyrightDate_ssim' => 'Copyright Date',
       'date_ssim' => 'Date',
@@ -15,7 +14,6 @@ RSpec.describe Yul::OriginMetadataPresenter do
       'publicationPlace_ssim' => 'Publication Place',
       'publisher_ssim' => 'Publisher',
       'published_ssim' => 'Published',
-      'published_vern_ssim' => 'Published',
       'sourceCreated_tesim' => 'Source Created',
       'sourceDate_tesim' => 'Source Date',
       'sourceEdition_tesim' => 'Source Edition',
@@ -30,10 +28,6 @@ RSpec.describe Yul::OriginMetadataPresenter do
     describe 'config' do
       it 'returns the Author Key' do
         expect(config['author_tsim'].to_s).to eq 'Author'
-      end
-
-      it 'returns the Author Key' do
-        expect(config['author_vern_ssim'].to_s).to eq 'Author'
       end
 
       it 'returns the Coordinates Key' do
@@ -70,10 +64,6 @@ RSpec.describe Yul::OriginMetadataPresenter do
 
       it 'returns the Published Key' do
         expect(config['published_ssim'].to_s).to eq 'Published'
-      end
-
-      it 'returns the Published Key' do
-        expect(config['published_vern_ssim'].to_s).to eq 'Published'
       end
 
       it 'returns the Source Created Key' do

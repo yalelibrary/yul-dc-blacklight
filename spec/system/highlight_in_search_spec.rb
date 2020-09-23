@@ -19,8 +19,6 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       format: 'three dimensional object',
       identifierShelfMark_tesim: 'Osborn Music MS 4',
       published_ssim: "1997",
-      published_vern_ssim: "1997",
-      lc_callnum_ssim: "123213213",
       language_ssim: ['en', 'eng', 'zz'],
       publisher_tesim: 'Printed for Eric',
       resourceType_tesim: "Music (Printed & Manuscript)",

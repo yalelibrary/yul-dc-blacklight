@@ -13,7 +13,6 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     {
       id: '111',
       author_tesim: 'Me and You',
-      author_vern_ssim: 'Me and You',
       date_ssim: '1999',
       resourceType_ssim: 'Archives or Manuscripts',
       partOf_ssim: 'Beinecke Library',
@@ -30,7 +29,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       expect(content).to have_content('1999')
     end
     it 'displays Author in results' do
-      expect(content).to have_content('Me and You').twice
+      expect(content).to have_content('Me and You')
     end
     it 'displays Resource Type in results' do
       expect(content).to have_content('Archives or Manuscripts')
