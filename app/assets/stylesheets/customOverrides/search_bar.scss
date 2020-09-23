@@ -128,7 +128,7 @@ DEFAULT MOBILE STYLING
   }
 
   .navbar-search .search-field {
-    max-width: 221px;
+    max-width: 245px;
   }
 
   .navbar-search .search-query-form {
@@ -147,7 +147,11 @@ DEFAULT MOBILE STYLING
   }
 
   .twitter-typeahead {
-    width: 560px;
-    max-width: 560px;
+    width: 505px;
+    max-width: 505px;
   }
+  .navbar-search .search-field {
+    max-width: 245px;
+  }
+
 }

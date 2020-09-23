@@ -21,7 +21,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
     find('.advanced_search').hover
   end
 
-  it 'gets correct search results from all fields' do
+  it 'gets correct search results from common fields' do
     visit root_path
     click_on "Advanced Search"
     # Search for something

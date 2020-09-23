@@ -253,13 +253,13 @@ class CatalogController < ApplicationController
     # Blacklight 'out of box code'
     # config.add_search_field 'all_fields', label: 'All Fields'
 
-    # Array allows for only listed Solr fields to be searched in the 'All Fields'
+    # Array allows for only listed Solr fields to be searched in the 'Common Fields'
     search_fields = ['abstract_tesim', 'author_tesim', 'alternativeTitle_tesim', 'description_tesim', 'subjectGeographic_tesim',
                      'identifierShelfMark_tesim', 'orbisBibId_ssi', 'publicatonPlace_tesim', 'publisher_tesim',
                      'resourceType_tesim', 'sourceCreated_tesim', 'subjectName_tesim', 'subject_topic_tesim',
                      'title_tesim']
 
-    config.add_search_field('all_fields', label: 'All Fields') do |field|
+    config.add_search_field('all_fields', label: 'Common Fields') do |field|
       field.qt = 'search'
       field.include_in_advanced_search = false
       field.solr_parameters = {
@@ -268,7 +268,7 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('all_fields_advanced', label: 'All Fields') do |field|
+    config.add_search_field('all_fields_advanced', label: 'Common Fields') do |field|
       field.qt = 'search'
       field.include_in_simple_select = false
       field.solr_parameters = {
