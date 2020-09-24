@@ -10,7 +10,7 @@ DEFAULT MOBILE STYLING
   background: transparent;
   border: transparent;
   font-size: 16px;
-  font: $mallory_medium;
+  font-family: $mallory_medium, Arial, Helvetica, sans-serif;
   text-transform: uppercase;
 }
 
@@ -19,6 +19,37 @@ DEFAULT MOBILE STYLING
   color: $light_blue;
   border-color: transparent;
 }
+
+.sort-submit-buttons {
+  display: none;
+}
+
+.adv-search-sort-submit-buttons {
+  border-top: 1px solid $light_grey;
+  padding-top: 20px;
+}
+
+.adv-search-sort-submit-buttons .btn:not(:nth-child(2n)) {
+  margin-right: 20px;
+}
+
+.adv-search-sort-submit-buttons .btn-primary:hover {
+  background-color: $white;
+  color: $yale_blue;
+}
+.adv-search-sort-submit-buttons .btn-primary {
+  border-color: $light_grey;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 12px 24px 12px 24px;
+  margin-bottom: 40px;
+}
+
+.adv-search-sort-submit-buttons .btn-primary.advanced-search-start-over {
+  border: none;
+  color: $light_blue;
+}
+
 
 @media screen and (min-width: $small_device) {
   .advanced_search {
@@ -29,7 +60,6 @@ DEFAULT MOBILE STYLING
     background: transparent;
     border: transparent;
     font-size: 16px;
-    font: $mallory_medium;
     text-transform: uppercase;
   }
 
@@ -50,7 +80,6 @@ DEFAULT MOBILE STYLING
     background: transparent;
     border: transparent;
     font-size: 16px;
-    font: $mallory_medium;
     text-transform: uppercase;
   }
 
@@ -71,7 +100,6 @@ DEFAULT MOBILE STYLING
     background: transparent;
     border: transparent;
     font-size: 16px;
-    font: $mallory_medium;
     text-transform: uppercase;
   }
 
@@ -91,7 +119,6 @@ DEFAULT MOBILE STYLING
     background: transparent;
     border: transparent;
     font-size: 16px;
-    font: $mallory_medium;
     text-transform: uppercase;
   }
 
