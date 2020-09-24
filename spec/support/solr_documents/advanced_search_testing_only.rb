@@ -97,7 +97,6 @@ ADVANCED_SEARCH_TESTING_2 = {
                         "Script: Written in humanistic script by Franciscus de Tianis of Pistoia."],
   "extent_ssim": ["ff. ii + 192 + i : parchment ; 271 x 177 (177 x 106) mm."],
   "extentOfDigitization_ssim": ["Complete work digitized."],
-  "format": ["mixed material"],
   "genre_ssim": ["Decorated initials",
                  "Manuscripts"],
   "identifierShelfMark_ssim": ["Beinecke MS 2"],

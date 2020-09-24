@@ -299,10 +299,12 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('date_ssim', label: 'Date') do |field|
+    date_fields = ['date_ssim', 'dateStructured_ssim']
+
+    config.add_search_field('date_fields', label: 'Date') do |field|
       field.qt = 'search'
       field.solr_parameters = {
-        qf: 'date_ssim',
+        qf: date_fields.join(' '),
         pf: ''
       }
     end

@@ -25,6 +25,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
         expect(page).not_to have_content('Record 2')
       end
     end
+
     it 'gets correct search results from author_tesim' do
       fill_in 'author_tesim', with: 'Me and Frederick'
       click_on 'SEARCH'
@@ -33,6 +34,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
         expect(page).not_to have_content('Record 2')
       end
     end
+
     it 'gets correct search results from identifierShelfMark_tesim' do
       fill_in 'identifierShelfMark_tesim', with: '["Landberg MSS 596"]'
       click_on 'SEARCH'
@@ -41,14 +43,25 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
         expect(page).not_to have_content('Record 2')
       end
     end
-    it 'gets correct search results from date_ssim' do
-      fill_in 'date_ssim', with: '[17--?]'
+
+    it 'gets correct search results from date_fields with date_ssim' do
+      fill_in 'date_fields', with: '[17--?]'
       click_on 'SEARCH'
       within '#documents' do
         expect(page).to     have_content('Record 1')
         expect(page).not_to have_content('Record 2')
       end
     end
+
+    it 'gets correct search results from date_fields with dateStructured_ssim' do
+      fill_in 'date_fields', with: '1700-00-00T00:00:00Z'
+      click_on 'SEARCH'
+      within '#documents' do
+        expect(page).to     have_content('Record 1')
+        expect(page).not_to have_content('Record 2')
+      end
+    end
+
     it 'gets correct search results from subject_fields' do
       fill_in 'subject_fields', with: 'Belles lettres'
       click_on 'SEARCH'
@@ -57,6 +70,16 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
         expect(page).not_to have_content('Record 2')
       end
     end
+
+    it 'gets correct search results from genre_fields' do
+      fill_in 'genre_fields', with: 'Manuscripts'
+      click_on 'SEARCH'
+      within '#documents' do
+        expect(page).not_to have_content('Record 1')
+        expect(page).to     have_content('Record 2')
+      end
+    end
+
     it 'gets correct search results from title_tesim' do
       fill_in 'title_tesim', with: '["Record 1"]'
       click_on 'SEARCH'
@@ -65,6 +88,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
         expect(page).not_to have_content('Record 2')
       end
     end
+
     it 'gets correct search results from oid_ssi' do
       fill_in 'oid_ssi', with: '11607445'
       click_on 'SEARCH'
@@ -73,6 +97,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
         expect(page).not_to have_content('Record 2')
       end
     end
+
     it 'gets correct search results from child oid_ssim' do
       fill_in 'child_oids_ssim', with: '11'
       click_on 'SEARCH'
@@ -108,6 +133,6 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       expect(page).to have_css '.advanced_search'
       expect(page).to have_link('Advanced Search', href: '/advanced')
       find('.advanced_search').hover
-    end  
+    end
   end
 end
