@@ -99,4 +99,19 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       expect(page).not_to have_content('Record 2')
     end
   end
+
+  describe 'advanced search styling' do
+    before do
+      visit root_path
+      click_on 'Advanced Search'
+    end
+
+    it 'has correct field input style' do
+      expect(page).to have_css '.adv-search-fields'
+    end
+
+    it 'has correct help section style' do
+      expect(page).to have_css '.adv-search-help'
+    end
+  end
 end
