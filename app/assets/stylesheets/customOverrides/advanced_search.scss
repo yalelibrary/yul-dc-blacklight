@@ -29,10 +29,21 @@ DEFAULT MOBILE STYLING
   padding-top: 20px;
 }
 
+.adv-search-sort-submit-buttons .btn:not(:nth-child(2n)) {
+  margin-right: 20px;
+}
+
 .adv-search-sort-submit-buttons .btn-primary:hover {
   background-color: $white;
   color: $yale_blue;
-  border-color: $medium_grey;
+}
+.adv-search-sort-submit-buttons .btn-primary {
+  border-color: $light_grey;
+}
+
+.adv-search-sort-submit-buttons .btn-primary.advanced-search-start-over {
+  border: none;
+  color: $light_blue;
 }
 
 
