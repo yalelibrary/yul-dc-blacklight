@@ -55,11 +55,22 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       expect(page).not_to have_content('Record 2')
     end
   end
-  it 'gets correct search results from orbisBibId_ssi' do
+  it 'gets correct search results from date_ssim' do
     visit root_path
     click_on 'Advanced Search'
     # Search for something
-    fill_in 'orbisBibId_ssi', with: '3832098'
+    fill_in 'date_ssim', with: '[17--?]'
+    click_on 'advanced-search-submit'
+    within '#documents' do
+      expect(page).to     have_content('Record 1')
+      expect(page).not_to have_content('Record 2')
+    end
+  end
+  it 'gets correct search results from subject_fields' do
+    visit root_path
+    click_on 'Advanced Search'
+    # Search for something
+    fill_in 'subject_fields', with: 'Belles lettres'
     click_on 'advanced-search-submit'
     within '#documents' do
       expect(page).to     have_content('Record 1')

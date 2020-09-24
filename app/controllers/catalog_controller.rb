@@ -276,6 +276,12 @@ class CatalogController < ApplicationController
     # Now we see how to over-ride Solr request handler defaults, in this
     # case for a BL "search field", which is really a dismax aggregate
     # of Solr search fields.
+    config.add_search_field('author_tesim', label: 'Creator') do |field|
+      field.solr_parameters = {
+        qf: 'author_tesim',
+        pf: ''
+      }
+    end
 
     config.add_search_field('title_tesim', label: 'Title') do |field|
       field.qt = 'search'
@@ -285,9 +291,18 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('author_tesim', label: 'Author') do |field|
+    config.add_search_field('identifierShelfMark_tesim', label: 'Call Number') do |field|
+      field.qt = 'search'
       field.solr_parameters = {
-        qf: 'author_tesim',
+        qf: 'identifierShelfMark_tesim',
+        pf: ''
+      }
+    end
+
+    config.add_search_field('date_ssim', label: 'Date') do |field|
+      field.qt = 'search'
+      field.solr_parameters = {
+        qf: 'date_ssim',
         pf: ''
       }
     end
@@ -304,15 +319,38 @@ class CatalogController < ApplicationController
       }
     end
 
+    subject_fields = ['subjectEra_ssim', 'subjectGeographic_tesim', 'subjectTitle_tsim', 'subjectTitleDisplay_tsim', 'subjectName_ssim', 'subjectName_tesim', 'subjectTopic_tesim', 'subjectTopic_ssim']
+
+    config.add_search_field('subject_fields', label: 'Subject') do |field|
+      field.qt = 'search'
+      field.include_in_simple_select = false
+      field.solr_parameters = {
+        qf: subject_fields.join(' '),
+        pf: ''
+      }
+    end
+
+    genre_fields = ['format', 'genre_ssim']
+
+    config.add_search_field('genre_fields', label: 'Genre/format') do |field|
+      field.qt = 'search'
+      field.include_in_simple_select = false
+      field.solr_parameters = {
+        qf: genre_fields.join(' '),
+        pf: ''
+      }
+    end
+
     config.add_search_field('orbisBibId_ssi', label: 'BibID') do |field|
       field.qt = 'search'
+      field.include_in_advanced_search = false
       field.solr_parameters = {
         qf: 'orbisBibId_ssi',
         pf: ''
       }
     end
 
-    config.add_search_field('oid_ssi', label: 'OID') do |field|
+    config.add_search_field('oid_ssi', label: 'OID [Parent/primary]') do |field|
       field.qt = 'search'
       field.include_in_simple_select = false
       field.solr_parameters = {
@@ -321,7 +359,7 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('child_oids_ssim', label: 'Child OID') do |field|
+    config.add_search_field('child_oids_ssim', label: 'OID [Child/images]') do |field|
       field.qt = 'search'
       field.include_in_simple_select = false
       field.solr_parameters = {
@@ -330,13 +368,6 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('identifierShelfMark_tesim', label: 'Call Number') do |field|
-      field.qt = 'search'
-      field.solr_parameters = {
-        qf: 'identifierShelfMark_tesim',
-        pf: ''
-      }
-    end
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
