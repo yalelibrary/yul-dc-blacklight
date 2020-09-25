@@ -141,7 +141,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field 'author_tesim', label: 'Author', highlight: true
+    config.add_index_field 'author_tesim', label: 'Creator', highlight: true
     config.add_index_field 'date_ssim', label: 'Date'
     config.add_index_field 'identifierShelfMark_tesim', label: 'Call Number', highlight: true
     config.add_index_field 'imageCount_isi', label: 'Image Count'
@@ -185,7 +185,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'subjectTopic_tesim', label: 'Subject Topic'
 
     # Origin Group
-    config.add_show_field 'author_tsim', label: 'Author'
+    config.add_show_field 'author_tsim', label: 'Creator'
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date'
     config.add_show_field 'coordinates_ssim', label: 'Coordinates'
     config.add_show_field 'date_ssim', label: 'Date'
