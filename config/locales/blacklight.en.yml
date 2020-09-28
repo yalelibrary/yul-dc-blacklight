@@ -16,3 +16,5 @@ en:
     header_links:
       login: Sign in
       logout: Sign out
+    search:
+      search_constraints_header: You Searched For

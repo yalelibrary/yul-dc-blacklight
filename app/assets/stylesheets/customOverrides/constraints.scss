@@ -1,0 +1,134 @@
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
+
+.btn-group.applied-filter.constraint{
+  display: inline-block;
+  margin: 5px 0 0 0;
+  padding: 0 0 5.5px 0;
+  text-justify: auto;
+  float: left;
+  word-wrap: break-word;
+  min-width: max-content;
+
+}
+
+.constraints-container-index.constraints-container{
+  background-color: $lighter_grey;
+  padding: 5px 0;
+  display: inline-flex;
+  justify-content: normal;
+  margin-left: 0;
+  overflow-wrap: break-word;
+}
+
+
+.constraints-container-index > .catalog_startOverLink{
+  position: relative;
+  font-family: Mallory-Medium;
+  color: #3399ff;
+  background-color: $lighter_grey;
+  border-color: $lighter_grey;
+  text-align: center;
+  top: -5px;
+  right: 0;
+}
+.constraints-container-index > .catalog_startOverLink:last-child{
+  margin-left: auto !important;
+
+}
+.constraints-group{
+  display: inline-block;
+  width: 62%;
+  flex-wrap: wrap;
+}
+
+
+.constraint-value.btn.btn-outline-secondary{
+  display:inline;
+  margin-left: 10px;
+  height: calc(100% - 15px);
+  width: content-box;
+  padding: 3px 0 3px 5.5px;
+  background-color: $white;
+  margin-right: 10px;
+}
+.constraint-value.btn.btn-outline-secondary:hover {
+  border-color: $lighter_grey;
+}
+.filter-name{
+  margin-top: 5px;
+  position: relative;
+  top: -2px;
+  color: $medium_grey;
+  font-family: $mallory_medium;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.filter-value{
+  position: relative;
+  top: -2px;
+  color: $medium_grey;
+  font-family: $mallory_medium;
+  font-size: 12px;
+  padding-right: 5px;
+  text-transform: capitalize;
+}
+
+.searched-heading{
+  font-size: 14px;
+  font-family: $mallory_medium;
+  text-align: left;
+  color: $medium_grey;
+  text-transform: uppercase;
+  margin-top:13px;
+  margin-bottom: 0;
+  margin-left: 16px;
+  position: relative;
+  top: -2px;
+}
+#appliedParams {
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding-bottom: 0;
+}
+
+@media screen and (min-width: $small_device) {
+  #appliedParams {
+    width: inherit;
+    height: auto;
+
+  }
+  .constraints-group{
+    width: 62%;
+  }
+
+}
+
+@media screen and (min-width: $medium_device) {
+  #appliedParams {
+    width: inherit;
+  }
+  .constraints-group{
+    width: 57%;
+  }
+}
+
+
+@media screen and (min-width: $large_device) {
+  #appliedParams {
+    width: inherit;
+  }
+  .constraints-group{
+    width: 55%;
+  }
+}
+@media screen and (min-width: $xlarge_device) {
+  #appliedParams {
+    width: inherit;
+  }
+  .constraints-group{
+    width: 62%;
+  }
+}
