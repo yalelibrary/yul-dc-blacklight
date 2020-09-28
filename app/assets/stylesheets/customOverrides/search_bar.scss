@@ -2,6 +2,27 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 
+.advanced_search {
+  padding: 11px 0px 11px 23px;
+  color: $light_blue;
+  background: transparent;
+  border: transparent;
+  font-size: 16px;
+  font-family: $mallory_medium;
+  text-transform: uppercase;
+}
+
+.advanced_search:hover {
+  background: none !important;
+  color: $light_blue;
+  border-color: $border_grey;
+}
+
+.advanced_search,
+.search-btn {
+  margin-top: 8px;
+}
+
 .bg-light {
   background-color: transparent !important;
 }
@@ -21,23 +42,20 @@ DEFAULT MOBILE STYLING
 .custom-select,
 .form-control,
 .search-btn {
-  padding: 11px 17px;
+  padding: 17px;
   line-height: 1;
+  border: 1px solid $border_grey;
+  border-radius: 0px;
+  line-height: 16px;
+  height: 51px;
 }
 
 .custom-select,
 .navbar-search .submit-search-text {
   color: $yale_blue;
   text-transform: uppercase;
-  font-size: 20px;
+  font-size: 16px;
   font-family: $mallory_medium;
-}
-
-.custom-select,
-.form-control,
-.search-btn {
-  border: 1px solid $border_grey;
-  border-radius: 0px;
 }
 
 .form-control {
@@ -47,17 +65,33 @@ DEFAULT MOBILE STYLING
 .input-group {
   margin-top: 30px;
   margin-bottom: 30px;
+  width: 98%;
 }
 
-.navbar-search .container,
-.navbar-search .search-query-form {
-  padding: 0px;
+.input-group .btn-primary:not(:disabled):not(.disabled):active,
+.input-group .search-btn:hover {
+  background: none;
+  background-color: transparent;
+  border-color: $border_grey;
+}
+
+.navbar-search {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .navbar-search .search-field,
 .twitter-typeahead {
   width: 100%;
   min-width: 9em;
+}
+
+.navbar-search .search-query-form {
+  padding-right: 0;
+  justify-content: center;
+  display: flex;
 }
 
 .navbar-search .submit-search-text {
@@ -69,49 +103,29 @@ DEFAULT MOBILE STYLING
 }
 
 .search-q {
-  font-size: 20px;
+  font-size: 16px;
   color: $black;
   font-family: $mallory_book $mallory_light, Arial, Helvetica, sans-serif !important;
 }
 
 
-@media screen and (min-width: $small_device) {
-  .form-control {
-    border-left: none;
-    border-top: 1px solid $border_grey;
-  }
-
-  .navbar-search .search-field {
-    width: 221px;
-  }
-
-  .twitter-typeahead {
-    width: 52%;
-    min-width: 250px;
-  }
-}
-
-
 @media screen and (min-width: $medium_device) {
-  .input-group-append {
-    margin-left: 8px;
-  }
-
-  .navbar.navbar-search > div.container {
-    max-width: 91%;
-  }
-
-  .search-btn {
-    margin-top: initial;
-  }
-
-  .twitter-typeahead {
-    width: 45%;
+  .input-group {
+    max-width: 96%;
   }
 }
 
 
 @media screen and (min-width: $large_device) {
+  .advanced_search {
+    margin-top: 0;
+  }
+
+  .form-control {
+    border-left: none;
+    border-top: 1px solid $border_grey;
+  }
+
   .input-group {
     max-width: 918px;
     justify-content: center;
@@ -133,25 +147,31 @@ DEFAULT MOBILE STYLING
 
   .navbar-search .search-query-form {
     max-width: 100%;
+    padding-right: 0;
+  }
+
+  .search-btn {
+    margin-top: 0;
+    margin-left: 8px;
   }
 
   .twitter-typeahead {
-    max-width: 500px;
+    width: 30%;
   }
 }
 
 
 @media screen and (min-width: $xlarge_device) {
   .input-group {
-    width: 918px;
+    width: 100%;
+    max-width: 1100px;
   }
 
-  .twitter-typeahead {
-    width: 505px;
-    max-width: 505px;
-  }
-  .navbar-search .search-field {
-    max-width: 245px;
+  .navbar.navbar-search > div.container {
+    max-width: 1100px;
   }
 
+  .navbar-search .search-query-form {
+    flex: 0 0 100%;
+  }
 }
