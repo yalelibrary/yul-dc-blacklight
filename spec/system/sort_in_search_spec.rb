@@ -91,4 +91,6 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
     expect(content).to have_content("3.\nHandsomeDan Bulldog")
     expect(content).to have_content("4.\nAquila Eccellenza")
   end
+
+  # add author and title test
 end
