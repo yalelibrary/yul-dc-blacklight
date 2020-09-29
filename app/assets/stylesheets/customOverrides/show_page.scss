@@ -1,8 +1,10 @@
 /********************************************************
 DEFAULT MOBILE STYLING
 ********************************************************/
-.btn-show {
+.show-buttons > .btn-show {
   text-transform: uppercase;
+}
+.btn-show{
   color: $yale_blue;
   font-size: 12px;
   font-family: $mallory_medium;

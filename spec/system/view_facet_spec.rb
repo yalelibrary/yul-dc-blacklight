@@ -65,7 +65,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   end
 
   it 'can filter results with format facets' do
-    click_on 'FORMAT'
+    click_on 'Format'
     click_on 'text'
     expect(page).to have_content('Amor Llama')
     expect(page).not_to have_content('Aquila Eccellenza')
@@ -73,7 +73,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   end
 
   it 'can filter results with language facets' do
-    click_on 'LANGUAGE'
+    click_on 'Language'
     click_on 'Latin (la)'
     expect(page).to have_content('Amor Llama')
     expect(page).not_to have_content('Aquila Eccellenza')
@@ -81,7 +81,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   end
 
   it 'can filter results with genre facets' do
-    click_on 'GENRE'
+    click_on 'Genre'
     click_on 'Animation'
     expect(page).to have_content('Rhett Lecheire')
     expect(page).not_to have_content('Amor Llama')
@@ -89,7 +89,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   end
 
   it 'can filter results with resource type facets' do
-    click_on 'RESOURCE TYPE'
+    click_on 'Resource Type'
     click_on 'Archives or Manuscripts'
     expect(page).to have_content('Aquila Eccellenza')
     expect(page).not_to have_content('Amor Llama')
@@ -97,7 +97,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   end
 
   it 'can filter results with author facets' do
-    click_on 'AUTHOR'
+    click_on 'Author'
     click_on 'Andy Graves'
     expect(page).to have_content('HandsomeDan Bulldog')
     expect(page).not_to have_content('Aquila Eccellenza')
@@ -109,29 +109,29 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
   end
 
   it 'renders the facet label' do
-    click_on 'RESOURCE TYPE'
+    click_on 'Resource Type'
     expect(page).to have_css('.facet-label')
   end
 
   it 'renders the facet count' do
-    click_on 'RESOURCE TYPE'
+    click_on 'Resource Type'
     expect(page).to have_css('.facet-count')
   end
 
   it 'does not render the x as text' do
-    click_on 'RESOURCE TYPE'
+    click_on 'Resource Type'
     click_on 'Archives or Manuscripts'
     expect(page).to have_no_css('.remove-icon')
   end
 
   it 'renders the x png' do
-    click_on 'GENRE'
+    click_on 'Genre'
     click_on 'Animation'
     expect(page).to have_css('.remove')
   end
 
   it 'removes the facet constraint when the x png is clicked' do
-    click_on 'GENRE'
+    click_on 'Genre'
     click_on 'Animation'
     click_on 'remove'
     expect(page).to have_no_css('.selected')

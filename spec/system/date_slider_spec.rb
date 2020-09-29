@@ -47,7 +47,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
 
   it "shows the range limit facet" do
     visit root_path
-    click_button 'PUBLICATION DATE'
+    click_button 'Publication Date'
 
     expect(page).to have_selector '.range_begin'
     expect(page).to have_selector '.range_end'
@@ -56,14 +56,14 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
 
   it "provides date information" do
     visit root_path
-    click_button 'PUBLICATION DATE'
+    click_button 'Publication Date'
 
     expect(page).to have_content("1100 to 2022")
   end
 
   xit "should be able to search with the slider" do
     visit root_path
-    click_button 'PUBLICATION DATE'
+    click_button 'Publication Date'
     within '.card.facet-limit.blacklight-dateStructured_ssim' do
       source = page.find('.slider-handle.round').last
       source.drag_by(30, 0)

@@ -32,6 +32,9 @@ div.card {
   content: '(';
 }
 
+.facet-field-heading button{
+  text-transform: uppercase;
+}
 .facet-field-heading button.collapsed::after {
   width: 11px;
   height: 8px;
