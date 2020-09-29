@@ -16,13 +16,13 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
   let(:cat) { ADVANCED_SEARCH_TESTING_2 }
 
   describe 'searching' do
-    it 'gets correct search results from common fields' do
-      fill_in 'all_fields_advanced', with: 'Record 1'
+    it 'gets correct search results from advanced fields' do
+      fill_in 'all_fields_advanced', with: 'Latin'
       click_on 'SEARCH'
 
       within '#documents' do
-        expect(page).to     have_content('Record 1')
-        expect(page).not_to have_content('Record 2')
+        expect(page).not_to have_content('Record 1')
+        expect(page).to have_content('Record 2')
       end
     end
 
