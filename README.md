@@ -79,20 +79,21 @@ To start the application stack, run `cam up` in the blacklight directory. This s
 ## Troubleshooting
 
 If you receive a `please set your AWS_PROFILE and AWS_DEFAULT_REGION (RuntimeError)` error when you `cam up`, you will need to set your AWS credentials. Credentials can be set in the `~/.aws/credentials` file in the following format:
+(The word "yale" in the straight brackets can be whatever you want it to be)
 
 ```bash
-[dce-hosting]
-aws_access_key_id=YOUR_ACCESS_KEY
-aws_secret_access_key=YOUR_SECRET_ACCESS_KEY
+[yale]
+aws_access_key_id=YOUR_YALE_ACCESS_KEY
+aws_secret_access_key=YOUR_YALE_SECRET_ACCESS_KEY
 ```
 
 After the credentials have been set, you will need to export the following settings via the command line:
 
 ```bash
-export AWS_PROFILE=dce-hosting && export AWS_DEFAULT_REGION=us-east-1
+export AWS_PROFILE=yale && export AWS_DEFAULT_REGION=us-east-1
 ```
 
-Note: AWS_PROFILE name needs to match the credentials profile name (`[dce-hosting]`). After you set the credentials, you will need to re-install camerata: `rake install`
+Note: AWS_PROFILE name needs to match the credentials profile name inside of the straight brackets (`[yale]`). After you set the credentials, you will need to re-install camerata from the camerata repo: `rake install`
 
 If you use rbenv, you must run the following command after installing camerata: `rbenv rehash`
 
