@@ -3,13 +3,14 @@ DEFAULT MOBILE STYLING
 ********************************************************/
 
 .advanced_search {
-  padding: 11px 0px 11px 23px;
+  padding: 14px 0px 11px 23px;
   color: $light_blue;
   background: transparent;
   border: transparent;
   font-size: 16px;
   font-family: $mallory_medium;
   text-transform: uppercase;
+  display: block !important;
 }
 
 .advanced_search:hover {
@@ -42,7 +43,7 @@ DEFAULT MOBILE STYLING
 .custom-select,
 .form-control,
 .search-btn {
-  padding: 17px;
+  padding: 14px;
   line-height: 1;
   border: 1px solid $border_grey;
   border-radius: 0px;
@@ -58,15 +59,13 @@ DEFAULT MOBILE STYLING
   font-family: $mallory_medium;
 }
 
-.form-control {
-  border-top: none;
-}
 
 .input-group {
   margin-top: 30px;
   margin-bottom: 30px;
   width: 98%;
 }
+
 
 .input-group .btn-primary:not(:disabled):not(.disabled):active,
 .input-group .search-btn:hover {

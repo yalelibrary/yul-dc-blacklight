@@ -1,0 +1,187 @@
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
+
+//TODO: add the correct font type YaleNew-Roman
+.advanced_page_header {
+  font-size: 27px;
+  color: $yale_blue;
+  font: $yale_italic;
+  margin-left: 12px;
+  padding-top: 25px;
+  margin-bottom: 13px;
+}
+
+.query_criteria_heading{
+  color:$medium_grey;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+  font: $mallory_mp_black;
+  padding-left: 30px;
+}
+
+.input-small{
+  background-size: 11px;
+  background-position-x: right;
+  background-origin: content-box;
+  background-color: transparent;
+  display: inline-block;
+  width: 20%;
+  height: calc(1.75em + 1rem + 2px);
+  padding: 0.65rem 0.65rem 0.5rem 1rem;
+  vertical-align: baseline;
+  background-repeat: no-repeat;
+  background-image: image-url('light-blue-double-arrow.png');  border: 1px solid #ced4da;
+  border-radius: 0rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color: $yale_blue;
+  text-transform: uppercase;
+  font-size: 14px;
+  font: $mallory_medium;
+  font-weight: bold;
+}
+//Sort text next to button
+.sort-buttons  {
+  color:$medium_grey;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+  font: $mallory_mp_black;
+  padding-left: 30px;
+  margin-top: 20px;
+}
+//Sort button text
+.sort-select {
+  background-size: 11px;
+  background-position-y: center;
+  background-position-x: right;
+  background-origin: content-box;
+  display: inline-block;
+  width: 38%;
+  height: calc(1.65em + .65rem + .65rem) !important;
+  vertical-align: baseline;
+  background-repeat: no-repeat;
+  padding: 0.65rem 0.65rem 0.5rem 1rem;
+  background-image: image-url('light-blue-double-arrow.png');  border: 1px solid #ced4da!important;
+  border-radius: 0rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color: $yale_blue;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  font: $mallory_medium;
+ }
+
+.input-match{
+  border-bottom: 1.75px solid $light_grey;
+  padding-bottom: 17px;
+  margin-bottom:13px
+}
+
+.advanced_search_clear_top{
+  float: right;
+  margin-top: -45px;
+  margin-right: 24px;
+}
+
+a.btn:nth-child(1) {
+  display: none;
+}
+
+input.btn:nth-child(2) {
+  display: none;
+}
+.advanced_search_fields > div > div >.form-control{
+  border: 1px solid #ced4da !important;
+}
+
+
+  @media screen and (min-width: $large_device) {
+    .advanced_page_header {
+      width:100%!important;
+      border-bottom: 1px solid #ced4da !important;
+      padding-bottom: 25px;
+      padding-top: 30px;
+    }
+    .advanced_search_form{
+      display: inline-flex;
+      flex-wrap: wrap;
+    }
+    .query_criteria_heading{
+      width: 330px;
+    }
+
+    //Sort text next to button
+    .sort-buttons  {
+      width: 500px;
+      margin-left: -75px;
+      margin-top: 4px;
+      }
+
+    .adv-search-sort-submit-buttons.sort-submit-top{
+      margin-top: -3px;
+    }
+
+
+    //Sort button text
+    .sort-select {
+      background-origin: content-box;
+      display: inline-block;
+      width: 225px;
+      height: calc(1.65em + .65rem + .65rem) !important;
+    }
+
+    .input-small{
+      width: 25%;
+    }
+
+    .input-match{
+      padding-bottom: 17px;
+      margin-bottom:13px;
+      display: inline-flex;
+      border: none;
+      position: absolute;
+      top: -81px;
+      left: 230px;
+      width: auto;
+    }
+
+    .advanced_search_clear_top{
+      float: right;
+      margin-top: -45px;
+      margin-right: 24px;
+    }
+  }
+
+  @media screen and (min-width: $xlarge_device) {
+    .input-match{
+      padding-bottom: 0;
+      margin-bottom: 0;
+      position: relative;
+      top: -81px;
+      left: 60%;
+      height: 0px
+    }
+
+    .advanced_search_fields{
+      position: relative;
+      top: -14px;
+    }
+
+
+    .input-small{
+      width: 29%;
+    }
+
+    .sort-buttons {
+      margin-left: -65px;
+      margin-top: 3px;
+    }
+
+    .query_criteria_heading{
+      margin-left: -35px;
+    }
+  }
