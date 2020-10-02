@@ -24,7 +24,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       resourceType_tesim: "Music (Printed & Manuscript)",
       sourceCreated_tesim: 'The Whale',
       subjectGeographic_tesim: 'United States--Maps, Manuscript',
-      subject_topic_tesim: 'Phrenology--United States',
+      subjectTopic_tesim: 'Phrenology--United States',
       subjectName_tesim: 'Price, Leo',
       visibility_ssi: 'Public'
     }
