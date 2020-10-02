@@ -4,7 +4,7 @@ require 'rails_helper'
 RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
   before do
     solr = Blacklight.default_index.connection
-    solr.add([dog, cat, bird])
+    solr.add([dog, cat, bird, rabbit, elephant])
     solr.commit
   end
 
@@ -45,6 +45,32 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     }
   end
 
+  let(:rabbit) do
+    {
+      id: '400',
+      identifierShelfMark_ssim: 'call number',
+      title_tesim: 'Handsome Dan is not a rabbit.',
+      dateStructured_ssim: '1555',
+      author_tesim: 'Frederick & Eric',
+      sourceTitle_tesim: "this is the source title",
+      orbisBibId_ssi: '1234567',
+      visibility_ssi: 'Public'
+    }
+  end
+
+  let(:elephant) do
+    {
+      id: '401',
+      identifierShelfMark_ssim: 'call number',
+      title_tesim: 'Handsome Dan is not a elephant.',
+      dateStructured_ssim: '1555',
+      author_tesim: 'Frederick & Eric',
+      sourceTitle_tesim: "this is the source title",
+      orbisBibId_ssi: '1234567',
+      visibility_ssi: 'Public'
+    }
+  end
+
   it "shows the range limit facet" do
     visit root_path
     click_button 'Publication Date'
@@ -57,8 +83,13 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
   it "provides date information" do
     visit root_path
     click_button 'Publication Date'
+    el = page.find(:css, '.slider.slider-horizontal > .tooltip.top.hide > .tooltip-inner', visible: false)
+    expect(el).to have_content("1100 : 2023")
+  end
 
-    expect(page).to have_content("1100 to 2022")
+  it "does not show the date slider if only one date" do
+    visit '?search_field=identifierShelfMark_tesim&q="call number"'
+    expect(page).not_to have_css('.card.facet-limit.blacklight-dateStructured_ssim')
   end
 
   xit "should be able to search with the slider" do
