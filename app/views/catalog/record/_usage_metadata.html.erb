@@ -1,5 +1,8 @@
 <% doc_presenter = show_presenter(document) %>
-<% usage = Yul::UsageMetadataPresenter.new(document: doc_presenter.fields_to_render).usage_terms %>
+<% usage = Yul::MetadataPresenter.new(
+  document: doc_presenter.fields_to_render,
+  name: 'usage'
+).terms %>
 
 <% if usage.length > 0 %>
   <div class='metadata-block single-item-show'>

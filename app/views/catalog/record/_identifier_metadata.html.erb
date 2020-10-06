@@ -1,5 +1,8 @@
 <% doc_presenter = show_presenter(document) %>
-<% identifier = Yul::IdentifierMetadataPresenter.new(document: doc_presenter.fields_to_render).identifier_terms %>
+<% identifier = Yul::MetadataPresenter.new(
+  document: doc_presenter.fields_to_render,
+  name: 'identifier'
+).terms %>
 
 <% if identifier.length > 0 %>
   <div class='metadata-block single-item-show'>

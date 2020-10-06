@@ -1,5 +1,8 @@
 <% doc_presenter = show_presenter(document) %>
-<% keyword = Yul::KeywordMetadataPresenter.new(document: doc_presenter.fields_to_render).keyword_terms %>
+<% keyword = Yul::MetadataPresenter.new(
+  document: doc_presenter.fields_to_render,
+  name: 'keyword'
+).terms %>
 
 <% if keyword.length > 0 %>
   <div class='metadata-block single-item-show'>

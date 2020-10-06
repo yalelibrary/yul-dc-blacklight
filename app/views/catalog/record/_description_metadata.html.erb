@@ -1,5 +1,8 @@
 <% doc_presenter = show_presenter(document) %>
-<% description = Yul::DescriptionMetadataPresenter.new(document: doc_presenter.fields_to_render).description_terms %>
+<% description = Yul::MetadataPresenter.new(
+  document: doc_presenter.fields_to_render,
+  name: 'description'
+).terms %>
 
 <% if description.length > 0 %>
   <div class='metadata-block single-item-show'>

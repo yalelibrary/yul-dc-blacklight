@@ -1,5 +1,8 @@
 <% doc_presenter = show_presenter(document) %>
-<% migration_source = Yul::MigrationSourceMetadataPresenter.new(document: doc_presenter.fields_to_render).migration_source_terms %>
+<% migration_source = Yul::MetadataPresenter.new(
+  document: doc_presenter.fields_to_render,
+  name: 'migration_source'
+).terms %>
 
 <% if migration_source.length > 0 %>
   <div class='metadata-block single-item-show'>

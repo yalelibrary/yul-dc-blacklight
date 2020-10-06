@@ -1,5 +1,8 @@
 <% doc_presenter = show_presenter(document) %>
-<% origin = Yul::OriginMetadataPresenter.new(document: doc_presenter.fields_to_render).origin_terms %>
+<% origin = Yul::MetadataPresenter.new(
+  document: doc_presenter.fields_to_render,
+  name: 'origin'
+).terms %>
 
 <% if origin.length > 0 %>
   <div class='metadata-block single-item-show'>
