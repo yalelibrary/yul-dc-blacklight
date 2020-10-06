@@ -216,6 +216,14 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       expect(page).to have_link 'BASIC SEARCH', href: "/"
     end
 
+    it 'renders header border' do
+      expect(page).to have_css '.adv-search-border-top'
+    end
+
+    it 'renders footer border' do
+      expect(page).to have_css '.adv-search-border-bottom'
+    end
+
     it 'render sort and submit buttons in header' do
       expect(page).to have_css '.sort-buttons'
       expect(page).to have_css '#op'

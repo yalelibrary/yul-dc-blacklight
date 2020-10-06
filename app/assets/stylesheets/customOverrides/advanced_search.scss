@@ -12,6 +12,18 @@ DEFAULT MOBILE STYLING
   margin-bottom: 13px;
 }
 
+.adv-search-border-top{
+  width: auto;
+  border-top: 1px solid $light_grey;
+  padding-top: 20px;
+}
+
+.adv-search-border-bottom{
+  width: auto;
+  border-top: 1px solid $light_grey;
+  padding-top: 20px;
+}
+
 .query_criteria_heading{
   color:$medium_grey;
   font-weight: bold;
@@ -59,7 +71,7 @@ DEFAULT MOBILE STYLING
   background-position-x: right;
   background-origin: content-box;
   display: inline-block;
-  width: 38%;
+  width: 66%;
   height: calc(1.65em + .65rem + .65rem) !important;
   vertical-align: baseline;
   background-repeat: no-repeat;
@@ -76,7 +88,6 @@ DEFAULT MOBILE STYLING
  }
 
 .input-match{
-  border-bottom: 1.75px solid $light_grey;
   padding-bottom: 17px;
   margin-bottom:13px
 }
@@ -95,7 +106,7 @@ input.btn:nth-child(2) {
   display: none;
 }
 .advanced_search_fields > div > div >.form-control{
-  border: 1px solid #ced4da !important;
+  border: 1px solid $light_grey !important;
 }
 
 .adv-search-help h4 {
@@ -132,6 +143,10 @@ input.btn:nth-child(2) {
 }
 
 @media screen and (min-width: $medium_device) {
+  .adv-search-border-top{
+    width: 154%;
+  }
+
   .adv-search-help{
     display: contents;
     position: relative;
@@ -139,12 +154,26 @@ input.btn:nth-child(2) {
     padding-right: 15px;
     padding-left: 15px;
   }
+
+  .adv-search-border-bottom{
+    width: 154%;
+    border-top: 1px solid $light_grey;
+    padding-top: 20px;
+  }
 }
 
   @media screen and (min-width: $large_device) {
+
+    .adv-search-border-top{
+      width: 160%;
+    }
+
+    .adv-search-border-bottom{
+      width: 160%;
+    }
+
     .advanced_page_header {
       width:100%!important;
-      border-bottom: 1px solid #ced4da !important;
       padding-bottom: 25px;
       padding-top: 30px;
     }
@@ -211,11 +240,15 @@ input.btn:nth-child(2) {
       height: 0px
     }
 
+    .adv-search-border-top{
+      margin-top: -40px;
+      margin-bottom: 20px;
+    }
+
     .advanced_search_fields{
       position: relative;
       top: -14px;
     }
-
 
     .input-small{
       width: 29%;
