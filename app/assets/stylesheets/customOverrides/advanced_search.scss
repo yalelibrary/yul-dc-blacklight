@@ -98,6 +98,48 @@ input.btn:nth-child(2) {
   border: 1px solid #ced4da !important;
 }
 
+.adv-search-help h4 {
+  font-family: $yale_roman, $mallory_medium, Arial, Helvetica, sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: $yale_blue;
+  padding-left: 25px;
+}
+
+.adv-search-help li {
+  font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: $medium_grey;
+}
+
+.adv-search-fields {
+  display: flex;
+  flex-wrap: wrap;
+  white-space: nowrap;
+}
+
+.adv-search-fields input {
+  border: 1px solid $medium_grey;
+  width: 325px;
+}
+
+.adv-search-fields label {
+  font-family: $mallory_mp_black, $mallory_medium, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  color: $medium_grey;
+}
+
+@media screen and (min-width: $medium_device) {
+  .adv-search-help{
+    display: contents;
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
 
   @media screen and (min-width: $large_device) {
     .advanced_page_header {
@@ -124,7 +166,6 @@ input.btn:nth-child(2) {
     .adv-search-sort-submit-buttons.sort-submit-top{
       margin-top: -3px;
     }
-
 
     //Sort button text
     .sort-select {
@@ -153,6 +194,10 @@ input.btn:nth-child(2) {
       float: right;
       margin-top: -45px;
       margin-right: 24px;
+    }
+
+    .adv-search-fields input {
+      margin-right: 10px;
     }
   }
 
@@ -184,4 +229,18 @@ input.btn:nth-child(2) {
     .query_criteria_heading{
       margin-left: -35px;
     }
+
+    .adv-search-fields .advanced-search-field {
+      flex: 45%;
+      white-space: nowrap;
+      margin-bottom: 30px;
+    }
+
+    .adv-search-fields input {
+      margin-right: 10px;
+    }
+    .adv-search-help{
+      display: inline-block;
+    }
+
   }
