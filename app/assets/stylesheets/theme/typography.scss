@@ -1,25 +1,97 @@
-// primary typeface
+/*
+FONT FILE TYPES
+  .eot - IE9 Compat Modes
+  .eot?#iefix - IE6-IE8
+  .woff2/.woff - Modern Browsers
+  .ttf - Safari, Android, iOS
+  .svg - Legacy iOS
+*/
+
+/*************************** YALE DESIGN SMALL CAPS ***************************/
+@font-face {
+  font-family: 'YaleDesign-SmallCaps';
+  src: url(https://static.yalepages.org/fonts/yalenew/YaleDesign-smacap/yaledessmacap-webfont.eot);
+  src: url(https://static.yalepages.org/fonts/yalenew/YaleDesign-smacap/yaledessmacap-webfont.eot?#iefix) format(embedded-opentype),
+       url(https://static.yalepages.org/fonts/yalenew/YaleDesign-smacap/yaledessmacap-webfont.ttf) format(truetype),
+       url(https://static.yalepages.org/fonts/yalenew/YaleDesign-smacap/yaledessmacap-webfont.woff) format(woff);
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/*************************** YALE DISPLAY ROMAN ***************************/
+@font-face {
+  font-family: 'YaleDisplay-Roman';
+  src: url(https://static.yalepages.org/fonts/yaledisplay/YaleDisplay-Roman.eot);
+  src: url(https://static.yalepages.org/fonts/yaledisplay/YaleDisplay-Roman.eot?#iefix) format(embedded-opentype),
+       url(https://static.yalepages.org/fonts/yaledisplay/YaleDisplay-Roman.ttf) format(truetype),
+       url(https://static.yalepages.org/fonts/yaledisplay/YaleDisplay-Roman.woff) format(woff),
+       url(https://static.yalepages.org/fonts/yaledisplay/YaleDisplay-Roman.svg#yaledisplay) format(svg);
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/*************************** YALE MARKS ***************************/
+@font-face {
+  font-family: 'YaleMarks';
+  src: url(https://static.yalepages.org/fonts/yalenew/YaleNew-marks/yalemarks-webfont.eot);
+  src: url(https://static.yalepages.org/fonts/yalenew/YaleNew-marks/yalemarks-webfont.eot?#iefix) format(embedded-opentype),
+       url(https://static.yalepages.org/fonts/yalenew/YaleNew-marks/yalemarks-webfont.ttf) format(truetype),
+       url(https://static.yalepages.org/fonts/yalenew/YaleNew-marks/yalemarks-webfont.woff) format(woff),
+       url(https://static.yalepages.org/fonts/yalenew/YaleNew-marks/yalemarks-webfont.svg#yalenewmarks) format(svg);
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/*************************** YALE NEW ***************************/
 @font-face {
   font-family: 'YaleNew-Bold';
-  src: url(https://static.yalepages.org/fonts/yaledisplay/YaleNew-Bold.otf);
+  src: url(https://static.yalepages.org/fonts/yalenew/YaleNew-normal-bold/yalenew-bold-webfont.eot);
+  src: url(https://static.yalepages.org/fonts/yalenew/YaleNew-normal-bold/yalenew-bold-webfont.eot?#iefix) format('embedded-opentype'),
+       url(https://static.yalepages.org/fonts/yalenew/YaleNew-normal-bold/yalenew-bold-webfont.woff2) format('woff2'),
+       url(https://static.yalepages.org/fonts/yalenew/YaleNew-normal-bold/yalenew-bold-webfont.woff) format('woff'),
+       url(https://static.yalepages.org/fonts/yalenew/YaleNew-normal-bold/yalenew-bold-webfont.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
   font-family: 'YaleNew-BoldItalic';
-  src: url(https://static.yalepages.org/fonts/yaledisplay/YaleNew-BoldItalic.otf);
+  src: url(https://static.yalepages.org/fonts/yalenew/YaleNew-italic-bold/yalenew-bolditalic-webfont.eot);
+  src: url(https://static.yalepages.org/fonts/yalenew/YaleNew-italic-bold/yalenew-bolditalic-webfont.eot?#iefix) format('embedded-opentype'),
+       url(https://static.yalepages.org/fonts/yalenew/YaleNew-italic-bold/yalenew-bolditalic-webfont.woff2) format('woff2'),
+       url(https://static.yalepages.org/fonts/yalenew/YaleNew-italic-bold/yalenew-bolditalic-webfont.woff) format('woff'),
+       url(https://static.yalepages.org/fonts/yalenew/YaleNew-italic-bold/yalenew-bolditalic-webfont.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
   font-family: 'YaleNew-Italic';
-  src: url(https://static.yalepages.org/fonts/yaledisplay/YaleNew-Italic.otf);
+  src: url(https://static.yalepages.org/fonts/yalenew/YaleNew-italic-normal/yalenew-italic-webfont.eot);
+  src: url(https://static.yalepages.org/fonts/yalenew/YaleNew-italic-normal/yalenew-italic-webfont.eot?#iefix) format('embedded-opentype'),
+       url(https://static.yalepages.org/fonts/yalenew/YaleNew-italic-normal/yalenew-italic-webfont.woff2) format('woff2'),
+       url(https://static.yalepages.org/fonts/yalenew/YaleNew-italic-normal/yalenew-italic-webfont.woff) format('woff'),
+       url(https://static.yalepages.org/fonts/yalenew/YaleNew-italic-normal/yalenew-italic-webfont.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
   font-family: 'YaleNew-Roman';
-  src: url(https://static.yalepages.org/fonts/yaledisplay/YaleNew-Roman.otf);
+  src: url(https://static.yalepages.org/fonts/yalenew/YaleNew-normal-normal/yalenew-roman-webfont.eot);
+  src: url(https://static.yalepages.org/fonts/yalenew/YaleNew-normal-normal/yalenew-roman-webfont.eot?#iefix) format('embedded-opentype'),
+       url(https://static.yalepages.org/fonts/yalenew/YaleNew-normal-normal/yalenew-roman-webfont.woff2) format('woff2'),
+       url(https://static.yalepages.org/fonts/yalenew/YaleNew-normal-normal/yalenew-roman-webfont.woff) format('woff'),
+       url(https://static.yalepages.org/fonts/yalenew/YaleNew-normal-normal/yalenew-roman-webfont.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-// secondary typeface
+
+/*************************** MALLORY ***************************/
 @font-face {
   font-family: 'Mallory-Bold';
   src: url(https://static.yalepages.org/fonts/mallory/Mallory-Bold.woff);
@@ -60,22 +132,31 @@
   src: url(https://static.yalepages.org/fonts/mallory/Mallory-MediumItalic.woff);
 }
 
-// TODO(alishaevn): update the 2 fonts below with the correct url once we have them
-@font-face {
-  font-family: 'MalloryMP-Medium';
-  src:  url(https://www.yale.edu/sites/all/themes/yale_blue/fonts_new/Mallory/Mallory/Mallory-Medium.woff);
-}
 
+/*************************** MALLORY MP ***************************/
+// TODO(alishaevn): update the 2 fonts below with the correct url once we have them
 @font-face {
   font-family: 'MalloryMP-Black';
   src:  url(https://www.yale.edu/sites/all/themes/yale_blue/fonts_new/Mallory/Mallory/Mallory-Medium.woff);
 }
 
+@font-face {
+  font-family: 'MalloryMP-Medium';
+  src:  url(https://www.yale.edu/sites/all/themes/yale_blue/fonts_new/Mallory/Mallory/Mallory-Medium.woff);
+}
 
-$yale_bold: YaleNew-Bold;
-$yale_bold_italic: YaleNew-BoldItalic;
-$yale_italic: YaleNew-Italic;
-$yale_roman: YaleNew-Roman;
+
+$yale_display_roman: YaleDisplay-Roman;
+
+$yale_design_small_caps: YaleDesign-SmallCaps;
+
+$yale_marks: YaleMarks;
+
+$yale_new_bold: YaleNew-Bold;
+$yale_new_bold_italic: YaleNew-BoldItalic;
+$yale_new_italic: YaleNew-Italic;
+$yale_new_roman: YaleNew-Roman;
+
 $mallory_bold: Mallory-Bold;
 $mallory_bold_italic: Mallory-BoldItalic;
 $mallory_book: Mallory-Book;
@@ -84,5 +165,6 @@ $mallory_light: Mallory-Light;
 $mallory_light_italic: Mallory-LightItalic;
 $mallory_medium: Mallory-Medium;
 $mallory_medium_italic: Mallory-MediumItalic;
-$mallory_mp_medium: MalloryMP-Medium;
+
 $mallory_mp_black: MalloryMP-Black;
+$mallory_mp_medium: MalloryMP-Medium;
