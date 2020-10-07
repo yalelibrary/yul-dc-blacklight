@@ -1,4 +1,4 @@
-<% unless (search_context_str = render_search_to_s( advanced_search_context)).blank? %>
+<% unless (search_context_str = render_search_to_s(advanced_search_context)).blank? %>
   <div class="constraints well search_history">
     <h4><%= t 'blacklight_advanced_search.form.search_context' %></h4>
     <%= search_context_str %>
@@ -6,25 +6,30 @@
 <% end %>
 
 <%= form_tag search_catalog_path, :class => 'advanced form-horizontal', :method => :get do  %>
-
   <%= render_hash_as_hidden_fields(advanced_search_context) %>
 
-  <div class="input-criteria">
-
-    <div class="query-criteria">
-      <h3 class="query-criteria-heading">
+  <!--  Find items that match-->
+  <div class="input-match">
+    <div class="query-criteria" aria-valuetext="FIND ITEMS THAT MATCH">
+      <div class="query_criteria_heading">
         <%= t('blacklight_advanced_search.form.query_criteria_heading_html', :select_menu =>  select_menu_for_field_operator ) %>
-      </h3>
-
-      <div id="advanced_search" class="adv-search-fields">
-        <%= render 'advanced/advanced_search_fields' %>
       </div>
     </div>
-
+    <!--    Sort Results by-->
+    <div class="adv-search-sort-submit-buttons sort-submit-top adv-search-fields clearfix">
+      <%= render 'advanced_search_submit_btns' %>
+    </div>
   </div>
 
-  <div class="sort-submit-buttons clearfix">
-    <%= render 'advanced_search_submit_btns' %>
+  <div class="adv-search-border-top">
+  </div>
+
+  <!-- Fields on the form     -->
+  <div class="advanced_search_fields" id="advanced_search">
+    <%= render 'advanced/advanced_search_fields' %>
+  </div>
+
+  <div class="adv-search-border-bottom">
   </div>
 
   <div class="adv-search-sort-submit-buttons clearfix">

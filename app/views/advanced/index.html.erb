@@ -1,14 +1,12 @@
 <% @page_title = "Advanced Search - #{application_name}" %>
 
-<div class="advanced-search-form col-sm-12">
+<div class="advanced_search_form col-sm-12">
 
-    <h1 class="advanced page-header">
+    <div class="advanced_page_header">
         <%= 'Advanced Search' %>
-        <%= link_to t('blacklight_advanced_search.form.start_over'), blacklight_advanced_search_engine.advanced_search_path, :class =>"btn btn-secondary pull-right advanced-search-start-over" %>
-    </h1>
+    </div>
 
     <div class="row">
-
         <div class="col-md-8">
             <%= render 'advanced_search_form' %>
         </div>

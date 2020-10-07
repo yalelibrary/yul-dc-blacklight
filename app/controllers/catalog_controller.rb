@@ -112,10 +112,10 @@ class CatalogController < ApplicationController
     config.add_facet_field 'dateStructured_ssim', label: 'Publication Date',
                                                   range: {
                                                     num_segments: 6,
-                                                    assumed_boundaries: [1100, Time.current.year + 2],
+                                                    assumed_boundaries: [800, Time.current.year + 2],
                                                     segments: true,
                                                     maxlength: 4
-                                                  }
+                                                  }, solr_params: { 'facet.pivot.mincount' => 2 }
 
     # the facets below are set to false because we aren't filtering on them from the main search page
     # but we need to be able to provide a label when they are filtered upon from an individual show page
@@ -144,7 +144,7 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
     config.add_index_field 'author_tesim', label: 'Creator', highlight: true
-    config.add_index_field 'date_ssim', label: 'Date'
+    config.add_index_field 'date_ssim', label: 'Date', highlight: true
     config.add_index_field 'identifierShelfMark_tesim', label: 'Call Number', highlight: true
     config.add_index_field 'imageCount_isi', label: 'Image Count'
     config.add_index_field 'partOf_ssim', label: 'Collection Name'
@@ -158,7 +158,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'publisher_tesim', label: 'Publisher', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'sourceCreated_tesim', label: 'Created Source', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'subjectName_tesim', label: 'Subject Name', highlight: true, solr_params: disp_highlight_on_search_params
-    config.add_index_field 'subject_topic_tesim', label: 'Subject Topic', highlight: true, solr_params: disp_highlight_on_search_params
+    config.add_index_field 'subjectTopic_tesim', label: 'Subject Topic', highlight: true, solr_params: disp_highlight_on_search_params
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -254,7 +254,7 @@ class CatalogController < ApplicationController
     # Array allows for only listed Solr fields to be searched in the 'Common Fields'
     search_fields = ['abstract_tesim', 'author_tesim', 'alternativeTitle_tesim', 'description_tesim', 'subjectGeographic_tesim',
                      'identifierShelfMark_tesim', 'orbisBibId_ssi', 'publicatonPlace_tesim', 'publisher_tesim',
-                     'resourceType_tesim', 'sourceCreated_tesim', 'subjectName_tesim', 'subject_topic_tesim',
+                     'resourceType_tesim', 'sourceCreated_tesim', 'subjectName_tesim', 'subjectTopic_tesim',
                      'title_tesim']
 
     config.add_search_field('all_fields', label: 'Common Fields') do |field|
