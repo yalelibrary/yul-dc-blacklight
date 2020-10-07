@@ -2,7 +2,7 @@
 require 'rails_helper'
 
 RSpec.describe Yul::MetadataPresenter do
-  let(:description_doc) do
+  let(:description_metadata) do
     {
       'abstract_tesim' => 'Abstract',
       'alternativeTitle_tesim' => 'Alternative Title',
@@ -18,7 +18,7 @@ RSpec.describe Yul::MetadataPresenter do
     }
   end
 
-  let(:identifier_doc) do
+  let(:identifier_metadata) do
     {
       'box_ssim' => 'Box',
       'children_ssim' => 'Children',
@@ -39,7 +39,7 @@ RSpec.describe Yul::MetadataPresenter do
     }
   end
 
-  let(:keyword_doc) do
+  let(:keyword_metadata) do
     {
       'format' => 'Format',
       'genre_ssim' => 'Genre',
@@ -51,14 +51,14 @@ RSpec.describe Yul::MetadataPresenter do
     }
   end
 
-  let(:migration_source_doc) do
+  let(:migration_source_metadata) do
     {
       'recordType_ssi' => 'Record Type',
       'source_ssim' => 'Source'
     }
   end
 
-  let(:origin_doc) do
+  let(:origin_metadata) do
     {
       'author_tsim' => 'Author',
       'coordinates_ssim' => 'Coordinates',
@@ -78,14 +78,14 @@ RSpec.describe Yul::MetadataPresenter do
     }
   end
 
-  let(:usage_doc) do
+  let(:usage_metadata) do
     {
       'rights_ssim' => 'Rights'
     }
   end
 
   context 'with a description document' do
-    let(:description_presenter_object) { described_class.new(document: description_doc, name: 'description') }
+    let(:description_presenter_object) { described_class.new(document: description_metadata, section: 'description') }
     let(:config) { YAML.safe_load(File.open(Rails.root.join('config', 'metadata', 'description_metadata.yml'))) }
 
     context 'containing overview metadata' do
@@ -144,7 +144,7 @@ RSpec.describe Yul::MetadataPresenter do
   end
 
   context 'with an identifier document' do
-    let(:identifier_presenter_object) { described_class.new(document: identifier_doc, name: 'identifier') }
+    let(:identifier_presenter_object) { described_class.new(document: identifier_metadata, section: 'identifier') }
     let(:config) { YAML.safe_load(File.open(Rails.root.join('config', 'metadata', 'identifier_metadata.yml'))) }
 
     context 'containing overview metadata' do
@@ -223,7 +223,7 @@ RSpec.describe Yul::MetadataPresenter do
   end
 
   context 'with a keyword document' do
-    let(:keyword_presenter_object) { described_class.new(document: keyword_doc, name: 'keyword') }
+    let(:keyword_presenter_object) { described_class.new(document: keyword_metadata, section: 'keyword') }
     let(:config) { YAML.safe_load(File.open(Rails.root.join('config', 'metadata', 'keyword_metadata.yml'))) }
 
     context 'containing overview metadata' do
@@ -266,7 +266,7 @@ RSpec.describe Yul::MetadataPresenter do
   end
 
   context 'with a migration source document' do
-    let(:migration_source_presenter_object) { described_class.new(document: migration_source_doc, name: 'migration_source') }
+    let(:migration_source_presenter_object) { described_class.new(document: migration_source_metadata, section: 'migration_source') }
     let(:config) { YAML.safe_load(File.open(Rails.root.join('config', 'metadata', 'migration_source_metadata.yml'))) }
 
     context 'containing overview metadata' do
@@ -289,7 +289,7 @@ RSpec.describe Yul::MetadataPresenter do
   end
 
   context 'with an origin document' do
-    let(:origin_presenter_object) { described_class.new(document: origin_doc, name: 'origin') }
+    let(:origin_presenter_object) { described_class.new(document: origin_metadata, section: 'origin') }
     let(:config) { YAML.safe_load(File.open(Rails.root.join('config', 'metadata', 'origin_metadata.yml'))) }
 
     context 'containing overview metadata' do
@@ -364,7 +364,7 @@ RSpec.describe Yul::MetadataPresenter do
   end
 
   context 'with a usage document' do
-    let(:usage_presenter_object) { described_class.new(document: usage_doc, name: 'usage') }
+    let(:usage_presenter_object) { described_class.new(document: usage_metadata, section: 'usage') }
     let(:config) { YAML.safe_load(File.open(Rails.root.join('config', 'metadata', 'usage_metadata.yml'))) }
 
     context 'containing overview metadata' do
