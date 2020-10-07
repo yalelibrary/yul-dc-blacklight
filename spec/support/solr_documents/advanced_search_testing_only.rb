@@ -148,7 +148,6 @@ ADVANCED_SEARCH_TESTING_2 = {
   "url_suppl_ssim": ["https://pre1600ms.beinecke.library.yale.edu/docs/pre1600.ms002.htm"],
   "visibility_ssi": "Public",
   "abstract_ssim": ["Manuscript on parchment of Jacopo Zeno, Vita Caroli Zeni. With a dedicatory preface to Pope Pius II."],
-  "author_tesim": ["Zeno, Jacopo, 1417-1481"],
   "date_tsim": ["[ca. 1458]"],
   "oid_ssim": ["11684565"],
   "orbisBarcode_ssim": ["39002091594300"],
