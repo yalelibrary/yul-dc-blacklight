@@ -2,7 +2,8 @@
 FONT FILE TYPES
   .eot - IE9 Compat Modes
   .eot?#iefix - IE6-IE8
-  .woff2/.woff - Modern Browsers
+  .woff2 - Super Modern Browsers
+  .woff - Pretty Modern Browsers
   .ttf - Safari, Android, iOS
   .svg - Legacy iOS
 */
@@ -137,12 +138,12 @@ FONT FILE TYPES
 // TODO(alishaevn): update the 2 fonts below with the correct url once we have them
 @font-face {
   font-family: 'MalloryMP-Black';
-  src:  url(https://www.yale.edu/sites/all/themes/yale_blue/fonts_new/Mallory/Mallory/Mallory-Medium.woff);
+  src:  url(https://static.yalepages.org/fonts/mallory/Mallory-Medium.woff);
 }
 
 @font-face {
   font-family: 'MalloryMP-Medium';
-  src:  url(https://www.yale.edu/sites/all/themes/yale_blue/fonts_new/Mallory/Mallory/Mallory-Medium.woff);
+  src:  url(https://static.yalepages.org/fonts/mallory/Mallory-Medium.woff);
 }
 
 
