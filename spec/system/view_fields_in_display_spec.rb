@@ -33,7 +33,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       title_tesim: "Diversity Bull Dogs",
       subtitle_tesim: "He's handsome",
       subtitle_vern_ssim: "He's handsome",
-      author_tsim: 'Eric & Frederick',
+      author_tesim: 'Eric & Frederick',
       format: 'three dimensional object',
       url_fulltext_ssim: 'http://0.0.0.0:3000/catalog/111',
       url_suppl_ssim: 'http://0.0.0.0:3000/catalog/111',

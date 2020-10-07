@@ -4,7 +4,7 @@ require 'rails_helper'
 RSpec.describe Yul::OriginMetadataPresenter do
   let(:solr_doc) do
     {
-      'author_tsim' => 'Author',
+      'author_tesim' => 'Author',
       'coordinates_ssim' => 'Coordinates',
       'copyrightDate_ssim' => 'Copyright Date',
       'date_ssim' => 'Date',
@@ -27,7 +27,7 @@ RSpec.describe Yul::OriginMetadataPresenter do
   context 'with a solr document containing overview metadata' do
     describe 'config' do
       it 'returns the Author Key' do
-        expect(config['author_tsim'].to_s).to eq 'Author'
+        expect(config['author_tesim'].to_s).to eq 'Author'
       end
 
       it 'returns the Coordinates Key' do
