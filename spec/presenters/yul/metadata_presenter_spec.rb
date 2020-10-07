@@ -84,7 +84,6 @@ RSpec.describe Yul::MetadataPresenter do
     }
   end
 
-
   context 'with a description document' do
     let(:description_presenter_object) { described_class.new(document: description_doc, name: 'description') }
     let(:config) { YAML.safe_load(File.open(Rails.root.join('config', 'metadata', 'description_metadata.yml'))) }
@@ -143,7 +142,6 @@ RSpec.describe Yul::MetadataPresenter do
       end
     end
   end
-
 
   context 'with an identifier document' do
     let(:identifier_presenter_object) { described_class.new(document: identifier_doc, name: 'identifier') }
@@ -224,7 +222,6 @@ RSpec.describe Yul::MetadataPresenter do
     end
   end
 
-
   context 'with a keyword document' do
     let(:keyword_presenter_object) { described_class.new(document: keyword_doc, name: 'keyword') }
     let(:config) { YAML.safe_load(File.open(Rails.root.join('config', 'metadata', 'keyword_metadata.yml'))) }
@@ -268,7 +265,6 @@ RSpec.describe Yul::MetadataPresenter do
     end
   end
 
-
   context 'with a migration source document' do
     let(:migration_source_presenter_object) { described_class.new(document: migration_source_doc, name: 'migration_source') }
     let(:config) { YAML.safe_load(File.open(Rails.root.join('config', 'metadata', 'migration_source_metadata.yml'))) }
@@ -291,7 +287,6 @@ RSpec.describe Yul::MetadataPresenter do
       end
     end
   end
-
 
   context 'with an origin document' do
     let(:origin_presenter_object) { described_class.new(document: origin_doc, name: 'origin') }
@@ -367,7 +362,6 @@ RSpec.describe Yul::MetadataPresenter do
       end
     end
   end
-
 
   context 'with a usage document' do
     let(:usage_presenter_object) { described_class.new(document: usage_doc, name: 'usage') }
