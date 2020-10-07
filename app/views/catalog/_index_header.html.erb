@@ -39,7 +39,6 @@
 <%else %>
   <div class='documentHeader row'>
     <h3 class='index_title document-title-heading <%= title_class %>'>
-      <%= counter %>
       <div class='document-title'>
         <%= link_to_document document, document.highlight_field('title_tesim').try(:[],0) || document['title_tesim'], counter:document_counter %>
       </div>

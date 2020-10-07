@@ -1,60 +1,149 @@
 /********************************************************
 DEFAULT MOBILE STYLING
 ********************************************************/
+.gallery.row {
+  .dd {
+    margin-left: 22%;
+    text-align: justify;
+  }
 
-.caption,
-.caption > .documentHeader {
-  width: 200px;
-}
+  .dt {
+    position: relative;
+  }
 
-.document.col {
-  display: flex;
-  margin-bottom: 50px;
-}
+  .document-title {
+    padding-left: 10px;
+    padding-bottom: 10px;
+  }
 
-.document.col .caption .documentHeader {
-  padding-left: 15px !important;
-}
+  .document-title-heading {
+    display: contents;
+    position: static;
+    max-width: 45%;
+    margin-bottom: 3%;
+  }
 
-.caption .document-title {
-  font-size: 14px;
-  font-family: $mallory_mp_medium;
-  padding-left: 0;
-  padding-bottom: 0;
-  width: 200px;
-  margin-top: 14px;
-}
+  .documentHeader {
+    padding-left: 19px !important;
+    display: -webkit-box;
+  }
 
-.document-title > a {
-  color: $light_blue;
-}
+  .search-highlight {
+    background-color: yellow;
+  }
 
-#documents .thumbnail > a {
-  width: 200px;
-  display: block;
-}
+  //Fields on Single Items and Search Result pages
+  .document-metadata {
+    display: contents;
+    position: static;
+    max-width: 55%;
+    margin-bottom: 3%;
+  }
 
-.row-cols-2 > * {
-  max-width: 100%;
-  flex: 0 0 100%;
-}
+  .caption,
+  .caption > .documentHeader {
+    width: 200px;
+  }
 
+  .document.col {
+    display: flex;
+    margin-bottom: 50px;
+  }
 
-@media screen and (min-width: $small_device) {
+  .document.col .caption .documentHeader {
+    padding-left: 15px !important;
+  }
+
+  .caption .document-title {
+    font-size: 14px;
+    font-family: $mallory_mp_medium;
+    padding-left: 0;
+    padding-bottom: 0;
+    width: 200px;
+    margin-top: 14px;
+  }
+
+  .document-title > a {
+    color: $light_blue;
+  }
+
   #documents .thumbnail > a {
-    height: 200px;
+    width: 200px;
+    display: block;
   }
 
   .row-cols-2 > * {
-    max-width: 50%;
-    flex: 0 0 50%;
+    max-width: 100%;
+    flex: 0 0 100%;
   }
-}
 
 
-@media screen and (min-width: $xlarge_device) {
-  .row-cols-2 > * {
-    max-width: 33%;
-    flex: 0 0 33%;
+  @media screen and (min-width: $small_device) {
+    #documents .thumbnail > a {
+      height: 200px;
+    }
+
+    .row-cols-2 > * {
+      max-width: 50%;
+      flex: 0 0 50%;
+    }
+  }
+
+  @media screen and (min-width: $medium_device) {
+    .dl-invert dt {
+      position: absolute;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 0px !important;
+    }
+
+    .document-metadata {
+      max-width: 55%;
+      margin-bottom: 3%;
+    }
+
+    .col-md-9 {
+      padding-left: 25%;
+    }
+  }
+
+
+  @media screen and (min-width: $large_device) {
+
+    .dl-invert dt {
+      position: absolute;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 0px !important;
+    }
+
+    .document-metadata {
+      max-width: 55%;
+      margin-bottom: 3%;
+    }
+
+    .col-md-9 {
+      padding-left: 25%;
+    }
+  }
+
+
+  @media screen and (min-width: $xlarge_device) {
+    .row-cols-2 > * {
+      max-width: 33%;
+      flex: 0 0 33%;
+    }
+    .dl-invert dt {
+      position: absolute;
+    }
+
+    .document-metadata {
+      max-width: 55%;
+      margin-bottom: 3%;
+    }
+
+    .col-md-9 {
+      padding-left: 25%;
+    }
   }
 }

@@ -2,6 +2,17 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 
+.document-title > a {
+  color: $light_blue;
+  max-width: 420px;
+  font-family: $mallory_medium;
+  font-size: 15px;
+}
+
+.search-highlight {
+  background-color: yellow;
+}
+
 .dd {
   margin-left:  22%;
   text-align: justify;
@@ -15,10 +26,10 @@ DEFAULT MOBILE STYLING
   padding-left: 10px;
   padding-bottom: 10px;
 }
+
 .document-title-heading {
   display: contents;
   position: static;
-  max-width: 45%;
   margin-bottom: 3%;
 }
 
@@ -27,9 +38,6 @@ DEFAULT MOBILE STYLING
   display: -webkit-box;
 }
 
-.search-highlight {
-  background-color: yellow;
-}
 
 //Fields on Single Items and Search Result pages
 .document-metadata{
@@ -40,54 +48,133 @@ DEFAULT MOBILE STYLING
 }
 
 @media screen and (min-width: $medium_device) {
-  .dl-invert dt {
-    position: absolute;
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 0px!important;
-  }
-
-  .document-metadata {
-    max-width: 55%;
-    margin-bottom: 3%;
-  }
-
-  .col-md-9 {
-    padding-left: 25%;
-  }
+  //.dl-invert dt {
+  //  position: absolute;
+  //  width: 100%;
+  //  padding-right: 15px;
+  //  padding-left: 0px!important;
+  //}
+  //
+  //.document-metadata {
+  //  max-width: 55%;
+  //  margin-bottom: 3%;
+  //}
+  //
+  //.col-md-9 {
+  //  padding-left: 25%;
+  //}
 }
 
 @media screen and (min-width: $large_device) {
-
-  .dl-invert dt {
-    position: absolute;
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 0px!important;
-  }
-
-  .document-metadata {
-    max-width: 55%;
-    margin-bottom: 3%;
-  }
-
-  .col-md-9 {
-    padding-left: 25%;
-  }
+  //.dl-invert dt {
+  //  position: absolute;
+  //  width: 100%;
+  //  padding-right: 15px;
+  //  padding-left: 0px!important;
+  //}
+  //
+  //.document-metadata {
+  //  max-width: 55%;
+  //  margin-bottom: 3%;
+  //}
+  //
+  //.col-md-9 {
+  //  padding-left: 25%;
+  //}
 }
 
 @media screen and (min-width: $xlarge_device) {
 
+  .document{
+    width: 100%;
+    height: auto;
+    padding-bottom: 40px;
+    padding-right: calc(100% - 780px);
+  }
+
+  .documentHeader.row{
+    display: -webkit-box;
+    margin-bottom: 1rem;
+    width: 420px!important;
+    padding-left: 0!important;
+    margin-left: 0!important;
+    position: relative;
+    float: right;
+  }
+
+  .documents-list.document {
+    border-bottom: 1px dotted $light_grey;
+    margin-top: 0rem;
+    padding-top: 2rem;
+  }
+
+  .document-title{
+    position: relative;
+    font-size: 15px;
+    width: 492px;
+    display: -webkit-inline-flex;
+    margin-top: 0rem;
+    text-align: left;
+    left: -99px;
+  }
+
+  .document-metadata.dl-invert.row{
+    display: inline-block;
+    position: relative;
+    top: -20px;
+    left: -90px;
+    width: 800px;
+    margin-bottom: 20px;
+    float: right;
+  }
+
+  //Solr field titles
   .dl-invert dt {
-    position: absolute;
+    width: 200px;
+    text-align: left;
+    position: relative;
+    color:$medium_grey;
+    font-family: $mallory_mp_black;
+    font-size: 12px;
+    display: contents;
+    left: -38px;
+  }
+
+  //Solr field details
+  .dl-invert dd{
+    font-size: 12px;
+    font: $mallory_medium;
+    color:$medium_grey;
+    flex-wrap: wrap;
+    margin-top: -21px;
+    margin-left: 74px;
   }
 
   .document-metadata {
     max-width: 55%;
-    margin-bottom: 3%;
+    margin-bottom: 1%;
+
+  }
+  .document-thumbnail {
+    float: left!important;
+    margin: 12px 0 0 0!important;
+    margin-left: 10px;
+    height: 200px;
+    width:200px;
+    padding-top: 0px;
   }
 
+  //styling for title on search result page
+  .document-title {
+    font-size:15px;
+    display: -webkit-inline-flex;
+    margin-top: 0rem;
+    padding-left: 0;
+  }
   .col-md-9 {
     padding-left: 25%;
+  }
+  .row {
+    margin-left: 5px !important;
   }
 }
