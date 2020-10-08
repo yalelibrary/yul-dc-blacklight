@@ -1,149 +1,60 @@
 /********************************************************
 DEFAULT MOBILE STYLING
 ********************************************************/
-.gallery.row {
-  .dd {
-    margin-left: 22%;
-    text-align: justify;
-  }
 
-  .dt {
-    position: relative;
-  }
+.caption,
+.caption > .documentHeader {
+  width: 200px;
+}
 
-  .document-title {
-    padding-left: 10px;
-    padding-bottom: 10px;
-  }
+.document.col {
+  display: flex;
+  margin-bottom: 50px;
+}
 
-  .document-title-heading {
-    display: contents;
-    position: static;
-    max-width: 45%;
-    margin-bottom: 3%;
-  }
+.document.col .caption .documentHeader {
+  padding-left: 15px !important;
+}
 
-  .documentHeader {
-    padding-left: 19px !important;
-    display: -webkit-box;
-  }
+.caption .document-title {
+  font-size: 14px;
+  font-family: $mallory_mp_medium;
+  padding-left: 0;
+  padding-bottom: 0;
+  width: 200px;
+  margin-top: 14px;
+}
 
-  .search-highlight {
-    background-color: yellow;
-  }
+.document-title > a {
+  color: $light_blue;
+}
 
-  //Fields on Single Items and Search Result pages
-  .document-metadata {
-    display: contents;
-    position: static;
-    max-width: 55%;
-    margin-bottom: 3%;
-  }
+#documents .thumbnail > a {
+  width: 200px;
+  display: block;
+}
 
-  .caption,
-  .caption > .documentHeader {
-    width: 200px;
-  }
+.row-cols-2 > * {
+  max-width: 100%;
+  flex: 0 0 100%;
+}
 
-  .document.col {
-    display: flex;
-    margin-bottom: 50px;
-  }
 
-  .document.col .caption .documentHeader {
-    padding-left: 15px !important;
-  }
-
-  .caption .document-title {
-    font-size: 14px;
-    font-family: $mallory_mp_medium;
-    padding-left: 0;
-    padding-bottom: 0;
-    width: 200px;
-    margin-top: 14px;
-  }
-
-  .document-title > a {
-    color: $light_blue;
-  }
-
+@media screen and (min-width: $small_device) {
   #documents .thumbnail > a {
-    width: 200px;
-    display: block;
+    height: 200px;
   }
 
   .row-cols-2 > * {
-    max-width: 100%;
-    flex: 0 0 100%;
+    max-width: 50%;
+    flex: 0 0 50%;
   }
+}
 
 
-  @media screen and (min-width: $small_device) {
-    #documents .thumbnail > a {
-      height: 200px;
-    }
-
-    .row-cols-2 > * {
-      max-width: 50%;
-      flex: 0 0 50%;
-    }
-  }
-
-  @media screen and (min-width: $medium_device) {
-    .dl-invert dt {
-      position: absolute;
-      width: 100%;
-      padding-right: 15px;
-      padding-left: 0px !important;
-    }
-
-    .document-metadata {
-      max-width: 55%;
-      margin-bottom: 3%;
-    }
-
-    .col-md-9 {
-      padding-left: 25%;
-    }
-  }
-
-
-  @media screen and (min-width: $large_device) {
-
-    .dl-invert dt {
-      position: absolute;
-      width: 100%;
-      padding-right: 15px;
-      padding-left: 0px !important;
-    }
-
-    .document-metadata {
-      max-width: 55%;
-      margin-bottom: 3%;
-    }
-
-    .col-md-9 {
-      padding-left: 25%;
-    }
-  }
-
-
-  @media screen and (min-width: $xlarge_device) {
-    .row-cols-2 > * {
-      max-width: 33%;
-      flex: 0 0 33%;
-    }
-    .dl-invert dt {
-      position: absolute;
-    }
-
-    .document-metadata {
-      max-width: 55%;
-      margin-bottom: 3%;
-    }
-
-    .col-md-9 {
-      padding-left: 25%;
-    }
+@media screen and (min-width: $xlarge_device) {
+  .row-cols-2 > * {
+    max-width: 33%;
+    flex: 0 0 33%;
   }
 }

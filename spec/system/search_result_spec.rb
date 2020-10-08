@@ -57,6 +57,10 @@ RSpec.describe 'search result', type: :system, clean: true do
       visit '/?q=&search_field=all_fields&view=gallery'
     end
 
+    it 'has expected css' do
+      expect(page).to have_css '.caption'
+    end
+
     it 'has the correct "per page" options' do
       expect(page).to have_text '9 per page 30 per page 60 per page 99 per page'
     end
