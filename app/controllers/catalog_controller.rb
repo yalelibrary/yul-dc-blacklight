@@ -187,7 +187,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'subjectTopic_tesim', label: 'Subject Topic'
 
     # Origin Group
-    config.add_show_field 'author_tsim', label: 'Creator'
+    config.add_show_field 'author_tesim', label: 'Creator'
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date'
     config.add_show_field 'coordinates_ssim', label: 'Coordinates'
     config.add_show_field 'date_ssim', label: 'Date'
