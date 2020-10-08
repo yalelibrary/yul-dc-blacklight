@@ -187,20 +187,41 @@ For the image instance to properly access images, you must also create a .secret
 
 ## Releasing a new version of yul-dc-blacklight
 
-1. Ensure you have a github personal access token.
+1. Checkout to the `master` branch and run `git pull`
 
-  Instructions here: <https://github.com/github-changelog-generator/github-changelog-generator#github-token> You will need to make your token available via an environment variable called `CHANGELOG_GITHUB_TOKEN`, e.g.:
+2. Ensure you have a github personal access token.
 
-  ```
-  export CHANGELOG_GITHUB_TOKEN=YOUR_TOKEN_HERE
-  ```
+    Instructions here: <https://github.com/github-changelog-generator/github-changelog-generator#github-token> You will need to make your token available via an environment variable called `CHANGELOG_GITHUB_TOKEN`, e.g.:
 
-2. Use the camerata gem to increment the blacklight version and deploy:
+    ```
+    export CHANGELOG_GITHUB_TOKEN=YOUR_TOKEN_HERE
+    ```
 
+3. Use the camerata gem to increment the blacklight version and deploy:
   Note: See [the camerata readme](https://github.com/yalelibrary/yul-dc-camerata) for details on installing camerata.
 
-  ```
-  cam release blacklight
+    ```
+    cam release blacklight
+    ```
+
+4. Proceed with the steps for the Yale infrastructure or the DCE infrastructure
+##### Using the Yale infrastructure
+  - Log on to VPN
+  - Go to Jenkins website in your browser (request it from a member of the team if you don't have it)
+  - Click on "YUL-DC-Test-Deploy" on the dashboard
+  - Click on "Build with Parameters" in the left side navigation panel
+  - In the "BLACKLIGHT_VERSION" input box, type in the version you released with the command in step 3 (e.g.: v1.30.0)
+  - Check the UPDATE_SSM box
+  - Press "Build"
+  - You will see your build in the "Build History" section in the left side navigation panel with a blinking blue circle, indicating it's in progress
+    - If you press the number associated with the build, you can see the details
+    - The build typically takes 10-15 minutes
+    - A successful build will show a solid blue circle when finished
+    - An unsuccessful build will show a solid red circle when finished
+
+
+##### Using the DCE infrastructure
+```
   PUBLIC_IP=ENABLED cam get-params yul-test
     - This will create 3 "yul-test...yml" files
   BLACKLIGHT_VERSION=NEW_BLACKLIGHT_VERSION_NUMBER cam deploy-main yul-test
@@ -220,7 +241,7 @@ For the image instance to properly access images, you must also create a .secret
   NOTE: You can delete all 6 untracked yml files
   ```
 
-3. Move any tickets that were included in this release from `For Release` to `Ready for Acceptance`
+5. Move any tickets that were included in this release from `For Release` to `Ready for Acceptance`
 
 ## Using a New Release of the Management App or other microservices
 
