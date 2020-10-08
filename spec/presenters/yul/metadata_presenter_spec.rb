@@ -60,7 +60,7 @@ RSpec.describe Yul::MetadataPresenter do
 
   let(:origin_metadata) do
     {
-      'author_tsim' => 'Author',
+      'author_tesim' => 'Author',
       'coordinates_ssim' => 'Coordinates',
       'copyrightDate_ssim' => 'Copyright Date',
       'date_ssim' => 'Date',
@@ -295,7 +295,7 @@ RSpec.describe Yul::MetadataPresenter do
     context 'containing overview metadata' do
       describe 'config' do
         it 'returns the Author Key' do
-          expect(config['author_tsim'].to_s).to eq 'Author'
+          expect(config['author_tesim'].to_s).to eq 'Author'
         end
 
         it 'returns the Coordinates Key' do
