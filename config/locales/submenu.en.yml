@@ -91,7 +91,7 @@ en:
       courseReserves:
         title: Course Reserves
         url: http://guides.library.yale.edu/reserves
-        description:
+        description: ''
       off-CampusAccess:
         title: Off-Campus Access
         url: https://library.yale.edu/help/off-campus-access-vpn
