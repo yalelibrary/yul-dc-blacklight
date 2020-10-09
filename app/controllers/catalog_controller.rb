@@ -291,8 +291,8 @@ class CatalogController < ApplicationController
       'extent_ssim',
       'extentOfDigitization_ssim',
       'folder_ssim',
-      'format',
-      'genre_ssim',
+      'format_tesim',
+      'genre_tesim',
       'identifierMfhd_ssim',
       'identifierShelfMark_tesim',
       'identifierShelfMark_ssim',
@@ -397,7 +397,7 @@ class CatalogController < ApplicationController
       }
     end
 
-    genre_fields = ['format', 'genre_ssim']
+    genre_fields = ['format_tesim', 'genre_tesim']
 
     config.add_search_field('genre_fields', label: 'Genre/format') do |field|
       field.qt = 'search'
