@@ -169,7 +169,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'description_tesim', label: 'Description'
     config.add_show_field 'extent_ssim', label: 'Extent'
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization'
-    config.add_show_field 'illustrativeMatter_tesim', label: 'Illustrative Matter'
     config.add_show_field 'numberOfPages_ssim', label: 'Number of Pages'
     config.add_show_field 'references_tesim', label: 'References'
     config.add_show_field 'projection_tesim', label: 'Projection'

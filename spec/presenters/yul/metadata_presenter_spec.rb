@@ -10,7 +10,6 @@ RSpec.describe Yul::MetadataPresenter do
       'extent_ssim' => 'Extent',
       'extentOfDigitization_ssim' => 'Extent of Digitization',
       'numberOfPages_ssim' => 'Number of Pages',
-      'illustrativeMatter_tesim' => 'Illustrative Matter',
       'projection_tesim' => 'Projection',
       'references_tesim' => 'References',
       'scale_tesim' => 'Scale',
@@ -112,10 +111,6 @@ RSpec.describe Yul::MetadataPresenter do
 
         it 'returns the Number of Pages Key' do
           expect(config['numberOfPages_ssim'].to_s).to eq 'Number of Pages'
-        end
-
-        it 'returns the Illustrative Matter Key' do
-          expect(config['illustrativeMatter_tesim'].to_s).to eq 'Illustrative Matter'
         end
 
         it 'returns the Projection Key' do

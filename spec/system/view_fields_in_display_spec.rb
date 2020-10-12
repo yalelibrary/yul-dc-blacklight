@@ -64,7 +64,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       date_ssim: "this is the date",
       children_ssim: "these are the children",
       importUrl_ssim: "this is the import URL",
-      illustrativeMatter_tesim: "this is the illustrative matter",
       oid_ssi: '2345678',
       identifierMfhd_ssim: 'this is the identifier MFHD',
       identifierShelfMark_ssim: 'this is the call number',
@@ -204,9 +203,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays the import URL in results' do
       expect(document).to have_content("this is the import URL")
-    end
-    it 'displays the Illustrative Matter in results' do
-      expect(document).to have_content("this is the illustrative matter")
     end
     it 'displays the OID in results' do
       expect(document).to have_content("2345678")
