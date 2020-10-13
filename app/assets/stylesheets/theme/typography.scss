@@ -135,15 +135,40 @@ FONT FILE TYPES
 
 
 /*************************** MALLORY MP ***************************/
-// TODO(alishaevn): update the 2 fonts below with the correct url once we have them
 @font-face {
   font-family: 'MalloryMP-Black';
-  src:  url(https://static.library.yale.edu/fonts/mallory/Mallory-Medium.woff);
+  src: url(https://static.library.yale.edu/fonts/mallory/MalloryMP-Black.woff2) format('woff2'),
+       url(https://static.library.yale.edu/fonts/mallory/MalloryMP-Black.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'MalloryMP-BlackItalic';
+  src: url(https://static.library.yale.edu/fonts/mallory/MalloryMP-BlackItalic.woff2) format('woff2'),
+       url(https://static.library.yale.edu/fonts/mallory/MalloryMP-BlackItalic.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'MalloryMP-Bold';
+  src: url(https://static.library.yale.edu/fonts/mallory/MalloryMP-Bold.woff2) format('woff2'),
+       url(https://static.library.yale.edu/fonts/mallory/MalloryMP-Bold.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'MalloryMP-BoldItalic';
+  src: url(https://static.library.yale.edu/fonts/mallory/MalloryMP-BoldItalic.woff2) format('woff2'),
+       url(https://static.library.yale.edu/fonts/mallory/MalloryMP-BoldItalic.woff) format('woff');
 }
 
 @font-face {
   font-family: 'MalloryMP-Medium';
-  src:  url(https://static.library.yale.edu/fonts/mallory/Mallory-Medium.woff);
+  src: url(https://static.library.yale.edu/fonts/mallory/MalloryMP-Medium.woff2) format('woff2'),
+       url(https://static.library.yale.edu/fonts/mallory/MalloryMP-Medium.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'MalloryMP-MediumItalic';
+  src: url(https://static.library.yale.edu/fonts/mallory/MalloryMP-MediumItalic.woff2) format('woff2'),
+       url(https://static.library.yale.edu/fonts/mallory/MalloryMP-MediumItalic.woff) format('woff');
 }
 
 
@@ -168,4 +193,8 @@ $mallory_medium: Mallory-Medium;
 $mallory_medium_italic: Mallory-MediumItalic;
 
 $mallory_mp_black: MalloryMP-Black;
+$mallory_mp_black_italic: MalloryMP-BlackItalic;
+$mallory_mp_bold: MalloryMP-Bold;
+$mallory_mp_bold_italic: MalloryMP-BoldItalic;
 $mallory_mp_medium: MalloryMP-Medium;
+$mallory_mp_medium_italic: MalloryMP-MediumItalic;
