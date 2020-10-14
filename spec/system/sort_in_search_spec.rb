@@ -124,5 +124,4 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
     expect(content).to have_content("3.\nAmor Llama")
     expect(content).to have_content("4.\nRhett Lecheire")
   end
-
 end
