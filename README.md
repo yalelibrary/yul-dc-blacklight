@@ -56,6 +56,11 @@ bundle install
 rake install
 ```
 
+## Dynatrace
+
+- We've integrated Dynatrace OneAgent for monitoring our Docker container environments. 
+  - Instructions on configuring OneAgent can be found [here](https://github.com/yalelibrary/yul-dc-camerata/tree/master/base)
+
 ## General Use
 
 Once camerata is installed on your system, interactions happen through the camerata command-line tool or through its alias `cam`. The camerata tool can be used to bring the development stack up and down locally, interact with the docker containers, deploy, run the smoke tests and otherwise do development tasks common to the various applications in the yul-dc application stack.
