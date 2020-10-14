@@ -109,7 +109,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
   end
 
   context 'sorting' do
-    it 'can sort by date from oldest to newest' do
+    xit 'can sort by date from oldest to newest' do
       within '#sort' do
         find("option[value='dateStructured_ssim desc, title_si asc']").click
       end
@@ -121,7 +121,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
     end
 
-    it 'can sort by date from newest to oldest' do
+    xit 'can sort by date from newest to oldest' do
       within '#sort' do
         find("option[value='dateStructured_ssim asc, title_si asc']").click
       end
@@ -133,7 +133,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
     end
 
-    it 'can sort by year' do
+    xit 'can sort by year' do
       within '#sort' do
         find("option[value='pub_date_si desc, title_si asc']").click
       end
@@ -147,7 +147,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
 
     it 'can sort by title' do
       within '#sort' do
-        find("option[value='title_si asc, pub_date_si desc']").click
+        find("option[value='title_ssim asc, pub_date_si desc']").click
       end
 
       click_on 'SEARCH'
@@ -159,7 +159,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
 
     it 'can sort by author' do
       within '#sort' do
-        find("option[value='author_si asc, title_si asc']").click
+        find("option[value='creator_ssim asc, title_ssim asc']").click
       end
 
       click_on 'SEARCH'
