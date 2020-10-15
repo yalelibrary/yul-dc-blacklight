@@ -28,7 +28,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     it 'displays Date in results' do
       expect(content).to have_content('1999')
     end
-    it 'displays Author in results' do
+    it 'displays Creator in results' do
       expect(content).to have_content('Me and You')
     end
     it 'displays Resource Type in results' do
