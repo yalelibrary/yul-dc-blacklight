@@ -50,6 +50,10 @@ module BlacklightHelper
     return image_tag(url) if ['Public', 'Yale Community Only'].include? document[:visibility_ssi]
   end
 
+  def pristine_search_state
+    Blacklight::SearchState.new(params, blacklight_config)
+  end
+
   private
 
   def image_exists?(url)
