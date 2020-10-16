@@ -96,8 +96,8 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     expect(page).not_to have_content('HandsomeDan Bulldog')
   end
 
-  it 'can filter results with author facets' do
-    click_on 'Author'
+  it 'can filter results with creator facets' do
+    click_on 'Creator'
     click_on 'Andy Graves'
     expect(page).to have_content('HandsomeDan Bulldog')
     expect(page).not_to have_content('Aquila Eccellenza')

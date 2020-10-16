@@ -91,7 +91,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays Title in results' do
       expect(document).to have_content("Diversity Bull Dogs")
     end
-    it 'displays Author in results' do
+    it 'displays Creator in results' do
       expect(document).to have_content("Eric & Frederick")
     end
     it 'displays Subtitle in results' do

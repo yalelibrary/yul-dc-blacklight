@@ -101,7 +101,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'genre_ssim', label: 'Genre'
     config.add_facet_field 'resourceType_ssim', label: 'Resource Type'
     config.add_facet_field 'language_ssim', label: 'Language', limit: true, helper_method: :language_code
-    config.add_facet_field 'author_ssim', label: 'Author', limit: true, sort: 'index'
+    config.add_facet_field 'author_ssim', label: 'Creator', limit: true, sort: 'index'
     config.add_facet_field 'subjectTopic_ssim', label: 'Subject Topic'
     config.add_facet_field 'subjectName_ssim', label: 'Subject Name'
     config.add_facet_field 'subject_ssim', label: 'Topic', limit: 20, index_range: 'A'..'Z'
@@ -447,7 +447,7 @@ class CatalogController < ApplicationController
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
-    config.spell_max = 5
+    config.spell_max = -1
 
     # Configuration for autocomplete suggestor
     config.autocomplete_enabled = false
