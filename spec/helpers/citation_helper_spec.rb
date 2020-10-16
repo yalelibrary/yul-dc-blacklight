@@ -9,8 +9,8 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
       edition_tesim: 'First Edition',
       subtitle_tesim: "He's handsome",
       subtitle_vern_ssim: "He's handsome",
-      author_tesim: 'Eric & Frederick',
-      author_ssim: 'Eric & Frederick',
+      creator_tesim: 'Eric & Frederick',
+      creator_ssim: 'Eric & Frederick',
       format: 'three dimensional object',
       url_fulltext_ssim: 'http://0.0.0.0:3000/catalog/111',
       url_suppl_ssim: 'http://0.0.0.0:3000/catalog/111',
@@ -95,10 +95,10 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
       end
     end
 
-    context 'with authors that do not have abnormal characters' do
+    context 'with creators that do not have abnormal characters' do
       before do
         solr = Blacklight.default_index.connection
-        test_record[:author_ssim] = 'Alisha Evans'
+        test_record[:creator_ssim] = 'Alisha Evans'
         solr.add([test_record])
         solr.commit
         visit '/catalog/111'

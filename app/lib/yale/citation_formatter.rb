@@ -31,18 +31,19 @@ module Yale
       CiteProc::Item.new(key_value_chunk_1.merge(key_value_chunk_2).merge(key_value_chunk_3))
     end
 
-    # @return [Boolean],returns true if author_ssim has a character that not in any language, else false
+    # @return [Boolean],returns true if creator_ssim has a character that not in any language, else false
     def abnormal_chars?
-      obj[:author_ssim]&.any? { |a| a.match(/[^\p{L}\s]+/) }
+      obj[:creator_ssim]&.any? { |a| a.match(/[^\p{L}\s]+/) }
     end
 
     # @return [Hash], a hash with a Solr Document's fields and values as key,value pairs
+    # Note: Although in this codebase we are using 'creator', the citation gem expects to receive 'author'
     def key_value_chunk_1
       {
         id: :item,
         abstract: obj[:abstract_tesim]&.join(', '),
         archive_location: obj[:sublocation_tesim]&.join(', '),
-        author: obj[:author_ssim]&.join(', '),
+        author: obj[:creator_ssim]&.join(', '),
         "call-number": obj[:identifierShelfMark_ssim]&.join(', '),
         edition: obj[:edition_tesim]&.join(', '),
         institution: obj[:institution_tesim]&.join(', ')

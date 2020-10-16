@@ -57,8 +57,8 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       expect(page).not_to have_content 'Handsome Dan is not a cat.'
     end
 
-    it 'contains displays the correct record when searching by author' do
-      visit '/?search_field=author&q=Eric'
+    it 'contains displays the correct record when searching by creator' do
+      visit '/?search_field=creator&q=Eric'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).to have_content 'Handsome Dan is not a cat.'
     end
