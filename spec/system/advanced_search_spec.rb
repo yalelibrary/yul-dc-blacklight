@@ -106,6 +106,36 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
         expect(page).not_to have_content('Record 2')
       end
     end
+
+    it 'maintains search results in gallery' do
+      fill_in 'oid_ssi', with: '11607445'
+      click_on 'SEARCH'
+      click_on 'Gallery'
+      within '#documents' do
+        expect(page).to     have_content('Record 1')
+        expect(page).not_to have_content('Record 2')
+      end
+      click_on 'List'
+      within '#documents' do
+        expect(page).to     have_content('Record 1')
+        expect(page).not_to have_content('Record 2')
+      end
+    end
+
+    it 'maintains search results when re-querying' do
+      fill_in 'oid_ssi', with: '11607445'
+      click_on 'SEARCH'
+      within '#documents' do
+        expect(page).to     have_content('Record 1')
+        expect(page).not_to have_content('Record 2')
+      end
+      click_on 'Advanced Search'
+      click_on 'SEARCH'
+      within '#documents' do
+        expect(page).to     have_content('Record 1')
+        expect(page).not_to have_content('Record 2')
+      end
+    end
   end
 
   context 'sorting' do
