@@ -21,7 +21,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       visibility_ssi: 'Public',
       genre_ssim: 'Maps',
       resourceType_ssim: 'Maps, Atlases & Globes',
-      author_ssim: ['Anna Elizabeth Dewdney']
+      creator_ssim: ['Anna Elizabeth Dewdney']
     }
   end
 
@@ -34,7 +34,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       visibility_ssi: 'Public',
       genre_ssim: 'Artifacts',
       resourceType_ssim: 'Books, Journals & Pamphlets',
-      author_ssim: ['Andy Graves']
+      creator_ssim: ['Andy Graves']
     }
   end
 
@@ -47,7 +47,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       visibility_ssi: 'Public',
       genre_ssim: 'Manuscripts',
       resourceType_ssim: 'Archives or Manuscripts',
-      author_ssim: ['Andrew Norriss']
+      creator_ssim: ['Andrew Norriss']
     }
   end
 
@@ -60,7 +60,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       visibility_ssi: 'Public',
       genre_ssim: 'Animation',
       resourceType_ssim: 'Archives or Manuscripts',
-      author_ssim: ['Paulo Coelho']
+      creator_ssim: ['Paulo Coelho']
     }
   end
 

@@ -11,7 +11,7 @@ RSpec.describe "search result pagination", type: :system, clean: true, js: true 
     {
       id: '111',
       title_tesim: 'Handsome Dan is a bull dog.',
-      author_tesim: 'Eric & Frederick',
+      creator_tesim: 'Eric & Frederick',
       subjectName_ssim: "this is the subject name",
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1238901',
@@ -23,7 +23,7 @@ RSpec.describe "search result pagination", type: :system, clean: true, js: true 
     {
       id: '212',
       title_tesim: 'Handsome Dan is not a cat.',
-      author_tesim: 'Frederick & Eric',
+      creator_tesim: 'Frederick & Eric',
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
       visibility_ssi: 'Public'
@@ -34,7 +34,7 @@ RSpec.describe "search result pagination", type: :system, clean: true, js: true 
     {
       id: '313',
       title_tesim: 'Handsome Dan is not a bird.',
-      author_tesim: 'Frederick & Eric',
+      creator_tesim: 'Frederick & Eric',
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
       visibility_ssi: 'Public'

@@ -2,7 +2,7 @@
 WORK_WITH_PUBLIC_VISIBILITY = {
   "id": "2055095",
   "title_tesim": ["A General dictionary of the English language"],
-  "author_tesim": ["Johnson, Samuel, 1709-1784"],
+  "creator_tesim": ["Johnson, Samuel, 1709-1784"],
   "extent_ssim": ["1 volume",
                   "43 cm."],
   "format": ["text"],

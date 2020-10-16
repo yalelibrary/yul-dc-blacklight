@@ -12,7 +12,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     {
       id: '111',
       title_tesim: 'Jack or Dan the Bulldog',
-      author_tesim: 'Me and You',
+      creator_tesim: 'Me and You',
       abstract_tesim: 'Binding: white with gold embossing.',
       alternativeTitle_tesim: 'The Yale Bulldogs',
       description_tesim: 'in black ink on thin white paper',

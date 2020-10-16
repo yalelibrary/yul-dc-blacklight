@@ -11,7 +11,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
 
   let(:search_fields) { CatalogController.blacklight_config.search_fields.keys }
   let(:expected_search_fields) do
-    ["all_fields", "all_fields_advanced", "author_tesim", "child_oids_ssim", "date_fields", "genre_fields",
+    ["all_fields", "all_fields_advanced", "creator_tesim", "child_oids_ssim", "date_fields", "genre_fields",
      "identifierShelfMark_tesim", "oid_ssi", "orbisBibId_ssi", "subjectName_ssim", "subject_fields", "title_tesim"]
   end
 
@@ -19,7 +19,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
     {
       id: '111',
       title_tesim: 'Handsome Dan is a bull dog.',
-      author_tesim: 'Eric & Frederick',
+      creator_tesim: 'Eric & Frederick',
       subjectName_ssim: "this is the subject name",
       sourceTitle_tesim: "this is the source title",
       identifierShelfMark_tesim: 'WA MSS 987',
@@ -32,7 +32,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
     {
       id: '212',
       title_tesim: 'Handsome Dan is not a cat.',
-      author_tesim: 'Frederick & Eric',
+      creator_tesim: 'Frederick & Eric',
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
       identifierShelfMark_tesim: 'Yale MS 123',

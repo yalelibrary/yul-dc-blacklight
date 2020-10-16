@@ -101,7 +101,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'genre_ssim', label: 'Genre'
     config.add_facet_field 'resourceType_ssim', label: 'Resource Type'
     config.add_facet_field 'language_ssim', label: 'Language', limit: true, helper_method: :language_code
-    config.add_facet_field 'author_ssim', label: 'Creator', limit: true, sort: 'index'
+    config.add_facet_field 'creator_ssim', label: 'Creator', limit: true, sort: 'index'
     config.add_facet_field 'subjectTopic_ssim', label: 'Subject Topic'
     config.add_facet_field 'subjectName_ssim', label: 'Subject Name'
     config.add_facet_field 'subject_ssim', label: 'Topic', limit: 20, index_range: 'A'..'Z'
@@ -143,7 +143,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field 'author_tesim', label: 'Creator', highlight: true
+    config.add_index_field 'creator_tesim', label: 'Creator', highlight: true
     config.add_index_field 'date_ssim', label: 'Date', highlight: true
     config.add_index_field 'identifierShelfMark_tesim', label: 'Call Number', highlight: true
     config.add_index_field 'imageCount_isi', label: 'Image Count'
@@ -186,7 +186,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'subjectTopic_tesim', label: 'Subject Topic'
 
     # Origin Group
-    config.add_show_field 'author_tesim', label: 'Creator'
+    config.add_show_field 'creator_tesim', label: 'Creator'
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date'
     config.add_show_field 'coordinates_ssim', label: 'Coordinates'
     config.add_show_field 'date_ssim', label: 'Date'
@@ -251,7 +251,7 @@ class CatalogController < ApplicationController
     # config.add_search_field 'all_fields', label: 'All Fields'
 
     # Array allows for only listed Solr fields to be searched in the 'Common Fields'
-    search_fields = ['abstract_tesim', 'author_tesim', 'alternativeTitle_tesim', 'description_tesim', 'subjectGeographic_tesim',
+    search_fields = ['abstract_tesim', 'creator_tesim', 'alternativeTitle_tesim', 'description_tesim', 'subjectGeographic_tesim',
                      'identifierShelfMark_tesim', 'orbisBibId_ssi', 'publicatonPlace_tesim', 'publisher_tesim',
                      'resourceType_tesim', 'sourceCreated_tesim', 'subjectName_tesim', 'subjectTopic_tesim',
                      'title_tesim']
@@ -278,7 +278,7 @@ class CatalogController < ApplicationController
       'contributor_tsim',
       'contributorDisplay_tsim',
       'coordinates_ssim',
-      'author_tesim',
+      'creator_tesim',
       'creatorDisplay_tsim',
       'date_ssim',
       'dateStructured_ssim',
@@ -340,9 +340,9 @@ class CatalogController < ApplicationController
     # Now we see how to over-ride Solr request handler defaults, in this
     # case for a BL "search field", which is really a dismax aggregate
     # of Solr search fields.
-    config.add_search_field('author_tesim', label: 'Creator') do |field|
+    config.add_search_field('creator_tesim', label: 'Creator') do |field|
       field.solr_parameters = {
-        qf: 'author_tesim',
+        qf: 'creator_tesim',
         pf: ''
       }
     end

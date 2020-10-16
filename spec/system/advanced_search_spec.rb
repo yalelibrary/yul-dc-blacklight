@@ -26,8 +26,8 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
     end
 
-    it 'gets correct search results from author_tesim' do
-      fill_in 'author_tesim', with: 'Me and Frederick'
+    it 'gets correct search results from creator_tesim' do
+      fill_in 'creator_tesim', with: 'Me and Frederick'
       click_on 'SEARCH'
       within '#documents' do
         expect(page).to     have_content('Record 1')
@@ -177,7 +177,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
 
       fill_in 'oid_ssi', with: '11607445' # for record 1
-      fill_in 'author_tesim', with: 'Zeno, Jacopo, 1417-1481' # for record 2
+      fill_in 'creator_tesim', with: 'Zeno, Jacopo, 1417-1481' # for record 2
       click_on 'SEARCH'
       within '#documents' do
         expect(page).to have_content('Record 1')
@@ -191,7 +191,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
 
       fill_in 'oid_ssi', with: '11607445' # for record 1
-      fill_in 'author_tesim', with: '*'
+      fill_in 'creator_tesim', with: '*'
       click_on 'SEARCH'
       within '#documents' do
         expect(page).to have_content('Record 1')
