@@ -13,7 +13,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
       id: '111',
       title_tesim: 'Handsome Dan is a bull dog.',
       dateStructured_ssim: '2022',
-      author_tesim: 'Eric & Frederick',
+      creator_tesim: 'Eric & Frederick',
       subjectName_ssim: "this is the subject name",
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1238901',
@@ -26,7 +26,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
       id: '212',
       title_tesim: 'Handsome Dan is not a cat.',
       dateStructured_ssim: '1600',
-      author_tesim: 'Frederick & Eric',
+      creator_tesim: 'Frederick & Eric',
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
       visibility_ssi: 'Public'
@@ -38,7 +38,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
       id: '313',
       title_tesim: 'Handsome Dan is not a bird.',
       dateStructured_ssim: '1100',
-      author_tesim: 'Frederick & Eric',
+      creator_tesim: 'Frederick & Eric',
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
       visibility_ssi: 'Public'
@@ -51,7 +51,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
       identifierShelfMark_ssim: 'call number',
       title_tesim: 'Handsome Dan is not a rabbit.',
       dateStructured_ssim: '1555',
-      author_tesim: 'Frederick & Eric',
+      creator_tesim: 'Frederick & Eric',
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
       visibility_ssi: 'Public'
@@ -64,7 +64,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
       identifierShelfMark_ssim: 'call number',
       title_tesim: 'Handsome Dan is not a elephant.',
       dateStructured_ssim: '1555',
-      author_tesim: 'Frederick & Eric',
+      creator_tesim: 'Frederick & Eric',
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
       visibility_ssi: 'Public'

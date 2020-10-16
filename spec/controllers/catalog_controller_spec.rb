@@ -12,7 +12,7 @@ RSpec.describe CatalogController, type: :controller do
       let(:search_fields) { controller.blacklight_config.search_fields.keys }
 
       let(:expected_search_fields) do
-        ["all_fields", "all_fields_advanced", "author_tesim", "child_oids_ssim", "date_fields", "genre_fields",
+        ["all_fields", "all_fields_advanced", "creator_tesim", "child_oids_ssim", "date_fields", "genre_fields",
          "identifierShelfMark_tesim", "oid_ssi", "orbisBibId_ssi", "subjectName_ssim", "subject_fields", "title_tesim"]
       end
 
