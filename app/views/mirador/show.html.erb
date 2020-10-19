@@ -8,28 +8,20 @@
 <div id="my-mirador"/> 
 <script type="text/javascript">
 
-function getUrlVar(key){
-    var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search);
-    return result && unescape(result[1]) || "";
-}
-
-var manifest_param = getUrlVar("manifest");
-var canvas_param = getUrlVar("canvas");
-
-manifests = {}
+manifests = {};
 windows = [];
 
-if (manifest_param) {
-    manifests[manifest_param] = {
+manifest = "<%= manifest_url(@oid) %>";
+
+if (manifest) {
+    manifests[manifest] = {
         "provider": "Yale University"
-    }
+    };
     windows.push({
-        "loadedManifest": manifest_param,
+        "loadedManifest": manifest,
         "thumbnailNavigationPosition": 'far-bottom'
-    })
+    });
 }
-
-
 var mirador = Mirador.viewer({
   "id": "my-mirador",
   "manifests": manifests,
