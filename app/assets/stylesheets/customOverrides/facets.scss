@@ -100,7 +100,11 @@ div.card {
   font-weight: 500;
 }
 
-#facets .btn {
+#facets .range-limit-input-group .btn {
+  margin-left: 10px;
+}
+
+#facets .facet-field-heading .btn {
   border-top: 1px solid $light_grey !important;
 }
 
@@ -115,4 +119,24 @@ h2.facets-heading {
   position: absolute;
   right: 6px;
   z-index: 10;
+}
+
+#facets .range-limit-input-group input {
+  padding: 0 0.25px 0 0.25px;
+}
+
+@media screen and (min-width: $small_device) {
+
+}
+
+@media screen and (min-width: $medium_device) {
+
+}
+
+@media screen and (min-width: $large_device) {
+
+}
+
+@media screen and (min-width: $xlarge_device) {
+
 }
