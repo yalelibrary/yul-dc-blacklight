@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 class MiradorController < ApplicationController
-
   include BlacklightHelper
 
   def show
@@ -14,5 +13,4 @@ class MiradorController < ApplicationController
   rescue ArgumentError
     nil
   end
-
 end
