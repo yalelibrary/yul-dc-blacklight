@@ -75,6 +75,8 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     visit root_path
     click_button 'Publication Date'
 
+    expect(page).to have_selector '.facet-field-heading'
+    expect(page).to have_selector '.range-limit-input-group'
     expect(page).to have_selector '.range_begin'
     expect(page).to have_selector '.range_end'
     expect(page).to have_button 'Apply'
