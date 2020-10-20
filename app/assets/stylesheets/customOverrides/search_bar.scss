@@ -1,7 +1,7 @@
 /********************************************************
 DEFAULT MOBILE STYLING
 ********************************************************/
-
+.search-area {
 .advanced_search {
   padding: 14px 0px 11px 23px;
   color: $light_blue;
@@ -173,4 +173,5 @@ DEFAULT MOBILE STYLING
   .navbar-search .search-query-form {
     flex: 0 0 100%;
   }
+}
 }
