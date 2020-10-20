@@ -7,26 +7,29 @@
 <body>
 <div id="my-mirador"/> 
 <script type="text/javascript">
+  let dc_mirador_config = {
+      "id": "my-mirador"
+  }
 
-manifests = {};
-windows = [];
+<% if @manifest %>
+  const manifest = "<%= @manifest %>";
+  dc_mirador_config = {
+      ...dc_mirador_config,
+      "manifests": {
+          manifest: {
+              "provider": "Yale University"
+          }
+      },
+      "windows": [
+          {
+              "loadedManifest": manifest,
+              "thumbnailNavigationPosition": 'far-bottom'
+          }
+      ]
+  }
+<% end %>
 
-manifest = "<%= manifest_url(@oid) %>";
-
-if (manifest) {
-    manifests[manifest] = {
-        "provider": "Yale University"
-    };
-    windows.push({
-        "loadedManifest": manifest,
-        "thumbnailNavigationPosition": 'far-bottom'
-    });
-}
-var mirador = Mirador.viewer({
-  "id": "my-mirador",
-  "manifests": manifests,
-  "windows": windows
-});
+var mirador = Mirador.viewer(dc_mirador_config);
 </script>
 </body>
 </html>
