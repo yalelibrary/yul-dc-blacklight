@@ -447,10 +447,10 @@ class CatalogController < ApplicationController
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
-    config.spell_max = -1
+    config.spell_max = 5
 
     # Configuration for autocomplete suggestor
-    config.autocomplete_enabled = false
+    config.autocomplete_enabled = true
     config.autocomplete_path = 'suggest'
     # if the name of the solr.SuggestComponent provided in your solrcongig.xml is not the
     # default 'mySuggester', uncomment and provide it below
