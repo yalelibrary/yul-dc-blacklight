@@ -4,6 +4,7 @@
 
 
     <span class="constraints-label sr-only"><%= t('blacklight.search.filters.title') %></span>
+    <%= render_date_constraint(params) if params["range"].present? %>
     <%= render_constraints(controller.params != params ? params : search_state) %>
     <%= render 'start_over', show_icon: true%>
   </div>

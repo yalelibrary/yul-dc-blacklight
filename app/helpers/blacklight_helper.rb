@@ -3,6 +3,41 @@
 module BlacklightHelper
   include Blacklight::BlacklightHelperBehavior
 
+  # sets up date params for constraint partial
+  def render_date_constraint(params)
+    label = "Date"
+
+    # if date is unknown
+    if params["range"].try(:[], "dateStructured_ssim").try(:[], "missing")
+      value = "Unknown"
+      remove_url = range_unknown_remove_url
+    else
+      beg_date = params["range"].values[0]["begin"]
+      end_date = params["range"].values[0]["end"]
+
+      value ||= "#{beg_date} - #{end_date}"
+      remove_url = range_remove_url
+    end
+
+    options = {
+      remove: remove_url,
+      classes: ["dateStructured_ssim"]
+    }
+    render partial: "constraints_element", locals: { value: value, label: label, options: options }
+  end
+
+  # removes date range params from link with unknown date
+  def range_unknown_remove_url
+    url = request.url.gsub(/[?&]range%5BdateStructured_ssim%5D%5Bmissing%5D=true&commit=Apply/, '')
+    url.gsub!(/[?&]range%5BdateStructured_ssim%5D%5Bmissing%5D=true/, '')
+  end
+
+  # removes date range params from link
+  def range_remove_url
+    url = request.url.gsub(/[&?]range%5BdateStructured_ssim%5D%5Bbegin%5D=[\d]{4}&range%5BdateStructured_ssim%5D%5Bend%5D=[\d]{4}&commit=Apply/, '')
+    url.gsub(/[&?]range%5BdateStructured_ssim%5D%5Bbegin%5D=[\d]{4}&range%5BdateStructured_ssim%5D%5Bend%5D=[\d]{4}/, '')
+  end
+
   def manifest_url(oid)
     File.join(manifest_base_url, "#{oid}.json")
   end
