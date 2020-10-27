@@ -48,7 +48,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
   let(:rabbit) do
     {
       id: '400',
-      identifierShelfMark_ssim: 'call number',
+      identifierShelfMark_ssim: 'MS123',
       title_tesim: 'Handsome Dan is not a rabbit.',
       dateStructured_ssim: '1555',
       creator_tesim: 'Frederick & Eric',
@@ -61,7 +61,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
   let(:elephant) do
     {
       id: '401',
-      identifierShelfMark_ssim: 'call number',
+      identifierShelfMark_ssim: 'MS123',
       title_tesim: 'Handsome Dan is not a elephant.',
       dateStructured_ssim: '1555',
       creator_tesim: 'Frederick & Eric',
@@ -89,25 +89,34 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     expect(el).to have_content("1100 : 2023")
   end
 
-  it "does not show the date slider if only one date" do
-    visit '?search_field=identifierShelfMark_tesim&q="call number"'
+  it "does not show the date slider if only one date", :style do
+    visit '?f%5BidentifierShelfMark_ssim%5D%5B%5D=MS123'
+    expect(page).to have_content("1 - 2")
     expect(page).not_to have_css('.card.facet-limit.blacklight-dateStructured_ssim')
   end
 
-  xit "should be able to search with the slider" do
+  it "is able to search with the slider", :style do
     visit root_path
     click_button 'Publication Date'
-    within '.card.facet-limit.blacklight-dateStructured_ssim' do
-      source = page.find('.slider-handle.round').last
-      source.drag_by(30, 0)
+    within '#facet-datestructured_ssim' do
+      sliders = find_all('.slider-handle.round')
+
+      beg_slider = sliders.first
+      beg_slider.drag_by(30, 0)
+
+      end_slider = sliders.last
+      end_slider.drag_by(-105, 0)
+    end
+    within '#facet-datestructured_ssim' do
+      click_on "Apply"
     end
 
     within '.blacklight-dateStructured_ssim' do
-      expect(page).to have_content "1100 to 1600"
+      expect(page.text).to match(/12\d\d to 16\d\d/)
     end
 
     within '.constraints-container' do
-      expect(page).to have_content '1100 to 1600'
+      expect(page.text).to match(/Date 12\d\d - 16\d\d/)
     end
 
     expect(page).to have_content '1 - 3'
