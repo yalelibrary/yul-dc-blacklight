@@ -328,7 +328,7 @@ class CatalogController < ApplicationController
       'visibility_ssi'
     ]
 
-    config.add_search_field('all_fields_advanced', label: 'Common Fields') do |field|
+    config.add_search_field('all_fields_advanced', label: 'All Fields') do |field|
       field.qt = 'search'
       field.include_in_simple_select = false
       field.solr_parameters = {

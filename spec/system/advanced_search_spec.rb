@@ -15,6 +15,20 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
 
   let(:cat) { ADVANCED_SEARCH_TESTING_2 }
 
+  describe 'search fields' do
+    it 'has the correct text field labels' do
+      expect(page).to have_content('All Fields')
+      expect(page).to have_content('Creator')
+      expect(page).to have_content('Title')
+      expect(page).to have_content('Call Number')
+      expect(page).to have_content('Date')
+      expect(page).to have_content('Subject')
+      expect(page).to have_content('Genre/format')
+      expect(page).to have_content('OID [Parent/primary]')
+      expect(page).to have_content('OID [Child/images]')
+    end
+  end
+
   describe 'searching' do
     it 'gets correct search results from advanced fields' do
       fill_in 'all_fields_advanced', with: 'Latin'
