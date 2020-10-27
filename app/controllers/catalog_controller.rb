@@ -105,7 +105,6 @@ class CatalogController < ApplicationController
     config.add_facet_field 'subjectTopic_ssim', label: 'Subject Topic'
     config.add_facet_field 'subjectName_ssim', label: 'Subject Name'
     config.add_facet_field 'subject_ssim', label: 'Topic', limit: 20, index_range: 'A'..'Z'
-    config.add_facet_field 'lc_1letter_ssim', label: 'Call Number'
     config.add_facet_field 'publicationPlace_ssim', label: 'Publication Place', limit: true, sort: 'index'
     config.add_facet_field 'partOf_ssim', label: 'Digital Collection'
     config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true
