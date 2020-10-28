@@ -138,6 +138,8 @@ module BlacklightHelper
       end[0]
     elsif field_name == 'orbisBibId_ssi'
       link_to field.to_s, "http://hdl.handle.net/10079/bibid/#{field}"
+    elsif ['subjectTopic_tesim', 'subjectName_ssim', 'geoSubject_ssim'].include?(field_name)
+      safe_join(field, '<br/>'.html_safe)
     elsif !field.respond_to?('doc_presenter') && field.respond_to?('to_sentence')
       field.to_sentence
     elsif !field.respond_to?('doc_presenter')
