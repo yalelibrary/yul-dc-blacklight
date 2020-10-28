@@ -74,11 +74,14 @@ DEFAULT MOBILE STYLING
 
 }
 
-#citationLink {
+#citationLink, #manifestLink, #miradorLink{
   color: $light_blue !important;
   font: $mallory_medium;
   font-size: 11px;
   text-transform: uppercase;
+}
+
+#citationLink {
   padding-left: 19px;
 }
 
@@ -86,15 +89,16 @@ DEFAULT MOBILE STYLING
   content: ' >';
 }
 
-#manifestLink {
-  color: $light_blue !important;
-  font: $mallory_medium;
-  font-size: 11px;
-  text-transform: uppercase;
-}
-
 #manifestLink:after {
   content: ' >';
+}
+
+#miradorLink:after {
+  content: ' >';
+}
+
+#miradorLink{
+  margin-left: 15px;
 }
 
 // metadata grouping

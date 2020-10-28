@@ -8,7 +8,8 @@
       <div class='nav-link'>
         <% oid = @document.id %>
         <%= link_to image_tag('iiif.png', alt: 'IIIF Logo'), manifest_url(oid), target: '_blank', class: 'iiif-logo', rel: 'external' %>
-        <%= link_to t('blacklight.sidebar.manifest'), manifest_url(oid), target: '_blank', id: 'manifestLink'%> 
+        <%= link_to t('blacklight.sidebar.manifest'), manifest_url(oid), target: '_blank', id: 'manifestLink'%>
+        <%= link_to 'View in Mirador', mirador_url(oid), target: '_blank', id: 'miradorLink'%>
       </div>
     </li>
   </ul>
