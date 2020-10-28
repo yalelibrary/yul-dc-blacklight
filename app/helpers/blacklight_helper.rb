@@ -46,6 +46,10 @@ module BlacklightHelper
     ENV.fetch('IIIF_MANIFESTS_BASE_URL', "#{request.protocol}localhost/manifests")
   end
 
+  def mirador_url(oid)
+    "/mirador/#{oid}"
+  end
+
   def language_codes(args)
     language_values = args[:document][args[:field]]
     language_values.map do |language_code|

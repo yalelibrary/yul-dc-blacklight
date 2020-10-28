@@ -19,5 +19,10 @@ RSpec.describe 'catalog/_show_tools.html.erb' do
       render partial: 'catalog/show_links'
       expect(rendered).to have_link 'Manifest Link', href: "http://localhost/manifests/xyz.json"
     end
+
+    it 'renders the mirador link' do
+      render partial: 'catalog/show_links'
+      expect(rendered).to have_link 'View in Mirador', href: "/mirador/xyz"
+    end
   end
 end
