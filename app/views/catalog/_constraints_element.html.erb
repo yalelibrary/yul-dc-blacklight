@@ -6,6 +6,7 @@
     #   :classes => array of classes to add to container span
     options ||= {}
 %>
+
 <span class="btn-group applied-filter constraint query <%= options[:classes].join(" ") if options[:classes] %>">
   <span class="constraint-value btn btn-outline-secondary ">
     <% unless label.blank? %>
