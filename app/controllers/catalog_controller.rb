@@ -442,8 +442,10 @@ class CatalogController < ApplicationController
     # config.add_sort_field 'pub_date_si desc, title_si asc', label: 'year'
     # config.add_sort_field 'dateStructured_ssim asc, title_si asc', label: 'date (oldest first)'
     # config.add_sort_field 'dateStructured_ssim desc, title_si asc', label: 'date (newest first)'
-    config.add_sort_field 'creator_ssim asc, title_ssim asc', label: 'creator'
-    config.add_sort_field 'title_ssim asc, pub_date_si desc', label: 'title'
+    config.add_sort_field 'creator_ssim asc, title_ssim asc', label: 'Creator (A --> Z)'
+    config.add_sort_field 'creator_ssim desc, title_ssim desc', label: 'Creator (Z --> A)'
+    config.add_sort_field 'title_ssim asc, pub_date_si desc', label: 'Title (A --> Z)'
+    config.add_sort_field 'title_ssim desc, pub_date_si desc', label: 'Title (Z --> A)'
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
