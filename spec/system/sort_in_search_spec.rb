@@ -97,31 +97,64 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
   end
 
   # add creator and title test
-  it 'sorts by title' do
-    click_on 'search'
-    click_on 'Sort by relevance'
-    within('div#sort-dropdown') do
-      click_on 'title'
+
+  context 'sorts by title' do
+    it 'asc' do
+      click_on 'search'
+      click_on 'Sort by relevance'
+      within('div#sort-dropdown') do
+        click_on 'Title (A --> Z)'
+      end
+
+      content = find(:css, '#content')
+      expect(content).to have_content("1.\nAmor Llama")
+      expect(content).to have_content("2.\nAquila Eccellenza")
+      expect(content).to have_content("3.\nHandsomeDan Bulldog")
+      expect(content).to have_content("4.\nRhett Lecheire")
     end
 
-    content = find(:css, '#content')
-    expect(content).to have_content("1.\nAmor Llama")
-    expect(content).to have_content("2.\nAquila Eccellenza")
-    expect(content).to have_content("3.\nHandsomeDan Bulldog")
-    expect(content).to have_content("4.\nRhett Lecheire")
+    it 'desc' do
+      click_on 'search'
+      click_on 'Sort by relevance'
+      within('div#sort-dropdown') do
+        click_on 'Title (Z --> A)'
+      end
+
+      content = find(:css, '#content')
+      expect(content).to have_content("4.\nAmor Llama")
+      expect(content).to have_content("3.\nAquila Eccellenza")
+      expect(content).to have_content("2.\nHandsomeDan Bulldog")
+      expect(content).to have_content("1.\nRhett Lecheire")
+    end
   end
 
-  it 'sorts by creator' do
-    click_on 'search'
-    click_on 'Sort by relevance'
-    within('div#sort-dropdown') do
-      click_on 'creator'
+  context 'sorts by creator' do
+    it 'sorts by creater asc' do
+      click_on 'search'
+      click_on 'Sort by relevance'
+      within('div#sort-dropdown') do
+        click_on 'Creator (A --> Z)'
+      end
+
+      content = find(:css, '#content')
+      expect(content).to have_content("1.\nAquila Eccellenza")
+      expect(content).to have_content("2.\nHandsomeDan Bulldog")
+      expect(content).to have_content("3.\nAmor Llama")
+      expect(content).to have_content("4.\nRhett Lecheire")
     end
 
-    content = find(:css, '#content')
-    expect(content).to have_content("1.\nAquila Eccellenza")
-    expect(content).to have_content("2.\nHandsomeDan Bulldog")
-    expect(content).to have_content("3.\nAmor Llama")
-    expect(content).to have_content("4.\nRhett Lecheire")
+    it 'sorts by creater desc' do
+      click_on 'search'
+      click_on 'Sort by relevance'
+      within('div#sort-dropdown') do
+        click_on 'Creator (Z --> A)'
+      end
+
+      content = find(:css, '#content')
+      expect(content).to have_content("4.\nAquila Eccellenza")
+      expect(content).to have_content("3.\nHandsomeDan Bulldog")
+      expect(content).to have_content("2.\nAmor Llama")
+      expect(content).to have_content("1.\nRhett Lecheire")
+    end
   end
 end
