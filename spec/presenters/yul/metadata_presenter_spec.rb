@@ -42,11 +42,11 @@ RSpec.describe Yul::MetadataPresenter do
     {
       'format' => 'Format',
       'genre_ssim' => 'Genre',
-      'geoSubject_ssim' => 'Geo Subject',
+      'geoSubject_ssim' => 'Subject (Geographic)',
       'material_tesim' => 'Material',
       'resourceType_ssim' => 'Resource Type',
-      'subjectName_ssim' => 'Subject Name',
-      'subjectTopic_tesim' => 'Subject Topic'
+      'subjectName_ssim' => 'Subject (Name)',
+      'subjectTopic_tesim' => 'Subject (Topic)'
     }
   end
 
@@ -232,7 +232,7 @@ RSpec.describe Yul::MetadataPresenter do
         end
 
         it 'returns the Geo Subject Key' do
-          expect(config['geoSubject_ssim'].to_s).to eq 'Geo Subject'
+          expect(config['geoSubject_ssim'].to_s).to eq 'Subject (Geographic)'
         end
 
         it 'returns the Material Key' do
@@ -244,11 +244,11 @@ RSpec.describe Yul::MetadataPresenter do
         end
 
         it 'returns the Subject Name Key' do
-          expect(config['subjectName_ssim'].to_s).to eq 'Subject Name'
+          expect(config['subjectName_ssim'].to_s).to eq 'Subject (Name)'
         end
 
         it 'returns the Subject Topic Key' do
-          expect(config['subjectTopic_tesim'].to_s).to eq 'Subject Topic'
+          expect(config['subjectTopic_tesim'].to_s).to eq 'Subject (Topic)'
         end
       end
 
