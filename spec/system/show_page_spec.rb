@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe 'Show Page', type: :system, js: :true, clean: true do
+RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   before do
     solr = Blacklight.default_index.connection
     solr.add([llama,
@@ -72,9 +72,9 @@ RSpec.describe 'Show Page', type: :system, js: :true, clean: true do
     expect(page).to have_css '.link-card-header'
     expect(page).to have_css '.manifest'
   end
-  context '"Back to Search" button' do
+  context '"Back to Search Results" button' do
     it 'returns user to search results' do
-      expect(page).to have_link("Back to Search", href: "/?page=1&per_page=10&search_field=all_fields")
+      expect(page).to have_link("Back to Search Results", href: "/?page=1&per_page=10&search_field=all_fields")
     end
   end
   context '"Start Over" button' do
