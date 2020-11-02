@@ -191,7 +191,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
 
     it 'can sort by title' do
       within '#sort' do
-        find("option[value='title_ssim asc, pub_date_si desc']").click
+        find("option[value='title_ssim asc, oid_ssi desc']").click
       end
 
       click_on 'SEARCH'
