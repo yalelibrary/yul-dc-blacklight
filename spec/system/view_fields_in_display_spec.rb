@@ -72,7 +72,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       orbisBibId_ssi: '1234567',
       orbisBarcode_ssi: 'this is the orbis bar code',
       findingAid_ssim: 'this is the finding aid',
-      collectionId_ssim: 'this is the collection ID',
       edition_ssim: 'this is the edition',
       uri_ssim: 'this is the URI',
       partOf_ssim: "this is the part of, using ssim",
@@ -224,9 +223,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays the Finding Aid in results' do
       expect(document).to have_content("this is the finding aid")
-    end
-    it 'displays the Collection ID in results' do
-      expect(document).to have_content("this is the collection ID")
     end
     it 'displays the Edition in results' do
       expect(document).to have_content("this is the edition")

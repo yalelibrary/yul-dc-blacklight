@@ -21,7 +21,6 @@ RSpec.describe Yul::MetadataPresenter do
     {
       'box_ssim' => 'Box',
       'children_ssim' => 'Children',
-      'collectionId_ssim' => 'Collection ID',
       'findingAid_ssim' => 'Finding Aid',
       'folder_ssim' => 'Folder',
       'identifierMfhd_ssim' => 'Identifier MFHD',
@@ -150,10 +149,6 @@ RSpec.describe Yul::MetadataPresenter do
 
         it 'returns the Children Key' do
           expect(config['children_ssim'].to_s).to eq 'Children'
-        end
-
-        it 'returns the Collection ID Key' do
-          expect(config['collectionId_ssim'].to_s).to eq 'Collection ID'
         end
 
         it 'returns the Finding Aid Key' do
