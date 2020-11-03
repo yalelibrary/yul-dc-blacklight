@@ -251,8 +251,11 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(page).to have_link('English (eng)', href: '/?f%5Blanguage_ssim%5D%5B%5D=English (eng)')
       expect(page).to have_link('zz', href: '/?f%5Blanguage_ssim%5D%5B%5D=zz')
     end
-    it 'contains a link on the Orbis Bib ID to the Orbis catalog record' do
+    it 'contains a link on the Orbis Bib ID to the Orbis catalog record' do
       expect(page).to have_link('1234567', href: 'http://hdl.handle.net/10079/bibid/1234567')
+    end
+    it 'contains a link for the Creator field to the facet' do
+      expect(page).to have_link('Eric & Frederick', href: '/?f%5Bcreator_tesim%5D%5B%5D=Eric+&+Frederick')
     end
     it 'contains a link on the Finding Aid to the Finding Aid catalog record' do
       expect(page).to have_link('this is the finding aid', href: 'this is the finding aid')
