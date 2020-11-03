@@ -151,7 +151,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("this is the genre")
     end
     it 'displays the Subject (Geographic) in results' do
-      expect(document).to have_content("this is the geograhic subject")
+      expect(document).to have_content("this is the geo subject")
     end
     it 'displays the Subject (Topic) in results' do
       expect(document).to have_content("this is the subject topic")
