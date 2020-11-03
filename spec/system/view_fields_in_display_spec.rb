@@ -149,13 +149,16 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the Genre in results' do
       expect(document).to have_content("this is the genre")
     end
-    it 'displays the Geo Subject in results' do
+    it 'displays the Subject (Geographic) in results' do
       expect(document).to have_content("this is the geo subject")
+    end
+    it 'displays the Subject (Topic) in results' do
+      expect(document).to have_content("this is the subject topic")
     end
     it 'displays the Resource Type in results' do
       expect(document).to have_content("this is the resource type")
     end
-    it 'displays the Subject Name in results' do
+    it 'displays the Subject (Name) in results' do
       expect(document).to have_content("this is the subject name")
     end
     it 'displays the Extend of Digitization in results' do
