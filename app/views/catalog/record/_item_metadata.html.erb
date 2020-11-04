@@ -1,23 +1,18 @@
 <% doc_presenter = show_presenter(document) %>
-<% item = Yul::MetadataPresenter.new(
-  document: doc_presenter.fields_to_render,
-  section: section
-).terms %>
 
-<% if item.length > 0 %>
   <div class='metadata-block single-item-show'>
-    <h4 class='metadata-block__title'><%= section.titlecase %></h4>
+    <h4 class='metadata-block__title'><%= metadata.titlecase %></h4>
     <dl class='metadata-block__group'>
-      <% item.each do |field_name, field| -%>
+
+      <% doc_presenter.metadata_fields_to_render(metadata).each do |field_name, field, field_presenter| %>
         <dt class='blacklight-<%= field_name.parameterize %> metadata-block__label-key'>
           <!-- KEY -->
           <%= (render_document_show_field_label document, field: field_name).tr(':', '') %>
           <!-- VALUE -->
         </dt>
         <dd class='blacklight-<%= field_name.parameterize %> metadata-block__label-value metadata-block__label-value--yul'>
-          <%= format_field(field, field_name) %>
+          <%= field_presenter.render%>
         </dd>
       <% end %>
     </dl>
   </div>
-<% end %>

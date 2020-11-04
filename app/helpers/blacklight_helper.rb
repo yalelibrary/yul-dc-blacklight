@@ -25,7 +25,7 @@ module BlacklightHelper
   def language_codes_as_links(args)
     out = []
 
-    language_values = args
+    language_values = args[:document][args[:field]]
     language_values.map do |language_code|
       converted_code = language_code_to_english(language_code)
       link = "/?f%5Blanguage_ssim%5D%5B%5D=#{converted_code}"
@@ -33,6 +33,22 @@ module BlacklightHelper
       out << tag.br
     end
     safe_join(out)
+  end
+
+  def link_to_orbis_bib_id(arg)
+    bib_id = arg[:document][arg[:field]]
+    link = "http://hdl.handle.net/10079/bibid/#{bib_id}"
+
+    link_to(bib_id, link)
+  end
+
+  def join_with_br(arg)
+    values = arg[:document][arg[:field]]
+    safe_join(values, '<br/>'.html_safe)
+  end
+
+  def link_to_url(arg)
+    link_to(arg[:value][0], arg[:value][0])
   end
 
   def search_field_value_link(args)
@@ -78,43 +94,5 @@ module BlacklightHelper
   def language_code_to_english(language_code)
     language_name_in_english = ISO_639.find_by_code(language_code)&.english_name
     language_name_in_english.present? ? "#{language_name_in_english} (#{language_code})" : language_code
-  end
-
-  def format_field(field, field_name)
-    if field_name == 'language_ssim'
-      language_codes_as_links(field)
-    elsif field_name == 'format'
-      field.map do |f|
-        link_to f.to_s, ('/?f%5Bformat%5D%5B%5D=' + f.to_s.split.join('+')).to_s
-      end[0]
-    elsif field_name == 'creator_tesim'
-      field.map do |f|
-        link_to f.to_s, ('/?f%5Bcreator_tesim%5D%5B%5D=' + f.to_s.split.join('+')).to_s
-      end[0]
-    elsif field_name == 'genre_ssim'
-      field.map do |f|
-        link_to f.to_s, ('/?f%5Bgenre_ssim%5D%5B%5D=' + f.to_s.split.join('+')).to_s
-      end[0]
-    elsif field_name == 'resourceType_ssim'
-      field.map do |f|
-        link_to f.to_s, ('/?f%5BresourceType_ssim%5D%5B%5D=' + f.to_s.split.join('+')).to_s
-      end[0]
-    elsif field_name == 'findingAid_ssim'
-      link_to (field[0]).to_s, (field[0]).to_s
-    elsif field_name == 'identifierShelfMark_ssim'
-      field.map do |f|
-        link_to f.to_s, ('/?f%5BidentifierShelfMark_ssim%5D%5B%5D=' + f.to_s.split.join('+')).to_s
-      end[0]
-    elsif field_name == 'orbisBibId_ssi'
-      link_to field.to_s, "http://hdl.handle.net/10079/bibid/#{field}"
-    elsif ['subjectTopic_tesim', 'subjectName_ssim', 'geoSubject_ssim'].include?(field_name)
-      safe_join(field, '<br/>'.html_safe)
-    elsif !field.respond_to?('doc_presenter') && field.respond_to?('to_sentence')
-      field.to_sentence
-    elsif !field.respond_to?('doc_presenter')
-      field.to_s
-    else
-      doc_presenter.field_value field
-    end
   end
 end

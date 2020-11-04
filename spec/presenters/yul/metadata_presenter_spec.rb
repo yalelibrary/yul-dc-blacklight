@@ -2,371 +2,264 @@
 require 'rails_helper'
 
 RSpec.describe Yul::MetadataPresenter do
-  let(:description_metadata) do
-    {
-      'abstract_tesim' => 'Abstract',
-      'alternativeTitle_tesim' => 'Alternative Title',
-      'description_tesim' => 'Description',
-      'extent_ssim' => 'Extent',
-      'extentOfDigitization_ssim' => 'Extent of Digitization',
-      'numberOfPages_ssim' => 'Number of Pages',
-      'projection_tesim' => 'Projection',
-      'references_tesim' => 'References',
-      'scale_tesim' => 'Scale',
-      'subtitle_tesim' => 'Subtitle'
-    }
-  end
+  subject(:presenter) { described_class.new(doc, request_context) }
 
-  let(:identifier_metadata) do
-    {
-      'box_ssim' => 'Box',
-      'children_ssim' => 'Children',
-      'findingAid_ssim' => 'Finding Aid',
-      'folder_ssim' => 'Folder',
-      'identifierMfhd_ssim' => 'Identifier MFHD',
-      'identifierShelfMark_ssim' => 'Call Number',
-      'importUrl_ssim' => 'Import URL',
-      'isbn_ssim' => 'ISBN',
-      'orbisBarcode_ssi' => 'Orbis Bar Code',
-      'orbisBibId_ssi' => 'Orbis Bib ID',
-      'oid_ssi' => 'OID',
-      'partOf_ssim' => 'Collection Name',
-      'uri_ssim' => 'URI',
-      'url_fulltext_ssim' => 'URL',
-      'url_suppl_ssim' => 'More Information'
-    }
-  end
+  let(:config) { CatalogController.blacklight_config }
+  let(:request_context) { instance_double('View context', should_render_field?: true, blacklight_config: config) }
+  let(:controller) { double }
+  let(:params) { {} }
+  let(:search_state) { Blacklight::SearchState.new(params, config, controller) }
 
-  let(:keyword_metadata) do
-    {
-      'format' => 'Format',
-      'genre_ssim' => 'Genre',
-      'geoSubject_ssim' => 'Subject (Geographic)',
-      'material_tesim' => 'Material',
-      'resourceType_ssim' => 'Resource Type',
-      'subjectName_ssim' => 'Subject (Name)',
-      'subjectTopic_tesim' => 'Subject (Topic)'
-    }
-  end
-
-  let(:migration_source_metadata) do
-    {
-      'recordType_ssi' => 'Record Type',
-      'source_ssim' => 'Source'
-    }
-  end
-
-  let(:origin_metadata) do
-    {
-      'creator_tesim' => 'Creator',
-      'coordinates_ssim' => 'Coordinates',
-      'copyrightDate_ssim' => 'Copyright Date',
-      'date_ssim' => 'Date',
-      'digital_ssim' => 'Digital',
-      'edition_ssim' => 'Edition',
-      'language_ssim' => 'Language',
-      'publicationPlace_ssim' => 'Publication Place',
-      'publisher_ssim' => 'Publisher',
-      'published_ssim' => 'Published',
-      'sourceCreated_tesim' => 'Source Created',
-      'sourceDate_tesim' => 'Source Date',
-      'sourceEdition_tesim' => 'Source Edition',
-      'sourceNote_tesim' => 'Source Note',
-      'sourceTitle_tesim' => 'Source Title'
-    }
-  end
-
-  let(:usage_metadata) do
-    {
-      'rights_ssim' => 'Rights'
-    }
+  before do
+    allow(request_context).to receive(:search_state).and_return(search_state)
   end
 
   context 'with a description document' do
-    let(:description_presenter_object) { described_class.new(document: description_metadata, section: 'description') }
-    let(:config) { YAML.safe_load(File.open(Rails.root.join('config', 'metadata', 'description_metadata.yml'))) }
-
+    let(:description_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
+    let(:fields) { description_presenter_object.metadata_fields_to_render('description') }
     context 'containing overview metadata' do
       describe 'config' do
         it 'returns the Abstract Key' do
-          expect(config['abstract_tesim'].to_s).to eq 'Abstract'
+          expect(fields.any? { |field| field.include? 'abstract_tesim' }).to be_truthy
         end
 
         it 'returns the Alternative Title Key' do
-          expect(config['alternativeTitle_tesim'].to_s).to eq 'Alternative Title'
+          expect(fields.any? { |field| field.include? 'alternativeTitle_tesim' }).to be_truthy
         end
 
         it 'returns the Description Key' do
-          expect(config['description_tesim'].to_s).to eq 'Description'
+          expect(fields.any? { |field| field.include? 'description_tesim' }).to be_truthy
         end
 
         it 'returns the Extent Key' do
-          expect(config['extent_ssim'].to_s).to eq 'Extent'
+          expect(fields.any? { |field| field.include? 'extent_ssim' }).to be_truthy
         end
 
         it 'returns the Extent of Digitization Key' do
-          expect(config['extentOfDigitization_ssim'].to_s).to eq 'Extent of Digitization'
+          expect(fields.any? { |field| field.include? 'extentOfDigitization_ssim' }).to be_truthy
         end
 
         it 'returns the Number of Pages Key' do
-          expect(config['numberOfPages_ssim'].to_s).to eq 'Number of Pages'
+          expect(fields.any? { |field| field.include? 'numberOfPages_ssim' }).to be_truthy
         end
 
         it 'returns the Projection Key' do
-          expect(config['projection_tesim'].to_s).to eq 'Projection'
+          expect(fields.any? { |field| field.include? 'projection_tesim' }).to be_truthy
         end
 
         it 'returns the References Key' do
-          expect(config['references_tesim'].to_s).to eq 'References'
+          expect(fields.any? { |field| field.include? 'references_tesim' }).to be_truthy
         end
 
         it 'returns the Scale Key' do
-          expect(config['scale_tesim'].to_s).to eq 'Scale'
+          expect(fields.any? { |field| field.include? 'scale_tesim' }).to be_truthy
         end
 
         it 'returns the Subtitle Key' do
-          expect(config['subtitle_tesim'].to_s).to eq 'Subtitle'
-        end
-      end
-
-      describe 'terms' do
-        it 'are a Hash' do
-          expect(description_presenter_object.terms).to be_instance_of(Hash)
+          expect(fields.any? { |field| field.include? 'subtitle_tesim' }).to be_truthy
         end
       end
     end
   end
 
   context 'with an identifier document' do
-    let(:identifier_presenter_object) { described_class.new(document: identifier_metadata, section: 'identifier') }
-    let(:config) { YAML.safe_load(File.open(Rails.root.join('config', 'metadata', 'identifier_metadata.yml'))) }
-
+    let(:identifier_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
+    let(:fields) { identifier_presenter_object.metadata_fields_to_render('identifier') }
     context 'containing overview metadata' do
       describe 'config' do
         it 'returns the Box Key' do
-          expect(config['box_ssim'].to_s).to eq 'Box'
+          expect(fields.any? { |field| field.include? 'box_ssim' }).to be_truthy
         end
 
         it 'returns the Children Key' do
-          expect(config['children_ssim'].to_s).to eq 'Children'
+          expect(fields.any? { |field| field.include? 'children_ssim' }).to be_truthy
         end
 
         it 'returns the Finding Aid Key' do
-          expect(config['findingAid_ssim'].to_s).to eq 'Finding Aid'
+          expect(fields.any? { |field| field.include? 'findingAid_ssim' }).to be_truthy
         end
 
         it 'returns the Folder Key' do
-          expect(config['folder_ssim'].to_s).to eq 'Folder'
+          expect(fields.any? { |field| field.include? 'folder_ssim' }).to be_truthy
         end
 
         it 'returns the Identifier MFHD Key' do
-          expect(config['identifierMfhd_ssim'].to_s).to eq 'Identifier MFHD'
+          expect(fields.any? { |field| field.include? 'identifierMfhd_ssim' }).to be_truthy
         end
 
         it 'returns the Call Number Key' do
-          expect(config['identifierShelfMark_ssim'].to_s).to eq 'Call Number'
+          expect(fields.any? { |field| field.include? 'identifierShelfMark_ssim' }).to be_truthy
         end
 
         it 'returns the Import URL Key' do
-          expect(config['importUrl_ssim'].to_s).to eq 'Import URL'
+          expect(fields.any? { |field| field.include? 'importUrl_ssim' }).to be_truthy
         end
 
         it 'returns the ISBN Key' do
-          expect(config['isbn_ssim'].to_s).to eq 'ISBN'
+          expect(fields.any? { |field| field.include? 'isbn_ssim' }).to be_truthy
         end
 
         it 'returns the Orbis Barcode Key' do
-          expect(config['orbisBarcode_ssi'].to_s).to eq 'Orbis Bar Code'
+          expect(fields.any? { |field| field.include? 'orbisBarcode_ssi' }).to be_truthy
         end
 
         it 'returns the Orbis Bib ID Key' do
-          expect(config['orbisBibId_ssi'].to_s).to eq 'Orbis Bib ID'
+          expect(fields.any? { |field| field.include? 'orbisBibId_ssi' }).to be_truthy
         end
 
         it 'returns the OID Key' do
-          expect(config['oid_ssi'].to_s).to eq 'OID'
+          expect(fields.any? { |field| field.include? 'oid_ssi' }).to be_truthy
         end
 
         it 'returns the Collection Name Key' do
-          expect(config['partOf_ssim'].to_s).to eq 'Collection Name'
+          expect(fields.any? { |field| field.include? 'partOf_ssim' }).to be_truthy
         end
 
         it 'returns the URI Key' do
-          expect(config['uri_ssim'].to_s).to eq 'URI'
+          expect(fields.any? { |field| field.include? 'uri_ssim' }).to be_truthy
         end
 
         it 'returns the URL Key' do
-          expect(config['url_fulltext_ssim'].to_s).to eq 'URL'
+          expect(fields.any? { |field| field.include? 'url_fulltext_ssim' }).to be_truthy
         end
 
         it 'returns the More Information Key' do
-          expect(config['url_suppl_ssim'].to_s).to eq 'More Information'
-        end
-      end
-
-      describe 'terms' do
-        it 'are a Hash' do
-          expect(identifier_presenter_object.terms).to be_instance_of(Hash)
+          expect(fields.any? { |field| field.include? 'url_suppl_ssim' }).to be_truthy
         end
       end
     end
   end
 
   context 'with a keyword document' do
-    let(:keyword_presenter_object) { described_class.new(document: keyword_metadata, section: 'keyword') }
-    let(:config) { YAML.safe_load(File.open(Rails.root.join('config', 'metadata', 'keyword_metadata.yml'))) }
+    let(:keyword_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
+    let(:fields) { keyword_presenter_object.metadata_fields_to_render('keyword') }
 
     context 'containing overview metadata' do
       describe 'config' do
         it 'returns the Format Key' do
-          expect(config['format'].to_s).to eq 'Format'
+          expect(fields.any? { |field| field.include? 'format' }).to be_truthy
         end
 
         it 'returns the Genre Key' do
-          expect(config['genre_ssim'].to_s).to eq 'Genre'
+          expect(fields.any? { |field| field.include? 'genre_ssim' }).to be_truthy
         end
 
         it 'returns the Geo Subject Key' do
-          expect(config['geoSubject_ssim'].to_s).to eq 'Subject (Geographic)'
+          expect(fields.any? { |field| field.include? 'geoSubject_ssim' }).to be_truthy
         end
 
         it 'returns the Material Key' do
-          expect(config['material_tesim'].to_s).to eq 'Material'
+          expect(fields.any? { |field| field.include? 'material_tesim' }).to be_truthy
         end
 
         it 'returns the Resource Type Key' do
-          expect(config['resourceType_ssim'].to_s).to eq 'Resource Type'
+          expect(fields.any? { |field| field.include? 'resourceType_ssim' }).to be_truthy
         end
 
         it 'returns the Subject Name Key' do
-          expect(config['subjectName_ssim'].to_s).to eq 'Subject (Name)'
+          expect(fields.any? { |field| field.include? 'subjectName_ssim' }).to be_truthy
         end
 
         it 'returns the Subject Topic Key' do
-          expect(config['subjectTopic_tesim'].to_s).to eq 'Subject (Topic)'
-        end
-      end
-
-      describe 'terms' do
-        it 'are a Hash' do
-          expect(keyword_presenter_object.terms).to be_instance_of(Hash)
+          expect(fields.any? { |field| field.include? 'subjectTopic_tesim' }).to be_truthy
         end
       end
     end
   end
 
   context 'with a migration source document' do
-    let(:migration_source_presenter_object) { described_class.new(document: migration_source_metadata, section: 'migration_source') }
-    let(:config) { YAML.safe_load(File.open(Rails.root.join('config', 'metadata', 'migration_source_metadata.yml'))) }
-
+    let(:migration_source_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
+    let(:fields) { migration_source_presenter_object.metadata_fields_to_render('migration_source') }
     context 'containing overview metadata' do
       describe 'config' do
         it 'returns the Record Type Key' do
-          expect(config['recordType_ssi'].to_s).to eq 'Record Type'
+          expect(fields.any? { |field| field.include? 'recordType_ssi' }).to be_truthy
         end
 
         it 'returns the Source Key' do
-          expect(config['source_ssim'].to_s).to eq 'Source'
-        end
-      end
-
-      describe 'terms' do
-        it 'are a Hash' do
-          expect(migration_source_presenter_object.terms).to be_instance_of(Hash)
+          expect(fields.any? { |field| field.include? 'source_ssim' }).to be_truthy
         end
       end
     end
   end
 
   context 'with an origin document' do
-    let(:origin_presenter_object) { described_class.new(document: origin_metadata, section: 'origin') }
-    let(:config) { YAML.safe_load(File.open(Rails.root.join('config', 'metadata', 'origin_metadata.yml'))) }
+    let(:origin_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
+    let(:fields) { origin_presenter_object.metadata_fields_to_render('origin') }
 
     context 'containing overview metadata' do
       describe 'config' do
         it 'returns the Creator Key' do
-          expect(config['creator_tesim'].to_s).to eq 'Creator'
+          expect(fields.any? { |field| field.include? 'creator_tesim' }).to be_truthy
         end
 
         it 'returns the Coordinates Key' do
-          expect(config['coordinates_ssim'].to_s).to eq 'Coordinates'
+          expect(fields.any? { |field| field.include? 'coordinates_ssim' }).to be_truthy
         end
 
         it 'returns the Copyright Date Key' do
-          expect(config['copyrightDate_ssim'].to_s).to eq 'Copyright Date'
+          expect(fields.any? { |field| field.include? 'copyrightDate_ssim' }).to be_truthy
         end
 
         it 'returns the Date Key' do
-          expect(config['date_ssim'].to_s).to eq 'Date'
+          expect(fields.any? { |field| field.include? 'date_ssim' }).to be_truthy
         end
 
         it 'returns the Digital Key' do
-          expect(config['digital_ssim'].to_s).to eq 'Digital'
+          expect(fields.any? { |field| field.include? 'digital_ssim' }).to be_truthy
         end
 
         it 'returns the Edition Key' do
-          expect(config['edition_ssim'].to_s).to eq 'Edition'
+          expect(fields.any? { |field| field.include? 'edition_ssim' }).to be_truthy
         end
 
         it 'returns the Language Key' do
-          expect(config['language_ssim'].to_s).to eq 'Language'
+          expect(fields.any? { |field| field.include? 'language_ssim' }).to be_truthy
         end
 
         it 'returns the Publication Place Key' do
-          expect(config['publicationPlace_ssim'].to_s).to eq 'Publication Place'
+          expect(fields.any? { |field| field.include? 'publicationPlace_ssim' }).to be_truthy
         end
 
         it 'returns the Publisher Key' do
-          expect(config['publisher_ssim'].to_s).to eq 'Publisher'
+          expect(fields.any? { |field| field.include? 'publisher_ssim' }).to be_truthy
         end
 
         it 'returns the Published Key' do
-          expect(config['published_ssim'].to_s).to eq 'Published'
+          expect(fields.any? { |field| field.include? 'published_ssim' }).to be_truthy
         end
 
         it 'returns the Source Created Key' do
-          expect(config['sourceCreated_tesim'].to_s).to eq 'Source Created'
+          expect(fields.any? { |field| field.include? 'sourceCreated_tesim' }).to be_truthy
         end
 
         it 'returns the Source Date Key' do
-          expect(config['sourceDate_tesim'].to_s).to eq 'Source Date'
+          expect(fields.any? { |field| field.include? 'sourceDate_tesim' }).to be_truthy
         end
 
         it 'returns the Source Edition Key' do
-          expect(config['sourceEdition_tesim'].to_s).to eq 'Source Edition'
+          expect(fields.any? { |field| field.include? 'sourceEdition_tesim' }).to be_truthy
         end
 
         it 'returns the Source Note Key' do
-          expect(config['sourceNote_tesim'].to_s).to eq 'Source Note'
+          expect(fields.any? { |field| field.include? 'sourceNote_tesim' }).to be_truthy
         end
 
         it 'returns the Source Title Key' do
-          expect(config['sourceTitle_tesim'].to_s).to eq 'Source Title'
-        end
-      end
-
-      describe 'terms' do
-        it 'are a Hash' do
-          expect(origin_presenter_object.terms).to be_instance_of(Hash)
+          expect(fields.any? { |field| field.include? 'sourceTitle_tesim' }).to be_truthy
         end
       end
     end
   end
 
   context 'with a usage document' do
-    let(:usage_presenter_object) { described_class.new(document: usage_metadata, section: 'usage') }
-    let(:config) { YAML.safe_load(File.open(Rails.root.join('config', 'metadata', 'usage_metadata.yml'))) }
+    let(:usage_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
+    let(:fields) { usage_presenter_object.metadata_fields_to_render('usage') }
 
     context 'containing overview metadata' do
       describe 'config' do
         it 'returns the Rights Key' do
-          expect(config['rights_ssim'].to_s).to eq 'Rights'
-        end
-      end
-
-      describe 'terms' do
-        it 'are a Hash' do
-          expect(usage_presenter_object.terms).to be_instance_of(Hash)
+          expect(fields.any? { |field| field.include? 'rights_ssim' }).to be_truthy
         end
       end
     end
