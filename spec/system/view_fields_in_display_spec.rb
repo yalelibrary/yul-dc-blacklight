@@ -255,7 +255,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(page).to have_link('1234567', href: 'http://hdl.handle.net/10079/bibid/1234567')
     end
     it 'contains a link for the Creator field to the facet' do
-      expect(page).to have_link("Eric", href: '?f%5Bcreator_ssim%5D%5B%5D=Eric')
+      expect(page).to have_link("Eric", href: '/?f%5Bcreator_ssim%5D%5B%5D=Eric')
     end
     it 'contains a link on the Finding Aid to the Finding Aid catalog record' do
       expect(page).to have_link('this is the finding aid', href: 'this is the finding aid')
