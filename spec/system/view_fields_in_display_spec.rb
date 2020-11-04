@@ -33,7 +33,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       title_tesim: "Diversity Bull Dogs",
       subtitle_tesim: "He's handsome",
       subtitle_vern_ssim: "He's handsome",
-      creator_ssim: 'Eric',
+      creator_ssim: ['Frederick, Eric'],
       format: 'three dimensional object',
       url_fulltext_ssim: 'http://0.0.0.0:3000/catalog/111',
       url_suppl_ssim: 'http://0.0.0.0:3000/catalog/111',
@@ -91,7 +91,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("Diversity Bull Dogs")
     end
     it 'displays Creator in results' do
-      expect(document).to have_content("Eric")
+      expect(document).to have_content("Frederick, Eric")
     end
     it 'displays Subtitle in results' do
       expect(document).to have_content("He's handsome")
@@ -255,7 +255,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(page).to have_link('1234567', href: 'http://hdl.handle.net/10079/bibid/1234567')
     end
     it 'contains a link for the Creator field to the facet' do
-      expect(page).to have_link("Eric", href: '/?f%5Bcreator_ssim%5D%5B%5D=Eric')
+      expect(page).to have_link("Frederick, Eric", href: '/?f%5Bcreator_ssim%5D%5B%5D=Frederick,+Eric')
     end
     it 'contains a link on the Finding Aid to the Finding Aid catalog record' do
       expect(page).to have_link('this is the finding aid', href: 'this is the finding aid')
