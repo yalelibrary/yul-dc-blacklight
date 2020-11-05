@@ -14,7 +14,14 @@ DEFAULT MOBILE STYLING
 
 .adv-search-btn{
   font-size: 20px;
-  line-height: 38px;
+  font-family: $mallory_mp_medium;
+  border-color: $light_grey;
+  line-height: 16px;
+  padding: 16px 25px;
+}
+
+.adv-search-btn:hover{
+  background: none !important;
 }
 
 .adv-search-border-top{
