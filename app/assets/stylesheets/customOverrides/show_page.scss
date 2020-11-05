@@ -5,14 +5,11 @@ DEFAULT MOBILE STYLING
   text-transform: uppercase;
 }
 
-.btn-show{
+.btn-show {
+  @extend .sm-btn;
   color: $yale_blue;
-  font-size: 14px;
-  font-family: $mallory_medium;
   border-color: $light_grey;
-  border-width: 1.15px;
-  line-height: 30px;
-  padding: 6px 10px 6px 10px;
+  border-width: 1px;
   margin: 4px 4px 4px 0px;
 }
 
