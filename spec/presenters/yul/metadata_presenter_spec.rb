@@ -2,7 +2,7 @@
 require 'rails_helper'
 
 RSpec.describe Yul::MetadataPresenter do
-  subject(:presenter) { described_class.new(doc, request_context) }
+  subject(:presenter) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context) }
 
   let(:config) { CatalogController.blacklight_config }
   let(:request_context) { instance_double('View context', should_render_field?: true, blacklight_config: config) }
@@ -12,6 +12,23 @@ RSpec.describe Yul::MetadataPresenter do
 
   before do
     allow(request_context).to receive(:search_state).and_return(search_state)
+  end
+
+  context '#metadata_fields_to_render with block' do
+    let(:migration_source_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
+    it 'returns only MS fields in block' do
+      record_found = false
+      source_found = false
+      counter = 0
+      migration_source_presenter_object.metadata_fields_to_render('migration_source') do |field, _field_config|
+        record_found = true if field.include? 'recordType_ssi'
+        source_found = true if field.include? 'source_ssim'
+        counter += 1
+      end
+      expect(record_found).to be_truthy
+      expect(source_found).to be_truthy
+      expect(counter).to be 2
+    end
   end
 
   context 'with a description document' do

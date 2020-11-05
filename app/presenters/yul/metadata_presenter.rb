@@ -14,8 +14,7 @@ module Yul
       if block_given?
         fields.each do |name, field_config|
           field_presenter = field_presenter(field_config)
-          next unless field_presenter.render_field? && field_presenter.any?
-
+          next unless field_presenter.render_field? && field_presenter.any? && field_config[:metadata].eql?(metadata_section)
           yield name, field_config, field_presenter
         end
       else
