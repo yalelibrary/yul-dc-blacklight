@@ -97,7 +97,8 @@ DEFAULT MOBILE STYLING
   position: initial;
 }
 
-.search-btn {
+.search-btn,
+.search-q {
   margin-top: 8px;
 }
 
@@ -152,6 +153,10 @@ DEFAULT MOBILE STYLING
   .search-btn {
     margin-top: 0;
     margin-left: 8px;
+  }
+
+  .search-q {
+    margin-top: 0;
   }
 
   .twitter-typeahead {
