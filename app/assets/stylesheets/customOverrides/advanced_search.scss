@@ -49,7 +49,7 @@ DEFAULT MOBILE STYLING
   background-color: transparent;
   display: inline-block;
   width: 20%;
-  height: calc(1.75em + 1rem + 2px);
+  height: 50px !important;
   padding: 0.65rem 0.65rem 0.5rem 1rem;
   vertical-align: baseline;
   background-repeat: no-repeat;
@@ -59,7 +59,7 @@ DEFAULT MOBILE STYLING
   -moz-appearance: none;
   color: $yale_blue;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 16px;
   font: $mallory_medium;
   font-weight: bold;
 }
@@ -81,7 +81,7 @@ DEFAULT MOBILE STYLING
   background-origin: content-box;
   display: inline-block;
   width: 66%;
-  height: calc(1.65em + .65rem + .65rem) !important;
+  height: 50px !important;
   vertical-align: baseline;
   background-repeat: no-repeat;
   padding: 0.65rem 0.65rem 0.5rem 1rem;
@@ -91,9 +91,9 @@ DEFAULT MOBILE STYLING
   -moz-appearance: none;
   color: $yale_blue;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
-  font: $mallory_medium;
+  font: $mallory_mp_medium;
  }
 
 .input-match {
@@ -211,7 +211,7 @@ input.btn:nth-child(2) {
       background-origin: content-box;
       display: inline-block;
       width: 225px;
-      height: calc(1.65em + .65rem + .65rem) !important;
+      height: 50px !important;
     }
 
     .input-small {
