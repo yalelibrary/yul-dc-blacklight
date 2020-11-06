@@ -27,6 +27,10 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
       it "defaults to 'Blacklight'" do
         expect(helper.manifest_url('foo')).to eq 'http://example.com/foo.json'
       end
+
+      it "can find the pdf with defaults" do
+        expect(helper.pdf_url('foo')).to eq 'http://example.com/foo.pdf'
+      end
     end
 
     context 'when IIIF_MANIFESTS_BASE_URL is not set' do
@@ -35,6 +39,10 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
         ENV['IIIF_MANIFESTS_BASE_URL'] = nil
         example.run
         ENV['IIIF_MANIFESTS_BASE_URL'] = original_iiif_manifests_url
+      end
+
+      it "can find the pdf" do
+        expect(helper.pdf_url('foo')).to eq 'http://localhost/manifests/foo.pdf'
       end
 
       it "defaults to 'Blacklight'" do

@@ -3,6 +3,10 @@
 module BlacklightHelper
   include Blacklight::BlacklightHelperBehavior
 
+  def pdf_url(oid)
+    File.join(manifest_base_url, "#{oid}.pdf")
+  end
+
   def manifest_url(oid)
     File.join(manifest_base_url, "#{oid}.json")
   end
