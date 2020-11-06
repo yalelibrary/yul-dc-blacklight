@@ -87,6 +87,10 @@ module BlacklightHelper
       field.map do |f|
         link_to f.to_s, ('/?f%5Bformat%5D%5B%5D=' + f.to_s.split.join('+')).to_s
       end[0]
+    elsif field_name == 'creator_ssim'
+      field.map do |f|
+        link_to f.to_s, ('/?f%5Bcreator_ssim%5D%5B%5D=' + f.to_s.force_encoding("utf-8").split.join('+')).to_s
+      end[0]
     elsif field_name == 'genre_ssim'
       field.map do |f|
         link_to f.to_s, ('/?f%5Bgenre_ssim%5D%5B%5D=' + f.to_s.split.join('+')).to_s

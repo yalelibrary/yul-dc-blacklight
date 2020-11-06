@@ -102,8 +102,8 @@ class CatalogController < ApplicationController
     config.add_facet_field 'resourceType_ssim', label: 'Resource Type'
     config.add_facet_field 'language_ssim', label: 'Language', limit: true, helper_method: :language_code
     config.add_facet_field 'creator_ssim', label: 'Creator', limit: true, sort: 'index'
-    config.add_facet_field 'subjectTopic_ssim', label: 'Subject Topic'
-    config.add_facet_field 'subjectName_ssim', label: 'Subject Name'
+    config.add_facet_field 'subjectTopic_ssim', label: 'Subject (Topic)'
+    config.add_facet_field 'subjectName_ssim', label: 'Subject (Name)'
     config.add_facet_field 'subject_ssim', label: 'Topic', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'publicationPlace_ssim', label: 'Publication Place', limit: true, sort: 'index'
     config.add_facet_field 'partOf_ssim', label: 'Digital Collection'
@@ -151,13 +151,13 @@ class CatalogController < ApplicationController
     config.add_index_field 'abstract_tesim', label: 'Abstract', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'alternativeTitle_tesim', label: 'Alternative Title', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'description_tesim', label: 'Description', highlight: true, solr_params: disp_highlight_on_search_params
-    config.add_index_field 'subjectGeographic_tesim', label: 'Subject Geographic', highlight: true, solr_params: disp_highlight_on_search_params
+    config.add_index_field 'subjectGeographic_tesim', label: 'Subject (Geographic)', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'orbisBidId_ssi', label: 'Orbis BidId', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'publicatonPlace_tesim', label: 'Publication Place', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'publisher_tesim', label: 'Publisher', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'sourceCreated_tesim', label: 'Created Source', highlight: true, solr_params: disp_highlight_on_search_params
-    config.add_index_field 'subjectName_tesim', label: 'Subject Name', highlight: true, solr_params: disp_highlight_on_search_params
-    config.add_index_field 'subjectTopic_tesim', label: 'Subject Topic', highlight: true, solr_params: disp_highlight_on_search_params
+    config.add_index_field 'subjectName_tesim', label: 'Subject (Name)', highlight: true, solr_params: disp_highlight_on_search_params
+    config.add_index_field 'subjectTopic_tesim', label: 'Subject (Topic)', highlight: true, solr_params: disp_highlight_on_search_params
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -178,14 +178,14 @@ class CatalogController < ApplicationController
     # Keywords Group
     config.add_show_field 'format', label: 'Format'
     config.add_show_field 'genre_ssim', label: 'Genre'
-    config.add_show_field 'geoSubject_ssim', label: 'Geo Subject'
+    config.add_show_field 'geoSubject_ssim', label: 'Subject (Geographic)'
     config.add_show_field 'material_tesim', label: 'Material'
     config.add_show_field 'resourceType_ssim', label: 'Resource Type'
-    config.add_show_field 'subjectName_ssim', label: 'Subject Name'
-    config.add_show_field 'subjectTopic_tesim', label: 'Subject Topic'
+    config.add_show_field 'subjectName_ssim', label: 'Subject (Name)'
+    config.add_show_field 'subjectTopic_tesim', label: 'Subject (Topic)'
 
     # Origin Group
-    config.add_show_field 'creator_tesim', label: 'Creator'
+    config.add_show_field 'creator_ssim', label: 'Creator'
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date'
     config.add_show_field 'coordinates_ssim', label: 'Coordinates'
     config.add_show_field 'date_ssim', label: 'Date'
@@ -204,7 +204,6 @@ class CatalogController < ApplicationController
     # Identifiers Group
     config.add_show_field 'box_ssim', label: 'Box'
     config.add_show_field 'children_ssim', label: 'Children'
-    config.add_show_field 'collectionId_ssim', label: 'Collection ID'
     config.add_show_field 'findingAid_ssim', label: 'Finding Aid'
     config.add_show_field 'folder_ssim', label: 'Folder'
     config.add_show_field 'identifierMfhd_ssim', label: 'Identifier MFHD'
@@ -438,13 +437,10 @@ class CatalogController < ApplicationController
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case).
     config.add_sort_field 'score desc, pub_date_si desc, title_si asc', label: 'relevance'
-    # config.add_sort_field 'pub_date_si desc, title_si asc', label: 'year'
-    # config.add_sort_field 'dateStructured_ssim asc, title_si asc', label: 'date (oldest first)'
-    # config.add_sort_field 'dateStructured_ssim desc, title_si asc', label: 'date (newest first)'
     config.add_sort_field 'creator_ssim asc, title_ssim asc', label: 'Creator (A --> Z)'
     config.add_sort_field 'creator_ssim desc, title_ssim asc', label: 'Creator (Z --> A)'
-    config.add_sort_field 'title_ssim asc, pub_date_si desc', label: 'Title (A --> Z)'
-    config.add_sort_field 'title_ssim desc, pub_date_si desc', label: 'Title (Z --> A)'
+    config.add_sort_field 'title_ssim asc, oid_ssi desc', label: 'Title (A --> Z)'
+    config.add_sort_field 'title_ssim desc, oid_ssi desc', label: 'Title (Z --> A)'
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.

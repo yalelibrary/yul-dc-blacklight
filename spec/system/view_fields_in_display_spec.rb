@@ -33,7 +33,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       title_tesim: "Diversity Bull Dogs",
       subtitle_tesim: "He's handsome",
       subtitle_vern_ssim: "He's handsome",
-      creator_tesim: 'Eric & Frederick',
+      creator_ssim: ['Frederick,  Eric & Maggie'],
       format: 'three dimensional object',
       url_fulltext_ssim: 'http://0.0.0.0:3000/catalog/111',
       url_suppl_ssim: 'http://0.0.0.0:3000/catalog/111',
@@ -72,7 +72,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       orbisBibId_ssi: '1234567',
       orbisBarcode_ssi: 'this is the orbis bar code',
       findingAid_ssim: 'this is the finding aid',
-      collectionId_ssim: 'this is the collection ID',
       edition_ssim: 'this is the edition',
       uri_ssim: 'this is the URI',
       partOf_ssim: "this is the part of, using ssim",
@@ -92,7 +91,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("Diversity Bull Dogs")
     end
     it 'displays Creator in results' do
-      expect(document).to have_content("Eric & Frederick")
+      expect(document).to have_content("Frederick, Eric & Maggie")
     end
     it 'displays Subtitle in results' do
       expect(document).to have_content("He's handsome")
@@ -150,13 +149,16 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the Genre in results' do
       expect(document).to have_content("this is the genre")
     end
-    it 'displays the Geo Subject in results' do
+    it 'displays the Subject (Geographic) in results' do
       expect(document).to have_content("this is the geo subject")
+    end
+    it 'displays the Subject (Topic) in results' do
+      expect(document).to have_content("this is the subject topic")
     end
     it 'displays the Resource Type in results' do
       expect(document).to have_content("this is the resource type")
     end
-    it 'displays the Subject Name in results' do
+    it 'displays the Subject (Name) in results' do
       expect(document).to have_content("this is the subject name")
     end
     it 'displays the Extend of Digitization in results' do
@@ -225,9 +227,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the Finding Aid in results' do
       expect(document).to have_content("this is the finding aid")
     end
-    it 'displays the Collection ID in results' do
-      expect(document).to have_content("this is the collection ID")
-    end
     it 'displays the Edition in results' do
       expect(document).to have_content("this is the edition")
     end
@@ -252,8 +251,11 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(page).to have_link('English (eng)', href: '/?f%5Blanguage_ssim%5D%5B%5D=English (eng)')
       expect(page).to have_link('zz', href: '/?f%5Blanguage_ssim%5D%5B%5D=zz')
     end
-    it 'contains a link on the Orbis Bib ID to the Orbis catalog record' do
+    it 'contains a link on the Orbis Bib ID to the Orbis catalog record' do
       expect(page).to have_link('1234567', href: 'http://hdl.handle.net/10079/bibid/1234567')
+    end
+    it 'contains a link for the Creator field to the facet' do
+      expect(page).to have_link("Frederick, Eric", href: '/?f%5Bcreator_ssim%5D%5B%5D=Frederick,+Eric+&+Maggie')
     end
     it 'contains a link on the Finding Aid to the Finding Aid catalog record' do
       expect(page).to have_link('this is the finding aid', href: 'this is the finding aid')

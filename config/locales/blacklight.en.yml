@@ -8,7 +8,7 @@ en:
   blacklight:
     application_name: 'Yale University Library'
     sidebar:
-      links: Links 
+      links: Links
       manifest: Manifest Link
     citation:
       apa: 'APA, 6th edition'
@@ -18,3 +18,4 @@ en:
       logout: Sign out
     search:
       search_constraints_header: You Searched For
+    back_to_search: 'Back to Search Results'

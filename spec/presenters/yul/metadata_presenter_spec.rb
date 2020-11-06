@@ -21,7 +21,6 @@ RSpec.describe Yul::MetadataPresenter do
     {
       'box_ssim' => 'Box',
       'children_ssim' => 'Children',
-      'collectionId_ssim' => 'Collection ID',
       'findingAid_ssim' => 'Finding Aid',
       'folder_ssim' => 'Folder',
       'identifierMfhd_ssim' => 'Identifier MFHD',
@@ -42,11 +41,11 @@ RSpec.describe Yul::MetadataPresenter do
     {
       'format' => 'Format',
       'genre_ssim' => 'Genre',
-      'geoSubject_ssim' => 'Geo Subject',
+      'geoSubject_ssim' => 'Subject (Geographic)',
       'material_tesim' => 'Material',
       'resourceType_ssim' => 'Resource Type',
-      'subjectName_ssim' => 'Subject Name',
-      'subjectTopic_tesim' => 'Subject Topic'
+      'subjectName_ssim' => 'Subject (Name)',
+      'subjectTopic_tesim' => 'Subject (Topic)'
     }
   end
 
@@ -59,7 +58,7 @@ RSpec.describe Yul::MetadataPresenter do
 
   let(:origin_metadata) do
     {
-      'creator_tesim' => 'Creator',
+      'creator_ssim' => 'Creator',
       'coordinates_ssim' => 'Coordinates',
       'copyrightDate_ssim' => 'Copyright Date',
       'date_ssim' => 'Date',
@@ -152,10 +151,6 @@ RSpec.describe Yul::MetadataPresenter do
           expect(config['children_ssim'].to_s).to eq 'Children'
         end
 
-        it 'returns the Collection ID Key' do
-          expect(config['collectionId_ssim'].to_s).to eq 'Collection ID'
-        end
-
         it 'returns the Finding Aid Key' do
           expect(config['findingAid_ssim'].to_s).to eq 'Finding Aid'
         end
@@ -232,7 +227,7 @@ RSpec.describe Yul::MetadataPresenter do
         end
 
         it 'returns the Geo Subject Key' do
-          expect(config['geoSubject_ssim'].to_s).to eq 'Geo Subject'
+          expect(config['geoSubject_ssim'].to_s).to eq 'Subject (Geographic)'
         end
 
         it 'returns the Material Key' do
@@ -244,11 +239,11 @@ RSpec.describe Yul::MetadataPresenter do
         end
 
         it 'returns the Subject Name Key' do
-          expect(config['subjectName_ssim'].to_s).to eq 'Subject Name'
+          expect(config['subjectName_ssim'].to_s).to eq 'Subject (Name)'
         end
 
         it 'returns the Subject Topic Key' do
-          expect(config['subjectTopic_tesim'].to_s).to eq 'Subject Topic'
+          expect(config['subjectTopic_tesim'].to_s).to eq 'Subject (Topic)'
         end
       end
 
@@ -290,7 +285,7 @@ RSpec.describe Yul::MetadataPresenter do
     context 'containing overview metadata' do
       describe 'config' do
         it 'returns the Creator Key' do
-          expect(config['creator_tesim'].to_s).to eq 'Creator'
+          expect(config['creator_ssim'].to_s).to eq 'Creator'
         end
 
         it 'returns the Coordinates Key' do
