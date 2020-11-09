@@ -23,8 +23,10 @@ DEFAULT MOBILE STYLING
   margin-top: -3px;
 }
 
-.list-group {
-  display: -webkit-box;
+.show-tools .list-group {
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-left: 15px;
 }
 
 .list-group-item {
@@ -74,31 +76,23 @@ DEFAULT MOBILE STYLING
 
 }
 
-#citationLink, #manifestLink, #miradorLink{
+.show-tools a, .show-tools a#citationLink {
   color: $light_blue !important;
   font: $mallory_medium;
-  font-size: 11px;
+  font-size: 12px!important;
   text-transform: uppercase;
 }
 
-#citationLink {
-  padding-left: 19px;
+.show-tools a:hover {
+  text-decoration: underline;
 }
 
-#citationLink:after {
+.show-tools a.nav-link, .show-tools span.nav-link {
+  padding: 0.5rem 0.25rem;
+}
+
+#citationLink:after, #manifestLink:after, #miradorLink:after, #pdfLink:after {
   content: ' >';
-}
-
-#manifestLink:after {
-  content: ' >';
-}
-
-#miradorLink:after {
-  content: ' >';
-}
-
-#miradorLink{
-  margin-left: 15px;
 }
 
 // metadata grouping
