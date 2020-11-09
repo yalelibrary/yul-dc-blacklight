@@ -4,11 +4,15 @@ module BlacklightHelper
   include Blacklight::BlacklightHelperBehavior
 
   def pdf_url(oid)
-    File.join(manifest_base_url, "#{oid}.pdf")
+    File.join(pdf_base_url, "#{oid}.pdf")
   end
 
   def manifest_url(oid)
     File.join(manifest_base_url, "#{oid}.json")
+  end
+
+  def pdf_base_url
+    ENV.fetch('PDF_BASE_URL', "#{request.protocol}localhost/pdf")
   end
 
   def manifest_base_url
