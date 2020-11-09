@@ -79,8 +79,12 @@ DEFAULT MOBILE STYLING
 .show-tools a, .show-tools a#citationLink {
   color: $light_blue !important;
   font: $mallory_medium;
-  font-size: 11px;
+  font-size: 12px!important;
   text-transform: uppercase;
+}
+
+.show-tools a:hover {
+  text-decoration: underline;
 }
 
 .show-tools a.nav-link, .show-tools span.nav-link {

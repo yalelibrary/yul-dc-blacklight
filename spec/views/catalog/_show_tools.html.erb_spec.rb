@@ -27,7 +27,7 @@ RSpec.describe 'catalog/_show_tools.html.erb' do
 
     it 'renders the pdf link' do
       render partial: 'catalog/show_tools'
-      expect(rendered).to have_link 'Download as PDF', href: "http://localhost/pdf/xyz.pdf"
+      expect(rendered).to have_link 'Download as PDF', href: "http://localhost/pdfs/xyz.pdf"
     end
   end
 end

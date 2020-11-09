@@ -45,7 +45,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
       end
 
       it "can find the pdf" do
-        expect(helper.pdf_url('foo')).to eq 'http://localhost/pdf/foo.pdf'
+        expect(helper.pdf_url('foo')).to eq 'http://localhost/pdfs/foo.pdf'
       end
 
       it "defaults to 'Blacklight'" do

@@ -12,7 +12,7 @@ module BlacklightHelper
   end
 
   def pdf_base_url
-    ENV.fetch('PDF_BASE_URL', "#{request.protocol}localhost/pdf")
+    ENV.fetch('PDF_BASE_URL', "#{request.protocol}localhost/pdfs")
   end
 
   def manifest_base_url
