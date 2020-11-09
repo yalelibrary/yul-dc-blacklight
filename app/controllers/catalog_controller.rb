@@ -196,7 +196,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'subjectTopic_tesim', label: 'Subject (Topic)', metadata: 'keyword', helper_method: :join_with_br
 
     # Origin Group
-    config.add_show_field 'creator_tesim', label: 'Creator', metadata: 'origin', link_to_facet: true
+    config.add_show_field 'creator_ssim', label: 'Creator', metadata: 'origin', link_to_facet: true
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date', metadata: 'origin'
     config.add_show_field 'coordinates_ssim', label: 'Coordinates', metadata: 'origin'
     config.add_show_field 'date_ssim', label: 'Date', metadata: 'origin'

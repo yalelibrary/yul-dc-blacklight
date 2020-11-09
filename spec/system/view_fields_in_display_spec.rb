@@ -33,7 +33,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       title_tesim: "Diversity Bull Dogs",
       subtitle_tesim: "He's handsome",
       subtitle_vern_ssim: "He's handsome",
-      creator_tesim: 'Eric & Frederick',
+      creator_ssim: ['Frederick,  Eric & Maggie'],
       format: 'three dimensional object',
       url_fulltext_ssim: 'http://0.0.0.0:3000/catalog/111',
       url_suppl_ssim: 'http://0.0.0.0:3000/catalog/111',
@@ -91,7 +91,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("Diversity Bull Dogs")
     end
     it 'displays Creator in results' do
-      expect(document).to have_content("Eric & Frederick")
+      expect(document).to have_content("Frederick, Eric & Maggie")
     end
     it 'displays Subtitle in results' do
       expect(document).to have_content("He's handsome")
@@ -268,7 +268,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     expect(page).to have_css '.list-group'
     expect(page).to have_css '.list-group-item'
     expect(page).to have_css '.single-item-show'
-    expect(page).to have_css '.show-links'
     expect(page).to have_css '.show-tools'
     expect(page).to have_css '.show-header'
     expect(page).to have_css '.universal-viewer-iframe'

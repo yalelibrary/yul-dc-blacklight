@@ -69,8 +69,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     expect(page).to have_css '.btn-show'
     expect(page).to have_css '.constraints-container'
     expect(page).to have_css '.show-buttons'
-    expect(page).to have_css '.link-card-header'
-    expect(page).to have_css '.manifest'
+    expect(page).to have_css '.manifestItem'
   end
   context '"Back to Search Results" button' do
     it 'returns user to search results' do
