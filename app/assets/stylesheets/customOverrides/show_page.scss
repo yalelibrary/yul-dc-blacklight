@@ -4,16 +4,19 @@ DEFAULT MOBILE STYLING
 .show-buttons > .btn-show {
   text-transform: uppercase;
 }
-.btn-show{
+
+.btn-show {
+  @extend .sm-btn;
   color: $yale_blue;
-  font-size: 12px;
-  font-family: $mallory_medium;
   border-color: $light_grey;
-  border-width: 1.15px;
-  height: 37px;
-  padding: 8px 10px 8px 10px;
+  border-width: 1px;
   margin: 4px 4px 4px 0px;
 }
+
+.btn-show:hover{
+  background: none !important;
+}
+
 
 .card {
   border: none;
