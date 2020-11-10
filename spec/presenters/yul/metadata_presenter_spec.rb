@@ -206,10 +206,6 @@ RSpec.describe Yul::MetadataPresenter do
 
     context 'containing overview metadata' do
       describe 'config' do
-        it 'returns the Creator Key' do
-          expect(fields.any? { |field| field.include? 'creator_tesim' }).to be_truthy
-        end
-
         it 'returns the Coordinates Key' do
           expect(fields.any? { |field| field.include? 'coordinates_ssim' }).to be_truthy
         end
