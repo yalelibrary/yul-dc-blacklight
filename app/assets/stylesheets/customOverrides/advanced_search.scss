@@ -144,7 +144,7 @@ input.btn:nth-child(2) {
   width: 325px;
 }
 
-.adv-search-fields label {
+.adv-search-fields label, .query_criteria_heading label {
   font-family: $mallory_mp_black, $mallory_medium, Arial, Helvetica, sans-serif;
   font-size: 12px;
   font-weight: 900;
@@ -198,7 +198,7 @@ input.btn:nth-child(2) {
     //Sort text next to button
     .sort-buttons {
       width: 500px;
-      margin-left: -75px;
+      margin-left: -45px;
       margin-top: 4px;
       }
 
@@ -265,12 +265,12 @@ input.btn:nth-child(2) {
     }
 
     .sort-buttons {
-      margin-left: -65px;
+      margin-left: -35px;
       margin-top: 3px;
     }
 
     .query_criteria_heading {
-      margin-left: -35px;
+      margin-left: -65px;
     }
 
     .adv-search-fields .advanced-search-field {
