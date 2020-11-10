@@ -268,7 +268,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     expect(page).to have_css '.list-group'
     expect(page).to have_css '.list-group-item'
     expect(page).to have_css '.single-item-show'
-    expect(page).to have_css '.show-links'
     expect(page).to have_css '.show-tools'
     expect(page).to have_css '.show-header'
     expect(page).to have_css '.universal-viewer-iframe'
