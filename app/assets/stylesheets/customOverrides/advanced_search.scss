@@ -12,16 +12,6 @@ DEFAULT MOBILE STYLING
   margin-bottom: 13px;
 }
 
-.adv-search-btn {
-  @extend .lg-btn;
-  border-color: $border_grey !important;
-}
-
-.adv-search-btn:hover {
-  background: none !important;
-  border-color: $medium_grey !important;
-}
-
 .adv-search-border-top {
   width: auto;
   border-top: 1px solid $border_grey;
