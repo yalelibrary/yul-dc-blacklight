@@ -97,17 +97,17 @@ class CatalogController < ApplicationController
     #  (useful when user clicks "more" on a large facet and wants to navigate alphabetically across a large set of results)
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case sensitive when searching values)
 
-    config.add_facet_field 'extentOfDigitization_ssim', label: 'Extent of Digitization'
-    config.add_facet_field 'format', label: 'Format'
-    config.add_facet_field 'genre_ssim', label: 'Genre'
-    config.add_facet_field 'resourceType_ssim', label: 'Resource Type'
+    config.add_facet_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', limit: true
+    config.add_facet_field 'format', label: 'Format', limit: true
+    config.add_facet_field 'genre_ssim', label: 'Genre', limit: true
+    config.add_facet_field 'resourceType_ssim', label: 'Resource Type', limit: true
     config.add_facet_field 'language_ssim', label: 'Language', limit: true, helper_method: :language_code
     config.add_facet_field 'creator_ssim', label: 'Creator', limit: true, sort: 'index'
-    config.add_facet_field 'subjectTopic_ssim', label: 'Subject (Topic)'
-    config.add_facet_field 'subjectName_ssim', label: 'Subject (Name)'
+    config.add_facet_field 'subjectTopic_ssim', label: 'Subject (Topic)', limit: true
+    config.add_facet_field 'subjectName_ssim', label: 'Subject (Name)', limit: true
     config.add_facet_field 'subject_ssim', label: 'Topic', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'publicationPlace_ssim', label: 'Publication Place', limit: true, sort: 'index'
-    config.add_facet_field 'partOf_ssim', label: 'Digital Collection'
+    config.add_facet_field 'partOf_ssim', label: 'Digital Collection', limit: true
     config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true
     config.add_facet_field 'dateStructured_ssim', label: 'Publication Date',
                                                   range: {
