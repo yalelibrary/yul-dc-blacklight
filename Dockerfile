@@ -1,5 +1,9 @@
 FROM yalelibraryit/dc-base:v1.1.1
 
+RUN apt-get update && apt install curl -y && apt clean
+COPY ops/boot.sh /boot.sh
+RUN chmod 755 /boot.sh
+
 COPY ops/webapp.conf /etc/nginx/sites-enabled/webapp.conf
 COPY ops/env.conf /etc/nginx/main.d/env.conf
 # Asset compile and migrate if prod, otherwise just start nginx
@@ -7,9 +11,6 @@ COPY ops/nginx.sh /etc/service/nginx/run
 RUN chmod +x /etc/service/nginx/run
 RUN rm -f /etc/service/nginx/down
 
-RUN apt-get update && apt install curl -y && apt clean
-COPY ops/boot.sh /boot.sh
-RUN chmod 755 /boot.sh
 
 ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
 BUNDLE_JOBS=4
