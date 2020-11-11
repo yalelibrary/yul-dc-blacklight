@@ -1,4 +1,4 @@
-# Overrides view in order to include Aria describedby on search fields
+<%# Overrides view in order to include Aria describedby on search fields %>
 <%- search_fields_for_advanced_search.each do |key, field_def| -%>
   <div class="form-group advanced-search-field">
       <%= label_tag key, "#{field_def.label }", :class => "col-sm-3 control-label" %>
