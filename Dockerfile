@@ -1,8 +1,5 @@
 FROM yalelibraryit/dc-base:v1.1.1
 
-RUN apt-get update && apt install curl -y && apt clean
-COPY ops/boot.sh /boot.sh
-RUN chmod 755 /boot.sh
 
 COPY ops/webapp.conf /etc/nginx/sites-enabled/webapp.conf
 COPY ops/env.conf /etc/nginx/main.d/env.conf
@@ -21,6 +18,9 @@ RUN /sbin/setuser app bash -l -c "bundle check || bundle install"
 
 COPY  --chown=app . $APP_HOME
 
+RUN apt-get update && apt install curl -y && apt clean
+COPY ops/boot.sh /boot.sh
+RUN chmod 755 /boot.sh
 # Assets and packs are moved aside - building them means you find out early if the asset compilation is broken
 # not on final deploy. It means that public/assets and public/packs can be volumes in production allowing for
 # cached pages / assets to be kept and cleaned the way Rails expects them to be while keeping deployment very fast.
