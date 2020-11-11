@@ -7,6 +7,10 @@ COPY ops/nginx.sh /etc/service/nginx/run
 RUN chmod +x /etc/service/nginx/run
 RUN rm -f /etc/service/nginx/down
 
+RUN apt-get update && apt install curl -y && apt clean
+COPY ops/boot.sh /boot.sh
+RUN chmod 755 /boot.sh
+
 ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
 BUNDLE_JOBS=4
 RUN gem install bundler -v 2.1.4
