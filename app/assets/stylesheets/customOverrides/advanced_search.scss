@@ -14,7 +14,7 @@ DEFAULT MOBILE STYLING
 
 .adv-search-btn {
   @extend .lg-btn;
-  border-color: $light_grey !important;
+  border-color: $border_grey !important;
 }
 
 .adv-search-btn:hover {
@@ -24,7 +24,7 @@ DEFAULT MOBILE STYLING
 
 .adv-search-border-top {
   width: auto;
-  border-top: 1px solid $light_grey;
+  border-top: 1px solid $border_grey;
   padding-top: 20px;
 }
 
