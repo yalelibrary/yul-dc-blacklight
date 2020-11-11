@@ -14,11 +14,12 @@ DEFAULT MOBILE STYLING
 
 .adv-search-btn {
   @extend .lg-btn;
-  border-color: $light_grey;
+  border-color: $light_grey !important;
 }
 
 .adv-search-btn:hover {
   background: none !important;
+  border-color: $medium_grey !important;
 }
 
 .adv-search-border-top {
