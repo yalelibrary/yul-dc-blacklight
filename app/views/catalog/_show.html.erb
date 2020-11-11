@@ -9,6 +9,6 @@
 
 <div class='item-page__metadata-wrapper'>
   <% metadata.each do | m | %>
-    <%= render 'catalog/record/item_metadata', document: document, section: m %>
+    <%= render 'catalog/record/item_metadata', document: document, metadata: m %>
   <% end %>
 </div>

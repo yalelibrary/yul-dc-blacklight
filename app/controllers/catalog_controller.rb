@@ -71,6 +71,7 @@ class CatalogController < ApplicationController
     # config.show.title_field = 'title_tesim'
     # config.show.display_type_field = 'format'
     # config.show.thumbnail_field = 'thumbnail_path_ss'
+    config.show.document_presenter_class = Yul::MetadataPresenter
 
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
@@ -142,7 +143,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field 'creator_tesim', label: 'Creator', highlight: true
+    config.add_index_field 'creator_tesim', label: 'Creator', highlight: true, link_to_facet: true
     config.add_index_field 'date_ssim', label: 'Date', highlight: true
     config.add_index_field 'identifierShelfMark_tesim', label: 'Call Number', highlight: true
     config.add_index_field 'imageCount_isi', label: 'Image Count'
@@ -161,69 +162,79 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
+    #
+    # The following keys decide which group the field is displayed in.
+    # For example add 'metadata: 'description'` to add a show field to the description block
+    # metadata = [
+    #     'description',
+    #     'keyword',
+    #     'origin',
+    #     'identifier',
+    #     'usage',
+    #     'migration_source'
 
     # Description Group
-    config.add_show_field 'abstract_tesim', label: 'Abstract'
-    config.add_show_field 'alternativeTitle_tesim', label: 'Alternative Title'
-    config.add_show_field 'description_tesim', label: 'Description'
-    config.add_show_field 'extent_ssim', label: 'Extent'
-    config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization'
-    config.add_show_field 'numberOfPages_ssim', label: 'Number of Pages'
-    config.add_show_field 'references_tesim', label: 'References'
-    config.add_show_field 'projection_tesim', label: 'Projection'
-    config.add_show_field 'scale_tesim', label: 'Scale'
-    config.add_show_field 'subtitle_tesim', label: 'Subtitle'
-    config.add_show_field 'subtitle_vern_ssim', label: 'Subtitle'
+    config.add_show_field 'abstract_tesim', label: 'Abstract', metadata: 'description'
+    config.add_show_field 'alternativeTitle_tesim', label: 'Alternative Title', metadata: 'description'
+    config.add_show_field 'description_tesim', label: 'Description', metadata: 'description'
+    config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description'
+    config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', metadata: 'description'
+    config.add_show_field 'numberOfPages_ssim', label: 'Number of Pages', metadata: 'description'
+    config.add_show_field 'references_tesim', label: 'References', metadata: 'description'
+    config.add_show_field 'projection_tesim', label: 'Projection', metadata: 'description'
+    config.add_show_field 'scale_tesim', label: 'Scale', metadata: 'description'
+    config.add_show_field 'subtitle_tesim', label: 'Subtitle', metadata: 'description'
+    config.add_show_field 'subtitle_vern_ssim', label: 'Subtitle', metadata: 'description'
 
     # Keywords Group
-    config.add_show_field 'format', label: 'Format'
-    config.add_show_field 'genre_ssim', label: 'Genre'
-    config.add_show_field 'geoSubject_ssim', label: 'Subject (Geographic)'
-    config.add_show_field 'material_tesim', label: 'Material'
-    config.add_show_field 'resourceType_ssim', label: 'Resource Type'
-    config.add_show_field 'subjectName_ssim', label: 'Subject (Name)'
-    config.add_show_field 'subjectTopic_tesim', label: 'Subject (Topic)'
+    config.add_show_field 'format', label: 'Format', metadata: 'keyword', link_to_facet: true
+    config.add_show_field 'genre_ssim', label: 'Genre', metadata: 'keyword', link_to_facet: true
+    config.add_show_field 'geoSubject_ssim', label: 'Subject (Geographic)', metadata: 'keyword', helper_method: :join_with_br
+    config.add_show_field 'material_tesim', label: 'Material', metadata: 'keyword'
+    config.add_show_field 'resourceType_ssim', label: 'Resource Type', metadata: 'keyword', link_to_facet: true
+    config.add_show_field 'subjectName_ssim', label: 'Subject (Name)', metadata: 'keyword', helper_method: :join_with_br
+    config.add_show_field 'subjectTopic_tesim', label: 'Subject (Topic)', metadata: 'keyword', helper_method: :join_with_br
 
     # Origin Group
-    config.add_show_field 'creator_ssim', label: 'Creator'
-    config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date'
-    config.add_show_field 'coordinates_ssim', label: 'Coordinates'
-    config.add_show_field 'date_ssim', label: 'Date'
-    config.add_show_field 'digital_ssim', label: 'Digital'
-    config.add_show_field 'edition_ssim', label: 'Edition'
-    config.add_show_field 'language_ssim', label: 'Language'
-    config.add_show_field 'publicationPlace_ssim', label: 'Publication Place'
-    config.add_show_field 'publisher_ssim', label: 'Publisher'
-    config.add_show_field 'published_ssim', label: 'Published'
-    config.add_show_field 'sourceCreated_tesim', label: 'Source Created'
-    config.add_show_field 'sourceDate_tesim', label: 'Source Date'
-    config.add_show_field 'sourceEdition_tesim', label: 'Source Edition'
-    config.add_show_field 'sourceNote_tesim', label: 'Source Note'
-    config.add_show_field 'sourceTitle_tesim', label: 'Source Title'
+    config.add_show_field 'creator_ssim', label: 'Creator', metadata: 'origin', link_to_facet: true
+    config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date', metadata: 'origin'
+    config.add_show_field 'coordinates_ssim', label: 'Coordinates', metadata: 'origin'
+    config.add_show_field 'date_ssim', label: 'Date', metadata: 'origin'
+    config.add_show_field 'digital_ssim', label: 'Digital', metadata: 'origin'
+    config.add_show_field 'edition_ssim', label: 'Edition', metadata: 'origin'
+    config.add_show_field 'language_ssim', label: 'Language', metadata: 'origin', helper_method: :language_codes_as_links
+    config.add_show_field 'publicationPlace_ssim', label: 'Publication Place', metadata: 'origin'
+    config.add_show_field 'publisher_ssim', label: 'Publisher', metadata: 'origin'
+    config.add_show_field 'published_ssim', label: 'Published', metadata: 'origin'
+    config.add_show_field 'sourceCreated_tesim', label: 'Source Created', metadata: 'origin'
+    config.add_show_field 'sourceDate_tesim', label: 'Source Date', metadata: 'origin'
+    config.add_show_field 'sourceEdition_tesim', label: 'Source Edition', metadata: 'origin'
+    config.add_show_field 'sourceNote_tesim', label: 'Source Note', metadata: 'origin'
+    config.add_show_field 'sourceTitle_tesim', label: 'Source Title', metadata: 'origin'
 
     # Identifiers Group
-    config.add_show_field 'box_ssim', label: 'Box'
-    config.add_show_field 'children_ssim', label: 'Children'
-    config.add_show_field 'findingAid_ssim', label: 'Finding Aid'
-    config.add_show_field 'folder_ssim', label: 'Folder'
-    config.add_show_field 'identifierMfhd_ssim', label: 'Identifier MFHD'
-    config.add_show_field 'identifierShelfMark_ssim', label: 'Call Number'
-    config.add_show_field 'importUrl_ssim', label: 'Import URL'
-    config.add_show_field 'isbn_ssim', label: 'ISBN'
-    config.add_show_field 'orbisBarcode_ssi', label: 'Orbis Bar Code'
-    config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID'
-    config.add_show_field 'oid_ssi', label: 'OID'
-    config.add_show_field 'partOf_ssim', label: 'Collection Name'
-    config.add_show_field 'uri_ssim', label: 'URI'
-    config.add_show_field 'url_fulltext_ssim', label: 'URL'
-    config.add_show_field 'url_suppl_ssim', label: 'More Information'
+    config.add_show_field 'box_ssim', label: 'Box', metadata: 'identifier'
+    config.add_show_field 'children_ssim', label: 'Children', metadata: 'identifier'
+    config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'identifier', helper_method: :link_to_url
+    config.add_show_field 'folder_ssim', label: 'Folder', metadata: 'identifier'
+    config.add_show_field 'identifierMfhd_ssim', label: 'Identifier MFHD', metadata: 'identifier'
+    config.add_show_field 'identifierShelfMark_ssim', label: 'Call Number', metadata: 'identifier', link_to_facet: true
+    config.add_show_field 'importUrl_ssim', label: 'Import URL', metadata: 'identifier'
+    config.add_show_field 'isbn_ssim', label: 'ISBN', metadata: 'identifier'
+    config.add_show_field 'orbisBarcode_ssi', label: 'Orbis Bar Code', metadata: 'identifier'
+    config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID', metadata: 'identifier', helper_method: :link_to_orbis_bib_id
+    config.add_show_field 'oid_ssi', label: 'OID', metadata: 'identifier'
+    config.add_show_field 'partOf_ssim', label: 'Collection Name', metadata: 'identifier'
+    config.add_show_field 'uri_ssim', label: 'URI', metadata: 'identifier'
+    config.add_show_field 'url_fulltext_ssim', label: 'URL', metadata: 'identifier'
+    config.add_show_field 'url_suppl_ssim', label: 'More Information', metadata: 'identifier'
 
     # Usage Group
-    config.add_show_field 'rights_ssim', label: 'Rights'
+    config.add_show_field 'rights_ssim', label: 'Rights', metadata: 'usage'
 
     # Migration Source Group
-    config.add_show_field 'recordType_ssi', label: 'Record Type'
-    config.add_show_field 'source_ssim', label: 'Source'
+    config.add_show_field 'recordType_ssi', label: 'Record Type', metadata: 'migration_source'
+    config.add_show_field 'source_ssim', label: 'Source', metadata: 'migration_source'
 
     config.add_field_configuration_to_solr_request!
 
