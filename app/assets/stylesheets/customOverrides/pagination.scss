@@ -37,10 +37,13 @@ DEFAULT MOBILE STYLING
 .page-item .page-link {
   font-family: $mallory_medium, Arial, Helvetica, sans-serif;
   font-size: 16px;
+  text-align: center;
   color: $light_blue;
   border: none;
   margin-left: 0px;
-  padding: 0px 12px;
+  padding: 12px 12px;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .page-item.active .page-link {
@@ -93,12 +96,12 @@ DEFAULT MOBILE STYLING
     left: 0;
     top: 40px;
   }
-  
+
   .page-item .page-link[aria-label="Go to next page"] {
     position: absolute;
     right: 0;
     top: 40px;
-  }    
+  }
 }
 
 @media screen and (min-width: $medium_device) {
@@ -107,12 +110,12 @@ DEFAULT MOBILE STYLING
     left: 0;
     top: 18px;
   }
-  
+
   .page-item .page-link[aria-label="Go to next page"] {
     position: absolute;
     right: 0;
     top: 18px;
-  }    
+  }
 }
 
 
@@ -122,10 +125,10 @@ DEFAULT MOBILE STYLING
     left: 0;
     top: 18px;
   }
-  
+
   .page-item .page-link[aria-label="Go to next page"] {
     position: absolute;
     right: 0;
     top: 18px;
-  }      
+  }
 }
