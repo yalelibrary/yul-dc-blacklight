@@ -18,12 +18,12 @@ a {
 .btn-primary {
   color: $yale_blue;
   background-color: $white;
-  border-color: $medium_grey;
+  border-color: $border_grey;
 }
 
 .btn-primary:hover {
   color: $yale_blue;
-  background-color: $light_grey;
+  background: none;
   border-color: $medium_grey;
 }
 
