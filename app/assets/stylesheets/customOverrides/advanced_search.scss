@@ -142,6 +142,16 @@ input.btn:nth-child(2) {
   color: $medium_grey;
 }
 
+//Do we want the advanced search to also change state? 
+.btn-secondary:not(:disabled):not(.disabled):hover {
+  color: $yale_blue;
+}
+
+/* If no to above we use this to fix the vanish issue
+.btn-secondary:not(:disabled):not(.disabled):active {
+  color: $light_blue;
+}*/
+
 @media screen and (min-width: $medium_device) {
 
   .adv-search-border-top{
