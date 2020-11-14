@@ -18,4 +18,7 @@ en:
       logout: Sign out
     search:
       search_constraints_header: You Searched For
+      page_title:
+        results: '%{count} results for %{q}'
+        results_with_constraint: '%{count} results for %{label}: %{value}'
     back_to_search: 'Back to Search Results'
