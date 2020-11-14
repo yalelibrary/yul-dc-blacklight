@@ -8,13 +8,6 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     user.present?
   end
 
-  describe 'image_exists?' do
-    context 'when URL is given but is invalid' do
-      it "treats it as a non-existent image" do
-        expect(helper.send(:image_exists?, "nonsense:8182")).to be_falsey
-      end
-    end
-  end
   describe '#manifest_url' do
     context 'when IIIF_MANIFESTS_BASE_URL is set' do
       around do |example|
@@ -94,7 +87,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
           .to_return(status: 200, body: File.open("spec/fixtures/images/Sun.png").read, headers: { "Content-Type" => /image\/.+/ })
       end
       it 'returns an image_tag for oids that have images' do
-        expect(helper.render_thumbnail(valid_document, { alt: "" })).to eq "<img src=\"http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg\" />"
+        expect(helper.render_thumbnail(valid_document, { alt: "" })).to match "<img [^>]* src=\"http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg\" />"
       end
       it 'returns an image_tag pointing to image_not_found.png for oids without images' do
         expect(helper.render_thumbnail(non_valid_document, {})).to include("<img src=\"/assets/image_not_found-")
@@ -123,7 +116,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
         user = FactoryBot.create(:user)
         sign_in(user) # sign_in so user_signed_in? works in method
 
-        expect(helper.render_thumbnail(yale_only_document, {})).to include("<img src=\"http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg\" />")
+        expect(helper.render_thumbnail(yale_only_document, {})).to match("<img [^>]* src=\"http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg\" />")
       end
     end
   end
