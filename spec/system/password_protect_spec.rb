@@ -7,7 +7,7 @@ RSpec.describe 'Password protect non-production instances', type: :system do
       ENV['HTTP_PASSWORD_PROTECT'] = 'false'
     end
     it 'does not prompt the user for a password' do
-      visit('/')
+      visit('/catalog')
       expect(page).to have_selector(".blacklight-catalog")
     end
   end
@@ -19,7 +19,7 @@ RSpec.describe 'Password protect non-production instances', type: :system do
       ENV['HTTP_PASSWORD_PROTECT'] = 'false'
     end
     it 'prompts the user for a password' do
-      visit('/')
+      visit('/catalog')
       expect(page).to have_content("HTTP Basic: Access denied")
     end
   end

@@ -8,7 +8,7 @@ RSpec.describe 'User Authentication', type: :system, js: false, clean: true do
 
   context 'an unauthenticated user' do
     it 'gets the omniauth redirect endpoint for Yale CAS authentication' do
-      visit root_path
+      visit search_catalog_path
       expect(page).to have_link('Sign in', href: '/users/auth/cas')
     end
   end
@@ -16,15 +16,15 @@ RSpec.describe 'User Authentication', type: :system, js: false, clean: true do
   context 'an authenticated user' do
     it 'gets a logout option' do
       login_as user
-      visit root_path
+      visit search_catalog_path
       expect(page).to have_link('Sign out', href: '/sign_out')
     end
 
     it 'expires the user session' do
       login_as user
-      visit root_path
+      visit search_catalog_path
       travel(13.hours)
-      visit root_path
+      visit search_catalog_path
       expect(page).to have_link('Sign in', href: '/users/auth/cas')
       travel_back
     end

@@ -6,7 +6,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
     solr = Blacklight.default_index.connection
     solr.add([dog, cat])
     solr.commit
-    visit '/?search_field=all_fields&q='
+    visit '/catalog?search_field=all_fields&q='
   end
 
   let(:search_fields) { CatalogController.blacklight_config.search_fields.keys }
@@ -46,31 +46,31 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
     end
 
     it 'contains displays the correct record when searching by call number' do
-      visit '/?search_field=identifierShelfMark_tesim&q=WA+MSS+987'
+      visit '/catalog?search_field=identifierShelfMark_tesim&q=WA+MSS+987'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).not_to have_content 'Handsome Dan is not a cat.'
     end
 
     it 'contains displays the correct record when searching by BibId' do
-      visit '/?search_field=orbisBibId_ssi&q=1238901'
+      visit '/catalog?search_field=orbisBibId_ssi&q=1238901'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).not_to have_content 'Handsome Dan is not a cat.'
     end
 
     it 'contains displays the correct record when searching by creator' do
-      visit '/?search_field=creator&q=Eric'
+      visit '/catalog?search_field=creator&q=Eric'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).to have_content 'Handsome Dan is not a cat.'
     end
 
     it 'contains displays the correct record when searching by subject' do
-      visit '/?search_field=subjectName_ssim&q=this+is+the+subject+name'
+      visit '/catalog?search_field=subjectName_ssim&q=this+is+the+subject+name'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).not_to have_content 'Handsome Dan is not a cat.'
     end
 
     it 'contains displays the correct record when searching by title' do
-      visit '/?search_field=title_tesim&q=handsome'
+      visit '/catalog?search_field=title_tesim&q=handsome'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).to have_content 'Handsome Dan is not a cat.'
     end

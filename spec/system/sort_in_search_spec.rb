@@ -9,7 +9,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
               eagle,
               puppy])
     solr.commit
-    visit root_path
+    visit search_catalog_path
   end
 
   let(:llama) do

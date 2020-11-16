@@ -7,4 +7,8 @@ class ApplicationController < ActionController::Base
   include HttpAuthConcern
 
   layout :determine_layout if respond_to? :layout
+
+  def landing
+    render layout: false
+  end
 end

@@ -6,7 +6,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     solr = Blacklight.default_index.connection
     solr.add([dog])
     solr.commit
-    visit '/?search_field=all_fields&q='
+    visit '/catalog?search_field=all_fields&q='
   end
 
   let(:dog) do

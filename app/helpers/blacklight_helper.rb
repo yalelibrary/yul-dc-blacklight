@@ -36,7 +36,7 @@ module BlacklightHelper
     language_values = args[:document][args[:field]]
     language_values.map do |language_code|
       converted_code = language_code_to_english(language_code)
-      link = "/?f%5Blanguage_ssim%5D%5B%5D=#{converted_code}"
+      link = "/catalog?f%5Blanguage_ssim%5D%5B%5D=#{converted_code}"
       out << link_to(converted_code, link)
       out << tag.br
     end
@@ -74,8 +74,11 @@ module BlacklightHelper
     # return placeholder image if not logged in for yale only works
     return image_tag('placeholder_restricted.png') if (document[:visibility_ssi].eql? 'Yale Community Only') && !user_signed_in?
     url = document[:thumbnail_path_ss]
-    return image_tag('image_not_found.png') unless image_exists?(url)
-    return image_tag(url) if ['Public', 'Yale Community Only'].include? document[:visibility_ssi]
+    if ['Public', 'Yale Community Only'].include?(document[:visibility_ssi]) && url.present?
+      error_image_url = image_url('image_not_found.png')
+      return image_tag(url, onerror: "this.error=null;this.src='#{error_image_url}'")
+    end
+    image_tag('image_not_found.png')
   end
 
   def pristine_search_state
@@ -83,21 +86,6 @@ module BlacklightHelper
   end
 
   private
-
-  def image_exists?(url)
-    return false if url.blank?
-    begin
-      # In local development, this is checked inside the container (iiif_image); however, the external browser
-      # needs to be able to resolve it, meaning it needs to be localhost
-      url = url.gsub("localhost", "iiif_image")
-      url = URI.parse(url)
-      http = Net::HTTP.get_response(url)
-    rescue
-      return false
-    end
-
-    http.content_type.include? 'image'
-  end
 
   def language_code_to_english(language_code)
     language_name_in_english = ISO_639.find_by_code(language_code)&.english_name

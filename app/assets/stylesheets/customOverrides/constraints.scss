@@ -2,7 +2,7 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 
-.btn-group.applied-filter.constraint{
+.btn-group.applied-filter.constraint {
   display: inline-block;
   margin: 5px 0 0 0;
   padding: 0 0 5.5px 0;
@@ -13,7 +13,7 @@ DEFAULT MOBILE STYLING
 
 }
 
-.constraints-container-index.constraints-container{
+.constraints-container-index.constraints-container {
   background-color: $lighter_grey;
   padding: 5px 0;
   display: inline-flex;
@@ -23,28 +23,28 @@ DEFAULT MOBILE STYLING
 }
 
 
-.constraints-container-index > .catalog_startOverLink{
+.constraints-container-index > .catalog_startOverLink {
   position: relative;
   font-family: Mallory-Medium;
-  color: #3399ff;
+  color: $light_blue;
   background-color: $lighter_grey;
   border-color: $lighter_grey;
   text-align: center;
   top: -5px;
   right: 0;
 }
-.constraints-container-index > .catalog_startOverLink:last-child{
+.constraints-container-index > .catalog_startOverLink:last-child {
   margin-left: auto !important;
 
 }
-.constraints-group{
+.constraints-group {
   display: inline-block;
   width: 62%;
   flex-wrap: wrap;
 }
 
 
-.constraint-value.btn.btn-outline-secondary{
+.constraint-value.btn.btn-outline-secondary {
   display:inline;
   margin-left: 10px;
   height: calc(100% - 15px);
@@ -53,9 +53,15 @@ DEFAULT MOBILE STYLING
   background-color: $white;
   margin-right: 10px;
 }
+
 .constraint-value.btn.btn-outline-secondary:hover {
   border-color: $lighter_grey;
 }
+
+.constraints-container-index > .catalog_startOverLink.btn.btn-primary.btn-show:focus .start-over-image {
+  filter: invert(54%) sepia(54%) saturate(3969%) hue-rotate(192deg) brightness(103%) contrast(108%);
+}
+
 .filter-name{
   margin-top: 5px;
   position: relative;
@@ -66,7 +72,7 @@ DEFAULT MOBILE STYLING
   text-transform: capitalize;
 }
 
-.filter-value{
+.filter-value {
   position: relative;
   top: -2px;
   color: $medium_grey;
@@ -76,7 +82,7 @@ DEFAULT MOBILE STYLING
   text-transform: capitalize;
 }
 
-.searched-heading{
+.searched-heading {
   font-size: 14px;
   font-family: $mallory_medium;
   text-align: left;
