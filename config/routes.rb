@@ -8,10 +8,11 @@ Rails.application.routes.draw do
     delete 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
   end
 
+  root to: 'application#landing'
+
   mount Blacklight::Engine => '/'
   mount BlacklightAdvancedSearch::Engine => '/'
 
-  root to: "catalog#index"
   concern :searchable, Blacklight::Routes::Searchable.new
 
   get 'mirador/:oid', to: 'mirador#show'

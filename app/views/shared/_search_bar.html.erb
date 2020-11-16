@@ -1,0 +1,15 @@
+<%unless current_page?('/advanced') %>
+  <div class="search-area">
+    <div class="navbar-search navbar navbar-light bg-light" role="navigation" aria-label="Search options">
+        <div class="<%= container_classes %>">
+            <%= render_search_bar %>
+        </div>
+    </div>
+  </div>
+  
+  <div class="user-subheader" role="heading" aria-level="1">
+    <div class="user-subheader-title">
+      Digital Collections
+    </div>
+  </div>
+<%end%>
