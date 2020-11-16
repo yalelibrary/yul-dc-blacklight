@@ -6,8 +6,8 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
               same_call_record,
               diff_call_record])
     solr.commit
-    visit root_path
-    visit '?search_field=all_fields&q='
+    visit search_catalog_path
+    visit '/catalog?search_field=all_fields&q='
   end
 
   let(:same_call_record) do

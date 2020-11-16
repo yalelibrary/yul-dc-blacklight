@@ -4,7 +4,7 @@ require 'rails_helper'
 RSpec.describe 'User Subheader', type: :system, js: true, style: true, clean: true do
   context "User logged out" do
     before do
-      visit '/'
+      visit '/catalog'
     end
     it 'has css' do
       expect(page).to have_css '.user-subheader'
@@ -25,7 +25,7 @@ RSpec.describe 'User Subheader', type: :system, js: true, style: true, clean: tr
     before do
       user = FactoryBot.create(:user)
       login_as(user, scope: :user, provider: :cas)
-      visit '/'
+      visit '/catalog'
     end
 
     it 'has css' do

@@ -61,7 +61,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   end
 
   it 'gets correct search results using year ranges' do
-    visit root_path
+    visit search_catalog_path
     click_on 'search'
 
     within '#documents' do

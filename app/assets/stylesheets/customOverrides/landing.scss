@@ -1,0 +1,145 @@
+#hero-carousel {
+  .carousel-caption {
+    position: absolute;
+    right: 7.5%;
+    text-align: right;
+  }
+
+  .carousel-control-prev, .carousel-control-next {
+    width: 10%;
+  }
+}
+
+#hero {
+  position: relative;
+}
+
+.search-query-form {
+  min-width: 400px;
+  width: 65%;
+}
+
+#q {
+  min-height: 44px;
+}
+
+#hero-search {
+  position: absolute;
+  height: 100%;
+  top: 0px;
+  max-width: 85%;
+  padding-left: 7.5%;
+  color: $white;
+
+  .btn-primary:hover {
+    border: 2px solid $darkest_grey;
+    background-color: $light_grey;
+  }
+
+  h1 {
+    font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: left;
+    font-weight: 800;
+    font-size: 64px;
+    width: 100%;
+  }
+
+  p {
+    margin-top: 1.25rem;
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+    font-family: $yale_new_roman, 'Times New Roman', Times, serif;
+    width: 65%;
+  }
+}
+
+#highlights {
+  margin-top: 92px;
+  margin-bottom: 92px;
+  width: 110%;
+
+  font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: left;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 2.25;
+  color: $medium_grey;
+
+  h2 {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 2.25;
+    color: $dark_grey;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+    li {
+      position: relative;
+      display: flex;
+      float: left;
+      padding-right: 2%;
+      padding-bottom: 2%;
+    }
+
+    .btn {
+      position: relative;
+      overflow: hidden;
+      min-width: 288px;
+      min-height: 160px;
+      width: 23%;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+
+    .btn:hover {
+      border: 3px solid $dark_grey;
+    }
+
+    .highlight-link {
+      color: transparent;
+    }
+  }
+}
+
+#hughes-papers {
+  background-image: image-url('landing/highlight-hughes.png');
+}
+
+#carson-papers {
+  background-image: image-url('landing/highlight-carson.png');
+}
+
+#divina-commedia {
+  background-image: image-url('landing/highlight-commedia.png');
+}
+
+#van-vechten-papers {
+  background-image: image-url('landing/highlight-van-vechten.png');
+}
+
+#stenzel-collection {
+  background-image: image-url('landing/highlight-stenzel.png');
+}
+
+#lewis-photographs {
+  background-image: image-url('landing/highlight-lewis.png');
+}
+
+#declaration-of-independence {
+  background-image: image-url('landing/highlight-independence.png');
+}
+
+#coming-soon {
+  background-image: image-url('landing/highlight-coming-soon.png');
+}

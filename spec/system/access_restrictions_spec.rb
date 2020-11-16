@@ -25,7 +25,7 @@ RSpec.describe "access restrictions", type: :system, clean: true do
 
   context "an unauthenticated user" do
     it 'displays public and yale-only but NOT private works in search results' do
-      visit '/?search_field=all_fields&q='
+      visit '/catalog?search_field=all_fields&q='
 
       expect(page).to have_content('A General dictionary of the English language')
       expect(page).to have_content('[Map of China]. [yale-only copy]')
@@ -49,7 +49,7 @@ RSpec.describe "access restrictions", type: :system, clean: true do
     end
 
     it 'displays public and yale-only but NOT private works in search results' do
-      visit '/?search_field=all_fields&q='
+      visit '/catalog?search_field=all_fields&q='
 
       expect(page).to have_content('A General dictionary of the English language')
       expect(page).to have_content('[Map of China]. [yale-only copy]')

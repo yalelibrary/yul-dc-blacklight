@@ -43,21 +43,21 @@ RSpec.describe "search result pagination", type: :system, clean: true, js: true 
 
   it "displays no pagination when search results are less than per page cap" do
     # default per page cap is 10 and there are 3 search results
-    visit '/?search_field=all_fields&view=list'
+    visit '/catalog?search_field=all_fields&view=list'
     # this double arrow is the last page link in the bottom pagination
     expect(page).not_to have_link "»"
   end
 
   it 'displays pagination when search results are greater than per page cap"' do
     # sets per page cap to 2 and there are 3 search results
-    visit '/?per_page=2&q=&search_field=all_fields'
+    visit '/catalog?per_page=2&q=&search_field=all_fields'
     # last page link
     expect(page).to have_link "»"
   end
 
   context "navigating with search context links" do
     it "has the appropriate context links on the first page of results" do
-      visit '/?per_page=2&q=&search_field=all_fields'
+      visit '/catalog?per_page=2&q=&search_field=all_fields'
       expect(page).to have_link "PREVIOUS"
       # this link is disabled on the first page of results
       expect(page).not_to have_link "«"
@@ -66,7 +66,7 @@ RSpec.describe "search result pagination", type: :system, clean: true, js: true 
     end
 
     it "jumps to last page of results" do
-      visit '/?per_page=2&q=&search_field=all_fields'
+      visit '/catalog?per_page=2&q=&search_field=all_fields'
       click_on "»"
       within 'ul.pagination' do
         # next button is disabled on last page so it cannot be found
@@ -75,7 +75,7 @@ RSpec.describe "search result pagination", type: :system, clean: true, js: true 
     end
 
     it "jumps to first page of results" do
-      visit '/?per_page=2&q=&search_field=all_fields'
+      visit '/catalog?per_page=2&q=&search_field=all_fields'
       click_on "»"
       click_on "«"
       within 'ul.pagination' do
