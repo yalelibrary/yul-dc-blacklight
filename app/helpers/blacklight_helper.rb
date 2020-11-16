@@ -36,7 +36,7 @@ module BlacklightHelper
     language_values = args[:document][args[:field]]
     language_values.map do |language_code|
       converted_code = language_code_to_english(language_code)
-      link = "/?f%5Blanguage_ssim%5D%5B%5D=#{converted_code}"
+      link = "/catalog?f%5Blanguage_ssim%5D%5B%5D=#{converted_code}"
       out << link_to(converted_code, link)
       out << tag.br
     end

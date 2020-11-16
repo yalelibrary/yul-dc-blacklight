@@ -234,28 +234,28 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("this is the URI")
     end
     it 'displays the call number in results as link' do
-      expect(page).to have_link("this is the call number", href: '/?f%5BidentifierShelfMark_ssim%5D%5B%5D=this+is+the+call+number')
-      expect(page).not_to have_link("this is the call number", href: '/?f%5BidentifierShelfMark_ssim%5D%5B%5D=this+is+the+call+number+but+different')
+      expect(page).to have_link("this is the call number", href: '/catalog?f%5BidentifierShelfMark_ssim%5D%5B%5D=this+is+the+call+number')
+      expect(page).not_to have_link("this is the call number", href: '/catalog?f%5BidentifierShelfMark_ssim%5D%5B%5D=this+is+the+call+number+but+different')
     end
     it 'contains a link on genre to its facet' do
-      expect(page).to have_link('this is the genre', href: '/?f%5Bgenre_ssim%5D%5B%5D=this+is+the+genre')
+      expect(page).to have_link('this is the genre', href: '/catalog?f%5Bgenre_ssim%5D%5B%5D=this+is+the+genre')
     end
     it 'contains a link on format to its facet' do
-      expect(page).to have_link('three dimensional object', href: '/?f%5Bformat%5D%5B%5D=three+dimensional+object')
+      expect(page).to have_link('three dimensional object', href: '/catalog?f%5Bformat%5D%5B%5D=three+dimensional+object')
     end
     it 'contains a link on resource type to its facet' do
-      expect(page).to have_link('this is the resource type', href: '/?f%5BresourceType_ssim%5D%5B%5D=this+is+the+resource+type')
+      expect(page).to have_link('this is the resource type', href: '/catalog?f%5BresourceType_ssim%5D%5B%5D=this+is+the+resource+type')
     end
     it 'contains a link on language to its facet' do
-      expect(page).to have_link('English (en)', href: '/?f%5Blanguage_ssim%5D%5B%5D=English (en)')
-      expect(page).to have_link('English (eng)', href: '/?f%5Blanguage_ssim%5D%5B%5D=English (eng)')
-      expect(page).to have_link('zz', href: '/?f%5Blanguage_ssim%5D%5B%5D=zz')
+      expect(page).to have_link('English (en)', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=English (en)')
+      expect(page).to have_link('English (eng)', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=English (eng)')
+      expect(page).to have_link('zz', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=zz')
     end
     it 'contains a link on the Orbis Bib ID to the Orbis catalog record' do
       expect(page).to have_link('1234567', href: 'http://hdl.handle.net/10079/bibid/1234567')
     end
     it 'contains a link for the Creator field to the facet' do
-      expect(page).to have_link('Frederick, Eric & Maggie', href: '/?f%5Bcreator_ssim%5D%5B%5D=Frederick%2C++Eric+%26+Maggie')
+      expect(page).to have_link('Frederick, Eric & Maggie', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Frederick%2C++Eric+%26+Maggie')
     end
     it 'contains a link on the Finding Aid to the Finding Aid catalog record' do
       expect(page).to have_link('this is the finding aid', href: 'this is the finding aid')

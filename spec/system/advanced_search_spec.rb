@@ -7,7 +7,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
     solr = Blacklight.default_index.connection
     solr.add([dog, cat])
     solr.commit
-    visit root_path
+    visit search_catalog_path
     click_on "Advanced Search"
   end
 
@@ -278,7 +278,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
     end
 
     it 'renders the button on the homepage' do
-      visit root_path
+      visit search_catalog_path
       expect(page).to have_css '.advanced_search'
       expect(page).to have_link('Advanced Search', href: '/advanced')
       find('.advanced_search').hover
