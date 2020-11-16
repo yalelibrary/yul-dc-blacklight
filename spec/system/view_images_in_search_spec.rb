@@ -59,7 +59,7 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
 
   context 'public records with broken images', style: true do
     it 'displays the image_not_found_png for records with broken images' do
-      visit "?q=#{document_with_broken_image[:oid_ssi]}&search_field=oid_ssi"
+      visit "/catalog?q=#{document_with_broken_image[:oid_ssi]}&search_field=oid_ssi"
       expect(page.html).to match('/assets/image_not_found')
     end
   end
