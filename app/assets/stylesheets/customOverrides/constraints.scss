@@ -46,8 +46,9 @@ DEFAULT MOBILE STYLING
 
 .constraint-value.btn.btn-outline-secondary {
   display:inline;
+  margin-top: -1px;
   margin-left: 10px;
-  height: calc(100% - 15px);
+  height: calc(100% - 1px);
   width: content-box;
   padding: 3px 0 3px 5.5px;
   background-color: $white;
@@ -63,9 +64,9 @@ DEFAULT MOBILE STYLING
 }
 
 .filter-name{
-  margin-top: 5px;
+  margin-top: 1px;
   position: relative;
-  top: -2px;
+  top: 0;
   color: $medium_grey;
   font-family: $mallory_medium;
   font-size: 12px;
@@ -74,7 +75,7 @@ DEFAULT MOBILE STYLING
 
 .filter-value {
   position: relative;
-  top: -2px;
+  top: 0;
   color: $medium_grey;
   font-family: $mallory_medium;
   font-size: 12px;
@@ -88,7 +89,7 @@ DEFAULT MOBILE STYLING
   text-align: left;
   color: $medium_grey;
   text-transform: uppercase;
-  margin-top:13px;
+  margin-top:19px;
   margin-bottom: 0;
   margin-left: 16px;
   position: relative;
