@@ -8,26 +8,18 @@
 %>
 
 <span class="btn-group applied-filter constraint query <%= options[:classes].join(" ") if options[:classes] %>">
-  <span class="constraint-value btn btn-outline-secondary ">
+  <button class="constraint-value btn btn-outline-secondary">
     <% unless label.blank? %>
-      <span class="filter-name"><%= label %></span>
+      <span class="filter-name"><%= label %> </span>
     <% end %>
+
     <% unless value.blank? %>
       <%= content_tag :span, value, class: 'filter-value'%>
-    <% end %>
-    <% unless options[:remove].blank? %>
-    <% accessible_remove_label = content_tag :span, class: 'sr-only' do
-      if label.blank?
-        t('blacklight.search.filters.remove.value', value: value)
-      else
-        t('blacklight.search.filters.remove.label_value', label: label, value: value)
-      end
-    end
-    %>
+      <!-- icon to remove-->
       <%= link_to(content_tag(:span, image_tag('x2x.png', alt: ""),
                               class: 'remove-icon') ,
                   options[:remove], class: 'btn btn-outline-secondary remove'
           ) %>
-  <%- end -%>
-  </span>
+       <% end %>
+  </button>
 </span>
