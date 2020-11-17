@@ -2,7 +2,7 @@
   <div id="appliedParams" class="clearfix constraints-container">
     <div id="showSearchButtons" class="show-buttons" >
       <%= render 'start_over' %>
-      <%= link_back_to_catalog class: 'btn btn-primary btn-show' %>
+      <%= link_back_to_catalog class: 'btn btn-primary btn-show', "role" => "button" %>
     </div>
     <%= render 'previous_next_doc' if @search_context %>
   </div>
