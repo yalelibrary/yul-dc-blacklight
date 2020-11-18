@@ -4,7 +4,7 @@
 <iframe
     class="universal-viewer-iframe"
     title="Universal Viewer"
-    src="<%= request&.base_url %>/uv/uv.html#?manifest=<%= manifest_url(oid) %>"
+    src="<%= request&.base_url %>/uv/uv.html#?manifest=<%= manifest_url(oid, format: 'json') %>"
     width="924"
     height="668"
     allowfullscreen

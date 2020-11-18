@@ -3,6 +3,8 @@ require 'rails_helper'
 
 RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   before do
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/111.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     solr = Blacklight.default_index.connection
     solr.add([llama,
               dog,

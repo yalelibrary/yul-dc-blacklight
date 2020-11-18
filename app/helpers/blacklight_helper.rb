@@ -3,22 +3,6 @@
 module BlacklightHelper
   include Blacklight::BlacklightHelperBehavior
 
-  def pdf_url(oid)
-    File.join(pdf_base_url, "#{oid}.pdf")
-  end
-
-  def manifest_url(oid)
-    File.join(manifest_base_url, "#{oid}.json")
-  end
-
-  def pdf_base_url
-    ENV.fetch('PDF_BASE_URL', "#{request.protocol}localhost/pdfs")
-  end
-
-  def manifest_base_url
-    ENV.fetch('IIIF_MANIFESTS_BASE_URL', "#{request.protocol}localhost/manifests")
-  end
-
   def mirador_url(oid)
     "/mirador/#{oid}"
   end
