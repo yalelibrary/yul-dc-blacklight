@@ -33,9 +33,9 @@
   </div>
 
   <div class="adv-search-sort-submit-buttons clearfix">
-    <input type="submit" name="commit" value="SEARCH" class="btn btn-primary lg-btn advanced-search-submit" id="advanced-search-submit" data-disable-with="Search" aria-label="Search">
-    <%= link_to "BASIC SEARCH", root_path, :class =>"btn btn-primary lg-btn pull-right", aria: { label: 'Basic Search' } %>
-    <%= link_to "CLEAR", blacklight_advanced_search_engine.advanced_search_path, :class =>"btn btn-primary lg-btn advanced-search-start-over", aria: { label: 'Clear Form' } %>
+    <input type="submit" name="commit" value="SEARCH" class="btn btn-primary lg-btn advanced-search-submit" id="advanced-search-submit" data-disable-with="Search" aria-label="Search" role="button">
+    <%= link_to "BASIC SEARCH", root_path, :class =>"btn btn-primary lg-btn pull-right", aria: { label: 'Basic Search' }, "role" => "button" %>
+    <%= link_to "CLEAR", blacklight_advanced_search_engine.advanced_search_path, :class =>"btn btn-primary lg-btn advanced-search-start-over", aria: { label: 'Clear Form' }, "role" => "button" %>
   </div>
 
 <% end %>
