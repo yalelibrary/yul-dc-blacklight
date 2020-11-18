@@ -19,13 +19,13 @@
     <%= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}", id: "q", aria: { label: 'search' }, autocomplete: presenter.autocomplete_enabled? ? "off" : "", autofocus: presenter.autofocus?, data: { autocomplete_enabled: presenter.autocomplete_enabled?, autocomplete_path: search_action_path(action: :suggest) }  %>
 
     <span class="input-group-append">
-      <button type="submit" class="btn btn-primary search-btn" id="search">
+      <button type="submit" class="btn btn-primary search-btn" id="search" role="button">
         <span class="submit-search-text"><%= t('blacklight.search.form.submit') %></span>
         <%= blacklight_icon :search, aria_hidden: true %>
       </button>
     </span>
     <span>
-      <%= link_to 'Advanced Search', blacklight_advanced_search_engine.advanced_search_path(pristine_search_state.to_h), class: 'advanced_search btn btn-secondary'%>
+      <%= link_to 'Advanced Search', blacklight_advanced_search_engine.advanced_search_path(pristine_search_state.to_h), class: 'advanced_search btn btn-secondary', 'role' => 'button'%>
     </span>
   </div>
 <% end %>

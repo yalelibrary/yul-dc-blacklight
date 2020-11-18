@@ -95,42 +95,50 @@ FONT FILE TYPES
 /*************************** MALLORY ***************************/
 @font-face {
   font-family: 'Mallory-Bold';
-  src: url(https://static.library.yale.edu/fonts/mallory/Mallory-Bold.woff);
+  src: url(https://static.library.yale.edu/fonts/mallory/Mallory-Bold.woff2) format('woff2'),
+       url(https://static.library.yale.edu/fonts/mallory/Mallory-Bold.woff) format('woff');
 }
 
 @font-face {
   font-family: 'Mallory-BoldItalic';
-  src: url(https://static.library.yale.edu/fonts/mallory/Mallory-BoldItalic.woff);
+  src: url(https://static.library.yale.edu/fonts/mallory/Mallory-BoldItalic.woff2) format('woff2'),
+       url(https://static.library.yale.edu/fonts/mallory/Mallory-BoldItalic.woff) format('woff');
 }
 
 @font-face {
   font-family: 'Mallory-Book';
-  src: url(https://static.library.yale.edu/fonts/mallory/Mallory-Book.woff);
+  src: url(https://static.library.yale.edu/fonts/mallory/Mallory-Book.woff2) format('woff2'),
+       url(https://static.library.yale.edu/fonts/mallory/Mallory-Book.woff) format('woff');
 }
 
 @font-face {
   font-family: 'Mallory-BookItalic';
-  src: url(https://static.library.yale.edu/fonts/mallory/Mallory-BookItalic.woff);
+  src: url(https://static.library.yale.edu/fonts/mallory/Mallory-BookItalic.woff2) format('woff2'),
+       url(https://static.library.yale.edu/fonts/mallory/Mallory-BookItalic.woff);
 }
 
 @font-face {
   font-family: 'Mallory-Light';
-  src: url(https://static.library.yale.edu/fonts/mallory/Mallory-Light.woff);
+  src: url(https://static.library.yale.edu/fonts/mallory/Mallory-Light.woff2) format('woff2'),
+       url(https://static.library.yale.edu/fonts/mallory/Mallory-Light.woff) format('woff');
 }
 
 @font-face {
   font-family: 'Mallory-LightItalic';
-  src: url(https://static.library.yale.edu/fonts/mallory/Mallory-LightItalic.woff);
+  src: url(https://static.library.yale.edu/fonts/mallory/Mallory-LightItalic.woff2) format('woff2'),
+       url(https://static.library.yale.edu/fonts/mallory/Mallory-LightItalic.woff) format('woff');
 }
 
 @font-face {
   font-family: 'Mallory-Medium';
-  src: url(https://static.library.yale.edu/fonts/mallory/Mallory-Medium.woff);
+  src: url(https://static.library.yale.edu/fonts/mallory/Mallory-Medium.woff2) format('woff2'),
+       url(https://static.library.yale.edu/fonts/mallory/Mallory-Medium.woff) format('woff');
 }
 
 @font-face {
   font-family: 'Mallory-MediumItalic';
-  src: url(https://static.library.yale.edu/fonts/mallory/Mallory-MediumItalic.woff);
+  src: url(https://static.library.yale.edu/fonts/mallory/Mallory-MediumItalic.woff2) format('woff2'),
+       url(https://static.library.yale.edu/fonts/mallory/Mallory-MediumItalic.woff) format('woff');
 }
 
 

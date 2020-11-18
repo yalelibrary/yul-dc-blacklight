@@ -71,15 +71,15 @@ a {
   color: $yale_blue;
 }
 
-
 .btn.btn-outline-secondary.remove > .remove-icon {
   position: relative;
-  top: -9px
+  top: 1px
 }
 
 .start-over-icon {
-margin-left: 5px;
+  margin-left: 5px;
 }
+
 .start-over-image {
   filter: invert(42%) sepia(73%) saturate(6447%) hue-rotate(203deg) brightness(97%) contrast(103%);
 }
