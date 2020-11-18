@@ -1,7 +1,7 @@
 <% doc_presenter = show_presenter(document) %>
 
   <div class='metadata-block single-item-show'>
-    <h4 class='metadata-block__title'><%= metadata.titlecase %></h4>
+    <h2 class='metadata-block__title'><%= metadata.titlecase %></h2>
     <dl class='metadata-block__group'>
 
       <% doc_presenter.metadata_fields_to_render(metadata).each do |field_name, field, field_presenter| %>
