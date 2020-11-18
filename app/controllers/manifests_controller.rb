@@ -20,6 +20,11 @@ class ManifestsController < ApplicationController
   def download_from_s3(remote_path)
     client = Aws::S3::Client.new
     response = client.get_object(bucket: ENV['SAMPLE_BUCKET'], key: remote_path)
-    response.body&.read
+    # TODO A&J - make this real code and not stuff Rob made up
+    if reponse.metadata['visibility'] == "public" || (reponse.metadata['visibility'] == "Yale Only" && current_user)
+      response.body&.read
+    else
+      # TODO A&J - burn it all down (or just show a 401 unauthorized message)
+    end
   end
 end
