@@ -3,6 +3,7 @@
 # Takes a request for a manifest/oid and stream the JSON for that oid from S3
 class ManifestsController < ApplicationController
   before_action :check_authorization
+  include Blacklight::Catalog
 
   def show
     remote_path = pairtree_path
@@ -24,10 +25,9 @@ class ManifestsController < ApplicationController
   end
 
   def check_authorization
-    @solr_query = Blacklight.default_index.connection
-    solr_connection = @solr_query.connection
-    response = solr_connection.get 'select', params: { q: "id:#{params[:id]}" }
-    visibility = response.body
+    @response, @document = search_service.fetch(params[:id])
+
+    case @document['visibility_ssi'] # TODO A&J make this handle nils
     when 'Public'
       return true
     when 'Yale Only'
