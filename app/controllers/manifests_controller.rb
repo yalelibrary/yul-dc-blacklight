@@ -2,12 +2,12 @@
 
 # Takes a request for a manifest/oid and stream the JSON for that oid from S3
 class ManifestsController < ApplicationController
+  before_action :check_authorization
+
   def show
     remote_path = pairtree_path
     response.set_header('Access-Control-Allow-Origin', '*')
     render json: download_from_s3(remote_path)
-  rescue ArgumentError
-    render json: { error: "not-found" }.to_json, status: 404
   end
 
   private
@@ -20,11 +20,24 @@ class ManifestsController < ApplicationController
   def download_from_s3(remote_path)
     client = Aws::S3::Client.new
     response = client.get_object(bucket: ENV['SAMPLE_BUCKET'], key: remote_path)
-    # TODO A&J - make this real code and not stuff Rob made up
-    if reponse.metadata['visibility'] == "public" || (reponse.metadata['visibility'] == "Yale Only" && current_user)
-      response.body&.read
+    response.body&.read
+  end
+
+  def check_authorization
+    @solr_response = Solr.find(params[:id]) # TODO how to query solr?
+    case @solr_response['results']['docs'].first['vibilitity_ssi'] # TODO A&J make this handle nils
+    when 'Public'
+      return true
+    when 'Yale Only'
+      if current_user
+        return true
+      else
+        render json: { error: "not-found" }.to_json, status: 404
+        return false
+      end
     else
-      # TODO A&J - burn it all down (or just show a 401 unauthorized message)
+      render json: { error: "not-found" }.to_json, status: 404
+      return false
     end
   end
 end
