@@ -24,8 +24,10 @@ class ManifestsController < ApplicationController
   end
 
   def check_authorization
-    @solr_response = Solr.find(params[:id]) # TODO how to query solr?
-    case @solr_response['results']['docs'].first['vibilitity_ssi'] # TODO A&J make this handle nils
+    @solr_query = Blacklight.default_index.connection
+    solr_connection = @solr_query.connection
+    response = solr_connection.get 'select', params: { q: "id:#{params[:id]}" }
+    visibility = response.body
     when 'Public'
       return true
     when 'Yale Only'
