@@ -27,18 +27,19 @@ class ManifestsController < ApplicationController
   def check_authorization
     @response, @document = search_service.fetch(params[:id])
 
-    case @document['visibility_ssi'] # TODO A&J make this handle nils
+    # Handle when the 'visibility_ssi' key doesn't exist on the manifest
+    unless @document.key?('visibility_ssi')
+      render json: { error: 'not-found' }.to_json, status: 404
+      return false
+    end
+
+    case @document['visibility_ssi']
     when 'Public'
       return true
     when 'Yale Only'
-      if current_user
-        return true
-      else
-        render json: { error: "not-found" }.to_json, status: 404
-        return false
-      end
-    else
-      render json: { error: "not-found" }.to_json, status: 404
+      return true if current_user
+
+      render json: { error: 'not-found' }.to_json, status: 404
       return false
     end
   end
