@@ -35,12 +35,12 @@ class ManifestsController < ApplicationController
 
     case @document['visibility_ssi']
     when 'Public'
-      return true
+      true
     when 'Yale Only'
       return true if current_user
 
       render json: { error: 'not-found' }.to_json, status: 404
-      return false
+      false
     end
   end
 end
