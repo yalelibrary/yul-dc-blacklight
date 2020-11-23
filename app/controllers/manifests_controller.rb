@@ -9,6 +9,8 @@ class ManifestsController < ApplicationController
     remote_path = pairtree_path
     response.set_header('Access-Control-Allow-Origin', '*')
     render json: download_from_s3(remote_path)
+  rescue ArgumentError
+    render json: { error: "not-found" }.to_json, status: 404
   end
 
   private
