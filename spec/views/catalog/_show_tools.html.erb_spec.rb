@@ -17,7 +17,7 @@ RSpec.describe 'catalog/_show_tools.html.erb' do
   describe 'links' do
     it 'renders the iiif manifest link' do
       render partial: 'catalog/show_tools'
-      expect(rendered).to have_link 'Manifest Link', href: "http://localhost/manifests/xyz.json"
+      expect(rendered).to have_link 'Manifest Link', href: "http://test.host/manifests/xyz.json"
     end
 
     it 'renders the mirador link' do
@@ -27,7 +27,7 @@ RSpec.describe 'catalog/_show_tools.html.erb' do
 
     it 'renders the pdf link' do
       render partial: 'catalog/show_tools'
-      expect(rendered).to have_link 'Download as PDF', href: "http://localhost/pdfs/xyz.pdf"
+      expect(rendered).to have_link 'Download as PDF', href: "http://test.host/pdfs/xyz.pdf"
     end
   end
 end

@@ -34,5 +34,9 @@ Rails.application.routes.draw do
       delete 'clear'
     end
   end
+  # This route needs to be the very last route in this file, because it's a wildcard and will glob everything
+  get '/manifests/*id', to: 'manifests#show', as: :manifest
+  get '/pdfs/not_found.html', to: 'pdfs#not_found'
+  get '/pdfs/*id', to: 'pdfs#show', as: :pdf
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
