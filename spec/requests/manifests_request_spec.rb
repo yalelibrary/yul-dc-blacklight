@@ -3,24 +3,17 @@ require 'rails_helper'
 # WebMock.allow_net_connect!
 
 RSpec.describe 'Manifests', type: :request do
-  # before do
-  #   stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/manifests/95/20/55/09/2055095.json')
-  #     .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2055095.json')).read)
-  # end
-
   let(:user) { FactoryBot.create(:user) }
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY }
   let(:yale_work) { WORK_WITH_YALE_ONLY_VISIBILITY }
 
   before do
-    solr = Blacklight.default_index.connection
-    solr.add(public_work)
-    solr.add(yale_work)
-    solr.commit
     stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/manifests/95/20/55/09/2055095.json')
-      .to_return(status: 200, body: '', headers: {})
-      # .to_return(status: 200, body: File.open(File.join('spec', 'support', 'solr_documents', 'metadata_cloud_with_visibility.rb')).read)
-    allow(Rails.application.config).to receive(:iiif_url).and_return('https://example.com')
+      .to_return(
+        status: 200,
+        body: JSON.generate(public_work),
+        headers: { "Content-Type": "application/json" }
+      )
   end
 
   around do |example|
@@ -33,8 +26,10 @@ RSpec.describe 'Manifests', type: :request do
   context 'as an unauthenticated user' do
     it 'displays if set to public' do
       get '/manifests/2055095.json'
-      byebug
-      # expect(response.body).to include 'A General dictionary of the English language'
+      manifest = JSON.parse(response.body)
+
+      expect(manifest['visibility_ssi']).to eq('Public')
+      expect(manifest['title_tesim'][0]).to eq('A General dictionary of the English language')
     end
 
     # it 'does not display if set to yale only' do
