@@ -50,9 +50,10 @@ DEFAULT MOBILE STYLING
   margin-left: 10px;
   height: calc(100% + 5px);
   width: content-box;
-  padding: 3px 0 3px 5.5px;
+  padding: 7px 0 17px 5.5px;
   background-color: $white;
   margin-right: 10px;
+  font-size: 16px;
 }
 
 .constraint-value.btn.btn-outline-secondary:hover {
@@ -66,7 +67,7 @@ DEFAULT MOBILE STYLING
 .filter-name{
   margin-top: 1px;
   position: relative;
-  top: 0;
+  top: 3px;
   color: $medium_grey;
   font-family: $mallory_medium;
   font-size: 12px;
@@ -75,7 +76,7 @@ DEFAULT MOBILE STYLING
 
 .filter-value {
   position: relative;
-  top: 0;
+  top: 3px;
   color: $medium_grey;
   font-family: $mallory_medium;
   font-size: 12px;

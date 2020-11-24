@@ -1,4 +1,3 @@
-<button class="catalog_startOverLink btn btn-primary btn-show">
 <% href = 'start_over.png' %>
 <%= link_to safe_join([
                     content_tag(:span,t('blacklight.search.start_over')),
@@ -6,6 +5,9 @@
                         :span, image_tag(href, class:'start-over-image', alt: ""),
                         class: 'start-over-icon'
                     )]),
-            start_over_path
+            start_over_path,
+            class: "catalog_startOverLink btn btn-primary btn-show",
+            role: "button",
+            tabindex: "0"
 %>
 </button>
