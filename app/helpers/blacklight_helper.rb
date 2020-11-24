@@ -55,6 +55,19 @@ module BlacklightHelper
     safe_join(values, '<br/>'.html_safe)
   end
 
+  def faceted_join_with_br(arg)
+    values = arg[:document][arg[:field]]
+    links = []
+    values.each do |value|
+      links << link_to(value, build_escaped_facet(arg[:field], value))
+    end
+    safe_join(links, '<br/>'.html_safe)
+  end
+
+  def build_escaped_facet(field, value)
+    "/catalog?f" + ERB::Util.url_encode("[#{field}][]") + "=#{value}"
+  end
+
   def link_to_url(arg)
     link_to(arg[:value][0], arg[:value][0])
   end
