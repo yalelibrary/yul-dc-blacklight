@@ -14,6 +14,10 @@ RSpec.describe 'Manifests', type: :request do
         body: JSON.generate(public_work),
         headers: { "Content-Type": "application/json" }
       )
+
+    solr = Blacklight.default_index.connection
+    solr.add([public_work, yale_work])
+    solr.commit
   end
 
   around do |example|
@@ -25,11 +29,11 @@ RSpec.describe 'Manifests', type: :request do
 
   context 'as an unauthenticated user' do
     it 'displays if set to public' do
-      #   get '/manifests/2055095'
-      #   manifest = JSON.parse(response.body)
+      get '/manifests/2055095'
+      manifest = JSON.parse(response.body)
 
-      #   expect(manifest['visibility_ssi']).to eq('Public')
-      #   expect(manifest['title_tesim'][0]).to eq('A General dictionary of the English language')
+      expect(manifest['visibility_ssi']).to eq('Public')
+      expect(manifest['title_tesim'][0]).to eq('A General dictionary of the English language')
     end
 
     # it 'does not display if set to yale only' do
