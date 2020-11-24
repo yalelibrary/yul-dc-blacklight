@@ -12,7 +12,6 @@ RSpec.describe 'Manifests', type: :request, clean: true do
       "visibility_ssi": "Yale Community Only"
     }
   end
-  # let(:cas) { WORK_WITH_YALE_ONLY_VISIBILITY }
 
   before do
     stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/manifests/95/20/55/09/2055095.json')
@@ -21,7 +20,7 @@ RSpec.describe 'Manifests', type: :request, clean: true do
         body: JSON.generate(public_work),
         headers: { "Content-Type": "application/json" }
       )
-    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/manifest/09/16/18/90/1618909.json')
+    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/manifests/09/16/18/90/1618909.json')
       .to_return(
         status: 200,
         body: JSON.generate(yale_work),
@@ -50,7 +49,7 @@ RSpec.describe 'Manifests', type: :request, clean: true do
     end
 
     it 'do not display if set to yale only' do
-      get '/manifests/16189097-yale'
+      get '/manifests/1618909'
       manifest = JSON.parse(response.body)
 
       expect(manifest['error']).to eq('not-found')
@@ -71,9 +70,8 @@ RSpec.describe 'Manifests', type: :request, clean: true do
     end
 
     it 'display if set to yale only' do
-      get '/manifests/16189097-yale'
+      get '/manifests/1618909'
       manifest = JSON.parse(response.body)
-      byebug
 
       expect(manifest['visibility_ssi']).to eq('Yale Community Only')
       expect(manifest['title_tesim'][0]).to eq('[Map of China]. [yale-only copy]')

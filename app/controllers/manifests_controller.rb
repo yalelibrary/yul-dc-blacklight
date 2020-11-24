@@ -10,14 +10,12 @@ class ManifestsController < ApplicationController
     response.set_header('Access-Control-Allow-Origin', '*')
     render json: download_from_s3(remote_path)
   rescue ArgumentError
-    byebug
     render json: { error: "not-found" }.to_json, status: 404
   end
 
   private
 
   def pairtree_path
-    byebug
     pairtree = Partridge::Pairtree.oid_to_pairtree(params[:id])
     File.join('manifests', pairtree, "#{params[:id]}.json")
   end
@@ -25,7 +23,6 @@ class ManifestsController < ApplicationController
   def download_from_s3(remote_path)
     client = Aws::S3::Client.new
     response = client.get_object(bucket: ENV['SAMPLE_BUCKET'], key: remote_path)
-    byebug
     response.body&.read
   end
 
