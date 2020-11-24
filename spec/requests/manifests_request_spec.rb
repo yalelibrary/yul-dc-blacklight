@@ -23,20 +23,20 @@ RSpec.describe 'Manifests', type: :request do
     ENV['SAMPLE_BUCKET'] = original_sample_bucket
   end
 
-  context 'as an unauthenticated user' do
-    it 'displays if set to public' do
-      get '/manifests/2055095.json'
-      manifest = JSON.parse(response.body)
+  # context 'as an unauthenticated user' do
+  # it 'displays if set to public' do
+  #   get '/manifests/2055095.json'
+  #   manifest = JSON.parse(response.body)
 
-      expect(manifest['visibility_ssi']).to eq('Public')
-      expect(manifest['title_tesim'][0]).to eq('A General dictionary of the English language')
-    end
+  #   expect(manifest['visibility_ssi']).to eq('Public')
+  #   expect(manifest['title_tesim'][0]).to eq('A General dictionary of the English language')
+  # end
 
-    # it 'does not display if set to yale only' do
-    #   get '/manifests/16189097-yale'
-    #   expect(page).not_to have_content('[Map of China]. [yale-only copy]')
-    # end
-  end
+  # it 'does not display if set to yale only' do
+  #   get '/manifests/16189097-yale'
+  #   expect(page).not_to have_content('[Map of China]. [yale-only copy]')
+  # end
+  # end
 
   # describe 'GET /show' do
   #   it 'returns a json document of the manifest' do

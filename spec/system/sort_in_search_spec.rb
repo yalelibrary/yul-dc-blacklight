@@ -96,8 +96,6 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
     expect(content).to have_content("4.\nAquila Eccellenza")
   end
 
-  # add creator and title test
-
   context 'sorts by title' do
     it 'asc' do
       click_on 'search'
