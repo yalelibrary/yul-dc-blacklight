@@ -14,6 +14,12 @@ RSpec.describe 'Manifests', type: :request do
         body: JSON.generate(public_work),
         headers: { "Content-Type": "application/json" }
       )
+    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/manifests/97/16/18/90/16189097-yale.json')
+      .to_return(
+        status: 200,
+        body: JSON.generate(yale_work),
+        headers: { "Content-Type": "application/json" }
+      )
 
     solr = Blacklight.default_index.connection
     solr.add([public_work, yale_work])
@@ -28,7 +34,7 @@ RSpec.describe 'Manifests', type: :request do
   end
 
   context 'as an unauthenticated user' do
-    it 'displays if set to public' do
+    it 'display if set to public' do
       get '/manifests/2055095'
       manifest = JSON.parse(response.body)
 
@@ -36,19 +42,11 @@ RSpec.describe 'Manifests', type: :request do
       expect(manifest['title_tesim'][0]).to eq('A General dictionary of the English language')
     end
 
-    # it 'does not display if set to yale only' do
-    #   get '/manifests/16189097-yale'
-    #   expect(page).not_to have_content('[Map of China]. [yale-only copy]')
-    # end
-  end
+    it 'do not display if set to yale only' do
+      get '/manifests/16189097-yale'
+      manifest = JSON.parse(response.body)
 
-  # describe 'GET /show' do
-  #   it 'returns a json document of the manifest' do
-  #     get '/manifests/2041002'
-  #     expect(response).to have_http_status(:success)
-  #     expect(response.body).to include 'A General dictionary of the English language'
-  #     expect(response.content_type).to eq 'application/json; charset=utf-8'
-  #     expect(response.headers['Access-Control-Allow-Origin']).to eq('*')
-  #   end
-  # end
+      expect(manifest['error']).to eq('not-found')
+    end
+  end
 end
