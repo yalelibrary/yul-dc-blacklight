@@ -44,7 +44,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       visibility_ssi: 'Public',
       abstract_tesim: "this is an abstract",
       alternativeTitle_tesim: "this is an alternative title",
-      genre_ssim: "this is the genre",
+      genre_ssim: ["this is the genre", "this is the second genre"],
       geoSubject_ssim: "this is the geo subject",
       resourceType_ssim: "this is the resource type",
       subjectName_ssim: "this is the subject name",
@@ -238,7 +238,11 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(page).not_to have_link("this is the call number", href: '/catalog?f%5BidentifierShelfMark_ssim%5D%5B%5D=this+is+the+call+number+but+different')
     end
     it 'contains a link on genre to its facet' do
-      expect(page).to have_link('this is the genre', href: '/catalog?f%5Bgenre_ssim%5D%5B%5D=this+is+the+genre')
+      expect(page).to have_link('this is the genre', href: '/catalog?f%5Bgenre_ssim%5D%5B%5D=this is the genre')
+      expect(page).to have_link('this is the second genre', href: '/catalog?f%5Bgenre_ssim%5D%5B%5D=this is the second genre')
+
+      # ensures that genre is seperated with new line rather than concataneted with commas and 'and'
+      expect(page).to have_text("this is the genrethis is the second genre")
     end
     it 'contains a link on format to its facet' do
       expect(page).to have_link('three dimensional object', href: '/catalog?f%5Bformat%5D%5B%5D=three+dimensional+object')
