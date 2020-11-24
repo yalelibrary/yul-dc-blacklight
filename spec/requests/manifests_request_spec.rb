@@ -15,7 +15,7 @@ RSpec.describe 'Manifests', type: :request, clean: true do
   let(:no_visibility_work) do
     {
       "id": "1234567",
-      "title_tesim": ["Fake Work"],
+      "title_tesim": ["Fake Work"]
     }
   end
 
