@@ -12,6 +12,12 @@ RSpec.describe 'Manifests', type: :request, clean: true do
       "visibility_ssi": "Yale Community Only"
     }
   end
+  let(:no_visibility_work) do
+    {
+      "id": "1234567",
+      "title_tesim": ["Fake Work"],
+    }
+  end
 
   before do
     stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/manifests/95/20/55/09/2055095.json')
@@ -26,9 +32,15 @@ RSpec.describe 'Manifests', type: :request, clean: true do
         body: JSON.generate(yale_work),
         headers: { "Content-Type": "application/json" }
       )
+    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/manifests/67/12/34/56/1234567.json')
+      .to_return(
+        status: 200,
+        body: JSON.generate(no_visibility_work),
+        headers: { "Content-Type": "application/json" }
+      )
 
     solr = Blacklight.default_index.connection
-    solr.add([public_work, yale_work])
+    solr.add([public_work, yale_work, no_visibility_work])
     solr.commit
   end
 
@@ -54,6 +66,13 @@ RSpec.describe 'Manifests', type: :request, clean: true do
 
       expect(manifest['error']).to eq('not-found')
     end
+
+    it 'returns a 404 if there is no visibility key' do
+      get '/manifests/1234567'
+      manifest = JSON.parse(response.body)
+
+      expect(manifest['error']).to eq('not-found')
+    end
   end
 
   context 'as an authenticated user' do
@@ -75,6 +94,13 @@ RSpec.describe 'Manifests', type: :request, clean: true do
 
       expect(manifest['visibility_ssi']).to eq('Yale Community Only')
       expect(manifest['title_tesim'][0]).to eq('[Map of China]. [yale-only copy]')
+    end
+
+    it 'returns a 404 if there is no visibility key' do
+      get '/manifests/1234567'
+      manifest = JSON.parse(response.body)
+
+      expect(manifest['error']).to eq('not-found')
     end
   end
 end
