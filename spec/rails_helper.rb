@@ -55,6 +55,7 @@ RSpec.configure do |config|
   end
 
   config.include Devise::Test::ControllerHelpers, type: :helper
+  config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Warden::Test::Helpers
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
