@@ -18,7 +18,6 @@ module CheckAuthorization
       render json: { error: 'not-found' }.to_json, status: 404
       return false
     end
-
     case @document['visibility_ssi']
     when 'Public'
       true

@@ -24,6 +24,7 @@ RSpec.describe "Iiifs", type: :request do
     solr = Blacklight.default_index.connection
     solr.add([public_work, yale_work, no_visibility_work])
     solr.commit
+    allow(User).to receive(:on_campus?).and_return(false)
   end
 
   context 'as an unauthenticated user' do
