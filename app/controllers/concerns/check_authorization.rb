@@ -23,7 +23,7 @@ module CheckAuthorization
     when 'Public'
       true
     when 'Yale Community Only'
-      return true if current_user
+      return true if current_user || User.on_campus?(request.remote_ip)
 
       render json: { error: 'not-found' }.to_json, status: 404
       false
