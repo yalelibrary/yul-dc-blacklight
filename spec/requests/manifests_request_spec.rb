@@ -42,7 +42,6 @@ RSpec.describe 'Manifests', type: :request, clean: true do
     solr = Blacklight.default_index.connection
     solr.add([public_work, yale_work, no_visibility_work])
     solr.commit
-    allow(User).to receive(:on_campus?).and_return(false)
   end
 
   around do |example|

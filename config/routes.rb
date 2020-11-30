@@ -38,6 +38,5 @@ Rails.application.routes.draw do
   get '/manifests/*id', to: 'manifests#show', as: :manifest
   get '/pdfs/not_found.html', to: 'pdfs#not_found'
   get '/pdfs/*id', to: 'pdfs#show', as: :pdf
-  get '/check-iiif/*id', to: 'iiif#show', as: :iiif
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
