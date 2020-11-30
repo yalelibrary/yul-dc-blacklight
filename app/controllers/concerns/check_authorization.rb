@@ -6,16 +6,20 @@ module CheckAuthorization
     before_action :check_authorization
   end
 
+  def unauthorized_status
+    404
+  end
+
   def check_authorization
     @response, @document = search_for_item
     if @document.blank?
-      render json: { error: 'not-found' }.to_json, status: 404
+      render json: { error: 'not-found' }.to_json, status: unauthorized_status
       return false
     end
 
     # Handle when the 'visibility_ssi' key doesn't exist on the manifest
     unless @document.key?('visibility_ssi')
-      render json: { error: 'not-found' }.to_json, status: 404
+      render json: { error: 'not-found' }.to_json, status: unauthorized_status
       return false
     end
     case @document['visibility_ssi']
@@ -24,7 +28,7 @@ module CheckAuthorization
     when 'Yale Community Only'
       return true if current_user || User.on_campus?(request.remote_ip)
 
-      render json: { error: 'not-found' }.to_json, status: 404
+      render json: { error: 'not-found' }.to_json, status: unauthorized_status
       false
     end
   end

@@ -59,11 +59,11 @@ RSpec.describe 'PdfController', type: :request do
       end
       it 'returns not found for oid with no visibility' do
         get '/pdfs/1234567.pdf'
-        expect(response).to have_http_status(:not_found)
+        expect(response).to have_http_status(:unauthorized)
       end
       it 'returns not found for oid with Yale Only' do
         get '/pdfs/1618909.pdf'
-        expect(response).to have_http_status(:not_found)
+        expect(response).to have_http_status(:unauthorized)
       end
     end
 
