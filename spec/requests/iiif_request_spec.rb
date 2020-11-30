@@ -1,8 +1,9 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe "Iiifs", type: :request do
   let(:user) { FactoryBot.create(:user) }
-  let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY.merge({"child_oids_ssim": ["5555555"]}) }
+  let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY.merge({ "child_oids_ssim": ["5555555"] }) }
   let(:yale_work) do
     {
       "id": "1618909",
@@ -67,5 +68,4 @@ RSpec.describe "Iiifs", type: :request do
       expect(response).to have_http_status(:not_found)
     end
   end
-
 end
