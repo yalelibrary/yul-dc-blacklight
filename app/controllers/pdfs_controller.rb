@@ -3,6 +3,7 @@
 # Takes a request for a manifest/oid and stream the JSON for that oid from S3
 class PdfsController < ApplicationController
   include ActionController::Streaming
+  include Blacklight::Catalog
   include CheckAuthorization
 
   def show
