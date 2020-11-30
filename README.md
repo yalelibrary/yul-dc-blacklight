@@ -192,6 +192,7 @@ For the image instance to properly access images, you must also create a .secret
 
 ## Releasing a new version of Blacklight
 Refer to the steps in the [Camerata repo](https://github.com/yalelibrary/yul-dc-camerata#releasing-a-new-app-version)
+
 ## Deploy an individual branch
 Refer to the steps in the [Camerata repo](https://github.com/yalelibrary/yul-dc-camerata#deploy-a-branch)
 
