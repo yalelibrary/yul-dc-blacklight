@@ -18,10 +18,6 @@ class User < ApplicationRecord
     (ENV['YALE_NETWORK_IPS'] || "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1").split(',')
   end
 
-  def can_view_yale_only?(ip_address)
-    !guest || User.on_campus?(ip_address)
-  end
-
   # Method added by Blacklight; Blacklight uses #to_s on your
   # user class to get a user-displayable login/identifier for
   # the account.
