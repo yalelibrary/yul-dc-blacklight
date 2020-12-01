@@ -61,7 +61,7 @@ RSpec.describe 'PdfController', type: :request do
         get '/pdfs/1234567.pdf'
         expect(response).to have_http_status(:unauthorized)
       end
-      it 'returns not found for oid with Yale Only' do
+      it 'returns unauthorized for oid with Yale Only' do
         get '/pdfs/1618909.pdf'
         expect(response).to have_http_status(:unauthorized)
       end
@@ -94,7 +94,7 @@ RSpec.describe 'PdfController', type: :request do
     end
 
     describe 'GET /show' do
-      it 'redircts to HTML page' do
+      it 'redirects to HTML page' do
         get '/pdfs/202.pdf'
         expect(response).to redirect_to '/pdfs/not_found.html'
       end

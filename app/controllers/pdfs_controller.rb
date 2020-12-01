@@ -33,8 +33,4 @@ class PdfsController < ApplicationController
     pairtree = Partridge::Pairtree.oid_to_pairtree(params[:id])
     File.join('pdfs', pairtree, "#{params[:id]}.pdf")
   end
-
-  def unauthorized_status
-    401
-  end
 end
