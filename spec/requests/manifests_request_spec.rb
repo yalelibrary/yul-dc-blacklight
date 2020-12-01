@@ -64,7 +64,7 @@ RSpec.describe 'Manifests', type: :request, clean: true do
       get '/manifests/1618909'
       manifest = JSON.parse(response.body)
 
-      expect(manifest['error']).to eq('not-found')
+      expect(manifest['error']).to eq('unauthorized')
     end
 
     it 'returns a 404 if there is no visibility key' do
