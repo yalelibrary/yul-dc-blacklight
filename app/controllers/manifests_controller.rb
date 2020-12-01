@@ -10,7 +10,7 @@ class ManifestsController < ApplicationController
     response.set_header('Access-Control-Allow-Origin', '*')
     render json: download_from_s3(remote_path)
   rescue ArgumentError
-    render json: { error: "not-found" }.to_json, status: 404
+    render json: { error: 'unauthorized' }.to_json, status: 401
   end
 
   private
@@ -41,7 +41,7 @@ class ManifestsController < ApplicationController
     when 'Yale Community Only'
       return true if current_user
 
-      render json: { error: 'not-found' }.to_json, status: 404
+      render json: { error: 'unauthorized' }.to_json, status: 401
       false
     end
   end
