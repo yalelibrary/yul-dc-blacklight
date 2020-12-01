@@ -7,14 +7,14 @@ RSpec.describe 'PdfController', type: :request do
   let(:public_work) do
     {
       "id": "2034600",
-      "title_tesim": ["[Map of China]. [yale-only copy]"],
+      "title_tesim": ["[Map of China]. [public copy]"],
       "visibility_ssi": "Public"
     }
   end
   let(:pubic_work_with_no_pdf) do
     {
       "id": "202",
-      "title_tesim": ["[Map of China]. [yale-only copy]"],
+      "title_tesim": ["[Map of China]. [public copy]"],
       "visibility_ssi": "Public"
     }
   end
