@@ -47,21 +47,4 @@ RSpec.describe User, type: :model do
       expect(described_class.on_campus?("18.193.56.44")).to be_falsey
     end
   end
-
-  describe "when user is not a guest, User.can_view_yale_only?" do
-    let(:user) { FactoryBot.create(:user, uid: "mk2525", guest: false) }
-    it "returns true, regardless of IP" do
-      expect(user.can_view_yale_only?("xxxxx")).to be_truthy
-    end
-  end
-
-  describe "when user is a guest, User.can_view_yale_only?" do
-    let(:user) { FactoryBot.create(:user, uid: "mk2525", guest: true) }
-    it "returns true, if valid IP" do
-      expect(user.can_view_yale_only?("99.88.244.55")).to be_truthy
-    end
-    it "returns false, if not valid IP" do
-      expect(user.can_view_yale_only?("99.188.244.55")).to be_falsey
-    end
-  end
 end
