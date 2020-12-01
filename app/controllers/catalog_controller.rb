@@ -97,7 +97,7 @@ class CatalogController < ApplicationController
     #  (useful when user clicks "more" on a large facet and wants to navigate alphabetically across a large set of results)
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case sensitive when searching values)
 
-    config.add_facet_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', limit: true
+    config.add_facet_field 'extentOfDigitization_ssim', label: 'Extent of Digitizations', limit: true
     config.add_facet_field 'format', label: 'Format', limit: true
     config.add_facet_field 'genre_ssim', label: 'Genre', limit: true
     config.add_facet_field 'resourceType_ssim', label: 'Resource Type', limit: true
@@ -159,6 +159,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'sourceCreated_tesim', label: 'Created Source', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'subjectName_tesim', label: 'Subject (Name)', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'subjectTopic_tesim', label: 'Subject (Topic)', highlight: true, solr_params: disp_highlight_on_search_params
+    config.add_index_field 'dateStructured_ssim',label: 'Date Created', highlight: true, solr_params: disp_highlight_on_search_params
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -211,6 +212,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceEdition_tesim', label: 'Source Edition', metadata: 'origin'
     config.add_show_field 'sourceNote_tesim', label: 'Source Note', metadata: 'origin'
     config.add_show_field 'sourceTitle_tesim', label: 'Source Title', metadata: 'origin'
+    config.add_show_field 'dateStructured_ssim',label: 'Date Created', metadata: 'origin'
 
     # Identifiers Group
     config.add_show_field 'box_ssim', label: 'Box', metadata: 'identifier'
