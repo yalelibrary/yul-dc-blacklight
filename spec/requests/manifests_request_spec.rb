@@ -53,6 +53,10 @@ RSpec.describe 'Manifests', type: :request, clean: true do
   end
 
   context 'as an unauthenticated user' do
+    before do
+      allow(User).to receive(:on_campus?).and_return(false)
+    end
+
     it 'display if set to public' do
       get '/manifests/2055095'
       manifest = JSON.parse(response.body)
@@ -65,14 +69,14 @@ RSpec.describe 'Manifests', type: :request, clean: true do
       get '/manifests/1618909'
       manifest = JSON.parse(response.body)
 
-      expect(manifest['error']).to eq('not-found')
+      expect(manifest['error']).to eq('unauthorized')
     end
 
-    it 'returns a 404 if there is no visibility key' do
+    it 'returns a 401/unauthorized if there is no visibility key' do
       get '/manifests/1234567'
       manifest = JSON.parse(response.body)
 
-      expect(manifest['error']).to eq('not-found')
+      expect(manifest['error']).to eq('unauthorized')
     end
   end
 
@@ -97,11 +101,11 @@ RSpec.describe 'Manifests', type: :request, clean: true do
       expect(manifest['title_tesim'][0]).to eq('[Map of China]. [yale-only copy]')
     end
 
-    it 'returns a 404 if there is no visibility key' do
+    it 'returns a 401 if there is no visibility key' do
       get '/manifests/1234567'
       manifest = JSON.parse(response.body)
 
-      expect(manifest['error']).to eq('not-found')
+      expect(manifest['error']).to eq('unauthorized')
     end
   end
 end
