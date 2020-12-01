@@ -73,7 +73,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
 
   it "shows the range limit facet" do
     visit search_catalog_path
-    click_button 'Publication Date'
+    click_button 'Date Created'
 
     expect(page).to have_selector '.facet-field-heading'
     expect(page).to have_selector '.range-limit-input-group'
@@ -84,7 +84,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
 
   it "provides date information" do
     visit search_catalog_path
-    click_button 'Publication Date'
+    click_button 'Date Created'
     el = page.find(:css, '.slider.slider-horizontal > .tooltip.top.hide > .tooltip-inner', visible: false)
     expect(el).to have_content("1100 : 2023")
   end
@@ -96,7 +96,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
 
   xit "should be able to search with the slider" do
     visit search_catalog_path
-    click_button 'Publication Date'
+    click_button 'Date Created'
     within '.card.facet-limit.blacklight-dateStructured_ssim' do
       source = page.find('.slider-handle.round').last
       source.drag_by(30, 0)

@@ -109,7 +109,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'publicationPlace_ssim', label: 'Publication Place', limit: true
     config.add_facet_field 'partOf_ssim', label: 'Digital Collection', limit: true
     config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true
-    config.add_facet_field 'dateStructured_ssim', label: 'Publication Date',
+    config.add_facet_field 'dateStructured_ssim', label: 'Date Created',
                                                   range: {
                                                     num_segments: 6,
                                                     assumed_boundaries: [800, Time.current.year + 2],
