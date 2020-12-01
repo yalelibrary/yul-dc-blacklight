@@ -183,8 +183,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'references_tesim', label: 'References', metadata: 'description'
     config.add_show_field 'projection_tesim', label: 'Projection', metadata: 'description'
     config.add_show_field 'scale_tesim', label: 'Scale', metadata: 'description'
-    config.add_show_field 'subtitle_tesim', label: 'Subtitle', metadata: 'description'
-    config.add_show_field 'subtitle_vern_ssim', label: 'Subtitle', metadata: 'description'
 
     # Keywords Group
     config.add_show_field 'format', label: 'Format', metadata: 'keyword', link_to_facet: true
@@ -205,7 +203,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'language_ssim', label: 'Language', metadata: 'origin', helper_method: :language_codes_as_links
     config.add_show_field 'publicationPlace_ssim', label: 'Publication Place', metadata: 'origin'
     config.add_show_field 'publisher_ssim', label: 'Publisher', metadata: 'origin'
-    config.add_show_field 'published_ssim', label: 'Published', metadata: 'origin'
     config.add_show_field 'sourceCreated_tesim', label: 'Source Created', metadata: 'origin'
     config.add_show_field 'sourceDate_tesim', label: 'Source Date', metadata: 'origin'
     config.add_show_field 'sourceEdition_tesim', label: 'Source Edition', metadata: 'origin'
@@ -214,19 +211,15 @@ class CatalogController < ApplicationController
 
     # Identifiers Group
     config.add_show_field 'box_ssim', label: 'Box', metadata: 'identifier'
-    config.add_show_field 'children_ssim', label: 'Children', metadata: 'identifier'
     config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'identifier', helper_method: :link_to_url
     config.add_show_field 'folder_ssim', label: 'Folder', metadata: 'identifier'
     config.add_show_field 'identifierMfhd_ssim', label: 'Identifier MFHD', metadata: 'identifier'
     config.add_show_field 'identifierShelfMark_ssim', label: 'Call Number', metadata: 'identifier', link_to_facet: true
-    config.add_show_field 'importUrl_ssim', label: 'Import URL', metadata: 'identifier'
-    config.add_show_field 'isbn_ssim', label: 'ISBN', metadata: 'identifier'
     config.add_show_field 'orbisBarcode_ssi', label: 'Orbis Bar Code', metadata: 'identifier'
     config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID', metadata: 'identifier', helper_method: :link_to_orbis_bib_id
     config.add_show_field 'oid_ssi', label: 'OID', metadata: 'identifier'
     config.add_show_field 'partOf_ssim', label: 'Collection Name', metadata: 'identifier'
     config.add_show_field 'uri_ssim', label: 'URI', metadata: 'identifier'
-    config.add_show_field 'url_fulltext_ssim', label: 'URL', metadata: 'identifier'
     config.add_show_field 'url_suppl_ssim', label: 'More Information', metadata: 'identifier'
 
     # Usage Group
