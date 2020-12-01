@@ -37,13 +37,13 @@ RSpec.describe "Iiifs", type: :request do
     it 'do not display if set to yale only' do
       get "/check-iiif/2/1111111/full/!200,200/0/default.jpg"
 
-      expect(response).to have_http_status(:not_found)
+      expect(response).to have_http_status(:unauthorized)
     end
 
     it 'returns a 404 if there is no visibility key' do
       get "/check-iiif/2/2222222/full/!200,200/0/default.jpg"
 
-      expect(response).to have_http_status(:not_found)
+      expect(response).to have_http_status(:unauthorized)
     end
   end
 
@@ -66,7 +66,7 @@ RSpec.describe "Iiifs", type: :request do
     it 'returns a 404 if there is no visibility key' do
       get "/check-iiif/2/2222222/full/!200,200/0/default.jpg"
 
-      expect(response).to have_http_status(:not_found)
+      expect(response).to have_http_status(:unauthorized)
     end
   end
 end
