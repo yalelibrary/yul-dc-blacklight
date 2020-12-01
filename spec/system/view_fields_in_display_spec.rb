@@ -31,15 +31,10 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     {
       id: '111',
       title_tesim: "Diversity Bull Dogs",
-      subtitle_tesim: "He's handsome",
-      subtitle_vern_ssim: "He's handsome",
       creator_ssim: ['Frederick,  Eric & Maggie'],
       format: 'three dimensional object',
-      url_fulltext_ssim: 'http://0.0.0.0:3000/catalog/111',
       url_suppl_ssim: 'http://0.0.0.0:3000/catalog/111',
-      published_ssim: "1997",
       language_ssim: ['en', 'eng', 'zz'],
-      isbn_ssim: '2321321389',
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       visibility_ssi: 'Public',
       abstract_tesim: "this is an abstract",
@@ -62,8 +57,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       sourceNote_tesim: "this is the source note",
       references_tesim: "these are the references",
       date_ssim: "this is the date",
-      children_ssim: "these are the children",
-      importUrl_ssim: "this is the import URL",
       oid_ssi: '2345678',
       identifierMfhd_ssim: 'this is the identifier MFHD',
       identifierShelfMark_ssim: 'this is the call number',
@@ -92,15 +85,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays Creator in results' do
       expect(document).to have_content("Frederick, Eric & Maggie")
-    end
-    it 'displays Subtitle in results' do
-      expect(document).to have_content("He's handsome")
-    end
-    it 'displays Url Fulltext in results' do
-      expect(document).to have_content("http://0.0.0.0:3000/catalog/111").twice
-    end
-    it 'displays Publishing in results' do
-      expect(document).to have_content("1997")
     end
     it 'displays format in results' do
       expect(document).to have_content("three dimensional object")
@@ -133,9 +117,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("English (en)")
       expect(document).to have_content("English (eng)")
       expect(document).to have_content("zz")
-    end
-    it 'displays ISBN in results' do
-      expect(document).to have_content("2321321389")
     end
     it 'displays description in results' do
       expect(document).to have_content("Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.")
@@ -199,12 +180,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays the Date in results' do
       expect(document).to have_content("this is the date")
-    end
-    it 'displays the Children in results' do
-      expect(document).to have_content("these are the children")
-    end
-    it 'displays the import URL in results' do
-      expect(document).to have_content("this is the import URL")
     end
     it 'displays the OID in results' do
       expect(document).to have_content("2345678")
