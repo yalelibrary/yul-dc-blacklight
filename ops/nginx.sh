@@ -11,6 +11,8 @@ rm -rf /home/app/webapp/.ruby*
 /bin/bash -l -c 'chown -fR app:app /home/app/webapp/node_modules' # mounted volume may have wrong permissions
 
 declare -p | grep -Ev 'BASHOPTS|PWD|BASH_VERSINFO|EUID|PPID|SHELLOPTS|UID' > /container.env
+# change out IIIF placeholder to support different environments
+sed -i "s]@@image_internal_url@@]${IIIF_IMAGE_INTERNAL_URL}]g" /etc/nginx/sites-enabled/webapp.conf
 
 if [[ $PASSENGER_APP_ENV == "development" ]] || [[ $PASSENGER_APP_ENV == "test" ]]
 then
