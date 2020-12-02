@@ -144,7 +144,7 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
     config.add_index_field 'creator_tesim', label: 'Creator', highlight: true
-    config.add_index_field 'date_ssim', label: 'Date', highlight: true
+    config.add_index_field 'date_ssim', label: 'Published / Created', highlight: true
     config.add_index_field 'identifierShelfMark_tesim', label: 'Call Number', highlight: true
     config.add_index_field 'imageCount_isi', label: 'Image Count'
     config.add_index_field 'partOf_ssim', label: 'Collection Name'
@@ -159,7 +159,6 @@ class CatalogController < ApplicationController
     config.add_index_field 'sourceCreated_tesim', label: 'Created Source', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'subjectName_tesim', label: 'Subject (Name)', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'subjectTopic_tesim', label: 'Subject (Topic)', highlight: true, solr_params: disp_highlight_on_search_params
-    config.add_index_field 'dateStructured_ssim', label: 'Date Created', highlight: true, solr_params: disp_highlight_on_search_params
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -200,7 +199,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'creator_ssim', label: 'Creator', metadata: 'origin', link_to_facet: true
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date', metadata: 'origin'
     config.add_show_field 'coordinates_ssim', label: 'Coordinates', metadata: 'origin'
-    config.add_show_field 'date_ssim', label: 'Date', metadata: 'origin'
+    config.add_show_field 'date_ssim', label: 'Published / Created', metadata: 'origin'
     config.add_show_field 'digital_ssim', label: 'Digital', metadata: 'origin'
     config.add_show_field 'edition_ssim', label: 'Edition', metadata: 'origin'
     config.add_show_field 'language_ssim', label: 'Language', metadata: 'origin', helper_method: :language_codes_as_links
@@ -212,7 +211,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceEdition_tesim', label: 'Source Edition', metadata: 'origin'
     config.add_show_field 'sourceNote_tesim', label: 'Source Note', metadata: 'origin'
     config.add_show_field 'sourceTitle_tesim', label: 'Source Title', metadata: 'origin'
-    config.add_show_field 'dateStructured_ssim', label: 'Date Created', metadata: 'origin'
 
     # Identifiers Group
     config.add_show_field 'box_ssim', label: 'Box', metadata: 'identifier'
