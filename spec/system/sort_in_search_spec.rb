@@ -23,7 +23,8 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       publicationPlace_ssim: 'Spain',
       resourceType_ssim: 'Maps, Atlases & Globes',
       creator_ssim: ['Anna Elizabeth Dewdney'],
-      dateStructured_ssim: '1911-1954'
+      dateStructured_ssim: '1911-1954',
+      year_isim: [1690]
     }
   end
 
@@ -38,7 +39,8 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       publicationPlace_ssim: 'New Haven',
       resourceType_ssim: 'Books, Journals & Pamphlets',
       creator_ssim: ['Andy Graves'],
-      dateStructured_ssim: '1755-00-00T00:00:00Z'
+      dateStructured_ssim: '1755-00-00T00:00:00Z',
+      year_isim: [1755]
     }
   end
 
@@ -53,7 +55,8 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       publicationPlace_ssim: 'Constantinople or southern Italy',
       resourceType_ssim: 'Archives or Manuscripts',
       creator_ssim: ['Paulo Coelho'],
-      dateStructured_ssim: '1972200'
+      dateStructured_ssim: '1972200',
+      year_isim: [1790]
     }
   end
 
@@ -68,7 +71,8 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       publicationPlace_ssim: 'White-Hall, printed upon the ice, on the River Thames',
       resourceType_ssim: 'Archives or Manuscripts',
       creator_ssim: ['Andrew Norriss'],
-      dateStructured_ssim: '1699'
+      dateStructured_ssim: '1699',
+      year_isim: [1830]
     }
   end
 
@@ -127,7 +131,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
   end
 
   context 'sorts by creator' do
-    it 'sorts by creater asc' do
+    it 'sorts by creator asc' do
       click_on 'search'
       click_on 'Sort by relevance'
       within('div#sort-dropdown') do
@@ -141,7 +145,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       expect(content).to have_content("4.\nRhett Lecheire")
     end
 
-    it 'sorts by creater desc' do
+    it 'sorts by creator desc' do
       click_on 'search'
       click_on 'Sort by relevance'
       within('div#sort-dropdown') do
@@ -153,6 +157,36 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       expect(content).to have_content("3.\nHandsomeDan Bulldog")
       expect(content).to have_content("2.\nAmor Llama")
       expect(content).to have_content("1.\nRhett Lecheire")
+    end
+  end
+
+  context 'sorts by year' do
+    it 'sorts by year asc' do
+      click_on 'search'
+      click_on 'Sort by relevance'
+      within('div#sort-dropdown') do
+        click_on 'Year (ascending)'
+      end
+
+      content = find(:css, '#content')
+      expect(content).to have_content("1.\nAmor Llama")
+      expect(content).to have_content("2.\nHandsomeDan Bulldog")
+      expect(content).to have_content("3.\nRhett Lecheire")
+      expect(content).to have_content("4.\nAquila Eccellenza")
+    end
+
+    it 'sorts by year desc' do
+      click_on 'search'
+      click_on 'Sort by relevance'
+      within('div#sort-dropdown') do
+        click_on 'Year (descending)'
+      end
+
+      content = find(:css, '#content')
+      expect(content).to have_content("1.\nAquila Eccellenza")
+      expect(content).to have_content("2.\nRhett Lecheire")
+      expect(content).to have_content("3.\nHandsomeDan Bulldog")
+      expect(content).to have_content("4.\nAmor Llama")
     end
   end
 end
