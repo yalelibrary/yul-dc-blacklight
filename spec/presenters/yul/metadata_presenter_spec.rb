@@ -100,10 +100,6 @@ RSpec.describe Yul::MetadataPresenter do
           expect(fields.any? { |field| field.include? 'identifierShelfMark_ssim' }).to be_truthy
         end
 
-        it 'returns the Orbis Barcode Key' do
-          expect(fields.any? { |field| field.include? 'orbisBarcode_ssi' }).to be_truthy
-        end
-
         it 'returns the Orbis Bib ID Key' do
           expect(fields.any? { |field| field.include? 'orbisBibId_ssi' }).to be_truthy
         end

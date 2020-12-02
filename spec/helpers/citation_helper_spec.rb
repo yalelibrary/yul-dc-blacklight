@@ -49,7 +49,6 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
       box_ssim: 'this is the box',
       folder_ssim: 'this is the folder',
       orbisBibId_ssi: 'this is the orbis bib ID',
-      orbisBarcode_ssi: 'this is the orbis bar code',
       findingAid_ssim: 'this is the finding aid',
       collectionId_ssim: 'this is the collection ID',
       edition_ssim: 'this is the edition',
