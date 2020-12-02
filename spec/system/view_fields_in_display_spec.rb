@@ -195,9 +195,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the Orbis Bib ID in results' do
       expect(document).to have_content("1234567")
     end
-    it 'displays the Orbis Bar Code in results' do
-      expect(document).to have_content("this is the orbis bar code")
-    end
     it 'displays the Finding Aid in results' do
       expect(document).to have_content("this is the finding aid")
     end
