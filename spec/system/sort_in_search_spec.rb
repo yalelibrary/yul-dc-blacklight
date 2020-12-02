@@ -24,7 +24,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       resourceType_ssim: 'Maps, Atlases & Globes',
       creator_ssim: ['Anna Elizabeth Dewdney'],
       dateStructured_ssim: '1911-1954',
-      year_isim: '18th century.'
+      year_isim: [1690]
     }
   end
 
@@ -40,7 +40,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       resourceType_ssim: 'Books, Journals & Pamphlets',
       creator_ssim: ['Andy Graves'],
       dateStructured_ssim: '1755-00-00T00:00:00Z',
-      year_isim: '[17--?]'
+      year_isim: [1755]
     }
   end
 
@@ -56,7 +56,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       resourceType_ssim: 'Archives or Manuscripts',
       creator_ssim: ['Paulo Coelho'],
       dateStructured_ssim: '1972200',
-      year_isim: '1739-40 February 18'
+      year_isim: [1790]
     }
   end
 
@@ -72,7 +72,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       resourceType_ssim: 'Archives or Manuscripts',
       creator_ssim: ['Andrew Norriss'],
       dateStructured_ssim: '1699',
-      year_isim: '1755'
+      year_isim: [1830]
     }
   end
 
@@ -165,28 +165,28 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       click_on 'search'
       click_on 'Sort by relevance'
       within('div#sort-dropdown') do
-        click_on 'Year (Ascending)'
+        click_on 'Year (ascending)'
       end
 
       content = find(:css, '#content')
-      expect(content).to have_content("1.\nAquila Eccellenza")
+      expect(content).to have_content("1.\nAmor Llama")
       expect(content).to have_content("2.\nHandsomeDan Bulldog")
-      expect(content).to have_content("3.\nAmor Llama")
-      expect(content).to have_content("4.\nRhett Lecheire")
+      expect(content).to have_content("3.\nRhett Lecheire")
+      expect(content).to have_content("4.\nAquila Eccellenza")
     end
 
     it 'sorts by year desc' do
       click_on 'search'
       click_on 'Sort by relevance'
       within('div#sort-dropdown') do
-        click_on 'Year (Descending)'
+        click_on 'Year (descending)'
       end
 
       content = find(:css, '#content')
-      expect(content).to have_content("4.\nAquila Eccellenza")
+      expect(content).to have_content("1.\nAquila Eccellenza")
+      expect(content).to have_content("2.\nRhett Lecheire")
       expect(content).to have_content("3.\nHandsomeDan Bulldog")
-      expect(content).to have_content("2.\nAmor Llama")
-      expect(content).to have_content("1.\nRhett Lecheire")
+      expect(content).to have_content("4.\nAmor Llama")
     end
   end
 end
