@@ -109,7 +109,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'publicationPlace_ssim', label: 'Publication Place', limit: true
     config.add_facet_field 'partOf_ssim', label: 'Digital Collection', limit: true
     config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true
-    config.add_facet_field 'dateStructured_ssim', label: 'Publication Date',
+    config.add_facet_field 'dateStructured_ssim', label: 'Date Created',
                                                   range: {
                                                     num_segments: 6,
                                                     assumed_boundaries: [800, Time.current.year + 2],
@@ -144,7 +144,7 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
     config.add_index_field 'creator_tesim', label: 'Creator', highlight: true
-    config.add_index_field 'date_ssim', label: 'Date', highlight: true
+    config.add_index_field 'date_ssim', label: 'Published / Created', highlight: true
     config.add_index_field 'identifierShelfMark_tesim', label: 'Call Number', highlight: true
     config.add_index_field 'imageCount_isi', label: 'Image Count'
     config.add_index_field 'partOf_ssim', label: 'Collection Name'
@@ -197,7 +197,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'creator_ssim', label: 'Creator', metadata: 'origin', link_to_facet: true
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date', metadata: 'origin'
     config.add_show_field 'coordinates_ssim', label: 'Coordinates', metadata: 'origin'
-    config.add_show_field 'date_ssim', label: 'Date', metadata: 'origin'
+    config.add_show_field 'date_ssim', label: 'Published / Created', metadata: 'origin'
     config.add_show_field 'digital_ssim', label: 'Digital', metadata: 'origin'
     config.add_show_field 'edition_ssim', label: 'Edition', metadata: 'origin'
     config.add_show_field 'language_ssim', label: 'Language', metadata: 'origin', helper_method: :language_codes_as_links
