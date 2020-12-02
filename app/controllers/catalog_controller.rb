@@ -452,6 +452,8 @@ class CatalogController < ApplicationController
     config.add_sort_field 'creator_ssim desc, title_ssim asc', label: 'Creator (Z --> A)'
     config.add_sort_field 'title_ssim asc, oid_ssi desc', label: 'Title (A --> Z)'
     config.add_sort_field 'title_ssim desc, oid_ssi desc', label: 'Title (Z --> A)'
+    config.add_sort_field 'year_isim asc, id desc', label: 'Year (ascending)'
+    config.add_sort_field 'year_isim desc, id desc', label: 'Year (descending)'
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
