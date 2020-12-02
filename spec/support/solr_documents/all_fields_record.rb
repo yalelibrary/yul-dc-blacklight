@@ -42,7 +42,6 @@ WORK_WITH_ALL_FIELDS = {
   box_ssim: 'this is the box',
   folder_ssim: 'this is the folder',
   orbisBibId_ssi: '1234567',
-  orbisBarcode_ssi: 'this is the orbis bar code',
   findingAid_ssim: 'this is the finding aid',
   edition_ssim: 'this is the edition',
   uri_ssim: 'this is the URI',
