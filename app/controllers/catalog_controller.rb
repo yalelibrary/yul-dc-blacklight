@@ -215,7 +215,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'folder_ssim', label: 'Folder', metadata: 'identifier'
     config.add_show_field 'identifierMfhd_ssim', label: 'Identifier MFHD', metadata: 'identifier'
     config.add_show_field 'identifierShelfMark_ssim', label: 'Call Number', metadata: 'identifier', link_to_facet: true
-    config.add_show_field 'orbisBarcode_ssi', label: 'Orbis Bar Code', metadata: 'identifier'
     config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID', metadata: 'identifier', helper_method: :link_to_orbis_bib_id
     config.add_show_field 'oid_ssi', label: 'OID', metadata: 'identifier'
     config.add_show_field 'partOf_ssim', label: 'Collection Name', metadata: 'identifier'
