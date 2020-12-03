@@ -12,7 +12,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     {
       id: '111',
       title_tesim: 'Handsome Dan is a bull dog.',
-      dateStructured_ssim: '2022',
+      dateStructured_ssim: ['2022'],
       creator_tesim: 'Eric & Frederick',
       subjectName_ssim: "this is the subject name",
       sourceTitle_tesim: "this is the source title",
@@ -25,7 +25,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     {
       id: '212',
       title_tesim: 'Handsome Dan is not a cat.',
-      dateStructured_ssim: '1600',
+      dateStructured_ssim: ['1600'],
       creator_tesim: 'Frederick & Eric',
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
@@ -37,7 +37,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     {
       id: '313',
       title_tesim: 'Handsome Dan is not a bird.',
-      dateStructured_ssim: '1100',
+      dateStructured_ssim: ['1100'],
       creator_tesim: 'Frederick & Eric',
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
@@ -48,9 +48,9 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
   let(:rabbit) do
     {
       id: '400',
-      identifierShelfMark_ssim: 'call number',
+      callNumber_ssim: 'call number',
       title_tesim: 'Handsome Dan is not a rabbit.',
-      dateStructured_ssim: '1555',
+      dateStructured_ssim: ['1555'],
       creator_tesim: 'Frederick & Eric',
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
@@ -61,9 +61,9 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
   let(:elephant) do
     {
       id: '401',
-      identifierShelfMark_ssim: 'call number',
+      callNumber_ssim: 'call number',
       title_tesim: 'Handsome Dan is not a elephant.',
-      dateStructured_ssim: '1555',
+      dateStructured_ssim: ['1555'],
       creator_tesim: 'Frederick & Eric',
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
@@ -90,7 +90,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
   end
 
   it "does not show the date slider if only one date" do
-    visit '/catalog?search_field=identifierShelfMark_tesim&q="call number"'
+    visit '/catalog?search_field=callNumber_tesim&q="call number"'
     expect(page).not_to have_css('.card.facet-limit.blacklight-dateStructured_ssim')
   end
 

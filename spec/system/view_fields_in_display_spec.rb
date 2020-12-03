@@ -15,7 +15,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     {
       id: '222',
       visibility_ssi: 'Public',
-      identifierShelfMark_ssim: 'this is the call number'
+      callNumber_ssim: 'this is the call number'
     }
   end
 
@@ -23,7 +23,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     {
       id: '333',
       visibility_ssi: 'Public',
-      identifierShelfMark_ssim: 'this is the call number, but different'
+      callNumber_ssim: 'this is the call number, but different'
     }
   end
 
@@ -46,7 +46,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       subjectTopic_tesim: "this is the subject topic",
       extentOfDigitization_ssim: 'this is the extent of digitization',
       rights_ssim: "these are the rights",
-      publicationPlace_ssim: "this is the publication place",
+      creationPlace_ssim: "this is the publication place",
       sourceCreated_tesim: "this is the source created",
       publisher_ssim: "this is the publisher",
       copyrightDate_ssim: "this is the copyright date",
@@ -55,11 +55,11 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       sourceTitle_tesim: "this is the source title",
       sourceDate_tesim: "this is the source date",
       sourceNote_tesim: "this is the source note",
-      references_tesim: "these are the references",
-      date_ssim: "this is the date",
+      preferredCitation_tesim: "these are the references",
+      dateStructured_ssim: "this is the date",
       oid_ssi: '2345678',
       identifierMfhd_ssim: 'this is the identifier MFHD',
-      identifierShelfMark_ssim: 'this is the call number',
+      callNumber_ssim: 'this is the call number',
       containerGrouping_ssim: 'this is the container grouping',
       folder_ssim: 'this is the folder',
       orbisBibId_ssi: '1234567',
@@ -205,8 +205,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("this is the URI")
     end
     it 'displays the call number in results as link' do
-      expect(page).to have_link("this is the call number", href: '/catalog?f%5BidentifierShelfMark_ssim%5D%5B%5D=this+is+the+call+number')
-      expect(page).not_to have_link("this is the call number", href: '/catalog?f%5BidentifierShelfMark_ssim%5D%5B%5D=this+is+the+call+number+but+different')
+      expect(page).to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number')
+      expect(page).not_to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number+but+different')
     end
     it 'contains a link on genre to its facet' do
       expect(page).to have_link('this is the genre', href: '/catalog?f%5Bgenre_ssim%5D%5B%5D=this is the genre')

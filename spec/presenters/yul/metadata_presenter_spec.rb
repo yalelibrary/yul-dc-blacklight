@@ -65,7 +65,7 @@ RSpec.describe Yul::MetadataPresenter do
         end
 
         it 'returns the References Key' do
-          expect(fields.any? { |field| field.include? 'references_tesim' }).to be_truthy
+          expect(fields.any? { |field| field.include? 'preferredCitation_tesim' }).to be_truthy
         end
 
         it 'returns the Scale Key' do
@@ -97,7 +97,7 @@ RSpec.describe Yul::MetadataPresenter do
         end
 
         it 'returns the Call Number Key' do
-          expect(fields.any? { |field| field.include? 'identifierShelfMark_ssim' }).to be_truthy
+          expect(fields.any? { |field| field.include? 'callNumber_ssim' }).to be_truthy
         end
 
         it 'returns the Orbis Bib ID Key' do
@@ -183,7 +183,7 @@ RSpec.describe Yul::MetadataPresenter do
         end
 
         it 'returns the Date Key' do
-          expect(fields.any? { |field| field.include? 'date_ssim' }).to be_truthy
+          expect(fields.any? { |field| field.include? 'dateStructured_ssim' }).to be_truthy
         end
 
         it 'returns the Digital Key' do
@@ -199,7 +199,7 @@ RSpec.describe Yul::MetadataPresenter do
         end
 
         it 'returns the Publication Place Key' do
-          expect(fields.any? { |field| field.include? 'publicationPlace_ssim' }).to be_truthy
+          expect(fields.any? { |field| field.include? 'creationPlace_ssim' }).to be_truthy
         end
 
         it 'returns the Publisher Key' do

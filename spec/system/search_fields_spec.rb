@@ -12,7 +12,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
   let(:search_fields) { CatalogController.blacklight_config.search_fields.keys }
   let(:expected_search_fields) do
     ["all_fields", "all_fields_advanced", "creator_tesim", "child_oids_ssim", "date_fields", "genre_fields",
-     "identifierShelfMark_tesim", "oid_ssi", "orbisBibId_ssi", "subjectName_ssim", "subject_fields", "title_tesim"]
+     "callNumber_tesim", "oid_ssi", "orbisBibId_ssi", "subjectName_ssim", "subject_fields", "title_tesim"]
   end
 
   let(:dog) do
@@ -22,7 +22,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       creator_tesim: 'Eric & Frederick',
       subjectName_ssim: "this is the subject name",
       sourceTitle_tesim: "this is the source title",
-      identifierShelfMark_tesim: 'WA MSS 987',
+      callNumber_tesim: 'WA MSS 987',
       orbisBibId_ssi: '1238901',
       visibility_ssi: 'Public'
     }
@@ -35,7 +35,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       creator_tesim: 'Frederick & Eric',
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
-      identifierShelfMark_tesim: 'Yale MS 123',
+      callNumber_tesim: 'Yale MS 123',
       visibility_ssi: 'Public'
     }
   end
@@ -46,7 +46,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
     end
 
     it 'contains displays the correct record when searching by call number' do
-      visit '/catalog?search_field=identifierShelfMark_tesim&q=WA+MSS+987'
+      visit '/catalog?search_field=callNumber_tesim&q=WA+MSS+987'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).not_to have_content 'Handsome Dan is not a cat.'
     end

@@ -49,17 +49,8 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
     end
 
-    it 'gets correct search results from identifierShelfMark_tesim' do
-      fill_in 'identifierShelfMark_tesim', with: '["Landberg MSS 596"]'
-      click_on 'SEARCH'
-      within '#documents' do
-        expect(page).to     have_content('Record 1')
-        expect(page).not_to have_content('Record 2')
-      end
-    end
-
-    it 'gets correct search results from date_fields with date_ssim' do
-      fill_in 'date_fields', with: '[17--?]'
+    it 'gets correct search results from callNumber_tesim' do
+      fill_in 'callNumber_tesim', with: '["Landberg MSS 596"]'
       click_on 'SEARCH'
       within '#documents' do
         expect(page).to     have_content('Record 1')
@@ -68,7 +59,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
     end
 
     it 'gets correct search results from date_fields with dateStructured_ssim' do
-      fill_in 'date_fields', with: '1700-00-00T00:00:00Z'
+      fill_in 'date_fields', with: '1700'
       click_on 'SEARCH'
       within '#documents' do
         expect(page).to     have_content('Record 1')
@@ -112,7 +103,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
     end
 
-    it 'gets correct search results from child oid_ssim' do
+    it 'gets correct search results from child oid_ssi' do
       fill_in 'child_oids_ssim', with: '11'
       click_on 'SEARCH'
       within '#documents' do

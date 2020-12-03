@@ -13,10 +13,10 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     {
       id: '111',
       creator_tesim: 'Me and You',
-      date_ssim: '1999',
+      dateStructured_ssim: '1999',
       resourceType_ssim: 'Archives or Manuscripts',
       partOf_ssim: 'Beinecke Library',
-      identifierShelfMark_tesim: 'Beinecke MS 801',
+      callNumber_tesim: 'Beinecke MS 801',
       imageCount_isi: '23',
       visibility_ssi: 'Public'
     }

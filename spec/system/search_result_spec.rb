@@ -15,7 +15,7 @@ RSpec.describe 'search result', type: :system, clean: true do
       id: 'test_record_1',
       oid_ssi: '2055095',
       visibility_ssi: 'Public',
-      identifierShelfMark_tesim: 'Call Number',
+      callNumber_tesim: 'Call Number',
       thumbnail_path_ss: "http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg"
     }
   end

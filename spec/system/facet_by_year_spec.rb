@@ -22,7 +22,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       isbn_ssim: '2321321389',
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       visibility_ssi: 'Public',
-      dateStructured_ssim: "1920"
+      dateStructured_ssim: ["1920"]
     }
   end
 
@@ -39,7 +39,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       isbn_ssim: '2321321389',
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       visibility_ssi: 'Public',
-      dateStructured_ssim: "1900"
+      dateStructured_ssim: ["1900"]
     }
   end
 
@@ -56,7 +56,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       isbn_ssim: '2321321389',
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       visibility_ssi: 'Public',
-      dateStructured_ssim: "2020"
+      dateStructured_ssim: ["2020"]
     }
   end
 

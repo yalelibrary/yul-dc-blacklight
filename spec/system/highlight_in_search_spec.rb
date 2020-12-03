@@ -17,7 +17,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       alternativeTitle_tesim: 'The Yale Bulldogs',
       description_tesim: 'in black ink on thin white paper',
       format: 'three dimensional object',
-      identifierShelfMark_tesim: 'Osborn Music MS 4',
+      callNumber_tesim: 'Osborn Music MS 4',
       published_ssim: "1997",
       language_ssim: ['en', 'eng', 'zz'],
       publisher_tesim: 'Printed for Eric',
