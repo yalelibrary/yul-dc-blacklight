@@ -85,7 +85,7 @@ RSpec.describe Yul::MetadataPresenter do
     context 'containing overview metadata' do
       describe 'config' do
         it 'returns the Box Key' do
-          expect(fields.any? { |field| field.include? 'box_ssim' }).to be_truthy
+          expect(fields.any? { |field| field.include? 'containerGrouping_ssim' }).to be_truthy
         end
 
         it 'returns the Children Key' do

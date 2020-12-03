@@ -39,7 +39,7 @@ WORK_WITH_ALL_FIELDS = {
   oid_ssi: '2345678',
   identifierMfhd_ssim: 'this is the identifier MFHD',
   identifierShelfMark_ssim: 'this is the call number',
-  box_ssim: 'this is the box',
+  containerGrouping_ssim: 'this is the container grouping',
   folder_ssim: 'this is the folder',
   orbisBibId_ssi: '1234567',
   orbisBarcode_ssi: 'this is the orbis bar code',
