@@ -385,7 +385,14 @@ class CatalogController < ApplicationController
       }
     end
 
-    subject_fields = ['subjectEra_ssim', 'subjectGeographic_tesim', 'subjecttitle_tesim', 'subjectTitleDisplay_tsim', 'subjectName_ssim', 'subjectName_tesim', 'subjectTopic_tesim', 'subjectTopic_ssim']
+    subject_fields = ['subjectEra_ssim',
+                      'subjectGeographic_tesim',
+                      'subjecttitle_tesim',
+                      'subjectTitleDisplay_tsim',
+                      'subjectName_ssim',
+                      'subjectName_tesim',
+                      'subjectTopic_tesim',
+                      'subjectTopic_ssim']
 
     config.add_search_field('subject_fields', label: 'Subject') do |field|
       field.qt = 'search'

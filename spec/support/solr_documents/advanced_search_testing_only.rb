@@ -55,18 +55,8 @@ ADVANCED_SEARCH_TESTING_1 = {
   "title_ssim": ["Record 1"],
   "uri_ssim": ["/ladybird/oid/11607445"],
   "visibility_ssi": "Public",
-  "abstract_tesim": ["Incomplete at beginning and end.",
-                    "The tale of Sindbād and his princely pupil, in colloquial Arabic."],
-  "alternativeTitle_tesim": ["Book of Sindbad.",
-                            "Sindbad the sailor"],
-  "dateStructured_ssim": ["1700"],
-  "oid_ssi": ["11607445"],
   "orbisBibId_ssim": ["3832098"],
-  "recordType_ssi": ["oid"],
-  "references_ssim": ["Brockelmann, S I, pp. 237, 239, 252."],
-  "subjectTopic_tesim": ["Arabic language and literature--Belles lettres",
-                         "Islamic binding"],
-  "title_tesim": ["Record 1"]
+  "references_ssim": ["Brockelmann, S I, pp. 237, 239, 252."]
 }.freeze
 
 ADVANCED_SEARCH_TESTING_2 = {
@@ -114,7 +104,7 @@ ADVANCED_SEARCH_TESTING_2 = {
   "creationPlace_tesim": ["Italy,"],
   "recordType_ssi": "oid",
   "preferredCitation_tesim": ["Jacopo Zeno, Vita Caroli Zeni. General Collection, Beinecke Rare Book and Manuscript Library, Yale University.",
-                       "Shailor, B. Catalogue of Medieval and Renaissance Manuscripts in the Beinecke Rare Book and Manuscript Library, MS 2."],
+                              "Shailor, B. Catalogue of Medieval and Renaissance Manuscripts in the Beinecke Rare Book and Manuscript Library, MS 2."],
   "repository_ssim": ["Beinecke Library"],
   "resourceType_ssim": ["Archives or Manuscripts"],
   "resourceType_tesim": ["Archives or Manuscripts"],
@@ -146,18 +136,9 @@ ADVANCED_SEARCH_TESTING_2 = {
   "uri_ssim": ["/ladybird/oid/11684565"],
   "url_suppl_ssim": ["https://pre1600ms.beinecke.library.yale.edu/docs/pre1600.ms002.htm"],
   "visibility_ssi": "Public",
-  "abstract_tesim": ["Manuscript on parchment of Jacopo Zeno, Vita Caroli Zeni. With a dedicatory preface to Pope Pius II."],
-  "dateStructured_ssim": ["1458"],
-  "oid_ssi": ["11684565"],
   "orbisBarcode_ssim": ["39002091594300"],
   "orbisBibId_ssim": ["9801995"],
-  "recordType_ssi": ["oid"],
   "references_ssim": ["Jacopo Zeno, Vita Caroli Zeni. General Collection, Beinecke Rare Book and Manuscript Library, Yale University.",
-                      "Shailor, B. Catalogue of Medieval and Renaissance Manuscripts in the Beinecke Rare Book and Manuscript Library, MS 2."],
-  "subjectTopic_tesim": ["Biography--Middle Ages, 500-1500",
-                         "Crusades--13th-15th centuries",
-                         "Illumination of books and manuscripts, Medieval",
-                         "Manuscripts, Medieval--Connecticut--New Haven",
-                         "Medieval and Renaissance Manuscripts in Beinecke Library"],
-  "title_tesim": ["Record 2"]
+                      "Shailor, B. Catalogue of Medieval and Renaissance Manuscripts in the Beinecke Rare Book and Manuscript Library, MS 2."]
+
 }.freeze
