@@ -249,7 +249,91 @@ class CatalogController < ApplicationController
     # since we aren't specifying it otherwise.
 
     # Blacklight 'out of box code'
-    config.add_search_field 'all_fields', label: 'All Fields'
+    # config.add_search_field 'all_fields', label: 'All Fields'
+
+    # Array allows for only listed Solr fields to be searched in the 'All Fields'
+    all_search_fields = [
+      'abstract_tesim',
+      'accessRestrictions_tesim',
+      'accessionNumber_ssi',
+      'alternativeTitle_tesim',
+      'alternativeTitleDisplay_tesim',
+      'archiveSpaceUri_ssi',
+      'box_ssim',
+      'collectionId_tesim',
+      'contents_tesim',
+      'contributor_tsim',
+      'contributorDisplay_tsim',
+      'coordinates_ssim',
+      'creator_tesim',
+      'creatorDisplay_tsim',
+      'date_ssim',
+      'dateStructured_ssim',
+      'copyrightDate_ssim',
+      'dateDepicted_ssim',
+      'description_tesim',
+      'digital_ssim',
+      'edition_ssim',
+      'extent_ssim',
+      'extentOfDigitization_ssim',
+      'folder_ssim',
+      'format_tesim',
+      'genre_tesim',
+      'identifierMfhd_ssim',
+      'identifierShelfMark_tesim',
+      'identifierShelfMark_ssim',
+      'illustrativeMatter_tesim',
+      'caption_tesim',
+      'label_tesim',
+      'language_ssim',
+      'localRecordNumber_ssim',
+      'material_tesim',
+      'oid_ssi',
+      'child_oids_ssim',
+      'orbisBarcode_ssi',
+      'orbisBibId_ssi',
+      'partOf_tesim',
+      'projection_tesim',
+      'publicationPlace_tesim',
+      'publisher_tesim',
+      'references_tesim',
+      'repository_ssim',
+      'resourceType_tesim',
+      'rights_tesim',
+      'scale_tesim',
+      'sourceCreated_tesim',
+      'sourceDate_tesim',
+      'sourceNote_tesim',
+      'sourceTitle_tesim',
+      'subjectEra_ssim',
+      'subjectGeographic_tesim',
+      'subjectTitle_tsim',
+      'subjectTitleDisplay_tsim',
+      'subjectName_tesim',
+      'subjectTopic_tesim',
+      'title_tesim',
+      'visibility_ssi'
+    ]
+
+    # Basic Search
+    config.add_search_field('all_fields', label: 'All Fields') do |field|
+      field.qt = 'search'
+      field.include_in_advanced_search = false
+      field.solr_parameters = {
+        qf: all_search_fields,
+        pf: ''
+      }
+    end
+
+    # Advanced Search
+    config.add_search_field('all_fields_advanced', label: 'All Fields') do |field|
+      field.qt = 'search'
+      field.include_in_simple_select = false
+      field.solr_parameters = {
+        qf: all_search_fields.join(' '),
+        pf: ''
+      }
+    end
 
     # Now we see how to over-ride Solr request handler defaults, in this
     # case for a BL "search field", which is really a dismax aggregate
