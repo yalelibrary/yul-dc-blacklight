@@ -107,7 +107,6 @@ ADVANCED_SEARCH_TESTING_2 = {
                      "Shailor, B. Catalogue of Medieval and Renaissance Manuscripts in the Beinecke Rare Book and Manuscript Library, MS 2."],
   "language_ssim": ["Latin"],
   "oid_ssi": "11684565",
-  "orbisBarcode_ssi": "39002091594300",
   "orbisBibId_ssi": "9801995",
   "partOf_tesim": ["Beinecke Library"],
   "partOf_ssim": ["Beinecke Library"],

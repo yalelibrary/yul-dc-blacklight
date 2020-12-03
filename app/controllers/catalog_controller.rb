@@ -109,7 +109,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'publicationPlace_ssim', label: 'Publication Place', limit: true
     config.add_facet_field 'partOf_ssim', label: 'Digital Collection', limit: true
     config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true
-    config.add_facet_field 'dateStructured_ssim', label: 'Publication Date',
+    config.add_facet_field 'dateStructured_ssim', label: 'Date Created',
                                                   range: {
                                                     num_segments: 6,
                                                     assumed_boundaries: [800, Time.current.year + 2],
@@ -144,7 +144,7 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
     config.add_index_field 'creator_tesim', label: 'Creator', highlight: true
-    config.add_index_field 'date_ssim', label: 'Date', highlight: true
+    config.add_index_field 'date_ssim', label: 'Published / Created', highlight: true
     config.add_index_field 'identifierShelfMark_tesim', label: 'Call Number', highlight: true
     config.add_index_field 'imageCount_isi', label: 'Image Count'
     config.add_index_field 'partOf_ssim', label: 'Collection Name'
@@ -183,8 +183,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'references_tesim', label: 'References', metadata: 'description'
     config.add_show_field 'projection_tesim', label: 'Projection', metadata: 'description'
     config.add_show_field 'scale_tesim', label: 'Scale', metadata: 'description'
-    config.add_show_field 'subtitle_tesim', label: 'Subtitle', metadata: 'description'
-    config.add_show_field 'subtitle_vern_ssim', label: 'Subtitle', metadata: 'description'
 
     # Keywords Group
     config.add_show_field 'format', label: 'Format', metadata: 'keyword', link_to_facet: true
@@ -199,13 +197,12 @@ class CatalogController < ApplicationController
     config.add_show_field 'creator_ssim', label: 'Creator', metadata: 'origin', link_to_facet: true
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date', metadata: 'origin'
     config.add_show_field 'coordinates_ssim', label: 'Coordinates', metadata: 'origin'
-    config.add_show_field 'date_ssim', label: 'Date', metadata: 'origin'
+    config.add_show_field 'date_ssim', label: 'Published / Created', metadata: 'origin'
     config.add_show_field 'digital_ssim', label: 'Digital', metadata: 'origin'
     config.add_show_field 'edition_ssim', label: 'Edition', metadata: 'origin'
     config.add_show_field 'language_ssim', label: 'Language', metadata: 'origin', helper_method: :language_codes_as_links
     config.add_show_field 'publicationPlace_ssim', label: 'Publication Place', metadata: 'origin'
     config.add_show_field 'publisher_ssim', label: 'Publisher', metadata: 'origin'
-    config.add_show_field 'published_ssim', label: 'Published', metadata: 'origin'
     config.add_show_field 'sourceCreated_tesim', label: 'Source Created', metadata: 'origin'
     config.add_show_field 'sourceDate_tesim', label: 'Source Date', metadata: 'origin'
     config.add_show_field 'sourceEdition_tesim', label: 'Source Edition', metadata: 'origin'
@@ -214,19 +211,14 @@ class CatalogController < ApplicationController
 
     # Identifiers Group
     config.add_show_field 'containerGrouping_ssim', label: 'Container Grouping', metadata: 'identifier'
-    config.add_show_field 'children_ssim', label: 'Children', metadata: 'identifier'
     config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'identifier', helper_method: :link_to_url
     config.add_show_field 'folder_ssim', label: 'Folder', metadata: 'identifier'
     config.add_show_field 'identifierMfhd_ssim', label: 'Identifier MFHD', metadata: 'identifier'
     config.add_show_field 'identifierShelfMark_ssim', label: 'Call Number', metadata: 'identifier', link_to_facet: true
-    config.add_show_field 'importUrl_ssim', label: 'Import URL', metadata: 'identifier'
-    config.add_show_field 'isbn_ssim', label: 'ISBN', metadata: 'identifier'
-    config.add_show_field 'orbisBarcode_ssi', label: 'Orbis Bar Code', metadata: 'identifier'
     config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID', metadata: 'identifier', helper_method: :link_to_orbis_bib_id
     config.add_show_field 'oid_ssi', label: 'OID', metadata: 'identifier'
     config.add_show_field 'partOf_ssim', label: 'Collection Name', metadata: 'identifier'
     config.add_show_field 'uri_ssim', label: 'URI', metadata: 'identifier'
-    config.add_show_field 'url_fulltext_ssim', label: 'URL', metadata: 'identifier'
     config.add_show_field 'url_suppl_ssim', label: 'More Information', metadata: 'identifier'
 
     # Usage Group
@@ -312,7 +304,6 @@ class CatalogController < ApplicationController
       'material_tesim',
       'oid_ssi',
       'child_oids_ssim',
-      'orbisBarcode_ssi',
       'orbisBibId_ssi',
       'partOf_tesim',
       'projection_tesim',
@@ -452,6 +443,8 @@ class CatalogController < ApplicationController
     config.add_sort_field 'creator_ssim desc, title_ssim asc', label: 'Creator (Z --> A)'
     config.add_sort_field 'title_ssim asc, oid_ssi desc', label: 'Title (A --> Z)'
     config.add_sort_field 'title_ssim desc, oid_ssi desc', label: 'Title (Z --> A)'
+    config.add_sort_field 'year_isim asc, id desc', label: 'Year (ascending)'
+    config.add_sort_field 'year_isim desc, id desc', label: 'Year (descending)'
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.

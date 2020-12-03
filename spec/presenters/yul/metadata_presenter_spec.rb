@@ -71,10 +71,6 @@ RSpec.describe Yul::MetadataPresenter do
         it 'returns the Scale Key' do
           expect(fields.any? { |field| field.include? 'scale_tesim' }).to be_truthy
         end
-
-        it 'returns the Subtitle Key' do
-          expect(fields.any? { |field| field.include? 'subtitle_tesim' }).to be_truthy
-        end
       end
     end
   end
@@ -86,10 +82,6 @@ RSpec.describe Yul::MetadataPresenter do
       describe 'config' do
         it 'returns the Box Key' do
           expect(fields.any? { |field| field.include? 'containerGrouping_ssim' }).to be_truthy
-        end
-
-        it 'returns the Children Key' do
-          expect(fields.any? { |field| field.include? 'children_ssim' }).to be_truthy
         end
 
         it 'returns the Finding Aid Key' do
@@ -108,18 +100,6 @@ RSpec.describe Yul::MetadataPresenter do
           expect(fields.any? { |field| field.include? 'identifierShelfMark_ssim' }).to be_truthy
         end
 
-        it 'returns the Import URL Key' do
-          expect(fields.any? { |field| field.include? 'importUrl_ssim' }).to be_truthy
-        end
-
-        it 'returns the ISBN Key' do
-          expect(fields.any? { |field| field.include? 'isbn_ssim' }).to be_truthy
-        end
-
-        it 'returns the Orbis Barcode Key' do
-          expect(fields.any? { |field| field.include? 'orbisBarcode_ssi' }).to be_truthy
-        end
-
         it 'returns the Orbis Bib ID Key' do
           expect(fields.any? { |field| field.include? 'orbisBibId_ssi' }).to be_truthy
         end
@@ -134,10 +114,6 @@ RSpec.describe Yul::MetadataPresenter do
 
         it 'returns the URI Key' do
           expect(fields.any? { |field| field.include? 'uri_ssim' }).to be_truthy
-        end
-
-        it 'returns the URL Key' do
-          expect(fields.any? { |field| field.include? 'url_fulltext_ssim' }).to be_truthy
         end
 
         it 'returns the More Information Key' do
@@ -171,14 +147,6 @@ RSpec.describe Yul::MetadataPresenter do
 
         it 'returns the Resource Type Key' do
           expect(fields.any? { |field| field.include? 'resourceType_ssim' }).to be_truthy
-        end
-
-        it 'returns the Subject Name Key' do
-          expect(fields.any? { |field| field.include? 'subjectName_ssim' }).to be_truthy
-        end
-
-        it 'returns the Subject Topic Key' do
-          expect(fields.any? { |field| field.include? 'subjectTopic_tesim' }).to be_truthy
         end
       end
     end
@@ -236,10 +204,6 @@ RSpec.describe Yul::MetadataPresenter do
 
         it 'returns the Publisher Key' do
           expect(fields.any? { |field| field.include? 'publisher_ssim' }).to be_truthy
-        end
-
-        it 'returns the Published Key' do
-          expect(fields.any? { |field| field.include? 'published_ssim' }).to be_truthy
         end
 
         it 'returns the Source Created Key' do
