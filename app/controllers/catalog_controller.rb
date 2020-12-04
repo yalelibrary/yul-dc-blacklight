@@ -251,22 +251,8 @@ class CatalogController < ApplicationController
     # Blacklight 'out of box code'
     # config.add_search_field 'all_fields', label: 'All Fields'
 
-    # Array allows for only listed Solr fields to be searched in the 'Common Fields'
-    search_fields = ['abstract_tesim', 'creator_tesim', 'alternativeTitle_tesim', 'description_tesim', 'subjectGeographic_tesim',
-                     'identifierShelfMark_tesim', 'orbisBibId_ssi', 'publicatonPlace_tesim', 'publisher_tesim',
-                     'resourceType_tesim', 'sourceCreated_tesim', 'subjectName_tesim', 'subjectTopic_tesim',
-                     'title_tesim']
-
-    config.add_search_field('all_fields', label: 'Common Fields') do |field|
-      field.qt = 'search'
-      field.include_in_advanced_search = false
-      field.solr_parameters = {
-        qf: search_fields,
-        pf: ''
-      }
-    end
-
-    advanced_search_fields = [
+    # Array allows for only listed Solr fields to be searched in the 'All Fields'
+    search_fields = [
       'abstract_tesim',
       'accessRestrictions_tesim',
       'accessionNumber_ssi',
@@ -304,6 +290,7 @@ class CatalogController < ApplicationController
       'material_tesim',
       'oid_ssi',
       'child_oids_ssim',
+      'orbisBarcode_ssi',
       'orbisBibId_ssi',
       'partOf_tesim',
       'projection_tesim',
@@ -328,11 +315,22 @@ class CatalogController < ApplicationController
       'visibility_ssi'
     ]
 
+    # Basic Search
+    config.add_search_field('all_fields', label: 'All Fields') do |field|
+      field.qt = 'search'
+      field.include_in_advanced_search = false
+      field.solr_parameters = {
+        qf: search_fields,
+        pf: ''
+      }
+    end
+
+    # Advanced Search
     config.add_search_field('all_fields_advanced', label: 'All Fields') do |field|
       field.qt = 'search'
       field.include_in_simple_select = false
       field.solr_parameters = {
-        qf: advanced_search_fields.join(' '),
+        qf: search_fields.join(' '),
         pf: ''
       }
     end
