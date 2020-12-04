@@ -6,7 +6,9 @@ class IiifController < ApplicationController
   include CheckAuthorization
 
   def show
-    redirect_to request.original_fullpath.gsub('check', 'authorized')
+    # authorization has passed by this point, swap the url to authorized and make sure protocol stays http
+    authorized_image_url = request.original_url.gsub('check', 'authorized').gsub(/^https:\/\//, 'http://')
+    redirect_to authorized_image_url
   end
 
   protected
