@@ -107,7 +107,6 @@ class CatalogController < ApplicationController
     config.add_facet_field 'subjectName_ssim', label: 'Subject (Name)', limit: true
     config.add_facet_field 'subject_ssim', label: 'Topic', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'creationPlace_ssim', label: 'Publication Place', limit: true
-    config.add_facet_field 'partOf_ssim', label: 'Digital Collection', limit: true
     config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true
     config.add_facet_field 'dateStructured_ssim', label: 'Date Created',
                                                   range: {
@@ -147,7 +146,6 @@ class CatalogController < ApplicationController
     config.add_index_field 'dateStructured_ssim', label: 'Published / Created', highlight: true
     config.add_index_field 'callNumber_tesim', label: 'Call Number', highlight: true
     config.add_index_field 'imageCount_isi', label: 'Image Count'
-    config.add_index_field 'partOf_ssim', label: 'Collection Name'
     config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true
     config.add_index_field 'abstract_tesim', label: 'Abstract', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'alternativeTitle_tesim', label: 'Alternative Title', highlight: true, solr_params: disp_highlight_on_search_params
@@ -217,7 +215,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'callNumber_ssim', label: 'Call Number', metadata: 'identifier', link_to_facet: true
     config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID', metadata: 'identifier', helper_method: :link_to_orbis_bib_id
     config.add_show_field 'oid_ssi', label: 'OID', metadata: 'identifier'
-    config.add_show_field 'partOf_ssim', label: 'Collection Name', metadata: 'identifier'
     config.add_show_field 'uri_ssim', label: 'URI', metadata: 'identifier'
     config.add_show_field 'url_suppl_ssim', label: 'More Information', metadata: 'identifier'
 
@@ -305,7 +302,6 @@ class CatalogController < ApplicationController
       'oid_ssi',
       'child_oids_ssim',
       'orbisBibId_ssi',
-      'partOf_tesim',
       'projection_tesim',
       'creationPlace_tesim',
       'publisher_tesim',

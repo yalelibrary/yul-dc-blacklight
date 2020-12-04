@@ -108,10 +108,6 @@ RSpec.describe Yul::MetadataPresenter do
           expect(fields.any? { |field| field.include? 'oid_ssi' }).to be_truthy
         end
 
-        it 'returns the Collection Name Key' do
-          expect(fields.any? { |field| field.include? 'partOf_ssim' }).to be_truthy
-        end
-
         it 'returns the URI Key' do
           expect(fields.any? { |field| field.include? 'uri_ssim' }).to be_truthy
         end

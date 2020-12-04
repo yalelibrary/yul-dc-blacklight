@@ -15,7 +15,6 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       creator_tesim: 'Me and You',
       dateStructured_ssim: '1999',
       resourceType_ssim: 'Archives or Manuscripts',
-      partOf_ssim: 'Beinecke Library',
       callNumber_tesim: 'Beinecke MS 801',
       imageCount_isi: '23',
       visibility_ssi: 'Public'

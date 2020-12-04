@@ -46,7 +46,6 @@ module Yale
         apa_box,
         ("(#{obj[:date_ssim]&.first})" unless obj[:date_ssim].nil?),
         ("[#{obj[:title_tesim]&.first}#{apa_edition}]. " unless obj[:title_tesim].nil?),
-        append_string_with_period(obj[:partOf_ssim]),
         url,
         "."
       ].join('')
@@ -58,7 +57,6 @@ module Yale
         append_string_with_period(obj[:title_tesim]),
         append_string_with_period(obj[:containerGrouping_ssim]),
         append_string_with_period(obj[:date_ssim]),
-        append_string_with_period(obj[:partOf_ssim]),
         url,
         "."
       ].join('')

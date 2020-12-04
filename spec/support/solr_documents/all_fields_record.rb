@@ -45,7 +45,6 @@ WORK_WITH_ALL_FIELDS = {
   findingAid_ssim: 'this is the finding aid',
   edition_ssim: 'this is the edition',
   uri_ssim: 'this is the URI',
-  partOf_ssim: "this is the part of, using ssim",
   numberOfPages_ssim: "this is the number of pages, using ssim",
   material_tesim: "this is the material, using ssim",
   scale_tesim: "this is the scale, using ssim",
