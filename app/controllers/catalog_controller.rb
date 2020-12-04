@@ -252,7 +252,7 @@ class CatalogController < ApplicationController
     # config.add_search_field 'all_fields', label: 'All Fields'
 
     # Array allows for only listed Solr fields to be searched in the 'All Fields'
-    all_search_fields = [
+    search_fields = [
       'abstract_tesim',
       'accessRestrictions_tesim',
       'accessionNumber_ssi',
@@ -320,7 +320,7 @@ class CatalogController < ApplicationController
       field.qt = 'search'
       field.include_in_advanced_search = false
       field.solr_parameters = {
-        qf: all_search_fields,
+        qf: search_fields,
         pf: ''
       }
     end
@@ -330,7 +330,7 @@ class CatalogController < ApplicationController
       field.qt = 'search'
       field.include_in_simple_select = false
       field.solr_parameters = {
-        qf: all_search_fields.join(' '),
+        qf: search_fields.join(' '),
         pf: ''
       }
     end
