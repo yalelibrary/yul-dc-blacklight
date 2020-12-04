@@ -22,7 +22,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       isbn_ssim: '2321321389',
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       visibility_ssi: 'Public',
-      dateStructured_ssim: "1920"
+      year_isim: [1920]
     }
   end
 
@@ -39,7 +39,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       isbn_ssim: '2321321389',
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       visibility_ssi: 'Public',
-      dateStructured_ssim: "1900"
+      year_isim: [1900]
     }
   end
 
@@ -56,12 +56,12 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       isbn_ssim: '2321321389',
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       visibility_ssi: 'Public',
-      dateStructured_ssim: "2020"
+      year_isim: [2020, 2021]
     }
   end
 
   it 'gets correct search results using year ranges' do
-    visit search_catalog_path
+    visit root_path
     click_on 'search'
 
     within '#documents' do
@@ -70,8 +70,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(page).to have_content("411")
     end
 
-    fill_in 'range_dateStructured_ssim_begin', with: '1910'
-    fill_in 'range_dateStructured_ssim_end', with: '1950'
+    fill_in 'range_year_isim_begin', with: '1910'
+    fill_in 'range_year_isim_end', with: '1950'
     click_on 'Apply'
 
     within '#documents' do
