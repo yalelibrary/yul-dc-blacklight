@@ -33,9 +33,6 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     it 'displays Resource Type in results' do
       expect(content).to have_content('Archives or Manuscripts')
     end
-    it 'displays Collection Name in results' do
-      expect(content).to have_content('Beinecke Library')
-    end
     it 'displays Call Number in results' do
       expect(content).to have_content('Beinecke MS 801')
     end

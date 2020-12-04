@@ -90,9 +90,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays extent in results' do
       expect(document).to have_content("this is the extent, using ssim")
     end
-    it 'displays part of in results' do
-      expect(document).to have_content("this is the part of, using ssim")
-    end
     it 'displays number of page in results' do
       expect(document).to have_content("this is the number of pages, using ssim")
     end
