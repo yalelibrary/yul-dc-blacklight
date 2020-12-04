@@ -7,7 +7,7 @@ class IiifController < ApplicationController
 
   def show
     # authorization has passed by this point, swap the url to authorized and make sure protocol stays http
-    authorized_image_url = request.original_fullpath.gsub('check', 'authorized').gsub(/^https:\/\//, 'http://')
+    authorized_image_url = request.original_url.gsub('check', 'authorized').gsub(/^https:\/\//, 'http://')
     Rails.logger.error("======= Image URL: #{authorized_image_url}")
     redirect_to authorized_image_url
   end
