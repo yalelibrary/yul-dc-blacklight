@@ -40,4 +40,7 @@ Rails.application.routes.draw do
   get '/pdfs/*id', to: 'pdfs#show', as: :pdf
   get '/check-iiif/*id', to: 'iiif#show', as: :iiif
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  # Stop throwing 404s on missing map files. This route should be LAST
+  get '/*path/*file.map', to: proc { [200, {}, ['']] }
 end
