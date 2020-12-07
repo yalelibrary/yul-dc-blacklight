@@ -31,7 +31,7 @@ RSpec.describe "Iiifs", type: :request do
     it 'display if set to public' do
       get "/check-iiif/2/5555555/full/!200,200/0/default.jpg"
 
-      expect(response).to redirect_to("/authorized-iiif/2/5555555/full/!200,200/0/default.jpg")
+      expect(response).to redirect_to("/iiif/2/5555555/full/!200,200/0/default.jpg")
     end
 
     it 'do not display if set to yale only' do
@@ -54,13 +54,13 @@ RSpec.describe "Iiifs", type: :request do
     it 'display if set to public' do
       get "/check-iiif/2/5555555/full/!200,200/0/default.jpg"
 
-      expect(response).to redirect_to("/authorized-iiif/2/5555555/full/!200,200/0/default.jpg")
+      expect(response).to redirect_to("/iiif/2/5555555/full/!200,200/0/default.jpg")
     end
 
     it 'do not display if set to yale only' do
       get "/check-iiif/2/1111111/full/!200,200/0/default.jpg"
 
-      expect(response).to redirect_to("/authorized-iiif/2/1111111/full/!200,200/0/default.jpg")
+      expect(response).to redirect_to("/iiif/2/1111111/full/!200,200/0/default.jpg")
     end
 
     it 'returns a 404 if there is no visibility key' do
