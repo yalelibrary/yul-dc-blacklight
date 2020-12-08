@@ -1,11 +1,8 @@
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
 #hero {
   position: relative;
-
-  .hero-image {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-  }
 }
 
 .search-query-form {
@@ -136,4 +133,24 @@
 
 #coming-soon {
   background-image: image-url('landing/highlight-coming-soon.png');
+}
+
+@media screen and (min-width: $medium_device) {}
+
+@media screen and (min-width: $large_device) {
+  #hero {
+    position: relative;
+
+    .intro {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background-color: $black;
+      height: 472px;
+    }
+
+    .hero-image {
+      opacity: 0.5;
+    }
+  }
 }
