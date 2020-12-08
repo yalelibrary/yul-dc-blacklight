@@ -1,17 +1,11 @@
-#hero-carousel {
-  .carousel-caption {
-    position: absolute;
-    right: 7.5%;
-    text-align: right;
-  }
-
-  .carousel-control-prev, .carousel-control-next {
-    width: 10%;
-  }
-}
-
 #hero {
   position: relative;
+
+  .hero-image {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
 }
 
 .search-query-form {

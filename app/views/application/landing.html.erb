@@ -28,48 +28,54 @@
 
   <div id='hero'>
 
-    <div id="hero-carousel" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#heroCarouselIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#heroCarouselIndicators" data-slide-to="1"></li>
-        <li data-target="#heroCarouselIndicators" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
+      <div class="hero-image">
+
+        <%
+=begin%>
+ <div class="carousel-item active">
           <%= image_tag("landing/hero-gutenberg.png", class: "d-block w-100", alt: " Prologue the Gutenberg Bible") %>
           <div class="carousel-caption d-none d-md-block">
             <p>From Gutenberg Bible, 1454</p>
           </div>
         </div>
-        <div class="carousel-item">
+<%
+=end%>
+
           <%= image_tag("landing/hero-camp-spingarn.png", class: "d-block w-100", alt: 'Conference attendees at "Camp Spingarn," Amenia, N.Y., August 24-26, 1916') %>
           <div class="carousel-caption d-none d-md-block">
             <p>Conference at "Camp Spingarn," Amenia, N.Y.” </p>
           </div>
         </div>
-        <div class="carousel-item">
+
+        <%
+=begin%>
+ <div class="carousel-item">
           <%= image_tag("landing/hero-chart.png", class: "d-block w-100", alt: 'Portolan Chart of the Mediterranean Sea') %>
           <div class="carousel-caption d-none d-md-block">
             <p>Portolan Chart of the Mediterranean Sea</p>
           </div>
         </div>
-      </div>
-      <a class="carousel-control-prev" href="#heroCarouselIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#heroCarouselIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
+<%
+=end%>
+
 
     <div id='hero-search' class="container d-flex h-100">
     <div class="row justify-content-left align-self-center">
 
-      <h1>Digital <br/> Collections</h1>
+      <%
+=begin%>
+ <h1>Digital <br/> Collections</h1>
+<%
+=end%>
 
-      <%= form_tag search_action_url, method: :get, class: 'search-query-form', role: 'search', 'aria-label' => t('blacklight.search.form.submit') do %>
+<%
+=begin%>
+  search bar
+<%
+=end%>
+      <%
+=begin%>
+ <%= form_tag search_action_url, method: :get, class: 'search-query-form', role: 'search', 'aria-label' => t('blacklight.search.form.submit') do %>
         <div class="input-group">
             <%= hidden_field_tag :search_field, search_fields.first.last %>
 
@@ -84,12 +90,17 @@
           </span>
         </div>
       <% end %>
+<%
+=end%>
 
-      <p class="d-none d-lg-block">Yale University Libraries Digital Collections provides access to millions of digitized works and images from our collections.
+      <%
+=begin%>
+ <p class="d-none d-lg-block">Yale University Libraries Digital Collections provides access to millions of digitized works and images from our collections.
         At launch, you can browse hundreds of thousands of works from the Beinecke Rare Book & Manuscript Library’s collections of
         literary archives, early manuscripts, and rare books.
       </p>
-    </div>
+<%
+=end%>
   </div>
 
   </div>
