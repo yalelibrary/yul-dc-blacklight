@@ -3,6 +3,21 @@ DEFAULT MOBILE STYLING
 ********************************************************/
 #hero {
   position: relative;
+
+  .intro {
+    background-color: $black;
+    height: 220px;
+  }
+
+  .hero-image {
+    opacity: 0.5;
+    height: 85%;
+    object-fit: cover;
+  }
+
+  .hero-search {
+    padding-left: 0;
+  }
 }
 
 .search-query-form {
@@ -27,15 +42,26 @@ DEFAULT MOBILE STYLING
     background-color: $light_grey;
   }
 
+  .hero-info {
+    margin-left: -10px;
+  }
+
   h1 {
-    font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
+    font-family: $yale_display_roman, 'Times New Roman', Times, serif;
+    margin: 30px auto 15px;
+    text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+    font-size: 36px;
+    font-weight: normal;
     font-stretch: normal;
     font-style: normal;
+    line-height: normal;
     letter-spacing: normal;
-    text-align: left;
-    font-weight: 800;
-    font-size: 64px;
-    width: 100%;
+    text-align: center;
+    color: #ffffff;
+  }
+
+  #search {
+    display: none;
   }
 
   p {
@@ -142,15 +168,15 @@ DEFAULT MOBILE STYLING
     position: relative;
 
     .intro {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      background-color: $black;
+      // position: relative;
+      // width: 100%;
+      // overflow: hidden;
+      // background-color: $black;
       height: 472px;
     }
 
-    .hero-image {
-      opacity: 0.5;
-    }
+    // .hero-image {
+    //   opacity: 0.5;
+    // }
   }
 }

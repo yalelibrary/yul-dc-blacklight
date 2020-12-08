@@ -27,11 +27,11 @@
   <%= render partial: 'shared/flash_msg', layout: 'shared/flash_messages' %>
 
   <div id='hero'>
-      <div class="intro">
+    <div class="intro">
 
-        <%
+      <%
 =begin%>
- <div class="carousel-item active">
+<div class="carousel-item active">
           <%= image_tag("landing/hero-gutenberg.png", class: "d-block w-100", alt: " Prologue the Gutenberg Bible") %>
           <div class="carousel-caption d-none d-md-block">
             <p>From Gutenberg Bible, 1454</p>
@@ -39,14 +39,11 @@
         </div>
 <%
 =end%>
-
-          <%= image_tag("landing/hero-camp-spingarn.png", class: "d-block w-100 hero-image", alt: 'Conference attendees at "Camp Spingarn," Amenia, N.Y., August 24-26, 1916') %>
-          <div class="carousel-caption d-none d-md-block">
-            <p>Conference at "Camp Spingarn," Amenia, N.Y.” </p>
-          </div>
-        </div>
-
-        <%
+      <%= image_tag("landing/hero-camp-spingarn.png", class: "d-block w-100 hero-image", alt: 'Conference attendees at "Camp Spingarn," Amenia, N.Y., August 24-26, 1916') %>
+      <div class="carousel-caption d-none d-md-block">
+        <p>Conference at "Camp Spingarn," Amenia, N.Y.” </p>
+      </div>
+      <%
 =begin%>
  <div class="carousel-item">
           <%= image_tag("landing/hero-chart.png", class: "d-block w-100", alt: 'Portolan Chart of the Mediterranean Sea') %>
@@ -56,48 +53,38 @@
         </div>
 <%
 =end%>
+    </div>
 
+    <div id='hero-search' class="container d-flex h-100">
       <%
 =begin%>
- <h1>Digital <br/> Collections</h1>
+ <div class="row justify-content-left align-self-center">
 <%
 =end%>
+      <div class="hero-info">
+        <h1>Digital Collections</h1>
 
-<%
-=begin%>
-  search bar
-<%
-=end%>
-      <%
-=begin%>
- <%= form_tag search_action_url, method: :get, class: 'search-query-form', role: 'search', 'aria-label' => t('blacklight.search.form.submit') do %>
-        <div class="input-group">
-            <%= hidden_field_tag :search_field, search_fields.first.last %>
+        <%= form_tag search_action_url, method: :get, class: 'search-query-form', role: 'search', 'aria-label' => t('blacklight.search.form.submit') do %>
+          <div class="input-group">
+              <%= hidden_field_tag :search_field, search_fields.first.last %>
 
-          <label for="q" class="sr-only"><%= t('blacklight.search.form.search.label') %></label>
-          <%= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}", id: "q", aria: { label: 'search' }  %>
+            <label for="q" class="sr-only"><%= t('blacklight.search.form.search.label') %></label>
+            <%= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}", id: "q", aria: { label: 'search' }  %>
 
-          <span class="input-group-append">
-            <button type="submit" class="btn btn-primary search-btn" id="search">
-              <span class="submit-search-text"><%= t('blacklight.search.form.submit') %></span>
-              <%= blacklight_icon :search, aria_hidden: true %>
-            </button>
-          </span>
-        </div>
-      <% end %>
-<%
-=end%>
+            <span class="input-group-append">
+              <button type="submit" class="btn btn-primary search-btn" id="search">
+                <span class="submit-search-text"><%= t('blacklight.search.form.submit') %></span>
+                <%= blacklight_icon :search, aria_hidden: true %>
+              </button>
+            </span>
+          </div>
+        <% end %>
 
-      <%
-=begin%>
- <p class="d-none d-lg-block">Yale University Libraries Digital Collections provides access to millions of digitized works and images from our collections.
-        At launch, you can browse hundreds of thousands of works from the Beinecke Rare Book & Manuscript Library’s collections of
-        literary archives, early manuscripts, and rare books.
-      </p>
-<%
-=end%>
-  </div>
-
+        <p class="d-none d-lg-block">
+          Yale University Libraries Digital Collections provides access to millions of digitized works and images from our collections. At launch, you can browse hundreds of thousands of works from the Beinecke Rare Book & Manuscript Library’s collections of literary archives, early manuscripts, and rare books.
+        </p>
+      </div>
+    </div>
   </div>
 
   <main id="main-container" class="<%= container_classes %>" role="main" aria-label="<%= t('blacklight.main.aria.main_container') %>">
