@@ -6,17 +6,14 @@ class IiifController < ApplicationController
   include CheckAuthorization
 
   def show
-    # authorization has passed by this point, swap the url to authorized and make sure protocol stays http
-    authorized_image_url = "#{ENV['IIIF_IMAGE_INTERNAL_URL']}#{request.original_fullpath}".gsub('check-', '')
-    Rails.logger.error("============ #{authorized_image_url}")
-    redirect_to authorized_image_url
+    render plain: 'success', status: 200
   end
 
   protected
 
   # IIIF doesn't just return the oid, find the child, then find the oid from there
   def search_for_item
-    child_oid = params[:id].gsub(/^2\/(\d+)\/.*/, '\1')
+    child_oid = request.headers['X-Origin-URI'].gsub(/^\/iiif\/2\/(\d+)\/.*/, '\1')
     search_state[:q] = { child_oids_ssim: child_oid }
     search_state[:rows] = 1
     search_service_class.new(config: blacklight_config, search_state: search_state, user_params: search_state.to_h, **search_service_context)
