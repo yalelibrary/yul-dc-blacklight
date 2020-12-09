@@ -8,38 +8,40 @@ module BlacklightHelper
   end
 
   # sets up date params for constraint partial
-  def render_date_constraint(params)
+  def get_date_constraint_params(params, url)
     label = "Date"
 
     # if date is unknown
-    if params["range"].try(:[], "dateStructured_ssim").try(:[], "missing")
+    if params["range"].try(:[], "year_isim").try(:[], "missing")
       value = "Unknown"
-      remove_url = range_unknown_remove_url
+      remove_url = range_unknown_remove_url(url)
     else
       beg_date = params["range"].values[0]["begin"]
       end_date = params["range"].values[0]["end"]
 
       value ||= "#{beg_date} - #{end_date}"
-      remove_url = range_remove_url
+      remove_url = range_remove_url(url)
     end
 
     options = {
       remove: remove_url,
-      classes: ["dateStructured_ssim"]
+      classes: ["year_isim"]
     }
-    render partial: "constraints_element", locals: { value: value, label: label, options: options }
+    [value, label, options]
   end
 
   # removes date range params from link with unknown date
-  def range_unknown_remove_url
-    url = request.url.gsub(/[?&]range%5BdateStructured_.*%5D%5Bmissing%5D=true&commit=Apply/, '')
-    url.gsub!(/[?&]range%5BdateStructured_.*%5D%5Bmissing%5D=true/, '')
+  def range_unknown_remove_url(url_in)
+    url = url_in.gsub(/[?&]range%5Byear_.*%5D%5Bmissing%5D=true/, '')
+    url.gsub!("&commit=Apply", '')
+    url.gsub(/[?&]range%5Byear_.*%5D%5Bmissing%5D=true/, '')
   end
 
   # removes date range params from link
-  def range_remove_url
-    url = request.url.gsub(/[&?]range%5BdateStructured_.*%5D%5Bbegin%5D=[\d]{3,4}&range%5BdateStructured_.*%5D%5Bend%5D=[\d]{3,4}&commit=Apply/, '')
-    url.gsub(/[&?]range%5BdateStructured_.*%5D%5Bbegin%5D=[\d]{3,4}&range%5BdateStructured_.*5D%5Bend%5D=[\d]{3,4}/, '')
+  def range_remove_url(url_in)
+    url = url_in.gsub(/[&?]range%5Byear_.*%5D%5Bbegin%5D=[\d]{3,4}&range%5Byear_.*%5D%5Bend%5D=[\d]{3,4}/, '')
+    url.gsub!("&commit=Apply", '')
+    url.gsub(/[&?]range%5Byear_.*%5D%5Bbegin%5D=[\d]{1,4}&range%5Byear_.*5D%5Bend%5D=[\d]{1,4}/, '')
   end
 
   def language_codes(args)

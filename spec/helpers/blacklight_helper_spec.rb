@@ -79,6 +79,69 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
 
         expect(helper.render_thumbnail(yale_only_document, {})).to match("<img [^>]* src=\"http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg\" />")
       end
+
+      describe '#range_unknown_remove_url' do
+        let(:missing_url) { "/catalog?range%5Byear_isim%5D%5Bmissing%5D=true&search_field=all_fields" }
+        let(:clean_url) { %r{catalog[?&]search_field=all_fields} }
+
+        it 'filters out missing when x is clicked' do
+
+          expect(helper.range_unknown_remove_url(missing_url)).to match clean_url
+        end
+      end
+
+      describe '#range_remove_url' do
+        let(:date_facet_url) { "/catalog?search_field=all_fields&range%5Byear_isim%5D%5Bbegin%5D=1116&range%5Byear_isim%5D%5Bend%5D=2002&commit=Apply" }
+        let(:clean_url) { %r{catalog[?&]search_field=all_fields} }
+
+        it 'filters out date range when x is clicked' do
+
+          expect(helper.range_remove_url(date_facet_url)).to match clean_url
+        end
+      end
+
+      describe '#get_date_constraint_params' do
+        let(:missing_url) { "/catalog?range%5Byear_isim%5D%5Bmissing%5D=true&search_field=all_fields" }
+        let(:date_facet_url) { "/catalog?search_field=all_fields&range%5Byear_isim%5D%5Bbegin%5D=1116&range%5Byear_isim%5D%5Bend%5D=2002&commit=Apply" }
+        let(:clean_url) { %r{catalog[?&]search_field=all_fields} }
+
+        context 'with missing date facet applied' do
+          let(:params){
+            params = Hash.new { |h, k| h[k] = h.dup.clear }
+            params["range"]["year_isim"]["missing"] = true
+            params
+          }
+          it 'assigns the correct values to options' do
+            value, label, options = helper.get_date_constraint_params(params,missing_url)
+            expect(value).to eq "Unknown"
+            expect(label).to eq "Date"
+            expect(options[:classes]).to match ["year_isim"]
+            expect(options[:remove]).to match clean_url
+          end
+        end
+        context 'with a date range face applied' do
+          let(:params) {
+            params = Hash.new { |h, k| h[k] = h.dup.clear }
+            params["range"]["year_isim"]["missing"] = false
+            params["range"] = Object.new
+            params["range"].define_singleton_method(:values) do
+             @values||= [Hash.new { |h, k| h[k] = h.dup.clear }]
+             @values
+            end
+            params["range"].values[0]["begin"] = 1500
+            params["range"].values[0]["end"] = 2000
+
+            params
+          }
+          it 'assigns the correct values to options' do
+            value, label, options = helper.get_date_constraint_params(params,date_facet_url)
+            expect(value).to eq "1500 - 2000"
+            expect(label).to eq "Date"
+            expect(options[:classes]).to match ["year_isim"]
+            expect(options[:remove]).to match clean_url
+          end
+        end
+      end
     end
   end
 end

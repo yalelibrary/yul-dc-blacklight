@@ -4,7 +4,7 @@ require 'rails_helper'
 RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
   before do
     solr = Blacklight.default_index.connection
-    solr.add([dog, cat, bird, rabbit, elephant])
+    solr.add([dog, cat, bird, rabbit, elephant, turtle])
     solr.commit
   end
 
@@ -25,7 +25,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     {
       id: '212',
       title_tesim: 'Handsome Dan is not a cat.',
-      year_isim: [1600],
+      year_isim: [1600, 1601, 1603],
       creator_tesim: 'Frederick & Eric',
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
@@ -37,7 +37,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     {
       id: '313',
       title_tesim: 'Handsome Dan is not a bird.',
-      year_isim: [1100],
+      year_isim: [1100, 1101, 1102],
       creator_tesim: 'Frederick & Eric',
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
@@ -50,7 +50,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
       id: '400',
       identifierShelfMark_ssim: 'call number',
       title_tesim: 'Handsome Dan is not a rabbit.',
-      year_isim: [1555],
+      year_isim: [1555, 1556, 1557],
       creator_tesim: 'Frederick & Eric',
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
@@ -64,6 +64,18 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
       identifierShelfMark_ssim: 'call number',
       title_tesim: 'Handsome Dan is not a elephant.',
       year_isim: [1555],
+      creator_tesim: 'Frederick & Eric',
+      sourceTitle_tesim: "this is the source title",
+      orbisBibId_ssi: '1234567',
+      visibility_ssi: 'Public'
+    }
+  end
+
+  let(:turtle) do
+    {
+      id: '402',
+      title_tesim: 'Handsome Dan is not a turtle.',
+      year_isim: (1555..1800).to_a,
       creator_tesim: 'Frederick & Eric',
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
@@ -118,6 +130,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
       expect(page.text).to match(/Date 12\d\d - 16\d\d/)
     end
 
-    expect(page).to have_content '1 - 3'
+    # makes sure that it includes the turtle record with years: 1555-1800
+    expect(page).to have_content '1 - 4'
   end
 end
