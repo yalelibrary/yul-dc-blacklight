@@ -22,7 +22,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       isbn_ssim: '2321321389',
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       visibility_ssi: 'Public',
-      year_isim: [1920]
+      year_isim: (1920..2000).to_a
     }
   end
 
