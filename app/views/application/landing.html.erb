@@ -28,7 +28,6 @@
 
   <div id='hero'>
     <div class="intro">
-
       <%
 =begin%>
 <div class="carousel-item active">
@@ -39,8 +38,9 @@
         </div>
 <%
 =end%>
-      <%= image_tag("landing/hero-camp-spingarn.png", class: "d-block w-100 hero-image", alt: 'Conference attendees at "Camp Spingarn," Amenia, N.Y., August 24-26, 1916') %>
-      <div class="carousel-caption d-none d-md-block">
+      <%= image_tag("landing/hero-images/camp-spingarn.jpg", class: "d-block w-100 hero-image", alt: 'Conference attendees at "Camp Spingarn," Amenia, N.Y., August 24-26, 1916') %>
+      <div class="image-overlay"></div>
+      <div class="hero-caption d-md-block">
         <p>Conference at "Camp Spingarn," Amenia, N.Y.” </p>
       </div>
       <%
@@ -56,11 +56,6 @@
     </div>
 
     <div id='hero-search' class="container d-flex h-100">
-      <%
-=begin%>
- <div class="row justify-content-left align-self-center">
-<%
-=end%>
       <div class="hero-info">
         <h1>Digital Collections</h1>
 
