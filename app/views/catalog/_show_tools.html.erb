@@ -14,7 +14,7 @@
             <% oid = @document.id %>
             <li class="list-group-item manifestItem">
                 <span class='nav-link'>
-                  <%= link_to(image_tag('iiif.png', alt: '') + t('blacklight.sidebar.manifest'), manifest_url(oid, format: 'json'), target: '_blank', id: 'manifestLink', class: 'iiif-logo')
+                  <%= link_to(image_tag('iiif.png', alt: '') + t('blacklight.sidebar.manifest'), manifest_url(oid), target: '_blank', id: 'manifestLink', class: 'iiif-logo')
                   %>
                 </span>
             </li>
