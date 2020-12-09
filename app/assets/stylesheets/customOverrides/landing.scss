@@ -67,6 +67,10 @@ DEFAULT MOBILE STYLING
     color: #ffffff;
   }
 
+  .hero-info {
+    width: 100%;
+  }
+
   // p {
   //   margin-top: 1.25rem;
   //   font-size: 1.5rem;
@@ -180,7 +184,37 @@ DEFAULT MOBILE STYLING
   background-image: image-url('landing/highlight-coming-soon.png');
 }
 
-@media screen and (min-width: $medium_device) {}
+
+@media screen and (min-width: $small_device) {
+  #hero {
+    .intro {
+      height: 300px;
+    }
+  }
+
+  #hero-search {
+    h1 {
+      margin: 60px auto 30px;
+    }
+  }
+}
+
+
+@media screen and (min-width: $medium_device) {
+  #hero {
+    .intro {
+      height: 375px;
+    }
+  }
+
+  #hero-search {
+    h1 {
+      margin: 70px auto 35px;
+      font-size: 55px;
+    }
+  }
+}
+
 
 @media screen and (min-width: $large_device) {
   #hero {
