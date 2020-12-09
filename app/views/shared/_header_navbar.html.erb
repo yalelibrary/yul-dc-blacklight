@@ -1,369 +1,369 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark topbar" role="navigation" aria-label="Main">
-    <div class="<%= container_classes %>">
-        <%= link_to application_name, root_path, class: 'mb-0 navbar-brand navbar-logo' %>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#user-util-collapse" aria-controls="user-util-collapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+  <div class="<%= container_classes %>">
+    <%= link_to application_name, root_path, class: 'mb-0 navbar-brand navbar-logo' %>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#user-util-collapse" aria-controls="user-util-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse justify-content-md-end" id="user-util-collapse">
-            <%= render 'shared/user_util_links' %>
-        </div>
+    <div class="collapse navbar-collapse justify-content-md-end" id="user-util-collapse">
+      <%= render 'shared/user_util_links' %>
     </div>
+  </div>
 
 </nav>
 <div class="navbar-expand-md navbar-dark bg-dark topbar" role="navigation" aria-label="User utilities">
-    <div class="secondary-nav">
-        <div class="row">
-            <section class="info-header">
-                <div class="dropdown">
-                    <h2 class="nav-link-title" data-toggle="dropdown">
-                        <a href="#" role="button" aria-expanded="true">Research</a>
-                        <p class="nav-link-caret">
-                          <%= image_tag("header/2x-angle-up-solid.png", {id: 'collapse-arrow-nav-bar', alt: 'collapse nav bar'})%>
-                        </p>
-                    </h2>
-                    <div class="content-yul">
-                        <div class="menu-block-wrapper">
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="<%= t('submenu.research.quicksearch.url')%>" title="<%= t('submenu.research.quicksearch.description')%>">
-                                        <%= t('submenu.research.quicksearch.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.research.searchLibraryCatalogOrbis.url')%>" title="<%= t('submenu.research.searchLibraryCatalogOrbis.description')%>">
-                                        <%= t('submenu.research.searchLibraryCatalogOrbis.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.research.searchLawLibraryCatalog.url')%>" title="<%= t('submenu.research.searchLawLibraryCatalog.description')%>">
-                                        <%= t('submenu.research.searchLawLibraryCatalog.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.research.searchBorrowDirect.url')%>" title="<%= t('submenu.research.searchBorrowDirect.description')%>">
-                                        <%= t('submenu.research.searchBorrowDirect.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.research.searchWorldCat.url')%>" title="<%= t('submenu.research.searchWorldCat.description')%>">
-                                        <%= t('submenu.research.searchWorldCat.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.research.searchArticlesPlus.url')%>" title="<%= t('submenu.research.searchArticlesPlus.description')%>">
-                                        <%= t('submenu.research.searchArticlesPlus.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.research.searchDigitalCollections.url')%>" title="<%= t('submenu.research.searchDigitalCollections.description')%>">
-                                        <%= t('submenu.research.searchDigitalCollections.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.research.searchArchivesYale.url')%>" title="<%= t('submenu.research.searchArchivesYale.description')%>">
-                                        <%= t('submenu.research.searchArchivesYale.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.research.researchGuides.url')%>" title="<%= t('submenu.research.researchGuides.description')%>">
-                                        <%= t('submenu.research.researchGuides.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.research.findDatabases.url')%>" title="<%= t('submenu.research.findDatabases.description')%>">
-                                        <%= t('submenu.research.findDatabases.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.research.findeJournalsTitle.url')%>" title="<%= t('submenu.research.findeJournalsTitle.description')%>">
-                                        <%= t('submenu.research.findeJournalsTitle.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.research.guideUsingSpecialCollections.url')%>" title="<%= t('submenu.research.guideUsingSpecialCollections.description')%>">
-                                        <%= t('submenu.research.guideUsingSpecialCollections.title')%>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="info-header">
-                <div class="dropdown">
-                    <h2 class="nav-link-title" data-toggle="dropdown">
-                        <a href="#" role="button" aria-expanded="false">Services</a>
-                        <p class="nav-link-caret">
-                          <%= image_tag("header/2x-angle-up-solid.png", {id: 'collapse-nav-bar', alt: 'collapse nav bar'})%>
-                        </p>
-                    </h2>
-                    <div class="content-yul">
-                        <div class="menu-block-wrapper">
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="<%= t('submenu.services.yourPersonalLibrarian.url')%>" title="<%= t('submenu.services.yourPersonalLibrarian.description')%>">
-                                        <%= t('submenu.services.yourPersonalLibrarian.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.services.subjectSpecialists.url')%>" title="<%= t('submenu.services.subjectSpecialists.description')%>">
-                                        <%= t('submenu.services.subjectSpecialists.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.services.researchSupportandWorkshops.url')%>" title="<%= t('submenu.services.researchSupportandWorkshops.description')%>">
-                                        <%= t('submenu.services.researchSupportandWorkshops.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.services.citationTools.url')%>" title="<%= t('submenu.services.citationTools.description')%>">
-                                        <%= t('submenu.services.citationTools.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.services.overDrive.url')%>" title="<%= t('submenu.services.overDrive.description')%>">
-                                        <%= t('submenu.services.overDrive.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.services.getIt@Yale.url')%>" title="<%= t('submenu.services.getIt@Yale.description')%>">
-                                        <%= t('submenu.services.getIt@Yale.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.services.courseReserves.url')%>" title="<%= t('submenu.services.courseReserves.description')%>">
-                                        <%= t('submenu.services.courseReserves.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.services.off-CampusAccess.url')%>" title="<%= t('submenu.services.off-CampusAccess.description')%>">
-                                        <%= t('submenu.services.off-CampusAccess.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.services.eliScholar.url')%>" title="<%= t('submenu.services.eliScholar.description')%>">
-                                        <%= t('submenu.services.eliScholar.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.services.overDrive.url')%>" title="<%= t('submenu.services.overDrive.description')%>">
-                                        <%= t('submenu.services.overDrive.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.services.bassMediaEquipment.url')%>" title="<%= t('submenu.services.bassMediaEquipment.description')%>">
-                                        <%= t('submenu.services.bassMediaEquipment.title')%>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="info-header">
-                <div class="dropdown">
-                    <h2 class="nav-link-title" data-toggle="dropdown">
-                        <a href="#" role="button" aria-expanded="false">Libraries & Collections</a>
-                        <p class="nav-link-caret">
-                          <%= image_tag("header/2x-angle-up-solid.png", {id: 'collapse-nav-bar', alt: 'collapse nav bar'})%>
-                        </p>
-                    </h2>
-                    <div class="content-yul">
-                        <div class="menu-block-wrapper">
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.artsLibrary.url')%>" title="<%= t('submenu.librariesCollections.artsLibrary.description')%>">
-                                        <%= t('submenu.librariesCollections.artsLibrary.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.bassLibrary.url')%>" title="<%= t('submenu.librariesCollections.bassLibrary.description')%>">
-                                        <%= t('submenu.librariesCollections.bassLibrary.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.beineckeLibrary.url')%>" title="<%= t('submenu.librariesCollections.beineckeLibrary.description')%>">
-                                        <%= t('submenu.librariesCollections.beineckeLibrary.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.classicsLibrary.url')%>" title="<%= t('submenu.librariesCollections.classicsLibrary.description')%>">
-                                        <%= t('submenu.librariesCollections.classicsLibrary.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.divinityLibrary.url')%>" title="<%= t('submenu.librariesCollections.divinityLibrary.description')%>">
-                                        <%= t('submenu.librariesCollections.divinityLibrary.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.filmStudyCenter.url')%>" title="<%= t('submenu.librariesCollections.filmStudyCenter.description')%>">
-                                        <%= t('submenu.librariesCollections.filmStudyCenter.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.fortunoffArchive.url')%>" title="<%= t('submenu.librariesCollections.fortunoffArchive.description')%>">
-                                        <%= t('submenu.librariesCollections.fortunoffArchive.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.humanitiesCollections.url')%>" title="<%= t('submenu.librariesCollections.humanitiesCollections.description')%>">
-                                        <%= t('submenu.librariesCollections.humanitiesCollections.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.internationalCollections.url')%>" title="<%= t('submenu.librariesCollections.internationalCollections.description')%>">
-                                        <%= t('submenu.librariesCollections.internationalCollections.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.lawLibrary.url')%>" title="<%= t('submenu.librariesCollections.lawLibrary.description')%>">
-                                        <%= t('submenu.librariesCollections.lawLibrary.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.lewisWalpoleLibrary.url')%>" title="<%= t('submenu.librariesCollections.lewisWalpoleLibrary.description')%>">
-                                        <%= t('submenu.librariesCollections.lewisWalpoleLibrary.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.libraryCollectionServices.url')%>" title="<%= t('submenu.librariesCollections.libraryCollectionServices.description')%>">
-                                        <%= t('submenu.librariesCollections.libraryCollectionServices.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.manuScriptsArchives.url')%>" title="<%= t('submenu.librariesCollections.manuScriptsArchives.description')%>">
-                                        <%= t('submenu.librariesCollections.manuScriptsArchives.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.mapCollection.url')%>" title="<%= t('submenu.librariesCollections.mapCollection.description')%>">
-                                        <%= t('submenu.librariesCollections.mapCollection.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.marxScienceSocialScienceLibrary.url')%>" title="<%= t('submenu.librariesCollections.marxScienceSocialScienceLibrary.description')%>">
-                                        <%= t('submenu.librariesCollections.marxScienceSocialScienceLibrary.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.mathematicsLibrary.url')%>" title="<%= t('submenu.librariesCollections.mathematicsLibrary.description')%>">
-                                        <%= t('submenu.librariesCollections.mathematicsLibrary.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.medicalLibrary.url')%>" title="<%= t('submenu.librariesCollections.medicalLibrary.description')%>">
-                                        <%= t('submenu.librariesCollections.medicalLibrary.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.musicLibrary.url')%>" title="<%= t('submenu.librariesCollections.musicLibrary.description')%>">
-                                        <%= t('submenu.librariesCollections.musicLibrary.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.sterlingLibrary.url')%>" title="<%= t('submenu.librariesCollections.sterlingLibrary.description')%>">
-                                        <%= t('submenu.librariesCollections.sterlingLibrary.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.librariesCollections.yaleCenterBritishArt.url')%>" title="<%= t('submenu.librariesCollections.yaleCenterBritishArt.description')%>">
-                                        <%= t('submenu.librariesCollections.yaleCenterBritishArt.title')%>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="info-header">
-                <div class="dropdown">
-                    <h2 class="nav-link-title" data-toggle="dropdown">
-                        <a href="#" role="button" aria-expanded="false">Information & Policies</a>
-                        <p class="nav-link-caret">
-                          <%= image_tag("header/2x-angle-up-solid.png", {id: 'collapse-nav-bar', alt: 'collapse nav bar'})%>
-                        </p>
-                    </h2>
-                    <div class="content-yul">
-                        <div class="menu-block-wrapper">
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="<%= t('submenu.informationPolicies.libraryHours.url')%>" title="<%= t('submenu.informationPolicies.libraryHours.description')%>">
-                                        <%= t('submenu.informationPolicies.libraryHours.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.informationPolicies.departmentsStaff.url')%>" title="<%= t('submenu.informationPolicies.departmentsStaff.description')%>">
-                                        <%= t('submenu.informationPolicies.departmentsStaff.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.informationPolicies.borrowingCirculation.url')%>" title="<%= t('submenu.informationPolicies.borrowingCirculation.description')%>">
-                                        <%= t('submenu.informationPolicies.borrowingCirculation.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.informationPolicies.servicesPersonsWithDisabilities.url')%>" title="<%= t('submenu.informationPolicies.servicesPersonsWithDisabilities.description')%>">
-                                        <%= t('submenu.informationPolicies.servicesPersonsWithDisabilities.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.informationPolicies.copyrightBasics.url')%>" title="<%= t('submenu.informationPolicies.copyrightBasics.description')%>">
-                                        <%= t('submenu.informationPolicies.copyrightBasics.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.informationPolicies.scanningPrintingCopying.url')%>" title="<%= t('submenu.informationPolicies.scanningPrintingCopying.description')%>">
-                                        <%= t('submenu.informationPolicies.scanningPrintingCopying.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.informationPolicies.computersWireless.url')%>" title="<%= t('submenu.informationPolicies.computersWireless.description')%>">
-                                        <%= t('submenu.informationPolicies.computersWireless.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.informationPolicies.libraryPolicies.url')%>" title="<%= t('submenu.informationPolicies.libraryPolicies.description')%>">
-                                        <%= t('submenu.informationPolicies.libraryPolicies.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.informationPolicies.aboutLibrary.url')%>" title="<%= t('submenu.informationPolicies.aboutLibrary.description')%>">
-                                        <%= t('submenu.informationPolicies.aboutLibrary.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.informationPolicies.givingtoLibrary.url')%>" title="<%= t('submenu.informationPolicies.givingtoLibrary.description')%>">
-                                        <%= t('submenu.informationPolicies.givingtoLibrary.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.informationPolicies.purchaseRequest.url')%>" title="<%= t('submenu.informationPolicies.purchaseRequest.description')%>">
-                                        <%= t('submenu.informationPolicies.purchaseRequest.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.informationPolicies.workingAtTheLibrary.url')%>" title="<%= t('submenu.informationPolicies.workingAtTheLibrary.description')%>">
-                                        <%= t('submenu.informationPolicies.workingAtTheLibrary.title')%>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<%= t('submenu.informationPolicies.termsGoverningMaterialsUse.url')%>" title="<%= t('submenu.informationPolicies.termsGoverningMaterialsUse.description')%>">
-                                        <%= t('submenu.informationPolicies.termsGoverningMaterialsUse.title')%>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
+  <div class="secondary-nav">
+    <div class="row">
+      <section class="info-header">
+        <div class="dropdown">
+          <h2 class="nav-link-title" data-toggle="dropdown">
+            <a href="#" role="button" aria-expanded="true">Research</a>
+            <p class="nav-link-caret" style="cursor: pointer">
+              <%= image_tag("header/2x-angle-up-solid.png", {id: 'collapse-arrow-nav-bar', alt: 'collapse nav bar'})%>
+            </p>
+          </h2>
+          <div class="content-yul">
+            <div class="menu-block-wrapper">
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="<%= t('submenu.research.quicksearch.url')%>" title="<%= t('submenu.research.quicksearch.description')%>">
+                    <%= t('submenu.research.quicksearch.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.research.searchLibraryCatalogOrbis.url')%>" title="<%= t('submenu.research.searchLibraryCatalogOrbis.description')%>">
+                    <%= t('submenu.research.searchLibraryCatalogOrbis.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.research.searchLawLibraryCatalog.url')%>" title="<%= t('submenu.research.searchLawLibraryCatalog.description')%>">
+                    <%= t('submenu.research.searchLawLibraryCatalog.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.research.searchBorrowDirect.url')%>" title="<%= t('submenu.research.searchBorrowDirect.description')%>">
+                    <%= t('submenu.research.searchBorrowDirect.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.research.searchWorldCat.url')%>" title="<%= t('submenu.research.searchWorldCat.description')%>">
+                    <%= t('submenu.research.searchWorldCat.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.research.searchArticlesPlus.url')%>" title="<%= t('submenu.research.searchArticlesPlus.description')%>">
+                    <%= t('submenu.research.searchArticlesPlus.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.research.searchDigitalCollections.url')%>" title="<%= t('submenu.research.searchDigitalCollections.description')%>">
+                    <%= t('submenu.research.searchDigitalCollections.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.research.searchArchivesYale.url')%>" title="<%= t('submenu.research.searchArchivesYale.description')%>">
+                    <%= t('submenu.research.searchArchivesYale.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.research.researchGuides.url')%>" title="<%= t('submenu.research.researchGuides.description')%>">
+                    <%= t('submenu.research.researchGuides.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.research.findDatabases.url')%>" title="<%= t('submenu.research.findDatabases.description')%>">
+                    <%= t('submenu.research.findDatabases.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.research.findeJournalsTitle.url')%>" title="<%= t('submenu.research.findeJournalsTitle.description')%>">
+                    <%= t('submenu.research.findeJournalsTitle.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.research.guideUsingSpecialCollections.url')%>" title="<%= t('submenu.research.guideUsingSpecialCollections.description')%>">
+                    <%= t('submenu.research.guideUsingSpecialCollections.title')%>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </section>
+
+      <section class="info-header">
+        <div class="dropdown">
+          <h2 class="nav-link-title" data-toggle="dropdown">
+            <a href="#" role="button" aria-expanded="false">Services</a>
+            <p class="nav-link-caret" style="cursor: pointer">
+              <%= image_tag("header/2x-angle-up-solid.png", {id: 'collapse-nav-bar', alt: 'collapse nav bar'})%>
+            </p>
+          </h2>
+          <div class="content-yul">
+            <div class="menu-block-wrapper">
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="<%= t('submenu.services.yourPersonalLibrarian.url')%>" title="<%= t('submenu.services.yourPersonalLibrarian.description')%>">
+                    <%= t('submenu.services.yourPersonalLibrarian.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.services.subjectSpecialists.url')%>" title="<%= t('submenu.services.subjectSpecialists.description')%>">
+                    <%= t('submenu.services.subjectSpecialists.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.services.researchSupportandWorkshops.url')%>" title="<%= t('submenu.services.researchSupportandWorkshops.description')%>">
+                    <%= t('submenu.services.researchSupportandWorkshops.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.services.citationTools.url')%>" title="<%= t('submenu.services.citationTools.description')%>">
+                    <%= t('submenu.services.citationTools.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.services.overDrive.url')%>" title="<%= t('submenu.services.overDrive.description')%>">
+                    <%= t('submenu.services.overDrive.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.services.getIt@Yale.url')%>" title="<%= t('submenu.services.getIt@Yale.description')%>">
+                    <%= t('submenu.services.getIt@Yale.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.services.courseReserves.url')%>" title="<%= t('submenu.services.courseReserves.description')%>">
+                    <%= t('submenu.services.courseReserves.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.services.off-CampusAccess.url')%>" title="<%= t('submenu.services.off-CampusAccess.description')%>">
+                    <%= t('submenu.services.off-CampusAccess.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.services.eliScholar.url')%>" title="<%= t('submenu.services.eliScholar.description')%>">
+                    <%= t('submenu.services.eliScholar.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.services.overDrive.url')%>" title="<%= t('submenu.services.overDrive.description')%>">
+                    <%= t('submenu.services.overDrive.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.services.bassMediaEquipment.url')%>" title="<%= t('submenu.services.bassMediaEquipment.description')%>">
+                    <%= t('submenu.services.bassMediaEquipment.title')%>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="info-header">
+        <div class="dropdown">
+          <h2 class="nav-link-title" data-toggle="dropdown">
+            <a href="#" role="button" aria-expanded="false">Libraries & Collections</a>
+            <p class="nav-link-caret" style="cursor: pointer">
+              <%= image_tag("header/2x-angle-up-solid.png", {id: 'collapse-nav-bar', alt: 'collapse nav bar'})%>
+            </p>
+          </h2>
+          <div class="content-yul">
+            <div class="menu-block-wrapper">
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.artsLibrary.url')%>" title="<%= t('submenu.librariesCollections.artsLibrary.description')%>">
+                    <%= t('submenu.librariesCollections.artsLibrary.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.bassLibrary.url')%>" title="<%= t('submenu.librariesCollections.bassLibrary.description')%>">
+                    <%= t('submenu.librariesCollections.bassLibrary.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.beineckeLibrary.url')%>" title="<%= t('submenu.librariesCollections.beineckeLibrary.description')%>">
+                    <%= t('submenu.librariesCollections.beineckeLibrary.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.classicsLibrary.url')%>" title="<%= t('submenu.librariesCollections.classicsLibrary.description')%>">
+                    <%= t('submenu.librariesCollections.classicsLibrary.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.divinityLibrary.url')%>" title="<%= t('submenu.librariesCollections.divinityLibrary.description')%>">
+                    <%= t('submenu.librariesCollections.divinityLibrary.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.filmStudyCenter.url')%>" title="<%= t('submenu.librariesCollections.filmStudyCenter.description')%>">
+                    <%= t('submenu.librariesCollections.filmStudyCenter.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.fortunoffArchive.url')%>" title="<%= t('submenu.librariesCollections.fortunoffArchive.description')%>">
+                    <%= t('submenu.librariesCollections.fortunoffArchive.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.humanitiesCollections.url')%>" title="<%= t('submenu.librariesCollections.humanitiesCollections.description')%>">
+                    <%= t('submenu.librariesCollections.humanitiesCollections.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.internationalCollections.url')%>" title="<%= t('submenu.librariesCollections.internationalCollections.description')%>">
+                    <%= t('submenu.librariesCollections.internationalCollections.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.lawLibrary.url')%>" title="<%= t('submenu.librariesCollections.lawLibrary.description')%>">
+                    <%= t('submenu.librariesCollections.lawLibrary.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.lewisWalpoleLibrary.url')%>" title="<%= t('submenu.librariesCollections.lewisWalpoleLibrary.description')%>">
+                    <%= t('submenu.librariesCollections.lewisWalpoleLibrary.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.libraryCollectionServices.url')%>" title="<%= t('submenu.librariesCollections.libraryCollectionServices.description')%>">
+                    <%= t('submenu.librariesCollections.libraryCollectionServices.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.manuScriptsArchives.url')%>" title="<%= t('submenu.librariesCollections.manuScriptsArchives.description')%>">
+                    <%= t('submenu.librariesCollections.manuScriptsArchives.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.mapCollection.url')%>" title="<%= t('submenu.librariesCollections.mapCollection.description')%>">
+                    <%= t('submenu.librariesCollections.mapCollection.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.marxScienceSocialScienceLibrary.url')%>" title="<%= t('submenu.librariesCollections.marxScienceSocialScienceLibrary.description')%>">
+                    <%= t('submenu.librariesCollections.marxScienceSocialScienceLibrary.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.mathematicsLibrary.url')%>" title="<%= t('submenu.librariesCollections.mathematicsLibrary.description')%>">
+                    <%= t('submenu.librariesCollections.mathematicsLibrary.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.medicalLibrary.url')%>" title="<%= t('submenu.librariesCollections.medicalLibrary.description')%>">
+                    <%= t('submenu.librariesCollections.medicalLibrary.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.musicLibrary.url')%>" title="<%= t('submenu.librariesCollections.musicLibrary.description')%>">
+                    <%= t('submenu.librariesCollections.musicLibrary.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.sterlingLibrary.url')%>" title="<%= t('submenu.librariesCollections.sterlingLibrary.description')%>">
+                    <%= t('submenu.librariesCollections.sterlingLibrary.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.librariesCollections.yaleCenterBritishArt.url')%>" title="<%= t('submenu.librariesCollections.yaleCenterBritishArt.description')%>">
+                    <%= t('submenu.librariesCollections.yaleCenterBritishArt.title')%>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="info-header">
+        <div class="dropdown">
+          <h2 class="nav-link-title" data-toggle="dropdown">
+            <a href="#" role="button" aria-expanded="false">Information & Policies</a>
+            <p class="nav-link-caret" style="cursor: pointer">
+              <%= image_tag("header/2x-angle-up-solid.png", {id: 'collapse-nav-bar', alt: 'collapse nav bar'})%>
+            </p>
+          </h2>
+          <div class="content-yul">
+            <div class="menu-block-wrapper">
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="<%= t('submenu.informationPolicies.libraryHours.url')%>" title="<%= t('submenu.informationPolicies.libraryHours.description')%>">
+                    <%= t('submenu.informationPolicies.libraryHours.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.informationPolicies.departmentsStaff.url')%>" title="<%= t('submenu.informationPolicies.departmentsStaff.description')%>">
+                    <%= t('submenu.informationPolicies.departmentsStaff.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.informationPolicies.borrowingCirculation.url')%>" title="<%= t('submenu.informationPolicies.borrowingCirculation.description')%>">
+                    <%= t('submenu.informationPolicies.borrowingCirculation.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.informationPolicies.servicesPersonsWithDisabilities.url')%>" title="<%= t('submenu.informationPolicies.servicesPersonsWithDisabilities.description')%>">
+                    <%= t('submenu.informationPolicies.servicesPersonsWithDisabilities.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.informationPolicies.copyrightBasics.url')%>" title="<%= t('submenu.informationPolicies.copyrightBasics.description')%>">
+                    <%= t('submenu.informationPolicies.copyrightBasics.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.informationPolicies.scanningPrintingCopying.url')%>" title="<%= t('submenu.informationPolicies.scanningPrintingCopying.description')%>">
+                    <%= t('submenu.informationPolicies.scanningPrintingCopying.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.informationPolicies.computersWireless.url')%>" title="<%= t('submenu.informationPolicies.computersWireless.description')%>">
+                    <%= t('submenu.informationPolicies.computersWireless.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.informationPolicies.libraryPolicies.url')%>" title="<%= t('submenu.informationPolicies.libraryPolicies.description')%>">
+                    <%= t('submenu.informationPolicies.libraryPolicies.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.informationPolicies.aboutLibrary.url')%>" title="<%= t('submenu.informationPolicies.aboutLibrary.description')%>">
+                    <%= t('submenu.informationPolicies.aboutLibrary.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.informationPolicies.givingtoLibrary.url')%>" title="<%= t('submenu.informationPolicies.givingtoLibrary.description')%>">
+                    <%= t('submenu.informationPolicies.givingtoLibrary.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.informationPolicies.purchaseRequest.url')%>" title="<%= t('submenu.informationPolicies.purchaseRequest.description')%>">
+                    <%= t('submenu.informationPolicies.purchaseRequest.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.informationPolicies.workingAtTheLibrary.url')%>" title="<%= t('submenu.informationPolicies.workingAtTheLibrary.description')%>">
+                    <%= t('submenu.informationPolicies.workingAtTheLibrary.title')%>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= t('submenu.informationPolicies.termsGoverningMaterialsUse.url')%>" title="<%= t('submenu.informationPolicies.termsGoverningMaterialsUse.description')%>">
+                    <%= t('submenu.informationPolicies.termsGoverningMaterialsUse.title')%>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
+  </div>
 </div>
 
 <script>
