@@ -1,4 +1,10 @@
-$small_device: '567px';
-$medium_device: '768px';
-$large_device: '992px';
-$xlarge_device: '1200px';
+// on zeplin the responsive designs are sized as:
+// mobile - 375px
+// tablet - 1024px
+// desktop - 1600px
+// when styling the app, the "mobile first" view begins at 375px
+// as media queries are added, use the descriptors below as the guide
+$small_device: '567px'; // mobile
+$medium_device: '768px'; // tablet
+$large_device: '992px'; // tablet
+$xlarge_device: '1200px'; // desktop

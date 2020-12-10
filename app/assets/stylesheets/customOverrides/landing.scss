@@ -52,11 +52,6 @@ DEFAULT MOBILE STYLING
   padding-left: 15px;
   max-width: inherit;
 
-  // .btn-primary:hover {
-  //   border: 2px solid $darkest_grey;
-  //   background-color: $light_grey;
-  // }
-
   h1 {
     font-family: $yale_display_roman, 'Times New Roman', Times, serif;
     margin: 31px auto 15px;
@@ -70,14 +65,6 @@ DEFAULT MOBILE STYLING
   .hero-info {
     width: 100%;
   }
-
-  // p {
-  //   margin-top: 1.25rem;
-  //   font-size: 1.5rem;
-  //   line-height: 1.75rem;
-  //   font-family: $yale_new_roman, 'Times New Roman', Times, serif;
-  //   width: 65%;
-  // }
 
   #search {
     display: none;
@@ -190,6 +177,10 @@ DEFAULT MOBILE STYLING
     .intro {
       height: 300px;
     }
+
+    .hero-image {
+      object-position: 0 -45px;
+    }
   }
 
   #hero-search {
@@ -203,7 +194,11 @@ DEFAULT MOBILE STYLING
 @media screen and (min-width: $medium_device) {
   #hero {
     .intro {
-      height: 375px;
+      height: 325px;
+    }
+
+    .hero-image {
+      object-position: 0 -65px;
     }
   }
 
@@ -212,24 +207,82 @@ DEFAULT MOBILE STYLING
       margin: 70px auto 35px;
       font-size: 55px;
     }
+
+    .hero-info {
+      width: 85%;
+      margin: 0 auto;
+    }
   }
 }
 
 
 @media screen and (min-width: $large_device) {
   #hero {
-    position: relative;
-
     .intro {
-      // position: relative;
-      // width: 100%;
-      // overflow: hidden;
-      // background-color: $black;
+      height: 354px;
+    }
+
+    .hero-image {
+      object-position: 0 -85px;
+    }
+  }
+
+  #hero-search {
+    .btn-primary:hover {
+      border: 2px solid $darkest_grey;
+      background-color: $light_grey;
+    }
+
+    h1 {
+      font-size: 72px;
+    }
+
+    .hero-info {
+      width: 70%;
+    }
+
+    #search {
+      display: initial;
+      margin-left: 8px;
+      font-size: 20px;
+      color: $yale_blue;
+      font-family: $mallory_mp_medium, Arial, Helvetica, sans-serif !important;
+      width: 129px;
+      text-transform: uppercase;
+    }
+
+    .blacklight-icon-search {
+      display: none;
+    }
+  }
+}
+
+
+@media screen and (min-width: $xlarge_device) {
+  #hero {
+    .intro {
       height: 472px;
     }
 
-    // .hero-image {
-    //   opacity: 0.5;
-    // }
+    .hero-image {
+      object-position: 0 -105px;
+    }
+  }
+
+  #hero-search {
+    p {
+      margin-top: 47px;
+      font-size: 18px;
+      font-family: $mallory_mp_medium;
+      font-size: 18px;
+      line-height: 1.67;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .search-query-form {
+      width: 80%;
+      margin: auto;
+    }
   }
 }

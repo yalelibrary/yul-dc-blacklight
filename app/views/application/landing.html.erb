@@ -58,14 +58,11 @@
     <div id='hero-search' class="container d-flex h-100">
       <div class="hero-info">
         <h1>Digital Collections</h1>
-
         <%= form_tag search_action_url, method: :get, class: 'search-query-form', role: 'search', 'aria-label' => t('blacklight.search.form.submit') do %>
           <div class="input-group">
-              <%= hidden_field_tag :search_field, search_fields.first.last %>
-
+            <%= hidden_field_tag :search_field, search_fields.first.last %>
             <label for="q" class="sr-only"><%= t('blacklight.search.form.search.label') %></label>
-            <%= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}", id: "q", aria: { label: 'search' }  %>
-
+            <%= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}", id: "q", aria: { label: 'search' } %>
             <span class="input-group-append">
               <button type="submit" class="btn btn-primary search-btn" id="search">
                 <span class="submit-search-text"><%= t('blacklight.search.form.submit') %></span>
@@ -74,8 +71,7 @@
             </span>
           </div>
         <% end %>
-
-        <p class="d-none d-lg-block">
+        <p class="d-none d-xl-block">
           Yale University Libraries Digital Collections provides access to millions of digitized works and images from our collections. At launch, you can browse hundreds of thousands of works from the Beinecke Rare Book & Manuscript Library’s collections of literary archives, early manuscripts, and rare books.
         </p>
       </div>
@@ -83,8 +79,6 @@
   </div>
 
   <main id="main-container" class="<%= container_classes %>" role="main" aria-label="<%= t('blacklight.main.aria.main_container') %>">
-
-
     <div id='highlights'>
       <h2>HIGHLIGHTS</h2>
       <ul class='clearfix'>
