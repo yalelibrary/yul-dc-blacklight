@@ -7,7 +7,7 @@
     options ||= {}
 %>
 
-<span class="btn-group applied-filter constraint query <%= options[:classes].join(" ") if options[:classes] %>">
+<span class="btn-group applied-filter constraint query <%= options[:classes].join if options[:classes] %>">
   <button class="constraint-value btn btn-outline-secondary">
     <% unless label.blank? %>
       <span class="filter-name"><%= label %> </span>
@@ -18,7 +18,8 @@
       <!-- icon to remove-->
       <%= link_to(content_tag(:span, image_tag('x2x.png', alt: ""),
                               class: 'remove-icon') ,
-                  options[:remove], class: 'btn btn-outline-secondary remove',
+                  options[:remove],
+                  class: "btn btn-outline-secondary remove #{("remove-" +options[:classes].join) if options[:classes]} ",
                   'aria-label' => 'Remove'
           ) %>
        <% end %>
