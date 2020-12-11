@@ -69,4 +69,56 @@ RSpec.describe 'search result', type: :system, clean: true do
       expect(page).not_to have_selector '#documents > .document.col:first-child span'
     end
   end
+
+  context 'in gallery view by session' do
+    before do
+      visit '/catalog?q=&search_field=all_fields&view=gallery'
+      visit '/catalog?q=&search_field=all_fields'
+    end
+
+    it 'has expected css' do
+      expect(page).to have_css '.caption'
+    end
+
+    it 'has the correct "per page" options' do
+      expect(page).to have_text '9 per page 30 per page 60 per page 99 per page'
+    end
+
+    it 'does not show the index number' do
+      expect(page).not_to have_selector '#documents > .document.col:first-child span'
+    end
+  end
+
+  context 'in list view after gallery view set in session' do
+    before do
+      visit '/catalog?q=&search_field=all_fields&view=gallery'
+      visit '/catalog?search_field=all_fields&view=list'
+    end
+    it 'has expected css', js: true, style: true do
+      within '.documents-list' do
+        expect(page).to have_css '.dl-invert'
+        expect(page).to have_css '.document-metadata'
+        expect(page).to have_css '.document-title'
+        expect(page).to have_css '.document-title-heading'
+        expect(page).to have_css '.documentHeader'
+        expect(page).to have_css '.row'
+        expect(page).to have_css '.document'
+        expect(page).to have_css '.document-metadata.dl-invert.row'
+        expect(page).to have_css '#documents > article.document > dl > dt'
+        expect(page).to have_css '.document-metadata.dl-invert > dt'
+        expect(page).to have_css '.document-metadata.dl-invert > dd'
+        expect(page).to have_css '.document-metadata'
+        expect(page).to have_css '.document-thumbnail'
+        expect(page).to have_css '.col-md-9'
+      end
+    end
+
+    it 'has the correct "per page" options' do
+      expect(page).to have_text '10 per page 20 per page 50 per page 100 per page'
+    end
+
+    it 'shows the index number' do
+      expect(page).to have_selector '#documents > .document-position-0 span', visible: true
+    end
+  end
 end
