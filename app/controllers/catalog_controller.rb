@@ -7,6 +7,8 @@ class CatalogController < ApplicationController
 
   before_action :determine_per_page
 
+  helper_method :gallery_view?
+
   configure_blacklight do |config|
     # default advanced config values
     config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
@@ -457,8 +459,12 @@ class CatalogController < ApplicationController
     # config.autocomplete_suggester = 'mySuggester'
   end
 
+  def gallery_view?
+    params[:view] == 'gallery' || (params[:view].nil? && session['preferred_view'].eql?("gallery"))
+  end
+
   def determine_per_page
-    grouping = params[:view] == 'gallery' ? [9, 30, 60, 99] : [10, 20, 50, 100]
+    grouping = gallery_view? ? [9, 30, 60, 99] : [10, 20, 50, 100]
     blacklight_config[:per_page] = grouping
   end
 end
