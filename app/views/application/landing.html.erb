@@ -38,10 +38,10 @@
         </div>
 <%
 =end%>
-      <%= image_tag("landing/hero-images/camp-spingarn.jpg", class: "d-block w-100 hero-image", alt: 'Conference attendees at "Camp Spingarn," Amenia, N.Y., August 24-26, 1916') %>
+      <%= image_tag("", class: "d-block w-100", id: "hero-image", alt: "") %>
       <div class="image-overlay"></div>
       <div class="hero-caption d-md-block">
-        <p>Conference at "Camp Spingarn," Amenia, N.Y.” </p>
+        <p id="hero-image-caption"></p>
       </div>
       <%
 =begin%>
@@ -123,5 +123,22 @@
   </body>
 <% end %>
 
+<script>
+  $(document).ready(function() {
 
+    const images = [
+      {
+        alt: 'Conference attendees at "Camp Spingarn," Amenia, N.Y., August 24-26, 1916',
+        caption: 'Conference at "Camp Spingarn," Amenia, N.Y.',
+        src: '../../assets/landing/hero-images/camp-spingarn.jpg',
+      },
+    ]
 
+    const alt = images[0].alt;
+    const caption = images[0].caption;
+    const src = images[0].src;
+
+    $('#hero-image').attr({ 'src': src, 'alt': alt });
+    $('#hero-image-caption').text(caption);
+  })
+</script>
