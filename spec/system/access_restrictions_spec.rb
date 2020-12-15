@@ -24,6 +24,17 @@ RSpec.describe "access restrictions", type: :system, clean: true do
   end
 
   context "an unauthenticated user" do
+    around do |example|
+      original_yale_networks = ENV['YALE_NETWORK_IPS']
+      ENV['YALE_NETWORK_IPS'] = "101.10.5.4,3.4.2.3"
+      example.run
+      ENV['YALE_NETWORK_IPS'] = original_yale_networks
+    end
+
+    before do
+      allow_any_instance_of(ActionDispatch::Request).to receive(:remote_ip).and_return('109.10.5.4')
+    end
+
     it 'displays public and yale-only but NOT private works in search results' do
       visit '/catalog?search_field=all_fields&q='
 
