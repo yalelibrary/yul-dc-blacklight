@@ -106,7 +106,7 @@ DEFAULT MOBILE STYLING
     line-height: 2.25;
     color: $yale_blue;
     border-bottom: 1px solid $light_grey;
-    margin-bottom: 35px;
+    margin-bottom: 0;
     margin-left: 7%;
     display: flex;
     margin-right: auto;
@@ -265,6 +265,7 @@ DEFAULT MOBILE STYLING
        margin-left: 0;
        align-content: center;
        display: flex;
+       margin-bottom: 2%;
      }
 
      li {
@@ -274,6 +275,7 @@ DEFAULT MOBILE STYLING
      ul {
        padding-left: 0;
        margin-left: 0;
+       margin-top: -2%; 
 
        .btn{
          height: 250px;
@@ -431,6 +433,7 @@ DEFAULT MOBILE STYLING
        max-width: 1120px;
        overflow: no-content;
        align-content: center;
+       margin-top: -2%;
  
        li{
          padding-bottom: 7%;
