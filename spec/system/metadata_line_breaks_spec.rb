@@ -15,7 +15,7 @@ RSpec.describe 'Metadata line breaks', type: :system, clean: true do
       id: '11111',
       subjectTopic_tesim: ['subject1', 'subject2'],
       subjectName_ssim: ['Langston Hughes', 'James Weldon Johnson'],
-      geoSubject_ssim: ['New Haven', 'New York City', 'Boston']
+      subjectGeographic_tesim: ['New Haven', 'New York City', 'Boston']
     }
   end
 
@@ -24,7 +24,7 @@ RSpec.describe 'Metadata line breaks', type: :system, clean: true do
       visit "/catalog/#{llama[:id]}"
       expect(page.html).to match(llama[:subjectTopic_tesim].join('<br/>'))
       expect(page.html).to match(llama[:subjectName_ssim].join('<br/>'))
-      expect(page.html).to match(llama[:geoSubject_ssim].join('<br/>'))
+      expect(page.html).to match(llama[:subjectGeographic_tesim].join('<br/>'))
     end
   end
 end
