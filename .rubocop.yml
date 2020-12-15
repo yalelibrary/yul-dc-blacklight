@@ -22,3 +22,7 @@ RSpec/InstanceVariable:
 RSpec/RepeatedExample:
   Exclude:
     - spec/system/access_restrictions_spec.rb
+
+RSpec/AnyInstance:
+  Exclude:
+    - spec/system/access_restrictions_spec.rb

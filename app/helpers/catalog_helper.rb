@@ -21,4 +21,15 @@ module CatalogHelper
 
     constraints.join(' / ')
   end
+
+  def client_can_access(document)
+    return false unless document.key?('visibility_ssi')
+    case document['visibility_ssi']
+    when 'Public'
+      true
+    when 'Yale Community Only'
+      return true if current_user || User.on_campus?(request.remote_ip)
+      false
+    end
+  end
 end
