@@ -138,7 +138,7 @@ RSpec.describe Yul::MetadataPresenter do
         end
 
         it 'returns the Geo Subject Key' do
-          expect(fields.any? { |field| field.include? 'geoSubject_ssim' }).to be_truthy
+          expect(fields.any? { |field| field.include? 'subjectGeographic_tesim' }).to be_truthy
         end
 
         it 'returns the Material Key' do
