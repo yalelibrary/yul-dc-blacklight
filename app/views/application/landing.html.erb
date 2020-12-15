@@ -28,31 +28,11 @@
 
   <div id='hero'>
     <div class="intro">
-      <%
-=begin%>
-<div class="carousel-item active">
-          <%= image_tag("landing/hero-gutenberg.png", class: "d-block w-100", alt: " Prologue the Gutenberg Bible") %>
-          <div class="carousel-caption d-none d-md-block">
-            <p>From Gutenberg Bible, 1454</p>
-          </div>
-        </div>
-<%
-=end%>
       <%= image_tag("", class: "d-block w-100", id: "hero-image", alt: "") %>
       <div class="image-overlay"></div>
       <div class="hero-caption d-md-block">
         <p id="hero-image-caption"></p>
       </div>
-      <%
-=begin%>
- <div class="carousel-item">
-          <%= image_tag("landing/hero-chart.png", class: "d-block w-100", alt: 'Portolan Chart of the Mediterranean Sea') %>
-          <div class="carousel-caption d-none d-md-block">
-            <p>Portolan Chart of the Mediterranean Sea</p>
-          </div>
-        </div>
-<%
-=end%>
     </div>
 
     <div id='hero-search' class="container d-flex h-100">
@@ -125,18 +105,35 @@
 
 <script>
   $(document).ready(function() {
-
     const images = [
       {
         alt: 'Conference attendees at "Camp Spingarn," Amenia, N.Y., August 24-26, 1916',
         caption: 'Conference at "Camp Spingarn," Amenia, N.Y.',
         src: '../../assets/landing/hero-images/camp-spingarn.jpg',
       },
+      {
+        alt: 'Prologue the Gutenberg Bible',
+        caption: 'From Gutenberg Bible, 1454',
+        src: '../../assets/landing/hero-images/gutenberg-bible.jpg',
+      },
+      {
+        alt: 'Portolan Chart of the Mediterranean Sea',
+        caption: 'Portolan Chart of the Mediterranean Sea',
+        src: '../../assets/landing/hero-images/portolan-chart.jpg',
+      },
     ]
 
-    const alt = images[0].alt;
-    const caption = images[0].caption;
-    const src = images[0].src;
+    const lastIndex = window.localStorage.getItem('lastIndex') || 0
+
+    let index = Math.floor(Math.random() * images.length)
+    while (index == lastIndex) {
+      index = Math.floor(Math.random() * images.length)
+    }
+    window.localStorage.setItem('lastIndex', JSON.stringify(index))
+
+    const alt = images[index].alt;
+    const caption = images[index].caption;
+    const src = images[index].src;
 
     $('#hero-image').attr({ 'src': src, 'alt': alt });
     $('#hero-image-caption').text(caption);
