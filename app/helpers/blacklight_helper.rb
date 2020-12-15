@@ -106,7 +106,7 @@ module BlacklightHelper
 
   def render_thumbnail(document, _options)
     # return placeholder image if not logged in for yale only works
-    return image_tag('placeholder_restricted.png') if (document[:visibility_ssi].eql? 'Yale Community Only') && !user_signed_in?
+    return image_tag('placeholder_restricted.png') unless client_can_access(document)
     url = document[:thumbnail_path_ss]
     if ['Public', 'Yale Community Only'].include?(document[:visibility_ssi]) && url.present?
       error_image_url = image_url('image_not_found.png')
