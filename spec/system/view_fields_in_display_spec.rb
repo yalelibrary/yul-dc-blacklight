@@ -40,7 +40,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       abstract_tesim: "this is an abstract",
       alternativeTitle_tesim: "this is an alternative title",
       genre_ssim: ["this is the genre", "this is the second genre"],
-      geoSubject_ssim: "this is the geo subject",
+      subjectGeographic_tesim: "this is the geo subject",
       resourceType_ssim: "this is the resource type",
       subjectName_ssim: "this is the subject name",
       subjectTopic_tesim: "this is the subject topic",

@@ -7,6 +7,8 @@ class CatalogController < ApplicationController
 
   before_action :determine_per_page
 
+  helper_method :gallery_view?
+
   configure_blacklight do |config|
     # default advanced config values
     config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
@@ -108,13 +110,14 @@ class CatalogController < ApplicationController
     config.add_facet_field 'subject_ssim', label: 'Topic', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'creationPlace_ssim', label: 'Publication Place', limit: true
     config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true
-    config.add_facet_field 'dateStructured_ssim', label: 'Date Created',
-                                                  range: {
-                                                    num_segments: 6,
-                                                    assumed_boundaries: [800, Time.current.year + 2],
-                                                    segments: true,
-                                                    maxlength: 4
-                                                  }, solr_params: { 'facet.pivot.mincount' => 2 }
+    config.add_facet_field 'year_isim', label: 'Date Created',
+                                        range: {
+                                          segments: true,
+                                          maxlength: 4
+                                        },
+                                        if: lambda { |_context, _field_config, facet|
+                                              facet.items.length > 1
+                                            }
 
     # the facets below are set to false because we aren't filtering on them from the main search page
     # but we need to be able to provide a label when they are filtered upon from an individual show page
@@ -185,7 +188,7 @@ class CatalogController < ApplicationController
     # Keywords Group
     config.add_show_field 'format', label: 'Format', metadata: 'keyword', link_to_facet: true
     config.add_show_field 'genre_ssim', label: 'Genre', metadata: 'keyword', link_to_facet: true, helper_method: :faceted_join_with_br
-    config.add_show_field 'geoSubject_ssim', label: 'Subject (Geographic)', metadata: 'keyword', helper_method: :join_with_br
+    config.add_show_field 'subjectGeographic_tesim', label: 'Subject (Geographic)', metadata: 'keyword', helper_method: :join_with_br
     config.add_show_field 'material_tesim', label: 'Material', metadata: 'keyword'
     config.add_show_field 'resourceType_ssim', label: 'Resource Type', metadata: 'keyword', link_to_facet: true
     config.add_show_field 'subjectName_ssim', label: 'Subject (Name)', metadata: 'keyword', helper_method: :join_with_br
@@ -460,8 +463,12 @@ class CatalogController < ApplicationController
     # config.autocomplete_suggester = 'mySuggester'
   end
 
+  def gallery_view?
+    params[:view] == 'gallery' || (params[:view].nil? && session['preferred_view'].eql?("gallery"))
+  end
+
   def determine_per_page
-    grouping = params[:view] == 'gallery' ? [9, 30, 60, 99] : [10, 20, 50, 100]
+    grouping = gallery_view? ? [9, 30, 60, 99] : [10, 20, 50, 100]
     blacklight_config[:per_page] = grouping
   end
 end

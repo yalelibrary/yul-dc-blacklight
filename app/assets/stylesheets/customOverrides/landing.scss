@@ -1,58 +1,85 @@
-#hero-carousel {
-  .carousel-caption {
-    position: absolute;
-    right: 7.5%;
-    text-align: right;
-  }
-
-  .carousel-control-prev, .carousel-control-next {
-    width: 10%;
-  }
-}
-
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
 #hero {
   position: relative;
-}
+  margin-top: -1px;
 
-.search-query-form {
-  min-width: 400px;
-  width: 65%;
-}
+  .hero-caption {
+    position: absolute;
+    bottom: 0px;
+    color: #fff;
+    text-align: center;
+    background-color: black;
+    width: 100%;
 
-#q {
-  min-height: 44px;
+    p {
+      font-size: 10px;
+      font-family: $mallory_mp_medium_italic;
+      margin: 10px auto;
+    }
+  }
+
+  #hero-image {
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .image-overlay {
+    background-color: $black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.65;
+  }
+
+  .intro {
+    height: 220px;
+    position: relative;
+  }
 }
 
 #hero-search {
   position: absolute;
   height: 100%;
   top: 0px;
-  max-width: 85%;
-  padding-left: 7.5%;
   color: $white;
-
-  .btn-primary:hover {
-    border: 2px solid $darkest_grey;
-    background-color: $light_grey;
-  }
+  padding-left: 15px;
+  max-width: inherit;
 
   h1 {
-    font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
-    font-stretch: normal;
-    font-style: normal;
-    letter-spacing: normal;
-    text-align: left;
-    font-weight: 800;
-    font-size: 64px;
+    font-family: $yale_display_roman, 'Times New Roman', Times, serif;
+    margin: 31px auto 15px;
+    text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+    font-size: 36px;
+    line-height: normal;
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .hero-info {
     width: 100%;
   }
 
-  p {
-    margin-top: 1.25rem;
-    font-size: 1.5rem;
-    line-height: 1.75rem;
-    font-family: $yale_new_roman, 'Times New Roman', Times, serif;
-    width: 65%;
+  #search {
+    display: none;
+  }
+
+  .search-query-form {
+    min-width: 342px;
+  }
+
+  // search input box
+  #q {
+    min-height: 44px;
+    height: 50px;
+    font-size: 20px;
+    font-family: $mallory_mp_medium;
   }
 }
 
@@ -142,4 +169,120 @@
 
 #coming-soon {
   background-image: image-url('landing/highlight-coming-soon.png');
+}
+
+
+@media screen and (min-width: $small_device) {
+  #hero {
+    .intro {
+      height: 300px;
+    }
+
+    #hero-image {
+      object-position: 0 -45px;
+    }
+  }
+
+  #hero-search {
+    h1 {
+      margin: 60px auto 30px;
+    }
+  }
+}
+
+
+@media screen and (min-width: $medium_device) {
+  #hero {
+    .intro {
+      height: 325px;
+    }
+
+    #hero-image {
+      object-position: 0 -65px;
+    }
+  }
+
+  #hero-search {
+    h1 {
+      margin: 70px auto 35px;
+      font-size: 55px;
+    }
+
+    .hero-info {
+      width: 85%;
+      margin: 0 auto;
+    }
+  }
+}
+
+
+@media screen and (min-width: $large_device) {
+  #hero {
+    .intro {
+      height: 354px;
+    }
+
+    #hero-image {
+      object-position: 0 -85px;
+    }
+  }
+
+  #hero-search {
+    .btn-primary:hover {
+      border: 2px solid $darkest_grey;
+      background-color: $light_grey;
+    }
+
+    h1 {
+      font-size: 72px;
+    }
+
+    .hero-info {
+      width: 70%;
+    }
+
+    #search {
+      display: initial;
+      margin-left: 8px;
+      font-size: 20px;
+      color: $yale_blue;
+      font-family: $mallory_mp_medium, Arial, Helvetica, sans-serif !important;
+      width: 129px;
+      text-transform: uppercase;
+    }
+
+    .blacklight-icon-search {
+      display: none;
+    }
+  }
+}
+
+
+@media screen and (min-width: $xlarge_device) {
+  #hero {
+    .intro {
+      height: 472px;
+    }
+
+    #hero-image {
+      object-position: 0 -105px;
+    }
+  }
+
+  #hero-search {
+    p {
+      margin-top: 47px;
+      font-size: 18px;
+      font-family: $mallory_mp_medium;
+      font-size: 18px;
+      line-height: 1.67;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .search-query-form {
+      width: 80%;
+      margin: auto;
+    }
+  }
 }

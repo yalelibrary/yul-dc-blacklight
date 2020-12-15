@@ -29,19 +29,19 @@ RSpec.describe "Iiifs", type: :request do
 
   context 'as an unauthenticated user' do
     it 'display if set to public' do
-      get "/check-iiif/2/5555555/full/!200,200/0/default.jpg"
+      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/5555555/full/!200,200/0/default.jpg" }
 
-      expect(response).to redirect_to("/authorized-iiif/2/5555555/full/!200,200/0/default.jpg")
+      expect(response).to have_http_status(:success)
     end
 
     it 'do not display if set to yale only' do
-      get "/check-iiif/2/1111111/full/!200,200/0/default.jpg"
+      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/1111111/full/!200,200/0/default.jpg" }
 
       expect(response).to have_http_status(:unauthorized)
     end
 
     it 'returns a 404 if there is no visibility key' do
-      get "/check-iiif/2/2222222/full/!200,200/0/default.jpg"
+      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/2222222/full/!200,200/0/default.jpg" }
 
       expect(response).to have_http_status(:unauthorized)
     end
@@ -52,19 +52,19 @@ RSpec.describe "Iiifs", type: :request do
       sign_in user
     end
     it 'display if set to public' do
-      get "/check-iiif/2/5555555/full/!200,200/0/default.jpg"
+      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/5555555/full/!200,200/0/default.jpg" }
 
-      expect(response).to redirect_to("/authorized-iiif/2/5555555/full/!200,200/0/default.jpg")
+      expect(response).to have_http_status(:success)
     end
 
     it 'do not display if set to yale only' do
-      get "/check-iiif/2/1111111/full/!200,200/0/default.jpg"
+      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/1111111/full/!200,200/0/default.jpg" }
 
-      expect(response).to redirect_to("/authorized-iiif/2/1111111/full/!200,200/0/default.jpg")
+      expect(response).to have_http_status(:success)
     end
 
     it 'returns a 404 if there is no visibility key' do
-      get "/check-iiif/2/2222222/full/!200,200/0/default.jpg"
+      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/2222222/full/!200,200/0/default.jpg" }
 
       expect(response).to have_http_status(:unauthorized)
     end

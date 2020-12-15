@@ -13,6 +13,8 @@ rm -rf /home/app/webapp/.ruby*
 declare -p | grep -Ev 'BASHOPTS|PWD|BASH_VERSINFO|EUID|PPID|SHELLOPTS|UID' > /container.env
 # change out IIIF placeholder to support different environments
 sed -i "s]@@image_internal_url@@]${IIIF_IMAGE_INTERNAL_URL}]g" /etc/nginx/sites-enabled/webapp.conf
+sed -i "s]@@image_internal_proto_override@@]${IIIF_IMAGE_UPSTREAM_PROTO}]g" /etc/nginx/sites-enabled/webapp.conf
+sed -i "s]@@image_internal_port_override@@]${IIIF_IMAGE_UPSTREAM_PORT}]g" /etc/nginx/sites-enabled/webapp.conf
 
 if [[ $PASSENGER_APP_ENV == "development" ]] || [[ $PASSENGER_APP_ENV == "test" ]]
 then

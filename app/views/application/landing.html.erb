@@ -27,76 +27,38 @@
   <%= render partial: 'shared/flash_msg', layout: 'shared/flash_messages' %>
 
   <div id='hero'>
-
-    <div id="hero-carousel" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#heroCarouselIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#heroCarouselIndicators" data-slide-to="1"></li>
-        <li data-target="#heroCarouselIndicators" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <%= image_tag("landing/hero-gutenberg.png", class: "d-block w-100", alt: " Prologue the Gutenberg Bible") %>
-          <div class="carousel-caption d-none d-md-block">
-            <p>From Gutenberg Bible, 1454</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <%= image_tag("landing/hero-camp-spingarn.png", class: "d-block w-100", alt: 'Conference attendees at "Camp Spingarn," Amenia, N.Y., August 24-26, 1916') %>
-          <div class="carousel-caption d-none d-md-block">
-            <p>Conference at "Camp Spingarn," Amenia, N.Y.” </p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <%= image_tag("landing/hero-chart.png", class: "d-block w-100", alt: 'Portolan Chart of the Mediterranean Sea') %>
-          <div class="carousel-caption d-none d-md-block">
-            <p>Portolan Chart of the Mediterranean Sea</p>
-          </div>
-        </div>
+    <div class="intro">
+      <%= image_tag("", class: "d-block w-100", id: "hero-image", alt: "") %>
+      <div class="image-overlay"></div>
+      <div class="hero-caption d-md-block">
+        <p id="hero-image-caption"></p>
       </div>
-      <a class="carousel-control-prev" href="#heroCarouselIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#heroCarouselIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
     </div>
 
     <div id='hero-search' class="container d-flex h-100">
-    <div class="row justify-content-left align-self-center">
-
-      <h1>Digital <br/> Collections</h1>
-
-      <%= form_tag search_action_url, method: :get, class: 'search-query-form', role: 'search', 'aria-label' => t('blacklight.search.form.submit') do %>
-        <div class="input-group">
+      <div class="hero-info">
+        <h1>Digital Collections</h1>
+        <%= form_tag search_action_url, method: :get, class: 'search-query-form', role: 'search', 'aria-label' => t('blacklight.search.form.submit') do %>
+          <div class="input-group">
             <%= hidden_field_tag :search_field, search_fields.first.last %>
-
-          <label for="q" class="sr-only"><%= t('blacklight.search.form.search.label') %></label>
-          <%= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}", id: "q", aria: { label: 'search' }  %>
-
-          <span class="input-group-append">
-            <button type="submit" class="btn btn-primary search-btn" id="search">
-              <span class="submit-search-text"><%= t('blacklight.search.form.submit') %></span>
-              <%= blacklight_icon :search, aria_hidden: true %>
-            </button>
-          </span>
-        </div>
-      <% end %>
-
-      <p class="d-none d-lg-block">Yale University Libraries Digital Collections provides access to millions of digitized works and images from our collections.
-        At launch, you can browse hundreds of thousands of works from the Beinecke Rare Book & Manuscript Library’s collections of
-        literary archives, early manuscripts, and rare books.
-      </p>
+            <label for="q" class="sr-only"><%= t('blacklight.search.form.search.label') %></label>
+            <%= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}", id: "q", aria: { label: 'search' } %>
+            <span class="input-group-append">
+              <button type="submit" class="btn btn-primary search-btn" id="search">
+                <span class="submit-search-text"><%= t('blacklight.search.form.submit') %></span>
+                <%= blacklight_icon :search, aria_hidden: true %>
+              </button>
+            </span>
+          </div>
+        <% end %>
+        <p class="d-none d-xl-block">
+          Yale University Libraries Digital Collections provides access to millions of digitized works and images from our collections. At launch, you can browse hundreds of thousands of works from the Beinecke Rare Book & Manuscript Library’s collections of literary archives, early manuscripts, and rare books.
+        </p>
+      </div>
     </div>
   </div>
 
-  </div>
-
   <main id="main-container" class="<%= container_classes %>" role="main" aria-label="<%= t('blacklight.main.aria.main_container') %>">
-
-
     <div id='highlights'>
       <h2>HIGHLIGHTS</h2>
       <ul class='clearfix'>
@@ -141,5 +103,39 @@
   </body>
 <% end %>
 
+<script>
+  $(document).ready(function() {
+    const images = [
+      {
+        alt: 'Conference attendees at "Camp Spingarn," Amenia, N.Y., August 24-26, 1916',
+        caption: 'Conference at "Camp Spingarn," Amenia, N.Y.',
+        src: '../../assets/landing/hero-images/camp-spingarn.jpg',
+      },
+      {
+        alt: 'Prologue the Gutenberg Bible',
+        caption: 'From Gutenberg Bible, 1454',
+        src: '../../assets/landing/hero-images/gutenberg-bible.jpg',
+      },
+      {
+        alt: 'Portolan Chart of the Mediterranean Sea',
+        caption: 'Portolan Chart of the Mediterranean Sea',
+        src: '../../assets/landing/hero-images/portolan-chart.jpg',
+      },
+    ]
 
+    const lastIndex = window.localStorage.getItem('lastIndex') || 0
 
+    let index = Math.floor(Math.random() * images.length)
+    while (index == lastIndex) {
+      index = Math.floor(Math.random() * images.length)
+    }
+    window.localStorage.setItem('lastIndex', JSON.stringify(index))
+
+    const alt = images[index].alt;
+    const caption = images[index].caption;
+    const src = images[index].src;
+
+    $('#hero-image').attr({ 'src': src, 'alt': alt });
+    $('#hero-image-caption').text(caption);
+  })
+</script>
