@@ -56,7 +56,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       sourceDate_tesim: "this is the source date",
       sourceNote_tesim: "this is the source note",
       preferredCitation_tesim: "these are the references",
-      dateStructured_ssim: "this is the date",
+      date_ssim: "this is the date",
       oid_ssi: '2345678',
       identifierMfhd_ssim: 'this is the identifier MFHD',
       callNumber_ssim: 'this is the call number',

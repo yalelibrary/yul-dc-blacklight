@@ -146,7 +146,7 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
     config.add_index_field 'creator_tesim', label: 'Creator', highlight: true
-    config.add_index_field 'dateStructured_ssim', label: 'Published / Created', highlight: true
+    config.add_index_field 'date_ssim', label: 'Published / Created', highlight: true
     config.add_index_field 'callNumber_tesim', label: 'Call Number', highlight: true
     config.add_index_field 'imageCount_isi', label: 'Image Count'
     config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true
@@ -198,7 +198,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'creator_ssim', label: 'Creator', metadata: 'origin', link_to_facet: true
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date', metadata: 'origin'
     config.add_show_field 'coordinates_ssim', label: 'Coordinates', metadata: 'origin'
-    config.add_show_field 'dateStructured_ssim', label: 'Published / Created', metadata: 'origin'
+    config.add_show_field 'date_ssim', label: 'Published / Created', metadata: 'origin'
     config.add_show_field 'digital_ssim', label: 'Digital', metadata: 'origin'
     config.add_show_field 'edition_ssim', label: 'Edition', metadata: 'origin'
     config.add_show_field 'language_ssim', label: 'Language', metadata: 'origin', helper_method: :language_codes_as_links
@@ -307,7 +307,7 @@ class CatalogController < ApplicationController
       'sourceTitle_tesim',
       'subjectEra_ssim',
       'subjectGeographic_tesim',
-      'subjecttitle_tesim',
+      'subjectTitle_tsim',
       'subjectTitleDisplay_tsim',
       'subjectName_tesim',
       'subjectTopic_tesim',
@@ -361,7 +361,7 @@ class CatalogController < ApplicationController
       }
     end
 
-    date_fields = ['dateStructured_ssim']
+    date_fields = ['date_ssim', 'dateStructured_ssim']
 
     config.add_search_field('date_fields', label: 'Date') do |field|
       field.qt = 'search'
@@ -385,7 +385,7 @@ class CatalogController < ApplicationController
 
     subject_fields = ['subjectEra_ssim',
                       'subjectGeographic_tesim',
-                      'subjecttitle_tesim',
+                      'subjectTitle_tsim',
                       'subjectTitleDisplay_tsim',
                       'subjectName_ssim',
                       'subjectName_tesim',

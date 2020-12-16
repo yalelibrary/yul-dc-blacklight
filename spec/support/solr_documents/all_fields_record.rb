@@ -33,7 +33,7 @@ WORK_WITH_ALL_FIELDS = {
   sourceNote_tesim: "this is the source note",
   sourceEdition_tesim: 'Source Edition',
   preferredCitation_tesim: "these are the references",
-  dateStructured_ssim: "this is the date",
+  date_ssim: "this is the date",
   children_ssim: "these are the children",
   importUrl_ssim: "this is the import URL",
   oid_ssi: '2345678',

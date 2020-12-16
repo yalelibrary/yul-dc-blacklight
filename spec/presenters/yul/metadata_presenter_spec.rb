@@ -179,7 +179,7 @@ RSpec.describe Yul::MetadataPresenter do
         end
 
         it 'returns the Date Key' do
-          expect(fields.any? { |field| field.include? 'dateStructured_ssim' }).to be_truthy
+          expect(fields.any? { |field| field.include? 'date_ssim' }).to be_truthy
         end
 
         it 'returns the Digital Key' do
