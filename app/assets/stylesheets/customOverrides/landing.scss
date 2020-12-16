@@ -427,6 +427,7 @@ DEFAULT MOBILE STYLING
        display: flex;
        margin-left: auto;
        margin-right: auto;
+       margin-bottom: 4%;
      }
  
      ul{
@@ -436,7 +437,9 @@ DEFAULT MOBILE STYLING
        margin-top: -2%;
  
        li{
-         padding-bottom: 7%;
+         //padding-bottom: 7%;
+         margin-bottom: 5%;
+         margin-top: -1%;
        }
        
        .btn {
@@ -451,4 +454,9 @@ DEFAULT MOBILE STYLING
    .item-lewis-photographs{
      margin-top: 0;
    }
- }
+
+  #stenzel-collection div {
+    margin-bottom: 55%;
+  }
+
+}
