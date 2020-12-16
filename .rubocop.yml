@@ -22,3 +22,8 @@ RSpec/InstanceVariable:
 RSpec/RepeatedExample:
   Exclude:
     - spec/system/access_restrictions_spec.rb
+
+RSpec/AnyInstance:
+  Exclude:
+    - spec/system/access_restrictions_spec.rb
+    - spec/system/view_images_in_search_spec.rb
