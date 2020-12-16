@@ -21,6 +21,7 @@ WORK_WITH_ALL_FIELDS = {
   subjectName_ssim: "this is the subject name",
   subjectTopic_tesim: "this is the subject topic",
   extentOfDigitization_ssim: 'this is the extent of digitization',
+  visibility_ssi: "this is the access level",
   rights_ssim: "these are the rights",
   publicationPlace_ssim: "this is the publication place",
   sourceCreated_tesim: "this is the source created",
