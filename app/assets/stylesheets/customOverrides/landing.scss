@@ -12,6 +12,7 @@ DEFAULT MOBILE STYLING
     text-align: center;
     background-color: black;
     width: 100%;
+    opacity: 0.5;
 
     p {
       font-size: 10px;
@@ -89,7 +90,6 @@ DEFAULT MOBILE STYLING
   margin-bottom: 92px;
   margin-right: auto;
   width: 110%;
-  font-family: $yale_display_roman, $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
   font-stretch: normal;
   font-style: normal;
   letter-spacing: normal;
@@ -101,7 +101,7 @@ DEFAULT MOBILE STYLING
   h2 {
     max-width: 343px;
     margin-top: -65px;
-    font-family: $yale_display_roman;
+    font-family: $yale_display_roman, 'Times New Roman', Times, serif;
     font-size: 30px;
     line-height: 2.25;
     color: $yale_blue;
@@ -153,6 +153,7 @@ DEFAULT MOBILE STYLING
       left: 0;
       display: flex;
       font-size: 16px;
+      font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
     }
 
     #main-container{
@@ -362,7 +363,6 @@ DEFAULT MOBILE STYLING
           background-size: 100% 127px;
           top: 0;
         }
-
         .highlight-link {
           position: absolute;
           margin-top: 53%;
@@ -410,16 +410,6 @@ DEFAULT MOBILE STYLING
 
 ////// BODY //////
    #highlights {
-     
-      .highlight-link {
-        position: absolute;
-        overflow: auto;
-        margin-top: 53%;
-        font-size: 13px;
-        width: 205px;
-        margin-left: -3%;
-        display: inline-flex;
-      }
  
      h2 {
        max-width: 1110px;
@@ -427,7 +417,7 @@ DEFAULT MOBILE STYLING
        display: flex;
        margin-left: auto;
        margin-right: auto;
-       margin-bottom: 4%;
+       margin-bottom: 4.5%;
      }
  
      ul{
@@ -437,16 +427,21 @@ DEFAULT MOBILE STYLING
        margin-top: -2%;
  
        li{
-         //padding-bottom: 7%;
-         margin-bottom: 5%;
-         margin-top: -1%;
+         margin-bottom: 6%;
+         margin-top: -2%;
        }
        
        .btn {
          min-width: 270px;
+         //min-width: 1687.5%;
          height: 151px;
          background-size: 100% 151px;
          margin-left: -2%;
+       }
+       .highlight-link {
+         font-size: 16px;
+         width: 260px;
+         margin-left: 1%;
        }
      }
    }
@@ -457,6 +452,10 @@ DEFAULT MOBILE STYLING
 
   #stenzel-collection div {
     margin-bottom: 55%;
+  }
+
+  #declaration-of-independence {
+    text-align: left;
   }
 
 }
