@@ -140,6 +140,9 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the Extend of Digitization in results' do
       expect(document).to have_content("this is the extent of digitization")
     end
+    it 'displays the Access in results' do
+      expect(document).to have_content("Public")
+    end
     it 'displays the Rights in results' do
       expect(document).to have_content("these are the rights")
     end

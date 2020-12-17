@@ -100,6 +100,7 @@ class CatalogController < ApplicationController
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case sensitive when searching values)
 
     config.add_facet_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', limit: true
+    config.add_facet_field 'visibility_ssi', label: 'Access', limit: true
     config.add_facet_field 'format', label: 'Format', limit: true
     config.add_facet_field 'genre_ssim', label: 'Genre', limit: true
     config.add_facet_field 'resourceType_ssim', label: 'Resource Type', limit: true
@@ -221,8 +222,9 @@ class CatalogController < ApplicationController
     config.add_show_field 'uri_ssim', label: 'URI', metadata: 'identifier'
     config.add_show_field 'url_suppl_ssim', label: 'More Information', metadata: 'identifier'
 
-    # Usage Group
-    config.add_show_field 'rights_ssim', label: 'Rights', metadata: 'usage'
+    # Access and Usage Rights Group
+    config.add_show_field 'visibility_ssi', label: 'Access', metadata: 'access_and_usage_rights'
+    config.add_show_field 'rights_ssim', label: 'Rights', metadata: 'access_and_usage_rights'
 
     # Migration Source Group
     config.add_show_field 'recordType_ssi', label: 'Record Type', metadata: 'migration_source'

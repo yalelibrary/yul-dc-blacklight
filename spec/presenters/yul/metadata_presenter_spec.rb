@@ -231,6 +231,9 @@ RSpec.describe Yul::MetadataPresenter do
 
     context 'containing overview metadata' do
       describe 'config' do
+        it 'returns the Access Key' do
+          expect(fields.any? { |field| field.include? 'visibility_ssi' }).to be_truthy
+        end
         it 'returns the Rights Key' do
           expect(fields.any? { |field| field.include? 'rights_ssim' }).to be_truthy
         end
