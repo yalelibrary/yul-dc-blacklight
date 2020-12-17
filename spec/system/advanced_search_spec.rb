@@ -127,7 +127,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
     end
 
-    it 'maintains search results when re-querying' do
+    it 'clears search results when re-querying' do
       fill_in 'oid_ssi', with: '11607445'
       click_on 'SEARCH'
       within '#documents' do
@@ -137,8 +137,8 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       click_on 'Advanced Search'
       click_on 'SEARCH'
       within '#documents' do
-        expect(page).to     have_content('Record 1')
-        expect(page).not_to have_content('Record 2')
+        expect(page).to have_content('Record 1')
+        expect(page).to have_content('Record 2')
       end
     end
   end
