@@ -94,9 +94,13 @@ RSpec.describe 'PdfController', type: :request do
     end
 
     describe 'GET /show' do
+      let(:logger_mock) { instance_double("Rails.logger").as_null_object }
       it 'redirects to HTML page' do
+        allow(Rails.logger).to receive(:error) { :logger_mock }
         get '/pdfs/202.pdf'
         expect(response).to redirect_to '/pdfs/not_found.html'
+        expect(Rails.logger).to have_received(:error)
+          .with("Error reading PDF with id [202]: Aws::S3::Errors::NotFound")
       end
     end
   end

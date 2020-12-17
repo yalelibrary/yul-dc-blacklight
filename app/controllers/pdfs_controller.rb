@@ -23,7 +23,7 @@ class PdfsController < ApplicationController
       response.stream.write(chunk)
     end
   rescue StandardError => e
-    Rails.logger.error("Error reading PDF: #{e.message}")
+    Rails.logger.error("Error reading PDF with id [#{params[:id]}]: #{e.message}")
     redirect_to '/pdfs/not_found.html'
   ensure
     response.stream.close
