@@ -31,7 +31,8 @@ class SearchBuilder < Blacklight::SearchBuilder
   def show_only_public_records(solr_parameters)
     # add a new solr facet query ('fq') parameter that limits results to those with a 'public_b' field of 1
     solr_parameters[:fq] ||= []
-    solr_parameters[:fq] << '((visibility_ssi:Public) OR (visibility_ssi:"Yale Community Only"))'
+    fq = AccessHelper.viewable_metadata_visibilities.map { |visibility| "(visibility_ssi:\"#{visibility}\")" }.join(" OR ")
+    solr_parameters[:fq] << "(#{fq})"
   end
 
   def highlight_fields(solr_parameters)

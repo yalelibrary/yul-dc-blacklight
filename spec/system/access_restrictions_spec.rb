@@ -51,6 +51,15 @@ RSpec.describe "access restrictions", type: :system, clean: true do
     it "does NOT display universal viewer for yale-only works" do
       visit solr_document_path(yale_work[:id])
       expect(page.html).not_to match(/universal-viewer-iframe/)
+      expect(page.html).to have_content('Please login using your Yale NetID or contact library staff to inquire about access to a physical copy.')
+      expect(page.html).to have_content("[Map of China]. [yale-only copy]")
+    end
+
+    it "does NOT display universal viewer for private works" do
+      visit solr_document_path(private_work[:id])
+      expect(page.html).to have_content("You are not authorized to view this item.")
+      expect(page.html).not_to match(/universal-viewer-iframe/)
+      expect(page.html).not_to have_content("[Map of China]. [private copy]")
     end
   end
 
@@ -78,7 +87,7 @@ RSpec.describe "access restrictions", type: :system, clean: true do
     end
   end
 
-  context "an user on the network" do
+  context "a user on the network" do
     around do |example|
       original_yale_networks = ENV['YALE_NETWORK_IPS']
       ENV['YALE_NETWORK_IPS'] = "101.10.5.4,3.4.2.3"
@@ -105,6 +114,13 @@ RSpec.describe "access restrictions", type: :system, clean: true do
     it "displays universal viewer for yale-only works" do
       visit solr_document_path(yale_work[:id])
       expect(page.html).to match(/universal-viewer-iframe/)
+      expect(page.html).to have_content("[Map of China]. [yale-only copy]")
+    end
+
+    it "displays universal viewer for private works" do
+      visit solr_document_path(private_work[:id])
+      expect(page.html).not_to match(/universal-viewer-iframe/)
+      expect(page.html).not_to have_content("[Map of China]. [private copy]")
     end
   end
 end

@@ -108,7 +108,7 @@ module BlacklightHelper
     # return placeholder image if not logged in for yale only works
     return image_tag('placeholder_restricted.png') unless client_can_access(document)
     url = document[:thumbnail_path_ss]
-    if ['Public', 'Yale Community Only'].include?(document[:visibility_ssi]) && url.present?
+    if url.present?
       error_image_url = image_url('image_not_found.png')
       return image_tag(url, onerror: "this.error=null;this.src='#{error_image_url}'")
     end

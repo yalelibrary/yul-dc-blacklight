@@ -13,6 +13,7 @@ RSpec.describe 'Metadata line breaks', type: :system, clean: true do
   let(:llama) do
     {
       id: '11111',
+      visibility_ssi: "Public",
       subjectTopic_tesim: ['subject1', 'subject2'],
       subjectName_ssim: ['Langston Hughes', 'James Weldon Johnson'],
       subjectGeographic_tesim: ['New Haven', 'New York City', 'Boston']
