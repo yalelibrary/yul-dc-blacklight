@@ -2,7 +2,7 @@
   "source": "ladybird",
   "recordType": "oid",
   "uri": "/ladybird/oid/15234629",
-  "identifierShelfMark": "11 1860A",
+  "callNumber": "11 1860A",
   "folder": "BRBL_00009",
   "title": [
     "[World map in Chinese, 1860.]"
@@ -26,7 +26,6 @@
     "World maps--1860"
   ],
   "format": "cartographic",
-  "partOf": "Beinecke Library",
   "rights": [
     "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement"
   ],

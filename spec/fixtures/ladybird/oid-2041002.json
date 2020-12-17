@@ -2,7 +2,7 @@
   "source": "ladybird",
   "recordType": "oid",
   "uri": "/ladybird/oid/2041002",
-  "identifierShelfMark": "GEN MSS VOL 728 (Oversize)",
+  "callNumber": "GEN MSS VOL 728 (Oversize)",
   "creator": [
     "Johnson, Samuel, 1709-1784"
   ],
@@ -23,7 +23,6 @@
     "Dictionaries"
   ],
   "format": "text",
-  "partOf": "Beinecke Library",
   "rights": [
     "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
   ],

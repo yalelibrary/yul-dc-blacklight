@@ -3,7 +3,7 @@
   "recordType": "oid",
   "uri": "/ladybird/oid/10001192",
   "identifierMfhd": "/repositories/11/archival_objects/304086",
-  "identifierShelfMark": "GEN MSS 963",
+  "callNumber": "GEN MSS 963",
   "box": "7",
   "sourceTitle": "George Eliot and George Henry Lewes collection",
   "sourceDate": "1834-1981",
@@ -30,7 +30,6 @@
     "Correspondence"
   ],
   "format": "text",
-  "partOf": "Beinecke Library",
   "rights": [
     "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
   ],

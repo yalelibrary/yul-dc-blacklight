@@ -20,10 +20,10 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       format: 'text',
       language_ssim: 'la',
       visibility_ssi: 'Public',
-      publicationPlace_ssim: 'Spain',
+      creationPlace_ssim: 'Spain',
       resourceType_ssim: 'Maps, Atlases & Globes',
       creator_ssim: ['Anna Elizabeth Dewdney'],
-      dateStructured_ssim: '1911-1954',
+      dateStructured_ssim: ['1911'],
       year_isim: [1690]
     }
   end
@@ -36,10 +36,10 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       format: 'three dimensional object',
       language_ssim: 'en',
       visibility_ssi: 'Public',
-      publicationPlace_ssim: 'New Haven',
+      creationPlace_ssim: 'New Haven',
       resourceType_ssim: 'Books, Journals & Pamphlets',
       creator_ssim: ['Andy Graves'],
-      dateStructured_ssim: '1755-00-00T00:00:00Z',
+      dateStructured_ssim: ['1755'],
       year_isim: [1755]
     }
   end
@@ -52,10 +52,10 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       format: 'text',
       language_ssim: 'fr',
       visibility_ssi: 'Public',
-      publicationPlace_ssim: 'Constantinople or southern Italy',
+      creationPlace_ssim: 'Constantinople or southern Italy',
       resourceType_ssim: 'Archives or Manuscripts',
       creator_ssim: ['Paulo Coelho'],
-      dateStructured_ssim: '1972200',
+      dateStructured_ssim: ['1972'],
       year_isim: [1790]
     }
   end
@@ -68,10 +68,10 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       format: 'still image',
       language_ssim: 'it',
       visibility_ssi: 'Public',
-      publicationPlace_ssim: 'White-Hall, printed upon the ice, on the River Thames',
+      creationPlace_ssim: 'White-Hall, printed upon the ice, on the River Thames',
       resourceType_ssim: 'Archives or Manuscripts',
       creator_ssim: ['Andrew Norriss'],
-      dateStructured_ssim: '1699',
+      dateStructured_ssim: ['1699'],
       year_isim: [1830]
     }
   end

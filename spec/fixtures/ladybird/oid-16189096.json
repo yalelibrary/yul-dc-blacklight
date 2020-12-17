@@ -2,7 +2,7 @@
   "source": "ladybird",
   "recordType": "oid",
   "uri": "/ladybird/oid/16189096",
-  "identifierShelfMark": "Covers 5615 +1857",
+  "callNumber": "Covers 5615 +1857",
   "creator": [
     "Dong, Chun (Cartographer), cartographer.",
     "董醇 (Cartographer), cartographer."
@@ -34,7 +34,6 @@
     "Pictorial maps."
   ],
   "format": "cartographic",
-  "partOf": "Beinecke Library",
   "rights": [
     "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
   ],

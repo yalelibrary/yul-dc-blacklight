@@ -2,7 +2,7 @@
   "source": "ladybird",
   "recordType": "oid",
   "uri": "/ladybird/oid/2111169",
-  "identifierShelfMark": "Beinecke MS 1121",
+  "callNumber": "Beinecke MS 1121",
   "creator": [
     "Galen"
   ],
@@ -32,7 +32,6 @@
     "Manuscripts"
   ],
   "format": "text",
-  "partOf": "Beinecke Library",
   "rights": [
     "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
   ],

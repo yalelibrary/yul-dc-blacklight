@@ -3,7 +3,7 @@
   "recordType": "oid",
   "uri": "/ladybird/oid/16797069",
   "identifierMfhd": "/repositories/11/archival_objects/608223",
-  "identifierShelfMark": "YCAL MSS 42",
+  "callNumber": "YCAL MSS 42",
   "box": "25",
   "folder": "787-93",
   "sourceTitle": "Edith Wharton collection",
@@ -33,7 +33,6 @@
     "correspondence (AAT)"
   ],
   "format": "text",
-  "partOf": "Beinecke Library",
   "rights": [
     "Copyright to material created by Edith Wharton may be held by her estate. To learn more, consult the WATCH file (http://norman.hrc.utexas.edu/watch/)."
   ],

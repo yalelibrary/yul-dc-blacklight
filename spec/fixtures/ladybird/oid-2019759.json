@@ -2,7 +2,7 @@
   "source": "ladybird",
   "recordType": "oid",
   "uri": "/ladybird/oid/2019759",
-  "identifierShelfMark": "YCAL MSS 229",
+  "callNumber": "YCAL MSS 229",
   "sourceTitle": "Jane Wodening and Stan Brakhage scrapbooks",
   "sourceNote": "Three scrapbooks, compiled by Jane Wodening, containing correspondence, photographs, manuscripts, printed material, artwork, cut film, and objects documenting the work and family life of Wodening (ne?e Collom) and Stan Brakhage from 1958 to 1967.",
   "creator": [
@@ -52,7 +52,6 @@
     "Studio portraits"
   ],
   "format": "still image",
-  "partOf": "Beinecke Library",
   "rights": [
     "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
   ],
