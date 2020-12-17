@@ -79,8 +79,7 @@ RSpec.describe Yul::MetadataPresenter do
     let(:identifier_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
     let(:fields) { identifier_presenter_object.metadata_fields_to_render('identifier') }
     context 'containing overview metadata' do
-      describe 'config' do
-        
+      describe 'config' do       
         it 'returns the Container Information Key' do
           expect(fields.any? { |field| field.include? 'containerGrouping_ssim' }).to be_truthy
         end
