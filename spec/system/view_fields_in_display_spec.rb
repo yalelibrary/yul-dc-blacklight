@@ -15,7 +15,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     {
       id: '222',
       visibility_ssi: 'Public',
-      identifierShelfMark_ssim: 'this is the call number'
+      callNumber_ssim: 'this is the call number'
     }
   end
 
@@ -23,7 +23,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     {
       id: '333',
       visibility_ssi: 'Public',
-      identifierShelfMark_ssim: 'this is the call number, but different'
+      callNumber_ssim: 'this is the call number, but different'
     }
   end
 
@@ -46,7 +46,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       subjectTopic_tesim: "this is the subject topic",
       extentOfDigitization_ssim: 'this is the extent of digitization',
       rights_ssim: "these are the rights",
-      publicationPlace_ssim: "this is the publication place",
+      creationPlace_ssim: "this is the publication place",
       sourceCreated_tesim: "this is the source created",
       publisher_ssim: "this is the publisher",
       copyrightDate_ssim: "this is the copyright date",
@@ -55,17 +55,16 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       sourceTitle_tesim: "this is the source title",
       sourceDate_tesim: "this is the source date",
       sourceNote_tesim: "this is the source note",
-      references_tesim: "these are the references",
+      preferredCitation_tesim: "these are the references",
       date_ssim: "this is the date",
       oid_ssi: '2345678',
       identifierMfhd_ssim: 'this is the identifier MFHD',
-      identifierShelfMark_ssim: 'this is the call number',
-      containerGrouping_ssim: 'this is the contaner information',
+      callNumber_ssim: 'this is the call number',
+      containerGrouping_ssim: 'this is the container grouping',
       orbisBibId_ssi: '1234567',
       findingAid_ssim: 'this is the finding aid',
       edition_ssim: 'this is the edition',
       uri_ssim: 'this is the URI',
-      partOf_ssim: "this is the part of, using ssim",
       numberOfPages_ssim: "this is the number of pages, using ssim",
       material_tesim: "this is the material, using ssim",
       scale_tesim: "this is the scale, using ssim",
@@ -89,9 +88,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays extent in results' do
       expect(document).to have_content("this is the extent, using ssim")
-    end
-    it 'displays part of in results' do
-      expect(document).to have_content("this is the part of, using ssim")
     end
     it 'displays number of page in results' do
       expect(document).to have_content("this is the number of pages, using ssim")
@@ -185,6 +181,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the Identifier MFHD in results' do
       expect(document).to have_content("this is the identifier MFHD")
     end
+
     it 'displays the Container Information in results' do
       expect(document).to have_content("this is the contaner information")
     end
@@ -201,8 +198,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("this is the URI")
     end
     it 'displays the call number in results as link' do
-      expect(page).to have_link("this is the call number", href: '/catalog?f%5BidentifierShelfMark_ssim%5D%5B%5D=this+is+the+call+number')
-      expect(page).not_to have_link("this is the call number", href: '/catalog?f%5BidentifierShelfMark_ssim%5D%5B%5D=this+is+the+call+number+but+different')
+      expect(page).to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number')
+      expect(page).not_to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number+but+different')
     end
     it 'contains a link on genre to its facet' do
       expect(page).to have_link('this is the genre', href: '/catalog?f%5Bgenre_ssim%5D%5B%5D=this is the genre')

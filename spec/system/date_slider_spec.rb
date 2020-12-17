@@ -48,7 +48,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
   let(:rabbit) do
     {
       id: '400',
-      identifierShelfMark_ssim: 'call number',
+      callNumber_ssim: 'call number',
       title_tesim: 'Handsome Dan is not a rabbit.',
       year_isim: [1555, 1556, 1557],
       creator_tesim: 'Frederick & Eric',

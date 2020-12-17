@@ -26,10 +26,10 @@ module CatalogHelper
     return false unless document.key?('visibility_ssi')
     case document['visibility_ssi']
     when 'Public'
-      true
+      return true
     when 'Yale Community Only'
       return true if current_user || User.on_campus?(request.remote_ip)
-      false
     end
+    false
   end
 end
