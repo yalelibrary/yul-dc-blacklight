@@ -212,9 +212,8 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceTitle_tesim', label: 'Source Title', metadata: 'origin'
 
     # Identifiers Group
-    config.add_show_field 'containerGrouping_ssim', label: 'Container Grouping', metadata: 'identifier'
+    config.add_show_field 'containerGrouping_ssim', label: 'Container Information', metadata: 'identifier'
     config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'identifier', helper_method: :link_to_url
-    config.add_show_field 'folder_ssim', label: 'Folder', metadata: 'identifier'
     config.add_show_field 'identifierMfhd_ssim', label: 'Identifier MFHD', metadata: 'identifier'
     config.add_show_field 'callNumber_ssim', label: 'Call Number', metadata: 'identifier', link_to_facet: true
     config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID', metadata: 'identifier', helper_method: :link_to_orbis_bib_id

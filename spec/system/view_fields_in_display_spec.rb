@@ -60,8 +60,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       oid_ssi: '2345678',
       identifierMfhd_ssim: 'this is the identifier MFHD',
       callNumber_ssim: 'this is the call number',
-      containerGrouping_ssim: 'this is the container grouping',
-      folder_ssim: 'this is the folder',
+      containerGrouping_ssim: 'this is the container information',
       orbisBibId_ssi: '1234567',
       findingAid_ssim: 'this is the finding aid',
       edition_ssim: 'this is the edition',
@@ -185,11 +184,9 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the Identifier MFHD in results' do
       expect(document).to have_content("this is the identifier MFHD")
     end
-    it 'displays the Box in results' do
-      expect(document).to have_content("this is the container grouping")
-    end
-    it 'displays the Folder in results' do
-      expect(document).to have_content("this is the folder")
+
+    it 'displays the Container Information in results' do
+      expect(document).to have_content("this is the container information")
     end
     it 'displays the Orbis Bib ID in results' do
       expect(document).to have_content("1234567")

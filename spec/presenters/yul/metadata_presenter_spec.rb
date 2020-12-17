@@ -80,16 +80,12 @@ RSpec.describe Yul::MetadataPresenter do
     let(:fields) { identifier_presenter_object.metadata_fields_to_render('identifier') }
     context 'containing overview metadata' do
       describe 'config' do
-        it 'returns the Box Key' do
+        it 'returns the Container Information Key' do
           expect(fields.any? { |field| field.include? 'containerGrouping_ssim' }).to be_truthy
         end
 
         it 'returns the Finding Aid Key' do
           expect(fields.any? { |field| field.include? 'findingAid_ssim' }).to be_truthy
-        end
-
-        it 'returns the Folder Key' do
-          expect(fields.any? { |field| field.include? 'folder_ssim' }).to be_truthy
         end
 
         it 'returns the Identifier MFHD Key' do
