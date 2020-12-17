@@ -183,7 +183,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
 
     it 'displays the Container Information in results' do
-      expect(document).to have_content("this is the contaner information")
+      expect(document).to have_content("this is the container information")
     end
     it 'displays the Orbis Bib ID in results' do
       expect(document).to have_content("1234567")
