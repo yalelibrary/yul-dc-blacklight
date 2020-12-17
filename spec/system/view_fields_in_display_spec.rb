@@ -45,7 +45,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       subjectName_ssim: "this is the subject name",
       subjectTopic_tesim: "this is the subject topic",
       extentOfDigitization_ssim: 'this is the extent of digitization',
-      visibility_ssi: "this is the access level",
       rights_ssim: "these are the rights",
       publicationPlace_ssim: "this is the publication place",
       sourceCreated_tesim: "this is the source created",
@@ -146,7 +145,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("this is the extent of digitization")
     end
     it 'displays the Access in results' do
-      expect(document).to have_content("this is the access level")
+      expect(document).to have_content("Public")
     end
     it 'displays the Rights in results' do
       expect(document).to have_content("these are the rights")
