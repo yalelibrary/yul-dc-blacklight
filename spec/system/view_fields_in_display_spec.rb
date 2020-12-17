@@ -60,7 +60,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       oid_ssi: '2345678',
       identifierMfhd_ssim: 'this is the identifier MFHD',
       callNumber_ssim: 'this is the call number',
-      containerGrouping_ssim: 'this is the container grouping',
+      containerGrouping_ssim: 'this is the container information',
       orbisBibId_ssi: '1234567',
       findingAid_ssim: 'this is the finding aid',
       edition_ssim: 'this is the edition',
