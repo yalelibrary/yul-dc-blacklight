@@ -85,29 +85,19 @@ DEFAULT MOBILE STYLING
 }
 ///// BODY //////
 #highlights {
-  display: block;
-  margin-top: 92px;
-  margin-bottom: 92px;
+  margin-top: 15px;
+  width: 343px;
+  margin-left: auto;
   margin-right: auto;
-  width: 110%;
-  font-stretch: normal;
-  font-style: normal;
-  letter-spacing: normal;
-  text-align: left;
-  font-size: 14px;
-  line-height: 2.25;
-
 
   h2 {
     max-width: 343px;
-    margin-top: -65px;
     font-family: $yale_display_roman, 'Times New Roman', Times, serif;
     font-size: 30px;
     line-height: 2.25;
     color: $yale_blue;
     border-bottom: 1px solid $light_grey;
     margin-bottom: 0;
-    margin-left: 7%;
     display: flex;
     margin-right: auto;
   }
@@ -123,10 +113,10 @@ DEFAULT MOBILE STYLING
     display: block;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 7%;
+    padding: 0;
+    margin-bottom: 18%;
 
     li {
-      display: -webkit-inline-flex;
       position: relative;
       line-height: 22px;
       display: flex;
@@ -156,7 +146,7 @@ DEFAULT MOBILE STYLING
       font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
     }
 
-    #main-container{
+    #main-container {
       max-width: max-content;
       position: relative;
       display: flex;
@@ -169,7 +159,7 @@ DEFAULT MOBILE STYLING
   text-align: left
 }
 
-#stenzel-collection{
+#stenzel-collection {
   min-width: 343px;
   height: 250px;
   margin-bottom: 5%;
@@ -206,7 +196,6 @@ DEFAULT MOBILE STYLING
 #coming-soon {
   background-image: image-url('landing/highlight-coming-soon.png');
 }
-
 
 @media screen and (min-width: $small_device) {
   #hero {
@@ -253,8 +242,7 @@ DEFAULT MOBILE STYLING
 
 ////// BODY //////
  #highlights {
-     max-width: 110%;
-     margin-left: -2%;
+   width: 726px;
 
       .highlight-link {
         margin-left: 1%;
@@ -269,26 +257,27 @@ DEFAULT MOBILE STYLING
        margin-bottom: 2%;
      }
 
-     li {
-       padding-left: 10px!important;
-     }
-
      ul {
        padding-left: 0;
        margin-left: 0;
-       margin-top: -2%; 
+       margin-top: -2%;
 
-       .btn{
+       li {
+         padding-left: 10px;
+         margin-left: 0;
+       }
+
+       .btn {
          height: 250px;
        }
      }
 
-     a{
+     a {
        margin-left: -4%;
      }
-
    }
-   .item-lewis-photographs{
+
+   .item-lewis-photographs {
      margin-top: 0;
    }
  }
@@ -336,48 +325,43 @@ DEFAULT MOBILE STYLING
 
 ///// BODY //////
   #highlights {
-      margin-left: -5%;
+    max-width: 860px;
+    width: auto;
 
-      a{
+      a {
         margin-bottom: -48%;
       }
 
       h2 {
-        max-width: 945px;
         margin-bottom: 3%;
-        margin-left: 0;
-        margin-right: 1%;
+        max-width: 860px;
+        width: auto;
+
       }
 
-      li{
-        padding-bottom: 4%;
-      }
-
-      ul{
-        margin-left: auto;
-        max-width: 1110px;
-
+      ul {
         .btn {
-          min-width: 227px;
-          height: 127px;
+          width: auto;
+          min-width: 205px;
+          height: 270px;
           background-size: 100% 127px;
           top: 0;
         }
         .highlight-link {
-          position: absolute;
-          margin-top: 53%;
-          font-size: 13px;
-          width: 205px;
-          margin-left: 0;
-          top: 6%;
+          font-size: 14px;
+          padding-top: 10px;
         }
       }
     }
 
-    .item-lewis-photographs{
-      margin-top: 0;
-    }
+  .item-lewis-photographs {
+    margin-top: 0;
   }
+
+  #declaration-of-independence {
+    text-align: left;
+  }
+}
 
 
 @media screen and (min-width: $xlarge_device) {
@@ -409,53 +393,46 @@ DEFAULT MOBILE STYLING
   }
 
 ////// BODY //////
-   #highlights {
+    #highlights {
+      width: 1111px;
+      max-width: initial;
+
+      h2 {
+        max-width: 1098px;
+        margin-bottom: 1.75%;
+        margin-left: -3%;
+        margin-top: 40px;
+      }
+
+      ul {
+        margin-left: -3%;
+
+        .btn {
+          min-width: 270px;
+          margin-top: 12%;
+          background-size: 100% 151px;
+          top: 0;
+          height: 335px;
+        }
+
+        .highlight-link {
+          padding-top: 0;
+        }
+
+        li {
+          display: inline-flex;
+          margin-left: -3px;
+          justify-content: center;
+          padding-left: 9px;
+        }
+      }
+    }
  
-     h2 {
-       max-width: 1110px;
-       align-content: center;
-       display: flex;
-       margin-left: auto;
-       margin-right: auto;
-       margin-bottom: 4.5%;
-     }
- 
-     ul{
-       max-width: 1120px;
-       overflow: no-content;
-       align-content: center;
-       margin-top: -2%;
- 
-       li{
-         margin-bottom: 6%;
-         margin-top: -2%;
-       }
-       
-       .btn {
-         min-width: 270px;
-         //min-width: 1687.5%;
-         height: 151px;
-         background-size: 100% 151px;
-         margin-left: -2%;
-       }
-       .highlight-link {
-         font-size: 16px;
-         width: 260px;
-         margin-left: 1%;
-       }
-     }
-   }
- 
-   .item-lewis-photographs{
+   .item-lewis-photographs {
      margin-top: 0;
    }
 
-  #stenzel-collection div {
-    margin-bottom: 55%;
+    #stenzel-collection div {
+      margin-bottom: 55%;
+    }
   }
-
-  #declaration-of-independence {
-    text-align: left;
-  }
-
-}
