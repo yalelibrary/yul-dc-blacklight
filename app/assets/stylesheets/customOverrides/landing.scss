@@ -12,6 +12,7 @@ DEFAULT MOBILE STYLING
     text-align: center;
     background-color: black;
     width: 100%;
+    opacity: 0.5;
 
     p {
       font-size: 10px;
@@ -82,61 +83,86 @@ DEFAULT MOBILE STYLING
     font-family: $mallory_mp_medium;
   }
 }
-
+///// BODY //////
 #highlights {
-  margin-top: 92px;
-  margin-bottom: 92px;
-  width: 110%;
-
-  font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
-  font-stretch: normal;
-  font-style: normal;
-  letter-spacing: normal;
-  text-align: left;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 2.25;
-  color: $medium_grey;
+  margin-top: 15px;
+  width: 343px;
+  margin-left: auto;
+  margin-right: auto;
 
   h2 {
-    font-weight: 600;
-    font-size: 24px;
+    max-width: 343px;
+    font-family: $yale_display_roman, 'Times New Roman', Times, serif;
+    font-size: 30px;
     line-height: 2.25;
-    color: $dark_grey;
+    color: $yale_blue;
+    border-bottom: 1px solid $light_grey;
+    margin-bottom: 0;
+    display: flex;
+    margin-right: auto;
+  }
+
+  a {
+    margin-bottom: 1%;
   }
 
   ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
     overflow: hidden;
+    max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    margin-bottom: 18%;
 
     li {
       position: relative;
+      line-height: 22px;
       display: flex;
       float: left;
-      padding-right: 2%;
-      padding-bottom: 2%;
+      padding-left: 0;
     }
 
     .btn {
+      display: block;
       position: relative;
       overflow: hidden;
-      min-width: 288px;
-      min-height: 160px;
+      min-width: 343px;
+      min-height: 225px;
       width: 23%;
-      background-size: 100% 100%;
+      background-size: 100% 193px;
       background-repeat: no-repeat;
-    }
-
-    .btn:hover {
-      border: 3px solid $dark_grey;
+      margin-top: 8%;
     }
 
     .highlight-link {
-      color: transparent;
+      color: $yale_blue;
+      position: absolute;
+      margin-top:57%;
+      left: 0;
+      display: flex;
+      font-size: 16px;
+      font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
+    }
+
+    #main-container {
+      max-width: max-content;
+      position: relative;
+      display: flex;
+      max-block-size: max-content;
     }
   }
+}
+
+#stenzel-collection div {
+  text-align: left
+}
+
+#stenzel-collection {
+  min-width: 343px;
+  height: 250px;
+  margin-bottom: 5%;
 }
 
 #hughes-papers {
@@ -170,7 +196,6 @@ DEFAULT MOBILE STYLING
 #coming-soon {
   background-image: image-url('landing/highlight-coming-soon.png');
 }
-
 
 @media screen and (min-width: $small_device) {
   #hero {
@@ -213,7 +238,49 @@ DEFAULT MOBILE STYLING
       margin: 0 auto;
     }
   }
-}
+
+
+////// BODY //////
+ #highlights {
+   width: 726px;
+
+      .highlight-link {
+        margin-left: 1%;
+        max-width: 261px;
+      }
+
+     h2 {
+       max-width: 695px;
+       margin-left: 0;
+       align-content: center;
+       display: flex;
+       margin-bottom: 2%;
+     }
+
+     ul {
+       padding-left: 0;
+       margin-left: 0;
+       margin-top: -2%;
+
+       li {
+         padding-left: 10px;
+         margin-left: 0;
+       }
+
+       .btn {
+         height: 250px;
+       }
+     }
+
+     a {
+       margin-left: -4%;
+     }
+   }
+
+   .item-lewis-photographs {
+     margin-top: 0;
+   }
+ }
 
 
 @media screen and (min-width: $large_device) {
@@ -255,6 +322,45 @@ DEFAULT MOBILE STYLING
       display: none;
     }
   }
+
+///// BODY //////
+  #highlights {
+    max-width: 860px;
+    width: auto;
+
+      a {
+        margin-bottom: -48%;
+      }
+
+      h2 {
+        margin-bottom: 3%;
+        max-width: 860px;
+        width: auto;
+
+      }
+
+      ul {
+        .btn {
+          width: auto;
+          min-width: 205px;
+          height: 270px;
+          background-size: 100% 127px;
+          top: 0;
+        }
+        .highlight-link {
+          font-size: 14px;
+          padding-top: 10px;
+        }
+      }
+    }
+
+  .item-lewis-photographs {
+    margin-top: 0;
+  }
+
+  #declaration-of-independence {
+    text-align: left;
+  }
 }
 
 
@@ -285,4 +391,48 @@ DEFAULT MOBILE STYLING
       margin: auto;
     }
   }
-}
+
+////// BODY //////
+    #highlights {
+      width: 1111px;
+      max-width: initial;
+
+      h2 {
+        max-width: 1098px;
+        margin-bottom: 1.75%;
+        margin-left: -3%;
+        margin-top: 40px;
+      }
+
+      ul {
+        margin-left: -3%;
+
+        .btn {
+          min-width: 270px;
+          margin-top: 12%;
+          background-size: 100% 151px;
+          top: 0;
+          height: 335px;
+        }
+
+        .highlight-link {
+          padding-top: 0;
+        }
+
+        li {
+          display: inline-flex;
+          margin-left: -3px;
+          justify-content: center;
+          padding-left: 9px;
+        }
+      }
+    }
+ 
+   .item-lewis-photographs {
+     margin-top: 0;
+   }
+
+    #stenzel-collection div {
+      margin-bottom: 55%;
+    }
+  }
