@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 module AccessHelper
-  def self.viewable_metadata_visibilities
+  def viewable_metadata_visibilities
     ["Public", "Yale Community Only"]
   end
 
@@ -15,7 +15,7 @@ module AccessHelper
   end
 
   def client_can_view_metadata(document)
-    AccessHelper.viewable_metadata_visibilities.include? document['visibility_ssi']
+    viewable_metadata_visibilities.include? document['visibility_ssi']
   end
 
   def restriction_message(document)

@@ -15,6 +15,7 @@ class SearchBuilder < Blacklight::SearchBuilder
   include Blacklight::Solr::SearchBuilderBehavior
   include BlacklightAdvancedSearch::AdvancedSearchBuilder
   include BlacklightRangeLimit::RangeLimitBuilder
+  include AccessHelper
 
   self.default_processor_chain += [:add_advanced_parse_q_to_solr, :add_advanced_search_to_solr]
   # include BlacklightRangeLimit::RangeLimitBuilder
@@ -31,7 +32,7 @@ class SearchBuilder < Blacklight::SearchBuilder
   def show_only_public_records(solr_parameters)
     # add a new solr facet query ('fq') parameter that limits results to those with a 'public_b' field of 1
     solr_parameters[:fq] ||= []
-    fq = AccessHelper.viewable_metadata_visibilities.map { |visibility| "(visibility_ssi:\"#{visibility}\")" }.join(" OR ")
+    fq = viewable_metadata_visibilities.map { |visibility| "(visibility_ssi:\"#{visibility}\")" }.join(" OR ")
     solr_parameters[:fq] << "(#{fq})"
   end
 
