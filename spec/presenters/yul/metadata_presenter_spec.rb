@@ -80,7 +80,7 @@ RSpec.describe Yul::MetadataPresenter do
     let(:fields) { identifier_presenter_object.metadata_fields_to_render('identifier') }
     context 'containing overview metadata' do
       describe 'config' do
-        it 'returns the Container Information Key' do
+        it 'returns the Container/Volume Information Key' do
           expect(fields.any? { |field| field.include? 'containerGrouping_ssim' }).to be_truthy
         end
 
