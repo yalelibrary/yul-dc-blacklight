@@ -44,7 +44,7 @@ module Yale
         abstract: obj[:abstract_tesim]&.join(', '),
         archive_location: obj[:sublocation_tesim]&.join(', '),
         author: obj[:creator_ssim]&.join(', '),
-        "call-number": obj[:identifierShelfMark_ssim]&.join(', '),
+        "call-number": obj[:callNumber_ssim]&.join(', '),
         edition: obj[:edition_tesim]&.join(', '),
         institution: obj[:institution_tesim]&.join(', ')
       }
@@ -72,7 +72,7 @@ module Yale
         ISBN: obj[:isbn_tesim]&.join(', '),
         ISSN: obj[:issn_tesim]&.join(', '),
         keyword: obj[:keywords_tesim]&.join(', '),
-        "publisher-place": obj[:publicationPlace_ssim]&.join(', ')
+        "publisher-place": obj[:creationPlace_ssim]&.join(', ')
       }
     end
   end

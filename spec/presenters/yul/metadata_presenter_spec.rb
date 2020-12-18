@@ -65,7 +65,7 @@ RSpec.describe Yul::MetadataPresenter do
         end
 
         it 'returns the References Key' do
-          expect(fields.any? { |field| field.include? 'references_tesim' }).to be_truthy
+          expect(fields.any? { |field| field.include? 'preferredCitation_tesim' }).to be_truthy
         end
 
         it 'returns the Scale Key' do
@@ -80,16 +80,12 @@ RSpec.describe Yul::MetadataPresenter do
     let(:fields) { identifier_presenter_object.metadata_fields_to_render('identifier') }
     context 'containing overview metadata' do
       describe 'config' do
-        it 'returns the Box Key' do
-          expect(fields.any? { |field| field.include? 'box_ssim' }).to be_truthy
+        it 'returns the Container/Volume Information Key' do
+          expect(fields.any? { |field| field.include? 'containerGrouping_ssim' }).to be_truthy
         end
 
         it 'returns the Finding Aid Key' do
           expect(fields.any? { |field| field.include? 'findingAid_ssim' }).to be_truthy
-        end
-
-        it 'returns the Folder Key' do
-          expect(fields.any? { |field| field.include? 'folder_ssim' }).to be_truthy
         end
 
         it 'returns the Identifier MFHD Key' do
@@ -97,7 +93,7 @@ RSpec.describe Yul::MetadataPresenter do
         end
 
         it 'returns the Call Number Key' do
-          expect(fields.any? { |field| field.include? 'identifierShelfMark_ssim' }).to be_truthy
+          expect(fields.any? { |field| field.include? 'callNumber_ssim' }).to be_truthy
         end
 
         it 'returns the Orbis Bib ID Key' do
@@ -106,10 +102,6 @@ RSpec.describe Yul::MetadataPresenter do
 
         it 'returns the OID Key' do
           expect(fields.any? { |field| field.include? 'oid_ssi' }).to be_truthy
-        end
-
-        it 'returns the Collection Name Key' do
-          expect(fields.any? { |field| field.include? 'partOf_ssim' }).to be_truthy
         end
 
         it 'returns the URI Key' do
@@ -199,7 +191,7 @@ RSpec.describe Yul::MetadataPresenter do
         end
 
         it 'returns the Publication Place Key' do
-          expect(fields.any? { |field| field.include? 'publicationPlace_ssim' }).to be_truthy
+          expect(fields.any? { |field| field.include? 'creationPlace_ssim' }).to be_truthy
         end
 
         it 'returns the Publisher Key' do
@@ -235,6 +227,9 @@ RSpec.describe Yul::MetadataPresenter do
 
     context 'containing overview metadata' do
       describe 'config' do
+        it 'returns the Access Key' do
+          expect(fields.any? { |field| field.include? 'visibility_ssi' }).to be_truthy
+        end
         it 'returns the Rights Key' do
           expect(fields.any? { |field| field.include? 'rights_ssim' }).to be_truthy
         end

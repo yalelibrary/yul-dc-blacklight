@@ -5,7 +5,7 @@ module Yul
     attr_reader :document, :config
 
     def initialize(document, view_context, configuration = view_context.blacklight_config)
-      @metadata_sections = %w[description keyword origin identifier usage migration_source]
+      @metadata_sections = %w[description keyword origin identifier access_and_usage_rights migration_source]
       super
     end
 

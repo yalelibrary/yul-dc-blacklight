@@ -18,7 +18,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       title_tesim: ['Amor Llama'],
       format: 'text',
       language_ssim: 'la',
-      visibility_ssi: 'Public',
+      visibility_ssi: 'Yale Community Only',
       genre_ssim: 'Maps',
       resourceType_ssim: 'Maps, Atlases & Globes',
       creator_ssim: ['Anna Elizabeth Dewdney']
@@ -86,6 +86,15 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     expect(page).to have_content('Rhett Lecheire')
     expect(page).not_to have_content('Amor Llama')
     expect(page).not_to have_content('Aquila Eccellenza')
+  end
+
+  it 'can filter results with visibility facets' do
+    click_on 'Access'
+    click_on 'Public'
+    expect(page).to have_content('Rhett Lecheire')
+    expect(page).to have_content('Aquila Eccellenza')
+    expect(page).to have_content('HandsomeDan Bulldog')
+    expect(page).not_to have_content('Amor Llama')
   end
 
   it 'can filter results with resource type facets' do

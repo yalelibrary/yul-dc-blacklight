@@ -2,7 +2,7 @@
   "source": "ladybird",
   "recordType": "oid",
   "uri": "/ladybird/oid/16425155",
-  "identifierShelfMark": "Globe 21",
+  "callNumber": "Globe 21",
   "creator": [
     "Coronelli, Vincenzo, 1650-1718."
   ],
@@ -38,7 +38,6 @@
     "Celestial globes."
   ],
   "format": "three dimensional object",
-  "partOf": "Beinecke Library",
   "rights": [
     "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
   ],

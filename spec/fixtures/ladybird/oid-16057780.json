@@ -2,7 +2,7 @@
   "source": "ladybird",
   "recordType": "oid",
   "uri": "/ladybird/oid/16057780",
-  "identifierShelfMark": "WA MSS S-3019",
+  "callNumber": "WA MSS S-3019",
   "box": "Box 5",
   "sourceTitle": "[Objects associated with Buffalo Bill]",
   "sourceDate": "[circa 1870-1895]",
@@ -34,7 +34,6 @@
     "Revolvers (firearms)--United States--19th century."
   ],
   "format": "three dimensional object",
-  "partOf": "Beinecke Library",
   "rights": [
     "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement"
   ],

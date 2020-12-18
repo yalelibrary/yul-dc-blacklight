@@ -100,6 +100,7 @@ class CatalogController < ApplicationController
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case sensitive when searching values)
 
     config.add_facet_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', limit: true
+    config.add_facet_field 'visibility_ssi', label: 'Access', limit: true
     config.add_facet_field 'format', label: 'Format', limit: true
     config.add_facet_field 'genre_ssim', label: 'Genre', limit: true
     config.add_facet_field 'resourceType_ssim', label: 'Resource Type', limit: true
@@ -108,8 +109,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'subjectTopic_ssim', label: 'Subject (Topic)', limit: true
     config.add_facet_field 'subjectName_ssim', label: 'Subject (Name)', limit: true
     config.add_facet_field 'subject_ssim', label: 'Topic', limit: 20, index_range: 'A'..'Z'
-    config.add_facet_field 'publicationPlace_ssim', label: 'Publication Place', limit: true
-    config.add_facet_field 'partOf_ssim', label: 'Digital Collection', limit: true
+    config.add_facet_field 'creationPlace_ssim', label: 'Publication Place', limit: true
     config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true
     config.add_facet_field 'year_isim', label: 'Date Created',
                                         range: {
@@ -122,7 +122,7 @@ class CatalogController < ApplicationController
 
     # the facets below are set to false because we aren't filtering on them from the main search page
     # but we need to be able to provide a label when they are filtered upon from an individual show page
-    config.add_facet_field 'identifierShelfMark_ssim', label: 'Call Number', show: false
+    config.add_facet_field 'callNumber_ssim', label: 'Call Number', show: false
 
     # This was example code after running rails generate blacklight_range_limit:install
     # config.add_facet_field 'example_query_facet_field', label: 'Publish Date', query: {
@@ -148,9 +148,8 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_index_field 'creator_tesim', label: 'Creator', highlight: true
     config.add_index_field 'date_ssim', label: 'Published / Created', highlight: true
-    config.add_index_field 'identifierShelfMark_tesim', label: 'Call Number', highlight: true
+    config.add_index_field 'callNumber_tesim', label: 'Call Number', highlight: true
     config.add_index_field 'imageCount_isi', label: 'Image Count'
-    config.add_index_field 'partOf_ssim', label: 'Collection Name'
     config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true
     config.add_index_field 'abstract_tesim', label: 'Abstract', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'alternativeTitle_tesim', label: 'Alternative Title', highlight: true, solr_params: disp_highlight_on_search_params
@@ -183,7 +182,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description'
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', metadata: 'description'
     config.add_show_field 'numberOfPages_ssim', label: 'Number of Pages', metadata: 'description'
-    config.add_show_field 'references_tesim', label: 'References', metadata: 'description'
+    config.add_show_field 'preferredCitation_tesim', label: 'References', metadata: 'description'
     config.add_show_field 'projection_tesim', label: 'Projection', metadata: 'description'
     config.add_show_field 'scale_tesim', label: 'Scale', metadata: 'description'
 
@@ -204,7 +203,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'digital_ssim', label: 'Digital', metadata: 'origin'
     config.add_show_field 'edition_ssim', label: 'Edition', metadata: 'origin'
     config.add_show_field 'language_ssim', label: 'Language', metadata: 'origin', helper_method: :language_codes_as_links
-    config.add_show_field 'publicationPlace_ssim', label: 'Publication Place', metadata: 'origin'
+    config.add_show_field 'creationPlace_ssim', label: 'Publication Place', metadata: 'origin'
     config.add_show_field 'publisher_ssim', label: 'Publisher', metadata: 'origin'
     config.add_show_field 'sourceCreated_tesim', label: 'Source Created', metadata: 'origin'
     config.add_show_field 'sourceDate_tesim', label: 'Source Date', metadata: 'origin'
@@ -213,19 +212,18 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceTitle_tesim', label: 'Source Title', metadata: 'origin'
 
     # Identifiers Group
-    config.add_show_field 'box_ssim', label: 'Box', metadata: 'identifier'
+    config.add_show_field 'containerGrouping_ssim', label: 'Container / Volume Information', metadata: 'identifier'
     config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'identifier', helper_method: :link_to_url
-    config.add_show_field 'folder_ssim', label: 'Folder', metadata: 'identifier'
     config.add_show_field 'identifierMfhd_ssim', label: 'Identifier MFHD', metadata: 'identifier'
-    config.add_show_field 'identifierShelfMark_ssim', label: 'Call Number', metadata: 'identifier', link_to_facet: true
+    config.add_show_field 'callNumber_ssim', label: 'Call Number', metadata: 'identifier', link_to_facet: true
     config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID', metadata: 'identifier', helper_method: :link_to_orbis_bib_id
     config.add_show_field 'oid_ssi', label: 'OID', metadata: 'identifier'
-    config.add_show_field 'partOf_ssim', label: 'Collection Name', metadata: 'identifier'
     config.add_show_field 'uri_ssim', label: 'URI', metadata: 'identifier'
     config.add_show_field 'url_suppl_ssim', label: 'More Information', metadata: 'identifier'
 
-    # Usage Group
-    config.add_show_field 'rights_ssim', label: 'Rights', metadata: 'usage'
+    # Access and Usage Rights Group
+    config.add_show_field 'visibility_ssi', label: 'Access', metadata: 'access_and_usage_rights'
+    config.add_show_field 'rights_ssim', label: 'Rights', metadata: 'access_and_usage_rights'
 
     # Migration Source Group
     config.add_show_field 'recordType_ssi', label: 'Record Type', metadata: 'migration_source'
@@ -253,7 +251,6 @@ class CatalogController < ApplicationController
 
     # Blacklight 'out of box code'
     # config.add_search_field 'all_fields', label: 'All Fields'
-
     # Array allows for only listed Solr fields to be searched in the 'All Fields'
     search_fields = [
       'abstract_tesim',
@@ -262,7 +259,8 @@ class CatalogController < ApplicationController
       'alternativeTitle_tesim',
       'alternativeTitleDisplay_tesim',
       'archiveSpaceUri_ssi',
-      'box_ssim',
+      'callNumber_tesim',
+      'containerGrouping_ssim',
       'collectionId_tesim',
       'contents_tesim',
       'contributor_tsim',
@@ -283,8 +281,8 @@ class CatalogController < ApplicationController
       'format_tesim',
       'genre_tesim',
       'identifierMfhd_ssim',
-      'identifierShelfMark_tesim',
-      'identifierShelfMark_ssim',
+      'callNumber_tesim',
+      'callNumber_ssim',
       'illustrativeMatter_tesim',
       'caption_tesim',
       'label_tesim',
@@ -295,11 +293,11 @@ class CatalogController < ApplicationController
       'child_oids_ssim',
       'orbisBarcode_ssi',
       'orbisBibId_ssi',
-      'partOf_tesim',
       'projection_tesim',
+      'creationPlace_tesim',
       'publicationPlace_tesim',
       'publisher_tesim',
-      'references_tesim',
+      'preferredCitation_tesim',
       'repository_ssim',
       'resourceType_tesim',
       'rights_tesim',
@@ -356,10 +354,10 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('identifierShelfMark_tesim', label: 'Call Number') do |field|
+    config.add_search_field('callNumber_tesim', label: 'Call Number') do |field|
       field.qt = 'search'
       field.solr_parameters = {
-        qf: 'identifierShelfMark_tesim',
+        qf: 'callNumber_tesim',
         pf: ''
       }
     end
@@ -386,7 +384,14 @@ class CatalogController < ApplicationController
       }
     end
 
-    subject_fields = ['subjectEra_ssim', 'subjectGeographic_tesim', 'subjectTitle_tsim', 'subjectTitleDisplay_tsim', 'subjectName_ssim', 'subjectName_tesim', 'subjectTopic_tesim', 'subjectTopic_ssim']
+    subject_fields = ['subjectEra_ssim',
+                      'subjectGeographic_tesim',
+                      'subjectTitle_tsim',
+                      'subjectTitleDisplay_tsim',
+                      'subjectName_ssim',
+                      'subjectName_tesim',
+                      'subjectTopic_tesim',
+                      'subjectTopic_ssim']
 
     config.add_search_field('subject_fields', label: 'Subject') do |field|
       field.qt = 'search'

@@ -62,11 +62,11 @@
     <div id='highlights'>
       <h2>Highlights</h2>
       <ul class='clearfix'>
-        <li><%= link_to( search_catalog_path(search_field: 'identifierShelfMark_tesim', q: '"JWJ MSS 26"'), id: 'hughes-papers', class: 'btn') do %>
+        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"JWJ MSS 26"'), id: 'hughes-papers', class: 'btn float-left') do %>
           <div class='highlight-link'>Langston Hughes Papers</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'identifierShelfMark_tesim', q: '"YCAL MSS 46"'), id: 'carson-papers', class: 'btn') do %>
+        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"YCAL MSS 46"'), id: 'carson-papers', class: 'btn float-left') do %>
           <div class='highlight-link'>Rachel Carson Papers</div>
           <% end %>
         </li>
@@ -74,15 +74,15 @@
           <div class='highlight-link'>Divina Commedia</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'identifierShelfMark_tesim', q: '"JWJ MSS 1050"'), id: 'van-vechten-papers', class: 'btn') do %>
+        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"JWJ MSS 1050"'), id: 'van-vechten-papers', class: 'btn float-left') do %>
           <div class='highlight-link'>Carl Van Vechten Papers</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'identifierShelfMark_tesim', q: '"WA MSS S-2368"'), id: 'stenzel-collection', class: 'btn') do %>
-          <div class='highlight-link'>Stenzel Collection of Western American Art</div>
+        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"WA MSS S-2368"'), id: 'stenzel-collection', class: 'btn float-left') do %>
+          <div class='highlight-link'>Stenzel Collection of <br/> Western American Art</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'identifierShelfMark_tesim', q: '"WA Photos 466"'), id: 'lewis-photographs', class: 'btn') do %>
+        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"WA Photos 466"'), id: 'lewis-photographs', class: 'btn float-left') do %>
           <div class='highlight-link'>Jon Lewis Photographs</div>
           <% end %>
         </li>
@@ -109,17 +109,17 @@
       {
         alt: 'Conference attendees at "Camp Spingarn," Amenia, N.Y., August 24-26, 1916',
         caption: 'Conference at "Camp Spingarn," Amenia, N.Y.',
-        src: '../../assets/landing/hero-images/camp-spingarn.jpg',
+        src: '<%= asset_path("landing/hero-images/camp-spingarn.jpg") %>',
       },
       {
         alt: 'Prologue the Gutenberg Bible',
         caption: 'From Gutenberg Bible, 1454',
-        src: '../../assets/landing/hero-images/gutenberg-bible.jpg',
+        src: '<%= asset_path("landing/hero-images/gutenberg-bible.jpg") %>'
       },
       {
         alt: 'Portolan Chart of the Mediterranean Sea',
         caption: 'Portolan Chart of the Mediterranean Sea',
-        src: '../../assets/landing/hero-images/portolan-chart.jpg',
+        src: '<%= asset_path("landing/hero-images/portolan-chart.jpg") %>',
       },
     ]
 

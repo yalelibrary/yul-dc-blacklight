@@ -14,18 +14,16 @@ module CheckAuthorization
     end
 
     # Handle when the 'visibility_ssi' key doesn't exist on the manifest
-    unless @document.key?('visibility_ssi')
-      render json: { error: 'unauthorized' }.to_json, status: 401
-      return false
+    if @document.key?('visibility_ssi')
+      case @document['visibility_ssi']
+      when 'Public'
+        return true
+      when 'Yale Community Only'
+        return true if current_user || User.on_campus?(request.remote_ip)
+      end
     end
-    case @document['visibility_ssi']
-    when 'Public'
-      true
-    when 'Yale Community Only'
-      return true if current_user || User.on_campus?(request.remote_ip)
-      render json: { error: 'unauthorized' }.to_json, status: 401
-      false
-    end
+    render json: { error: 'unauthorized' }.to_json, status: 401
+    false
   end
 
   # Default implementation, to make it easy to override later
