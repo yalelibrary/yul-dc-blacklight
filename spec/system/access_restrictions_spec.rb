@@ -95,6 +95,7 @@ RSpec.describe "access restrictions", type: :system, clean: true do
     end
   end
 
+  # For information about testing locally with browser, see README.md#testing-ip-access-restrictions
   context "a user on the network" do
     around do |example|
       original_yale_networks = ENV['YALE_NETWORK_IPS']
