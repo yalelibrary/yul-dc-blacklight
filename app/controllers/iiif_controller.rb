@@ -18,7 +18,7 @@ class IiifController < ApplicationController
     search_state[:rows] = 1
     search_service_class.new(config: blacklight_config, search_state: search_state, user_params: search_state.to_h, **search_service_context)
     r, d = search_service.search_results do |builder|
-      builder.processor_chain.delete(:show_only_public_records)
+      builder.processor_chain.delete(:filter_by_visibility)
       builder
     end
     [r, d.first]
