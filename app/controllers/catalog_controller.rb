@@ -9,7 +9,6 @@ class CatalogController < ApplicationController
   before_action :determine_per_page
 
   helper_method :gallery_view?
-  helper_method :restriction_message
 
   configure_blacklight do |config|
     # default advanced config values
@@ -477,6 +476,6 @@ class CatalogController < ApplicationController
 
   def show
     super
-    render "catalog/show_unauthorized" unless client_can_view_metadata(@document)
+    render "catalog/show_unauthorized", status: :unauthorized unless client_can_view_metadata?(@document)
   end
 end

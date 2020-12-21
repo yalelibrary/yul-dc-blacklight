@@ -60,6 +60,7 @@ RSpec.describe "access restrictions", type: :system, clean: true do
       expect(page.html).to have_content("You are not authorized to view this item.")
       expect(page.html).not_to match(/universal-viewer-iframe/)
       expect(page.html).not_to have_content("[Map of China]. [private copy]")
+      expect(page).to have_http_status(:unauthorized)
     end
   end
 
@@ -90,6 +91,7 @@ RSpec.describe "access restrictions", type: :system, clean: true do
       visit solr_document_path(private_work[:id])
       expect(page.html).not_to match(/universal-viewer-iframe/)
       expect(page.html).not_to have_content("[Map of China]. [private copy]")
+      expect(page).to have_http_status(:unauthorized)
     end
   end
 
@@ -127,6 +129,7 @@ RSpec.describe "access restrictions", type: :system, clean: true do
       visit solr_document_path(private_work[:id])
       expect(page.html).not_to match(/universal-viewer-iframe/)
       expect(page.html).not_to have_content("[Map of China]. [private copy]")
+      expect(page).to have_http_status(:unauthorized)
     end
   end
 end

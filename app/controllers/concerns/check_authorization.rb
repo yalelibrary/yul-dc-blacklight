@@ -14,7 +14,7 @@ module CheckAuthorization
       render json: { error: 'not-found' }.to_json, status: 404
       return false
     end
-    return true if client_can_access(@document)
+    return true if client_can_view_digital?(@document)
     render json: { error: 'unauthorized' }.to_json, status: 401
     false
   end
