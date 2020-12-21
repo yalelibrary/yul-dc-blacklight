@@ -87,7 +87,7 @@ RSpec.describe "access restrictions", type: :system, clean: true do
       expect(page.html).to match(/universal-viewer-iframe/)
     end
 
-    it "does not displays universal viewer or metadata for private works" do
+    it "does not display universal viewer or metadata for private works" do
       visit solr_document_path(private_work[:id])
       expect(page.html).not_to match(/universal-viewer-iframe/)
       expect(page.html).not_to have_content("[Map of China]. [private copy]")
@@ -125,7 +125,7 @@ RSpec.describe "access restrictions", type: :system, clean: true do
       expect(page.html).to have_content("[Map of China]. [yale-only copy]")
     end
 
-    it "does not displays universal viewer or metadata for private works" do
+    it "does not display universal viewer or metadata for private works" do
       visit solr_document_path(private_work[:id])
       expect(page.html).not_to match(/universal-viewer-iframe/)
       expect(page.html).not_to have_content("[Map of China]. [private copy]")
