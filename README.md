@@ -212,3 +212,9 @@ If styling is needed for a test to pass, tag the test with `style:true`
 ## Test coverage
 
 We use [coveralls](https://coveralls.io/github/yalelibrary/yul-dc-blacklight) to measure test coverage. More details [here](https://github.com/yalelibrary/yul-dc-blacklight/wiki/code-coverage).
+
+## Testing IP Access Restrictions
+
+By default, when running locally, your IP will not be considered "On Campus," so you will not be able to view Yale Community Only items unless you log in.
+
+To test having an IP which is considered "On Campus" so that you can view Yale Community Only items without logging in, start with `YALE_NETWORK_IPS=10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1 cam up`.

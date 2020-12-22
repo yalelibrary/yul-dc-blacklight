@@ -2,6 +2,8 @@
 
 module CheckAuthorization
   extend ActiveSupport::Concern
+  include AccessHelper
+
   included do
     before_action :check_authorization
   end
@@ -12,16 +14,7 @@ module CheckAuthorization
       render json: { error: 'not-found' }.to_json, status: 404
       return false
     end
-
-    # Handle when the 'visibility_ssi' key doesn't exist on the manifest
-    if @document.key?('visibility_ssi')
-      case @document['visibility_ssi']
-      when 'Public'
-        return true
-      when 'Yale Community Only'
-        return true if current_user || User.on_campus?(request.remote_ip)
-      end
-    end
+    return true if client_can_view_digital?(@document)
     render json: { error: 'unauthorized' }.to_json, status: 401
     false
   end

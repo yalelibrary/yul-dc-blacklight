@@ -4,6 +4,7 @@ class CatalogController < ApplicationController
   include Blacklight::Catalog
   include Blacklight::Marc::Catalog
   include BlacklightRangeLimit::ControllerOverride
+  include AccessHelper
 
   before_action :determine_per_page
 
@@ -471,5 +472,10 @@ class CatalogController < ApplicationController
   def determine_per_page
     grouping = gallery_view? ? [9, 30, 60, 99] : [10, 20, 50, 100]
     blacklight_config[:per_page] = grouping
+  end
+
+  def show
+    super
+    render "catalog/show_unauthorized", status: :unauthorized unless client_can_view_metadata?(@document)
   end
 end

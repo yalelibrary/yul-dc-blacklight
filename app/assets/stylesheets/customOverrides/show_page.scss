@@ -175,6 +175,10 @@ DEFAULT MOBILE STYLING
   font-weight: 300;
 }
 
+h2.yale-restricted-work-text {
+  font-size: 1.5em;
+} 
+
 @media screen and (min-width: $medium_device) {
   .constraints-container {
     margin-left: -.5%;
