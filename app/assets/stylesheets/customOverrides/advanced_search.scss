@@ -51,7 +51,7 @@ DEFAULT MOBILE STYLING
   color: $yale_blue;
   text-transform: uppercase;
   font-size: 16px;
-  font: $mallory_medium;
+  font: $mallory_medium, Arial, Helvetica, sans-serif;
   font-weight: bold;
 }
 //Sort text next to button
@@ -60,7 +60,7 @@ DEFAULT MOBILE STYLING
   font-weight: bold;
   font-size: 12px;
   text-transform: uppercase;
-  font: $mallory_mp_black;
+  font: $mallory_mp_black, $mallory_medium, Arial, Helvetica, sans-serif;
   padding-left: 30px;
   margin-top: 20px;
 }
@@ -84,7 +84,7 @@ DEFAULT MOBILE STYLING
   text-transform: uppercase;
   font-size: 16px;
   font-weight: bold;
-  font: $mallory_mp_medium;
+  font: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
  }
 
 .input-match {
