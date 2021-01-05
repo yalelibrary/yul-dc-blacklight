@@ -110,7 +110,7 @@ input.btn:nth-child(2) {
 }
 
 .adv-search-help h2 {
-  font-family: $yale_new_roman, $mallory_medium, Arial, Helvetica, sans-serif;
+  font-family: $yale_new_roman, 'Times New Roman', Times, serif !important;
   font-size: 28px;
   font-weight: 500;
   color: $yale_blue;
@@ -142,7 +142,7 @@ input.btn:nth-child(2) {
   color: $medium_grey;
 }
 
-//Do we want the advanced search to also change state? 
+//Do we want the advanced search to also change state?
 .btn-secondary:not(:disabled):not(.disabled):hover {
   color: $yale_blue;
 }
