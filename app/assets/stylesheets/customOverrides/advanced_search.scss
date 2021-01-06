@@ -51,7 +51,7 @@ DEFAULT MOBILE STYLING
   color: $yale_blue;
   text-transform: uppercase;
   font-size: 16px;
-  font: $mallory_medium;
+  font: $mallory_medium, Arial, Helvetica, sans-serif;
   font-weight: bold;
 }
 //Sort text next to button
@@ -60,7 +60,7 @@ DEFAULT MOBILE STYLING
   font-weight: bold;
   font-size: 12px;
   text-transform: uppercase;
-  font: $mallory_mp_black;
+  font: $mallory_mp_black, $mallory_medium, Arial, Helvetica, sans-serif;
   padding-left: 30px;
   margin-top: 20px;
 }
@@ -84,7 +84,7 @@ DEFAULT MOBILE STYLING
   text-transform: uppercase;
   font-size: 16px;
   font-weight: bold;
-  font: $mallory_mp_medium;
+  font: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
  }
 
 .input-match {
@@ -110,7 +110,7 @@ input.btn:nth-child(2) {
 }
 
 .adv-search-help h2 {
-  font-family: $yale_new_roman, $mallory_medium, Arial, Helvetica, sans-serif;
+  font-family: $yale_new_roman, 'Times New Roman', Times, serif !important;
   font-size: 28px;
   font-weight: 500;
   color: $yale_blue;
@@ -142,7 +142,7 @@ input.btn:nth-child(2) {
   color: $medium_grey;
 }
 
-//Do we want the advanced search to also change state? 
+//Do we want the advanced search to also change state?
 .btn-secondary:not(:disabled):not(.disabled):hover {
   color: $yale_blue;
 }

@@ -101,7 +101,7 @@ DEFAULT MOBILE STYLING
 //Title on Single Items and Search Result pages
 //Replace Yale Roman with Yale Display when its available.
 .show-header {
-  font-family: $yale_new_roman, $mallory_medium, Arial, Helvetica, sans-serif !important;
+  font-family: $yale_new_roman, 'Times New Roman', Times, serif !important;
   font-size: 1.5rem;
   color: $yale_blue;
   padding-left: 8%;
@@ -153,7 +153,7 @@ DEFAULT MOBILE STYLING
 
 .single-item-show.metadata-block h2 {
   color: $yale_blue;
-  font-family: $yale_new_roman, $mallory_medium, Arial, Helvetica, sans-serif !important;
+  font-family: $yale_new_roman, 'Times New Roman', Times, serif !important;
   font-size: 28px;
 }
 

@@ -8,7 +8,7 @@ DEFAULT MOBILE STYLING
   background: transparent;
   border: transparent;
   font-size: 16px;
-  font-family: $mallory_medium;
+  font-family: $mallory_medium, Arial, Helvetica, sans-serif;
   text-transform: uppercase;
   display: block !important;
 }
@@ -55,7 +55,7 @@ DEFAULT MOBILE STYLING
 .navbar-search .submit-search-text {
   text-transform: uppercase;
   font-size: 16px;
-  font-family: $mallory_medium;
+  font-family: $mallory_medium, Arial, Helvetica, sans-serif;
 }
 
 
@@ -102,7 +102,7 @@ DEFAULT MOBILE STYLING
 .search-q {
   font-size: 16px;
   color: $black;
-  font-family: $mallory_book $mallory_light, Arial, Helvetica, sans-serif !important;
+  font-family: $mallory_book, $mallory_light, Arial, Helvetica, sans-serif !important;
 }
 
 
