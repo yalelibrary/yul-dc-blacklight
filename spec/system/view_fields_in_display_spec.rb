@@ -43,7 +43,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       subjectGeographic_tesim: "this is the geo subject",
       resourceType_ssim: "this is the resource type",
       subjectName_ssim: "this is the subject name",
-      subjectTopic_tesim: "this is the subject topic",
+      subjectTopic_tesim: ["this is the subject topic", "these are the subject topics"],
       extentOfDigitization_ssim: 'this is the extent of digitization',
       rights_ssim: "these are the rights",
       creationPlace_ssim: "this is the publication place",
@@ -230,6 +230,10 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'contains a link on the Finding Aid to the Finding Aid catalog record' do
       expect(page).to have_link('this is the finding aid', href: 'this is the finding aid')
+    end
+    it 'contains a link on subject (topic) to its facet' do
+      expect(page).to have_link('this is the subject topic', href: '/catalog?f%5BsubjectTopic_tesim%5D%5B%5D=this is the subject topic')
+      expect(page).to have_link('these are the subject topics', href: '/catalog?f%5BsubjectTopic_tesim%5D%5B%5D=these are the subject topics')
     end
   end
 
