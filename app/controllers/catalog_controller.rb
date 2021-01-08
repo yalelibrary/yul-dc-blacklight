@@ -194,7 +194,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'material_tesim', label: 'Material', metadata: 'keyword'
     config.add_show_field 'resourceType_ssim', label: 'Resource Type', metadata: 'keyword', link_to_facet: true
     config.add_show_field 'subjectName_ssim', label: 'Subject (Name)', metadata: 'keyword', helper_method: :join_with_br
-    config.add_show_field 'subjectTopic_tesim', label: 'Subject (Topic)', metadata: 'keyword', helper_method: :join_with_br
+    config.add_show_field 'subjectTopic_ssim', label: 'Subject (Topic)', metadata: 'keyword', link_to_facet: true, helper_method: :faceted_join_with_br
 
     # Origin Group
     config.add_show_field 'creator_ssim', label: 'Creator', metadata: 'origin', link_to_facet: true
