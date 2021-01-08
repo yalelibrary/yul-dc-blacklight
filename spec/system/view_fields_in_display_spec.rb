@@ -43,7 +43,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       subjectGeographic_tesim: "this is the geo subject",
       resourceType_ssim: "this is the resource type",
       subjectName_ssim: "this is the subject name",
-      subjectTopic_tesim: ["this is the subject topic", "these are the subject topics"],
+      subjectTopic_ssim: ['this is the subject topic', 'these are the subject topics'],
       extentOfDigitization_ssim: 'this is the extent of digitization',
       rights_ssim: "these are the rights",
       creationPlace_ssim: "this is the publication place",
@@ -129,6 +129,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays the Subject (Topic) in results' do
       expect(document).to have_content("this is the subject topic")
+      expect(document).to have_content("these are the subject topics")
     end
     it 'displays the Resource Type in results' do
       expect(document).to have_content("this is the resource type")
