@@ -28,12 +28,12 @@ $('.blacklight-year_i').data('plot-config', {
 $(document).on('turbolinks:load', function() {
     $(".wrapper-button").click(function(e){
         let href = $(this).find("a").prop("href");
-        if (href) document.location = href;
         e.preventDefault();
+        if (href) Turbolinks.visit(href);
     });
     $(".href-button").click(function(e){
         let href = $(this).attr("href");
-        if (href) document.location = href;
         e.preventDefault();
+        if (href) Turbolinks.visit(href);
     });
 })
