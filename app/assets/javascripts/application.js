@@ -31,7 +31,15 @@ $(document).on('turbolinks:load', function() {
         e.preventDefault();
         if (href) Turbolinks.visit(href);
     });
-    $(".href-button").click(function(e){
+    $(".convert-to-button").each(function(ix, element) {
+        if (element.tagName === "A") {
+            let buttonElement = $(element.outerHTML.replace(/^<a/, "<button").replace(/<\/a>$/, "</button>"));
+            buttonElement.addClass("href-button");
+            buttonElement.removeClass("convert-to-button");
+            $(element).replaceWith(buttonElement);
+        }
+    });
+    $(".href-button").click(function (e){
         let href = $(this).attr("href");
         e.preventDefault();
         if (href) Turbolinks.visit(href);
