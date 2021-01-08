@@ -71,9 +71,10 @@ a {
   color: $yale_blue;
 }
 
-.btn.btn-outline-secondary.remove > .remove-icon {
+.remove-icon {
   position: relative;
-  top: 1px
+  top: 1px;
+  margin-right: 5px;
 }
 
 .start-over-icon {

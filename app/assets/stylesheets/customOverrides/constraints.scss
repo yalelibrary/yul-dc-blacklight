@@ -63,6 +63,26 @@ DEFAULT MOBILE STYLING
   filter: invert(54%) sepia(54%) saturate(3969%) hue-rotate(192deg) brightness(103%) contrast(108%);
 }
 
+.catalog_startOverLink:active a {
+  color: white;
+}
+
+.constraints-container {
+  .catalog_startOverLink {
+    color: $yale_blue
+  }
+  .catalog_startOverLink:focus, .catalog_startOverLink:hover, .catalog_startOverLink:active {
+    background: $yale_blue;
+    color: white;
+    a {
+      color: white;
+    }
+    .start-over-image {
+      filter: invert(100%);
+    }
+  }
+}
+
 .filter-name{
   margin-top: 1px;
   position: relative;

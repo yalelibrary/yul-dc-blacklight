@@ -25,3 +25,15 @@ $('.blacklight-year_i').data('plot-config', {
     grid: { color: '#aaaaaa', tickColor: '#aaaaaa', borderWidth: 0 }
 });
 
+$(document).on('turbolinks:load', function() {
+    $(".wrapper-button").click(function(e){
+        let href = $(this).find("a").prop("href");
+        if (href) document.location = href;
+        e.preventDefault();
+    });
+    $(".href-button").click(function(e){
+        let href = $(this).attr("href");
+        if (href) document.location = href;
+        e.preventDefault();
+    });
+})
