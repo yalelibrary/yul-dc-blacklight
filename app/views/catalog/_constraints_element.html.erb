@@ -16,7 +16,7 @@
     <% unless value.blank? %>
       <%= content_tag :span, value, class: 'filter-value'%>
       <!-- icon to remove-->
-      <%= content_tag(:span, image_tag('x2x.png', alt: ""), class: 'remove-icon')  %>
+      <%= content_tag(:span, image_tag('x2x.png', alt: "remove"), class: 'remove-icon')  %>
     <% end %>
   </button>
 </span>
