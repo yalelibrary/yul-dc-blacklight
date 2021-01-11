@@ -28,9 +28,6 @@ $('.blacklight-year_i').data('plot-config', {
 /**
  * Setup button functionality.
  * 
- * Buttons with 'wrapper-button' class will follow anchor links contained in the button when clicked. This allows SPACE
- * to cause the anchor inside a button to be followed.
- *
  * Buttons with 'href-button' class will be setup to follow the button tags href property when the button is clicked.  
  * This allows us to setup an onclick event for all buttons with this class in the JS file rather than adding the 
  * JS to each button. It follows the links using Turbolinks.
@@ -47,11 +44,6 @@ $('.blacklight-year_i').data('plot-config', {
  * Turbolinks.visit() is equivalent to setting document.location, but using turbolinks when possible.
  */
 $(document).on('turbolinks:load', function() {
-    $(".wrapper-button").click(function(e){
-        let href = $(this).find("a").prop("href");
-        e.preventDefault();
-        if (href) Turbolinks.visit(href);
-    });
     $(".convert-to-button").each(function(ix, element) {
         if (element.tagName === "A") {
             let buttonElement = $(element.outerHTML.replace(/^<a/, "<button").replace(/<\/a>$/, "</button>"));
