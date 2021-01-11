@@ -297,7 +297,10 @@ DEFAULT MOBILE STYLING
   #hero-search {
     .btn-primary:hover {
       border: 2px solid $darkest_grey;
-      background-color: $light_grey;
+      background: white;
+    }
+    .btn-primary:hover:active {
+      background: $yale_blue;
     }
 
     h1 {
@@ -312,7 +315,6 @@ DEFAULT MOBILE STYLING
       display: initial;
       margin-left: 8px;
       font-size: 20px;
-      color: $yale_blue;
       font-family: $mallory_mp_medium, Arial, Helvetica, sans-serif !important;
       width: 129px;
       text-transform: uppercase;

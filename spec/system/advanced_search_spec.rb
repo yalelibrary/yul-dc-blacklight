@@ -247,8 +247,8 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
 
     it 'renders footer buttons' do
       expect(page).to have_button 'SEARCH'
-      expect(page).to have_link 'CLEAR', href: "/advanced"
-      expect(page).to have_link 'BASIC SEARCH', href: "/"
+      expect(page).to have_button 'CLEAR'
+      expect(page).to have_button 'BASIC SEARCH'
     end
 
     it 'renders header border' do
@@ -271,7 +271,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
     it 'renders the button on the homepage' do
       visit search_catalog_path
       expect(page).to have_css '.advanced_search'
-      expect(page).to have_link('Advanced Search', href: '/advanced')
+      expect(page).to have_button('Advanced Search')
       find('.advanced_search').hover
     end
   end

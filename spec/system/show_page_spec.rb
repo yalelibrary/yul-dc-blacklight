@@ -75,12 +75,15 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   end
   context '"Back to Search Results" button' do
     it 'returns user to search results' do
-      expect(page).to have_link("Back to Search Results", href: "/catalog?page=1&per_page=10&search_field=all_fields")
+      expect(page).to have_button("Back to Search Results")
+      expect(page).to have_xpath("//button[@href='/catalog?page=1&per_page=10&search_field=all_fields']")
     end
   end
   context '"Start Over" button' do
     it 'returns user to homepage' do
-      expect(page).to have_link("Start Over", href: "/catalog")
+      expect(page).to have_button "Start Over"
+      expect(page).to have_xpath("//button[@href='/catalog']")
+      expect(page.first('button.catalog_startOverLink').text).to eq 'Start Over'
     end
   end
 end
