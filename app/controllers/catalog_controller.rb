@@ -124,6 +124,7 @@ class CatalogController < ApplicationController
     # the facets below are set to false because we aren't filtering on them from the main search page
     # but we need to be able to provide a label when they are filtered upon from an individual show page
     config.add_facet_field 'callNumber_ssim', label: 'Call Number', show: false
+    config.add_facet_field 'subjectGeographic_ssim', label: 'Subject (Geographic)', show: false
 
     # This was example code after running rails generate blacklight_range_limit:install
     # config.add_facet_field 'example_query_facet_field', label: 'Publish Date', query: {
@@ -190,10 +191,10 @@ class CatalogController < ApplicationController
     # Keywords Group
     config.add_show_field 'format', label: 'Format', metadata: 'keyword', link_to_facet: true
     config.add_show_field 'genre_ssim', label: 'Genre', metadata: 'keyword', link_to_facet: true, helper_method: :faceted_join_with_br
-    config.add_show_field 'subjectGeographic_tesim', label: 'Subject (Geographic)', metadata: 'keyword', helper_method: :join_with_br
+    config.add_show_field 'subjectGeographic_ssim', label: 'Subject (Geographic)', metadata: 'keyword', link_to_facet: true, helper_method: :faceted_join_with_br
     config.add_show_field 'material_tesim', label: 'Material', metadata: 'keyword'
     config.add_show_field 'resourceType_ssim', label: 'Resource Type', metadata: 'keyword', link_to_facet: true
-    config.add_show_field 'subjectName_ssim', label: 'Subject (Name)', metadata: 'keyword', helper_method: :join_with_br
+    config.add_show_field 'subjectName_ssim', label: 'Subject (Name)', metadata: 'keyword', link_to_facet: true, helper_method: :faceted_join_with_br
     config.add_show_field 'subjectTopic_ssim', label: 'Subject (Topic)', metadata: 'keyword', link_to_facet: true, helper_method: :faceted_join_with_br
 
     # Origin Group
