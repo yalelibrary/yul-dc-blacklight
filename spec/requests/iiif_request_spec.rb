@@ -28,6 +28,19 @@ RSpec.describe "Iiifs", type: :request do
   end
 
   context 'as an unauthenticated user' do
+    describe 'GET /show' do
+      let(:logger_mock) { instance_double("Rails.logger").as_null_object }
+      it 'redirects to HTML page' do
+        allow(Rails.logger).to receive(:warn) { :logger_mock }
+        get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/5555555/full/!200,200/0/default.jpg" }
+        expect(response).to have_http_status(:success)
+        expect(Rails.logger).to have_received(:warn)
+          .with("starting search for item for /iiif/2/5555555/full/!200,200/0/default.jpg")
+          .with("starting authorization check for /iiif/2/5555555/full/!200,200/0/default.jpg")
+          .with("starting client can view digital check for /iiif/2/5555555/full/!200,200/0/default.jpg")
+      end
+    end
+
     it 'display if set to public' do
       get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/5555555/full/!200,200/0/default.jpg" }
 
