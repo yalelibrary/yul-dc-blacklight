@@ -40,9 +40,9 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       abstract_tesim: "this is an abstract",
       alternativeTitle_tesim: "this is an alternative title",
       genre_ssim: ["this is the genre", "this is the second genre"],
-      subjectGeographic_tesim: "this is the geo subject",
+      subjectGeographic_ssim: ['this is the geo subject', 'these are the geo subjects'],
       resourceType_ssim: "this is the resource type",
-      subjectName_ssim: "this is the subject name",
+      subjectName_ssim: ['this is the subject name', 'these are the subject names'],
       subjectTopic_ssim: ['this is the subject topic', 'these are the subject topics'],
       extentOfDigitization_ssim: 'this is the extent of digitization',
       rights_ssim: "these are the rights",
@@ -126,6 +126,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays the Subject (Geographic) in results' do
       expect(document).to have_content("this is the geo subject")
+      expect(document).to have_content("these are the geo subjects")
     end
     it 'displays the Subject (Topic) in results' do
       expect(document).to have_content("this is the subject topic")
@@ -136,6 +137,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays the Subject (Name) in results' do
       expect(document).to have_content("this is the subject name")
+      expect(document).to have_content("these are the subject names")
     end
     it 'displays the Extend of Digitization in results' do
       expect(document).to have_content("this is the extent of digitization")
@@ -235,6 +237,14 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'contains a link on subject (topic) to its facet' do
       expect(page).to have_link('this is the subject topic', href: '/catalog?f%5BsubjectTopic_ssim%5D%5B%5D=this is the subject topic')
       expect(page).to have_link('these are the subject topics', href: '/catalog?f%5BsubjectTopic_ssim%5D%5B%5D=these are the subject topics')
+    end
+    it 'contains a link on subject (name) to its facet' do
+      expect(page).to have_link('this is the subject name', href: '/catalog?f%5BsubjectName_ssim%5D%5B%5D=this is the subject name')
+      expect(page).to have_link('these are the subject names', href: '/catalog?f%5BsubjectName_ssim%5D%5B%5D=these are the subject names')
+    end
+    it 'contains a link on subject (geographic) to its facet' do
+      expect(page).to have_link('this is the geo subject', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=this is the geo subject')
+      expect(page).to have_link('these are the geo subjects', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=these are the geo subjects')
     end
   end
 
