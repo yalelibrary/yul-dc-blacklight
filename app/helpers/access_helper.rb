@@ -5,6 +5,7 @@ module AccessHelper
   end
 
   def client_can_view_digital?(document)
+    Rails.logger.warn("starting client can view digital check for #{request.env['HTTP_X_ORIGIN_URI']}")
     case document['visibility_ssi']
     when 'Public'
       return true

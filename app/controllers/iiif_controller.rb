@@ -13,6 +13,7 @@ class IiifController < ApplicationController
 
   # IIIF doesn't just return the oid, find the child, then find the oid from there
   def search_for_item
+    Rails.logger.warn("starting search for item for #{request.headers['X-Origin-URI']}")
     child_oid = request.headers['X-Origin-URI'].gsub(/^\/iiif\/2\/(\d+)\/.*/, '\1')
     search_state[:q] = { child_oids_ssim: child_oid }
     search_state[:rows] = 1
