@@ -197,6 +197,11 @@ DEFAULT MOBILE STYLING
   background-image: image-url('landing/highlight-coming-soon.png');
 }
 
+#content-statement {
+  margin-top: -100px;
+  margin-bottom: 50px;
+}
+
 @media screen and (min-width: $small_device) {
   #hero {
     .intro {
