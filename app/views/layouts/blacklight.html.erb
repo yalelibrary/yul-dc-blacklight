@@ -1,9 +1,5 @@
 <% content_for(:content) do %>
 
-	<!-- For BugHerd user feedback issue tracking -->
-	<script type="text/javascript" src="https://www.bugherd.com/sidebarv2.js?apikey=1ws6agf4j61dyolkgxnxaa" async="true"></script>
-  <!-- end of BugHerd customization -->
-
 	<% if content_for? :sidebar %>
     <section id="content" class="<%= main_content_classes %> order-last" aria-label="<%= t('blacklight.search.documents.aria.search_results') %>">
       <%= yield %>
