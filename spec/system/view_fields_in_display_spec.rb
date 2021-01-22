@@ -163,8 +163,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the Source in results' do
       expect(document).to have_content("this is the source")
     end
-    it 'displays the Record Type in results' do
-      expect(document).to have_content("this is the record type")
+    it 'does not display the Record Type in results' do
+      expect(document).not_to have_content("this is the record type")
     end
     it 'displays the Source Title in results' do
       expect(document).to have_content("this is the source title")
