@@ -51,7 +51,6 @@ ADVANCED_SEARCH_TESTING_1 = {
                         "Islamic binding"],
   "title_tesim": ["Record 1"],
   "title_ssim": ["Record 1"],
-  "uri_ssim": ["/ladybird/oid/11607445"],
   "visibility_ssi": "Public",
   "orbisBibId_ssim": ["3832098"],
   "references_ssim": ["Brockelmann, S I, pp. 237, 239, 252."]
@@ -129,7 +128,6 @@ ADVANCED_SEARCH_TESTING_2 = {
                         "Manuscripts, Medieval--Connecticut--New Haven",
                         "Medieval and Renaissance Manuscripts in Beinecke Library"],
   "title_tesim": ["Record 2"],
-  "uri_ssim": ["/ladybird/oid/11684565"],
   "url_suppl_ssim": ["https://pre1600ms.beinecke.library.yale.edu/docs/pre1600.ms002.htm"],
   "visibility_ssi": "Public",
   "orbisBarcode_ssim": ["39002091594300"],
