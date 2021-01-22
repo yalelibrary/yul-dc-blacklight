@@ -64,7 +64,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       orbisBibId_ssi: '1234567',
       findingAid_ssim: 'this is the finding aid',
       edition_ssim: 'this is the edition',
-      uri_ssim: 'this is the URI',
       numberOfPages_ssim: "this is the number of pages, using ssim",
       material_tesim: "this is the material, using ssim",
       scale_tesim: "this is the scale, using ssim",
@@ -199,9 +198,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays the Edition in results' do
       expect(document).to have_content("this is the edition")
-    end
-    it 'displays the URI in results' do
-      expect(document).to have_content("this is the URI")
     end
     it 'displays the call number in results as link' do
       expect(page).to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number')
