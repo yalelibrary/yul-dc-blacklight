@@ -51,8 +51,8 @@
             </span>
           </div>
         <% end %>
-        <p class="d-none d-xl-block">
-          Yale University Libraries Digital Collections provides access to millions of digitized works and images from our collections. At launch, you can browse hundreds of thousands of works from the Beinecke Rare Book & Manuscript Library’s collections of literary archives, early manuscripts, and rare books.
+        <p class="d-none d-xl-block" style="font-size: medium;">
+          Yale University Library’s digital collections provide access to millions of digitized works and images. As of January 2021, Beinecke Library digital collections have been moved to a new platform for improved viewing. Over time, material from other Yale Library digital collections will be added to the platform. Click on an image or use the search box to explore Beinecke digital collections. Begin your <a href="https://web.library.yale.edu/digital-collections" class="link-white">search for all other Yale Library digital collections here</a>.
         </p>
       </div>
     </div>
@@ -90,9 +90,10 @@
           <div class='highlight-link'>Declaration of Independence</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'all_fields', q: ''), id: 'coming-soon', class: 'btn') do %>
-          <div class='highlight-link'>Coming soon...</div>
-          <% end %>
+        <li>
+          <div id="coming-soon" class="btn cursor-default">
+            <div class='highlight-link'>More coming soon...</div>
+          </div>
         </li>
       </ul>
     </div>
