@@ -212,6 +212,11 @@ DEFAULT MOBILE STYLING
   margin-bottom: 50px;
 }
 
+#content-statement a{
+  margin-left: 0px !important;
+}
+
+
 @media screen and (min-width: $small_device) {
   #hero {
     .intro {
