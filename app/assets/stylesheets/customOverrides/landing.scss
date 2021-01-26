@@ -21,6 +21,11 @@ DEFAULT MOBILE STYLING
     }
   }
 
+  .link-white {
+    color: #fff;
+    text-decoration: underline;
+  }
+
   #hero-image {
     height: 100%;
     object-fit: cover;
@@ -146,6 +151,10 @@ DEFAULT MOBILE STYLING
       font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
     }
 
+    .cursor-default {
+      cursor: default;
+    }
+
     #main-container {
       max-width: max-content;
       position: relative;
@@ -198,7 +207,8 @@ DEFAULT MOBILE STYLING
 }
 
 #content-statement {
-  margin-top: -100px;
+  margin-top: -150px;
+  margin-right: 30px;
   margin-bottom: 50px;
 }
 
