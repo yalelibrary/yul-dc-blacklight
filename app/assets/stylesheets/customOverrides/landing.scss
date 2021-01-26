@@ -206,13 +206,7 @@ DEFAULT MOBILE STYLING
   background-image: image-url('landing/highlight-coming-soon.png');
 }
 
-#content-statement {
-  margin-top: -150px;
-  margin-right: 30px;
-  margin-bottom: 50px;
-}
-
-#content-statement a{
+#content-statement a {
   margin-left: 0px !important;
 }
 
@@ -233,6 +227,12 @@ DEFAULT MOBILE STYLING
       margin: 60px auto 30px;
     }
   }
+
+  #content-statement {
+    margin-top: -5px;
+    margin-bottom: 50px;
+  }
+  
 }
 
 
@@ -300,6 +300,11 @@ DEFAULT MOBILE STYLING
    .item-lewis-photographs {
      margin-top: 0;
    }
+
+   #content-statement {
+    margin-top: -50px;
+    margin-bottom: 50px;
+  }
  }
 
 
@@ -383,6 +388,12 @@ DEFAULT MOBILE STYLING
   #declaration-of-independence {
     text-align: left;
   }
+
+  #content-statement {
+    margin-top: -175px;
+    margin-bottom: 50px;
+  }
+
 }
 
 
@@ -456,5 +467,14 @@ DEFAULT MOBILE STYLING
 
     #stenzel-collection div {
       margin-bottom: 55%;
+    }
+
+    #content-statement {
+      margin-top: -175px;
+      margin-bottom: 50px;
+    }
+
+    #content-statement p {
+      margin-left:-30px;
     }
   }
