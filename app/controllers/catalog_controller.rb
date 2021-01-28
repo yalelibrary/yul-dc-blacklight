@@ -182,7 +182,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'abstract_tesim', label: 'Abstract', metadata: 'description'
     config.add_show_field 'alternativeTitle_tesim', label: 'Alternative Title', metadata: 'description'
     config.add_show_field 'description_tesim', label: 'Description', metadata: 'description', helper_method: :join_with_br
-    config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description'
+    config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', metadata: 'description'
     config.add_show_field 'numberOfPages_ssim', label: 'Number of Pages', metadata: 'description'
     config.add_show_field 'preferredCitation_tesim', label: 'References', metadata: 'description'
