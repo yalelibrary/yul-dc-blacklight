@@ -151,6 +151,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'creator_tesim', label: 'Creator', highlight: true
     config.add_index_field 'date_ssim', label: 'Published / Created', highlight: true
     config.add_index_field 'callNumber_tesim', label: 'Call Number', highlight: true
+    config.add_index_field 'sourceTitle_tesim', label: 'Collection Title', highlight: true
     config.add_index_field 'imageCount_isi', label: 'Image Count'
     config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true
     config.add_index_field 'abstract_tesim', label: 'Abstract', highlight: true, solr_params: disp_highlight_on_search_params
@@ -180,8 +181,8 @@ class CatalogController < ApplicationController
     # Description Group
     config.add_show_field 'abstract_tesim', label: 'Abstract', metadata: 'description'
     config.add_show_field 'alternativeTitle_tesim', label: 'Alternative Title', metadata: 'description'
-    config.add_show_field 'description_tesim', label: 'Description', metadata: 'description'
-    config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description'
+    config.add_show_field 'description_tesim', label: 'Description', metadata: 'description', helper_method: :join_with_br
+    config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', metadata: 'description'
     config.add_show_field 'numberOfPages_ssim', label: 'Number of Pages', metadata: 'description'
     config.add_show_field 'preferredCitation_tesim', label: 'References', metadata: 'description'
@@ -211,7 +212,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceDate_tesim', label: 'Source Date', metadata: 'origin'
     config.add_show_field 'sourceEdition_tesim', label: 'Source Edition', metadata: 'origin'
     config.add_show_field 'sourceNote_tesim', label: 'Source Note', metadata: 'origin'
-    config.add_show_field 'sourceTitle_tesim', label: 'Source Title', metadata: 'origin'
+    config.add_show_field 'sourceTitle_tesim', label: 'Collection Title', metadata: 'origin'
 
     # Identifiers Group
     config.add_show_field 'containerGrouping_ssim', label: 'Container / Volume Information', metadata: 'identifier'
