@@ -196,15 +196,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'edition_ssim', label: 'Edition', metadata: 'description'
     config.add_show_field 'language_ssim', label: 'Language', metadata: 'description', helper_method: :language_codes_as_links
 
-    # Subjects, Formats, and Genres Group
-    config.add_show_field 'format', label: 'Format', metadata: 'subjects,_formats,_and_genres', link_to_facet: true
-    config.add_show_field 'genre_ssim', label: 'Genre', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
-    config.add_show_field 'material_tesim', label: 'Material', metadata: 'subjects,_formats,_and_genres'
-    config.add_show_field 'resourceType_ssim', label: 'Resource Type', metadata: 'subjects,_formats,_and_genres', link_to_facet: true
-    config.add_show_field 'subjectGeographic_ssim', label: 'Subject (Geographic)', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
-    config.add_show_field 'subjectName_ssim', label: 'Subject (Name)', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
-    config.add_show_field 'subjectTopic_ssim', label: 'Subject (Topic)', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
-
     # Collection Information Group
     config.add_show_field 'callNumber_ssim', label: 'Call Number', metadata: 'collection_information', link_to_facet: true
     config.add_show_field 'sourceTitle_tesim', label: 'Collection Title', metadata: 'collection_information'
@@ -215,15 +206,24 @@ class CatalogController < ApplicationController
     config.add_show_field 'containerGrouping_ssim', label: 'Container / Volume Information', metadata: 'collection_information'
     config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'collection_information', helper_method: :link_to_url
 
+    # Subjects, Formats, and Genres Group
+    config.add_show_field 'format', label: 'Format', metadata: 'subjects,_formats,_and_genres', link_to_facet: true
+    config.add_show_field 'genre_ssim', label: 'Genre', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
+    config.add_show_field 'material_tesim', label: 'Material', metadata: 'subjects,_formats,_and_genres'
+    config.add_show_field 'resourceType_ssim', label: 'Resource Type', metadata: 'subjects,_formats,_and_genres', link_to_facet: true
+    config.add_show_field 'subjectGeographic_ssim', label: 'Subject (Geographic)', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
+    config.add_show_field 'subjectName_ssim', label: 'Subject (Name)', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
+    config.add_show_field 'subjectTopic_ssim', label: 'Subject (Topic)', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
+
     # Access and Usage Rights Group
     config.add_show_field 'visibility_ssi', label: 'Access', metadata: 'access_and_usage_rights'
     config.add_show_field 'rights_ssim', label: 'Rights', metadata: 'access_and_usage_rights'
-    config.add_show_field 'preferredCitation_tesim', label: 'References', metadata: 'access_and_usage_rights'
+    config.add_show_field 'preferredCitation_tesim', label: 'Citation', metadata: 'access_and_usage_rights'
 
     # Identifiers Group
-    config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID', metadata: 'identifier', helper_method: :link_to_orbis_bib_id
-    config.add_show_field 'oid_ssi', label: 'OID', metadata: 'identifier'
-    config.add_show_field 'url_suppl_ssim', label: 'More Information', metadata: 'identifier'
+    config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID', metadata: 'identifiers', helper_method: :link_to_orbis_bib_id
+    config.add_show_field 'oid_ssi', label: 'OID', metadata: 'identifiers'
+    config.add_show_field 'url_suppl_ssim', label: 'More Information', metadata: 'identifiers'
 
     # # Migration Source Group
     #     config.add_show_field 'recordType_ssi', label: 'Record Type', metadata: 'migration_source'

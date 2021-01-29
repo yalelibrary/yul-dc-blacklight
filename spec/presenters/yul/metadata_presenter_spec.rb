@@ -180,7 +180,7 @@ RSpec.describe Yul::MetadataPresenter do
         it 'returns the Rights Key' do
           expect(fields.any? { |field| field.include? 'rights_ssim' }).to be_truthy
         end
-        it 'returns the References Key' do
+        it 'returns the Citation Key' do
           expect(fields.any? { |field| field.include? 'preferredCitation_tesim' }).to be_truthy
         end
       end
@@ -189,7 +189,7 @@ RSpec.describe Yul::MetadataPresenter do
 
   context 'with an identifier document' do
     let(:identifier_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
-    let(:fields) { identifier_presenter_object.metadata_fields_to_render('identifier') }
+    let(:fields) { identifier_presenter_object.metadata_fields_to_render('identifiers') }
     context 'containing overview metadata' do
       describe 'config' do
         it 'returns the Orbis Bib ID Key' do
