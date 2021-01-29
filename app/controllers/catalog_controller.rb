@@ -224,11 +224,9 @@ class CatalogController < ApplicationController
     config.add_show_field 'oid_ssi', label: 'OID', metadata: 'identifier'
     config.add_show_field 'url_suppl_ssim', label: 'More Information', metadata: 'identifier'
 
-=begin
-# Migration Source Group
-    config.add_show_field 'recordType_ssi', label: 'Record Type', metadata: 'migration_source'
-    config.add_show_field 'source_ssim', label: 'Source', metadata: 'migration_source'
-=end
+    # # Migration Source Group
+    #     config.add_show_field 'recordType_ssi', label: 'Record Type', metadata: 'migration_source'
+    #     config.add_show_field 'source_ssim', label: 'Source', metadata: 'migration_source'
 
     config.add_field_configuration_to_solr_request!
 

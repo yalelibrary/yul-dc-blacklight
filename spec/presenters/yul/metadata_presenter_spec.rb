@@ -207,21 +207,19 @@ RSpec.describe Yul::MetadataPresenter do
     end
   end
 
-=begin
-  context 'with a migration source document' do
-    let(:migration_source_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
-    let(:fields) { migration_source_presenter_object.metadata_fields_to_render('migration_source') }
-    context 'containing overview metadata' do
-      describe 'config' do
-        it 'returns the Record Type Key' do
-          expect(fields.any? { |field| field.include? 'recordType_ssi' }).to be_truthy
-        end
-
-        it 'returns the Source Key' do
-          expect(fields.any? { |field| field.include? 'source_ssim' }).to be_truthy
-        end
-      end
-    end
-  end
-=end
+  #   context 'with a migration source document' do
+  #     let(:migration_source_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
+  #     let(:fields) { migration_source_presenter_object.metadata_fields_to_render('migration_source') }
+  #     context 'containing overview metadata' do
+  #       describe 'config' do
+  #         it 'returns the Record Type Key' do
+  #           expect(fields.any? { |field| field.include? 'recordType_ssi' }).to be_truthy
+  #         end
+  #
+  #         it 'returns the Source Key' do
+  #           expect(fields.any? { |field| field.include? 'source_ssim' }).to be_truthy
+  #         end
+  #       end
+  #     end
+  #   end
 end
