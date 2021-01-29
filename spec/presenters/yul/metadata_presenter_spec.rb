@@ -15,18 +15,18 @@ RSpec.describe Yul::MetadataPresenter do
   end
 
   context '#metadata_fields_to_render with block' do
-  let(:migration_source_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
-  it 'returns only identifiers fields in block' do
-    bib_found = false
-    oid_found = false
-    migration_source_presenter_object.metadata_fields_to_render('identifiers') do |field, _field_config|
-      bib_found = true if field.include? 'orbisBibId_ssi'
-      oid_found = true if field.include? 'oid_ssi'
+    let(:migration_source_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
+    it 'returns only identifiers fields in block' do
+      bib_found = false
+      oid_found = false
+      migration_source_presenter_object.metadata_fields_to_render('identifiers') do |field, _field_config|
+        bib_found = true if field.include? 'orbisBibId_ssi'
+        oid_found = true if field.include? 'oid_ssi'
+      end
+      expect(bib_found).to be_truthy
+      expect(oid_found).to be_truthy
     end
-    expect(bib_found).to be_truthy
-    expect(oid_found).to be_truthy
   end
-end
 
   context 'with a description document' do
     let(:description_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
