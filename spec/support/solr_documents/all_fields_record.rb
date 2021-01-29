@@ -21,6 +21,7 @@ WORK_WITH_ALL_FIELDS = {
   resourceType_ssim: "this is the resource type",
   subjectName_ssim: "this is the subject name",
   subjectTopic_tesim: "this is the subject topic",
+  subjectTopic_ssim: "this is also the subject topic",
   extentOfDigitization_ssim: 'this is the extent of digitization',
   rights_ssim: "these are the rights",
   creationPlace_ssim: "this is the publication place",
