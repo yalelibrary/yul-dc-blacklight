@@ -214,13 +214,12 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceEdition_tesim', label: 'Collection Edition', metadata: 'collection_information'
     config.add_show_field 'containerGrouping_ssim', label: 'Container / Volume Information', metadata: 'collection_information'
     config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'collection_information', helper_method: :link_to_url
-    
-     # Access and Usage Rights Group
+
+    # Access and Usage Rights Group
     config.add_show_field 'visibility_ssi', label: 'Access', metadata: 'access_and_usage_rights'
     config.add_show_field 'rights_ssim', label: 'Rights', metadata: 'access_and_usage_rights'
     config.add_show_field 'preferredCitation_tesim', label: 'References', metadata: 'access_and_usage_rights'
-    
-    
+
     # Identifiers Group
     config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID', metadata: 'identifier', helper_method: :link_to_orbis_bib_id
     config.add_show_field 'oid_ssi', label: 'OID', metadata: 'identifier'
