@@ -151,6 +151,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'creator_tesim', label: 'Creator', highlight: true
     config.add_index_field 'date_ssim', label: 'Published / Created', highlight: true
     config.add_index_field 'callNumber_tesim', label: 'Call Number', highlight: true
+    config.add_index_field 'sourceTitle_tesim', label: 'Collection Title', highlight: true
     config.add_index_field 'imageCount_isi', label: 'Image Count'
     config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true
     config.add_index_field 'abstract_tesim', label: 'Abstract', highlight: true, solr_params: disp_highlight_on_search_params
@@ -213,12 +214,13 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceEdition_tesim', label: 'Collection Edition', metadata: 'collection_information'
     config.add_show_field 'containerGrouping_ssim', label: 'Container / Volume Information', metadata: 'collection_information'
     config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'collection_information', helper_method: :link_to_url
-
-    # Access and Usage Rights Group
+    
+     # Access and Usage Rights Group
     config.add_show_field 'visibility_ssi', label: 'Access', metadata: 'access_and_usage_rights'
     config.add_show_field 'rights_ssim', label: 'Rights', metadata: 'access_and_usage_rights'
     config.add_show_field 'preferredCitation_tesim', label: 'References', metadata: 'access_and_usage_rights'
-
+    
+    
     # Identifiers Group
     config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID', metadata: 'identifier', helper_method: :link_to_orbis_bib_id
     config.add_show_field 'oid_ssi', label: 'OID', metadata: 'identifier'
