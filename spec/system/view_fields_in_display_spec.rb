@@ -35,7 +35,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       format: 'three dimensional object',
       url_suppl_ssim: 'http://0.0.0.0:3000/catalog/111',
       language_ssim: ['en', 'eng', 'zz'],
-      description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
+      description_tesim: ["Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.", "here is something else about it"],
       visibility_ssi: 'Public',
       abstract_tesim: "this is an abstract",
       alternativeTitle_tesim: "this is an alternative title",
@@ -68,7 +68,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       digital_ssim: "this is the digital, using ssim",
       coordinates_ssim: "this is the coordinates, using ssim",
       projection_tesim: "this is the projection, using ssim",
-      extent_ssim: "this is the extent, using ssim"
+      extent_ssim: ["this is the extent, using ssim", "here is another extent"]
     }
   end
 
@@ -85,6 +85,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays extent in results' do
       expect(document).to have_content("this is the extent, using ssim")
+      # extent should be separated by new line
+      expect(page).to have_text("this is the extent, using ssimhere is another extent")
     end
     it 'displays material in results' do
       expect(document).to have_content("this is the material, using ssim")
@@ -108,6 +110,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays description in results' do
       expect(document).to have_content("Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.")
+      # extent should be separated by new line
+      expect(page).to have_text("Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.here is something else about it")
     end
     it 'displays the Abstract in results' do
       expect(document).to have_content("this is an abstract")
@@ -133,7 +137,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("this is the subject name")
       expect(document).to have_content("these are the subject names")
     end
-    it 'displays the Extend of Digitization in results' do
+    it 'displays the Extent of Digitization in results' do
       expect(document).to have_content("this is the extent of digitization")
     end
     it 'displays the Access in results' do
@@ -199,7 +203,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(page).to have_link('this is the genre', href: '/catalog?f%5Bgenre_ssim%5D%5B%5D=this is the genre')
       expect(page).to have_link('this is the second genre', href: '/catalog?f%5Bgenre_ssim%5D%5B%5D=this is the second genre')
 
-      # ensures that genre is seperated with new line rather than concataneted with commas and 'and'
+      # ensures that genre is separated with new line rather than concatenated with commas and 'and'
       expect(page).to have_text("this is the genrethis is the second genre")
     end
     it 'contains a link on format to its facet' do
