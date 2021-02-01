@@ -157,7 +157,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'abstract_tesim', label: 'Abstract', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'alternativeTitle_tesim', label: 'Alternative Title', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'description_tesim', label: 'Description', highlight: true, solr_params: disp_highlight_on_search_params
-    config.add_index_field 'orbisBidId_ssi', label: 'Orbis BidId', highlight: true, solr_params: disp_highlight_on_search_params
+    config.add_index_field 'orbisBidId_ssi', label: 'Orbis Record', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'publicatonPlace_tesim', label: 'Publication Place', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'publisher_tesim', label: 'Publisher', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'subjectGeographic_tesim', label: 'Subject (Geographic)', highlight: true, solr_params: disp_highlight_on_search_params
@@ -221,7 +221,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'preferredCitation_tesim', label: 'Citation', metadata: 'access_and_usage_rights'
 
     # Identifiers Group
-    config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID', metadata: 'identifiers', helper_method: :link_to_orbis_bib_id
+    config.add_show_field 'orbisBibId_ssi', label: 'Orbis Record', metadata: 'identifiers', helper_method: :link_to_orbis_bib_id
     config.add_show_field 'oid_ssi', label: 'OID', metadata: 'identifiers'
     config.add_show_field 'url_suppl_ssim', label: 'More Information', metadata: 'identifiers'
 
@@ -413,7 +413,7 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('orbisBibId_ssi', label: 'BibID') do |field|
+    config.add_search_field('orbisBibId_ssi', label: 'Orbis ID') do |field|
       field.qt = 'search'
       field.include_in_advanced_search = false
       field.solr_parameters = {
