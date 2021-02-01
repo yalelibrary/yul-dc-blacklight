@@ -58,13 +58,11 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       preferredCitation_tesim: "these are the references",
       date_ssim: "this is the date",
       oid_ssi: '2345678',
-      identifierMfhd_ssim: 'this is the identifier MFHD',
       callNumber_ssim: 'this is the call number',
       containerGrouping_ssim: 'this is the container information',
       orbisBibId_ssi: '1234567',
       findingAid_ssim: 'this is the finding aid',
       edition_ssim: 'this is the edition',
-      numberOfPages_ssim: "this is the number of pages, using ssim",
       material_tesim: "this is the material, using ssim",
       scale_tesim: "this is the scale, using ssim",
       digital_ssim: "this is the digital, using ssim",
@@ -87,9 +85,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays extent in results' do
       expect(document).to have_content("this is the extent, using ssim")
-    end
-    it 'displays number of page in results' do
-      expect(document).to have_content("this is the number of pages, using ssim")
     end
     it 'displays material in results' do
       expect(document).to have_content("this is the material, using ssim")
@@ -182,9 +177,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays the OID in results' do
       expect(document).to have_content("2345678")
-    end
-    it 'displays the Identifier MFHD in results' do
-      expect(document).to have_content("this is the identifier MFHD")
     end
 
     it 'displays the Container/Volume Information in results' do
