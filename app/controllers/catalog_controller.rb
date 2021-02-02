@@ -223,7 +223,7 @@ class CatalogController < ApplicationController
     # Identifiers Group
     config.add_show_field 'orbisBibId_ssi', label: 'Orbis Record', metadata: 'identifiers', helper_method: :link_to_orbis_bib_id
     config.add_show_field 'oid_ssi', label: 'OID', metadata: 'identifiers'
-    config.add_show_field 'url_suppl_ssim', label: 'More Information', metadata: 'identifiers'
+    config.add_show_field 'url_suppl_ssim', label: 'More Information', metadata: 'identifiers', helper_method: :link_to_url
 
     # # Migration Source Group
     #     config.add_show_field 'recordType_ssi', label: 'Record Type', metadata: 'migration_source'
