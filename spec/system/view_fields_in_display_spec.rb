@@ -226,6 +226,9 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'contains a link on the Finding Aid to the Finding Aid catalog record' do
       expect(page).to have_link('this is the finding aid', href: 'this is the finding aid')
     end
+    it 'contains a link on the more info to the more info record' do
+      expect(page).to have_link('http://0.0.0.0:3000/catalog/111', href: 'http://0.0.0.0:3000/catalog/111')
+    end
     it 'contains a link on subject (topic) to its facet' do
       expect(page).to have_link('this is the subject topic', href: '/catalog?f%5BsubjectTopic_ssim%5D%5B%5D=this is the subject topic')
       expect(page).to have_link('these are the subject topics', href: '/catalog?f%5BsubjectTopic_ssim%5D%5B%5D=these are the subject topics')
