@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <%= render partial: 'shared/ga_header' %>
   <title>Yale Digital Collections Mirador Viewer</title>
-  <script src="/mirador.js"></script> 
+  <script src="/mirador.js"></script>
 </head>
 <body>
-<div id="my-mirador"/> 
+  <%= render partial: 'shared/ga_body' %>
+<div id="my-mirador"/>
 <script type="text/javascript">
   let dc_mirador_config = {
       "id": "my-mirador"
