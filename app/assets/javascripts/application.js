@@ -58,3 +58,34 @@ $(document).on('turbolinks:load', function() {
         if (href) Turbolinks.visit(href);
     });
 })
+
+
+$(document).on('turbolinks:load', function() {
+    renderBanner();
+})
+
+function renderBanner() {
+    fetch("https://banner.library.yale.edu/banner.json")
+        .then(response => response.json())
+        .then(data => {
+            let allBanners = data.banners;
+            if ("global" in allBanners) {
+                let banners = allBanners.global;
+                if (banners.length > 0) {
+                    let banner = banners[0];
+                    let container = document.getElementById("banner");
+                    // Code to apply text and background color directly
+                    container.style.backgroundColor = banner.backgroundColor;
+                    container.style.color = banner.textColor;
+                    container.innerHTML += "<h3>" + banner.header + "</h3>";
+                    container.innerHTML += "<p>" + banner.message + "</p>";
+                    container.style.display = "block";
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            $("#banner").remove();
+        });
+}
+
