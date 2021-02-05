@@ -2,7 +2,7 @@
 module Yale
   module CitationStringProcessor
     def url
-      "http://collections-demo.curationexperts.com/catalog/#{obj[:id]}" if obj[:id].present?
+      "https://collections.library.yale.edu/catalog/#{obj[:id]}" if obj[:id].present?
     end
 
     def append_string_with_period(field)
