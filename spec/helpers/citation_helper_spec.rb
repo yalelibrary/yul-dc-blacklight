@@ -77,7 +77,7 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
 
       within('#mla-citation') do
         expect(page).to have_content('MLA')
-        expect(page).to have_content("Eric, and Frederick. Handsome Dan. First Edition, this is the publisher, 0AD. http://collections-demo.curationexperts.com/catalog/111.")
+        expect(page).to have_content("Eric, and Frederick. Handsome Dan. First Edition, this is the publisher, 0AD. https://collections.library.yale.edu/catalog/111.")
       end
     end
 
@@ -87,9 +87,9 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
 
       within('#apa-citation') do
         expect(page).to have_content('APA, 6th edition')
-        expect(page).to have_content("E., & F. (0 C.E.). Handsome Dan (First Edition) [This is the genre]. this is the publisher. http://collections-demo.curationexperts.com/catalog/111.")
+        expect(page).to have_content("E., & F. (0 C.E.). Handsome Dan (First Edition) [This is the genre]. this is the publisher. https://collections.library.yale.edu/catalog/111.")
 
-        expect(page).not_to have_content('this is the publisher http://collections-demo.curationexperts.com/catalog/111.')
+        expect(page).not_to have_content('this is the publisher https://collections.library.yale.edu/catalog/111.')
       end
     end
 
