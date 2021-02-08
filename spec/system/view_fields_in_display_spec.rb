@@ -53,6 +53,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       source_ssim: "this is the source",
       recordType_ssi: "this is the record type",
       sourceTitle_tesim: "this is the source title",
+      sourceCreator_tesim: "this is the source creator",
       sourceDate_tesim: "this is the source date",
       sourceNote_tesim: "this is the source note",
       preferredCitation_tesim: "these are the references",
@@ -169,6 +170,9 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays the Source Date in results' do
       expect(document).to have_content("this is the source date")
+    end
+    it 'displays the Source Creator in results' do
+      expect(document).to have_content("this is the source creator")
     end
     it 'displays the Source Note in results' do
       expect(document).to have_content("this is the source note")
