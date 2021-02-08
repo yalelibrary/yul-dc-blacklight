@@ -31,6 +31,7 @@ WORK_WITH_ALL_FIELDS = {
   source_ssim: "this is the source",
   recordType_ssi: "this is the record type",
   sourceTitle_tesim: "this is the source title",
+  sourceCreator_tesim: "this is the source creator",
   sourceDate_tesim: "this is the source date",
   sourceNote_tesim: "this is the source note",
   sourceEdition_tesim: 'Source Edition',
