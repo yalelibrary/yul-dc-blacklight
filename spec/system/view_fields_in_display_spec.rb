@@ -59,7 +59,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       date_ssim: "this is the date",
       oid_ssi: '2345678',
       callNumber_ssim: 'this is the call number',
-      containerGrouping_ssim: 'this is the container information',
+      containerGrouping_tesim: 'this is the container information',
       orbisBibId_ssi: '1234567',
       findingAid_ssim: 'this is the finding aid',
       edition_ssim: 'this is the edition',

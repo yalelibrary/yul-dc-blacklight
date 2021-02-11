@@ -203,7 +203,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceDate_tesim', label: 'Collection Date', metadata: 'collection_information'
     config.add_show_field 'sourceNote_tesim', label: 'Collection Note', metadata: 'collection_information'
     config.add_show_field 'sourceEdition_tesim', label: 'Collection Edition', metadata: 'collection_information'
-    config.add_show_field 'containerGrouping_ssim', label: 'Container / Volume Information', metadata: 'collection_information'
+    config.add_show_field 'containerGrouping_tesim', label: 'Container / Volume Information', metadata: 'collection_information'
     config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'collection_information', helper_method: :link_to_url
 
     # Subjects, Formats, and Genres Group
@@ -260,7 +260,7 @@ class CatalogController < ApplicationController
       'alternativeTitleDisplay_tesim',
       'archiveSpaceUri_ssi',
       'callNumber_tesim',
-      'containerGrouping_ssim',
+      'containerGrouping_tesim',
       'collectionId_tesim',
       'contents_tesim',
       'contributor_tsim',

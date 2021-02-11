@@ -14,7 +14,7 @@ module Yale
     end
 
     def apa_box
-      " (#{obj[:containerGrouping_ssim]})" if obj[:containerGrouping_ssim].present?
+      " (#{obj[:containerGrouping_tesim]})" if obj[:containerGrouping_tesim].present?
     end
 
     def sanitized_citation(citation)
@@ -55,7 +55,7 @@ module Yale
       [
         formatted_mla_creator,
         append_string_with_period(obj[:title_tesim]),
-        append_string_with_period(obj[:containerGrouping_ssim]),
+        append_string_with_period(obj[:containerGrouping_tesim]),
         append_string_with_period(obj[:date_ssim]),
         url,
         "."
