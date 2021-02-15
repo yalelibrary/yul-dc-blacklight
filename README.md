@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master.svg?style=svg)](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master) ![Docker Image CI](https://github.com/yalelibrary/yul-dc-blacklight/workflows/Docker%20Image%20CI/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/yalelibrary/yul-dc-blacklight/badge.svg?branch=master)](https://coveralls.io/github/yalelibrary/yul-dc-blacklight?branch=master)
+[![CircleCI](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/main.svg?style=svg)](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/main) ![Docker Image CI](https://github.com/yalelibrary/yul-dc-blacklight/workflows/Docker%20Image%20CI/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/yalelibrary/yul-dc-blacklight/badge.svg?branch=main)](https://coveralls.io/github/yalelibrary/yul-dc-blacklight?branch=main)
 
 # Yale Digital Library Discovery Application
 
@@ -51,7 +51,7 @@ rake install
 
 ```bash
 cd yul-dc-camerata
-git pull origin master
+git pull origin main
 bundle install
 rake install
 ```
@@ -59,7 +59,7 @@ rake install
 ### Dynatrace
 
 - We've integrated Dynatrace OneAgent for monitoring our Docker container environments.
-  - Instructions on configuring OneAgent can be found [here](https://github.com/yalelibrary/yul-dc-camerata/tree/master/base)
+  - Instructions on configuring OneAgent can be found [here](https://github.com/yalelibrary/yul-dc-camerata/tree/main/base)
 
 ## General Use
 
@@ -198,7 +198,7 @@ Refer to the steps in the [Camerata repo](https://github.com/yalelibrary/yul-dc-
 
 ## Using a New Release of the Management App or other microservices
 
-1. Go to the yul-dc-camerata repository on Github and check the latest release number in the [.env file.](https://github.com/yalelibrary/yul-dc-camerata/blob/master/.env)
+1. Go to the yul-dc-camerata repository on Github and check the latest release number in the [.env file.](https://github.com/yalelibrary/yul-dc-camerata/blob/main/.env)
 
 2. Edit your .env file to match
 
