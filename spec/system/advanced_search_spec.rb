@@ -143,6 +143,27 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
     end
   end
 
+  describe 'sanitizing quotes' do
+    context 'when quotes are consecutive' do
+      it 'removes one quote' do
+        fill_in 'all_fields_advanced', with: '""nested""'
+        click_on 'SEARCH'
+
+        searched_text = find 'span .filter-value'
+        expect(searched_text).to have_content '"nested"'
+      end
+    end
+    context 'when a quote is not closed' do
+      it 'removes all quotes' do
+        fill_in 'all_fields_advanced', with: '"not" "closed'
+        click_on 'SEARCH'
+
+        searched_text = find 'span .filter-value'
+        expect(searched_text).to have_content 'not closed'
+      end
+    end
+  end
+
   context 'sorting' do
     xit 'can sort by date from oldest to newest' do
       within '#sort' do

@@ -22,6 +22,7 @@ class CatalogController < ApplicationController
     config.view.gallery.partials = [:index_header]
     config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
     config.show.partials.insert(1, :openseadragon)
+    config.http_method = :post
 
     ## Class for sending and receiving requests from a search index
     # config.repository_class = Blacklight::Solr::Repository
