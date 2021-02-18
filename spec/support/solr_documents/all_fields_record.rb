@@ -41,7 +41,7 @@ WORK_WITH_ALL_FIELDS = {
   importUrl_ssim: "this is the import URL",
   oid_ssi: '2345678',
   identifierMfhd_ssim: 'this is the identifier MFHD',
-  containerGrouping_ssim: 'this is the container information',
+  containerGrouping_tesim: 'this is the container information',
   callNumber_ssim: 'this is the call number',
   orbisBibId_ssi: '1234567',
   findingAid_ssim: 'this is the finding aid',

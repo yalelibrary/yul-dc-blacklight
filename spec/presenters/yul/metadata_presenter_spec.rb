@@ -172,7 +172,7 @@ RSpec.describe Yul::MetadataPresenter do
         end
 
         it 'returns the Container/Volume Information Key' do
-          expect(fields.any? { |field| field.include? 'containerGrouping_ssim' }).to be_truthy
+          expect(fields.any? { |field| field.include? 'containerGrouping_tesim' }).to be_truthy
         end
 
         it 'returns the Finding Aid Key' do

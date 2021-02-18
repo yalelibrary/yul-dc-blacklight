@@ -23,7 +23,7 @@ WORK_WITH_PUBLIC_VISIBILITY = {
   "dateStructured_ssim": ["1755"],
   "oid_ssi": ["2055095"],
   "callNumber_ssim": ["GEN MSS VOL 728 (Oversize)"],
-  "containerGrouping_ssim": ["GEN MSS VOL 728 (Oversize)"],
+  "containerGrouping_tesim": ["GEN MSS VOL 728 (Oversize)"],
   "orbisBibId_ssi": ["1169354"],
   "number_of_pages_ss": "Vol. 3",
   "date_ssim": ["1755"],
