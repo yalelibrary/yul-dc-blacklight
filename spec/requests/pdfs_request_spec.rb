@@ -56,6 +56,7 @@ RSpec.describe 'PdfController', type: :request do
         expect(response).to have_http_status(:success)
         expect(response.content_type).to eq 'application/pdf'
         expect(response.body).to include 'PDF-1.4'
+        expect(response.headers['X-Robots-Tag']).to be('noindex')
       end
       it 'returns not found for oid with no visibility' do
         get '/pdfs/1234567.pdf'
