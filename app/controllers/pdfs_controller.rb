@@ -18,6 +18,7 @@ class PdfsController < ApplicationController
 
   def send_pdf
     response.set_header('Content-Type', 'application/pdf')
+    response.set_header('X-Robots-Tag', 'noindex')
     client = Aws::S3::Client.new
     client.get_object(bucket: ENV['S3_SOURCE_BUCKET_NAME'], key: pdf_pairtree_path) do |chunk|
       response.stream.write(chunk)
