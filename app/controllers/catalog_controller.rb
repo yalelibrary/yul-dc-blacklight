@@ -466,6 +466,23 @@ class CatalogController < ApplicationController
     # if the name of the solr.SuggestComponent provided in your solrcongig.xml is not the
     # default 'mySuggester', uncomment and provide it below
     # config.autocomplete_suggester = 'mySuggester'
+
+    # OAI provider config
+    config.oai = {
+      provider: {
+        repository_name: 'Yale University Library Digital Collections',
+        repository_url: "#{ENV['BLACKLIGHT_BASE_URL']}/catalog/oai",
+        record_prefix: 'oai:collections.library.yale.edu',
+        admin_email: 'root@localhost',
+        sample_id: '2002046'
+      },
+      document: {
+        limit: 25, # number of records returned with each request, default: 15
+        set_fields: [ # ability to define ListSets, optional, default: nil
+          { label: 'language', solr_field: 'language_ssim' }
+        ]
+      }
+    }
   end
 
   def gallery_view?
