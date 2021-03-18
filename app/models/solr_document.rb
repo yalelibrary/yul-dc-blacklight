@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 class SolrDocument
   include Blacklight::Solr::Document
+  include BlacklightOaiProvider::SolrDocument
+
   include Blacklight::Gallery::OpenseadragonSolrDocument
 
   # # The following shows how to setup this blacklight document to display marc documents

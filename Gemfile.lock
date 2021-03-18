@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/projectblacklight/blacklight_oai_provider.git
+  revision: 76b6a2ae6fc0068aa93a3035051fb333c4564795
+  specs:
+    blacklight_oai_provider (7.0.0)
+      blacklight (~> 7.0)
+      oai (~> 1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -192,6 +200,8 @@ GEM
       railties (>= 4.2.0)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
+    faraday_middleware (1.0.0)
+      faraday (~> 1.0)
     ffaker (2.15.0)
     ffi (1.13.1)
     ffi-compiler (1.0.1)
@@ -265,6 +275,10 @@ GEM
     nokogiri (1.11.2)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
+    oai (1.1.0)
+      builder (>= 3.1.0)
+      faraday
+      faraday_middleware
     omniauth (1.9.1)
       hashie (>= 3.4.6)
       rack (>= 1.6.2, < 3)
@@ -501,6 +515,7 @@ DEPENDENCIES
   blacklight-gallery
   blacklight-marc (>= 7.0.0.rc1, < 8)
   blacklight_advanced_search
+  blacklight_oai_provider!
   blacklight_range_limit
   bootsnap (>= 1.4.2)
   bootstrap (~> 4.0)

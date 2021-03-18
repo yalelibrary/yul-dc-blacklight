@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  concern :oai_provider, BlacklightOaiProvider::Routes.new
+
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   concern :marc_viewable, Blacklight::Marc::Routes::MarcViewable.new
   devise_for :users, skip: [:sessions, :registrations, :passwords], controllers: { omniauth_callbacks: "omniauth_callbacks" }
@@ -18,6 +20,8 @@ Rails.application.routes.draw do
   get 'mirador/:oid', to: 'mirador#show'
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
+    concerns :oai_provider
+
     concerns :searchable
     concerns :range_searchable
   end
