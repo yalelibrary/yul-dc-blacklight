@@ -483,6 +483,18 @@ class CatalogController < ApplicationController
         ]
       }
     }
+
+    # Configure Dublin Core field mapping
+    SolrDocument.field_semantics.merge!(
+      {
+        title: 'title_tesim',
+        creator: 'creator_ssim',
+        date: 'date_ssim',
+        language: 'language_ssim',
+        description: %w[abstract_tesim description_tesim],
+        format: 'format'
+      }
+    )
   end
 
   def gallery_view?
