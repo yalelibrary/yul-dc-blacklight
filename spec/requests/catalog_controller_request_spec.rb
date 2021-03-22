@@ -45,5 +45,13 @@ RSpec.describe "/catalog", clean: true, type: :request do
       title = xml.xpath('//mods:titleInfo', ns_hash).xpath('//mods:title', ns_hash)
       expect(title.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:title_tesim].first)
     end
+
+    it 'returns properly formatted abstract_tesim with GetRecord' do
+      get "/catalog/oai?verb=GetRecord&metadataPrefix=oai_mods&identifier=oai:collections.library.yale.edu:#{WORK_WITH_PUBLIC_VISIBILITY[:id]}"
+      expect(response).to have_http_status(:success)
+      xml = Nokogiri::XML(response.body)
+      abstract = xml.xpath('//mods:abstract', ns_hash)
+      expect(abstract.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:abstract_tesim].first)
+    end
   end
 end

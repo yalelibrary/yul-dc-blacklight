@@ -9,7 +9,7 @@ module ModsSolrDocument
         xml['mods'].identifier({ type: 'ladybird' }, "oid#{self[:id]}")
         xml['mods'].identifier({ displayLabel: 'Accession Number', type: 'local' }, self[:accessionNumber_ssi]) if self[:accessionNumber_ssi].present?
         xml['mods'].identifier({ displayLabel: 'Barcode', type: 'local' }, self[:orbisBarcode_ssi]) if self[:orbisBarcode_ssi].present?
-
+        self[:abstract_tesim]&.each { |abstract| xml['mods'].abstract abstract.to_s }
         xml['mods'].titleInfo do
           self[:title_tesim]&.each { |title| xml['mods'].title title.to_s }
         end
