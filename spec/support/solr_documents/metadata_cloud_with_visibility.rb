@@ -2,6 +2,7 @@
 WORK_WITH_PUBLIC_VISIBILITY = {
   "id": "2055095",
   "title_tesim": ["A General dictionary of the English language"],
+  "alternativeTitle_tesim": ["Alternative: A General dictionary of the English language"],
   "creator_tesim": ["Johnson, Samuel, 1709-1784"],
   "extent_ssim": ["1 volume",
                   "43 cm."],
@@ -13,6 +14,7 @@ WORK_WITH_PUBLIC_VISIBILITY = {
   "accessRestrictions_tesim": ["public"],
   "partOf_tesim": ["Beinecke Library"],
   "caption_tesim": ["Sketch of the Missouri"],
+  "creatorDisplay_tsim": ["Creator Display Test"],
   "genre_ssim": ["Annotations",
                  "Dictionaries",
                  "Marginalia",

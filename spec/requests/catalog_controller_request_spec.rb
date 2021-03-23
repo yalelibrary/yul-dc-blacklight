@@ -52,7 +52,7 @@ RSpec.describe "/catalog", clean: true, type: :request do
       end
 
       it 'returns properly formatted accessRestrictions_tesim with GetRecord' do
-        access = xml.xpath('//mods:accessCondition', ns_hash)
+        access = xml.xpath('//mods:accessCondition', ns_hash).first
         expect(access.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:accessRestrictions_tesim].first)
       end
 
@@ -99,6 +99,31 @@ RSpec.describe "/catalog", clean: true, type: :request do
       it 'returns properly formatted format_tesim with GetRecord' do
         format = xml.xpath('//mods:typeOfResource', ns_hash).first
         expect(format.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:format_tesim].first)
+      end
+
+      it 'returns properly formatted rights_ssim with GetRecord' do
+        rights = xml.xpath('//mods:accessCondition[@type=\'restriction on access\']', ns_hash).first
+        expect(rights.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:rights_ssim].first)
+      end
+
+      it 'returns properly formatted language_ssim with GetRecord' do
+        language = xml.xpath('//mods:language/mods:languageTerm', ns_hash).first
+        expect(language.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:language_ssim].first)
+      end
+
+      it 'returns properly formatted creatorDisplay_tsim with GetRecord' do
+        value = xml.xpath('//mods:name/mods:namePart', ns_hash).first
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:creatorDisplay_tsim].first)
+      end
+
+      it 'returns properly formatted title_tesim with GetRecord' do
+        value = xml.xpath('//mods:titleInfo/mods:title', ns_hash).first
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:title_tesim].first)
+      end
+
+      it 'returns properly formatted alternativeTitle_tesim with GetRecord' do
+        value = xml.xpath('//mods:titleInfo/mods:alternative', ns_hash).first
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:alternativeTitle_tesim].first)
       end
     end
   end
