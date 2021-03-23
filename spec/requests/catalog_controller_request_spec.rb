@@ -30,28 +30,76 @@ RSpec.describe "/catalog", clean: true, type: :request do
       expect(response).to have_http_status(:success)
     end
 
-    it 'returns properly formatted identifier with GetRecord' do
-      get "/catalog/oai?verb=GetRecord&metadataPrefix=oai_mods&identifier=oai:collections.library.yale.edu:#{WORK_WITH_PUBLIC_VISIBILITY[:id]}"
-      expect(response).to have_http_status(:success)
-      xml = Nokogiri::XML(response.body)
-      identifier = xml.xpath('//mods:identifier[@type=\'ladybird\']', ns_hash)
-      expect(identifier.text).to eq("oid#{WORK_WITH_PUBLIC_VISIBILITY[:id]}")
-    end
+    context 'use GetRecord' do
+      let(:xml) { Nokogiri::XML(response.body) }
+      before do
+        get "/catalog/oai?verb=GetRecord&metadataPrefix=oai_mods&identifier=oai:collections.library.yale.edu:#{WORK_WITH_PUBLIC_VISIBILITY[:id]}"
+      end
 
-    it 'returns properly formatted title with GetRecord' do
-      get "/catalog/oai?verb=GetRecord&metadataPrefix=oai_mods&identifier=oai:collections.library.yale.edu:#{WORK_WITH_PUBLIC_VISIBILITY[:id]}"
-      expect(response).to have_http_status(:success)
-      xml = Nokogiri::XML(response.body)
-      title = xml.xpath('//mods:titleInfo', ns_hash).xpath('//mods:title', ns_hash)
-      expect(title.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:title_tesim].first)
-    end
+      it 'returns properly formatted identifier with GetRecord' do
+        identifier = xml.xpath('//mods:identifier[@type=\'ladybird\']', ns_hash)
+        expect(identifier.text).to eq("oid#{WORK_WITH_PUBLIC_VISIBILITY[:id]}")
+      end
 
-    it 'returns properly formatted abstract_tesim with GetRecord' do
-      get "/catalog/oai?verb=GetRecord&metadataPrefix=oai_mods&identifier=oai:collections.library.yale.edu:#{WORK_WITH_PUBLIC_VISIBILITY[:id]}"
-      expect(response).to have_http_status(:success)
-      xml = Nokogiri::XML(response.body)
-      abstract = xml.xpath('//mods:abstract', ns_hash)
-      expect(abstract.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:abstract_tesim].first)
+      it 'returns properly formatted title with GetRecord' do
+        title = xml.xpath('//mods:titleInfo', ns_hash).xpath('//mods:title', ns_hash)
+        expect(title.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:title_tesim].first)
+      end
+
+      it 'returns properly formatted abstract_tesim with GetRecord' do
+        abstract = xml.xpath('//mods:abstract', ns_hash)
+        expect(abstract.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:abstract_tesim].first)
+      end
+
+      it 'returns properly formatted accessRestrictions_tesim with GetRecord' do
+        access = xml.xpath('//mods:accessCondition', ns_hash)
+        expect(access.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:accessRestrictions_tesim].first)
+      end
+
+      it 'returns properly formatted genre_ssim with GetRecord' do
+        genre = xml.xpath('//mods:genre', ns_hash).first
+        expect(genre.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:genre_ssim].first)
+      end
+
+      it 'returns properly formatted description_tesim with GetRecord' do
+        note = xml.xpath('//mods:note', ns_hash).first
+        expect(note.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:description_tesim].first)
+      end
+
+      it 'returns properly formatted callNumber_tesim with GetRecord' do
+        classification = xml.xpath('//mods:classification', ns_hash).first
+        expect(classification.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:callNumber_ssim].first)
+      end
+
+      it 'returns properly formatted partOf_tesim with GetRecord' do
+        note = xml.xpath('//mods:note[@type=\'preferred citation\']', ns_hash).first
+        expect(note.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:partOf_tesim].first)
+      end
+
+      it 'returns properly formatted caption_tesim with GetRecord' do
+        note = xml.xpath('//mods:note[@displayLabel=\'Caption\']', ns_hash).first
+        expect(note.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:caption_tesim].first)
+      end
+
+      it 'returns properly formatted number_of_pages_ss with GetRecord' do
+        note = xml.xpath('//mods:note[@displayLabel=\'number\']', ns_hash)
+        expect(note.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:number_of_pages_ss])
+      end
+
+      it 'returns properly formatted extentOfDigitization_ssim with GetRecord' do
+        note = xml.xpath('//mods:note[@displayLabel=\'Parts scanned\']', ns_hash).first
+        expect(note.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:extentOfDigitization_ssim].first)
+      end
+
+      it 'returns properly formatted digital_ssim with GetRecord' do
+        note = xml.xpath('//mods:note[@displayLabel=\'Digital\']', ns_hash).first
+        expect(note.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:digital_ssim].first)
+      end
+
+      it 'returns properly formatted format_tesim with GetRecord' do
+        format = xml.xpath('//mods:typeOfResource', ns_hash).first
+        expect(format.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:format_tesim].first)
+      end
     end
   end
 end
