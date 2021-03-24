@@ -4,7 +4,7 @@
 module ModsSolrDocument
   extend ActiveSupport::Concern
 
-  # rubocop:disable Metrics/BlockLength,Metrics/MethodLength
+  # rubocop:disable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize
   def to_oai_mods
     builder = Nokogiri::XML::Builder.new do |xml|
       xml.mods('xmlns:mods' => 'http://www.loc.gov/mods/v3', 'version' => '3.4') do
@@ -47,11 +47,23 @@ module ModsSolrDocument
         self[:findingAid_ssim]&.each { |finding_aid| xml['mods'].relatedItem({ displayLabel: 'Finding Aid', "xlink:href" => finding_aid }) }
         self[:url_suppl_ssim]&.each { |url_suppl| xml['mods'].relatedItem({ displayLabel: 'Related Resource', "xlink:href" => url_suppl }) }
         self[:partOf_tesim]&.each { |part_of| xml['mods'].relatedItem({ displayLabel: 'Related Exhibition or Resource', "xlink:href" => part_of }) }
+
+        if related_item_host.any? { |related_item| self[related_item].present? }
+          xml['mods'].relatedItem({ type: "host" }) do
+            if self[:box_ssim]
+              xml['mods'].part do
+                xml['mods'].detail({ type: "Box" }) do
+                  self[:box_ssim]&.each { |value| xml['mods'].text value.to_s }
+                end
+              end
+            end
+          end
+        end
       end
     end
     Nokogiri::XML(builder.to_xml).root.to_xml
   end
-  # rubocop:enable Metrics/BlockLength,Metrics/MethodLength
+  # rubocop:enable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize
 
   def valid_formats
     ["text",
@@ -64,5 +76,16 @@ module ModsSolrDocument
      "three dimensional object",
      "software, multimedia",
      "mixed material"]
+  end
+
+  def related_item_host
+    [:box_ssim,
+     :folder_ssim,
+     :sourceCreator_tesim,
+     :sourceTitle_tesim,
+     :sourceCreated_tesim,
+     :sourceDate_tesim,
+     :sourceEdition_tesim,
+     :sourceNote_tesim]
   end
 end
