@@ -16,7 +16,7 @@ module ModsSolrDocument
         self[:genre_ssim]&.each { |genre| xml['mods'].genre genre.to_s }
         self[:description_tesim]&.each { |note| xml['mods'].note note.to_s }
         self[:callNumber_ssim]&.each { |classification| xml['mods'].classification classification.to_s }
-        self[:partOf_tesim]&.each { |note| xml['mods'].note({ type: 'preferred citation' }, note.to_s) }
+        self[:repository_ssim]&.each { |note| xml['mods'].note({ type: 'preferred citation' }, note.to_s) }
         self[:caption_tesim]&.each { |note| xml['mods'].note({ displayLabel: 'Caption' }, note.to_s) }
         xml['mods'].note({ displayLabel: 'number' }, self[:number_of_pages_ss]) if self[:number_of_pages_ss].present?
         self[:extentOfDigitization_ssim]&.each { |note| xml['mods'].note({ displayLabel: 'Parts scanned' }, note.to_s) }
@@ -39,8 +39,14 @@ module ModsSolrDocument
           self[:title_tesim]&.each { |title| xml['mods'].title title.to_s }
           self[:alternativeTitle_tesim]&.each { |alternative_title| xml['mods'].alternative alternative_title.to_s }
         end
-
-        self[:extent_ssim]&.each { |extent| xml['mods'].extent extent.to_s }
+        if self[:extent_ssim]
+          xml['mods'].physicalDescription do
+            self[:extent_ssim]&.each { |extent| xml['mods'].extent extent.to_s }
+          end
+        end
+        self[:findingAid_ssim]&.each { |finding_aid| xml['mods'].relatedItem({ displayLabel: 'Finding Aid', "xlink:href" => finding_aid }) }
+        self[:url_suppl_ssim]&.each { |url_suppl| xml['mods'].relatedItem({ displayLabel: 'Related Resource', "xlink:href" => url_suppl }) }
+        self[:partOf_tesim]&.each { |part_of| xml['mods'].relatedItem({ displayLabel: 'Related Exhibition or Resource', "xlink:href" => part_of }) }
       end
     end
     Nokogiri::XML(builder.to_xml).root.to_xml

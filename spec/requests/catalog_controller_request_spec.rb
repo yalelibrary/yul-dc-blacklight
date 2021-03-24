@@ -11,7 +11,8 @@ RSpec.describe "/catalog", clean: true, type: :request do
   end
 
   def ns_hash
-    { 'mods' => 'http://www.loc.gov/mods/v3' }
+    { 'mods' => 'http://www.loc.gov/mods/v3',
+      'xlink' => "http://www.w3.org/1999/xlink" }
   end
 
   describe 'GET /oai?verb=ListRecords&metadataPrefix=oai_mods' do
@@ -71,9 +72,9 @@ RSpec.describe "/catalog", clean: true, type: :request do
         expect(classification.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:callNumber_ssim].first)
       end
 
-      it 'returns properly formatted partOf_tesim with GetRecord' do
+      it 'returns properly formatted repository_tesim with GetRecord' do
         note = xml.xpath('//mods:note[@type=\'preferred citation\']', ns_hash).first
-        expect(note.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:partOf_tesim].first)
+        expect(note.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:repository_ssim].first)
       end
 
       it 'returns properly formatted caption_tesim with GetRecord' do
@@ -124,6 +125,26 @@ RSpec.describe "/catalog", clean: true, type: :request do
       it 'returns properly formatted alternativeTitle_tesim with GetRecord' do
         value = xml.xpath('//mods:titleInfo/mods:alternative', ns_hash).first
         expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:alternativeTitle_tesim].first)
+      end
+
+      it 'returns properly formatted extent_ssim with GetRecord' do
+        value = xml.xpath('//mods:physicalDescription/mods:extent', ns_hash).first
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:extent_ssim].first)
+      end
+
+      it 'returns properly formatted findingAid_ssim with GetRecord' do
+        value = xml.xpath('//mods:relatedItem[@displayLabel=\'Finding Aid\']', ns_hash).attr("xlink:href")
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:findingAid_ssim].first)
+      end
+
+      it 'returns properly formatted url_suppl_ssim with GetRecord' do
+        value = xml.xpath('//mods:relatedItem[@displayLabel=\'Related Resource\']', ns_hash).attr("xlink:href")
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:url_suppl_ssim].first)
+      end
+
+      it 'returns properly formatted partOf_tesim with GetRecord' do
+        value = xml.xpath('//mods:relatedItem[@displayLabel=\'Related Exhibition or Resource\']', ns_hash).attr("xlink:href")
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:partOf_tesim].first)
       end
     end
   end
