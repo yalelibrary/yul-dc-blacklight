@@ -53,8 +53,14 @@ RSpec.describe "Iiifs", type: :request do
       expect(response).to have_http_status(:unauthorized)
     end
 
-    it 'returns a 404 if there is no visibility key' do
+    it 'returns an unauthorized response if there is no visibility key' do
       get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/2222222/full/!200,200/0/default.jpg" }
+
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it 'returns an unauthorized response if there child is not found' do
+      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/9328239/full/!200,200/0/default.jpg" }
 
       expect(response).to have_http_status(:unauthorized)
     end
@@ -76,7 +82,7 @@ RSpec.describe "Iiifs", type: :request do
       expect(response).to have_http_status(:success)
     end
 
-    it 'returns a 404 if there is no visibility key' do
+    it 'returns an unauthorized response if there is no visibility key' do
       get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/2222222/full/!200,200/0/default.jpg" }
 
       expect(response).to have_http_status(:unauthorized)
