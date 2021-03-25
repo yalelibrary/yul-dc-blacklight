@@ -37,6 +37,11 @@ RSpec.describe "/catalog", clean: true, type: :request do
         get "/catalog/oai?verb=GetRecord&metadataPrefix=oai_mods&identifier=oai:collections.library.yale.edu:#{WORK_WITH_PUBLIC_VISIBILITY[:id]}"
       end
 
+      it 'has xlink ns' do
+        node = xml.xpath('//mods:identifier[@type=\'ladybird\']', ns_hash).first
+        expect(node.namespaces["xmlns:xlink"]).to eq("http://www.w3.org/1999/xlink")
+      end
+
       it 'returns properly formatted identifier with GetRecord' do
         identifier = xml.xpath('//mods:identifier[@type=\'ladybird\']', ns_hash)
         expect(identifier.text).to eq("oid#{WORK_WITH_PUBLIC_VISIBILITY[:id]}")
@@ -133,17 +138,20 @@ RSpec.describe "/catalog", clean: true, type: :request do
       end
 
       it 'returns properly formatted findingAid_ssim with GetRecord' do
-        value = xml.xpath('//mods:relatedItem[@displayLabel=\'Finding Aid\']', ns_hash).attr("xlink:href")
+        xml.remove_namespaces!
+        value = xml.xpath('//relatedItem[@displayLabel=\'Finding Aid\']', ns_hash).attr("href")
         expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:findingAid_ssim].first)
       end
 
       it 'returns properly formatted url_suppl_ssim with GetRecord' do
-        value = xml.xpath('//mods:relatedItem[@displayLabel=\'Related Resource\']', ns_hash).attr("xlink:href")
+        xml.remove_namespaces!
+        value = xml.xpath('//relatedItem[@displayLabel=\'Related Resource\']', ns_hash).attr("href")
         expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:url_suppl_ssim].first)
       end
 
       it 'returns properly formatted partOf_tesim with GetRecord' do
-        value = xml.xpath('//mods:relatedItem[@displayLabel=\'Related Exhibition or Resource\']', ns_hash).attr("xlink:href")
+        xml.remove_namespaces!
+        value = xml.xpath('//relatedItem[@displayLabel=\'Related Exhibition or Resource\']', ns_hash).attr("href")
         expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:partOf_tesim].first)
       end
     end
