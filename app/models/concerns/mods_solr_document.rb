@@ -4,7 +4,7 @@
 module ModsSolrDocument
   extend ActiveSupport::Concern
 
-  # rubocop:disable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize
+  # rubocop:disable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize/Metrics/,Metrics/CyclomaticComplexity
   def to_oai_mods
     builder = Nokogiri::XML::Builder.new do |xml|
       xml.mods('xmlns:mods' => 'http://www.loc.gov/mods/v3', 'version' => '3.4', 'xmlns:xlink' => 'http://www.w3.org/1999/xlink') do
@@ -57,13 +57,33 @@ module ModsSolrDocument
                 end
               end
             end
+
+            if self[:folder_ssim]
+              xml['mods'].part do
+                xml['mods'].detail({ type: "Folder" }) do
+                  self[:folder_ssim]&.each { |value| xml['mods'].text value.to_s }
+                end
+              end
+            end
+
+            if self[:sourceCreator_tesim]
+              xml['mods'].name do
+                self[:sourceCreator_tesim]&.each { |value| xml['mods'].namePart value.to_s }
+              end
+            end
+
+            if self[:sourceTitle_tesim]
+              xml['mods'].titleInfo do
+                self[:sourceTitle_tesim]&.each { |value| xml['mods'].title value.to_s }
+              end
+            end
           end
         end
       end
     end
     Nokogiri::XML(builder.to_xml).root.to_xml
   end
-  # rubocop:enable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize
+  # rubocop:enable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize/Metrics/,Metrics/CyclomaticComplexity
 
   def valid_formats
     ["text",
