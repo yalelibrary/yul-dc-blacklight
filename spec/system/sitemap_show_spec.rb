@@ -125,7 +125,7 @@ RSpec.describe 'Sitemap Show', type: :feature do
   end
   it 'does render a thumbnail for public images' do
     visit blacklight_dynamic_sitemap.sitemap_path('2')
-    expect(page).to have_content('http://localhost:8182/iiif/2/10962124/full/!200,200/0/default.jpg')
+    expect(page.body).to include('<image:loc>http://localhost:8182/iiif/2/10962124/full/!200,200/0/default.jpg</image:loc>')
   end
   it 'does not render a thumbnail for non-public images' do
     visit blacklight_dynamic_sitemap.sitemap_path('0')
