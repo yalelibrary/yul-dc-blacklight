@@ -8,6 +8,7 @@ ruby '2.6.6'
 gem 'awesome_print'
 gem 'aws-sdk-s3'
 gem 'blacklight', '>= 7.0'
+gem 'blacklight_dynamic_sitemap'
 gem 'blacklight-gallery'
 gem 'blacklight-marc', '>= 7.0.0.rc1', '< 8'
 gem "blacklight_advanced_search"
