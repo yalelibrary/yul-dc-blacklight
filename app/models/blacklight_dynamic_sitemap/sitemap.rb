@@ -1,20 +1,21 @@
 # frozen_string_literal: true
-
+#
 module BlacklightDynamicSitemap
   ##
   #
   class Sitemap
     delegate :hashed_id_field, :unique_id_field, :last_modified_field, to: :engine_config
+    include AccessHelper
 
     def get(id)
       # if someone's hacking URLs (in ways that could potentially generate enormous requests),
       # just return an empty response
       return [] if id.length != exponent
-
+      fq = viewable_metadata_visibilities.map { |visibility| "(visibility_ssi:\"#{visibility}\")" }.join(" OR ")
       index_connection.select(
         params: show_params(id, {
                               q: '*:*',
-                              fq: ["{!prefix f=#{hashed_id_field} v=#{id}}"],
+                              fq: ["{!prefix f=#{hashed_id_field} v=#{id}}", fq],
                               fl: [unique_id_field, last_modified_field, 'visibility_ssi', 'thumbnail_path_ss'].join(','),
                               rows: 2_000_000, # Ensure that we do not page this result
                               facet: false,
