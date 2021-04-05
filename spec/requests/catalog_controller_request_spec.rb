@@ -3,10 +3,11 @@ require 'rails_helper'
 
 RSpec.describe "/catalog", clean: true, type: :request do
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY.merge({ "child_oids_ssim": ["5555555"] }) }
+  let(:private_work) { WORK_WITH_PRIVATE_VISIBILITY }
 
   before do
     solr = Blacklight.default_index.connection
-    solr.add([public_work])
+    solr.add([public_work, private_work])
     solr.commit
   end
 
@@ -21,9 +22,15 @@ RSpec.describe "/catalog", clean: true, type: :request do
       expect(response).to have_http_status(:success)
     end
 
-    it 'returns success to GetRecord' do
+    it 'returns success and data to GetRecord when visibility is not "Private"' do
       get "/catalog/oai?verb=GetRecord&metadataPrefix=oai_mods&identifier=oai:collections.library.yale.edu:#{WORK_WITH_PUBLIC_VISIBILITY[:id]}"
       expect(response).to have_http_status(:success)
+      expect(response.body).not_to include "The value of the identifier argument is unknown or illegal in this repository."
+    end
+
+    it 'does not return data from GetRecord when visibility is "Private"' do
+      get "/catalog/oai?verb=GetRecord&metadataPrefix=oai_mods&identifier=oai:collections.library.yale.edu:#{WORK_WITH_PRIVATE_VISIBILITY[:id]}"
+      expect(response.body).to include "The value of the identifier argument is unknown or illegal in this repository."
     end
 
     it 'returns success to ListFormats' do
