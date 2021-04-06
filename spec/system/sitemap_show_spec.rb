@@ -115,10 +115,10 @@ RSpec.describe 'Sitemap Show', type: :feature do
     expect(page).to have_xpath('//url', count: 1)
   end
   it 'renders XML with a root element that leads with a hash of 1' do
-     visit blacklight_dynamic_sitemap.sitemap_path('0')
+    visit blacklight_dynamic_sitemap.sitemap_path('0')
     expect(page).to have_xpath('//urlset')
   end
-  it 'renders elements with a hash that leads with 1' do
+  it 'renders elements with a hash that leads with 0' do
     visit blacklight_dynamic_sitemap.sitemap_path('0')
     expect(page).to have_xpath('//url', count: 2)
   end
