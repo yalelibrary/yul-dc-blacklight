@@ -42,7 +42,10 @@ WORK_WITH_PUBLIC_VISIBILITY = {
   "number_of_pages_ss": "Vol. 3",
   "date_ssim": ["1755"],
   "public_bsi": true,
-  "visibility_ssi": "Public"
+  "visibility_ssi": "Public",
+  "dateCreated_tesim": ["1755"],
+  "sourceDate_tesim": ["1855"],
+  "sourceCreated_tesim": ["aa", "bb"]
 }.freeze
 
 WORK_WITH_PRIVATE_VISIBILITY = {
