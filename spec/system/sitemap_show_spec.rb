@@ -106,20 +106,19 @@ RSpec.describe 'Sitemap Show', type: :feature do
       year_isim: [2020, 2021]
     }
   end
-
-  it 'renders XML with a root element for record 2' do
+  it 'renders XML with a root element that leads with a hash of 2' do
     visit blacklight_dynamic_sitemap.sitemap_path('1')
     expect(page).to have_xpath('//urlset')
   end
-  it 'renders record 2 elements' do
+  it 'renders elements with a hash that leads with 1' do
     visit blacklight_dynamic_sitemap.sitemap_path('1')
     expect(page).to have_xpath('//url', count: 1)
   end
-  it 'renders XML with a root element for record 1' do
-    visit blacklight_dynamic_sitemap.sitemap_path('0')
+  it 'renders XML with a root element that leads with a hash of 1' do
+     visit blacklight_dynamic_sitemap.sitemap_path('0')
     expect(page).to have_xpath('//urlset')
   end
-  it 'renders record 1 elements' do
+  it 'renders elements with a hash that leads with 1' do
     visit blacklight_dynamic_sitemap.sitemap_path('0')
     expect(page).to have_xpath('//url', count: 2)
   end
