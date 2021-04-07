@@ -93,6 +93,10 @@ module BlacklightHelper
     link_to(arg[:value][0], arg[:value][0])
   end
 
+  def html_safe_converter(arg)
+    sanitize arg[:value][0], tags: %w[a], attributes: %w[href]
+  end
+
   def search_field_value_link(args)
     field_value = args[:document][args[:field]]
     link_text = "/?q=#{field_value}&search_field=#{args[:field]}"

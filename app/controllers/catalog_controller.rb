@@ -177,8 +177,9 @@ class CatalogController < ApplicationController
     #     'description',
     #     'subjects_,_formats_and_genres',
     #     'collection_information',
-    #     'access_and_usage',
+    #     'access_and_usage_rights',
     #     'identifier'
+    # ]
 
     # Description Group
     config.add_show_field 'title_tesim', label: 'Title', metadata: 'description'
@@ -221,7 +222,7 @@ class CatalogController < ApplicationController
 
     # Access and Usage Rights Group
     config.add_show_field 'visibility_ssi', label: 'Access', metadata: 'access_and_usage_rights'
-    config.add_show_field 'rights_ssim', label: 'Rights', metadata: 'access_and_usage_rights'
+    config.add_show_field 'rights_ssim', label: 'Rights', metadata: 'access_and_usage_rights', helper_method: :html_safe_converter
     config.add_show_field 'preferredCitation_tesim', label: 'Citation', metadata: 'access_and_usage_rights'
 
     # Identifiers Group
