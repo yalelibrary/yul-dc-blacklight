@@ -43,6 +43,10 @@ DEFAULT MOBILE STYLING
   position: relative;
 }
 
+.page-sidebar {
+  display: none;
+}
+
 .show-buttons {
   justify-self: center;
   margin-right: 137px;
@@ -177,7 +181,7 @@ DEFAULT MOBILE STYLING
 
 h2.yale-restricted-work-text {
   font-size: 1.5em;
-} 
+}
 
 @media screen and (min-width: $medium_device) {
   .constraints-container {
