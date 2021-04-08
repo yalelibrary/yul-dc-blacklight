@@ -1,10 +1,15 @@
 <% oid = @document.id %>
-
+<%
+  order_param = ""
+  if @document[:child_oids_ssim]
+    order_param= "&cv=#{@document[:child_oids_ssim].index(params[:child_oid])|| 0}"
+  end
+%>
 <div class="uv-container">
 <iframe
     class="universal-viewer-iframe"
     title="Universal Viewer"
-    src="<%= request&.base_url %>/uv/uv.html#?manifest=<%= manifest_url(oid) %>"
+    src="<%= request&.base_url %>/uv/uv.html#?manifest=<%= manifest_url(oid) %><%= order_param %>"
     width="924"
     height="668"
     allowfullscreen
