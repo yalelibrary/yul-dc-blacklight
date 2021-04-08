@@ -55,7 +55,7 @@ RSpec.describe "/catalog", clean: true, type: :request do
       end
 
       it 'returns properly formatted title with GetRecord' do
-        title = xml.xpath('//mods:titleInfo', ns_hash).xpath('//mods:title', ns_hash)
+        title = xml.xpath('//mods:titleInfo', ns_hash).xpath('//mods:title', ns_hash).first
         expect(title.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:title_tesim].first)
       end
 
@@ -160,6 +160,42 @@ RSpec.describe "/catalog", clean: true, type: :request do
         xml.remove_namespaces!
         value = xml.xpath('//relatedItem[@displayLabel=\'Related Exhibition or Resource\']', ns_hash).attr("href")
         expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:partOf_tesim].first)
+      end
+
+      it 'returns properly formatted box_ssim with GetRecord' do # 60
+        xml.remove_namespaces!
+        value = xml.xpath('//detail [@type=\'Box\']/text', ns_hash).first
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:box_ssim].first)
+      end
+
+      it 'returns properly formatted folder_ssim with GetRecord' do # 61
+        xml.remove_namespaces!
+        value = xml.xpath('//detail[@type=\'Folder\']/text', ns_hash).first
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:folder_ssim].first)
+      end
+
+      it 'returns properly formatted sourceCreator_tesim with GetRecord' do # 62
+        xml.remove_namespaces!
+        value = xml.xpath('//relatedItem/name/namePart', ns_hash).first
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:sourceCreator_tesim].first)
+      end
+
+      it 'returns properly formatted sourceTitle_tesim with GetRecord' do # 63
+        xml.remove_namespaces!
+        value = xml.xpath('//relatedItem/titleInfo/title', ns_hash).first
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:sourceTitle_tesim].first)
+      end
+
+      it 'returns properly formatted sourceCreated_tesim with GetRecord' do # 64 writer.WriteAttributeString
+        xml.remove_namespaces!
+        value = xml.xpath('//relatedItem/originInfo/place/placeTerm[@type=\'text\']', ns_hash).first
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:sourceCreated_tesim].first)
+      end
+
+      it 'returns properly formatted sourceDate_tesim with GetRecord' do # 66
+        xml.remove_namespaces!
+        value = xml.xpath('//relatedItem/originInfo/dateCreated', ns_hash).first
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:sourceDate_tesim].first)
       end
     end
   end

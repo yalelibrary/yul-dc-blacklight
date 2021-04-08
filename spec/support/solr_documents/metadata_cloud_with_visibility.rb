@@ -25,6 +25,10 @@ WORK_WITH_PUBLIC_VISIBILITY = {
   "digital_ssim": ["digital"],
   "findingAid_ssim": ['http://hdl.handle.net/10079/fa/beinecke.lincoln'],
   "url_suppl_ssim": ['https://pre1600ms.beinecke.library.yale.edu/docs/pre1600.ms395.htm'],
+  "box_ssim": ["Box 2"],
+  "folder_ssim": ["Folder 22"],
+  "sourceCreator_tesim": ["Priscian, fl. ca. 500-530"],
+  "sourceTitle_tesim": ["Abraham Lincoln collection"],
   "rights_ssim": ["The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."],
   "creationPlace_ssim": ["London"],
   "publisher_ssim": ["Printed by W. Strahan, for J. and P. Knapton [etc.]"],
@@ -38,7 +42,10 @@ WORK_WITH_PUBLIC_VISIBILITY = {
   "number_of_pages_ss": "Vol. 3",
   "date_ssim": ["1755"],
   "public_bsi": true,
-  "visibility_ssi": "Public"
+  "visibility_ssi": "Public",
+  "dateCreated_tesim": ["1755"],
+  "sourceDate_tesim": ["1855"],
+  "sourceCreated_tesim": ["aa", "bb"]
 }.freeze
 
 WORK_WITH_PRIVATE_VISIBILITY = {

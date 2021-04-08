@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-#
+# rubocop:disable Metrics/ModuleLength,Metrics/CyclomaticComplexity
 module ModsSolrDocument
   extend ActiveSupport::Concern
 
-  # rubocop:disable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize
+  # rubocop:disable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize/Metrics/
   def to_oai_mods
     builder = Nokogiri::XML::Builder.new do |xml|
       xml.mods('xmlns:mods' => 'http://www.loc.gov/mods/v3', 'version' => '3.4', 'xmlns:xlink' => 'http://www.w3.org/1999/xlink') do
@@ -50,11 +50,41 @@ module ModsSolrDocument
 
         if related_item_host.any? { |related_item| self[related_item].present? }
           xml['mods'].relatedItem({ type: "host" }) do
-            if self[:box_ssim]
+            if self[:box_ssim] # 60
               xml['mods'].part do
                 xml['mods'].detail({ type: "Box" }) do
-                  self[:box_ssim]&.each { |value| xml['mods'].text value.to_s }
+                  self[:box_ssim]&.each { |value| xml['mods'].text_ value.to_s }
                 end
+              end
+            end
+
+            if self[:folder_ssim] # 61
+              xml['mods'].part do
+                xml['mods'].detail({ type: "Folder" }) do
+                  self[:folder_ssim]&.each { |value| xml['mods'].text_ value.to_s }
+                end
+              end
+            end
+
+            if self[:sourceCreator_tesim] # 62
+              xml['mods'].name do
+                self[:sourceCreator_tesim]&.each { |value| xml['mods'].namePart value.to_s }
+              end
+            end
+
+            if self[:sourceTitle_tesim] # 63
+              xml['mods'].titleInfo do
+                self[:sourceTitle_tesim]&.each { |value| xml['mods'].title value.to_s }
+              end
+            end
+            if origininfo_item.any? { |origininfo_item| self[origininfo_item].present? }
+              xml['mods'].originInfo do
+                if self[:sourceCreated_tesim] # 64
+                  xml['mods'].place do # newMODSTag
+                    self[:sourceCreated_tesim]&.each { |source_created| xml['mods'].placeTerm({ type: 'text' }, source_created.to_s) }
+                  end
+                end
+                self[:sourceDate_tesim]&.each { |value| xml['mods'].dateCreated value.to_s } if self[:sourceDate_tesim] # 66
               end
             end
           end
@@ -63,7 +93,7 @@ module ModsSolrDocument
     end
     Nokogiri::XML(builder.to_xml).root.to_xml
   end
-  # rubocop:enable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize
+  # rubocop:enable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize/Metrics/
 
   def valid_formats
     ["text",
@@ -88,4 +118,11 @@ module ModsSolrDocument
      :sourceEdition_tesim,
      :sourceNote_tesim]
   end
+
+  def origininfo_item
+    [:sourceCreated_tesim,
+     :sourceDate_tesim,
+     :sourceEdition_tesim]
+  end
+  # rubocop:enable Metrics/ModuleLength,Metrics/CyclomaticComplexity
 end
