@@ -197,6 +197,42 @@ RSpec.describe "/catalog", clean: true, type: :request do
         value = xml.xpath('//relatedItem/originInfo/dateCreated', ns_hash).first
         expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:sourceDate_tesim].first)
       end
+
+      it 'returns properly formatted sourceEdition_tesim with GetRecord' do # 67
+        xml.remove_namespaces!
+        value = xml.xpath('//relatedItem/originInfo/edition', ns_hash).first
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:sourceEdition_tesim].first)
+      end
+
+      it 'returns properly formatted sourceNote_tesim with GetRecord' do # 68
+        xml.remove_namespaces!
+        value = xml.xpath('//relatedItem/note', ns_hash).first
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:sourceNote_tesim].first)
+      end
+
+      it 'returns properly formatted edition_ssim with GetRecord' do # 76
+        xml.remove_namespaces!
+        value = xml.xpath('//originInfo/edition', ns_hash)[1]
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:edition_ssim].first)
+      end
+
+      it 'returns properly formatted :creationPlace_ssim with GetRecord' do # 77
+        xml.remove_namespaces!
+        value = xml.xpath('//originInfo/place/placeTerm[@type=\'text\']', ns_hash)[1]
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:creationPlace_ssim].first)
+      end
+
+      it 'returns properly formatted :publisher_ssim with GetRecord' do # 78
+        xml.remove_namespaces!
+        value = xml.xpath('//originInfo/publisher', ns_hash)
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:publisher_ssim].first)
+      end
+
+      it 'returns properly formatted :date_ssim with GetRecord' do # 79
+        xml.remove_namespaces!
+        value = xml.xpath('//originInfo/dateCreated', ns_hash)[1]
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:date_ssim].first)
+      end
     end
   end
 end

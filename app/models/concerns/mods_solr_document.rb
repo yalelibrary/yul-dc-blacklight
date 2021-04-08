@@ -77,17 +77,34 @@ module ModsSolrDocument
                 self[:sourceTitle_tesim]&.each { |value| xml['mods'].title value.to_s }
               end
             end
-            if origininfo_item.any? { |origininfo_item| self[origininfo_item].present? }
+            if related_origininfo_item.any? { |origininfo_item| self[origininfo_item].present? }
               xml['mods'].originInfo do
                 if self[:sourceCreated_tesim] # 64
                   xml['mods'].place do # newMODSTag
                     self[:sourceCreated_tesim]&.each { |source_created| xml['mods'].placeTerm({ type: 'text' }, source_created.to_s) }
                   end
                 end
-                self[:sourceDate_tesim]&.each { |value| xml['mods'].dateCreated value.to_s } if self[:sourceDate_tesim] # 66
+                self[:sourceDate_tesim]&.each { |value| xml['mods'].dateCreated value.to_s } # 66
+                self[:sourceEdition_tesim]&.each { |value| xml['mods'].edition value.to_s } # 67
               end
             end
+
+            self[:sourceNote_tesim]&.each { |value| xml['mods'].note value.to_s } # 68sourceNote_tesim
           end
+        end
+
+        if origininfo_item.any? { |origininfo_item| self[origininfo_item].present? }
+          xml['mods'].originInfo do
+            self[:edition_ssim]&.each { |value| xml['mods'].edition value.to_s } # 76
+            if self[:creationPlace_ssim] # 77
+              xml['mods'].place do # newMODSTag
+                self[:creationPlace_ssim]&.each { |value| xml['mods'].placeTerm({ type: 'text' }, value.to_s) }
+              end
+            end
+            self[:publisher_ssim]&.each { |value| xml['mods'].publisher value.to_s } # 78
+            self[:date_ssim]&.each { |value| xml['mods'].dateCreated value.to_s } # 79
+          end
+
         end
       end
     end
@@ -119,10 +136,18 @@ module ModsSolrDocument
      :sourceNote_tesim]
   end
 
-  def origininfo_item
+  def related_origininfo_item
     [:sourceCreated_tesim,
      :sourceDate_tesim,
      :sourceEdition_tesim]
   end
+
+  def origininfo_item
+    [:edition_ssim,
+     :creationPlace_ssim,
+     :publisher_ssim,
+     :date_ssim]
+  end
+
   # rubocop:enable Metrics/ModuleLength,Metrics/CyclomaticComplexity
 end
