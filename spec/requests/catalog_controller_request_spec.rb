@@ -56,7 +56,7 @@ RSpec.describe "/catalog", clean: true, type: :request do
 
       it 'returns properly formatted title with GetRecord' do
         title = xml.xpath('//mods:titleInfo', ns_hash).xpath('//mods:title', ns_hash).first
-        expect(title.text). to eq(WORK_WITH_PUBLIC_VISIBILITY[:title_tesim].first)
+        expect(title.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:title_tesim].first)
       end
 
       it 'returns properly formatted abstract_tesim with GetRecord' do
