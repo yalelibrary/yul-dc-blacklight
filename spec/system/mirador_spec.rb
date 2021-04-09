@@ -12,7 +12,7 @@ RSpec.describe 'Mirador viewer', type: :system do
     it 'contains a noindex tag' do
       value = 123_456
       visit "/mirador/#{value}"
-      expect(page.html).to include('<meta name="robots" content="noindex">')
+      expect(page).to have_css("meta[name=robots][content=noindex]", visible: false)
     end
 
     it 'builds a blank configuration given an invalid value' do
