@@ -104,7 +104,19 @@ module ModsSolrDocument
             self[:publisher_ssim]&.each { |value| xml['mods'].publisher value.to_s } # 78
             self[:date_ssim]&.each { |value| xml['mods'].dateCreated value.to_s } # 79
           end
+        end
 
+        if topic_geographic.any? { |topic_geographic| self[topic_geographic].present? }
+          xml['mods'].subject do
+            self[:subjectName_ssim]&.each { |value| xml['mods'].name({ type: 'personal' }, value.to_s) } # 88
+            self[:subjectTopic_ssim]&.each { |value| xml['mods'].topic value.to_s } # 90
+            self[:subjectGeographic_ssim]&.each { |value| xml['mods']. geographic value.to_s } # 91
+            if self[:scale_tesim] # 95
+              xml['mods'].cartographics do #
+                self[:scale_tesim]&.each { |value| xml['mods'].scale value.to_s } # 95
+              end
+            end
+          end
         end
       end
     end
@@ -147,6 +159,13 @@ module ModsSolrDocument
      :creationPlace_ssim,
      :publisher_ssim,
      :date_ssim]
+  end
+
+  def topic_geographic
+    [:subjectName_ssim,
+     :subjectTopic_ssim,
+     :subjectGeographic_ssim,
+     :scale_tesim]
   end
 
   # rubocop:enable Metrics/ModuleLength,Metrics/CyclomaticComplexity

@@ -233,6 +233,30 @@ RSpec.describe "/catalog", clean: true, type: :request do
         value = xml.xpath('//originInfo/dateCreated', ns_hash)[1]
         expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:date_ssim].first)
       end
+
+      it 'returns properly formatted :subjectName_ssim with GetRecord' do # 88
+        xml.remove_namespaces!
+        value = xml.xpath('//subject/name[@type=\'personal\']', ns_hash)
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:subjectName_ssim].first)
+      end
+
+      it 'returns properly formatted :subjectTopic_ssim with GetRecord' do # 90
+        xml.remove_namespaces!
+        value = xml.xpath('//subject/topic', ns_hash)
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:subjectTopic_ssim].first)
+      end
+
+      it 'returns properly formatted :subjectGeographic_ssim with GetRecord' do # 91
+        xml.remove_namespaces!
+        value = xml.xpath('//subject/geographic', ns_hash)
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:subjectGeographic_ssim].first)
+      end
+
+      it 'returns properly formatted :scale_tesim with GetRecord' do # 95
+        xml.remove_namespaces!
+        value = xml.xpath('//subject/cartographics/scale', ns_hash)
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:scale_tesim].first)
+      end
     end
   end
 end

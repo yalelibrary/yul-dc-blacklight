@@ -48,7 +48,12 @@ WORK_WITH_PUBLIC_VISIBILITY = {
   "visibility_ssi": "Public",
   "dateCreated_tesim": ["1755"],
   "sourceDate_tesim": ["1855"],
-  "sourceCreated_tesim": ["aa"]
+  "sourceCreated_tesim": ["aa"],
+  "subjectName_ssim": ["Cockerell, Sydney Carlyle,--Sir,--1867-1962--Ownership."],
+  "subjectTopic_ssim": ["Manuscripts, Medieval--Connecticut--New Haven"],
+  "subjectGeographic_ssim": ["Connecticut--New Haven"],
+  "scale_tesim": ["Scale not given."]
+
 }.freeze
 
 WORK_WITH_PRIVATE_VISIBILITY = {
