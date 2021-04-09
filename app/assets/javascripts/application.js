@@ -77,8 +77,7 @@ function renderBanner() {
                     // Code to apply text and background color directly
                     container.style.backgroundColor = banner.backgroundColor;
                     container.style.color = banner.textColor;
-                    container.innerHTML += "<h3>" + banner.header + "</h3>";
-                    container.innerHTML += "<p>" + banner.message + "</p>";
+                    container.innerHTML = "<h3>" + banner.header + "</h3><p>" + banner.message + "</p>";
                     container.style.display = "block";
                 }
             }
