@@ -197,6 +197,66 @@ RSpec.describe "/catalog", clean: true, type: :request do
         value = xml.xpath('//relatedItem/originInfo/dateCreated', ns_hash).first
         expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:sourceDate_tesim].first)
       end
+
+      it 'returns properly formatted sourceEdition_tesim with GetRecord' do # 67
+        xml.remove_namespaces!
+        value = xml.xpath('//relatedItem/originInfo/edition', ns_hash).first
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:sourceEdition_tesim].first)
+      end
+
+      it 'returns properly formatted sourceNote_tesim with GetRecord' do # 68
+        xml.remove_namespaces!
+        value = xml.xpath('//relatedItem/note', ns_hash).first
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:sourceNote_tesim].first)
+      end
+
+      it 'returns properly formatted edition_ssim with GetRecord' do # 76
+        xml.remove_namespaces!
+        value = xml.xpath('//originInfo/edition', ns_hash)[1]
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:edition_ssim].first)
+      end
+
+      it 'returns properly formatted :creationPlace_ssim with GetRecord' do # 77
+        xml.remove_namespaces!
+        value = xml.xpath('//originInfo/place/placeTerm[@type=\'text\']', ns_hash)[1]
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:creationPlace_ssim].first)
+      end
+
+      it 'returns properly formatted :publisher_ssim with GetRecord' do # 78
+        xml.remove_namespaces!
+        value = xml.xpath('//originInfo/publisher', ns_hash)
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:publisher_ssim].first)
+      end
+
+      it 'returns properly formatted :date_ssim with GetRecord' do # 79
+        xml.remove_namespaces!
+        value = xml.xpath('//originInfo/dateCreated', ns_hash)[1]
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:date_ssim].first)
+      end
+
+      it 'returns properly formatted :subjectName_ssim with GetRecord' do # 88
+        xml.remove_namespaces!
+        value = xml.xpath('//subject/name[@type=\'personal\']', ns_hash)
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:subjectName_ssim].first)
+      end
+
+      it 'returns properly formatted :subjectTopic_ssim with GetRecord' do # 90
+        xml.remove_namespaces!
+        value = xml.xpath('//subject/topic', ns_hash)
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:subjectTopic_ssim].first)
+      end
+
+      it 'returns properly formatted :subjectGeographic_ssim with GetRecord' do # 91
+        xml.remove_namespaces!
+        value = xml.xpath('//subject/geographic', ns_hash)
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:subjectGeographic_ssim].first)
+      end
+
+      it 'returns properly formatted :scale_tesim with GetRecord' do # 95
+        xml.remove_namespaces!
+        value = xml.xpath('//subject/cartographics/scale', ns_hash)
+        expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:scale_tesim].first)
+      end
     end
   end
 end
