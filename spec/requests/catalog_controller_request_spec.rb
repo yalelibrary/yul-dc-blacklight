@@ -257,6 +257,13 @@ RSpec.describe "/catalog", clean: true, type: :request do
         value = xml.xpath('//subject/cartographics/scale', ns_hash)
         expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:scale_tesim].first)
       end
+
+byebug
+      it 'returns properly formatted :BidId_ssi with GetRecord' do # 104
+        xml.remove_namespaces!
+        locator = xml.xpath('//location/holdingSimple/copyInformation/electronicLocator', ns_hash)
+        expect(locator.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:BibId_ssi].first)
+      end
     end
   end
 end

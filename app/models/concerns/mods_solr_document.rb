@@ -118,6 +118,15 @@ module ModsSolrDocument
             end
           end
         end
+
+        xml['mods'].location
+        if self[:orbisBidId_ssi] # 104
+          xml['mods'].holdingSimple do
+            xml['mods'].copyInformation do
+              self[:orbisBidId_ssi]&.each { |value| xml['mods'].electronicLocator value.to_s }
+            end
+          end
+        end
       end
     end
     Nokogiri::XML(builder.to_xml).root.to_xml
