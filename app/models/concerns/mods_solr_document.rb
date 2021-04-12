@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-#
+# rubocop:disable Metrics/ModuleLength,Metrics/CyclomaticComplexity
 module ModsSolrDocument
   extend ActiveSupport::Concern
 
-  # rubocop:disable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize/Metrics/,Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize/Metrics/
   def to_oai_mods
     builder = Nokogiri::XML::Builder.new do |xml|
       xml.mods('xmlns:mods' => 'http://www.loc.gov/mods/v3', 'version' => '3.4', 'xmlns:xlink' => 'http://www.w3.org/1999/xlink') do
@@ -50,31 +50,70 @@ module ModsSolrDocument
 
         if related_item_host.any? { |related_item| self[related_item].present? }
           xml['mods'].relatedItem({ type: "host" }) do
-            if self[:box_ssim]
+            if self[:box_ssim] # 60
               xml['mods'].part do
                 xml['mods'].detail({ type: "Box" }) do
-                  self[:box_ssim]&.each { |value| xml['mods'].text value.to_s }
+                  self[:box_ssim]&.each { |value| xml['mods'].text_ value.to_s }
                 end
               end
             end
 
-            if self[:folder_ssim]
+            if self[:folder_ssim] # 61
               xml['mods'].part do
                 xml['mods'].detail({ type: "Folder" }) do
-                  self[:folder_ssim]&.each { |value| xml['mods'].text value.to_s }
+                  self[:folder_ssim]&.each { |value| xml['mods'].text_ value.to_s }
                 end
               end
             end
 
-            if self[:sourceCreator_tesim]
+            if self[:sourceCreator_tesim] # 62
               xml['mods'].name do
                 self[:sourceCreator_tesim]&.each { |value| xml['mods'].namePart value.to_s }
               end
             end
 
-            if self[:sourceTitle_tesim]
+            if self[:sourceTitle_tesim] # 63
               xml['mods'].titleInfo do
                 self[:sourceTitle_tesim]&.each { |value| xml['mods'].title value.to_s }
+              end
+            end
+            if related_origininfo_item.any? { |origininfo_item| self[origininfo_item].present? }
+              xml['mods'].originInfo do
+                if self[:sourceCreated_tesim] # 64
+                  xml['mods'].place do # newMODSTag
+                    self[:sourceCreated_tesim]&.each { |source_created| xml['mods'].placeTerm({ type: 'text' }, source_created.to_s) }
+                  end
+                end
+                self[:sourceDate_tesim]&.each { |value| xml['mods'].dateCreated value.to_s } # 66
+                self[:sourceEdition_tesim]&.each { |value| xml['mods'].edition value.to_s } # 67
+              end
+            end
+
+            self[:sourceNote_tesim]&.each { |value| xml['mods'].note value.to_s } # 68sourceNote_tesim
+          end
+        end
+
+        if origininfo_item.any? { |origininfo_item| self[origininfo_item].present? }
+          xml['mods'].originInfo do
+            self[:edition_ssim]&.each { |value| xml['mods'].edition value.to_s } # 76
+            if self[:creationPlace_ssim] # 77
+              xml['mods'].place do # newMODSTag
+                self[:creationPlace_ssim]&.each { |value| xml['mods'].placeTerm({ type: 'text' }, value.to_s) }
+              end
+            end
+            self[:publisher_ssim]&.each { |value| xml['mods'].publisher value.to_s } # 78
+            self[:date_ssim]&.each { |value| xml['mods'].dateCreated value.to_s } # 79
+          end
+        end
+
+        if topic_geographic.any? { |topic_geographic| self[topic_geographic].present? }
+          xml['mods'].subject do
+            self[:subjectName_ssim]&.each { |value| xml['mods'].name({ type: 'personal' }, value.to_s) } # 88
+            self[:subjectTopic_ssim]&.each { |value| xml['mods'].topic value.to_s } # 90
+            self[:subjectGeographic_ssim]&.each { |value| xml['mods']. geographic value.to_s } # 91
+            if self[:scale_tesim] # 95
+              xml['mods'].cartographics do #
+                self[:scale_tesim]&.each { |value| xml['mods'].scale value.to_s } # 95
               end
             end
           end
@@ -83,7 +122,7 @@ module ModsSolrDocument
     end
     Nokogiri::XML(builder.to_xml).root.to_xml
   end
-  # rubocop:enable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize/Metrics/,Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize/Metrics/
 
   def valid_formats
     ["text",
@@ -108,4 +147,26 @@ module ModsSolrDocument
      :sourceEdition_tesim,
      :sourceNote_tesim]
   end
+
+  def related_origininfo_item
+    [:sourceCreated_tesim,
+     :sourceDate_tesim,
+     :sourceEdition_tesim]
+  end
+
+  def origininfo_item
+    [:edition_ssim,
+     :creationPlace_ssim,
+     :publisher_ssim,
+     :date_ssim]
+  end
+
+  def topic_geographic
+    [:subjectName_ssim,
+     :subjectTopic_ssim,
+     :subjectGeographic_ssim,
+     :scale_tesim]
+  end
+
+  # rubocop:enable Metrics/ModuleLength,Metrics/CyclomaticComplexity
 end

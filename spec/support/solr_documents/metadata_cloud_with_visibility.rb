@@ -28,6 +28,9 @@ WORK_WITH_PUBLIC_VISIBILITY = {
   "box_ssim": ["Box 2"],
   "folder_ssim": ["Folder 22"],
   "sourceCreator_tesim": ["Priscian, fl. ca. 500-530"],
+  "sourceEdition_tesim": ["Source Edition"],
+  "sourceNote_tesim": ["Oversize"],
+  "edition_ssim": ["1st"],
   "sourceTitle_tesim": ["Abraham Lincoln collection"],
   "rights_ssim": ["The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."],
   "creationPlace_ssim": ["London"],
@@ -42,7 +45,15 @@ WORK_WITH_PUBLIC_VISIBILITY = {
   "number_of_pages_ss": "Vol. 3",
   "date_ssim": ["1755"],
   "public_bsi": true,
-  "visibility_ssi": "Public"
+  "visibility_ssi": "Public",
+  "dateCreated_tesim": ["1755"],
+  "sourceDate_tesim": ["1855"],
+  "sourceCreated_tesim": ["aa"],
+  "subjectName_ssim": ["Cockerell, Sydney Carlyle,--Sir,--1867-1962--Ownership."],
+  "subjectTopic_ssim": ["Manuscripts, Medieval--Connecticut--New Haven"],
+  "subjectGeographic_ssim": ["Connecticut--New Haven"],
+  "scale_tesim": ["Scale not given."]
+
 }.freeze
 
 WORK_WITH_PRIVATE_VISIBILITY = {

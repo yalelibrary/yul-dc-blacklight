@@ -128,6 +128,9 @@ GEM
     blacklight_advanced_search (7.0.0)
       blacklight (~> 7.0)
       parslet
+    blacklight_dynamic_sitemap (0.4.0)
+      blacklight (> 6.0)
+      rails (<= 6.1)
     blacklight_range_limit (7.8.2)
       blacklight (>= 7.0)
     bootsnap (1.4.9)
@@ -264,7 +267,9 @@ GEM
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (1.0.0)
-    mimemagic (0.3.5)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.2)
     mini_portile2 (2.5.0)
     minitest (5.14.4)
@@ -394,7 +399,6 @@ GEM
       rubocop (>= 0.68.1)
     ruby-progressbar (1.10.1)
     rubyzip (2.3.0)
-    safe_yaml (1.0.5)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -515,6 +519,7 @@ DEPENDENCIES
   blacklight-gallery
   blacklight-marc (>= 7.0.0.rc1, < 8)
   blacklight_advanced_search
+  blacklight_dynamic_sitemap
   blacklight_oai_provider!
   blacklight_range_limit
   bootsnap (>= 1.4.2)

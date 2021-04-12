@@ -50,6 +50,10 @@ RSpec.describe 'search result', type: :system, clean: true do
     it 'shows the index number' do
       expect(page).to have_selector '#documents > .document-position-0 span', visible: true
     end
+
+    it 'has a no index meta tag in header' do
+      expect(page).to have_css("meta[name=robots][content=noindex]", visible: false)
+    end
   end
 
   context 'in gallery view' do
@@ -67,6 +71,10 @@ RSpec.describe 'search result', type: :system, clean: true do
 
     it 'does not show the index number' do
       expect(page).not_to have_selector '#documents > .document.col:first-child span'
+    end
+
+    it 'has a no index meta tag in header' do
+      expect(page).to have_css("meta[name=robots][content=noindex]", visible: false)
     end
   end
 
@@ -119,6 +127,16 @@ RSpec.describe 'search result', type: :system, clean: true do
 
     it 'shows the index number' do
       expect(page).to have_selector '#documents > .document-position-0 span', visible: true
+    end
+  end
+
+  context 'on catalog page without results' do
+    before do
+      visit '/catalog'
+    end
+
+    it 'does not have a no index meta tag in header' do
+      expect(page).not_to have_css("meta[name=robots][content=noindex]", visible: false)
     end
   end
 end

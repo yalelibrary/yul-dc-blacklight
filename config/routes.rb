@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   root to: 'application#landing'
 
   mount Blacklight::Engine => '/'
+  mount BlacklightDynamicSitemap::Engine => '/'
+
   mount BlacklightAdvancedSearch::Engine => '/'
 
   concern :searchable, Blacklight::Routes::Searchable.new
