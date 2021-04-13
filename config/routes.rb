@@ -41,6 +41,9 @@ Rails.application.routes.draw do
     end
   end
 
+  # Custom error pages
+  get '/404', to: 'errors#not_found', via: :all
+
   # This route needs to be the very last route in this file, because it's a wildcard and will glob everything
   get '/manifests/*id', to: 'manifests#show', as: :manifest
   get '/pdfs/not_found.html', to: 'pdfs#not_found'
