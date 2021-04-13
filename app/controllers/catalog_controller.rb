@@ -3,18 +3,15 @@ class CatalogController < ApplicationController
   include BlacklightAdvancedSearch::Controller
   include Blacklight::Catalog
   include BlacklightOaiProvider::Controller
-
   include Blacklight::Marc::Catalog
   include BlacklightRangeLimit::ControllerOverride
   include AccessHelper
+  before_action :determine_per_page
+  helper_method :gallery_view?
 
   rescue_from Blacklight::Exceptions::RecordNotFound do
-    redirect_to '/404'
+    render 'record_not_found'
   end
-
-  before_action :determine_per_page
-
-  helper_method :gallery_view?
 
   configure_blacklight do |config|
     # default advanced config values
