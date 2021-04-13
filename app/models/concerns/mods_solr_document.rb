@@ -26,6 +26,7 @@ module ModsSolrDocument
         end
         self[:rights_ssim]&.each { |access_condition| xml['mods'].accessCondition({ type: 'restriction on access' }, access_condition.to_s) }
         if self[:language_ssim]
+          xml['mods'].languageTerm({ type: "text" })
           xml['mods'].language do
             self[:language_ssim]&.each { |language| xml['mods'].languageTerm(language.to_s) }
           end
@@ -47,7 +48,7 @@ module ModsSolrDocument
         self[:findingAid_ssim]&.each { |finding_aid| xml['mods'].relatedItem({ displayLabel: 'Finding Aid', "xlink:href" => finding_aid }) }
         self[:url_suppl_ssim]&.each { |url_suppl| xml['mods'].relatedItem({ displayLabel: 'Related Resource', "xlink:href" => url_suppl }) }
         self[:partOf_tesim]&.each { |part_of| xml['mods'].relatedItem({ displayLabel: 'Related Exhibition or Resource', "xlink:href" => part_of }) }
-
+        
         if related_item_host.any? { |related_item| self[related_item].present? }
           xml['mods'].relatedItem({ type: "host" }) do
             if self[:box_ssim] # 60
@@ -57,7 +58,7 @@ module ModsSolrDocument
                 end
               end
             end
-
+            
             if self[:folder_ssim] # 61
               xml['mods'].part do
                 xml['mods'].detail({ type: "Folder" }) do
@@ -65,13 +66,13 @@ module ModsSolrDocument
                 end
               end
             end
-
+            
             if self[:sourceCreator_tesim] # 62
               xml['mods'].name do
                 self[:sourceCreator_tesim]&.each { |value| xml['mods'].namePart value.to_s }
               end
             end
-
+            
             if self[:sourceTitle_tesim] # 63
               xml['mods'].titleInfo do
                 self[:sourceTitle_tesim]&.each { |value| xml['mods'].title value.to_s }
@@ -88,11 +89,11 @@ module ModsSolrDocument
                 self[:sourceEdition_tesim]&.each { |value| xml['mods'].edition value.to_s } # 67
               end
             end
-
+            
             self[:sourceNote_tesim]&.each { |value| xml['mods'].note value.to_s } # 68sourceNote_tesim
           end
         end
-
+        
         if origininfo_item.any? { |origininfo_item| self[origininfo_item].present? }
           xml['mods'].originInfo do
             self[:edition_ssim]&.each { |value| xml['mods'].edition value.to_s } # 76
