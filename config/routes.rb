@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Rails.application.routes.draw do
+Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   concern :oai_provider, BlacklightOaiProvider::Routes.new
 
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
@@ -40,6 +40,10 @@ Rails.application.routes.draw do
       delete 'clear'
     end
   end
+
+  # Custom error pages
+  get '/404', to: 'errors#not_found', via: :all
+
   # This route needs to be the very last route in this file, because it's a wildcard and will glob everything
   get '/manifests/*id', to: 'manifests#show', as: :manifest
   get '/pdfs/not_found.html', to: 'pdfs#not_found'
