@@ -21,6 +21,10 @@ DEFAULT MOBILE STYLING
   margin-top: -3px;
 }
 
+.record-not-found {
+  font-family: $yale_new_roman;
+}
+
 .show-tools .list-group {
   flex-direction: row;
   flex-wrap: wrap;
@@ -227,6 +231,10 @@ h2.yale-restricted-work-text {
     position: relative;
   }
 
+  .record-not-found {
+    min-height: 200px;
+  }
+
   .show-tools {
     margin-right: -34%;
   }
@@ -271,6 +279,9 @@ h2.yale-restricted-work-text {
     display: flex;
     z-index: 1;
     position: relative;
+  }
+  .record-not-found {
+    min-height: 400px;
   }
 
   .show-tools {
