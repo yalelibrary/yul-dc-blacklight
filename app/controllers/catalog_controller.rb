@@ -8,6 +8,10 @@ class CatalogController < ApplicationController
   include BlacklightRangeLimit::ControllerOverride
   include AccessHelper
 
+  rescue_from Blacklight::Exceptions::RecordNotFound do
+    redirect_to '/404'
+  end
+
   before_action :determine_per_page
 
   helper_method :gallery_view?

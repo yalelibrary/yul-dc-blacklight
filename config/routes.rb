@@ -40,6 +40,13 @@ Rails.application.routes.draw do
       delete 'clear'
     end
   end
+
+  # Custom error pages
+  match '/404' => 'errors#not_found', via: :all
+  # NOTE(alishaevn): Breadcrumb in case custom error pages are ever desired for the routes below
+  # match '/422' => 'errors#not_found', via: :all
+  # match '/500' => 'errors#internal_server_error', via: :all
+
   # This route needs to be the very last route in this file, because it's a wildcard and will glob everything
   get '/manifests/*id', to: 'manifests#show', as: :manifest
   get '/pdfs/not_found.html', to: 'pdfs#not_found'
