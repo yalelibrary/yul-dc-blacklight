@@ -21,4 +21,5 @@ en:
       page_title:
         results: '%{count} results for %{q}'
         results_with_constraint: '%{count} results for %{label}: %{value}'
+      start_over: 'New Search'
     back_to_search: 'Back to Search Results'
