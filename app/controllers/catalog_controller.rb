@@ -10,7 +10,7 @@ class CatalogController < ApplicationController
   helper_method :gallery_view?
 
   rescue_from Blacklight::Exceptions::RecordNotFound do
-    render 'record_not_found'
+    render 'record_not_found', status: 404
   end
 
   configure_blacklight do |config|

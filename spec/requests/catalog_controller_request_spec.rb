@@ -259,4 +259,15 @@ RSpec.describe "/catalog", clean: true, type: :request do
       end
     end
   end
+
+  describe 'responds to the Blacklight::Exceptions::RecordNotFound exception' do
+    it 'redirects to a custom 404 page' do
+      params = { id: 'alpha' }
+      get "/catalog/#{params[:id]}"
+
+      expect(response.status).to eq(404)
+      expect(response.body).to include("The page you were looking for doesn't exist")
+      expect(response.body).to include("You may have mistyped the address or provided an invalid Object ID (#{params[:id]})")
+    end
+  end
 end
