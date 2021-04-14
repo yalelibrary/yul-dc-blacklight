@@ -119,11 +119,12 @@ module ModsSolrDocument
           end
         end
 
-        xml['mods'].location
-        if self[:orbisBidId_ssi] # 104
-          xml['mods'].holdingSimple do
-            xml['mods'].copyInformation do
-              self[:orbisBidId_ssi]&.each { |value| xml['mods'].electronicLocator value.to_s }
+        xml['mods'].location do
+          if self[:orbisBibId_ssi] # 104
+            xml['mods'].holdingSimple do
+              xml['mods'].copyInformation do
+                self[:orbisBibId_ssi] { |value| xml['mods'].electronicLocator value.to_s }
+              end
             end
           end
         end
