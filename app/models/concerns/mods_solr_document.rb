@@ -123,7 +123,7 @@ module ModsSolrDocument
           if self[:orbisBibId_ssi] # 104
             xml['mods'].holdingSimple do
               xml['mods'].copyInformation do
-                self[:orbisBibId_ssi] { |value| xml['mods'].electronicLocator value.to_s }
+                xml['mods'].electronicLocator self[:orbisBibId_ssi]
               end
             end
           end
