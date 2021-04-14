@@ -6,6 +6,10 @@
     </div>
     <%= render 'previous_next_doc' if @search_context %>
   </div>
+<% else %>
+  <div id="showSearchButtons" class="show-buttons" >
+      <%= render 'start_over' %>
+  </div>
 <% end %>
 
 <%= render_document_main_content_partial %>
