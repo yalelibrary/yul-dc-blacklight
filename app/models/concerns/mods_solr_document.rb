@@ -127,12 +127,16 @@ module ModsSolrDocument
               end
             end
           end
+          xml['mods'].url({ access: 'object in context', displayLabel: 'View information and digital image(s) in the Beinecke Library’s Digital Images Online database', "test" => 'http://findit-test.library.yale.edu' })
         end
       end
     end
     Nokogiri::XML(builder.to_xml).root.to_xml
   end
   # rubocop:enable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize/Metrics/
+
+  # o.writer.WriteAttributeString("access", "object in context");
+  # self[:url_suppl_ssim]&.each { |url_suppl| xml['mods'].relatedItem({ displayLabel: 'Related Resource', "xlink:href" => url_suppl }) }
 
   def valid_formats
     ["text",
