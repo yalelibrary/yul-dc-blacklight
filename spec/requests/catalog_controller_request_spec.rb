@@ -257,6 +257,18 @@ RSpec.describe "/catalog", clean: true, type: :request do
         value = xml.xpath('//subject/cartographics/scale', ns_hash)
         expect(value.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:scale_tesim].first)
       end
+
+      it 'returns properly formatted :orbisBidId_ssi with GetRecord' do # 104
+        xml.remove_namespaces!
+        locator = xml.xpath('//location/holdingSimple/copyInformation/electronicLocator', ns_hash)
+        expect(locator.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:orbisBibId_ssi].first)
+      end
+
+      it 'returns properly formatted :thumbnail_path_ss with GetRecord' do # No fdid
+        xml.remove_namespaces!
+        url_thumb = xml.xpath('//location/url[@access=\'preview\']', ns_hash).attr("href")
+        expect(url_thumb.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:thumbnail_path_ss])
+      end
     end
   end
 

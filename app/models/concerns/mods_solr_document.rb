@@ -118,6 +118,27 @@ module ModsSolrDocument
             end
           end
         end
+
+        xml['mods'].location do
+          if self[:orbisBibId_ssi] # 104
+            xml['mods'].holdingSimple do
+              xml['mods'].copyInformation do
+                xml['mods'].electronicLocator self[:orbisBibId_ssi]
+              end
+            end
+          end # Need test for the below
+          xml['mods'].url({ access: 'object in context',
+                            displayLabel: 'View information and digital image(s) in the Beinecke Library’s Digital Images Online database',
+                            "xlink:href" => "https://collections.library.yale.edu" })
+          if self[:thumbnail_path_ss].present?
+            thumbnail_array = self[:thumbnail_path_ss].split("/")
+            thumbnail_array[7] = "full"
+            thumbnail_array[0] = 'https:'
+            raw_object_value = thumbnail_array.join("/")
+            xml['mods'].url({ access: 'preview', "xlink:href" => self[:thumbnail_path_ss] })
+            xml['mods'].url({ access: 'raw object', "xlink:href" => raw_object_value })
+          end
+        end
       end
     end
     Nokogiri::XML(builder.to_xml).root.to_xml
