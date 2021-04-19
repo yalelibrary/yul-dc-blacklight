@@ -282,4 +282,16 @@ RSpec.describe "/catalog", clean: true, type: :request do
       expect(response.body).to include("You may have mistyped the address or provided an invalid Object ID (#{params[:id]})")
     end
   end
+
+  describe 'GET /catalog/<OID>' do
+    it 'contains schema.org heading' do
+      get "/catalog/#{WORK_WITH_PUBLIC_VISIBILITY[:id]}"
+
+      doc = Nokogiri::HTML::Document.parse(response.body)
+      json = doc.css('script[@type=\'application/ld+json\']')&.first&.text
+      expect(json).not_to be_nil
+      schema = SolrDocument.new(WORK_WITH_PUBLIC_VISIBILITY).to_schema_json_ld&.to_json
+      expect(json.strip).to eq(schema)
+    end
+  end
 end
