@@ -123,6 +123,10 @@ module BlacklightHelper
     Blacklight::SearchState.new(params, blacklight_config)
   end
 
+  def render_schema_org_metadata
+    render partial: 'catalog/schema_org_metadata', locals: { metadata: @document.to_schema_json_ld }
+  end
+
   private
 
   def language_code_to_english(language_code)
