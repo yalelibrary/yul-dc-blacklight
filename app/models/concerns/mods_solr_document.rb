@@ -26,9 +26,8 @@ module ModsSolrDocument
         end
         self[:rights_ssim]&.each { |access_condition| xml['mods'].accessCondition({ type: 'restriction on access' }, access_condition.to_s) }
         if self[:language_ssim]
-          xml['mods'].languageTerm({ type: "text" })
           xml['mods'].language do
-            self[:language_ssim]&.each { |language| xml['mods'].languageTerm(language.to_s) }
+            self[:language_ssim]&.each { |language| xml['mods'].languageTerm({ type: 'text' }, language.to_s) }
           end
         end
         if self[:creatorDisplay_tsim]
