@@ -49,7 +49,6 @@ DEFAULT MOBILE STYLING
 
 .show-buttons {
   justify-self: center;
-  margin-right: 137px;
 }
 
 .show-links {
@@ -216,13 +215,14 @@ h2.yale-restricted-work-text {
 
   .show-buttons {
     justify-self: center;
-    margin-right: 176px;
   }
+
 }
 
 
 @media screen and (min-width: $large_device) {
   .constraints-container {
+    margin-left: 0.5%;
     width: 140%;
     justify-self: center;
     justify-content: space-between;
@@ -265,14 +265,16 @@ h2.yale-restricted-work-text {
 
   .show-buttons {
     justify-self: center;
-    margin-right: 52%;
+  }
+
+  #appliedParams {
+    width: 130%;
   }
 }
 
 
 @media screen and (min-width: $xlarge_device) {
   .constraints-container {
-    margin-left: -1%;
     width: 144%;
     justify-self: center;
     justify-content: space-between;
