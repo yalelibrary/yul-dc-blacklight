@@ -9,9 +9,7 @@ class ApplicationController < ActionController::Base
   layout :determine_layout if respond_to? :layout
 
   rescue_from Blacklight::Exceptions::RecordNotFound do
-    # redirect_to 'errors#not_found', status: 404
     render template: 'errors/not_found'
-    # render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
   end
 
   def landing
