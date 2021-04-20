@@ -5,10 +5,11 @@ module SchemaOrgSolrDocument
   extend ActiveSupport::Concern
 
   def to_schema_json_ld
+    about_description = [self[:subjectTopic_ssim]&.join(", "), self[:subjectGeographic_ssim]&.join(", ")].compact
+    about_description = nil if about_description.empty?
     about = {
       "name": self[:subjectName_ssim]&.join(", "),
-      "topic": self[:subjectGeographic_ssim]&.join(", "), # @self[:subjectTopic_ssim],
-      "place": self[:creationPlace_ssim]&.join(", ")
+      "description": about_description&.join(", ")
     }.compact
     about = nil if about.empty?
     {
