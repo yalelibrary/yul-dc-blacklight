@@ -17,3 +17,17 @@
 </iframe>
 </div>
 </br>
+
+<div id="uv-pages"></div>
+
+<script>
+  // use blacklight onload?
+  // move to js file?
+  $(document).ready(function(){
+    window.addEventListener("message", (event) => {
+      if (event.origin.match("<%= request.protocol %><%= request.host %>")) {
+        $("#uv-pages").html(event.data)
+      }
+    }, false);
+  });
+</script>
