@@ -21,8 +21,7 @@ RSpec.describe SolrDocument, type: :model do
 
       about = schema[:about]
       expect(about[:name]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:subjectName_ssim]&.join(", "))
-      expect(about[:topic]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:subjectGeographic_ssim]&.join(", "))
-      expect(about[:place]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:creationPlace_ssim]&.join(", "))
+      expect(about[:description]).to eq([WORK_WITH_PUBLIC_VISIBILITY[:subjectTopic_ssim]&.join(", "), WORK_WITH_PUBLIC_VISIBILITY[:subjectGeographic_ssim]&.join(", ")].join(", "))
     end
   end
 
