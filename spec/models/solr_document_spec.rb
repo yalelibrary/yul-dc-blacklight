@@ -7,21 +7,22 @@ RSpec.describe SolrDocument, type: :model do
     let(:solr_document) { described_class.new(WORK_WITH_PUBLIC_VISIBILITY) }
     it "creates valid schema.org metadata" do
       schema = solr_document.to_schema_json_ld
+
       expect(schema[:@context]).to eq('https://schema.org/')
       expect(schema[:@type]).to eq('CreativeWork')
 
-      expect(schema[:name]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:title_tesim]&.join(", "))
-      expect(schema[:alternateName]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:alternativeTitle_tesim]&.join(", "))
-      expect(schema[:description]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:description_tesim]&.join(", "))
+      expect(schema[:name]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:title_tesim])
+      expect(schema[:alternateName]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:alternativeTitle_tesim])
+      expect(schema[:description]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:description_tesim])
       expect(schema[:url]).to eq("https://collections.library.yale.edu/catalog/#{WORK_WITH_PUBLIC_VISIBILITY[:id]}")
-      expect(schema[:genre]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:genre_ssim]&.join(", "))
-      expect(schema[:materialExtent]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:extent_ssim]&.join(", "))
-      expect(schema[:temporal]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:date_ssim]&.join(", "))
+      expect(schema[:genre]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:genre_ssim])
+      expect(schema[:materialExtent]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:extent_ssim])
+      expect(schema[:temporal]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:date_ssim])
       expect(schema[:thumbnailUrl]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:thumbnail_path_ss])
 
+      # work because the WORK_WITH_PUBLIC_VISIBILITY record has a value for each of these fields.
       about = schema[:about]
-      expect(about[:name]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:subjectName_ssim]&.join(", "))
-      expect(about[:description]).to eq([WORK_WITH_PUBLIC_VISIBILITY[:subjectTopic_ssim]&.join(", "), WORK_WITH_PUBLIC_VISIBILITY[:subjectGeographic_ssim]&.join(", ")].join(", "))
+      expect(about[:name]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:subjectName_ssim] + WORK_WITH_PUBLIC_VISIBILITY[:subjectTopic_ssim] + WORK_WITH_PUBLIC_VISIBILITY[:subjectGeographic_ssim])
     end
   end
 
