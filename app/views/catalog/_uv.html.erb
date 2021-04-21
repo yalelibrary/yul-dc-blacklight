@@ -24,10 +24,12 @@
   // use blacklight onload?
   // move to js file?
   $(document).ready(function(){
-    window.addEventListener("message", (event) => {
-      if (event.origin.match("<%= request.protocol %><%= request.host %>")) {
-        $("#uv-pages").html(event.data)
+    window.addEventListener('message', (event) => {
+      if (event.origin.match('<%= request.protocol %><%= request.host %>')) {
+        array = '<%= @document[:child_oids_ssim] %>'
+        oids = JSON.parse(array.replace(/&quot;/g,'"'))
+        $('#uv-pages').html(oids[event.data])
       }
-    }, false);
-  });
+    }, false)
+  })
 </script>

@@ -61,9 +61,9 @@
                 locales: formattedLocales
             }, urlDataProvider);
             uv.on('canvasIndexChanged', function (event, obj) {
-              // TODO figure out which two pages are showing right now
-              window.parent.postMessage(event, "*")
-            });
+                window.parent.postMessage(event, "*")
+                // TODO figure out which two pages are showing right now
+            })
 
         }, false);
     </script>

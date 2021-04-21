@@ -60,6 +60,11 @@
                 embedded: true,
                 locales: formattedLocales
             }, urlDataProvider);
+            uv.on('canvasIndexChanged', function (event, obj) {
+                window.parent.postMessage(event, "*")
+                // TODO figure out which two pages are showing right now
+            })
+
         }, false);
     </script>
 </head>
