@@ -41,16 +41,21 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  # Custom error pages
-  get '/404', to: 'errors#not_found', via: :all
-
   get '/check-iiif', to: 'iiif#show', as: :iiif
   get '/pdfs/not_found.html', to: 'pdfs#not_found'
 
-  # Thes routes use wildcards for the ids. They need to be after any other /manifests or /pdfs routes.
+  # Custom error page
+  get '/404', to: 'errors#not_found', via: :all
+
+  # These routes use wildcards for the ids. They need to be after any other /manifests or /pdfs routes.
   get '/manifests/*id', to: 'manifests#show', as: :manifest
   get '/pdfs/*id', to: 'pdfs#show', as: :pdf
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  # Match all unknown paths to the 404 page
+  Rails.application.routes.draw do
+    match '*path' => 'errors#not_found', via: :all
+  end
 
   # Stop throwing 404s on missing map files. This route should be LAST as it will match anything that ends in .map
   get '/*path/*file.map', to: proc { [200, {}, ['']] }
