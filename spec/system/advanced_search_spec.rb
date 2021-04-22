@@ -127,6 +127,38 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
     end
 
+    it 'maintains search results after changing sort dropdown' do
+      fill_in 'oid_ssi', with: '11607445'
+      click_on 'SEARCH'
+      within '#documents' do
+        expect(page).to     have_content('Record 1')
+        expect(page).not_to have_content('Record 2')
+      end
+      within '#sort-dropdown' do
+        click_on 'Year (ascending)'
+      end
+      within '#documents' do
+        expect(page).to     have_content('Record 1')
+        expect(page).not_to have_content('Record 2')
+      end
+    end
+
+    it 'maintains search results after clicking per page' do
+      fill_in 'oid_ssi', with: '11607445'
+      click_on 'SEARCH'
+      within '#documents' do
+        expect(page).to     have_content('Record 1')
+        expect(page).not_to have_content('Record 2')
+      end
+      within '#per_page-dropdown' do
+        click_on '50'
+      end
+      within '#documents' do
+        expect(page).to     have_content('Record 1')
+        expect(page).not_to have_content('Record 2')
+      end
+    end
+
     it 'clears search results when re-querying' do
       fill_in 'oid_ssi', with: '11607445'
       click_on 'SEARCH'
@@ -165,42 +197,6 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
   end
 
   context 'sorting' do
-    xit 'can sort by date from oldest to newest' do
-      within '#sort' do
-        find("option[value='dateStructured_ssim desc, title_si asc']").click
-      end
-
-      click_on 'SEARCH'
-      within '#documents' do
-        expect(page).to have_content("1.\nRecord 1")
-        expect(page).to have_content("2.\nRecord 2")
-      end
-    end
-
-    xit 'can sort by date from newest to oldest' do
-      within '#sort' do
-        find("option[value='dateStructured_ssim asc, title_si asc']").click
-      end
-
-      click_on 'SEARCH'
-      within '#documents' do
-        expect(page).to have_content("1.\nRecord 2")
-        expect(page).to have_content("2.\nRecord 1")
-      end
-    end
-
-    xit 'can sort by year' do
-      within '#sort' do
-        find("option[value='pub_date_si desc, title_si asc']").click
-      end
-
-      click_on 'SEARCH'
-      within '#documents' do
-        expect(page).to have_content("1.\nRecord 1")
-        expect(page).to have_content("2.\nRecord 2")
-      end
-    end
-
     it 'can sort by title' do
       within '#sort' do
         find("option[value='title_ssim asc, oid_ssi desc']").click
