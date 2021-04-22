@@ -21,8 +21,12 @@ RSpec.describe SolrDocument, type: :model do
       expect(schema[:thumbnailUrl]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:thumbnail_path_ss])
 
       # work because the WORK_WITH_PUBLIC_VISIBILITY record has a value for each of these fields.
-      about = schema[:about]
-      expect(about[:name]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:subjectName_ssim] + WORK_WITH_PUBLIC_VISIBILITY[:subjectTopic_ssim] + WORK_WITH_PUBLIC_VISIBILITY[:subjectGeographic_ssim])
+      abouts = schema[:about]
+      all_expected_abouts = WORK_WITH_PUBLIC_VISIBILITY[:subjectName_ssim] + WORK_WITH_PUBLIC_VISIBILITY[:subjectTopic_ssim] + WORK_WITH_PUBLIC_VISIBILITY[:subjectGeographic_ssim]
+      all_expected_abouts.each_with_index do |expected_about, ix|
+        expect(abouts[ix][:name]).to eq(expected_about)
+        expect(abouts[ix][:@type]).to eq("Thing")
+      end
     end
   end
 

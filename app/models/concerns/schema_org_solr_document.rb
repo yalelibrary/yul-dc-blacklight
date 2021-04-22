@@ -10,7 +10,7 @@ module SchemaOrgSolrDocument
     about_names += self[:subjectTopic_ssim] if self[:subjectTopic_ssim]
     about_names += self[:subjectGeographic_ssim] if self[:subjectGeographic_ssim]
     about_names.compact!
-    about = { name: about_names } unless about_names.empty?
+    about = about_names.map { |name| { "@type": "Thing", name: name } } unless about_names.empty?
     {
       "@context": "https://schema.org/",
       "@type": "CreativeWork",
