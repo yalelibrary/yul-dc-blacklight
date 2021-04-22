@@ -261,12 +261,12 @@ RSpec.describe "/catalog", clean: true, type: :request do
       it 'returns properly formatted :orbisBidId_ssi with GetRecord' do
         xml.remove_namespaces!
         locator = xml.xpath('//location/holdingSimple/copyInformation/electronicLocator', ns_hash)
-        expect(locator.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:orbisBibId_ssi].first)
+        expect(locator.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:orbisBibId_ssi])
       end
 
       it 'returns properly location object in context' do # 104
         locator = xml.xpath('//mods:location/mods:url[@access=\'object in context\']', ns_hash).attr("href")
-        oid = WORK_WITH_PUBLIC_VISIBILITY[:oid_ssi].first
+        oid = WORK_WITH_PUBLIC_VISIBILITY[:oid_ssi]
         expect(locator.text).to eq("https://collections.library.yale.edu/catalog/#{oid}")
       end
 
