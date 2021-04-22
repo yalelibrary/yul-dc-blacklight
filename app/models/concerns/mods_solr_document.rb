@@ -129,7 +129,7 @@ module ModsSolrDocument
           end # Need test for the below
           xml['mods'].url({ access: 'object in context',
                             displayLabel: 'View information and digital image(s) in the Beinecke Library’s Digital Images Online database',
-                            "xlink:href" => "https://collections.library.yale.edu" })
+                            "xlink:href" => "https://collections.library.yale.edu/catalog/#{self[:oid_ssi]}" })
           if self[:thumbnail_path_ss].present?
             thumbnail_array = self[:thumbnail_path_ss].split("/")
             thumbnail_array[7] = "full"
