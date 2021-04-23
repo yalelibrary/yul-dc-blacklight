@@ -8,7 +8,7 @@ module OgpSolrDocument
     description = ogp_description
 
     ogp_metadata =
-      { 'og:title': self[:title_tesim].join(', '),
+      { 'og:title': self[:title_tesim]&.join(', '),
         'og:url': "https://collections.library.yale.edu/catalog/#{id}",
         'og:type': 'website',
         'og:description': description,
@@ -30,6 +30,6 @@ module OgpSolrDocument
     description_value += self[:creator_tesim] if self[:creator_tesim]
     description_value += self[:date_ssim] if self[:date_ssim]
     description_value.compact!
-    !description_value.empty? && description_value.join(', ') || nil
+    !description_value.empty? && description_value.join('; ') || nil
   end
 end
