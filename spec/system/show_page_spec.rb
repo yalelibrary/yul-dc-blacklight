@@ -32,7 +32,10 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       genre_ssim: 'Maps',
       resourceType_ssim: 'Maps, Atlases & Globes',
       creator_ssim: ['Anna Elizabeth Dewdney'],
-      child_oids_ssim: [112, 113]
+      creator_tesim: ['Anna Elizabeth Dewdney'],
+      child_oids_ssim: [112, 113],
+      oid_ssi: 111,
+      thumbnail_path_ss: 'https://this/is/an/image'
     }
   end
 
@@ -100,6 +103,21 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     }
   end
 
+  let(:train) do
+    {
+      id: '555',
+      title_tesim: ['The Boiler Makers'],
+      format: 'text',
+      language_ssim: 'fr',
+      visibility_ssi: 'Yale Community Only',
+      genre_ssim: 'Animation',
+      resourceType_ssim: 'Archives or Manuscripts',
+      creator_ssim: ['France A. Cordova'],
+      oid_ssi: 555,
+      thumbnail_path_ss: 'https://this/is/an/image'
+    }
+  end
+
   it 'has expected css' do
     expect(page).to have_css '.btn-show'
     expect(page).to have_css '.constraints-container'
@@ -139,6 +157,30 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
         src = find('.universal-viewer-iframe')['src']
         expect(src).to include '&cv=0'
       end
+    end
+  end
+
+  context 'with public works' do
+    it 'Metadata og tags are in the header of html' do
+      expect(page).to have_css("meta[property='og:title'][content='Amor Llama']", visible: false)
+      expect(page).to have_css("meta[property='og:url'][content='https://collections.library.yale.edu/catalog/111']", visible: false)
+      expect(page).to have_css("meta[property='og:type'][content='website']", visible: false)
+      expect(page).to have_css("meta[property='og:description'][content='Anna Elizabeth Dewdney']", visible: false)
+      expect(page).to have_css("meta[property='og:image'][content='https://this/is/an/image']", visible: false)
+      expect(page).to have_css("meta[property='og:image:type'][content='image/jpeg']", visible: false)
+    end
+    it 'has og namespace' do
+      expect(page).to have_css("html[prefix='og: https://ogp.me/ns#']", visible: false)
+    end
+  end
+
+  context 'with yale-only works' do
+    before do
+      visit 'catalog/555'
+    end
+    it 'does not have image of og tag' do
+      expect(page).not_to have_css("meta[property='og:image'][content='https://this/is/an/image']", visible: false)
+      expect(page).not_to have_css("meta[property='og:image:type'][content='image/jpeg']", visible: false)
     end
   end
 end

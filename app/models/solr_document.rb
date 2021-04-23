@@ -6,6 +6,7 @@ class SolrDocument
   include Blacklight::Gallery::OpenseadragonSolrDocument
   include ModsSolrDocument
   include SchemaOrgSolrDocument
+  include OgpSolrDocument
 
   # # The following shows how to setup this blacklight document to display marc documents
   # extension_parameters[:marc_source_field] = :marc_ss

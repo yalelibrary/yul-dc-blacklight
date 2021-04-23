@@ -127,6 +127,14 @@ module BlacklightHelper
     render partial: 'catalog/schema_org_metadata', locals: { metadata: @document.to_schema_json_ld }
   end
 
+  def render_ogp_metadata
+    @document.to_ogp_metadata
+  end
+
+  def html_tag_attributes
+    { lang: I18n.locale, prefix: "og: https://ogp.me/ns#" }
+  end
+
   private
 
   def language_code_to_english(language_code)
