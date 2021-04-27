@@ -29,9 +29,10 @@
         const array = '<%= @document[:child_oids_ssim] %>'
         const viewing_hint = '<%= @document[:viewing_hint_ssi] %>'
         const child_oids = JSON.parse(array.replace(/&quot;/g,'"'))
+        const selected = $('iframe').contents().find('[id^="thumb"].thumb.selected')
         let uv_thumbnail = child_oids[index]
 
-        if (viewing_hint === 'paged') {
+        if (selected.length > 1) {
           uv_thumbnail = is_even
             ? `${child_oids[index - 1] || ''} ${child_oids[index]}`
             : `${child_oids[index]} ${child_oids[index + 1] || ''}`
