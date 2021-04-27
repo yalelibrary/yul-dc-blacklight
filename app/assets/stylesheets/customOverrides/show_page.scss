@@ -217,6 +217,11 @@ h2.yale-restricted-work-text {
     justify-self: center;
   }
 
+  .item-page__tools-wrapper{
+    max-width: 628px;
+    margin-left: 8%;
+  }
+
 }
 
 
@@ -267,6 +272,11 @@ h2.yale-restricted-work-text {
     justify-self: center;
   }
 
+  .item-page__tools-wrapper{
+    max-width: 740px;
+    margin-left: 19%;
+  }
+
   #appliedParams {
     width: 130%;
   }
@@ -313,5 +323,10 @@ h2.yale-restricted-work-text {
 
   .item-page__metadata-wrapper {
     padding-left: 19%;
+  }
+
+  .item-page__tools-wrapper{
+    max-width: 890px;
+    min-width: 880px;
   }
 }
