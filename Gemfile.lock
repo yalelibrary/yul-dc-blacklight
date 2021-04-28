@@ -503,6 +503,7 @@ GEM
     yard (0.9.26)
     yell (2.2.2)
     zeitwerk (2.4.2)
+    zlib (1.0.0)
 
 PLATFORMS
   ruby
@@ -563,6 +564,7 @@ DEPENDENCIES
   webmock
   webpacker (~> 4.0)
   yard
+  zlib
 
 RUBY VERSION
    ruby 2.6.6p146
