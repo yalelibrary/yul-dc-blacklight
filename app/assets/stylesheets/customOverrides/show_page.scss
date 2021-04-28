@@ -28,7 +28,7 @@ DEFAULT MOBILE STYLING
 .show-tools .list-group {
   flex-direction: row;
   flex-wrap: wrap;
-  padding-left: 15px;
+  margin-left: -1%;
 }
 
 .list-group-item {
@@ -89,7 +89,7 @@ DEFAULT MOBILE STYLING
 }
 
 .show-tools a.nav-link, .show-tools span.nav-link {
-  padding: 0.5rem 0.25rem;
+  padding: 0.5rem 0.25rem 1rem;
 }
 
 #citationLink:after, #manifestLink:after, #miradorLink:after, #pdfLink:after {
@@ -180,6 +180,9 @@ DEFAULT MOBILE STYLING
 
 h2.yale-restricted-work-text {
   font-size: 1.5em;
+}
+.tools-text-format{
+  margin-left: -3%;
 }
 
 @media screen and (min-width: $medium_device) {
@@ -272,6 +275,10 @@ h2.yale-restricted-work-text {
     justify-self: center;
   }
 
+  .tools-text-format{
+    margin-left: -2.5%;
+  }
+
   .item-page__tools-wrapper{
     max-width: 740px;
     margin-left: 19%;
@@ -328,5 +335,12 @@ h2.yale-restricted-work-text {
   .item-page__tools-wrapper{
     max-width: 890px;
     min-width: 880px;
+  }
+
+  .tools-text-format{
+    margin-left: -2.25%;
+  }
+  .show-tools.list-group{
+    margin-left: -0.5%;
   }
 }
