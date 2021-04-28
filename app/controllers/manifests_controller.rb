@@ -9,19 +9,8 @@ class ManifestsController < ApplicationController
   def show
     remote_path = pairtree_path
     response.set_header('Access-Control-Allow-Origin', '*')
-
-    manifest = download_from_s3(remote_path)
-    puts "manifest >>> #{manifest.inspect}"
-    puts "manifest size>>> #{manifest.size}"
-
-    compressed_manifest = Zlib::Deflate.deflate(manifest)
-    puts "compressed manifest >>> #{compressed_manifest.inspect}"
-    puts "compressed manifest size>>> #{compressed_manifest.size}"
-
-    uncompressed_manifest = Zlib::Inflate.inflate(compressed_manifest)
-    puts "Uncompressed data is >>> #{uncompressed_manifest}"
-
-    render json: uncompressed_manifest
+    response.set_header('Content-Encoding', 'gzip')
+    render json: download_from_s3(remote_path)
   rescue ArgumentError
     render json: { error: 'unauthorized' }.to_json, status: 401
   end

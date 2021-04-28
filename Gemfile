@@ -41,7 +41,6 @@ gem 'twitter-typeahead-rails', '0.11.1.pre.corejavascript'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'webpacker', '~> 4.0'
 gem 'yard'
-gem 'zlib'
 
 group :development, :test do
   gem 'bixby', '~> 3.0.0'
