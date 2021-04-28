@@ -13,7 +13,8 @@ RSpec.describe "/catalog", clean: true, type: :request do
 
   def ns_hash
     { 'mods' => 'http://www.loc.gov/mods/v3',
-      'xlink' => "http://www.w3.org/1999/xlink" }
+      'xlink' => "http://www.w3.org/1999/xlink",
+      'dc' => "http://purl.org/dc/elements/1.1/" }
   end
 
   describe 'GET /oai?verb=ListRecords&metadataPrefix=oai_mods' do
@@ -280,6 +281,17 @@ RSpec.describe "/catalog", clean: true, type: :request do
         url_thumb = xml.xpath('//location/url[@access=\'preview\']', ns_hash).attr("href")
         expect(url_thumb.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:thumbnail_path_ss])
       end
+    end
+  end
+
+  context 'use GetRecord for dublin core' do
+    let(:xml) { Nokogiri::XML(response.body) }
+    before do
+      get "/catalog/oai?verb=GetRecord&metadataPrefix=oai_dc&identifier=oai:collections.library.yale.edu:#{WORK_WITH_PUBLIC_VISIBILITY[:id]}"
+    end
+
+    it "uses the language code for Language" do
+      expect(xml.xpath('//dc:language', ns_hash).text).to eq('eng')
     end
   end
 
