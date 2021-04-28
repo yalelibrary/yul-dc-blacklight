@@ -120,8 +120,13 @@ RSpec.describe "/catalog", clean: true, type: :request do
       end
 
       it 'returns properly formatted language_ssim with GetRecord' do
-        language = xml.xpath('//mods:language/mods:languageTerm', ns_hash).first
+        language = xml.xpath('//mods:language/mods:languageTerm[@type=\'text\']', ns_hash).first
         expect(language.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:language_ssim].first)
+      end
+
+      it 'returns properly formatted languageCode_ssim with GetRecord' do
+        language = xml.xpath('//mods:language/mods:languageTerm[@type=\'code\']', ns_hash).first
+        expect(language.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:languageCode_ssim].first)
       end
 
       it 'returns properly formatted creatorDisplay_tsim with GetRecord' do
