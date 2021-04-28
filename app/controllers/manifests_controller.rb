@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require "zlib"
 
 # Takes a request for a manifest/oid and stream the JSON for that oid from S3
 class ManifestsController < ApplicationController
