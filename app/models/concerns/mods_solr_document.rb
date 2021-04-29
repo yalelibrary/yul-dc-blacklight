@@ -25,9 +25,10 @@ module ModsSolrDocument
           self[:format_tesim].select { |format| valid_formats.any? { |f| f.include?(format.downcase) } }.each { |type_resource| xml['mods'].typeOfResource type_resource.to_s }
         end
         self[:rights_ssim]&.each { |access_condition| xml['mods'].accessCondition({ type: 'restriction on access' }, access_condition.to_s) }
-        if self[:language_ssim]
+        if self[:language_ssim] || self[:languageCode_ssim]
           xml['mods'].language do
             self[:language_ssim]&.each { |language| xml['mods'].languageTerm({ type: 'text' }, language.to_s) }
+            self[:languageCode_ssim]&.each { |language_code| xml['mods'].languageTerm({ type: 'code', authority: 'iso639-2b' }, language_code.to_s) }
           end
         end
         if self[:creatorDisplay_tsim]

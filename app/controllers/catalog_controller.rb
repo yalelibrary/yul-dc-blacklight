@@ -492,7 +492,7 @@ class CatalogController < ApplicationController
         title: 'title_tesim',
         creator: 'creator_ssim',
         date: 'date_ssim',
-        language: 'language_ssim',
+        language: 'languageCode_ssim',
         description: %w[abstract_tesim description_tesim],
         format: 'format'
       }

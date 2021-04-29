@@ -9,6 +9,7 @@ WORK_WITH_PUBLIC_VISIBILITY = {
   "format": ["text"],
   "format_tesim": ["text"],
   "language_ssim": ["English"],
+  "languageCode_ssim": ["eng"],
   "description_tesim": ["Four volume printer's proof with manuscript notes throughout."],
   "abstract_tesim": ["Published on April 15, 1755 and written largely single-handedly by Samuel Johnson. Sometimes published as \"Johnson's Dictionary.\" The first edition was published in two folio volumes; later editions were published in four volumes."],
   "accessRestrictions_tesim": ["public"],
