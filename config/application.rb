@@ -24,5 +24,8 @@ module BlacklightYul
 
     # Set Rails default to the organization's local timezone
     config.time_zone = 'Eastern Time (US & Canada)'
+
+    # Add gzip compression for HTML, JSON and other Rails generated responses
+    config.middleware.use Rack::Deflater
   end
 end
