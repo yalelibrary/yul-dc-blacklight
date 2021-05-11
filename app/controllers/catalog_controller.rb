@@ -13,7 +13,20 @@ class CatalogController < ApplicationController
     render 'record_not_found', status: 404
   end
 
+  # CatalogController-scope behavior and configuration for BlacklightIiifSearch
+  include BlacklightIiifSearch::Controller
+
   configure_blacklight do |config|
+
+    # configuration for Blacklight IIIF Content Search
+    config.iiif_search = {
+      full_text_field: 'all_text_timv',
+      object_relation_field: 'is_page_of_ssi',
+      supported_params: %w[q page],
+      autocomplete_handler: 'iiif_suggest',
+      suggester_name: 'iiifSuggester'
+    }
+
     # default advanced config values
     config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
     # config.advanced_search[:qt] ||= 'advanced'

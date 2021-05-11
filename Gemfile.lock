@@ -131,6 +131,10 @@ GEM
     blacklight_dynamic_sitemap (0.4.0)
       blacklight (> 6.0)
       rails (<= 6.1)
+    blacklight_iiif_search (2.0.0)
+      blacklight (~> 7.0)
+      iiif-presentation
+      rails (>= 5.1, < 7)
     blacklight_range_limit (7.8.2)
       blacklight (>= 7.0)
     bootsnap (1.4.9)
@@ -229,6 +233,10 @@ GEM
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
+    iiif-presentation (1.0.0)
+      activesupport (>= 3.2.18)
+      faraday (>= 0.9)
+      json
     iso-639 (0.3.5)
     jbuilder (2.10.2)
       activesupport (>= 5.0.0)
@@ -520,6 +528,7 @@ DEPENDENCIES
   blacklight-marc (>= 7.0.0.rc1, < 8)
   blacklight_advanced_search
   blacklight_dynamic_sitemap
+  blacklight_iiif_search
   blacklight_oai_provider!
   blacklight_range_limit
   bootsnap (>= 1.4.2)
