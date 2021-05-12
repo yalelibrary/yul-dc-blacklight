@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-Rails.application.routes.draw do
-
-  concern :iiif_search, BlacklightIiifSearch::Routes.new # rubocop:disable Metrics/BlockLength
+Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
+  concern :iiif_search, BlacklightIiifSearch::Routes.new
   concern :oai_provider, BlacklightOaiProvider::Routes.new
 
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
@@ -56,8 +55,7 @@ Rails.application.routes.draw do
 
   # Match all unknown paths to the 404 page
   Rails.application.routes.draw do
-
-  concern :iiif_search, BlacklightIiifSearch::Routes.new
+    concern :iiif_search, BlacklightIiifSearch::Routes.new
     match '*path' => 'errors#not_found', via: :all
   end
 
