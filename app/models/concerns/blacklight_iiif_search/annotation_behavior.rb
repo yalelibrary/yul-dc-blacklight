@@ -18,7 +18,7 @@ module BlacklightIiifSearch
     # Create a URL for the canvas that the annotation refers to
     # @return [String]
     def canvas_uri_for_annotation
-      "#{controller.solr_document_url(parent_document[:id])}/canvas/#{document[:id]}" + coordinates
+      "#{manifest_base_url}oid/#{document[:parent_ssi]}/canvas/#{document[:id]}" + coordinates
     end
 
     ##
