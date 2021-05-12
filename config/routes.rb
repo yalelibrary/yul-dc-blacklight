@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
-  concern :iiif_search, BlacklightIiifSearch::Routes.new 
+  concern :iiif_search, BlacklightIiifSearch::Routes.new
   concern :oai_provider, BlacklightOaiProvider::Routes.new
 
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
@@ -32,6 +32,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
     concerns [:exportable, :marc_viewable]
+    concerns :iiif_search
   end
 
   resources :bookmarks do
