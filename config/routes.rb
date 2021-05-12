@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
+  concern :iiif_search, BlacklightIiifSearch::Routes.new 
   concern :oai_provider, BlacklightOaiProvider::Routes.new
 
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
