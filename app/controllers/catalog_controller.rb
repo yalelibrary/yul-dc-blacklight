@@ -20,8 +20,8 @@ class CatalogController < ApplicationController
 
     # configuration for Blacklight IIIF Content Search
     config.iiif_search = {
-      full_text_field: 'all_text_timv',
-      object_relation_field: 'is_page_of_ssi',
+      full_text_field: 'fulltext_tsim', #all_text_timv 
+      object_relation_field: 'child_oids_ssim', #is_page_of_ssi
       supported_params: %w[q page],
       autocomplete_handler: 'iiif_suggest',
       suggester_name: 'iiifSuggester'
