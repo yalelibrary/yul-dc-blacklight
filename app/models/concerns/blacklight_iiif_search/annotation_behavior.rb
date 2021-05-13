@@ -7,8 +7,8 @@ module BlacklightIiifSearch
     # Create a URL for the annotation
     # @return [String]
     def annotation_id
-      "#{manifest_base_url}oid/#{document[:parent_ssi]}/canvas/#{document[:id]}/image/1" # should the index be 1 to match with the IDs in our manifests?
-    end
+      "#{controller.solr_document_url(parent_document[:id])}/canvas/#{document[:id]}/annotation/#{hl_index}"
+    end    
 
     def manifest_base_url
       @manifest_base_url ||= (ENV["IIIF_MANIFESTS_BASE_URL"] || "http://localhost/manifests")
