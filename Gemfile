@@ -25,7 +25,6 @@ gem 'honeybadger', '~> 4.0'
 gem 'iso-639'
 gem 'jbuilder', '~> 2.7'
 gem 'jquery-rails'
-gem 'mimemagic', '~> 0.3.10'
 gem 'omniauth'
 gem 'omniauth-cas'
 # This addresses CVE-2015-9284 https://github.com/advisories/GHSA-ww4x-rwq6-qpgf
@@ -37,6 +36,7 @@ gem 'rails', '~> 6.0.3'
 gem "rails_semantic_logger", ">=4.4.4"
 gem 'rsolr', '>= 1.0', '< 3'
 gem 'sass-rails', '>= 6'
+gem 'sprockets', '~> 4.0', '>= 4.0.2'
 gem 'turbolinks', '~> 5'
 gem 'twitter-typeahead-rails', '0.11.1.pre.corejavascript'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
