@@ -381,12 +381,12 @@ class CatalogController < ApplicationController
     # Specifying a :qt only to show it's possible, and so our internal automated
     # tests can test it. In this case it's the same as
     # config[:default_solr_parameters][:qt], so isn't actually neccesary.
-    config.add_search_field('subjectName_ssim', label: 'Subject') do |field|
+    config.add_search_field('subjectName_tesim', label: 'Subject') do |field|
       field.qt = 'search'
       field.include_in_advanced_search = false
       field.solr_parameters = {
-        qf: '',
-        pf: 'subjectName_ssim'
+        qf: 'subjectName_tesim',
+        pf: ''
       }
     end
 
