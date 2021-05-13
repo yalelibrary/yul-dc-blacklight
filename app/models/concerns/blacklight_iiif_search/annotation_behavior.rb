@@ -8,7 +8,7 @@ module BlacklightIiifSearch
     # @return [String]
     def annotation_id
       "#{controller.solr_document_url(parent_document[:id])}/canvas/#{document[:id]}/annotation/#{hl_index}"
-    end    
+    end
 
     def manifest_base_url
       @manifest_base_url ||= (ENV["IIIF_MANIFESTS_BASE_URL"] || "http://localhost/manifests")
