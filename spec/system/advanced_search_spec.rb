@@ -286,7 +286,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
   describe 'styling' do
     it 'renders field input style' do
       expect(page).to have_css '.advanced_search_fields'
-      expect(page).to have_css '.advanced-search-field', count: 9
+      expect(page).to have_css '.advanced-search-field', count: 10
     end
 
     it 'renders help section style' do
