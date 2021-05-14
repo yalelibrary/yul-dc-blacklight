@@ -22,7 +22,7 @@ RSpec.describe CatalogController, type: :controller do
          "genre_fields",
          "oid_ssi",
          "orbisBibId_ssi",
-         "subjectName_ssim",
+         "subjectName_tesim",
          "subject_fields",
          "title_tesim"]
       end
