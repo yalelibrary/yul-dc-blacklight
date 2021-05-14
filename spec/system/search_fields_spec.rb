@@ -12,7 +12,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
   let(:search_fields) { CatalogController.blacklight_config.search_fields.keys }
   let(:expected_search_fields) do
     ["all_fields", "all_fields_advanced", "creator_tesim", "child_oids_ssim", "date_fields", "genre_fields",
-     "callNumber_tesim", "oid_ssi", "orbisBibId_ssi", "subjectName_ssim", "subject_fields", "title_tesim"]
+     "callNumber_tesim", "oid_ssi", "fulltext_tsim_advanced", "orbisBibId_ssi", "fulltext_tsim", "subjectName_ssim", "subject_fields", "title_tesim"]
   end
 
   let(:dog) do
@@ -20,6 +20,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       id: '111',
       title_tesim: 'Handsome Dan is a bull dog.',
       creator_tesim: 'Eric & Frederick',
+      fulltext_tsim: ['fulltext text one'],
       subjectName_ssim: "this is the subject name",
       sourceTitle_tesim: "this is the source title",
       callNumber_tesim: 'WA MSS 987',
@@ -33,6 +34,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       id: '212',
       title_tesim: 'Handsome Dan is not a cat.',
       creator_tesim: 'Frederick & Eric',
+      fulltext_tsim: ['fulltext text two'],
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
       callNumber_tesim: 'Yale MS 123',
@@ -73,6 +75,18 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       visit '/catalog?search_field=title_tesim&q=handsome'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).to have_content 'Handsome Dan is not a cat.'
+    end
+
+    it 'displays the correct records when searching by fulltext' do
+      visit '/catalog?search_field=fulltext_tsim&q=fulltext'
+      expect(page).to have_content 'Handsome Dan is a bull dog.'
+      expect(page).to have_content 'Handsome Dan is not a cat.'
+    end
+
+    it 'displays the correct record when searching by fulltext' do
+      visit '/catalog?search_field=fulltext_tsim&q=one'
+      expect(page).to have_content 'Handsome Dan is a bull dog.'
+      expect(page).not_to have_content 'Handsome Dan is not a cat.'
     end
   end
 end
