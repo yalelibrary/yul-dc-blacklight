@@ -117,7 +117,7 @@ GEM
       rails (>= 5.1, < 7)
       view_component (>= 2.28.0)
     blacklight-gallery (2.1.0)
-      blacklight (~> 7.17)
+      blacklight (~> 7.7)
       bootstrap (~> 4.0)
       openseadragon (>= 0.2.0)
       rails (>= 5.1, < 7)
