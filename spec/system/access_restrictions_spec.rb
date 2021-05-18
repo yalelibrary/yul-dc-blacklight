@@ -77,6 +77,21 @@ RSpec.describe "access restrictions", type: :system, clean: true do
       visit solr_document_iiif_search_path(private_work[:id], {q: 'blacklight'})
       expect(page).to have_http_status(:unauthorized)
     end
+  
+    xit 'does allow iiif_suggest for public works' do
+      visit solr_document_iiif_suggest_path(public_work[:id], {q: 'blacklight'})
+      expect(page).to have_http_status(200)
+    end
+  
+    xit 'does NOT allow iiif_suggest for yale-only works' do
+      visit solr_document_iiif_suggest_path(yale_work[:id], {q: 'blacklight'})
+      expect(page).to have_http_status(:unauthorized)
+    end
+  
+    xit 'does NOT allow iiif_suggest for private works' do
+      visit solr_document_iiif_suggest_path(private_work[:id], {q: 'blacklight'})
+      expect(page).to have_http_status(:unauthorized)
+    end
   end
 
   context "an authenticated user" do
@@ -121,6 +136,21 @@ RSpec.describe "access restrictions", type: :system, clean: true do
   
     it 'does NOT allow iiif_search for private works' do
       visit solr_document_iiif_search_path(private_work[:id], {q: 'blacklight'})
+      expect(page).to have_http_status(:unauthorized)
+    end
+
+    xit 'does allow iiif_suggest for public works' do
+      visit solr_document_iiif_suggest_path(public_work[:id], {q: 'blacklight'})
+      expect(page).to have_http_status(200)
+    end
+  
+    xit 'does allow iiif_suggest for yale-only works' do
+      visit solr_document_iiif_suggest_path(yale_work[:id], {q: 'blacklight'})
+      expect(page).to have_http_status(200)
+    end
+  
+    xit 'does NOT allow iiif_suggest for private works' do
+      visit solr_document_iiif_suggest_path(private_work[:id], {q: 'blacklight'})
       expect(page).to have_http_status(:unauthorized)
     end
   end
@@ -175,6 +205,21 @@ RSpec.describe "access restrictions", type: :system, clean: true do
   
     it 'does NOT allow iiif_search for private works' do
       visit solr_document_iiif_search_path(private_work[:id], {q: 'blacklight'})
+      expect(page).to have_http_status(:unauthorized)
+    end
+
+    xit 'does allow iiif_suggest for public works' do
+      visit solr_document_iiif_suggest_path(public_work[:id], {q: 'blacklight'})
+      expect(page).to have_http_status(200)
+    end
+  
+    xit 'does allow iiif_suggest for yale-only works' do
+      visit solr_document_iiif_suggest_path(yale_work[:id], {q: 'blacklight'})
+      expect(page).to have_http_status(200)
+    end
+  
+    xit 'does NOT allow iiif_suggest for private works' do
+      visit solr_document_iiif_suggest_path(private_work[:id], {q: 'blacklight'})
       expect(page).to have_http_status(:unauthorized)
     end
   end
