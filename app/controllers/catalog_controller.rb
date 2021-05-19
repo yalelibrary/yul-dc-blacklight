@@ -11,6 +11,8 @@ class CatalogController < ApplicationController
   before_action :determine_per_page
   helper_method :gallery_view?
 
+  self.search_service_class = YulBlacklight::SearchService
+
   rescue_from Blacklight::Exceptions::RecordNotFound do
     render 'record_not_found', status: 404
   end
