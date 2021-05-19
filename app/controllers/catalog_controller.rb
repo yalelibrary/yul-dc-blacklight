@@ -6,6 +6,8 @@ class CatalogController < ApplicationController
   include Blacklight::Marc::Catalog
   include BlacklightRangeLimit::ControllerOverride
   include AccessHelper
+  include CheckAuthorization
+  before_action :check_authorization, only: [:iiif_search, :iiif_suggest]
   before_action :determine_per_page
   helper_method :gallery_view?
 
@@ -528,6 +530,11 @@ class CatalogController < ApplicationController
         format: 'format'
       }
     )
+  end
+
+  # This is for iiif_search
+  def search_for_item
+    search_service.fetch(params[:solr_document_id])
   end
 
   def gallery_view?
