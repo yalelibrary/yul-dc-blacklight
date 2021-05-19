@@ -4,10 +4,6 @@ module CheckAuthorization
   extend ActiveSupport::Concern
   include AccessHelper
 
-  included do
-    before_action :check_authorization
-  end
-
   def check_authorization
     # checking authorization
     Rails.logger.warn("starting authorization check for #{request.env['HTTP_X_ORIGIN_URI']}")

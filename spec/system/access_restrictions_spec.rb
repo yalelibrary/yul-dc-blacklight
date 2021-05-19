@@ -62,6 +62,36 @@ RSpec.describe "access restrictions", type: :system, clean: true do
       expect(page.html).not_to have_content("[Map of China]. [private copy]")
       expect(page).to have_http_status(:unauthorized)
     end
+
+    it 'does allow iiif_search for public works' do
+      visit solr_document_iiif_search_path(public_work[:id], { q: 'blacklight' })
+      expect(page).to have_http_status(:ok)
+    end
+
+    it 'does NOT allow iiif_search for yale-only works' do
+      visit solr_document_iiif_search_path(yale_work[:id], { q: 'blacklight' })
+      expect(page).to have_http_status(:unauthorized)
+    end
+
+    it 'does NOT allow iiif_search for private works' do
+      visit solr_document_iiif_search_path(private_work[:id], { q: 'blacklight' })
+      expect(page).to have_http_status(:unauthorized)
+    end
+
+    xit 'does allow iiif_suggest for public works' do
+      visit solr_document_iiif_suggest_path(public_work[:id], { q: 'blacklight' })
+      expect(page).to have_http_status(:ok)
+    end
+
+    xit 'does NOT allow iiif_suggest for yale-only works' do
+      visit solr_document_iiif_suggest_path(yale_work[:id], { q: 'blacklight' })
+      expect(page).to have_http_status(:unauthorized)
+    end
+
+    xit 'does NOT allow iiif_suggest for private works' do
+      visit solr_document_iiif_suggest_path(private_work[:id], { q: 'blacklight' })
+      expect(page).to have_http_status(:unauthorized)
+    end
   end
 
   context "an authenticated user" do
@@ -91,6 +121,36 @@ RSpec.describe "access restrictions", type: :system, clean: true do
       visit solr_document_path(private_work[:id])
       expect(page.html).not_to match(/universal-viewer-iframe/)
       expect(page.html).not_to have_content("[Map of China]. [private copy]")
+      expect(page).to have_http_status(:unauthorized)
+    end
+
+    it 'does allow iiif_search for public works' do
+      visit solr_document_iiif_search_path(public_work[:id], { q: 'blacklight' })
+      expect(page).to have_http_status(:ok)
+    end
+
+    it 'does allow iiif_search for yale-only works' do
+      visit solr_document_iiif_search_path(yale_work[:id], { q: 'blacklight' })
+      expect(page).to have_http_status(:ok)
+    end
+
+    it 'does NOT allow iiif_search for private works' do
+      visit solr_document_iiif_search_path(private_work[:id], { q: 'blacklight' })
+      expect(page).to have_http_status(:unauthorized)
+    end
+
+    xit 'does allow iiif_suggest for public works' do
+      visit solr_document_iiif_suggest_path(public_work[:id], { q: 'blacklight' })
+      expect(page).to have_http_status(:ok)
+    end
+
+    xit 'does allow iiif_suggest for yale-only works' do
+      visit solr_document_iiif_suggest_path(yale_work[:id], { q: 'blacklight' })
+      expect(page).to have_http_status(:ok)
+    end
+
+    xit 'does NOT allow iiif_suggest for private works' do
+      visit solr_document_iiif_suggest_path(private_work[:id], { q: 'blacklight' })
       expect(page).to have_http_status(:unauthorized)
     end
   end
@@ -130,6 +190,36 @@ RSpec.describe "access restrictions", type: :system, clean: true do
       visit solr_document_path(private_work[:id])
       expect(page.html).not_to match(/universal-viewer-iframe/)
       expect(page.html).not_to have_content("[Map of China]. [private copy]")
+      expect(page).to have_http_status(:unauthorized)
+    end
+
+    it 'does allow iiif_search for public works' do
+      visit solr_document_iiif_search_path(public_work[:id], { q: 'blacklight' })
+      expect(page).to have_http_status(:ok)
+    end
+
+    it 'does allow iiif_search for yale-only works' do
+      visit solr_document_iiif_search_path(yale_work[:id], { q: 'blacklight' })
+      expect(page).to have_http_status(:ok)
+    end
+
+    it 'does NOT allow iiif_search for private works' do
+      visit solr_document_iiif_search_path(private_work[:id], { q: 'blacklight' })
+      expect(page).to have_http_status(:unauthorized)
+    end
+
+    xit 'does allow iiif_suggest for public works' do
+      visit solr_document_iiif_suggest_path(public_work[:id], { q: 'blacklight' })
+      expect(page).to have_http_status(:ok)
+    end
+
+    xit 'does allow iiif_suggest for yale-only works' do
+      visit solr_document_iiif_suggest_path(yale_work[:id], { q: 'blacklight' })
+      expect(page).to have_http_status(:ok)
+    end
+
+    xit 'does NOT allow iiif_suggest for private works' do
+      visit solr_document_iiif_suggest_path(private_work[:id], { q: 'blacklight' })
       expect(page).to have_http_status(:unauthorized)
     end
   end
