@@ -37,6 +37,7 @@ class SearchBuilder < Blacklight::SearchBuilder
       alternativeTitle_tesim
       alternativeTitleDisplay_tesim
       archiveSpaceUri_ssi
+      box_ssim
       callNumber_ssim
       callNumber_tesim
       caption_tesim
@@ -63,6 +64,7 @@ class SearchBuilder < Blacklight::SearchBuilder
       description_tesim
       digital_ssim
       edition_ssim
+      edition_tesim
       extent_ssim
       extentOfDigitization_ssim
       findingAid_ssim
@@ -85,6 +87,7 @@ class SearchBuilder < Blacklight::SearchBuilder
       oid_ssi
       orbisBarcode_ssi
       orbisBibId_ssi
+      partOf_tesim
       preferredCitation_tesim
       projection_tesim
       public_bsi
