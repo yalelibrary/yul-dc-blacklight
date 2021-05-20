@@ -106,7 +106,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     expect(page).not_to have_css('.card.facet-limit.blacklight-year_isim')
   end
 
-  it "is able to search with the slider", :style do
+  it "is able to search with the slider", :style, js: true do
     visit search_catalog_path
     click_button 'Date Created'
     within '#facet-year_isim' do
