@@ -18,7 +18,7 @@ module BlacklightIiifSearch
     # Create a URL for the canvas that the annotation refers to
     # @return [String]
     def canvas_uri_for_annotation
-      "#{manifest_base_url}oid/#{document[:parent_ssi]}/canvas/#{document[:id]}" + coordinates
+      File.join(manifest_base_url.to_s, "oid/#{document[:parent_ssi]}/canvas/#{document[:id]}" + coordinates)
     end
 
     ##
