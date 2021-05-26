@@ -138,7 +138,8 @@ module BlacklightHelper
   def fulltext_snippet_separation(options = {})
     # Some snippets come back with new lines embedded without them. We don't want that.
     # We do however want new lines after a snippet, to show separation
-    snippets_without_new_lines = options[:value].map { |snippet| snippet.gsub(/\n/, ' ') }
+    # the "tr" below has to use double quotes, otherwise it will remove the character 'n', instead of new line notations
+    snippets_without_new_lines = options[:value].map { |snippet| snippet.tr("\n", ' ') }
     snippets_separated_by_line_break = snippets_without_new_lines.join('<br><br>')
 
     simple_format(snippets_separated_by_line_break)
