@@ -135,6 +135,13 @@ module BlacklightHelper
     { lang: I18n.locale, prefix: "og: https://ogp.me/ns#" }
   end
 
+  def fulltext_snippet_separation(options = {})
+    snippets_without_new_lines = options[:value].map { |snippet| snippet.gsub(/\n/, ' ') }
+    snippets_separated_by_line_break = snippets_without_new_lines.join('<br><br>')
+
+    simple_format(snippets_separated_by_line_break)
+  end
+
   private
 
   def language_code_to_english(language_code)
