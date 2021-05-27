@@ -13,7 +13,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
       options = { value: ["This is a test.\n\nThis is the OCR <span class='search-highlight'>text</span>", " for 1030368.\n\nSearch for some <span class='search-highlight'>text</span> to see"] }
 
       expect(helper.fulltext_snippet_separation(options)).to eq(
-        "<p>This is a test.  This is the OCR <span class=\"search-highlight\">text</span><br><br> for 1030368.  Search for some <span class=\"search-highlight\">text</span> to see</p>"
+        "<p>This is a test.  This is the OCR <span class=\"search-highlight\">text</span><br> for 1030368.  Search for some <span class=\"search-highlight\">text</span> to see</p>"
       )
     end
   end
