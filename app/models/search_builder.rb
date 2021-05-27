@@ -29,7 +29,7 @@ class SearchBuilder < Blacklight::SearchBuilder
   #
   # This is list of fields for requests to Solr (the fl parameter)
   #   This list is used in all Solr queries in SearchBuilder and SearchService.fetch to limit which fields are
-  #   returned when querying Solr.  It is used so that fulltext_tsim is not returned during queries or fetch.
+  #   returned when querying Solr.  It is used so that fulltext_tesim is not returned during queries or fetch.
   #   When a new Solr field is indexed and needed in blacklight, it must be added to this list.
   #   See: https://solr.apache.org/guide/8_0/common-query-parameters.html#fl-field-list-parameter
   def self.solr_record_fields

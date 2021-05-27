@@ -174,7 +174,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'sourceTitle_tesim', label: 'Collection Title', highlight: true
     config.add_index_field 'imageCount_isi', label: 'Image Count'
     config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true
-    config.add_index_field 'fulltext_tsim', label: 'Full Text', highlight: true, solr_params: disp_highlight_on_search_params.merge({ 'hl.snippets': 4 })
+    config.add_index_field 'fulltext_tesim', label: 'Full Text', highlight: true, solr_params: disp_highlight_on_search_params.merge({ 'hl.snippets': 4 })
     config.add_index_field 'abstract_tesim', label: 'Abstract', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'alternativeTitle_tesim', label: 'Alternative Title', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'description_tesim', label: 'Description', highlight: true, solr_params: disp_highlight_on_search_params
@@ -440,7 +440,7 @@ class CatalogController < ApplicationController
       field.qt = 'search'
       field.include_in_simple_select = false
       field.solr_parameters = {
-        qf: 'fulltext_tsim',
+        qf: 'fulltext_tesim',
         pf: ''
       }
     end
@@ -454,11 +454,11 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('fulltext_tsim', label: 'Full Text') do |field|
+    config.add_search_field('fulltext_tesim', label: 'Full Text') do |field|
       field.qt = 'search'
       field.include_in_advanced_search = false
       field.solr_parameters = {
-        qf: 'fulltext_tsim',
+        qf: 'fulltext_tesim',
         pf: ''
       }
     end
@@ -556,40 +556,20 @@ class CatalogController < ApplicationController
   def iiif_suggest
     @query = params[:q]
     @document_id = params[:solr_document_id]
-
-    suggest_with_children = false
-    if suggest_with_children
-      #  search children to get the count
-      params = {
-        "rows": 0,
-        "facet.field": "child_fulltext_tesim",
-        "facet": "on",
-        "q": "parent_ssi:#{@document_id}",
-        "facet.prefix": @query
-      }
-      results = search_service.repository.search(params)['facet_counts']['facet_fields']['child_fulltext_tesim']
-      terms_for_list = []
-      results.each_slice(2) do |term, freq|
-        term_hash = { match: term, url: solr_document_iiif_search_url(@document_id, q: term), count: freq }
-        terms_for_list << term_hash
-      end
-    else
-      #  search parent to find hits, count is always 1
-      params = {
-        "rows": 0,
-        "facet.field": "fulltext_tsim",
-        "facet": "on",
-        "q": "oid_ssi:#{@document_id}",
-        "facet.prefix": @query
-      }
-      results = search_service.repository.search(params)['facet_counts']['facet_fields']['fulltext_tsim']
-      terms_for_list = []
-      results.each_slice(2) do |term, _|
-        term_hash = { match: term, url: solr_document_iiif_search_url(@document_id, q: term) }
-        terms_for_list << term_hash
-      end
+    #  search children to get the count
+    params = {
+      "rows": 0,
+      "facet.field": "child_fulltext_tsim",
+      "facet": "on",
+      "q": "parent_ssi:#{@document_id}",
+      "facet.prefix": @query
+    }
+    results = search_service.repository.search(params)['facet_counts']['facet_fields']['child_fulltext_tsim']
+    terms_for_list = []
+    results.each_slice(2) do |term, freq|
+      term_hash = { match: term, url: solr_document_iiif_search_url(@document_id, q: term), count: freq }
+      terms_for_list << term_hash
     end
-
     render json: term_list(terms_for_list).to_json
   end
 
