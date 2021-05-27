@@ -8,6 +8,16 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     user.present?
   end
 
+  describe '#fulltext_snippet_separation' do
+    it 'separates the snippets by line breaks' do
+      options = { value: ["This is a test.\n\nThis is the OCR <span class='search-highlight'>text</span>", " for 1030368.\n\nSearch for some <span class='search-highlight'>text</span> to see"] }
+
+      expect(helper.fulltext_snippet_separation(options)).to eq(
+        "<p>This is a test.  This is the OCR <span class=\"search-highlight\">text</span><br><br> for 1030368.  Search for some <span class=\"search-highlight\">text</span> to see</p>"
+      )
+    end
+  end
+
   describe '#language_code' do
     context 'with a valid language code' do
       it 'returns the English name of the language' do
