@@ -23,7 +23,7 @@ class CatalogController < ApplicationController
   configure_blacklight do |config|
     # configuration for Blacklight IIIF Content Search
     config.iiif_search = {
-      full_text_field: 'child_fulltext_tesim',
+      full_text_field: 'child_fulltext_tsim',
       object_relation_field: 'parent_ssi',
       supported_params: %w[q page],
       autocomplete_handler: 'iiif_suggest'
