@@ -552,4 +552,57 @@ class CatalogController < ApplicationController
     super
     render "catalog/show_unauthorized", status: :unauthorized unless client_can_view_metadata?(@document)
   end
+
+  def iiif_suggest
+    @query = params[:q]
+    @document_id = params[:solr_document_id]
+
+    suggest_with_children = false
+    if suggest_with_children
+      #  search children to get the count
+      params = {
+        "rows": 0,
+        "facet.field": "child_fulltext_tesim",
+        "facet": "on",
+        "q": "parent_ssi:#{@document_id}",
+        "facet.prefix": @query
+      }
+      results = search_service.repository.search(params)['facet_counts']['facet_fields']['child_fulltext_tesim']
+      terms_for_list = []
+      results.each_slice(2) do |term, freq|
+        term_hash = { match: term, url: solr_document_iiif_search_url(@document_id, q: term), count: freq }
+        terms_for_list << term_hash
+      end
+    else
+      #  search parent to find hits, count is always 1
+      params = {
+        "rows": 0,
+        "facet.field": "fulltext_tsim",
+        "facet": "on",
+        "q": "oid_ssi:#{@document_id}",
+        "facet.prefix": @query
+      }
+      results = search_service.repository.search(params)['facet_counts']['facet_fields']['fulltext_tsim']
+      terms_for_list = []
+      results.each_slice(2) do |term, _|
+        term_hash = { match: term, url: solr_document_iiif_search_url(@document_id, q: term) }
+        terms_for_list << term_hash
+      end
+    end
+
+    render json: term_list(terms_for_list).to_json
+  end
+
+  ##
+  # Constructs the termList as IIIF::Presentation::Resource
+  # @return [IIIF::OrderedHash]
+  def term_list(terms)
+    list_id = request.original_url
+    term_list = IIIF::Presentation::Resource.new('@id' => list_id)
+    term_list['@context'] = 'http://iiif.io/api/search/1/context.json'
+    term_list['@type'] = 'search:TermList'
+    term_list['terms'] = terms
+    # term_list['ignored'] = ignored
+    term_list.to_ordered_hash(force: true, include_context: false)
+  end
 end
