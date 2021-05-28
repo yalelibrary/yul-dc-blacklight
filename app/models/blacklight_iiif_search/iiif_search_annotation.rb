@@ -31,6 +31,12 @@ module BlacklightIiifSearch
     # @return [IIIF::Presentation::Annotation]
     def as_hash
       annotation = IIIF::Presentation::Annotation.new('@id' => annotation_id)
+      #  Overriding default behaviour to always have a resource, even if there is no snippet.
+      #  Universal Viewer expects that all result annotations have resources, so if there is no snippet, still create
+      #  one using the query itself as the snippet.
+      #  (Manifold, used by UV, has the problem here:
+      #   https://github.com/IIIF-Commons/manifold/blob/v2.0.3/src/AnnotationRect.ts#L19
+      #   when this.resource is null)
       annotation.resource = text_resource_for_annotation(snippet || query)
       annotation['on'] = canvas_uri_for_annotation
       annotation
