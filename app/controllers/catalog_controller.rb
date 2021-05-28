@@ -578,12 +578,13 @@ class CatalogController < ApplicationController
   # Constructs the termList as IIIF::Presentation::Resource
   # @return [IIIF::OrderedHash]
   def term_list(terms)
+    ignored = params.keys - ['q', 'solr_document_id', 'action', 'controller']
     list_id = request.original_url
     term_list = IIIF::Presentation::Resource.new('@id' => list_id)
     term_list['@context'] = 'http://iiif.io/api/search/1/context.json'
     term_list['@type'] = 'search:TermList'
     term_list['terms'] = terms
-    # term_list['ignored'] = ignored
+    term_list['ignored'] = ignored
     term_list.to_ordered_hash(force: true, include_context: false)
   end
 end
