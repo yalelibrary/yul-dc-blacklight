@@ -17,7 +17,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       alternativeTitle_tesim: 'The Yale Bulldogs',
       description_tesim: 'in black ink on thin white paper',
       format: 'three dimensional object',
-      fulltext_tsim: ["fulltext text one.\n\nThis is for dog\n"],
+      fulltext_tesim: ["fulltext text one.\n\nThis is for dog\n"],
       callNumber_tesim: 'Osborn Music MS 4',
       published_ssim: "1997",
       language_ssim: ['en', 'eng', 'zz'],
@@ -90,12 +90,12 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     end
 
     it 'highlights the full text when a term is queried' do
-      visit '/catalog?search_field=fulltext_tsim&q=text'
+      visit '/catalog?search_field=fulltext_tesim&q=text'
       expect(page.html).to include 'fulltext <span class="search-highlight">text</span> one'
     end
 
     it 'highlights the full text when multiple terms are queried' do
-      visit '/catalog?search_field=fulltext_tsim&q=text+dog'
+      visit '/catalog?search_field=fulltext_tesim&q=text+dog'
       expect(page.html).to include 'fulltext <span class="search-highlight">text</span> one.  This is for <span class="search-highlight">dog</span>'
     end
   end

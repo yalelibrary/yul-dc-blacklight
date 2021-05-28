@@ -13,5 +13,6 @@ class IiifSearchBuilder < Blacklight::SearchBuilder
     solr_parameters[:'hl.fl'] = blacklight_config.iiif_search[:full_text_field]
     solr_parameters[:'hl.fragsize'] = 100
     solr_parameters[:'hl.snippets'] = 10
+    solr_parameters[:qf] = blacklight_config.iiif_search[:full_text_q_field]
   end
 end

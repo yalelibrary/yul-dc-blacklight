@@ -23,7 +23,8 @@ class CatalogController < ApplicationController
   configure_blacklight do |config|
     # configuration for Blacklight IIIF Content Search
     config.iiif_search = {
-      full_text_field: 'child_fulltext_tesim',
+      full_text_field: 'child_fulltext_tsim',
+      full_text_q_field: 'child_fulltext_tesim',
       object_relation_field: 'parent_ssi',
       supported_params: %w[q page],
       autocomplete_handler: 'iiif_suggest'
@@ -174,7 +175,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'sourceTitle_tesim', label: 'Collection Title', highlight: true
     config.add_index_field 'imageCount_isi', label: 'Image Count'
     config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true
-    config.add_index_field 'fulltext_tsim', label: 'Full Text', highlight: true, solr_params: disp_highlight_on_search_params.merge({ 'hl.snippets': 4 }), helper_method: :fulltext_snippet_separation
+    config.add_index_field 'fulltext_tesim', label: 'Full Text', highlight: true, solr_params: disp_highlight_on_search_params.merge({ 'hl.snippets': 4 }), helper_method: :fulltext_snippet_separation
     config.add_index_field 'abstract_tesim', label: 'Abstract', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'alternativeTitle_tesim', label: 'Alternative Title', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'description_tesim', label: 'Description', highlight: true, solr_params: disp_highlight_on_search_params
@@ -440,7 +441,7 @@ class CatalogController < ApplicationController
       field.qt = 'search'
       field.include_in_simple_select = false
       field.solr_parameters = {
-        qf: 'fulltext_tsim',
+        qf: 'fulltext_tesim',
         pf: ''
       }
     end
@@ -454,11 +455,11 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('fulltext_tsim', label: 'Full Text') do |field|
+    config.add_search_field('fulltext_tesim', label: 'Full Text') do |field|
       field.qt = 'search'
       field.include_in_advanced_search = false
       field.solr_parameters = {
-        qf: 'fulltext_tsim',
+        qf: 'fulltext_tesim',
         pf: ''
       }
     end
@@ -551,5 +552,41 @@ class CatalogController < ApplicationController
   def show
     super
     render "catalog/show_unauthorized", status: :unauthorized unless client_can_view_metadata?(@document)
+  end
+
+  def iiif_suggest
+    @query = params[:q]
+    @document_id = params[:solr_document_id]
+    #  search children to get the count
+    params = {
+      "rows": 0,
+      "facet.field": "child_fulltext_tsim",
+      "facet": "on",
+      "q": "parent_ssi:#{@document_id}",
+      "facet.prefix": @query
+    }
+    results = search_service.repository.search(params)['facet_counts']['facet_fields']['child_fulltext_tsim']
+    terms_for_list = []
+    results.each_slice(2) do |term, freq|
+      term_hash = { match: term, url: solr_document_iiif_search_url(@document_id, q: term), count: freq }
+      terms_for_list << term_hash
+    end
+    response = term_list(terms_for_list)
+    response['terms'] = [] unless response['terms']
+    render json: response.to_json
+  end
+
+  ##
+  # Constructs the termList as IIIF::Presentation::Resource
+  # @return [IIIF::OrderedHash]
+  def term_list(terms)
+    ignored = params.keys - ['q', 'solr_document_id', 'action', 'controller']
+    list_id = request.original_url
+    term_list = IIIF::Presentation::Resource.new('@id' => list_id)
+    term_list['@context'] = 'http://iiif.io/api/search/1/context.json'
+    term_list['@type'] = 'search:TermList'
+    term_list['terms'] = terms
+    term_list['ignored'] = ignored
+    term_list.to_ordered_hash(force: true, include_context: false)
   end
 end
