@@ -571,7 +571,9 @@ class CatalogController < ApplicationController
       term_hash = { match: term, url: solr_document_iiif_search_url(@document_id, q: term), count: freq }
       terms_for_list << term_hash
     end
-    render json: term_list(terms_for_list).to_json
+    response = term_list(terms_for_list)
+    response['terms'] = [] unless response['terms']
+    render json: response.to_json
   end
 
   ##
