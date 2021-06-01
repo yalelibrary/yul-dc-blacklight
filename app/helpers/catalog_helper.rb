@@ -28,7 +28,7 @@ module CatalogHelper
   def uv_fulltext_search_param
     search_params = current_search_session.try(:query_params) || {}
     q = nil
-    if 'fulltext_tsim' == search_params['search_field'] && search_params['q']
+    if 'fulltext_tesim' == search_params['search_field'] && search_params['q']
       q = search_params['q']
     elsif search_params['fulltext_tsim_advanced']
       q = search_params['fulltext_tsim_advanced']
