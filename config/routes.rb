@@ -20,6 +20,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   concern :searchable, Blacklight::Routes::Searchable.new
 
+  get 'annotation/oid/:oid/canvas/:child_oid/fulltext', to: 'annotations#full_text'
+
   get 'mirador/:oid', to: 'mirador#show'
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
