@@ -183,8 +183,8 @@ class CatalogController < ApplicationController
     # ]
 
     # Description Group
-    config.add_show_field 'title_tesim', label: 'Title', metadata: 'description'
-    config.add_show_field 'alternativeTitle_tesim', label: 'Alternative Title', metadata: 'description'
+    config.add_show_field 'title_tesim', label: 'Title', metadata: 'description', helper_method: :join_with_br
+    config.add_show_field 'alternativeTitle_tesim', label: 'Alternative Title', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'creator_ssim', label: 'Creator', metadata: 'description', link_to_facet: true
     config.add_show_field 'date_ssim', label: 'Published / Created', metadata: 'description'
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date', metadata: 'description'
@@ -224,7 +224,7 @@ class CatalogController < ApplicationController
     # Access and Usage Rights Group
     config.add_show_field 'visibility_ssi', label: 'Access', metadata: 'access_and_usage_rights'
     config.add_show_field 'rights_ssim', label: 'Rights', metadata: 'access_and_usage_rights', helper_method: :html_safe_converter
-    config.add_show_field 'preferredCitation_tesim', label: 'Citation', metadata: 'access_and_usage_rights'
+    config.add_show_field 'preferredCitation_tesim', label: 'Citation', metadata: 'access_and_usage_rights', helper_method: :join_with_br
 
     # Identifiers Group
     config.add_show_field 'orbisBibId_ssi', label: 'Orbis Record', metadata: 'identifiers', helper_method: :link_to_orbis_bib_id
