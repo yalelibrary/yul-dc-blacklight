@@ -555,7 +555,7 @@ class CatalogController < ApplicationController
   end
 
   def iiif_suggest
-    @query = params[:q]
+    @query = params[:q] || ""
     @document_id = params[:solr_document_id]
     #  search children to get the count
     params = {
@@ -563,7 +563,7 @@ class CatalogController < ApplicationController
       "facet.field": "child_fulltext_tsim",
       "facet": "on",
       "q": "parent_ssi:#{@document_id}",
-      "facet.prefix": @query
+      "facet.prefix": @query.downcase
     }
     results = search_service.repository.search(params)['facet_counts']['facet_fields']['child_fulltext_tsim']
     terms_for_list = []
