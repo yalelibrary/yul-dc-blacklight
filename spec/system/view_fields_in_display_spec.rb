@@ -30,7 +30,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   let(:test_record) do
     {
       id: '111',
-      title_tesim: "Diversity Bull Dogs",
+      title_tesim: ["Diversity Bull Dogs", "this is the second title"],
       creator_ssim: ['Frederick,  Eric & Maggie'],
       format: 'three dimensional object',
       url_suppl_ssim: 'http://0.0.0.0:3000/catalog/111',
@@ -38,7 +38,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       description_tesim: ["Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.", "here is something else about it"],
       visibility_ssi: 'Public',
       abstract_tesim: "this is an abstract",
-      alternativeTitle_tesim: "this is an alternative title",
+      alternativeTitle_tesim: ["this is an alternative title", "this is the second alternative title"],
       genre_ssim: ["this is the genre", "this is the second genre"],
       subjectGeographic_ssim: ['this is the geo subject', 'these are the geo subjects'],
       resourceType_ssim: "this is the resource type",
@@ -56,7 +56,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       sourceCreator_tesim: "this is the source creator",
       sourceDate_tesim: "this is the source date",
       sourceNote_tesim: "this is the source note",
-      preferredCitation_tesim: "these are the references",
+      preferredCitation_tesim: ["these are the references", "this is the second reference"],
       date_ssim: "this is the date",
       oid_ssi: '2345678',
       callNumber_ssim: 'this is the call number',
@@ -76,7 +76,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   context 'Within main document' do
     subject(:document) { find(:css, '#document') }
     it 'displays Title in results' do
-      expect(document).to have_content("Diversity Bull Dogs")
+      expect(page.html).to match("Diversity Bull Dogs<br/>")
+      expect(document).to have_content("this is the second title")
     end
     it 'displays Creator in results' do
       expect(document).to have_content("Frederick, Eric & Maggie")
@@ -118,7 +119,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("this is an abstract")
     end
     it 'displays the Alternative Title in results' do
-      expect(document).to have_content("this is an alternative title")
+      expect(page.html).to match("this is an alternative title<br/>")
+      expect(document).to have_content("this is the second alternative title")
     end
     it 'displays the Genre in results' do
       expect(document).to have_content("this is the genre")
@@ -178,7 +180,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("this is the source note")
     end
     it 'displays the References in results' do
-      expect(document).to have_content("these are the references")
+      expect(page.html).to match("these are the references<br/>")
+      expect(document).to have_content("this is the second reference")
     end
     it 'displays the Date in results' do
       expect(document).to have_content("this is the date")
