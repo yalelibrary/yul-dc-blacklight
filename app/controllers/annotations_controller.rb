@@ -10,10 +10,10 @@ class AnnotationsController < ApplicationController
   def full_text
     @oid = params[:oid]
     @child_oid = params[:child_oid]
-    @response, @child_document = search_service.fetch(@child_oid, { fl: ['child_fulltext_tsim', 'parent_ssi'] })
+    @response, @child_document = search_service.fetch(@child_oid, { fl: ['child_fulltext_wstsim', 'parent_ssi'] })
     child_doc = @child_document.response['response']['docs'].first
     if child_doc["parent_ssi"] == @oid
-      render json: fulltext_response(child_doc["child_fulltext_tsim"].join('\n'))
+      render json: fulltext_response(child_doc["child_fulltext_wstsim"].join('\n'))
     else
       render json: { error: 'unauthorized' }.to_json, status: 401
     end
