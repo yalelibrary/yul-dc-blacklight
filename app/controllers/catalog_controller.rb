@@ -156,7 +156,6 @@ class CatalogController < ApplicationController
     disp_highlight_on_search_params = {
       'hl': true,
       'hl.method': 'original',
-      'hl.requireFieldMatch': true,
       'hl.usePhraseHighlighter': true,
       'hl.preserveMulti': false,
       "hl.simple.pre": "<span class='search-highlight'>",
@@ -447,7 +446,7 @@ class CatalogController < ApplicationController
       field.include_in_simple_select = false
       field.solr_parameters = {
         qf: 'fulltext_tesim',
-        pf: ''
+        pf: '',
       }
     end
 
@@ -466,14 +465,7 @@ class CatalogController < ApplicationController
       field.solr_parameters = {
         qf: 'fulltext_tesim',
         pf: '',
-        'hl': true,
-        'hl.method': 'original',
-        'hl.requireFieldMatch': true,
-        'hl.usePhraseHighlighter': true,
-        'hl.preserveMulti': false,
-        "hl.simple.pre": "<span class='search-highlight'>",
-        "hl.simple.post": "</span>",
-        "hl.fragsize": 40
+        'hl.requireFieldMatch': true
       }
     end
 
