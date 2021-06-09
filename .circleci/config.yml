@@ -38,7 +38,7 @@ jobs:
             POSTGRES_PASSWORD: password
             SOLR_CORE: blacklight-test
             SOLR_TEST_URL: http://localhost:8983/solr/blacklight-test
-      - image: yalelibraryit/dc-solr:fulltext_retain_case
+      - image: yalelibraryit/dc-solr:79a71ec
         command: bash -c 'precreate-core blacklight-test /opt/config; exec solr -f'
       - image: circleci/postgres:9.5-alpine-ram
         environment:
