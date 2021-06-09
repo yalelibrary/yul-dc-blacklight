@@ -464,16 +464,6 @@ class CatalogController < ApplicationController
       field.qt = 'search'
       field.include_in_advanced_search = false
       field.solr_parameters = {
-        qf: 'fulltext_tesim',
-        pf: '',
-        'hl': true,
-        'hl.method': 'original',
-        'hl.requireFieldMatch': true,
-        'hl.usePhraseHighlighter': true,
-        'hl.preserveMulti': false,
-        "hl.simple.pre": "<span class='search-highlight'>",
-        "hl.simple.post": "</span>",
-        "hl.fragsize": 40
       }
     end
 
