@@ -446,7 +446,7 @@ class CatalogController < ApplicationController
       field.include_in_simple_select = false
       field.solr_parameters = {
         qf: 'fulltext_tesim',
-        pf: '',
+        pf: ''
       }
     end
 
