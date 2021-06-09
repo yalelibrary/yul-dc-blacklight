@@ -156,6 +156,7 @@ class CatalogController < ApplicationController
     disp_highlight_on_search_params = {
       'hl': true,
       'hl.method': 'original',
+      'hl.requireFieldMatch': true,
       'hl.usePhraseHighlighter': true,
       'hl.preserveMulti': false,
       "hl.simple.pre": "<span class='search-highlight'>",
@@ -169,12 +170,12 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field 'creator_tesim', label: 'Creator', highlight: true
-    config.add_index_field 'date_ssim', label: 'Published / Created', highlight: true
-    config.add_index_field 'callNumber_tesim', label: 'Call Number', highlight: true
-    config.add_index_field 'sourceTitle_tesim', label: 'Collection Title', highlight: true
+    config.add_index_field 'creator_tesim', label: 'Creator', highlight: true, solr_params: disp_highlight_on_search_params
+    config.add_index_field 'date_ssim', label: 'Published / Created', highlight: true, solr_params: disp_highlight_on_search_params
+    config.add_index_field 'callNumber_tesim', label: 'Call Number', highlight: true, solr_params: disp_highlight_on_search_params
+    config.add_index_field 'sourceTitle_tesim', label: 'Collection Title', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'imageCount_isi', label: 'Image Count'
-    config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true
+    config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'fulltext_tesim', label: 'Full Text', highlight: true, solr_params: disp_highlight_on_search_params.merge({ 'hl.snippets': 4 }), helper_method: :fulltext_snippet_separation
     config.add_index_field 'abstract_tesim', label: 'Abstract', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'alternativeTitle_tesim', label: 'Alternative Title', highlight: true, solr_params: disp_highlight_on_search_params

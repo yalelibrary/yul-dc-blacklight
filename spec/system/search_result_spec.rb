@@ -34,12 +34,8 @@ RSpec.describe 'search result', type: :system, clean: true do
         expect(page).to have_css '.row'
         expect(page).to have_css '.document'
         expect(page).to have_css '.document-metadata.dl-invert.row'
-        expect(page).to have_css '#documents > article.document > dl > dt'
-        expect(page).to have_css '.document-metadata.dl-invert > dt'
-        expect(page).to have_css '.document-metadata.dl-invert > dd'
         expect(page).to have_css '.document-metadata'
         expect(page).to have_css '.document-thumbnail'
-        expect(page).to have_css '.col-md-9'
       end
     end
 
@@ -112,12 +108,8 @@ RSpec.describe 'search result', type: :system, clean: true do
         expect(page).to have_css '.row'
         expect(page).to have_css '.document'
         expect(page).to have_css '.document-metadata.dl-invert.row'
-        expect(page).to have_css '#documents > article.document > dl > dt'
-        expect(page).to have_css '.document-metadata.dl-invert > dt'
-        expect(page).to have_css '.document-metadata.dl-invert > dd'
         expect(page).to have_css '.document-metadata'
         expect(page).to have_css '.document-thumbnail'
-        expect(page).to have_css '.col-md-9'
       end
     end
 
