@@ -159,8 +159,6 @@ class CatalogController < ApplicationController
       'hl.requireFieldMatch': true,
       'hl.usePhraseHighlighter': true,
       'hl.preserveMulti': false,
-      # 'hl.highlightAlternate':true,
-      # 'hl.preserveMulti': true,
       "hl.simple.pre": "<span class='search-highlight'>",
       "hl.simple.post": "</span>",
       "hl.fragsize": 40
