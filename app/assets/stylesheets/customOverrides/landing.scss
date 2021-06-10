@@ -210,6 +210,10 @@ DEFAULT MOBILE STYLING
   margin-left: 0px !important;
 }
 
+#content-statement p {
+  width: 95%;
+}
+
 
 @media screen and (min-width: $small_device) {
   #hero {
@@ -393,7 +397,10 @@ DEFAULT MOBILE STYLING
     margin-top: -175px;
     margin-bottom: 50px;
   }
-
+  
+  #content-statement p{
+    width: 98%;
+  }
 }
 
 
