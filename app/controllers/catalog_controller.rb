@@ -156,6 +156,7 @@ class CatalogController < ApplicationController
     disp_highlight_on_search_params = {
       'hl': true,
       'hl.method': 'original',
+      'hl.requireFieldMatch': true,
       'hl.usePhraseHighlighter': true,
       'hl.preserveMulti': false,
       "hl.simple.pre": "<span class='search-highlight'>",
