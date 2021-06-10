@@ -73,7 +73,7 @@ module BlacklightHelper
 
   def join_with_br(arg)
     values = arg[:document][arg[:field]]
-    safe_join(values, '<br />'.html_safe)
+    safe_join(values, '<br/>'.html_safe)
   end
 
   def faceted_join_with_br(arg)
