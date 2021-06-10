@@ -563,7 +563,8 @@ class CatalogController < ApplicationController
       "facet.field": "child_fulltext_wstsim",
       "facet": "on",
       "q": "parent_ssi:#{@document_id}",
-      "facet.contains": @query.downcase,
+      "fq": "child_fulltext_tesim:#{@query}*",
+      "facet.contains": @query,
       "facet.contains.ignoreCase": "true"
     }
     results = search_service.repository.search(params)['facet_counts']['facet_fields']['child_fulltext_wstsim']
