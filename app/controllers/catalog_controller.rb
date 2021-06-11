@@ -23,7 +23,7 @@ class CatalogController < ApplicationController
   configure_blacklight do |config|
     # configuration for Blacklight IIIF Content Search
     config.iiif_search = {
-      full_text_field: 'child_fulltext_tsim',
+      full_text_field: 'child_fulltext_wstsim',
       full_text_q_field: 'child_fulltext_tesim',
       object_relation_field: 'parent_ssi',
       supported_params: %w[q page],
@@ -566,12 +566,14 @@ class CatalogController < ApplicationController
     #  search children to get the count
     params = {
       "rows": 0,
-      "facet.field": "child_fulltext_tsim",
+      "facet.field": "child_fulltext_wstsim",
       "facet": "on",
       "q": "parent_ssi:#{@document_id}",
-      "facet.prefix": @query.downcase
+      "fq": "child_fulltext_tesim:#{@query}*",
+      "facet.contains": @query,
+      "facet.contains.ignoreCase": "true"
     }
-    results = search_service.repository.search(params)['facet_counts']['facet_fields']['child_fulltext_tsim']
+    results = search_service.repository.search(params)['facet_counts']['facet_fields']['child_fulltext_wstsim']
     terms_for_list = []
     results.each_slice(2) do |term, freq|
       term_hash = { match: term, url: solr_document_iiif_search_url(@document_id, q: term), count: freq }

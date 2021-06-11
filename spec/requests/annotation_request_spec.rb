@@ -16,7 +16,7 @@ RSpec.describe 'AnnotationsController', type: :request do
     {
       "id": "998833",
       "parent_ssi": "2034600",
-      "child_fulltext_tsim": ["This is the full text public"]
+      "child_fulltext_wstsim": ["This is the full text public"]
     }
   end
   let(:yale_work) do
@@ -30,7 +30,7 @@ RSpec.describe 'AnnotationsController', type: :request do
     {
       "id": "998834",
       "parent_ssi": "1618909",
-      "child_fulltext_tsim": ["This is the full text Yale only"]
+      "child_fulltext_wstsim": ["This is the full text Yale only"]
     }
   end
   let(:unknown_visibility_work) do
@@ -44,7 +44,7 @@ RSpec.describe 'AnnotationsController', type: :request do
     {
       "id": "998835",
       "parent_ssi": "1618904",
-      "child_fulltext_tsim": ["This is the full text Unknown"]
+      "child_fulltext_wstsim": ["This is the full text Unknown"]
     }
   end
 

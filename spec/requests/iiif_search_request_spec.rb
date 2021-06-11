@@ -15,7 +15,7 @@ RSpec.describe "Iiif Search", type: :request do
   let(:child_work1) do
     {
       "id": "3456",
-      "child_fulltext_tsim": ["This is the ocr text for this document. Paris basketball can you search for it."],
+      "child_fulltext_wstsim": ["This is the ocr text for this document. Paris basketball can you search for it."],
       "child_fulltext_tesim": ["This is the ocr text for this document. Paris basketball can you search for it."],
       "parent_ssi": "1234567"
     }
@@ -23,7 +23,7 @@ RSpec.describe "Iiif Search", type: :request do
   let(:child_work2) do
     {
       "id": "3457",
-      "child_fulltext_tsim": ["This is the ocr text for this document. Pakistan baseball can you search for it."],
+      "child_fulltext_wstsim": ["This is the ocr text for this document. Pakistan baseball can you search for it."],
       "child_fulltext_tesim": ["This is the ocr text for this document. Pakistan baseball can you search for it."],
       "parent_ssi": "1234567"
     }
