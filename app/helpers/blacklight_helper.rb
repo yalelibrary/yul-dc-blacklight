@@ -105,7 +105,7 @@ module BlacklightHelper
 
   def sep_title_show_page
     values = @document[:title_tesim]
-    safe_join(values, '<br/>'.html_safe)
+    safe_join(values, '<br/>'.html_safe) unless values.nil?
   end
 
   def language_code(args)
