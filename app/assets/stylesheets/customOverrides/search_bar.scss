@@ -105,6 +105,64 @@ DEFAULT MOBILE STYLING
   font-family: $mallory_book, $mallory_light, Arial, Helvetica, sans-serif !important;
 }
 
+  .callout {
+    z-index:20;
+    position:absolute;
+    top:20px;
+    border:0;
+    left:-12px;
+  }
+
+  a.ft-tooltip span {
+    border-radius:4px;
+    box-shadow: 5px 5px 8px #CCC;
+  }
+
+  /*  -- full text checkbox ----*/
+  .ftsearch span3 {float:left; width:25%;}
+
+  .ftsearch a {font-size:11px;}
+
+
+  /* ---- full-text search tooltip ----*/
+  .tool-text {margin-top: -10px; font-weight: normal; font-size: 11px;}
+  /*label {color: #333; vertical-align: bottom;} --*/
+  label.tool-text {margin-left: 5px; font-weight: 400; color: #891b17;}
+
+  a.ft-tooltip {outline:none; text-decoration:none;}
+  a.ft-tooltip strong {line-height:30px;}
+  a.ft-tooltip:hover {text-decoration:underline;}
+  a.ft-tooltip span {
+    z-index:9999;
+    display:none;
+    padding:14px 20px;
+    margin-top: -20px;
+    margin-left:20px;
+    width:230px;
+    line-height:16px;
+    font-family: $mallory_book, $mallory_light, Arial, Helvetica, Verdana, sans-serif;
+  }
+
+  a.ft-tooltip:hover span {
+    display:inline;
+    position:absolute;
+    color:#000;
+    border:1px solid #DCA;
+    background:#fffAF0;
+  }
+
+  .callout {
+    z-index:20;
+    position:absolute;
+    top:20px;
+    border:0;
+    left:-12px;
+  }
+
+  a.ft-tooltip span {
+    border-radius:4px;
+    box-shadow: 5px 5px 8px #CCC;
+  }
 
 @media screen and (min-width: $medium_device) {
   .input-group {
