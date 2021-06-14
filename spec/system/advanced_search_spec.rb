@@ -26,6 +26,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       expect(page).to have_content('Genre/format')
       expect(page).to have_content('OID [Parent/primary]')
       expect(page).to have_content('OID [Child/images]')
+      expect(page).to have_content('Full Text')
     end
   end
 
@@ -109,6 +110,15 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       within '#documents' do
         expect(page).to     have_content('Record 1')
         expect(page).not_to have_content('Record 2')
+      end
+    end
+
+    it 'gets correct search results from fulltext_tsim' do
+      fill_in 'fulltext_tsim', with: 'record 1'
+      click_on 'SEARCH'
+      within '#documents' do
+        expect(page).to         have_content('Record 1')
+        expect(page).not_to     have_content('Record 2')
       end
     end
 
@@ -255,7 +265,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
   describe 'styling' do
     it 'renders field input style' do
       expect(page).to have_css '.advanced_search_fields'
-      expect(page).to have_css '.advanced-search-field', count: 9
+      expect(page).to have_css '.advanced-search-field', count: 10
     end
 
     it 'renders help section style' do

@@ -24,7 +24,8 @@ RSpec.describe CatalogController, type: :controller do
          "orbisBibId_ssi",
          "subjectName_tesim",
          "subject_fields",
-         "title_tesim"]
+         "title_tesim",
+         "fulltext_tsim"]
       end
 
       it { expect(search_fields).to contain_exactly(*expected_search_fields) }

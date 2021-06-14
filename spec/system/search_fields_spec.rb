@@ -12,7 +12,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
   let(:search_fields) { CatalogController.blacklight_config.search_fields.keys }
   let(:expected_search_fields) do
     ["all_fields", "all_fields_advanced", "creator_tesim", "child_oids_ssim", "date_fields", "genre_fields",
-     "callNumber_tesim", "oid_ssi", "orbisBibId_ssi", "subjectName_tesim", "subject_fields", "title_tesim"]
+     "callNumber_tesim", "oid_ssi", "orbisBibId_ssi", "subjectName_tesim", "subject_fields", "title_tesim", "fulltext_tsim"]
   end
 
   let(:dog) do
@@ -24,7 +24,8 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       sourceTitle_tesim: "this is the source title",
       callNumber_tesim: 'WAMSS987',
       orbisBibId_ssi: '1238901',
-      visibility_ssi: 'Public'
+      visibility_ssi: 'Public',
+      fulltext_tsim: 'this is the first full text'
     }
   end
 
@@ -37,7 +38,8 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       orbisBibId_ssi: '1234567',
       subjectName_tesim: "WAMSS987",
       callNumber_tesim: 'Yale MS 123',
-      visibility_ssi: 'Public'
+      visibility_ssi: 'Public',
+      fulltext_tsim: 'this is second full text'
     }
   end
 
@@ -79,6 +81,24 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
     it 'displays the correct record when searching by title' do
       visit '/catalog?search_field=title_tesim&q=handsome'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
+      expect(page).to have_content 'Handsome Dan is not a cat.'
+    end
+
+    it 'displays the correct record when searching by full text' do
+      visit '/catalog?search_field=fulltext_tsim&q=second'
+      expect(page).not_to have_content 'Handsome Dan is a bull dog.'
+      expect(page).to have_content 'Handsome Dan is not a cat.'
+    end
+
+    it 'displays the correct record when full text search is on' do
+      visit '/catalog?search_field=fulltext_tsim&q=first&ftsearch=on'
+      expect(page).to have_content 'Handsome Dan is a bull dog.'
+      expect(page).not_to have_content 'Handsome Dan is not a cat.'
+    end
+
+    it 'displays the correct record when checked full text search checkbox' do
+      visit '/catalog?ftsearch=on&search_field=fulltext_tsim&q=second&ftsearch=on'
+      expect(page).not_to have_content 'Handsome Dan is a bull dog.'
       expect(page).to have_content 'Handsome Dan is not a cat.'
     end
   end

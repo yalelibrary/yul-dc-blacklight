@@ -53,7 +53,8 @@ ADVANCED_SEARCH_TESTING_1 = {
   "title_ssim": ["Record 1"],
   "visibility_ssi": "Public",
   "orbisBibId_ssim": ["3832098"],
-  "references_ssim": ["Brockelmann, S I, pp. 237, 239, 252."]
+  "references_ssim": ["Brockelmann, S I, pp. 237, 239, 252."],
+  "fulltext_tsim": ["test full text for record 1"]
 }.freeze
 
 ADVANCED_SEARCH_TESTING_2 = {
@@ -133,6 +134,7 @@ ADVANCED_SEARCH_TESTING_2 = {
   "orbisBarcode_ssim": ["39002091594300"],
   "orbisBibId_ssim": ["9801995"],
   "references_ssim": ["Jacopo Zeno, Vita Caroli Zeni. General Collection, Beinecke Rare Book and Manuscript Library, Yale University.",
-                      "Shailor, B. Catalogue of Medieval and Renaissance Manuscripts in the Beinecke Rare Book and Manuscript Library, MS 2."]
+                      "Shailor, B. Catalogue of Medieval and Renaissance Manuscripts in the Beinecke Rare Book and Manuscript Library, MS 2."],
+  "fulltext_tsim": ["test full text for record 2"]
 
 }.freeze

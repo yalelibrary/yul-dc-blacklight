@@ -6,7 +6,7 @@ class CatalogController < ApplicationController
   include Blacklight::Marc::Catalog
   include BlacklightRangeLimit::ControllerOverride
   include AccessHelper
-  before_action :determine_per_page
+  before_action :determine_per_page, :set_fulltext
   helper_method :gallery_view?
 
   rescue_from Blacklight::Exceptions::RecordNotFound do
@@ -319,7 +319,8 @@ class CatalogController < ApplicationController
       'subjectName_tesim',
       'subjectTopic_tesim',
       'title_tesim',
-      'visibility_ssi'
+      'visibility_ssi',
+      'fulltext_tsim'
     ]
 
     # Basic Search
@@ -446,6 +447,14 @@ class CatalogController < ApplicationController
       }
     end
 
+    config.add_search_field('fulltext_tsim', label: 'Full Text ') do |field|
+      field.qt = 'search'
+      field.solr_parameters = {
+        qf: 'fulltext_tsim',
+        pf: ''
+      }
+    end
+
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
@@ -511,5 +520,10 @@ class CatalogController < ApplicationController
   def show
     super
     render "catalog/show_unauthorized", status: :unauthorized unless client_can_view_metadata?(@document)
+  end
+
+  def set_fulltext
+    params[:search_field] = "fulltext_tsim" if params[:ftsearch] == "on" && params[:q].present?
+    params.delete :ftsearch if params[:ftsearch] == "on" && params[:q].present?
   end
 end
