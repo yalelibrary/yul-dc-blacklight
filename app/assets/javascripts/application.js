@@ -61,11 +61,14 @@ $(document).on('turbolinks:load', function() {
 
 // Toggle the fulltext button
 $(document).on('turbolinks:load', function() {
-    $('.fulltext-transcription').addClass('hidden')
+    const fulltextTranscription = $('.item-page-fulltext-wrapper .row')
+    fulltextTranscription.addClass('hidden')
 
     $('.fulltext-button').click(function() {
         const fulltext_button = $(this)
-        $('.fulltext-transcription').toggle(() => $(this).is(':visible') ? fulltext_button.text('Hide Full Text') : fulltext_button.text('Show Full Text'))
+        fulltextTranscription.toggle(function(i, text) {
+            $(this).is(':visible') ? fulltext_button.text('Hide Full Text') : fulltext_button.text('Show Full Text')
+        })
     })
 });
 
