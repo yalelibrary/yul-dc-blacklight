@@ -61,10 +61,10 @@ $(document).on('turbolinks:load', function() {
 
 $(document).on('turbolinks:load', function() {
     $('.fulltext-button').click(function() {
-        $(this).text(function(i, text){
-            return text === 'Show Full Text' ? 'Hide Full Text' : 'Show Full Text'
+        const fulltext_button = $(this) 
+        $('.fulltext-transcription').toggle(function(i, text) {
+            $(this).is(':visible') ? fulltext_button.text('Hide Full Text') : fulltext_button.text('Show Full Text')
         })
-        $('.fulltext-transcription').toggle()
     })
 });
 
