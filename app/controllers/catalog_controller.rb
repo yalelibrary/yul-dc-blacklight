@@ -133,7 +133,6 @@ class CatalogController < ApplicationController
     config.add_facet_field 'subject_ssim', label: 'Topic', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'creationPlace_ssim', label: 'Publication Place', limit: true
     config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true
-    config.add_facet_field 'has_fulltext_ssi', label: "Full Text Available", limit: true
     config.add_facet_field 'year_isim', label: 'Date Created',
                                         range: {
                                           segments: true,
@@ -444,6 +443,16 @@ class CatalogController < ApplicationController
       }
     end
 
+    config.add_search_field('fulltext_tesim', label: 'Full Text') do |field|
+      field.qt = 'search'
+      field.include_in_advanced_search = false
+      field.solr_parameters = {
+          qf: 'fulltext_tesim',
+          pf: '',
+          'hl.requireFieldMatch': true
+      }
+    end
+
     config.add_search_field('fulltext_tsim_advanced', label: 'Full Text') do |field|
       field.qt = 'search'
       field.include_in_simple_select = false
@@ -462,15 +471,6 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('fulltext_tesim', label: 'Full Text') do |field|
-      field.qt = 'search'
-      field.include_in_advanced_search = false
-      field.solr_parameters = {
-        qf: 'fulltext_tesim',
-        pf: '',
-        'hl.requireFieldMatch': true
-      }
-    end
 
     config.add_search_field('oid_ssi', label: 'OID [Parent/primary]') do |field|
       field.qt = 'search'

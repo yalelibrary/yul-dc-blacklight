@@ -106,6 +106,7 @@ DEFAULT MOBILE STYLING
 }
 
 
+
 @media screen and (min-width: $medium_device) {
   .input-group {
     max-width: 96%;
@@ -174,6 +175,19 @@ DEFAULT MOBILE STYLING
 
   .navbar-search .search-query-form {
     flex: 0 0 100%;
+  }
+
+  .fulltext-info {
+    z-index:9999;
+    display:none;
+    font-size: 14px;
+    font-family: $mallory_book, $mallory_light, Arial, Helvetica, sans-serif;
+    margin-top:60px;
+    margin-right:120px;
+    width: 450px;
+    line-height:20px;
+    color:#303030;
+    position:absolute;
   }
 }
 }
