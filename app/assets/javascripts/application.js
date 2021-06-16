@@ -69,6 +69,7 @@ $(document).on('turbolinks:load', function() {
         fulltextTranscription.toggle(function(i, text) {
             $(this).is(':visible') ? fulltext_button.text('Hide Full Text') : fulltext_button.text('Show Full Text')
         })
+        fulltextTranscription.css('display', 'flex')
     })
 });
 
@@ -81,11 +82,14 @@ $(document).ready(() => {
 
 // Get the full text and render it on screen
 const fulltext = () => {
-    $('.item-page-fulltext-wrapper .row').empty()
-    let pages = $('#uv-pages').html().split(' ')
+    const fulltextTranscription = $('.item-page-fulltext-wrapper .row')
+    // Delete the old full text
+    fulltextTranscription.empty()
+    const pages = $('#uv-pages').html().split(' ')
+    const pageWidth = pages.length === 1 ? 'col-md-12' : 'col-md-6'
 
     pages.forEach(() => {
-        $('.item-page-fulltext-wrapper .row').append(`<div class='col-md-6 fulltext-transcription'>This is a div!</div>`)
+        fulltextTranscription.append(`<span class='${pageWidth}'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>`)
     })
 }
 
