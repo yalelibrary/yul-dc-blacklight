@@ -6,7 +6,7 @@ class CatalogController < ApplicationController
   include Blacklight::Marc::Catalog
   include BlacklightRangeLimit::ControllerOverride
   include AccessHelper
-  before_action :determine_per_page, :set_fulltext
+  before_action :determine_per_page
   helper_method :gallery_view?
 
   rescue_from Blacklight::Exceptions::RecordNotFound do
@@ -447,7 +447,7 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('fulltext_tsim', label: 'Full Text ') do |field|
+    config.add_search_field('fulltext_tsim', label: 'Full Text') do |field|
       field.qt = 'search'
       field.solr_parameters = {
         qf: 'fulltext_tsim',
@@ -520,10 +520,5 @@ class CatalogController < ApplicationController
   def show
     super
     render "catalog/show_unauthorized", status: :unauthorized unless client_can_view_metadata?(@document)
-  end
-
-  def set_fulltext
-    params[:search_field] = "fulltext_tsim" if params[:ftsearch] == "on" && params[:q].present?
-    params.delete :ftsearch if params[:ftsearch] == "on" && params[:q].present?
   end
 end

@@ -25,6 +25,14 @@ $('.blacklight-year_i').data('plot-config', {
     grid: { color: '#aaaaaa', tickColor: '#aaaaaa', borderWidth: 0 }
 });
 
+function fulltextchecked()
+{
+
+    if ($('#ftsearch').is(":checked")) {
+        document.getElementById("search_field").value = "fulltext_tsim";
+    }
+}
+
 /**
  * Setup button functionality.
  * 

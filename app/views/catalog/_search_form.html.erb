@@ -1,5 +1,5 @@
 <%= form_tag search_action_url, method: :get, class: 'search-query-form', role: 'search', 'aria-label' => t('blacklight.search.form.submit') do %>
-  <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
+  <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :ftsearch, :utf8)) %>
   <% if search_fields.length > 1 %>
     <label for="search_field" class="sr-only"><%= t('blacklight.search.form.search_field.label') %></label>
   <% end %>
@@ -25,16 +25,18 @@
       </button>
     </span>
 
-    <div class="ftsearch" >
+    <span class="ftsearch" >
       <form action="" method="GET" target="_blank" accept-charset="UTF-8">
-        <input type="checkbox" id="ftsearch" name="ftsearch">&nbsp;
+        <%= javascript_include_tag "application" %>
+        <input type="checkbox" id="ftsearch" name="ftsearch" onclick="fulltextchecked()" >&nbsp;
         <label for="ftsearch" style="font-size:14px; font-weight:normal;">Full-text</label>
         <a href="#" class="ft-tooltip"><label class="tool-text">(What's this?)</label><span><%= image_tag "callout.png", :class => 'callout' %>Search full text that occurs in a work. Not all works contain searchable full text.</span></a>
       </form>
-    </div>
+   </span>
 
     <span>
       <button class="advanced_search btn btn-secondary href-button" href="<%=blacklight_advanced_search_engine.advanced_search_path %>">Advanced Search</button>
     </span>
   </div>
+
 <% end %>
