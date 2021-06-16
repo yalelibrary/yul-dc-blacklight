@@ -147,7 +147,6 @@ class CatalogController < ApplicationController
     # but we need to be able to provide a label when they are filtered upon from an individual show page
     config.add_facet_field 'callNumber_ssim', label: 'Call Number', show: false
     config.add_facet_field 'subjectGeographic_ssim', label: 'Subject (Geographic)', show: false
-    config.add_facet_field 'has_fulltext_ssi', label: "Full Text Available", limit: true
 
     # This was example code after running rails generate blacklight_range_limit:install
     # config.add_facet_field 'example_query_facet_field', label: 'Publish Date', query: {
