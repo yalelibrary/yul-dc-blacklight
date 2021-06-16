@@ -447,9 +447,9 @@ class CatalogController < ApplicationController
       field.qt = 'search'
       field.include_in_advanced_search = false
       field.solr_parameters = {
-          qf: 'fulltext_tesim',
-          pf: '',
-          'hl.requireFieldMatch': true
+        qf: 'fulltext_tesim',
+        pf: '',
+        'hl.requireFieldMatch': true
       }
     end
 
@@ -470,7 +470,6 @@ class CatalogController < ApplicationController
         pf: ''
       }
     end
-
 
     config.add_search_field('oid_ssi', label: 'OID [Parent/primary]') do |field|
       field.qt = 'search'
