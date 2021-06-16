@@ -59,14 +59,13 @@ $(document).on('turbolinks:load', function() {
     });
 })
 
+// Toggle the fulltext
 $(document).on('turbolinks:load', function() {
     $('.fulltext-transcription').addClass('hidden')
 
     $('.fulltext-button').click(function() {
         const fulltext_button = $(this)
-        $('.fulltext-transcription').toggle(function(i, text) {
-            $(this).is(':visible') ? fulltext_button.text('Hide Full Text') : fulltext_button.text('Show Full Text')
-        })
+        $('.fulltext-transcription').toggle(() => $(this).is(':visible') ? fulltext_button.text('Hide Full Text') : fulltext_button.text('Show Full Text'))
     })
 });
 
