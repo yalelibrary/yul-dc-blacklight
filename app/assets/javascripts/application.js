@@ -59,7 +59,7 @@ $(document).on('turbolinks:load', function() {
     });
 })
 
-// Toggle the fulltext
+// Toggle the fulltext button
 $(document).on('turbolinks:load', function() {
     $('.fulltext-transcription').addClass('hidden')
 
@@ -68,6 +68,23 @@ $(document).on('turbolinks:load', function() {
         $('.fulltext-transcription').toggle(() => $(this).is(':visible') ? fulltext_button.text('Hide Full Text') : fulltext_button.text('Show Full Text'))
     })
 });
+
+// Wait until 'uv-pages' has text in it before getting the text
+$(document).ready(() => {
+    window.addEventListener('message', () => {
+        setTimeout(fulltext, 250)
+    }, false)
+})
+
+// Get the full text and render it on screen
+const fulltext = () => {
+    $('.item-page-fulltext-wrapper .row').empty()
+    let pages = $('#uv-pages').html().split(' ')
+
+    pages.forEach(() => {
+        $('.item-page-fulltext-wrapper .row').append(`<div class='col-md-6 fulltext-transcription'>This is a div!</div>`)
+    })
+}
 
 $(document).on('turbolinks:load', function() {
     renderBanner();
