@@ -92,7 +92,6 @@ function selectFulltext() {
     var fulltext = document.getElementById("search_field").value;
     if (fulltext == "fulltext_tesim") {
         fulltext_info = document.getElementById("fulltext-info");
-        fulltext_info.style.backgroudColor ="";
         fulltext_info.innerHTML = "Search full text that occurs in a work. Not all works contain searchable full text."
         fulltext_info.style.display ="inline-block"
 

@@ -95,5 +95,11 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).not_to have_content 'Handsome Dan is not a cat.'
     end
+
+    it 'adds the fulltext  simple search description' do
+      visit search_catalog_path
+      select('Full Text', from: 'search_field')
+      expect(page).to have_content 'Search full text that occurs in a work. Not all works contain searchable full text.'
+    end
   end
 end
