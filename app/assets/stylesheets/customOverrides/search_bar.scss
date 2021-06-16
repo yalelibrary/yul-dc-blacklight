@@ -105,18 +105,43 @@ DEFAULT MOBILE STYLING
   font-family: $mallory_book, $mallory_light, Arial, Helvetica, sans-serif !important;
 }
 
+  .fulltext-info {
+    font-size: 14px;
+    font-family: $mallory_book, $mallory_light, Arial, Helvetica, sans-serif;
+    top: 103%;
+    right: 52%;
+    width: 46%;
+    color: $medium_grey;
+    position:absolute;
+    background-color: none;
+  }
+
 
 
 @media screen and (min-width: $medium_device) {
   .input-group {
     max-width: 96%;
   }
+  .fulltext-info {
+    display: inline-block;
+    right: 45%;
+    width: 61%;
+    left: 2%;
+  }
 }
+
+
 
 
 @media screen and (min-width: $large_device) {
   .advanced_search {
     margin-top: 0;
+  }
+  .fulltext-info {
+    display: inline-block;
+    right: 45%;
+    width: 38%;
+    left: 29%;
   }
 
   .form-control {
@@ -178,16 +203,10 @@ DEFAULT MOBILE STYLING
   }
 
   .fulltext-info {
-    z-index:9999;
-    display:none;
-    font-size: 14px;
-    font-family: $mallory_book, $mallory_light, Arial, Helvetica, sans-serif;
-    margin-top:60px;
-    margin-right:120px;
-    width: 450px;
-    line-height:20px;
-    color:#303030;
-    position:absolute;
+    top: 103%;
+    left: 24%;
+    width: 46%;
   }
+
 }
 }
