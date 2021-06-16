@@ -25,16 +25,11 @@
     window.addEventListener('message', (event) => {
       if (event.origin.match('<%= request.protocol %><%= request.host %>')) {
         const index = event.data
-        console.log(index)
         const is_even = index % 2 === 0
         const array = '<%= @document[:child_oids_ssim] %>'
-        console.log(array)
         const viewing_hint = '<%= @document[:viewing_hint_ssi] %>'
-        console.log(viewing_hint)
         const child_oids = JSON.parse(array.replace(/&quot;/g,'"'))
-        console.log(child_oids)
         const selected = $('iframe').contents().find('[id^="thumb"].thumb.selected')
-        console.log(selected)
         let uv_thumbnail = child_oids[index]
 
         if (selected.length > 1) {
@@ -48,21 +43,3 @@
     }, false)
   })
 </script>
-
-<% if client_can_view_digital?(@document) && @document['has_fulltext_ssi'] == 'Yes' %>
-  <%= oid %>
-  <%= @document['has_fulltext_ssi'] %>
-  <div class='item-page-fulltext-wrapper'>
-    <div class="fulltext-button">
-    Hide Full Text
-    </div>
-    <div class= "row">
-      <div class="col-md-6 fulltext-transcription">
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-      </div>
-      <div class="col-md-6 fulltext-transcription">
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-      </div>
-    </div>
-  </div>
-<% end %>
