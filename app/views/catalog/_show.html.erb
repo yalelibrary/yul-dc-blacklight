@@ -7,6 +7,8 @@
 ] %>
 
 <div class='item-page__metadata-wrapper'>
+  <%= render 'fulltext_transcription', document: document %>
+
   <% metadata.each do | m | %>
     <%= render 'catalog/record/item_metadata', document: document, metadata: m %>
   <% end %>

@@ -59,6 +59,14 @@ $(document).on('turbolinks:load', function() {
     });
 })
 
+$(document).on('turbolinks:load', function() {
+    $('.fulltext-button').click(function() {
+        $(this).text(function(i, text){
+            return text === 'Show Full Text' ? 'Hide Full Text' : 'Show Full Text'
+        })
+        $('.fulltext-transcription').toggle()
+    })
+});
 
 $(document).on('turbolinks:load', function() {
     renderBanner();
@@ -87,4 +95,3 @@ function renderBanner() {
             $("#banner").remove();
         });
 }
-
