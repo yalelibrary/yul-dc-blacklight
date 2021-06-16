@@ -220,6 +220,10 @@ h2.yale-restricted-work-text {
     padding-left: 8%;
   }
 
+  .hidden {
+    display: none;
+  }
+
   .item-page-fulltext-wrapper {
     width: 118%;
     padding-bottom: 25px;
@@ -229,7 +233,7 @@ h2.yale-restricted-work-text {
       font-size: 14px;
       color: #7b736b;
       font-family: Mallory-Medium, Arial, Helvetica, sans-serif !important;
-      font-weight: 900; 
+      font-weight: 900;
       padding-bottom: 15px;
       cursor: pointer;
     }

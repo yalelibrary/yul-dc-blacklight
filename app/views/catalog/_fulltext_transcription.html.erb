@@ -1,7 +1,7 @@
-<% if client_can_view_digital?(document) %>
+<% if @document['has_fulltext_ssi'] == 'Yes' && client_can_view_digital?(@document) %>
   <div class='item-page-fulltext-wrapper'>
     <div class='fulltext-button'>
-    Hide Full Text
+    Show Full Text
     </div>
     <div class= 'row'>
       <div class='col-md-6 fulltext-transcription'>
