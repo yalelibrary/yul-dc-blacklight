@@ -133,7 +133,6 @@ class CatalogController < ApplicationController
     config.add_facet_field 'subject_ssim', label: 'Topic', limit: 20, index_range: 'A'..'Z'
     config.add_facet_field 'creationPlace_ssim', label: 'Publication Place', limit: true
     config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true
-    config.add_facet_field 'has_fulltext_ssi', label: "Full Text Available", limit: true
     config.add_facet_field 'year_isim', label: 'Date Created',
                                         range: {
                                           segments: true,
