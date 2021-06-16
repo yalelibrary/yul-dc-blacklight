@@ -65,7 +65,9 @@ $(document).on('turbolinks:load', function() {
 
     $('.fulltext-button').click(function() {
         const fulltext_button = $(this)
-        $('.fulltext-transcription').toggle(() => $(this).is(':visible') ? fulltext_button.text('Hide Full Text') : fulltext_button.text('Show Full Text'))
+        $('.fulltext-transcription').toggle(function(i, text) {
+            $(this).is(':visible') ? fulltext_button.text('Hide Full Text') : fulltext_button.text('Show Full Text')
+        })
     })
 });
 
