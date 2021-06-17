@@ -64,6 +64,10 @@ $(document).on('turbolinks:load', function() {
     renderBanner();
 })
 
+$(document).on('turbolinks:load', function() {
+    document.getElementById("search_field").onchange = selectFulltext;
+})
+
 function renderBanner() {
     fetch("https://banner.library.yale.edu/banner.json")
         .then(response => response.json())
