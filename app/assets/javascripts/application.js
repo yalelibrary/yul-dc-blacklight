@@ -85,8 +85,12 @@ const fulltext = () => {
     const fulltextTranscription = $('.item-page-fulltext-wrapper .row')
     // Delete the old full text
     fulltextTranscription.empty()
+    const parent_oid = $('#parent-oid').text()
     const pages = $('#uv-pages').html().split(' ')
     const pageWidth = pages.length === 1 ? 'col-md-12' : 'col-md-6'
+
+    // use the parent oid and child oid(s) to get the full text with the
+    // full_text method in the annotations controller
 
     pages.forEach(() => {
         fulltextTranscription.append(`<span class='${pageWidth}'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>`)
