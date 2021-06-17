@@ -443,16 +443,6 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('fulltext_tesim', label: 'Full Text') do |field|
-      field.qt = 'search'
-      field.include_in_advanced_search = false
-      field.solr_parameters = {
-        qf: 'fulltext_tesim',
-        pf: '',
-        'hl.requireFieldMatch': true
-      }
-    end
-
     config.add_search_field('fulltext_tsim_advanced', label: 'Full Text') do |field|
       field.qt = 'search'
       field.include_in_simple_select = false
@@ -468,6 +458,16 @@ class CatalogController < ApplicationController
       field.solr_parameters = {
         qf: 'orbisBibId_ssi',
         pf: ''
+      }
+    end
+
+    config.add_search_field('fulltext_tesim', label: 'Full Text') do |field|
+      field.qt = 'search'
+      field.include_in_advanced_search = false
+      field.solr_parameters = {
+        qf: 'fulltext_tesim',
+        pf: '',
+        'hl.requireFieldMatch': true
       }
     end
 
