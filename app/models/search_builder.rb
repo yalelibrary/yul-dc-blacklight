@@ -80,6 +80,7 @@ class SearchBuilder < Blacklight::SearchBuilder
       genre_ssim
       genre_tesim
       geoSubject_ssim
+      has_fulltext_ssi
       hashed_id_ssi
       identifierMfhd_ssim
       imageCount_isi
