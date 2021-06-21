@@ -27,6 +27,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       expect(page).to have_content('Full Text')
       expect(page).to have_content('OID [Parent/primary]')
       expect(page).to have_content('OID [Child/images]')
+      expect(page).to have_content('Search full text that occurs in a work. Not all works contain searchable full text.')
     end
   end
 
