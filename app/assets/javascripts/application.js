@@ -73,6 +73,24 @@ $(document).on('turbolinks:load', function() {
     })
 });
 
+const getFulltext = async () => {
+    await $.ajax({
+        type:'GET',
+        url:`/annotation/oid/${$('#parent-oid').text()}/canvas/${$('#uv-pages').text()}/fulltext`,
+        data: { 
+            oid: $('#parent-oid').text(),
+            child_oid: $('#uv-pages').text()
+        },
+        dataType: 'json',
+        success: function (data) {
+            console.log('on success')
+            console.log(data.body.value)
+            return data.body.value
+            // Rails.$('.item-page-fulltext-wrapper .row')[0].innerHTML = data.body.value;
+        }
+    })
+}
+
 // Wait until 'uv-pages' has text in it before getting the text
 $(document).ready(() => {
     window.addEventListener('message', () => {
@@ -81,7 +99,7 @@ $(document).ready(() => {
 })
 
 // Get the full text and render it on screen
-const fulltext = () => {
+const fulltext = async () => {
     const fulltextTranscription = $('.item-page-fulltext-wrapper .row')
     // Delete the old full text
     fulltextTranscription.empty()
@@ -91,9 +109,10 @@ const fulltext = () => {
 
     // use the parent oid and child oid(s) to get the full text with the
     // full_text method in the annotations controller
-
     pages.forEach(() => {
-        fulltextTranscription.append(`<span class='${pageWidth}'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>`)
+        const transcription = await getFulltext()
+        console.log(transcription)
+        fulltextTranscription.append(`<span class='${pageWidth}'>${transcription}</span>`)
     })
 }
 
