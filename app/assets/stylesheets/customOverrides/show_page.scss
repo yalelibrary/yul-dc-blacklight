@@ -107,9 +107,11 @@ DEFAULT MOBILE STYLING
   font-family: $yale_new_roman, 'Times New Roman', Times, serif !important;
   font-size: 1.5rem;
   color: $yale_blue;
-  padding-left: 8%;
   padding-bottom: 1.5%;
   padding-top: 1.5%;
+  width: 82%;
+  left: 8%;
+  position: relative;
 }
 
 .universal-viewer-iframe {
@@ -208,8 +210,7 @@ h2.yale-restricted-work-text {
 
   .show-header,
   .yale-restricted-work-text {
-    padding-left: 10%;
-    width: 640px;
+    width: 92%;
   }
 
   .single-item-show {
@@ -282,8 +283,8 @@ h2.yale-restricted-work-text {
 
   .show-header,
   .yale-restricted-work-text {
-    padding-left: 19%;
-    width: 790px;
+    width: 97%;
+    left: 19%;
   }
 
   .single-item-show {
@@ -343,8 +344,7 @@ h2.yale-restricted-work-text {
 
   .show-header,
   .yale-restricted-work-text {
-    padding-left: 19%;
-    width: 895px;
+    width: 96%;
   }
 
   .single-item-show {
