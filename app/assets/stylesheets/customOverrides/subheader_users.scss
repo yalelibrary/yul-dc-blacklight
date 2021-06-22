@@ -18,7 +18,7 @@ DEFAULT MOBILE STYLING
   overflow: visible;
   width: 250px;
   padding-bottom: 12px;
-  padding-top: 12px;
+  padding-top: 10%;
 }
 
 .user-subheader-options {
@@ -90,11 +90,12 @@ DEFAULT MOBILE STYLING
   .user-subheader-title {
     font-size: 30px;
     width: 300px;
+    padding-top: 2%;
   }
 
   .user-subheader-options {
     padding-left: 45%;
-    padding-top: 2%
+    padding-top: 2%;
   }
 }
 

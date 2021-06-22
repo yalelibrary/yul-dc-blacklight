@@ -101,6 +101,10 @@ $(document).on('turbolinks:load', function() {
     renderBanner();
 })
 
+$(document).on('turbolinks:load', function() {
+    document.getElementById("search_field").onchange = selectFulltext;
+})
+
 function renderBanner() {
     fetch("https://banner.library.yale.edu/banner.json")
         .then(response => response.json())
@@ -123,4 +127,14 @@ function renderBanner() {
             console.error('Error:', error);
             $("#banner").remove();
         });
+}
+
+function selectFulltext() {
+    var fulltext = document.getElementById("search_field").value;
+    var fulltext_info = document.getElementById("fulltext-info");
+    if (fulltext == "fulltext_tesim") {
+        fulltext_info.style.display ="inline-block"
+    } else {
+        fulltext_info.style.display = "none"
+    }
 }
