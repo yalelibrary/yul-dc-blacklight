@@ -73,25 +73,21 @@ $(document).on('turbolinks:load', function() {
     })
 });
 
-const getFulltext = async () => {
-    await $.ajax({
+const getFulltext = async (child_oid) => {
+    const result = await $.ajax({
         type:'GET',
-        url:`/annotation/oid/${$('#parent-oid').text()}/canvas/${$('#uv-pages').text()}/fulltext`,
-        data: { 
+        url:`/annotation/oid/${$('#parent-oid').text()}/canvas/${child_oid}/fulltext`,
+        data: {
             oid: $('#parent-oid').text(),
             child_oid: $('#uv-pages').text()
         },
-        dataType: 'json',
-        success: function (data) {
-            console.log('on success')
-            console.log(data.body.value)
-            return data.body.value
-            // Rails.$('.item-page-fulltext-wrapper .row')[0].innerHTML = data.body.value;
-        }
     })
+
+    return result.body.value
 }
 
-// Wait until 'uv-pages' has text in it before getting the text
+// 'uv-pages' is undefined by default
+// the setTimeout waits until 'uv-pages' has text in it before getting the text
 $(document).ready(() => {
     window.addEventListener('message', () => {
         setTimeout(fulltext, 250)
@@ -99,20 +95,16 @@ $(document).ready(() => {
 })
 
 // Get the full text and render it on screen
-const fulltext = async () => {
+const fulltext = () => {
     const fulltextTranscription = $('.item-page-fulltext-wrapper .row')
-    // Delete the old full text
-    fulltextTranscription.empty()
-    const parent_oid = $('#parent-oid').text()
-    const pages = $('#uv-pages').html().split(' ')
-    const pageWidth = pages.length === 1 ? 'col-md-12' : 'col-md-6'
+    fulltextTranscription.empty() // Delete the old full text
+    const child_oids_array = $('#uv-pages').html().split(' ')
+    const pageWidth = child_oids_array.length === 1 ? 'col-md-12' : 'col-md-6'
 
-    // use the parent oid and child oid(s) to get the full text with the
-    // full_text method in the annotations controller
-    pages.forEach(() => {
-        const transcription = await getFulltext()
-        console.log(transcription)
-        fulltextTranscription.append(`<span class='${pageWidth}'>${transcription}</span>`)
+    child_oids_array.forEach(async child_oid => {
+        const transcription = await getFulltext(child_oid)
+
+        return fulltextTranscription.append(`<span class='${pageWidth}'>${transcription}</span>`)
     })
 }
 
