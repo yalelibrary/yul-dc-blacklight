@@ -73,19 +73,6 @@ $(document).on('turbolinks:load', function() {
     })
 });
 
-const getFulltext = async (child_oid) => {
-    const result = await $.ajax({
-        type:'GET',
-        url:`/annotation/oid/${$('#parent-oid').text()}/canvas/${child_oid}/fulltext`,
-        data: {
-            oid: $('#parent-oid').text(),
-            child_oid: $('#uv-pages').text()
-        },
-    })
-
-    return result.body.value
-}
-
 // 'uv-pages' is undefined by default
 // the setTimeout waits until 'uv-pages' has text in it before getting the text
 $(document).ready(() => {
@@ -106,6 +93,19 @@ const fulltext = () => {
 
         return fulltextTranscription.append(`<span class='${pageWidth}'>${transcription}</span>`)
     })
+}
+
+const getFulltext = async (child_oid) => {
+    const result = await $.ajax({
+        type:'GET',
+        url:`/annotation/oid/${$('#parent-oid').text()}/canvas/${child_oid}/fulltext`,
+        data: {
+            oid: $('#parent-oid').text(),
+            child_oid: $('#uv-pages').text()
+        },
+    })
+
+    return result.body.value
 }
 
 $(document).on('turbolinks:load', function() {
