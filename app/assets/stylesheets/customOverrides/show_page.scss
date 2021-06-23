@@ -221,11 +221,30 @@ h2.yale-restricted-work-text {
     padding-left: 8%;
   }
 
+  .hidden {
+    display: none;
+  }
+
+  .item-page-fulltext-wrapper {
+    width: 118%;
+    padding-bottom: 25px;
+
+    .fulltext-button {
+      text-align: right;
+      font-size: 14px;
+      color: $medium_grey;
+      font-family: $mallory_medium, Arial, Helvetica, sans-serif !important;
+      font-weight: 900;
+      padding-bottom: 15px;
+      cursor: pointer;
+    }
+  }
+
   .show-buttons {
     justify-self: center;
   }
 
-  .item-page__tools-wrapper{
+  .item-page__tools-wrapper {
     max-width: 628px;
     margin-left: 8%;
   }
