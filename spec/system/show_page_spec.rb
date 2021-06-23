@@ -15,10 +15,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     solr = Blacklight.default_index.connection
     solr.add([llama,
               llama_child_1,
-              llama_child_2,
-              dog,
-              eagle,
-              puppy])
+              llama_child_2])
     solr.commit
     visit '/catalog?search_field=all_fields&q='
     click_on 'Amor Llama'
@@ -55,6 +52,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       fulltext_tesim: ['fulltext text for llama child one.']
     }
   end
+
   let(:llama_child_2) do
     {
       id: '113',
@@ -66,60 +64,6 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       resourceType_ssim: 'Maps, Atlases & Globes',
       creator_ssim: ['Anna Elizabeth Dewdney'],
       fulltext_tesim: ['fulltext text for llama child two.']
-    }
-  end
-
-  let(:dog) do
-    {
-      id: '222',
-      title_tesim: ['HandsomeDan Bulldog'],
-      format: 'three dimensional object',
-      language_ssim: 'en',
-      visibility_ssi: 'Public',
-      genre_ssim: 'Artifacts',
-      resourceType_ssim: 'Books, Journals & Pamphlets',
-      creator_ssim: ['Andy Graves']
-    }
-  end
-
-  let(:eagle) do
-    {
-      id: '333',
-      title_tesim: ['Aquila Eccellenza'],
-      format: 'still image',
-      language_ssim: 'it',
-      visibility_ssi: 'Public',
-      genre_ssim: 'Manuscripts',
-      resourceType_ssim: 'Archives or Manuscripts',
-      creator_ssim: ['Andrew Norriss']
-    }
-  end
-
-  let(:puppy) do
-    {
-      id: '444',
-      title_tesim: ['Rhett Lecheire'],
-      format: 'text',
-      language_ssim: 'fr',
-      visibility_ssi: 'Public',
-      genre_ssim: 'Animation',
-      resourceType_ssim: 'Archives or Manuscripts',
-      creator_ssim: ['Paulo Coelho']
-    }
-  end
-
-  let(:train) do
-    {
-      id: '555',
-      title_tesim: ['The Boiler Makers'],
-      format: 'text',
-      language_ssim: 'fr',
-      visibility_ssi: 'Yale Community Only',
-      genre_ssim: 'Animation',
-      resourceType_ssim: 'Archives or Manuscripts',
-      creator_ssim: ['France A. Cordova'],
-      oid_ssi: 555,
-      thumbnail_path_ss: 'https://this/is/an/image'
     }
   end
 
