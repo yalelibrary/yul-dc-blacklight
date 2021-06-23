@@ -9,6 +9,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/113.json')
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/222.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
 
     solr = Blacklight.default_index.connection
     solr.add([llama,
@@ -161,6 +163,11 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
 
     context 'without full text available' do
       it 'does not have a full text button' do
+        visit 'catalog/222'
+
+        expect(page).not_to have_css('.fulltext-button')
+      end
+    end
         visit 'catalog/111'
 
         expect(page).not_to have_css('.fulltext-button')
