@@ -158,6 +158,14 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
         expect(src).to include '&cv=0'
       end
     end
+
+    context 'without full text available' do
+      it 'does not have a full text button' do
+        visit 'catalog/111'
+
+        expect(page).not_to have_css('.fulltext-button')
+      end
+    end
   end
 
   context 'with public works' do
