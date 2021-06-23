@@ -37,7 +37,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       creator_tesim: ['Anna Elizabeth Dewdney'],
       child_oids_ssim: [112, 113],
       oid_ssi: 111,
-      thumbnail_path_ss: 'https://this/is/an/image'
+      thumbnail_path_ss: 'https://this/is/an/image',
+      has_fulltext_ssi: 'Yes'
     }
   end
 
@@ -50,7 +51,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       visibility_ssi: 'Public',
       genre_ssim: 'Maps',
       resourceType_ssim: 'Maps, Atlases & Globes',
-      creator_ssim: ['Anna Elizabeth Dewdney']
+      creator_ssim: ['Anna Elizabeth Dewdney'],
+      fulltext_tesim: ['fulltext text for llama child one.']
     }
   end
   let(:llama_child_2) do
@@ -62,7 +64,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       visibility_ssi: 'Public',
       genre_ssim: 'Maps',
       resourceType_ssim: 'Maps, Atlases & Globes',
-      creator_ssim: ['Anna Elizabeth Dewdney']
+      creator_ssim: ['Anna Elizabeth Dewdney'],
+      fulltext_tesim: ['fulltext text for llama child two.']
     }
   end
 
@@ -168,9 +171,20 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
         expect(page).not_to have_css('.fulltext-button')
       end
     end
+
+    context 'with full text available' do
+      it 'has a "Show Full Text" button' do
         visit 'catalog/111'
 
-        expect(page).not_to have_css('.fulltext-button')
+        expect(page).to have_css('.fulltext-button')
+        expect(page).to have_content('Show Full Text')
+      end
+
+      it 'can show the full text when viewing a single child object' do
+        visit 'catalog/111'
+      end
+
+      it 'can show the full text when viewing two child objects side by side' do
       end
     end
   end
