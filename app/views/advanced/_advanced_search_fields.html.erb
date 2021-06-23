@@ -3,8 +3,10 @@
   <div class="form-group advanced-search-field">
       <%= label_tag key, "#{field_def.label }", :class => "col-sm-3 control-label" %>
       <div class="col-sm-9">
-        <% if key== "fulltext_tsim_advanced" %>
-          <%= text_field_tag key, label_tag_default_for(key), :class => 'form-control', aria: { describedby: 'advanced-help' } %>
+        <% if key== "all_fields_advanced" %>
+          <%= text_field_tag key, label_tag_default_for(key), placeholder: 'Search words about the items',:class => 'form-control', aria: { describedby: 'advanced-help' } %>
+        <% elsif key== "fulltext_tsim_advanced" %>
+          <%= text_field_tag key, label_tag_default_for(key), placeholder: 'Search words within the items', :class => 'form-control', aria: { describedby: 'advanced-help' } %>
           <span id="advanced-fulltext-info" class about="advanced-fulltext-info" >Search full text that occurs in a work. Not all works contain searchable full text.</span>
         <% else %>
           <%= text_field_tag key, label_tag_default_for(key), :class => 'form-control', aria: { describedby: 'advanced-help' } %>
