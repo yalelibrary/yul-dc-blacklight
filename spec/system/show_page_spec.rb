@@ -2,25 +2,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Show Page', type: :system, js: true, clean: true do
-  before do
-    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/111.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
-    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/112.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
-    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/113.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
-    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/222.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
-
-    solr = Blacklight.default_index.connection
-    solr.add([llama,
-              llama_child_1,
-              llama_child_2])
-    solr.commit
-    visit '/catalog?search_field=all_fields&q='
-    click_on 'Amor Llama'
-  end
-
   let(:llama) do
     {
       id: '111',
@@ -62,9 +43,38 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       visibility_ssi: 'Public',
       genre_ssim: 'Maps',
       resourceType_ssim: 'Maps, Atlases & Globes',
-      creator_ssim: ['Anna Elizabeth Dewdney'],
-      fulltext_tesim: ['fulltext text for llama child two.']
+      creator_ssim: ['Anna Elizabeth Dewdney']
     }
+  end
+
+  let(:dog) do
+    {
+      id: '222',
+      title_tesim: ['HandsomeDan Bulldog'],
+      format: 'three dimensional object',
+      language_ssim: 'en',
+      visibility_ssi: 'Public',
+      genre_ssim: 'Artifacts',
+      resourceType_ssim: 'Books, Journals & Pamphlets',
+      creator_ssim: ['Andy Graves']
+    }
+  end
+
+  before do
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/111.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/112.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/113.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/222.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+
+    solr = Blacklight.default_index.connection
+    solr.add([llama, llama_child_1, llama_child_2])
+    solr.commit
+    visit '/catalog?search_field=all_fields&q='
+    click_on 'Amor Llama'
   end
 
   it 'has expected css' do
@@ -122,13 +132,6 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
 
         expect(page).to have_css('.fulltext-button')
         expect(page).to have_content('Show Full Text')
-      end
-
-      it 'can show the full text when viewing a single child object' do
-        visit 'catalog/111'
-      end
-
-      it 'can show the full text when viewing two child objects side by side' do
       end
     end
   end
