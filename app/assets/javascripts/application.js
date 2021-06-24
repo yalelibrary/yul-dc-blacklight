@@ -59,17 +59,54 @@ $(document).on('turbolinks:load', function() {
     });
 })
 
-// Toggle the fulltext
+// Toggle the fulltext button
 $(document).on('turbolinks:load', function() {
-    $('.fulltext-transcription').addClass('hidden')
+    const fulltextTranscription = $('.item-page-fulltext-wrapper .row')
+    fulltextTranscription.addClass('hidden')
 
     $('.fulltext-button').click(function() {
         const fulltext_button = $(this)
-        $('.fulltext-transcription').toggle(function(i, text) {
+        fulltextTranscription.toggle(function(i, text) {
             $(this).is(':visible') ? fulltext_button.text('Hide Full Text') : fulltext_button.text('Show Full Text')
         })
+        fulltextTranscription.css('display', 'flex')
     })
 });
+
+// 'uv-pages' is undefined by default
+// the setTimeout waits until 'uv-pages' has text in it before getting the text
+$(document).ready(() => {
+    window.addEventListener('message', () => {
+        setTimeout(fulltext, 250)
+    }, false)
+})
+
+// Get the full text and render it on screen
+const fulltext = () => {
+    const fulltextTranscription = $('.item-page-fulltext-wrapper .row')
+    fulltextTranscription.empty() // Delete the old full text
+    const child_oids_array = $('#uv-pages').html().split(' ')
+    const pageWidth = child_oids_array.length === 1 ? 'col-md-12' : 'col-md-6'
+
+    child_oids_array.forEach(async child_oid => {
+        const transcription = await getFulltext(child_oid)
+
+        return fulltextTranscription.append(`<span class='${pageWidth}'>${transcription}</span>`)
+    })
+}
+
+const getFulltext = async (child_oid) => {
+    const result = await $.ajax({
+        type:'GET',
+        url:`/annotation/oid/${$('#parent-oid').text()}/canvas/${child_oid}/fulltext`,
+        data: {
+            oid: $('#parent-oid').text(),
+            child_oid: $('#uv-pages').text()
+        },
+    })
+
+    return result.body.value
+}
 
 $(document).on('turbolinks:load', function() {
     renderBanner();
