@@ -2,26 +2,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Show Page', type: :system, js: true, clean: true do
-  before do
-    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/111.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
-    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/112.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
-    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/113.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
-
-    solr = Blacklight.default_index.connection
-    solr.add([llama,
-              llama_child_1,
-              llama_child_2,
-              dog,
-              eagle,
-              puppy])
-    solr.commit
-    visit '/catalog?search_field=all_fields&q='
-    click_on 'Amor Llama'
-  end
-
   let(:llama) do
     {
       id: '111',
@@ -35,7 +15,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       creator_tesim: ['Anna Elizabeth Dewdney'],
       child_oids_ssim: [112, 113],
       oid_ssi: 111,
-      thumbnail_path_ss: 'https://this/is/an/image'
+      thumbnail_path_ss: 'https://this/is/an/image',
+      has_fulltext_ssi: 'Yes'
     }
   end
 
@@ -48,9 +29,11 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       visibility_ssi: 'Public',
       genre_ssim: 'Maps',
       resourceType_ssim: 'Maps, Atlases & Globes',
-      creator_ssim: ['Anna Elizabeth Dewdney']
+      creator_ssim: ['Anna Elizabeth Dewdney'],
+      fulltext_tesim: ['fulltext text for llama child one.']
     }
   end
+
   let(:llama_child_2) do
     {
       id: '113',
@@ -77,45 +60,21 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     }
   end
 
-  let(:eagle) do
-    {
-      id: '333',
-      title_tesim: ['Aquila Eccellenza'],
-      format: 'still image',
-      language_ssim: 'it',
-      visibility_ssi: 'Public',
-      genre_ssim: 'Manuscripts',
-      resourceType_ssim: 'Archives or Manuscripts',
-      creator_ssim: ['Andrew Norriss']
-    }
-  end
+  before do
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/111.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/112.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/113.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/222.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
 
-  let(:puppy) do
-    {
-      id: '444',
-      title_tesim: ['Rhett Lecheire'],
-      format: 'text',
-      language_ssim: 'fr',
-      visibility_ssi: 'Public',
-      genre_ssim: 'Animation',
-      resourceType_ssim: 'Archives or Manuscripts',
-      creator_ssim: ['Paulo Coelho']
-    }
-  end
-
-  let(:train) do
-    {
-      id: '555',
-      title_tesim: ['The Boiler Makers'],
-      format: 'text',
-      language_ssim: 'fr',
-      visibility_ssi: 'Yale Community Only',
-      genre_ssim: 'Animation',
-      resourceType_ssim: 'Archives or Manuscripts',
-      creator_ssim: ['France A. Cordova'],
-      oid_ssi: 555,
-      thumbnail_path_ss: 'https://this/is/an/image'
-    }
+    solr = Blacklight.default_index.connection
+    solr.add([llama, llama_child_1, llama_child_2])
+    solr.commit
+    visit '/catalog?search_field=all_fields&q='
+    click_on 'Amor Llama'
   end
 
   it 'has expected css' do
@@ -156,6 +115,23 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
         visit 'catalog/111?child_oid=11312321'
         src = find('.universal-viewer-iframe')['src']
         expect(src).to include '&cv=0'
+      end
+    end
+
+    context 'without full text available' do
+      it 'does not have a full text button' do
+        visit 'catalog/222'
+
+        expect(page).not_to have_css('.fulltext-button')
+      end
+    end
+
+    context 'with full text available' do
+      it 'has a "Show Full Text" button' do
+        visit 'catalog/111'
+
+        expect(page).to have_css('.fulltext-button')
+        expect(page).to have_content('Show Full Text')
       end
     end
   end
