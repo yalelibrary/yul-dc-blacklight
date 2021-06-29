@@ -9,13 +9,32 @@
                        options_for_select(search_fields, h(params[:search_field])),
                        title: t('blacklight.search.form.search_field.title'),
                        id: "search_field",
-                       class: "custom-select search-field") %>
+                       class: "custom-select search-field",
+                       :onchange => 'onChangeSearchFields()')
+        %>
     <% elsif search_fields.length == 1 %>
       <%= hidden_field_tag :search_field, search_fields.first.last %>
     <% end %>
 
-    <span class="fulltext-info hidden" id="fulltext-info"> Search full text that occurs in a work. Not all works contain searchable full text.
+    <%= @params %>
+    <span class="fulltext-info" id="fulltext-info">
+      <%= radio_button_tag(
+              :fulltext_search,
+              1,
+              false,
+              onclick:("onSelectDescription();")
+          )
+      %>
+      <%= label_tag(:fulltext_search, "Description") %>
+      <%= radio_button_tag(:fulltext_search,
+                           2,
+                           false,
+                           onclick:("onSelectFulltext();")
+                           )
+      %>
+      <%= label_tag(:fulltext_search, "Full text") %>
     </span>
+
 
     <label for="q" class="sr-only"><%= t('blacklight.search.form.search.label') %></label>
     <%#= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}", id: "q", autocomplete: presenter.autocomplete_enabled? ? "off" : "", autofocus: presenter.autofocus?, data: { autocomplete_enabled: presenter.autocomplete_enabled?, autocomplete_path: search_action_path(action: :suggest) }  %>

@@ -108,7 +108,7 @@ DEFAULT MOBILE STYLING
   .fulltext-info {
     font-size: 14px;
     font-family: $mallory_book, $mallory_light, Arial, Helvetica, sans-serif;
-    top: 103%;
+    top: 123%;
     right: 52%;
     width: 46%;
     color: $medium_grey;
@@ -143,7 +143,7 @@ DEFAULT MOBILE STYLING
   }
 
   .form-control {
-    border-left: none;
+    border-left: 1px solid $border_grey;;
     border-top: 1px solid $border_grey;
   }
 
@@ -201,7 +201,7 @@ DEFAULT MOBILE STYLING
   }
 
   .fulltext-info {
-    top: 103%;
+    top: 125%;
     left: 24%;
     width: 46%;
   }
