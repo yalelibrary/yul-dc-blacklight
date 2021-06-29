@@ -120,7 +120,8 @@ DEFAULT MOBILE STYLING
   align-content: center;
 }
 
-#uv-pages {
+#uv-pages,
+#parent-oid {
   display: none;
 }
 
@@ -230,13 +231,16 @@ h2.yale-restricted-work-text {
     padding-bottom: 25px;
 
     .fulltext-button {
-      text-align: right;
       font-size: 14px;
       color: $medium_grey;
       font-family: $mallory_medium, Arial, Helvetica, sans-serif !important;
       font-weight: 900;
       padding-bottom: 15px;
-      cursor: pointer;
+      background: none;
+      border: none;
+      margin-right: 0;
+      margin-left: auto;
+      display: block;
     }
   }
 
