@@ -57,8 +57,99 @@ $(document).on('turbolinks:load', function() {
         e.preventDefault();
         if (href) Turbolinks.visit(href);
     });
-})
+});
 
+function onChangeSearchFields() {
+    const search_field = document.getElementById("search_field");
+    let options = search_field.options;
+
+    // change placeholder
+    changePlaceholderText();
+}
+
+
+$(document).on('turbolinks:load', function() {
+    // Receiving the data:
+    let useDefault = localStorage.getItem("useDefault");
+    if(useDefault === null){
+        useDefault = "true";
+        localStorage.setItem("useDefault", "true")
+    }
+    if(localStorage.getItem("searchFieldValue") === null){
+        localStorage.setItem("searchFieldValue", "all_fields")
+    }
+    useDefault = (useDefault === "true");
+
+    // hide fulltext option in search fields
+    hideFulltextOptions();
+    changePlaceholderText();
+
+    let descriptionButton = document.getElementById("fulltext_search_1");
+    let fullTextButton = document.getElementById("fulltext_search_2");
+
+    if(useDefault){
+        descriptionButton.click();
+    }
+    else{
+        fullTextButton.click();
+    }
+});
+
+function changePlaceholderText(){
+    // change placeholder
+    const search_field = document.getElementById("search_field");
+    let options = search_field.options;
+
+    switch ( options[search_field.selectedIndex].value) {
+        case "all_fields":
+            $("#q").attr('placeholder','Search words about the items');
+            break;
+        case "fulltext_tesim":
+            $("#q").attr('placeholder',"Search words within the items");
+            break;
+        default:
+            $("#q").attr('placeholder',"Search");
+            break;
+    }
+}
+
+// Toggle the fulltext
+function onSelectDescription() {
+    localStorage.setItem("useDefault", "true");
+    const search_field = document.getElementById("search_field");
+    search_field.style.visibility = 'visible';
+
+    let options = search_field.options;
+    let value = localStorage.getItem("searchFieldValue");
+    for (let i = 0, optionsLength = options.length; i < optionsLength; i++) {
+        if (options[i].value === value) {
+            search_field.selectedIndex = i;
+        }
+    }
+    changePlaceholderText();
+    return true;
+};
+
+function onSelectFulltext(){
+    localStorage.setItem("useDefault", "false");
+    const search_field = document.getElementById("search_field");
+    search_field.style.visibility = 'hidden';
+
+    let options = search_field.options;
+    let value = "fulltext_tesim";
+
+    for (let i = 0, optionsLength = options.length; i < optionsLength; i++) {
+        if (options[i].value === value) {
+            search_field.selectedIndex = i;
+        }
+    }
+    changePlaceholderText();
+    return false;
+};
+
+function hideFulltextOptions(){
+    $('#search_field').children('option[value="fulltext_tesim"]').css('display','none');
+}
 // Toggle the fulltext button
 $(document).on('turbolinks:load', function() {
     const fulltextTranscription = $('.item-page-fulltext-wrapper .row')
@@ -110,11 +201,7 @@ const getFulltext = async (child_oid) => {
 
 $(document).on('turbolinks:load', function() {
     renderBanner();
-})
-
-$(document).on('turbolinks:load', function() {
-    document.getElementById("search_field").onchange = selectFulltext;
-})
+});
 
 function renderBanner() {
     fetch("https://banner.library.yale.edu/banner.json")
@@ -138,14 +225,4 @@ function renderBanner() {
             console.error('Error:', error);
             $("#banner").remove();
         });
-}
-
-function selectFulltext() {
-    var fulltext = document.getElementById("search_field").value;
-    var fulltext_info = document.getElementById("fulltext-info");
-    if (fulltext == "fulltext_tesim") {
-        fulltext_info.style.display ="inline-block"
-    } else {
-        fulltext_info.style.display = "none"
-    }
 }
