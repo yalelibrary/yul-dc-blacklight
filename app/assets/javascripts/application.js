@@ -137,12 +137,6 @@ function onSelectFulltext(){
     let options = search_field.options;
     let value = "fulltext_tesim";
 
-
-    // don't save fulltext value
-    if("fulltext_tesim" !== options[search_field.selectedIndex].value) {
-        localStorage.setItem("searchFieldValue", options[search_field.selectedIndex].value);
-    }
-
     for (let i = 0, optionsLength = options.length; i < optionsLength; i++) {
         if (options[i].value === value) {
             search_field.selectedIndex = i;
