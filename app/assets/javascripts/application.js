@@ -63,10 +63,6 @@ function onChangeSearchFields() {
     const search_field = document.getElementById("search_field");
     let options = search_field.options;
 
-    // don't save fulltext value
-    if("fulltext_tesim" !== options[search_field.selectedIndex].value) {
-        localStorage.setItem("searchFieldValue", options[search_field.selectedIndex].value);
-    }
     // change placeholder
     changePlaceholderText();
 }
