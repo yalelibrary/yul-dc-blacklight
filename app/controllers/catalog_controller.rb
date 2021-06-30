@@ -106,6 +106,7 @@ class CatalogController < ApplicationController
 
     config.add_facet_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', limit: true
     config.add_facet_field 'visibility_ssi', label: 'Access', limit: true
+    config.add_facet_field 'repository_ssi', label: 'Repository', limit: true
     config.add_facet_field 'format', label: 'Format', limit: true
     config.add_facet_field 'genre_ssim', label: 'Genre', limit: true
     config.add_facet_field 'resourceType_ssim', label: 'Resource Type', limit: true
@@ -168,7 +169,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'subjectName_tesim', label: 'Subject (Name)', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'subjectTopic_tesim', label: 'Subject (Topic)', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'sourceCreated_tesim', label: 'Collection Created', highlight: true, solr_params: disp_highlight_on_search_params
-
+    config.add_index_field 'repository_ssi', label: 'Repository', highlight: true, solr_params: disp_highlight_on_search_params
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     #
@@ -305,6 +306,7 @@ class CatalogController < ApplicationController
       'publisher_tesim',
       'preferredCitation_tesim',
       'repository_ssim',
+      "repository_ssi",
       'resourceType_tesim',
       'rights_tesim',
       'scale_tesim',

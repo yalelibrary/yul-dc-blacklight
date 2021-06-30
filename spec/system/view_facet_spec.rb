@@ -16,6 +16,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     {
       id: '111',
       title_tesim: ['Amor Llama'],
+      repository_ssi: 'Yale University Arts Library',
       format: 'text',
       language_ssim: 'la',
       visibility_ssi: 'Yale Community Only',
@@ -29,6 +30,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     {
       id: '222',
       title_tesim: ['HandsomeDan Bulldog'],
+      repository_ssi: 'Yale University Arts Library',
       format: 'three dimensional object',
       language_ssim: 'en',
       visibility_ssi: 'Public',
@@ -78,6 +80,14 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     expect(page).to have_content('Amor Llama')
     expect(page).not_to have_content('Aquila Eccellenza')
     expect(page).not_to have_content('HandsomeDan Bulldog')
+  end
+
+  it 'can filter results with repository facets' do
+    click_on 'Repository'
+    click_on 'Yale University Arts Library'
+    expect(page).to have_content('Amor Llama')
+    expect(page).to have_content('HandsomeDan Bulldog')
+    expect(page).not_to have_content('Aquila Eccellenza')
   end
 
   it 'can filter results with genre facets' do
