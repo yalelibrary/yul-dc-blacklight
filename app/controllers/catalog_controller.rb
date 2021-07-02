@@ -170,7 +170,6 @@ class CatalogController < ApplicationController
     config.add_index_field 'subjectName_tesim', label: 'Subject (Name)', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'subjectTopic_tesim', label: 'Subject (Topic)', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'sourceCreated_tesim', label: 'Collection Created', highlight: true, solr_params: disp_highlight_on_search_params
-    config.add_index_field 'ancestorTitles_tesim', label: 'Found in', highlight: true, solr_params: disp_highlight_on_search_params
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -267,7 +266,6 @@ class CatalogController < ApplicationController
       'accessionNumber_ssi',
       'alternativeTitle_tesim',
       'alternativeTitleDisplay_tesim',
-      'ancestorTitles_tesim',
       'archiveSpaceUri_ssi',
       'callNumber_tesim',
       'containerGrouping_tesim',
