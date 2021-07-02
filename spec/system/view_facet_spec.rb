@@ -17,6 +17,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       id: '111',
       title_tesim: ['Amor Llama'],
       repository_ssi: 'Yale University Arts Library',
+      collection_title_ssi: ['AAA'],
       format: 'text',
       language_ssim: 'la',
       visibility_ssi: 'Yale Community Only',
@@ -87,6 +88,14 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     click_on 'Yale University Arts Library'
     expect(page).to have_content('Amor Llama')
     expect(page).to have_content('HandsomeDan Bulldog')
+    expect(page).not_to have_content('Aquila Eccellenza')
+  end
+
+  it 'can filter results with collection title facets' do
+    click_on 'Collection Title'
+    click_on 'AAA'
+    expect(page).to have_content('Amor Llama')
+    expect(page).not_to have_content('HandsomeDan Bulldog')
     expect(page).not_to have_content('Aquila Eccellenza')
   end
 
