@@ -139,7 +139,6 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Oversize'
     end
   end
-  
 
   context '"New Search" button' do
     it 'returns user to homepage' do
