@@ -184,6 +184,7 @@ class CatalogController < ApplicationController
     # ]
 
     # Description Group
+    config.add_show_field 'ancestorTitles_tesim', label: 'Found In', metadata: 'ancestorTitles', helper_method: :archival_display
     config.add_show_field 'title_tesim', label: 'Title', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'alternativeTitle_tesim', label: 'Alternative Title', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'creator_ssim', label: 'Creator', metadata: 'description', link_to_facet: true

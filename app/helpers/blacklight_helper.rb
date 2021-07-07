@@ -76,6 +76,11 @@ module BlacklightHelper
     safe_join(values, '<br/>'.html_safe)
   end
 
+  def archival_display(arg)
+    values = arg[:document][arg[:field]]
+    safe_join(values.reverse, ' > ')
+  end
+
   def faceted_join_with_br(arg)
     values = arg[:document][arg[:field]]
     links = []
