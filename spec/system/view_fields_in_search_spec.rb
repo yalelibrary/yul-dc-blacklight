@@ -17,7 +17,11 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       resourceType_ssim: 'Archives or Manuscripts',
       callNumber_tesim: 'Beinecke MS 801',
       imageCount_isi: '23',
-      visibility_ssi: 'Public'
+      visibility_ssi: 'Public',
+      ancestorTitles_tesim: ['Beinecke Rare Book and Manuscript Library (BRBL)',
+                             'Osborn Manuscript Files (OSB MSS FILE)',
+                             'Numerical Sequence: 17975-19123',
+                             'BURNEY, SARAH HARRIET, 1772-1844']
     }
   end
 
@@ -38,6 +42,9 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     end
     it 'displays Image Count in results' do
       expect(content).to have_content('23')
+    end
+    it 'displays Ancestor Title (Found in) in results' do
+      expect(content).to have_content('Osborn Manuscript Files (OSB MSS FILE)')
     end
   end
 end

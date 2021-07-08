@@ -26,7 +26,11 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       subjectGeographic_tesim: 'United States--Maps, Manuscript',
       subjectTopic_tesim: 'Phrenology--United States',
       subjectName_tesim: 'Price, Leo',
-      visibility_ssi: 'Public'
+      visibility_ssi: 'Public',
+      ancestorTitles_tesim: ['Beinecke Rare Book and Manuscript Library (BRBL)',
+                             'Osborn Manuscript Files (OSB MSS FILE)',
+                             'Numerical Sequence: 17975-19123',
+                             'BURNEY, SARAH HARRIET, 1772-1844']
     }
   end
 
@@ -36,6 +40,8 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     it 'highlights title when a term is queried' do
       visit '/catalog?search_field=all_fields&q=Dan'
       expect(page.html).to include "Jack or <span class='search-highlight'>Dan</span> the Bulldog"
+      expect(page.html).to include "Beinecke Rare Book and Manuscript Library (BRBL) >"
+      expect(page.html).to include "> BURNEY, SARAH HARRIET, 1772-1844"
     end
 
     it 'highlights abstract when a term is queried' do
