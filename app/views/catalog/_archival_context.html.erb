@@ -10,9 +10,11 @@
       <% if field_name == "ancestorTitles_tesim" %>
         <div class="archival-context">
           <!-- KEY -->
-          <p class='blacklight-<%= field_name.parameterize %> metadata-block__label-key'>
-            <%= (render_document_show_field_label document, field: field_name) %>
-          </p>
+          <div class="archival-context-key">
+            <p class='blacklight-<%= field_name.parameterize %> metadata-block__label-key'>
+              <%= (render_document_show_field_label document, field: field_name) %>
+            </p>
+          </div>
           <!-- VALUE -->
           <p class='blacklight-<%= field_name.parameterize %> metadata-block__label-value metadata-block__label-value--yul'>
             <%= field_presenter.render %>

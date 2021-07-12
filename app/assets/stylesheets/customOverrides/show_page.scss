@@ -5,10 +5,16 @@ DEFAULT MOBILE STYLING
 //Archival Context
 .blacklight-ancestortitles_tesim {
   padding-right: 4px;
+  width: 1080px;
 }
 
 .archival-context {
   display: flex;
+}
+
+.archival-context-key {
+  width: 75px;
+  height: 20px;
 }
 
 .show-buttons > .btn-show {
