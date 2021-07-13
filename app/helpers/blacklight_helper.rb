@@ -78,7 +78,12 @@ module BlacklightHelper
 
   def archival_display(arg)
     values = arg[:document][arg[:field]]
-    safe_join(values.reverse, ' > ')
+    values = values.reverse
+    if values.count > 5
+      values[3] = "<span><button class='show-more-button'>...</button> &gt; </span><span class='show-more-hidden-text'>".html_safe + values[3]
+      values[values.count - 2] = "</span></span>".html_safe + values[values.count - 2]
+    end
+    safe_join(values, ' > ')
   end
 
   def faceted_join_with_br(arg)
