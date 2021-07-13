@@ -214,6 +214,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceEdition_tesim', label: 'Collection Edition', metadata: 'collection_information'
     config.add_show_field 'containerGrouping_tesim', label: 'Container / Volume Information', metadata: 'collection_information'
     config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'collection_information', helper_method: :link_to_url
+    config.add_show_field 'archiveSpaceUri_ssi', label: 'View item information in Archives at Yale', metadata: 'aspace_uri'
 
     # Subjects, Formats, and Genres Group
     config.add_show_field 'format', label: 'Format', metadata: 'subjects,_formats,_and_genres', link_to_facet: true
