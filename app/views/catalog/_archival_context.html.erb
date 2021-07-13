@@ -2,23 +2,23 @@
   'ancestorTitles'
 ] %>
 
-<div class='item-page__metadata-wrapper'>
-  <% metadata.each do | m | %>
-    <% doc_presenter = show_presenter(document) %>
+<% metadata.each do | m | %>
+  <% doc_presenter = show_presenter(document) %>
 
-    <% doc_presenter.metadata_fields_to_render(metadata).each do |field_name, field, field_presenter| %>
-      <% if field_name == "ancestorTitles_tesim" %>
-        <div class="archival-context">
-          <!-- KEY -->
+  <% doc_presenter.metadata_fields_to_render(metadata).each do |field_name, field, field_presenter| %>
+    <% if field_name == "ancestorTitles_tesim" %>
+      <div class="archival-context">
+        <!-- KEY -->
+        <div class="archival-context-key">
           <p class='blacklight-<%= field_name.parameterize %> metadata-block__label-key'>
             <%= (render_document_show_field_label document, field: field_name) %>
           </p>
-          <!-- VALUE -->
-          <p class='blacklight-<%= field_name.parameterize %> metadata-block__label-value metadata-block__label-value--yul'>
-            <%= field_presenter.render %>
-          </p>
         </div>
-      <% end %>
+        <!-- VALUE -->
+        <p class='blacklight-<%= field_name.parameterize %> metadata-block__label-value metadata-block__label-value--yul'>
+          <%= field_presenter.render %>
+        </p>
+      </div>
     <% end %>
   <% end %>
-</div>
+<% end %>

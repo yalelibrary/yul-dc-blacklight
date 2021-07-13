@@ -3,12 +3,22 @@ DEFAULT MOBILE STYLING
 ********************************************************/
 
 //Archival Context
+
 .blacklight-ancestortitles_tesim {
   padding-right: 4px;
+  width: 1080px;
 }
 
 .archival-context {
   display: flex;
+  width: 83%;
+  left: 8%;
+  position: relative;
+}
+
+.archival-context-key {
+  width: 75px;
+  height: 20px;
 }
 
 .show-buttons > .btn-show {
@@ -223,6 +233,11 @@ h2.yale-restricted-work-text {
     width: 92%;
   }
 
+  .archival-context {
+    left: 8%;
+    width: 92%;
+  }
+
   .single-item-show {
     width: 625px;
   }
@@ -276,6 +291,11 @@ h2.yale-restricted-work-text {
   .yale-restricted-work-text {
     width: 97%;
     left: 19%;
+  }
+
+  .archival-context {
+    left: 19%;
+    width: 96%;
   }
 
   .single-item-show {
