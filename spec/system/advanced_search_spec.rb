@@ -59,7 +59,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
     end
 
     it 'gets correct search results from date_fields with dateStructured_ssim' do
-      fill_in 'date_fields', with: '1700'
+      fill_in 'date_fields', with: '1459'
       click_on 'SEARCH'
       within '#documents' do
         expect(page).to     have_content('Record 1')
@@ -215,6 +215,29 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
 
       click_on 'SEARCH'
+      within '#documents' do
+        expect(page).to have_content("1.\nRecord 1")
+        expect(page).to have_content("2.\nRecord 2")
+      end
+    end
+
+    it 'can sort by date asc' do
+      within '#sort' do
+        find("option[value='year_isim asc, id desc']").click
+      end
+      click_on 'SEARCH'
+      within '#documents' do
+        expect(page).to have_content("1.\nRecord 1")
+        expect(page).to have_content("2.\nRecord 2")
+      end
+    end
+
+    it 'can sort by date desc' do
+      within '#sort' do
+        find("option[value='year_isim desc, id desc']").click
+      end
+      click_on 'SEARCH'
+      # same order as asc because Record 1's dates strattle Record 2's
       within '#documents' do
         expect(page).to have_content("1.\nRecord 1")
         expect(page).to have_content("2.\nRecord 2")
