@@ -91,7 +91,13 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     expect(page).not_to have_content('Aquila Eccellenza')
   end
 
-  it 'can filter results with collection title facets' do
+  it 'does not display the collection title facet by default' do
+    expect(page).not_to have_css('.blacklight-collection_title_ssi')
+  end
+
+  it 'can filter results with collection title facets when a repository is selected' do
+    click_on 'Repository'
+    click_on 'Yale University Arts Library'
     click_on 'Collection Title'
     click_on 'AAA'
     expect(page).to have_content('Amor Llama')

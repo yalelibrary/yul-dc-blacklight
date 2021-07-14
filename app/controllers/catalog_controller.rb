@@ -107,7 +107,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', limit: true
     config.add_facet_field 'visibility_ssi', label: 'Access', limit: true
     config.add_facet_field 'repository_ssi', label: 'Repository', limit: true
-    config.add_facet_field 'collection_title_ssi', label: 'Collection Title', limit: true
+    config.add_facet_field 'collection_title_ssi', label: 'Collection Title', limit: true, if: :repository_facet?
     config.add_facet_field 'format', label: 'Format', limit: true
     config.add_facet_field 'genre_ssim', label: 'Genre', limit: true
     config.add_facet_field 'resourceType_ssim', label: 'Resource Type', limit: true
@@ -504,6 +504,10 @@ class CatalogController < ApplicationController
         format: 'format'
       }
     )
+  end
+
+  def repository_facet?
+    helpers.facet_field_in_params?('repository_ssi')
   end
 
   def gallery_view?
