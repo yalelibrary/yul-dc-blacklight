@@ -81,6 +81,15 @@ module BlacklightHelper
     safe_join(values.reverse, ' > ')
   end
 
+  def aspace_link(arg)
+    # rubocop:disable Naming/VariableName
+    archiveSpaceUri = arg[:document][arg[:field]]
+    link = "https://archives.yale.edu#{archiveSpaceUri}"
+    popup_window = image_tag("YULPopUpWindow.png", { id: 'popup_window', alt: 'pop up window' })
+    link_to 'View item information in Archives at Yale'.html_safe + popup_window, link, target: '_blank', rel: 'noopener'
+    # rubocop:enable Naming/VariableName
+  end
+
   def faceted_join_with_br(arg)
     values = arg[:document][arg[:field]]
     links = []

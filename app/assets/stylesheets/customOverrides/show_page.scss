@@ -322,6 +322,17 @@ h2.yale-restricted-work-text {
   .show-document #appliedParams {
     width: 130%;
   }
+
+  .showpage_no_label_tag{
+    font-family: Mallory-Bold;
+    width: 100%;
+    padding-top: 2%;
+    position: -webkit-sticky;
+    #popup_window{
+      padding-left: 0.5%;
+      padding-bottom: 0.5%;
+    }
+ }
 }
 
 

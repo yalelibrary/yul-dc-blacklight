@@ -205,6 +205,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'language_ssim', label: 'Language', metadata: 'description', helper_method: :language_codes_as_links
 
     # Collection Information Group
+    # archiveSpaceUri must be last
     config.add_show_field 'callNumber_ssim', label: 'Call Number', metadata: 'collection_information', link_to_facet: true
     config.add_show_field 'sourceTitle_tesim', label: 'Collection Title', metadata: 'collection_information'
     config.add_show_field 'sourceCreator_tesim', label: 'Collection/Other Creator', metadata: 'collection_information'
@@ -214,6 +215,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceEdition_tesim', label: 'Collection Edition', metadata: 'collection_information'
     config.add_show_field 'containerGrouping_tesim', label: 'Container / Volume Information', metadata: 'collection_information'
     config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'collection_information', helper_method: :link_to_url
+    config.add_show_field 'archiveSpaceUri_ssi', label: ' ', no_label: true, metadata: 'collection_information', helper_method: :aspace_link
 
     # Subjects, Formats, and Genres Group
     config.add_show_field 'format', label: 'Format', metadata: 'subjects,_formats,_and_genres', link_to_facet: true
