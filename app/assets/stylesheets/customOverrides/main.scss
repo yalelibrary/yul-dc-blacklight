@@ -113,6 +113,15 @@ a {
   position: relative;
 }
 
+.show-more-hidden-text {
+  display: none;
+}
+
+.show-more-button {
+  border: none;
+  background: none;
+}
+
 .text-success, .facet-values li .selected {
   color: $light_blue !important;
 }

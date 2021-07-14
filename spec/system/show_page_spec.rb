@@ -30,7 +30,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       language_ssim: 'la',
       visibility_ssi: 'Public',
       genre_ssim: 'Maps',
-      ancestorTitles_tesim: ['Oversize', 'Abraham Lincoln collection (GEN MSS 257)', 'Beinecke Rare Book and Manuscript Library (BRBL)'],
+      ancestorTitles_tesim: ['Level0', 'Level1', 'Level2', 'Level3', 'Oversize', 'Abraham Lincoln collection (GEN MSS 257)', 'Beinecke Rare Book and Manuscript Library (BRBL)'],
       resourceType_ssim: 'Maps, Atlases & Globes',
       creator_ssim: ['Anna Elizabeth Dewdney'],
       creator_tesim: ['Anna Elizabeth Dewdney'],
@@ -136,7 +136,9 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   context 'Archival Context breadcrumbs' do
     it 'renders the Archival Context' do
       expect(page).to have_content 'Found In:'
-      expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Oversize'
+      expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Oversize > ... >'
+      click_on("...")
+      expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Oversize > Level3 > Level2 > Level1 > Level0'
     end
   end
 

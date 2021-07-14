@@ -21,7 +21,11 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       ancestorTitles_tesim: ['Beinecke Rare Book and Manuscript Library (BRBL)',
                              'Osborn Manuscript Files (OSB MSS FILE)',
                              'Numerical Sequence: 17975-19123',
-                             'BURNEY, SARAH HARRIET, 1772-1844']
+                             'BURNEY, SARAH HARRIET, 1772-1844',
+                             'Level3',
+                             'Level2',
+                             'Level1',
+                             'Level0']
     }
   end
 
@@ -45,6 +49,12 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     end
     it 'displays Ancestor Title (Found in) in results' do
       expect(content).to have_content('Osborn Manuscript Files (OSB MSS FILE)')
+    end
+    it 'displays Ancestor Title (Found in) in results with ellipsis' do
+      expect(content).to have_content('Level0 > Level1 > Level2 > ...')
+      expect(content).not_to have_content('Level0 > Level1 > Level2 > Level3')
+      click_on("...")
+      expect(content).not_to have_content('Level0 > Level1 > Level2 > Level3')
     end
   end
 end
