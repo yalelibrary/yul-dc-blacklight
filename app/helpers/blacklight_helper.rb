@@ -80,7 +80,7 @@ module BlacklightHelper
     values = arg[:document][arg[:field]]
     values = values.reverse
     if values.count > 5
-      values[3] = "<span><button class='show-more-button'>...</button> &gt; </span><span class='show-more-hidden-text'>".html_safe + values[3]
+      values[3] = "<span><button class='show-more-button' aria-label='Show More' title='Show More'>...</button> &gt; </span><span class='show-more-hidden-text'>".html_safe + values[3]
       values[values.count - 2] = "</span></span>".html_safe + values[values.count - 2]
     end
     safe_join(values, ' > ')
