@@ -205,10 +205,12 @@ class CatalogController < ApplicationController
     config.add_show_field 'language_ssim', label: 'Language', metadata: 'description', helper_method: :language_codes_as_links
 
     # Collection Information Group
+    # ancestorDisplayStrings must be first
     # archiveSpaceUri must be last
+    #
+    config.add_show_field 'ancestorDisplayStrings_tesim', label: ' ', no_label: true, metadata: 'collection_information', helper_method: :aspace_tree_display
     config.add_show_field 'callNumber_ssim', label: 'Call Number', metadata: 'collection_information', link_to_facet: true
     config.add_show_field 'sourceTitle_tesim', label: 'Collection Title', metadata: 'collection_information'
-    config.add_show_field 'sourceCreator_tesim', label: 'Collection/Other Creator', metadata: 'collection_information'
     config.add_show_field 'sourceCreated_tesim', label: 'Collection Created', metadata: 'collection_information'
     config.add_show_field 'sourceDate_tesim', label: 'Collection Date', metadata: 'collection_information'
     config.add_show_field 'sourceNote_tesim', label: 'Collection Note', metadata: 'collection_information'
