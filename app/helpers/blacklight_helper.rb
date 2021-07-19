@@ -95,6 +95,62 @@ module BlacklightHelper
     # rubocop:enable Naming/VariableName
   end
 
+  def aspace_tree_display(arg)
+    ancestor_display_strings = arg[:document][arg[:field]]
+    last = ancestor_display_strings.size
+
+    img_home = image_tag("archival_icons/yaleASpaceHome.png", { class: 'ASpace_Home ASpace_Icon', alt: 'Main level' })
+    img_stack = image_tag("archival_icons/yaleASpaceStack.png", { class: 'ASpace_Stack ASpace_Icon', alt: 'Second level' })
+    img_folder = image_tag("archival_icons/yaleASpaceFolder.png", { class: 'ASpace_Folder ASpace_Icon', alt: 'Document or last level' })
+
+    branch_connection = true
+    last_or_first = true
+    collapsed = nil
+    hierarchy_tree = nil
+    # rubocop:disable Metrics/BlockLength
+    (1..last).each do
+      current = ancestor_display_strings.shift
+
+      case ancestor_display_strings.size
+      when 0
+        img = img_home
+        li_class = 'yaleASpaceHome'
+        ul_class = 'yaleASpaceHomeNested'
+        branch_connection = false
+        last_or_first = true
+      when 1
+        img = img_stack
+        li_class = 'yaleASpaceStack'
+        ul_class = 'yaleASpaceStackNested'
+      else
+        img = img_folder
+        li_class = 'yaleASpaceFolder'
+        ul_class = 'yaleASpaceFolderNested'
+      end
+      hierarchy_tree = tag.li(class: li_class) do
+        tag.div(class: (!last_or_first ? 'show-full-tree-hidden-text' : '')) do
+          concat tag.span(nil, class: 'aSpaceBranch') if branch_connection
+          concat img
+          concat current
+          concat collapsed if collapsed && last_or_first
+          concat tag.ul(hierarchy_tree, class: ul_class) if hierarchy_tree
+        end
+      end
+      if last_or_first
+        collapsed = tag.ul do
+          tag.li do
+            concat tag.span(nil, class: 'aSpaceBranch')
+            concat button_tag '...', class: 'show-full-tree-button'
+            concat tag.ul(hierarchy_tree)
+          end
+        end
+      end
+      last_or_first = false
+    end
+    # rubocop:enable Metrics/BlockLength
+    tag.ul(hierarchy_tree, class: 'aSpace_tree') if hierarchy_tree
+  end
+
   def faceted_join_with_br(arg)
     values = arg[:document][arg[:field]]
     links = []

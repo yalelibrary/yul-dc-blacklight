@@ -70,7 +70,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       coordinates_ssim: "this is the coordinates, using ssim",
       projection_tesim: "this is the projection, using ssim",
       extent_ssim: ["this is the extent, using ssim", "here is another extent"],
-      archiveSpaceUri_ssi: "/repositories/11/archival_objects/214638"
+      archiveSpaceUri_ssi: "/repositories/11/archival_objects/214638",
+      ancestorDisplayStrings_tesim: %w[third second first]
     }
   end
 
@@ -255,6 +256,22 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(aspace_link).to be_truthy
       expect(aspace_link).to have_content "View item information in Archives at Yale"
       expect(aspace_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
+    end
+    context 'ASpace hierarchy display' do
+      it 'has an ellipsis instead of a full tree' do
+        expect(page).to have_content "first"
+        expect(page).not_to have_text(type: :visible, text: "second")
+        expect(page).to have_content "..."
+        expect(page).to have_content "third"
+      end
+      it 'shows full tree on button click' do
+        page.find('.show-full-tree-button').click
+
+        expect(page).to have_content "first"
+        expect(page).not_to have_text(type: :visible, text: "...")
+        expect(page).to have_content "second"
+        expect(page).to have_content "third"
+      end
     end
   end
 

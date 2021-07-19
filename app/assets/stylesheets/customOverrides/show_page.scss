@@ -207,8 +207,60 @@ DEFAULT MOBILE STYLING
 h2.yale-restricted-work-text {
   font-size: 1.5em;
 }
+
 .tools-text-format{
   margin-left: -3%;
+}
+
+.ASpace_Icon{
+  height: 16px;
+  width: 18px;
+  margin-bottom: 6px;
+  margin-right: 6px;
+}
+
+.aSpace_tree ul{
+  list-style: none;
+  margin-top: 10px;
+}
+
+.aSpace_tree li {
+  right: 3%;
+  top: -20%;
+  padding-bottom: 0%;
+  list-style: none;
+  position: relative;
+  margin: 0;
+}
+.yaleASpaceHome li{
+  width: 620px;
+}
+
+.yaleASpaceHomeNested li {
+  right: 1%;
+}
+
+.yaleASpaceStackNested li{
+  right: 1%;
+  top: 1%;
+}
+
+.yaleASpaceHome li, .yaleASpaceStack li, .yaleASpaceFolder li{
+  list-style: none;
+}
+
+.yaleASpaceHomeNested ul, .yaleASpaceStackNested ul, .yaleASpaceFolderNested ul{
+  list-style: none;
+}
+.aSpaceBranch {
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  border-left: 2px solid #dddddd;
+  border-bottom: 2px solid #dddddd;
+  padding: 22px 20px 0px 1px;
+  top: -12px;
+  left: -25px;
 }
 
 @media screen and (min-width: $medium_device) {
