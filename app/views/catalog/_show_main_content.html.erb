@@ -9,7 +9,9 @@
   <div id="doc_<%= @document.id.to_s.parameterize %>">
     <!-- Only render universal viewer if the work is public OR if the user is authenticated -->
     <% if client_can_view_digital?(@document) %>
-      <%= render_document_partials @document, [:show_header, :uv] %>
+      <%= render_document_partials @document, [:show_header] %>
+      <%= render_document_partials @document, [:archival_context] %>
+      <%= render_document_partials @document, [:uv] %>
       <%= render "grouped_metadata" %>
     <% else %>
       <%= render_document_partials @document, [:show_header] %>

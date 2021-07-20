@@ -69,7 +69,9 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       digital_ssim: "this is the digital, using ssim",
       coordinates_ssim: "this is the coordinates, using ssim",
       projection_tesim: "this is the projection, using ssim",
-      extent_ssim: ["this is the extent, using ssim", "here is another extent"]
+      extent_ssim: ["this is the extent, using ssim", "here is another extent"],
+      archiveSpaceUri_ssi: "/repositories/11/archival_objects/214638",
+      ancestorDisplayStrings_tesim: %w[third second first]
     }
   end
 
@@ -248,6 +250,29 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(page).to have_link('this is the geo subject', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=this is the geo subject')
       expect(page).to have_link('these are the geo subjects', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=these are the geo subjects')
     end
+    it 'contains a link to Aspace' do
+      aspace_link = page.find("a[href = 'https://archives.yale.edu/repositories/11/archival_objects/214638']")
+
+      expect(aspace_link).to be_truthy
+      expect(aspace_link).to have_content "View item information in Archives at Yale"
+      expect(aspace_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
+    end
+    context 'ASpace hierarchy display' do
+      it 'has an ellipsis instead of a full tree' do
+        expect(page).to have_content "first"
+        expect(page).not_to have_text(type: :visible, text: "second")
+        expect(page).to have_content "..."
+        expect(page).to have_content "third"
+      end
+      it 'shows full tree on button click' do
+        page.find('.show-full-tree-button').click
+
+        expect(page).to have_content "first"
+        expect(page).not_to have_text(type: :visible, text: "...")
+        expect(page).to have_content "second"
+        expect(page).to have_content "third"
+      end
+    end
   end
 
   it 'has expected css' do
@@ -259,5 +284,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     expect(page).to have_css '.show-tools'
     expect(page).to have_css '.show-header'
     expect(page).to have_css '.universal-viewer-iframe'
+    expect(page).to have_css '.showpage_no_label_tag'
   end
 end
