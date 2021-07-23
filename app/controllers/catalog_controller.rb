@@ -210,6 +210,8 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceNote_tesim', label: 'Collection Note', metadata: 'collection_information'
     config.add_show_field 'sourceEdition_tesim', label: 'Collection Edition', metadata: 'collection_information'
     config.add_show_field 'containerGrouping_tesim', label: 'Container / Volume Information', metadata: 'collection_information'
+    config.add_show_field 'relatedResourceOnline_ssim', label: 'Related Resource Online', metadata: 'collection_information', helper_method: :link_to_url_with_label
+    config.add_show_field 'resourceVersionOnline_ssim', label: 'Resource Version Online', metadata: 'collection_information', helper_method: :link_to_url_with_label
     config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'collection_information', helper_method: :link_to_url
 
     # Subjects, Formats, and Genres Group
