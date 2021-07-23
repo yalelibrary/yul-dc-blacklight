@@ -164,6 +164,18 @@ module BlacklightHelper
     "/catalog?f" + ERB::Util.url_encode("[#{field}][]") + "=#{value}"
   end
 
+  def finding_aid_link(arg)
+    # rubocop:disable Naming/VariableName
+    findingAidUri = arg[:document][arg[:field]]
+    links = []
+    findingAidUri.each do |link|
+      popup_window = image_tag("YULPopUpWindow.png", { id: 'popup_window', alt: 'pop up window' })
+      links << link_to("View full finding aid for #{arg[:document]['collection_title_ssi']}".html_safe + popup_window, link, target: '_blank')
+    end
+    # safe_join(links, '<br/>'.html_safe)
+    links.first
+  end
+
   def link_to_url(arg)
     link_to(arg[:value][0], arg[:value][0])
   end
