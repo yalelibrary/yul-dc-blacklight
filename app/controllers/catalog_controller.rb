@@ -217,8 +217,8 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceNote_tesim', label: 'Collection Note', metadata: 'collection_information'
     config.add_show_field 'sourceEdition_tesim', label: 'Collection Edition', metadata: 'collection_information'
     config.add_show_field 'containerGrouping_tesim', label: 'Container / Volume Information', metadata: 'collection_information'
-    config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'collection_information', helper_method: :link_to_url
     config.add_show_field 'archiveSpaceUri_ssi', label: ' ', no_label: true, metadata: 'collection_information', helper_method: :aspace_link
+    config.add_show_field 'findingAid_ssim', label: ' ', no_label: true, metadata: 'collection_information', helper_method: :finding_aid_link
 
     # Subjects, Formats, and Genres Group
     config.add_show_field 'format', label: 'Format', metadata: 'subjects,_formats,_and_genres', link_to_facet: true
