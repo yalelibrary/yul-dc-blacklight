@@ -101,6 +101,8 @@ class SearchBuilder < Blacklight::SearchBuilder
       publisher_tesim
       publisher_ssim
       recordType_ssi
+      relatedResourceOnline_ssim
+      resourceVersionOnline_ssim
       repository_ssim
       resourceType_ssim
       resourceType_tesim
