@@ -63,6 +63,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       containerGrouping_tesim: 'this is the container information',
       orbisBibId_ssi: '1234567',
       findingAid_ssim: 'this is the finding aid',
+      collection_title_ssi: 'this is the collection title',
       edition_ssim: 'this is the edition',
       material_tesim: "this is the material, using ssim",
       scale_tesim: "this is the scale, using ssim",
@@ -198,9 +199,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the Orbis Bib ID in results' do
       expect(document).to have_content("1234567")
     end
-    it 'displays the Finding Aid in results' do
-      expect(document).to have_content("this is the finding aid")
-    end
     it 'displays the Edition in results' do
       expect(document).to have_content("this is the edition")
     end
@@ -231,9 +229,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'contains a link for the Creator field to the facet' do
       expect(page).to have_link('Frederick, Eric & Maggie', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Frederick%2C++Eric+%26+Maggie')
-    end
-    it 'contains a link on the Finding Aid to the Finding Aid catalog record' do
-      expect(page).to have_link('this is the finding aid', href: 'this is the finding aid')
     end
     it 'contains a link on the more info to the more info record' do
       expect(page).to have_link('http://0.0.0.0:3000/catalog/111', href: 'http://0.0.0.0:3000/catalog/111')
@@ -272,6 +267,13 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         expect(page).to have_content "second"
         expect(page).to have_content "third"
       end
+    end
+    it 'contains a link to Finding Aid' do
+      finding_aid_link = page.find("a[href = 'this is the finding aid']")
+
+      expect(finding_aid_link).to be_truthy
+      expect(finding_aid_link).to have_content "View full finding aid for this is the collection title"
+      expect(finding_aid_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
     end
   end
 
