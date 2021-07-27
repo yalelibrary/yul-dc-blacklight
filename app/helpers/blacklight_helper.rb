@@ -89,6 +89,20 @@ module BlacklightHelper
     "/catalog?f" + ERB::Util.url_encode("[#{field}][]") + "=#{value}"
   end
 
+  def link_to_url_with_label(arg)
+    links = arg[:value].map do |value|
+      link_part = value.split('|')
+      next unless link_part.count <= 2
+      urls = link_part.select { |s| s.start_with? 'http' }
+      labels = link_part.select { |s| !s.start_with? 'http' }
+      if urls.count == 1
+        label = labels[0] || urls[0]
+        link_to(label, urls[0])
+      end
+    end.compact
+    safe_join(links, '<br/>'.html_safe)
+  end
+
   def link_to_url(arg)
     link_to(arg[:value][0], arg[:value][0])
   end
