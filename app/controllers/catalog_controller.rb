@@ -119,13 +119,13 @@ class CatalogController < ApplicationController
     config.add_facet_field 'creationPlace_ssim', label: 'Publication Place', limit: true
     config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true
     config.add_facet_field 'year_isim', label: 'Date Created',
-                           range: {
-                             segments: true,
-                             maxlength: 4
-                           },
-                           if: lambda { |_context, _field_config, facet|
-                             facet.items.length > 1
-                           }
+                                        range: {
+                                          segments: true,
+                                          maxlength: 4
+                                        },
+                                        if: lambda { |_context, _field_config, facet|
+                                              facet.items.length > 1
+                                            }
 
     # the facets below are set to false because we aren't filtering on them from the main search page
     # but we need to be able to provide a label when they are filtered upon from an individual show page
