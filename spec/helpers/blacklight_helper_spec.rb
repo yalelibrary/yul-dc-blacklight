@@ -58,6 +58,25 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     end
   end
 
+  describe 'link to url with label' do
+    context 'with a list of links with labels' do
+      let(:document) { SolrDocument.new(id: 'xyz') }
+      let(:args) do
+        {
+          document: document,
+          field: 'relatedResourceOnline_ssim',
+          value: ['View Related Resource|http://library.somewhere.com/special_page', 'http://library.somewhereelse.com/special_page', 'View Related Resource| not']
+        }
+      end
+
+      it 'returns a list of links with labels' do
+        # rubocop:disable Layout/LineLength
+        expect(helper.link_to_url_with_label(args)).to eq "<a href=\"http://library.somewhere.com/special_page\">View Related Resource</a><br/><a href=\"http://library.somewhereelse.com/special_page\">http://library.somewhereelse.com/special_page</a>"
+        # rubocop:enable Layout/LineLength
+      end
+    end
+  end
+
   describe '#render_thumbnail' do
     context 'with public record and oid with images' do
       let(:valid_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Public', oid_ssi: ['2055095'], thumbnail_path_ss: "http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg") }
