@@ -221,7 +221,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'findingAid_ssim', label: ' ', no_label: true, metadata: 'collection_information', helper_method: :finding_aid_link
     config.add_show_field 'relatedResourceOnline_ssim', label: 'Related Resource Online', metadata: 'collection_information', helper_method: :link_to_url_with_label
     config.add_show_field 'resourceVersionOnline_ssim', label: 'Resource Version Online', metadata: 'collection_information', helper_method: :link_to_url_with_label
-    config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'collection_information', helper_method: :link_to_url
 
     # Subjects, Formats, and Genres Group
     config.add_show_field 'format', label: 'Format', metadata: 'subjects,_formats,_and_genres', link_to_facet: true
