@@ -84,7 +84,7 @@ To start the application stack, run `cam up` in the blacklight directory. This s
 ## Troubleshooting
 
 If you receive a `please set your AWS_PROFILE and AWS_DEFAULT_REGION (RuntimeError)` error when you `cam up`, you will need to set your AWS credentials. Credentials can be set in the `~/.aws/credentials` file in the following format:
-(The word "yale" in the straight brackets can be whatever you want it to be)
+(The word "yale" in the straight brackets can be whatever you want it to be).
 
 ```bash
 [yale]
