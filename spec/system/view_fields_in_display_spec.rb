@@ -63,13 +63,16 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       containerGrouping_tesim: 'this is the container information',
       orbisBibId_ssi: '1234567',
       findingAid_ssim: 'this is the finding aid',
+      collection_title_ssi: 'this is the collection title',
       edition_ssim: 'this is the edition',
       material_tesim: "this is the material, using ssim",
       scale_tesim: "this is the scale, using ssim",
       digital_ssim: "this is the digital, using ssim",
       coordinates_ssim: "this is the coordinates, using ssim",
       projection_tesim: "this is the projection, using ssim",
-      extent_ssim: ["this is the extent, using ssim", "here is another extent"]
+      extent_ssim: ["this is the extent, using ssim", "here is another extent"],
+      archiveSpaceUri_ssi: "/repositories/11/archival_objects/214638",
+      ancestorDisplayStrings_tesim: %w[third second first]
     }
   end
 
@@ -196,9 +199,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the Orbis Bib ID in results' do
       expect(document).to have_content("1234567")
     end
-    it 'displays the Finding Aid in results' do
-      expect(document).to have_content("this is the finding aid")
-    end
     it 'displays the Edition in results' do
       expect(document).to have_content("this is the edition")
     end
@@ -230,9 +230,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'contains a link for the Creator field to the facet' do
       expect(page).to have_link('Frederick, Eric & Maggie', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Frederick%2C++Eric+%26+Maggie')
     end
-    it 'contains a link on the Finding Aid to the Finding Aid catalog record' do
-      expect(page).to have_link('this is the finding aid', href: 'this is the finding aid')
-    end
     it 'contains a link on the more info to the more info record' do
       expect(page).to have_link('http://0.0.0.0:3000/catalog/111', href: 'http://0.0.0.0:3000/catalog/111')
     end
@@ -248,6 +245,36 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(page).to have_link('this is the geo subject', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=this is the geo subject')
       expect(page).to have_link('these are the geo subjects', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=these are the geo subjects')
     end
+    it 'contains a link to Aspace' do
+      aspace_link = page.find("a[href = 'https://archives.yale.edu/repositories/11/archival_objects/214638']")
+
+      expect(aspace_link).to be_truthy
+      expect(aspace_link).to have_content "View item information in Archives at Yale"
+      expect(aspace_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
+    end
+    context 'ASpace hierarchy display' do
+      it 'has an ellipsis instead of a full tree' do
+        expect(page).to have_content "first"
+        expect(page).not_to have_text(type: :visible, text: "second")
+        expect(page).to have_content "..."
+        expect(page).to have_content "third"
+      end
+      it 'shows full tree on button click' do
+        page.find('.show-full-tree-button').click
+
+        expect(page).to have_content "first"
+        expect(page).not_to have_text(type: :visible, text: "...")
+        expect(page).to have_content "second"
+        expect(page).to have_content "third"
+      end
+    end
+    it 'contains a link to Finding Aid' do
+      finding_aid_link = page.find("a[href = 'this is the finding aid']")
+
+      expect(finding_aid_link).to be_truthy
+      expect(finding_aid_link).to have_content "View full finding aid for this is the collection title"
+      expect(finding_aid_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
+    end
   end
 
   it 'has expected css' do
@@ -259,5 +286,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     expect(page).to have_css '.show-tools'
     expect(page).to have_css '.show-header'
     expect(page).to have_css '.universal-viewer-iframe'
+    expect(page).to have_css '.showpage_no_label_tag'
   end
 end

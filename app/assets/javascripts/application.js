@@ -12,6 +12,7 @@
 //= require twitter/typeahead
 //= require bootstrap
 //= require blacklight/blacklight
+//= require show_more
 
 
 
@@ -27,18 +28,18 @@ $('.blacklight-year_i').data('plot-config', {
 
 /**
  * Setup button functionality.
- * 
- * Buttons with 'href-button' class will be setup to follow the button tags href property when the button is clicked.  
- * This allows us to setup an onclick event for all buttons with this class in the JS file rather than adding the 
+ *
+ * Buttons with 'href-button' class will be setup to follow the button tags href property when the button is clicked.
+ * This allows us to setup an onclick event for all buttons with this class in the JS file rather than adding the
  * JS to each button. It follows the links using Turbolinks.
- * 
- * Anchor links with 'convert-to-button' will be converted to buttons.  This allows us to pass a class to blacklight 
+ *
+ * Anchor links with 'convert-to-button' will be converted to buttons.  This allows us to pass a class to blacklight
  * code that generates a link, and then the link will get converted into a button.
  * The button gets the 'href-button' class so that when it is clicked, the href is followed.
  * (It helps us change blacklight functionality without having to pull in the generation code and changing it.)
- * 
+ *
  * These only work when links contain simple hrefs and don't execute Javascript, etc.
- * 
+ *
  * Turbolinks:
  * turbolinks:load is equivalent to document ready for non-turbolink pages.  It's called after the page loads.
  * Turbolinks.visit() is equivalent to setting document.location, but using turbolinks when possible.
@@ -87,4 +88,3 @@ function renderBanner() {
             $("#banner").remove();
         });
 }
-

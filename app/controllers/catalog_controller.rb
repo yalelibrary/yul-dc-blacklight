@@ -106,6 +106,8 @@ class CatalogController < ApplicationController
 
     config.add_facet_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', limit: true
     config.add_facet_field 'visibility_ssi', label: 'Access', limit: true
+    config.add_facet_field 'repository_ssi', label: 'Repository', limit: true
+    config.add_facet_field 'collection_title_ssi', label: 'Collection Title', limit: true, if: :repository_facet?
     config.add_facet_field 'format', label: 'Format', limit: true
     config.add_facet_field 'genre_ssim', label: 'Genre', limit: true
     config.add_facet_field 'resourceType_ssim', label: 'Resource Type', limit: true
@@ -168,7 +170,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'subjectName_tesim', label: 'Subject (Name)', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'subjectTopic_tesim', label: 'Subject (Topic)', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'sourceCreated_tesim', label: 'Collection Created', highlight: true, solr_params: disp_highlight_on_search_params
-
+    config.add_index_field 'ancestorTitles_tesim', label: 'Found in', helper_method: :archival_display
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     #
@@ -183,6 +185,7 @@ class CatalogController < ApplicationController
     # ]
 
     # Description Group
+    config.add_show_field 'ancestorTitles_tesim', label: 'Found In', metadata: 'ancestorTitles', helper_method: :archival_display
     config.add_show_field 'title_tesim', label: 'Title', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'alternativeTitle_tesim', label: 'Alternative Title', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'creator_ssim', label: 'Creator', metadata: 'description', link_to_facet: true
@@ -202,6 +205,10 @@ class CatalogController < ApplicationController
     config.add_show_field 'language_ssim', label: 'Language', metadata: 'description', helper_method: :language_codes_as_links
 
     # Collection Information Group
+    # ancestorDisplayStrings must be first
+    # archiveSpaceUri must be last
+    #
+    config.add_show_field 'ancestorDisplayStrings_tesim', label: ' ', no_label: true, metadata: 'collection_information', helper_method: :aspace_tree_display
     config.add_show_field 'callNumber_ssim', label: 'Call Number', metadata: 'collection_information', link_to_facet: true
     config.add_show_field 'sourceTitle_tesim', label: 'Collection Title', metadata: 'collection_information'
     config.add_show_field 'sourceCreator_tesim', label: 'Collection/Other Creator', metadata: 'collection_information'
@@ -210,9 +217,8 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceNote_tesim', label: 'Collection Note', metadata: 'collection_information'
     config.add_show_field 'sourceEdition_tesim', label: 'Collection Edition', metadata: 'collection_information'
     config.add_show_field 'containerGrouping_tesim', label: 'Container / Volume Information', metadata: 'collection_information'
-    config.add_show_field 'relatedResourceOnline_ssim', label: 'Related Resource Online', metadata: 'collection_information', helper_method: :link_to_url_with_label
-    config.add_show_field 'resourceVersionOnline_ssim', label: 'Resource Version Online', metadata: 'collection_information', helper_method: :link_to_url_with_label
-    config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'collection_information', helper_method: :link_to_url
+    config.add_show_field 'archiveSpaceUri_ssi', label: ' ', no_label: true, metadata: 'collection_information', helper_method: :aspace_link
+    config.add_show_field 'findingAid_ssim', label: ' ', no_label: true, metadata: 'collection_information', helper_method: :finding_aid_link
 
     # Subjects, Formats, and Genres Group
     config.add_show_field 'format', label: 'Format', metadata: 'subjects,_formats,_and_genres', link_to_facet: true
@@ -266,10 +272,12 @@ class CatalogController < ApplicationController
       'accessionNumber_ssi',
       'alternativeTitle_tesim',
       'alternativeTitleDisplay_tesim',
+      'ancestor_titles_hierarchy_ssim',
       'archiveSpaceUri_ssi',
       'callNumber_tesim',
       'containerGrouping_tesim',
       'collectionId_tesim',
+      'collection_title_ssi',
       'contents_tesim',
       'contributor_tsim',
       'contributorDisplay_tsim',
@@ -307,6 +315,7 @@ class CatalogController < ApplicationController
       'publisher_tesim',
       'preferredCitation_tesim',
       'repository_ssim',
+      "repository_ssi",
       'resourceType_tesim',
       'rights_tesim',
       'scale_tesim',
@@ -499,6 +508,10 @@ class CatalogController < ApplicationController
         format: 'format'
       }
     )
+  end
+
+  def repository_facet?
+    helpers.facet_field_in_params?('repository_ssi')
   end
 
   def gallery_view?

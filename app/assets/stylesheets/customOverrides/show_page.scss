@@ -1,6 +1,26 @@
 /********************************************************
 DEFAULT MOBILE STYLING
 ********************************************************/
+
+//Archival Context
+
+.blacklight-ancestortitles_tesim {
+  padding-right: 4px;
+  width: 1080px;
+}
+
+.archival-context {
+  display: flex;
+  width: 83%;
+  left: 8%;
+  position: relative;
+}
+
+.archival-context-key {
+  width: 75px;
+  height: 20px;
+}
+
 .show-buttons > .btn-show {
   text-transform: uppercase;
 }
@@ -187,8 +207,60 @@ DEFAULT MOBILE STYLING
 h2.yale-restricted-work-text {
   font-size: 1.5em;
 }
+
 .tools-text-format{
   margin-left: -3%;
+}
+
+.ASpace_Icon{
+  height: 16px;
+  width: 18px;
+  margin-bottom: 6px;
+  margin-right: 6px;
+}
+
+.aSpace_tree ul{
+  list-style: none;
+  margin-top: 10px;
+}
+
+.aSpace_tree li {
+  right: 3%;
+  top: -20%;
+  padding-bottom: 0%;
+  list-style: none;
+  position: relative;
+  margin: 0;
+}
+.yaleASpaceHome li{
+  width: 620px;
+}
+
+.yaleASpaceHomeNested li {
+  right: 1%;
+}
+
+.yaleASpaceStackNested li{
+  right: 1%;
+  top: 1%;
+}
+
+.yaleASpaceHome li, .yaleASpaceStack li, .yaleASpaceFolder li{
+  list-style: none;
+}
+
+.yaleASpaceHomeNested ul, .yaleASpaceStackNested ul, .yaleASpaceFolderNested ul{
+  list-style: none;
+}
+.aSpaceBranch {
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  border-left: 2px solid #dddddd;
+  border-bottom: 2px solid #dddddd;
+  padding: 22px 20px 0px 1px;
+  top: -12px;
+  left: -25px;
 }
 
 @media screen and (min-width: $medium_device) {
@@ -210,6 +282,11 @@ h2.yale-restricted-work-text {
 
   .show-header,
   .yale-restricted-work-text {
+    width: 92%;
+  }
+
+  .archival-context {
+    left: 8%;
     width: 92%;
   }
 
@@ -268,6 +345,11 @@ h2.yale-restricted-work-text {
     left: 19%;
   }
 
+  .archival-context {
+    left: 19%;
+    width: 96%;
+  }
+
   .single-item-show {
     width: 735px;
   }
@@ -292,6 +374,17 @@ h2.yale-restricted-work-text {
   .show-document #appliedParams {
     width: 130%;
   }
+
+  .showpage_no_label_tag{
+    font-family: Mallory-Bold;
+    width: 100%;
+    padding-top: 2%;
+    position: -webkit-sticky;
+    #popup_window{
+      padding-left: 0.5%;
+      padding-bottom: 0.5%;
+    }
+ }
 }
 
 
