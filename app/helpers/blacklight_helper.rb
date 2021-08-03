@@ -44,6 +44,13 @@ module BlacklightHelper
     url.gsub(/[&?]range%5Byear_.*%5D%5Bbegin%5D=[\d]{1,4}&range%5Byear_.*5D%5Bend%5D=[\d]{1,4}/, '')
   end
 
+  # removes collection when repository is removed
+  def get_repository_constraint_params(params, url_in)
+    # is repository in the url
+    byebug
+    url = url_in
+  end
+
   def language_codes(args)
     language_values = args[:document][args[:field]]
     language_values.map do |language_code|
