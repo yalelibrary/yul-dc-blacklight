@@ -130,6 +130,7 @@ class CatalogController < ApplicationController
     # the facets below are set to false because we aren't filtering on them from the main search page
     # but we need to be able to provide a label when they are filtered upon from an individual show page
     config.add_facet_field 'callNumber_ssim', label: 'Call Number', show: false
+    config.add_facet_field 'ancestor_titles_hierarchy_ssim', label: "Found In", show: false
     config.add_facet_field 'subjectGeographic_ssim', label: 'Subject (Geographic)', show: false
 
     # This was example code after running rails generate blacklight_range_limit:install

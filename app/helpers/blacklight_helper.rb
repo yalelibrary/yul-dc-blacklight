@@ -77,8 +77,18 @@ module BlacklightHelper
   end
 
   def archival_display(arg)
-    values = arg[:document][arg[:field]]
-    values = values.reverse
+    values = arg[:document][arg[:field]].reverse
+
+    hierarchy = arg[:document][:ancestor_titles_hierarchy_ssim]
+
+    if hierarchy.present?
+      (0..values.size - 1).each do |i|
+        values[i] = link_to values[i], request.params.merge('f' =>
+            request&.params&.[]("f")&.except("ancestor_titles_hierarchy_ssim"))&.merge(
+            "f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i]
+          )
+      end
+    end
     if values.count > 5
       values[3] = "<span><button class='show-more-button' aria-label='Show More' title='Show More'>...</button> &gt; </span><span class='show-more-hidden-text'>".html_safe + values[3]
       values[values.count - 2] = "</span></span>".html_safe + values[values.count - 2]

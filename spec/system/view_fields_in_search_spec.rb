@@ -12,7 +12,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
   let(:dog) do
     {
       id: '111',
-      creator_tesim: 'Me and You',
+      creator_ssim: 'Me and You',
       date_ssim: '1999',
       resourceType_ssim: 'Archives or Manuscripts',
       callNumber_tesim: 'Beinecke MS 801',
@@ -25,7 +25,17 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
                              'Level3',
                              'Level2',
                              'Level1',
-                             'Level0']
+                             'Level0'],
+      # rubocop:disable Layout/LineLength
+      ancestor_titles_hierarchy_ssim: ["Beinecke Rare Book and Manuscript Library (BRBL) > ",
+                                       "Beinecke Rare Book and Manuscript Library (BRBL) > Osborn Manuscript Files (OSB MSS FILE) > ",
+                                       "Beinecke Rare Book and Manuscript Library (BRBL) > Osborn Manuscript Files (OSB MSS FILE) > Numerical Sequence: 17975-19123 > ",
+                                       "Beinecke Rare Book and Manuscript Library (BRBL) > Osborn Manuscript Files (OSB MSS FILE) > Numerical Sequence: 17975-19123 > BURNEY, SARAH HARRIET, 1772-1844 > ",
+                                       "Beinecke Rare Book and Manuscript Library (BRBL) > Osborn Manuscript Files (OSB MSS FILE) > Numerical Sequence: 17975-19123 > BURNEY, SARAH HARRIET, 1772-1844 > Level3 > ",
+                                       "Beinecke Rare Book and Manuscript Library (BRBL) > Osborn Manuscript Files (OSB MSS FILE) > Numerical Sequence: 17975-19123 > BURNEY, SARAH HARRIET, 1772-1844 > Level3 > Level2 > ",
+                                       "Beinecke Rare Book and Manuscript Library (BRBL) > Osborn Manuscript Files (OSB MSS FILE) > Numerical Sequence: 17975-19123 > BURNEY, SARAH HARRIET, 1772-1844 > Level3 > Level2 > Level1 > ",
+                                       "Beinecke Rare Book and Manuscript Library (BRBL) > Osborn Manuscript Files (OSB MSS FILE) > Numerical Sequence: 17975-19123 > BURNEY, SARAH HARRIET, 1772-1844 > Level3 > Level2 > Level1 > Level0 > "]
+      # rubocop:enable Layout/LineLength
     }
   end
 
@@ -55,6 +65,33 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       expect(content).not_to have_content('Level0 > Level1 > Level2 > Level3')
       click_on("...")
       expect(content).not_to have_content('Level0 > Level1 > Level2 > Level3')
+    end
+    context 'Ancestor Title (Found in)' do
+      it 'is displayed in results with links' do
+        expect(content).to have_link("Level0")
+        click_on "Level0"
+        expect(page).to have_content "111"
+
+        click_on "Beinecke Rare Book and Manuscript Library (BRBL)"
+        expect(page).to have_content "111"
+
+        click_on("...")
+        click_on "Level3"
+        expect(page).to have_content "111"
+
+        # makes sure "found in" does not stack
+        expect(page).to have_css ".filter-name", text: "Found In", count: 1
+      end
+      it 'keeps other constraints when facet links are clicked' do
+        click_on "Creator"
+        click_on "Me and You"
+        expect(page).to have_css ".filter-name", text: "Creator", count: 1
+
+        click_on "Level0"
+
+        expect(page).to have_css ".filter-name", text: "Found In", count: 1
+        expect(page).to have_css ".filter-name", text: "Creator", count: 1
+      end
     end
   end
 end
