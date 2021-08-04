@@ -96,6 +96,22 @@ module BlacklightHelper
     safe_join(values, ' > ')
   end
 
+  def hierarchy_builder(document)
+    hierarchy = document[:ancestor_titles_hierarchy_ssim]
+    hierarchy_params = []
+    @search_params ||= Hash.new { |h, k| h[k] = h.dup.clear }
+
+    if hierarchy.present? && @search_params
+      (0..hierarchy.size - 1).each do |i|
+        hierarchy_params << @search_params.merge('f' =>
+        @search_params&.[]("f")&.except("ancestor_titles_hierarchy_ssim"))&.merge(
+          "f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i]
+        )
+      end
+    end
+    hierarchy_params
+  end
+
   def aspace_link(arg)
     # rubocop:disable Naming/VariableName
     archiveSpaceUri = arg[:document][arg[:field]]
@@ -107,6 +123,7 @@ module BlacklightHelper
 
   def aspace_tree_display(arg)
     ancestor_display_strings = arg[:document][arg[:field]]
+    hierarchy_params = hierarchy_builder arg[:document]
     last = ancestor_display_strings.size
 
     img_home = image_tag("archival_icons/yaleASpaceHome.png", { class: 'ASpace_Home ASpace_Icon', alt: 'Main level' })
@@ -120,6 +137,7 @@ module BlacklightHelper
     # rubocop:disable Metrics/BlockLength
     (1..last).each do
       current = ancestor_display_strings.shift
+      current = link_to current, url_for(hierarchy_params.pop&.merge(action: 'index')) if hierarchy_params.present?
 
       case ancestor_display_strings.size
       when 0
