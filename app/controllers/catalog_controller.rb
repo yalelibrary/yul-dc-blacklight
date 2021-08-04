@@ -524,8 +524,14 @@ class CatalogController < ApplicationController
     blacklight_config[:per_page] = grouping
   end
 
+  def index
+    session[:search_params] = request.params.dup
+    super
+  end
+
   def show
     super
+    @search_params = session[:search_params]
     render "catalog/show_unauthorized", status: :unauthorized unless client_can_view_metadata?(@document)
   end
 end
