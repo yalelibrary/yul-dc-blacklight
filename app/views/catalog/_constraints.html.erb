@@ -5,7 +5,7 @@
       <% value, label, options = get_date_constraint_params(params, request.url)%>
       <%= render partial: "constraints_element", locals: { value: value, label: label, options: options } %>
     <%end %>
-    <% if params["repository_ssi"].present? && params["collection_title_ssi"].present? %>
+    <% if params["repository_ssi"].present? %>
       <% value, label, options = get_repository_constraint_params(params, request.url)%>
       <%= render partial: "constraints_element", locals: { value: value, label: label, options: options } %>
     <%end %>

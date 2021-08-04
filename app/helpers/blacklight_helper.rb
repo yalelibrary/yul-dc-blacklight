@@ -46,9 +46,17 @@ module BlacklightHelper
 
   # removes collection when repository is removed
   def get_repository_constraint_params(params, url_in)
-    # is repository in the url
-    byebug
-    url = url_in
+    # byebug
+    label = "Access"
+    remove_url = url_in.gsub(/f%5Bcollection_title_ssi%5D%5B%5D=[^&]*/, '')
+    remove_url.gsub!(/f%5Brepository_ssi%5D%5B%5D=[^&]*/, '')
+    remove_url.gsub!(/&&/, '')
+    value = params["repository_ssi"].values[0]
+    options = {
+      remove: remove_url,
+      classes: []
+    }
+    [value, label, options]
   end
 
   def language_codes(args)
