@@ -39,6 +39,20 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     end
   end
 
+  describe '#join_as_paragraphs' do
+    it 'returns multiple items in paragraphs' do
+      expect(helper.join_as_paragraphs({ value: %w[Test1 Test2 Test3] })).to eq '<p>Test1</p><p>Test2</p><p>Test3</p>'
+    end
+
+    it 'returns one item in paragraph' do
+      expect(helper.join_as_paragraphs({ value: %w[Test1] })).to eq '<p>Test1</p>'
+    end
+
+    it 'returns nil with nil value' do
+      expect(helper.join_as_paragraphs({ value: nil })).to be_nil
+    end
+  end
+
   describe '#render_thumbnail' do
     context 'with public record and oid with images' do
       let(:valid_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Public', oid_ssi: ['2055095'], thumbnail_path_ss: "http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg") }
