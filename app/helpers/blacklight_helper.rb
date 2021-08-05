@@ -76,6 +76,11 @@ module BlacklightHelper
     safe_join(values, '<br/>'.html_safe)
   end
 
+  def join_as_paragraphs(arg)
+    values = arg[:value]
+    '<p>'.html_safe + safe_join(values, '</p><p>'.html_safe) + '</p>'.html_safe if values
+  end
+
   def faceted_join_with_br(arg)
     values = arg[:document][arg[:field]]
     links = []
