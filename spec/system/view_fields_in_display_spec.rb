@@ -304,7 +304,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     context 'ASpace hierarchy breadcrumb' do
       it 'has links for each item' do
         within '.archival-context' do
-
           expect(page).to have_link "first"
           expect(page).to have_link "second"
           expect(page).to have_link "third"
@@ -312,7 +311,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       end
       it 'searches on link click' do
         within '.archival-context' do
-
           click_on 'second'
         end
         expect(page).to have_content "Diversity Bull Dogs"
@@ -324,7 +322,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
 
         visit '/catalog/111'
         within '.archival-context' do
-
           click_on 'second'
         end
         expect(page).to have_css ".filter-name", text: "Found In", count: 1
