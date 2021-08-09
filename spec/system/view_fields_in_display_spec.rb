@@ -72,6 +72,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       projection_tesim: "this is the projection, using ssim",
       extent_ssim: ["this is the extent, using ssim", "here is another extent"],
       archiveSpaceUri_ssi: "/repositories/11/archival_objects/214638",
+      ancestorTitles_tesim: %w[third second first],
       ancestorDisplayStrings_tesim: %w[third second first],
       ancestor_titles_hierarchy_ssim: ['first > ', 'first > second > ', 'first > second > third > ']
     }
@@ -300,6 +301,34 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         expect(page).to have_css ".filter-name", text: "Creator", count: 1
       end
     end
+    context 'ASpace hierarchy breadcrumb' do
+      it 'has links for each item' do
+        within '.archival-context' do
+          expect(page).to have_link "first"
+          expect(page).to have_link "second"
+          expect(page).to have_link "third"
+        end
+      end
+      it 'searches on link click' do
+        within '.archival-context' do
+          click_on 'second'
+        end
+        expect(page).to have_content "Diversity Bull Dogs"
+      end
+      it 'preserves search constraints', style: true do
+        visit '/catalog?q='
+        click_on 'Creator'
+        click_on 'Frederick'
+
+        visit '/catalog/111'
+        within '.archival-context' do
+          click_on 'second'
+        end
+        expect(page).to have_css ".filter-name", text: "Found In", count: 1
+        expect(page).to have_css ".filter-name", text: "Creator", count: 1
+      end
+    end
+
     it 'contains a link to Finding Aid' do
       finding_aid_link = page.find("a[href = 'this is the finding aid']")
 
@@ -308,7 +337,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(finding_aid_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
     end
   end
-
   it 'has expected css' do
     expect(page).to have_css '.card'
     expect(page).to have_css '.iiif-logo'
