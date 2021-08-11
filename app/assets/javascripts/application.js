@@ -66,8 +66,8 @@ function onChangeSearchFields() {
 
 $(document).on('turbolinks:load', function() {
     // Receiving the data:
-    let fullTextSearchSelected = localStorage.getItem("fullTextSearchSelected");
-    fullTextSearchSelected = (fullTextSearchSelected === "true")
+    let fullTextSearchSelected = new RegExp('[\?&]search_field=([^&#]*)').exec(window.location.href);
+    fullTextSearchSelected = fullTextSearchSelected && fullTextSearchSelected[1] === 'fulltext_tesim'
 
     let descriptionButton = document.getElementById("fulltext_search_1");
     let fullTextButton = document.getElementById("fulltext_search_2");
@@ -99,7 +99,6 @@ function changePlaceholderText(){
 
 // Toggle the fulltext
 function onSelectDescription() {
-    localStorage.removeItem("fullTextSearchSelected");
     const search_field = $("#search_field");
     search_field.find("option[value='fulltext_tesim']").remove();
     search_field.css({visibility: 'visible'});
@@ -111,7 +110,6 @@ function onSelectDescription() {
 };
 
 function onSelectFulltext(){
-    localStorage.setItem("fullTextSearchSelected", "true");
     const search_field = $("#search_field");
     if (search_field.find("option[value='fulltext_tesim']").length === 0) {
         search_field.append("<option value=\"fulltext_tesim\">Full Text</option>")
