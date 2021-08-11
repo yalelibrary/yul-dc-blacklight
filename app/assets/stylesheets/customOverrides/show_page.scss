@@ -229,7 +229,7 @@ h2.yale-restricted-work-text {
 }
 
 .aSpace_tree li {
-  right: 3%;
+  right: 1%;
   top: -20%;
   padding-bottom: 0%;
   list-style: none;
@@ -256,15 +256,22 @@ h2.yale-restricted-work-text {
 .yaleASpaceHomeNested ul, .yaleASpaceStackNested ul, .yaleASpaceFolderNested ul{
   list-style: none;
 }
+
 .aSpaceBranch {
   position: absolute;
   height: 15px;
   width: 15px;
   border-left: 2px solid #dddddd;
   border-bottom: 2px solid #dddddd;
-  padding: 22px 20px 0px 1px;
+  padding: 20px 20px 0 1px;
   top: -12px;
   left: -25px;
+}
+
+.aSpaceBranch img {
+  position: absolute;
+  height: 15px;
+  width: 15px;
 }
 
 @media screen and (min-width: $medium_device) {
