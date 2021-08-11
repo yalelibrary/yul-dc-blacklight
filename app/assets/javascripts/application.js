@@ -103,7 +103,9 @@ function onSelectDescription() {
     const search_field = $("#search_field");
     search_field.find("option[value='fulltext_tesim']").remove();
     search_field.css({visibility: 'visible'});
-    search_field.val('all_fields');
+    if ( search_field.val() === "fulltext_tesim") {
+        search_field.val('all_fields');
+    }
     changePlaceholderText();
     return true;
 };
