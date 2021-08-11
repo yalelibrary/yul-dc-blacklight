@@ -60,10 +60,6 @@ $(document).on('turbolinks:load', function() {
 });
 
 function onChangeSearchFields() {
-    const search_field = document.getElementById("search_field");
-    let options = search_field.options;
-
-    // change placeholder
     changePlaceholderText();
 }
 
