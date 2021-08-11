@@ -204,7 +204,6 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).not_to have_content "Identifiers"
     end
     it 'is displayed when they have values' do
-
       expect(page).to have_content "Description"
       expect(page).to have_content "Collection Information"
       expect(page).to have_content "Subjects, Formats, And Genres"
