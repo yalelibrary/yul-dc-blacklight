@@ -149,7 +149,7 @@ module BlacklightHelper
     img_folder = image_tag("archival_icons/yaleASpaceFolder.png", { class: 'ASpace_Folder ASpace_Icon', alt: 'Document or last level' })
 
     branch_connection = true
-    last_or_first = true
+    above_or_below = false
     collapsed = nil
     hierarchy_tree = nil
     # rubocop:disable Metrics/BlockLength
@@ -163,7 +163,6 @@ module BlacklightHelper
         li_class = 'yaleASpaceHome'
         ul_class = 'yaleASpaceHomeNested'
         branch_connection = false
-        last_or_first = true
       when 1
         img = img_stack
         li_class = 'yaleASpaceStack'
@@ -174,24 +173,26 @@ module BlacklightHelper
         ul_class = 'yaleASpaceFolderNested'
       end
       hierarchy_tree = tag.li(class: li_class) do
-        tag.div(class: (!last_or_first ? 'show-full-tree-hidden-text' : '')) do
+        tag.div(class: (!(ancestor_display_strings.size < 3 || ancestor_display_strings.size > last - 4) ? 'show-full-tree-hidden-text' : '')) do
           concat tag.span(nil, class: 'aSpaceBranch') if branch_connection
           concat img
           concat current
-          concat collapsed if collapsed && last_or_first
+          concat collapsed if collapsed && above_or_below
           concat tag.ul(hierarchy_tree, class: ul_class) if hierarchy_tree
         end
       end
-      if last_or_first
-        collapsed = tag.ul do
-          tag.li do
-            concat tag.span(nil, class: 'aSpaceBranch')
-            concat button_tag '...', class: 'show-full-tree-button'
-            concat tag.ul(hierarchy_tree)
-          end
+
+      above_or_below = last > 6 && [3, last - 3].include?(ancestor_display_strings.size)
+      next unless above_or_below && collapsed.nil?
+
+      collapsed ||= tag.ul do
+        tag.li do
+          concat tag.span(nil, class: 'aSpaceBranch')
+          concat button_tag '...', class: 'show-full-tree-button'
+          concat tag.ul(hierarchy_tree)
         end
       end
-      last_or_first = false
+      above_or_below = false
     end
     # rubocop:enable Metrics/BlockLength
     tag.ul(hierarchy_tree, class: 'aSpace_tree') if hierarchy_tree
