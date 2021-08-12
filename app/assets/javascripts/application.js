@@ -60,38 +60,22 @@ $(document).on('turbolinks:load', function() {
 });
 
 function onChangeSearchFields() {
-    const search_field = document.getElementById("search_field");
-    let options = search_field.options;
-
-    // change placeholder
     changePlaceholderText();
 }
 
 
 $(document).on('turbolinks:load', function() {
     // Receiving the data:
-    let useDefault = localStorage.getItem("useDefault");
-    if(useDefault === null){
-        useDefault = "true";
-        localStorage.setItem("useDefault", "true")
-    }
-    if(localStorage.getItem("searchFieldValue") === null){
-        localStorage.setItem("searchFieldValue", "all_fields")
-    }
-    useDefault = (useDefault === "true");
-
-    // hide fulltext option in search fields
-    hideFulltextOptions();
-    changePlaceholderText();
+    let fullTextSearchSelected = new RegExp('[\?&]search_field=([^&#]*)').exec(window.location.href);
+    fullTextSearchSelected = fullTextSearchSelected && fullTextSearchSelected[1] === 'fulltext_tesim'
 
     let descriptionButton = document.getElementById("fulltext_search_1");
     let fullTextButton = document.getElementById("fulltext_search_2");
 
-    if(useDefault){
-        descriptionButton.click();
-    }
-    else{
+    if (fullTextSearchSelected) {
         fullTextButton.click();
+    } else {
+        descriptionButton.click();
     }
 });
 
@@ -115,41 +99,27 @@ function changePlaceholderText(){
 
 // Toggle the fulltext
 function onSelectDescription() {
-    localStorage.setItem("useDefault", "true");
-    const search_field = document.getElementById("search_field");
-    search_field.style.visibility = 'visible';
-
-    let options = search_field.options;
-    let value = localStorage.getItem("searchFieldValue");
-    for (let i = 0, optionsLength = options.length; i < optionsLength; i++) {
-        if (options[i].value === value) {
-            search_field.selectedIndex = i;
-        }
+    const search_field = $("#search_field");
+    search_field.find("option[value='fulltext_tesim']").remove();
+    search_field.css({visibility: 'visible'});
+    if ( search_field.val() === "fulltext_tesim") {
+        search_field.val('all_fields');
     }
     changePlaceholderText();
     return true;
 };
 
 function onSelectFulltext(){
-    localStorage.setItem("useDefault", "false");
-    const search_field = document.getElementById("search_field");
-    search_field.style.visibility = 'hidden';
-
-    let options = search_field.options;
-    let value = "fulltext_tesim";
-
-    for (let i = 0, optionsLength = options.length; i < optionsLength; i++) {
-        if (options[i].value === value) {
-            search_field.selectedIndex = i;
-        }
+    const search_field = $("#search_field");
+    if (search_field.find("option[value='fulltext_tesim']").length === 0) {
+        search_field.append("<option value=\"fulltext_tesim\">Full Text</option>")
     }
+    search_field.css({visibility: 'hidden'});
+    search_field.val("fulltext_tesim")
     changePlaceholderText();
     return false;
 };
 
-function hideFulltextOptions(){
-    $('#search_field').children('option[value="fulltext_tesim"]').css('display','none');
-}
 // Toggle the fulltext button
 $(document).on('turbolinks:load', function() {
     const fulltextTranscription = $('.item-page-fulltext-wrapper .row')
