@@ -16,7 +16,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
               llama_child_2,
               dog,
               eagle,
-              puppy])
+              puppy,
+              void])
     solr.commit
     visit '/catalog?search_field=all_fields&q='
     click_on 'Amor Llama'
@@ -35,7 +36,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       creator_tesim: ['Anna Elizabeth Dewdney'],
       child_oids_ssim: [112, 113],
       oid_ssi: 111,
-      thumbnail_path_ss: 'https://this/is/an/image'
+      thumbnail_path_ss: 'https://this/is/an/image',
+      callNumber_ssim: "call number"
     }
   end
 
@@ -118,6 +120,13 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     }
   end
 
+  let(:void) do
+    {
+      other_vis_bsi: true,
+      id: '666'
+    }
+  end
+
   it 'has expected css' do
     expect(page).to have_css '.btn-show'
     expect(page).to have_css '.constraints-container'
@@ -181,6 +190,25 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     it 'does not have image of og tag' do
       expect(page).not_to have_css("meta[property='og:image'][content='https://this/is/an/image']", visible: false)
       expect(page).not_to have_css("meta[property='og:image:type'][content='image/jpeg']", visible: false)
+    end
+  end
+
+  context "Metadata block" do
+    it 'is not displayed when empty', :use_other_vis do
+      visit 'catalog/666'
+
+      expect(page).not_to have_content "Description"
+      expect(page).not_to have_content "Collection Information"
+      expect(page).not_to have_content "Subjects, Formats, And Genres"
+      expect(page).not_to have_content "Access And Usage Rights"
+      expect(page).not_to have_content "Identifiers"
+    end
+    it 'is displayed when they have values' do
+      expect(page).to have_content "Description"
+      expect(page).to have_content "Collection Information"
+      expect(page).to have_content "Subjects, Formats, And Genres"
+      expect(page).to have_content "Access And Usage Rights"
+      expect(page).to have_content "Identifiers"
     end
   end
 end

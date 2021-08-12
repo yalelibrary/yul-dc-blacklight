@@ -9,6 +9,15 @@ module Yul
       super
     end
 
+    def metadata_section_empty?(metadata_section = nil)
+      return true unless @metadata_sections.include? metadata_section
+      list_of_fields = to_enum(:fields_to_render).select do |_name, field_config|
+        field_config[:metadata].eql? metadata_section
+      end
+
+      list_of_fields.empty?
+    end
+
     def metadata_fields_to_render(metadata_section = nil)
       return fields_to_render unless @metadata_sections.include? metadata_section
       if block_given?
