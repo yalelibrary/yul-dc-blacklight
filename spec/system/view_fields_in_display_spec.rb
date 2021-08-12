@@ -74,7 +74,9 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       archiveSpaceUri_ssi: "/repositories/11/archival_objects/214638",
       ancestorTitles_tesim: %w[seventh sixth fifth fourth third second first],
       ancestorDisplayStrings_tesim: %w[seventh sixth fifth fourth third second first],
-      ancestor_titles_hierarchy_ssim: ['first > ', 'first > second > ', 'first > second > third > ', 'first > second > third > fourth > ', 'first > second > third > fourth > fifth > ', 'first > second > third > fourth > fifth > sixth > ', 'first > second > third > fourth > fifth > sixth > seventh > ']
+      ancestor_titles_hierarchy_ssim: ['first > ', 'first > second > ', 'first > second > third > ',
+                                       'first > second > third > fourth > ', 'first > second > third > fourth > fifth > ',
+                                       'first > second > third > fourth > fifth > sixth > ', 'first > second > third > fourth > fifth > sixth > seventh > ']
     }
   end
 

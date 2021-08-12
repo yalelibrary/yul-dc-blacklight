@@ -173,7 +173,7 @@ module BlacklightHelper
         ul_class = 'yaleASpaceFolderNested'
       end
       hierarchy_tree = tag.li(class: li_class) do
-        tag.div(class: (!(ancestor_display_strings.size<3 || ancestor_display_strings.size>last-4)? 'show-full-tree-hidden-text' : '')) do
+        tag.div(class: (!(ancestor_display_strings.size < 3 || ancestor_display_strings.size > last - 4) ? 'show-full-tree-hidden-text' : '')) do
           concat tag.span(nil, class: 'aSpaceBranch') if branch_connection
           concat img
           concat current
@@ -182,18 +182,17 @@ module BlacklightHelper
         end
       end
 
-      above_or_below = last>6 && [3, last-3].include?(ancestor_display_strings.size)
-      if above_or_below && collapsed.nil?
+      above_or_below = last > 6 && [3, last - 3].include?(ancestor_display_strings.size)
+      next unless above_or_below && collapsed.nil?
 
-        collapsed ||= tag.ul do
-          tag.li do
-            concat tag.span(nil, class: 'aSpaceBranch')
-            concat button_tag '...', class: 'show-full-tree-button'
-            concat tag.ul(hierarchy_tree)
-          end
+      collapsed ||= tag.ul do
+        tag.li do
+          concat tag.span(nil, class: 'aSpaceBranch')
+          concat button_tag '...', class: 'show-full-tree-button'
+          concat tag.ul(hierarchy_tree)
         end
-        above_or_below = false
       end
+      above_or_below = false
     end
     # rubocop:enable Metrics/BlockLength
     tag.ul(hierarchy_tree, class: 'aSpace_tree') if hierarchy_tree
