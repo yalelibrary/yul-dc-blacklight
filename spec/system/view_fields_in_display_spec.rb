@@ -72,9 +72,9 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       projection_tesim: "this is the projection, using ssim",
       extent_ssim: ["this is the extent, using ssim", "here is another extent"],
       archiveSpaceUri_ssi: "/repositories/11/archival_objects/214638",
-      ancestorTitles_tesim: %w[third second first],
-      ancestorDisplayStrings_tesim: %w[third second first],
-      ancestor_titles_hierarchy_ssim: ['first > ', 'first > second > ', 'first > second > third > ']
+      ancestorTitles_tesim: %w[seventh sixth fifth fourth third second first],
+      ancestorDisplayStrings_tesim: %w[seventh sixth fifth fourth third second first],
+      ancestor_titles_hierarchy_ssim: ['first > ', 'first > second > ', 'first > second > third > ', 'first > second > third > fourth > ', 'first > second > third > fourth > fifth > ', 'first > second > third > fourth > fifth > sixth > ', 'first > second > third > fourth > fifth > sixth > seventh > ']
     }
   end
 
@@ -257,17 +257,17 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     context 'ASpace hierarchy graphical display' do
       it 'has an ellipsis instead of a full tree' do
         expect(page).to have_content "first"
-        expect(page).not_to have_text(type: :visible, text: "second")
+        expect(page).not_to have_text(type: :visible, text: "fourth")
         expect(page).to have_content "..."
-        expect(page).to have_content "third"
+        expect(page).to have_content "seventh"
       end
       it 'shows full tree on button click' do
         page.find('.show-full-tree-button').click
 
         expect(page).to have_content "first"
         expect(page).not_to have_text(type: :visible, text: "...")
-        expect(page).to have_content "second"
-        expect(page).to have_content "third"
+        expect(page).to have_content "fourth"
+        expect(page).to have_content "seventh"
       end
       it 'has links for each item' do
         within '.aSpace_tree' do
@@ -276,13 +276,17 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
           expect(page).to have_link "first"
           expect(page).to have_link "second"
           expect(page).to have_link "third"
+          expect(page).to have_link "fourth"
+          expect(page).to have_link "fifth"
+          expect(page).to have_link "sixth"
+          expect(page).to have_link "seventh"
         end
       end
       it 'searches on link click' do
         within '.aSpace_tree' do
           page.find('.show-full-tree-button').click
 
-          click_on 'second'
+          click_on 'fourth'
         end
         expect(page).to have_content "Diversity Bull Dogs"
       end
@@ -295,7 +299,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         within '.aSpace_tree' do
           page.find('.show-full-tree-button').click
 
-          click_on 'second'
+          click_on 'fourth'
         end
         expect(page).to have_css ".filter-name", text: "Found In", count: 1
         expect(page).to have_css ".filter-name", text: "Creator", count: 1
