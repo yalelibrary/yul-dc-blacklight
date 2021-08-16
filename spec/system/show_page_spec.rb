@@ -82,6 +82,47 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     }
   end
 
+  let(:eagle) do
+    {
+      id: '333',
+      title_tesim: ['Aquila Eccellenza'],
+      format: 'still image',
+      language_ssim: 'it',
+      visibility_ssi: 'Public',
+      genre_ssim: 'Manuscripts',
+      resourceType_ssim: 'Archives or Manuscripts',
+      creator_ssim: ['Andrew Norriss']
+    }
+  end
+
+  let(:puppy) do
+    {
+      id: '444',
+      title_tesim: ['Rhett Lecheire'],
+      format: 'text',
+      language_ssim: 'fr',
+      visibility_ssi: 'Public',
+      genre_ssim: 'Animation',
+      resourceType_ssim: 'Archives or Manuscripts',
+      creator_ssim: ['Paulo Coelho']
+    }
+  end
+
+  let(:train) do
+    {
+      id: '555',
+      title_tesim: ['The Boiler Makers'],
+      format: 'text',
+      language_ssim: 'fr',
+      visibility_ssi: 'Yale Community Only',
+      genre_ssim: 'Animation',
+      resourceType_ssim: 'Archives or Manuscripts',
+      creator_ssim: ['France A. Cordova'],
+      oid_ssi: 555,
+      thumbnail_path_ss: 'https://this/is/an/image'
+    }
+  end
+
   let(:void) do
     {
       other_vis_bsi: true,
