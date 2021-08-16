@@ -167,3 +167,5 @@ class SearchBuilder < Blacklight::SearchBuilder
   end
 end
 # rubocop:enable Metrics/ClassLength
+
+# TODO: add RelatedResourceOnline and ResourceVersionOnline to the list in def self.solr_record_fields

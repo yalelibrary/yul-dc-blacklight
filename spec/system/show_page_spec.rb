@@ -2,6 +2,27 @@
 require 'rails_helper'
 
 RSpec.describe 'Show Page', type: :system, js: true, clean: true do
+  before do
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/111.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/112.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/113.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+
+    solr = Blacklight.default_index.connection
+    solr.add([llama,
+              llama_child_1,
+              llama_child_2,
+              dog,
+              eagle,
+              puppy,
+              void])
+    solr.commit
+    visit '/catalog?search_field=all_fields&q='
+    click_on 'Amor Llama'
+  end
+
   let(:llama) do
     {
       id: '111',
@@ -15,6 +36,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       creator_tesim: ['Anna Elizabeth Dewdney'],
       child_oids_ssim: [112, 113],
       oid_ssi: 111,
+      thumbnail_path_ss: 'https://this/is/an/image',
+      callNumber_ssim: "call number"
       thumbnail_path_ss: 'https://this/is/an/image',
       has_fulltext_ssi: 'Yes'
     }
@@ -75,6 +98,13 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     solr.commit
     visit '/catalog?search_field=all_fields&q='
     click_on 'Amor Llama'
+  end
+
+  let(:void) do
+    {
+      other_vis_bsi: true,
+      id: '666'
+    }
   end
 
   it 'has expected css' do
@@ -157,6 +187,25 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     it 'does not have image of og tag' do
       expect(page).not_to have_css("meta[property='og:image'][content='https://this/is/an/image']", visible: false)
       expect(page).not_to have_css("meta[property='og:image:type'][content='image/jpeg']", visible: false)
+    end
+  end
+
+  context "Metadata block" do
+    it 'is not displayed when empty', :use_other_vis do
+      visit 'catalog/666'
+
+      expect(page).not_to have_content "Description"
+      expect(page).not_to have_content "Collection Information"
+      expect(page).not_to have_content "Subjects, Formats, And Genres"
+      expect(page).not_to have_content "Access And Usage Rights"
+      expect(page).not_to have_content "Identifiers"
+    end
+    it 'is displayed when they have values' do
+      expect(page).to have_content "Description"
+      expect(page).to have_content "Collection Information"
+      expect(page).to have_content "Subjects, Formats, And Genres"
+      expect(page).to have_content "Access And Usage Rights"
+      expect(page).to have_content "Identifiers"
     end
   end
 end
