@@ -9,6 +9,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/113.json')
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/22/22/222.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
 
     solr = Blacklight.default_index.connection
     solr.add([llama,
@@ -17,6 +19,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
               dog,
               eagle,
               puppy,
+              train,
               void])
     solr.commit
     visit '/catalog?search_field=all_fields&q='
@@ -217,14 +220,14 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     it 'is not displayed when empty', :use_other_vis do
       visit 'catalog/666'
 
-      expect(page).not_to have_content "Description"
+      expect(page).not_to have_content "Description", count:2
       expect(page).not_to have_content "Collection Information"
       expect(page).not_to have_content "Subjects, Formats, And Genres"
       expect(page).not_to have_content "Access And Usage Rights"
       expect(page).not_to have_content "Identifiers"
     end
     it 'is displayed when they have values' do
-      expect(page).to have_content "Description"
+      expect(page).to have_content "Description", count:2
       expect(page).to have_content "Collection Information"
       expect(page).to have_content "Subjects, Formats, And Genres"
       expect(page).to have_content "Access And Usage Rights"
