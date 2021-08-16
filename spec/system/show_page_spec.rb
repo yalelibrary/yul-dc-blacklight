@@ -220,14 +220,14 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     it 'is not displayed when empty', :use_other_vis do
       visit 'catalog/666'
 
-      expect(page).not_to have_content "Description", count:2
+      expect(page).not_to have_content "Description", count: 2
       expect(page).not_to have_content "Collection Information"
       expect(page).not_to have_content "Subjects, Formats, And Genres"
       expect(page).not_to have_content "Access And Usage Rights"
       expect(page).not_to have_content "Identifiers"
     end
     it 'is displayed when they have values' do
-      expect(page).to have_content "Description", count:2
+      expect(page).to have_content "Description", count: 2
       expect(page).to have_content "Collection Information"
       expect(page).to have_content "Subjects, Formats, And Genres"
       expect(page).to have_content "Access And Usage Rights"
