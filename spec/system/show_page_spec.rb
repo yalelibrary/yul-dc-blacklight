@@ -37,8 +37,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       child_oids_ssim: [112, 113],
       oid_ssi: 111,
       thumbnail_path_ss: 'https://this/is/an/image',
-      callNumber_ssim: "call number"
-      thumbnail_path_ss: 'https://this/is/an/image',
+      callNumber_ssim: "call number",
       has_fulltext_ssi: 'Yes'
     }
   end
@@ -81,23 +80,6 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       resourceType_ssim: 'Books, Journals & Pamphlets',
       creator_ssim: ['Andy Graves']
     }
-  end
-
-  before do
-    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/111.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
-    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/112.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
-    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/113.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
-    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/222.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
-
-    solr = Blacklight.default_index.connection
-    solr.add([llama, llama_child_1, llama_child_2])
-    solr.commit
-    visit '/catalog?search_field=all_fields&q='
-    click_on 'Amor Llama'
   end
 
   let(:void) do
