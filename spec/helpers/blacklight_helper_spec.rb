@@ -170,7 +170,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
         context 'with missing date facet applied' do
           let(:params) do
             params = Hash.new { |h, k| h[k] = h.dup.clear }
-            params["range"]["year_isim"]["missing"] = true     
+            params["range"]["year_isim"]["missing"] = true
             params
           end
           it 'assigns the correct values to options' do
