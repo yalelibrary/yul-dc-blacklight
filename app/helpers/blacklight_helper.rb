@@ -292,6 +292,16 @@ module BlacklightHelper
     { lang: I18n.locale, prefix: "og: https://ogp.me/ns#" }
   end
 
+  def fulltext_snippet_separation(options = {})
+    # Some snippets come back with new lines embedded without them. We don't want that.
+    # We do however want new lines after a snippet, to show separation
+    # the "tr" below has to use double quotes, otherwise it will remove the character 'n', instead of new line notations
+    snippets_without_new_lines = options[:value].map { |snippet| snippet.tr("\n", ' ') }
+    snippets_separated_by_line_break = snippets_without_new_lines.join('<br>')
+
+    simple_format(snippets_separated_by_line_break)
+  end
+
   private
 
   def language_code_to_english(language_code)

@@ -8,6 +8,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     user.present?
   end
 
+
   describe '#aspace_link' do
     context 'with a valid aspace link' do
       let(:document) { SolrDocument.new(id: 'aspace_link', archiveSpaceUri_ssi: '/repositories/11/archival_objects/21463') }
@@ -24,6 +25,33 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
         expect(aspace_test_link).to match "<a target=\"_blank\" rel=\"noopener\" href=\"https://archives.yale.edu/repositories/11/archival_objects/21463\">View item information in Archives at Yale<img id=\"popup_window\" alt=\"pop up window\" src=\"/assets/YULPopUpWindow-6875f3abe2978f95c415644269f3a1765897b5fd06976b6762dc3b06736b3324.png\" /></a>"
         # rubocop:enable Layout/LineLength
       end
+<<<<<<< HEAD
+=======
+
+  describe '#fulltext_snippet_separation' do
+    it 'separates the snippets by line breaks' do
+      options = { value: ["This is a test.\n\nThis is the OCR <span class='search-highlight'>text</span>", " for 1030368.\n\nSearch for some <span class='search-highlight'>text</span> to see"] }
+
+      expect(helper.fulltext_snippet_separation(options)).to eq(
+        "<p>This is a test.  This is the OCR <span class=\"search-highlight\">text</span><br> for 1030368.  Search for some <span class=\"search-highlight\">text</span> to see</p>"
+      )
+    end
+  end
+
+  describe '#language_code' do
+    context 'with a valid language code' do
+      it 'returns the English name of the language' do
+        expect(helper.language_code('en')).to eq 'English (en)'
+      end
+    end
+
+    context 'with an invalid language code' do
+      it 'returns the the invalid language code' do
+        expect(helper.language_code('zz')).to eq 'zz'
+      end
+    end
+  end
+>>>>>>> a171423f616f5ae4b8f6d806e0b7124e22c46482
 
       describe '#fulltext_snippet_separation' do
         it 'separates the snippets by line breaks' do
