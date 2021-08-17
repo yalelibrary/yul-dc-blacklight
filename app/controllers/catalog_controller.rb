@@ -106,8 +106,6 @@ class CatalogController < ApplicationController
 
     config.add_facet_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', limit: true
     config.add_facet_field 'visibility_ssi', label: 'Access', limit: true
-    config.add_facet_field 'repository_ssi', label: 'Repository', limit: true
-    config.add_facet_field 'collection_title_ssi', label: 'Collection Title', limit: true, if: :repository_facet?
     config.add_facet_field 'format', label: 'Format', limit: true
     config.add_facet_field 'genre_ssim', label: 'Genre', limit: true
     config.add_facet_field 'resourceType_ssim', label: 'Resource Type', limit: true
@@ -194,7 +192,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date', metadata: 'description'
     config.add_show_field 'creationPlace_ssim', label: 'Publication Place', metadata: 'description'
     config.add_show_field 'publisher_ssim', label: 'Publisher', metadata: 'description'
-    config.add_show_field 'abstract_tesim', label: 'Abstract', metadata: 'description'
+    config.add_show_field 'abstract_tesim', label: 'Abstract', metadata: 'description', helper_method: :join_as_paragraphs
     config.add_show_field 'description_tesim', label: 'Description', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', metadata: 'description'

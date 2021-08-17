@@ -58,6 +58,20 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     end
   end
 
+  describe '#join_as_paragraphs' do
+    it 'returns multiple items in paragraphs' do
+      expect(helper.join_as_paragraphs({ value: %w[Test1 Test2 Test3] })).to eq '<p>Test1</p><p>Test2</p><p>Test3</p>'
+    end
+
+    it 'returns one item in paragraph' do
+      expect(helper.join_as_paragraphs({ value: %w[Test1] })).to eq '<p>Test1</p>'
+    end
+
+    it 'returns nil with nil value' do
+      expect(helper.join_as_paragraphs({ value: nil })).to be_nil
+    end
+  end
+
   describe 'link to url with label' do
     context 'with a list of links with labels' do
       let(:document) { SolrDocument.new(id: 'xyz') }
