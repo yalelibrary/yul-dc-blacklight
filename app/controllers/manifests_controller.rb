@@ -5,6 +5,8 @@ class ManifestsController < ApplicationController
   include Blacklight::Catalog
   include CheckAuthorization
 
+  before_action :check_authorization
+
   def show
     remote_path = pairtree_path
     response.set_header('Access-Control-Allow-Origin', '*')
