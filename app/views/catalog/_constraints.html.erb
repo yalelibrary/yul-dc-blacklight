@@ -4,7 +4,7 @@
     <% if params["range"].present? %>
       <% value, label, options = get_date_constraint_params(params, request.url)%>
       <%= render partial: "constraints_element", locals: { value: value, label: label, options: options } %>
-    <%end %>
+    <% end %>
     <% if params["repository_ssi"].present? %>
       <% value, label, options = get_repository_constraint_params(params, request.url)%>
       <%= render partial: "constraints_element", locals: { value: value, label: label, options: options } %>
