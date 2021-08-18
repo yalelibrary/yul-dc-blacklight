@@ -6,14 +6,31 @@ class CatalogController < ApplicationController
   include Blacklight::Marc::Catalog
   include BlacklightRangeLimit::ControllerOverride
   include AccessHelper
+  include CheckAuthorization
+  before_action :check_authorization, only: [:iiif_search, :iiif_suggest]
   before_action :determine_per_page
   helper_method :gallery_view?
+
+  self.search_service_class = YulBlacklight::SearchService
 
   rescue_from Blacklight::Exceptions::RecordNotFound do
     render 'record_not_found', status: 404
   end
 
+  # CatalogController-scope behavior and configuration for BlacklightIiifSearch
+  include BlacklightIiifSearch::Controller
+
   configure_blacklight do |config|
+    # configuration for Blacklight IIIF Content Search
+    config.iiif_search = {
+      full_text_field: 'child_fulltext_wstsim',
+      full_text_q_field: 'child_fulltext_tesim',
+      object_relation_field: 'parent_ssi',
+      supported_params: %w[q page],
+      autocomplete_handler: 'iiif_suggest'
+      # suggester_name: 'iiifSuggester'
+    }
+
     # default advanced config values
     config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
     # config.advanced_search[:qt] ||= 'advanced'
@@ -132,6 +149,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'callNumber_ssim', label: 'Call Number', show: false
     config.add_facet_field 'ancestor_titles_hierarchy_ssim', label: "Found In", show: false
     config.add_facet_field 'subjectGeographic_ssim', label: 'Subject (Geographic)', show: false
+    config.add_facet_field 'has_fulltext_ssi', label: "Full Text Available", limit: true
 
     # This was example code after running rails generate blacklight_range_limit:install
     # config.add_facet_field 'example_query_facet_field', label: 'Publish Date', query: {
@@ -142,11 +160,16 @@ class CatalogController < ApplicationController
     disp_highlight_on_search_params = {
       'hl': true,
       'hl.method': 'original',
+      'hl.requireFieldMatch': true,
       'hl.usePhraseHighlighter': true,
       'hl.preserveMulti': false,
       "hl.simple.pre": "<span class='search-highlight'>",
       "hl.simple.post": "</span>",
       "hl.fragsize": 40
+    }
+
+    disp_req_fieldmatch_on_search_params = {
+      'hl.requireFieldMatch': true
     }
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -155,12 +178,13 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field 'creator_tesim', label: 'Creator', highlight: true
-    config.add_index_field 'date_ssim', label: 'Published / Created', highlight: true
-    config.add_index_field 'callNumber_tesim', label: 'Call Number', highlight: true
-    config.add_index_field 'sourceTitle_tesim', label: 'Collection Title', highlight: true
+    config.add_index_field 'creator_tesim', label: 'Creator', highlight: true, solr_params: disp_req_fieldmatch_on_search_params
+    config.add_index_field 'date_ssim', label: 'Published / Created', highlight: true, solr_params: disp_req_fieldmatch_on_search_params
+    config.add_index_field 'callNumber_tesim', label: 'Call Number', highlight: true, solr_params: disp_req_fieldmatch_on_search_params
+    config.add_index_field 'sourceTitle_tesim', label: 'Collection Title', highlight: true, solr_params: disp_req_fieldmatch_on_search_params
     config.add_index_field 'imageCount_isi', label: 'Image Count'
-    config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true
+    config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true, solr_params: disp_req_fieldmatch_on_search_params
+    config.add_index_field 'fulltext_tesim', label: 'Full Text', highlight: true, solr_params: disp_highlight_on_search_params.merge({ 'hl.snippets': 4 }), helper_method: :fulltext_snippet_separation
     config.add_index_field 'abstract_tesim', label: 'Abstract', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'alternativeTitle_tesim', label: 'Alternative Title', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'description_tesim', label: 'Description', highlight: true, solr_params: disp_highlight_on_search_params
@@ -194,7 +218,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date', metadata: 'description'
     config.add_show_field 'creationPlace_ssim', label: 'Publication Place', metadata: 'description'
     config.add_show_field 'publisher_ssim', label: 'Publisher', metadata: 'description'
-    config.add_show_field 'abstract_tesim', label: 'Abstract', metadata: 'description'
+    config.add_show_field 'abstract_tesim', label: 'Abstract', metadata: 'description', helper_method: :join_as_paragraphs
     config.add_show_field 'description_tesim', label: 'Description', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', metadata: 'description'
@@ -433,12 +457,31 @@ class CatalogController < ApplicationController
       }
     end
 
+    config.add_search_field('fulltext_tsim_advanced', label: 'Full Text') do |field|
+      field.qt = 'search'
+      field.include_in_simple_select = false
+      field.solr_parameters = {
+        qf: 'fulltext_tesim',
+        pf: ''
+      }
+    end
+
     config.add_search_field('orbisBibId_ssi', label: 'Orbis ID') do |field|
       field.qt = 'search'
       field.include_in_advanced_search = false
       field.solr_parameters = {
         qf: 'orbisBibId_ssi',
         pf: ''
+      }
+    end
+
+    config.add_search_field('fulltext_tesim', label: 'Full Text') do |field|
+      field.qt = 'search'
+      field.include_in_advanced_search = false
+      field.solr_parameters = {
+        qf: 'fulltext_tesim',
+        pf: '',
+        'hl.requireFieldMatch': true
       }
     end
 
@@ -513,6 +556,11 @@ class CatalogController < ApplicationController
     )
   end
 
+  # This is for iiif_search
+  def search_for_item
+    search_service.fetch(params[:solr_document_id])
+  end
+
   def repository_facet?
     helpers.facet_field_in_params?('repository_ssi')
   end
@@ -535,5 +583,42 @@ class CatalogController < ApplicationController
     super
     @search_params = session[:search_params]
     render "catalog/show_unauthorized", status: :unauthorized unless client_can_view_metadata?(@document)
+  end
+
+  def iiif_suggest
+    @query = params[:q] || ""
+    @document_id = params[:solr_document_id]
+    #  search children to get the count
+    params = {
+      "rows": 0,
+      "facet.field": "child_fulltext_wstsim",
+      "facet": "on",
+      "q": "parent_ssi:#{@document_id}",
+      "facet.contains": @query,
+      "facet.contains.ignoreCase": "true"
+    }
+    results = search_service.repository.search(params)['facet_counts']['facet_fields']['child_fulltext_wstsim']
+    terms_for_list = []
+    results.each_slice(2) do |term, freq|
+      term_hash = { match: term, url: solr_document_iiif_search_url(@document_id, q: term), count: freq }
+      terms_for_list << term_hash
+    end
+    response = term_list(terms_for_list)
+    response['terms'] = [] unless response['terms']
+    render json: response.to_json
+  end
+
+  ##
+  # Constructs the termList as IIIF::Presentation::Resource
+  # @return [IIIF::OrderedHash]
+  def term_list(terms)
+    ignored = params.keys - ['q', 'solr_document_id', 'action', 'controller']
+    list_id = request.original_url
+    term_list = IIIF::Presentation::Resource.new('@id' => list_id)
+    term_list['@context'] = 'http://iiif.io/api/search/1/context.json'
+    term_list['@type'] = 'search:TermList'
+    term_list['terms'] = terms
+    term_list['ignored'] = ignored
+    term_list.to_ordered_hash(force: true, include_context: false)
   end
 end

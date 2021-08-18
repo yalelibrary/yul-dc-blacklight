@@ -47,6 +47,22 @@ RSpec.configure do |config|
     solr.commit
   end
 
+  # use for tests where we have an record without any fields but want to reach the item page for it without using visibility_ssi
+  config.around(:each, :use_other_vis) do |example|
+    old_method = SearchBuilder.instance_method(:filter_by_visibility)
+    SearchBuilder.define_method(:filter_by_visibility) do |solr_parameters|
+      solr_parameters[:fq] ||= []
+      fq = viewable_metadata_visibilities.map { |visibility| "(visibility_ssi:\"#{visibility}\")" }.join(" OR ")
+      fq += " OR other_vis_bsi:True"
+
+      solr_parameters[:fq] << "(#{fq})"
+    end
+
+    example.run
+
+    SearchBuilder.module_exec { define_method :filter_by_visibility, old_method }
+  end
+
   config.before(:each, style: true) do
     ENV["NO_STYLE"] = nil
   end
