@@ -32,7 +32,6 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       id: '222',
       title_tesim: ['HandsomeDan Bulldog'],
       repository_ssi: 'Yale University Arts Library',
-      collection_title_ssi: ['AAA'],
       format: 'three dimensional object',
       language_ssim: 'en',
       visibility_ssi: 'Public',

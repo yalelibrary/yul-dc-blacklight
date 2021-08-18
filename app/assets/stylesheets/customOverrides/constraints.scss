@@ -103,6 +103,11 @@ DEFAULT MOBILE STYLING
   text-transform: capitalize;
 }
 
+// prevents duplicate constraint from displaying
+.btn-group.applied-filter.constraint.query.filterfilter-repository_ssi {
+  display: none;
+}
+
 .searched-heading {
   font-size: 14px;
   font-family: $mallory_medium, Arial, Helvetica, sans-serif;
