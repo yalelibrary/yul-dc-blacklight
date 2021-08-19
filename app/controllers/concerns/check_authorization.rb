@@ -4,13 +4,8 @@ module CheckAuthorization
   extend ActiveSupport::Concern
   include AccessHelper
 
-  included do
-    before_action :check_authorization
-  end
-
   def check_authorization
     # checking authorization
-    Rails.logger.warn("starting authorization check for #{request.env['HTTP_X_ORIGIN_URI']}")
     @response, @document = search_for_item
     if @document.blank?
       render json: { error: 'not-found' }.to_json, status: 401
@@ -23,6 +18,6 @@ module CheckAuthorization
 
   # Default implementation, to make it easy to override later
   def search_for_item
-    search_service.fetch(params[:id])
+    search_service.fetch(params[:id], { fl: ['visibility_ssi'] })
   end
 end
