@@ -2,9 +2,13 @@
   <div id="appliedParams" class="row constraints-container constraints-container-index">
     <h2 class="sr searched-heading"><%= t('blacklight.search.search_constraints_header') %></h2>
     <% if params["range"].present? %>
-      <% value,label, options = get_date_constraint_params(params, request.url)%>
+      <% value, label, options = get_date_constraint_params(params, request.url)%>
       <%= render partial: "constraints_element", locals: { value: value, label: label, options: options } %>
-    <%end %>
+    <% end %>
+      <% if params["f"] && params["f"]["repository_ssi"].present? %>
+        <% value, label, options = get_repository_constraint_params(params, request.url)%>
+        <%= render partial: "constraints_element", locals: { value: value, label: label, options: options } %>
+      <% end %>
 
     <%= render_constraints(controller.params != params ? params : search_state) %>
     <%= render 'start_over', show_icon: true%>
