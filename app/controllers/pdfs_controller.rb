@@ -6,6 +6,8 @@ class PdfsController < ApplicationController
   include Blacklight::Catalog
   include CheckAuthorization
 
+  before_action :check_authorization
+
   def show
     send_pdf
   end

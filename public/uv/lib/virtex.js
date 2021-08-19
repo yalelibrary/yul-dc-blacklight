@@ -1,7 +1,6 @@
-// virtex v0.3.6 https://github.com/edsilv/virtex#readme
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.virtex = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+// virtex v0.3.18 https://github.com/edsilv/virtex#readme
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.virtex = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 (function (global){
-
 var Virtex;
 (function (Virtex) {
     var StringValue = /** @class */ (function () {
@@ -142,22 +141,22 @@ var Virtex;
     var glTFFileTypeHandler = /** @class */ (function () {
         function glTFFileTypeHandler() {
         }
-        glTFFileTypeHandler.setup = function (viewport, obj) {
+        glTFFileTypeHandler.setup = function (viewport, gltf) {
             return new Promise(function (resolve) {
-                viewport.objectGroup.add(obj.scene);
-                if (obj.animations) {
-                    var animations = obj.animations;
-                    for (var i = 0, l = animations.length; i < l; i++) {
-                        //const animation = animations[i];
-                        //animation.loop = true;
-                        //animation.play();
-                    }
-                }
-                viewport.scene = obj.scene;
-                if (obj.cameras && obj.cameras.length) {
-                    viewport.camera = obj.cameras[0];
-                }
-                resolve(obj);
+                // todo: add animation, gltf camera support e.g.
+                // https://github.com/donmccurdy/three-gltf-viewer/blob/master/src/viewer.js#L183
+                // allow specifying envmap? https://github.com/mrdoob/three.js/blob/dev/examples/webgl_loader_gltf.html#L92
+                var obj = gltf.scene || gltf.scenes[0];
+                viewport.options.data.ambientLightColor = 0xffffff;
+                viewport.options.data.ambientLightIntensity = 0.5;
+                viewport.options.data.directionalLight1Intensity = 1;
+                viewport.options.data.directionalLight2Intensity = 0;
+                // https://github.com/mrdoob/three.js/pull/12766
+                viewport.renderer.gammaOutput = true;
+                viewport.objectGroup.add(obj);
+                viewport.createLights();
+                viewport.createCamera();
+                resolve(gltf);
             });
         };
         return glTFFileTypeHandler;
@@ -225,6 +224,7 @@ var Virtex;
         PLYFileTypeHandler.setup = function (viewport, geometry) {
             return new Promise(function (resolve) {
                 var material = new THREE.PointsMaterial({ vertexColors: THREE.VertexColors });
+                material.sizeAttenuation = false;
                 var mesh = new THREE.Points(geometry, material);
                 viewport.objectGroup.add(mesh);
                 viewport.createCamera();
@@ -297,21 +297,29 @@ var Virtex;
             this._loading = document.createElement('div');
             this._loading.classList.add('loading');
             this._loadingBar = document.createElement('div');
-            this._loadingBar.classList.add('bar');
+            this._loadingBar.classList.add('loadingBar');
+            this._loadingBarProgress = document.createElement('div');
+            this._loadingBarProgress.classList.add('loadingBarProgress');
+            this._spinner = document.createElement('div');
+            this._spinner.classList.add('spinner');
+            this._loadingBar.style.display = 'none';
+            this._loadingBarProgress.style.display = 'none';
+            this._spinner.style.display = 'none';
             this._element.appendChild(this._viewport);
-            this._clock = new THREE.Clock();
             this._raycaster = new THREE.Raycaster();
             this.scene = new THREE.Scene();
             this.scene.background = new THREE.Color(this.options.data.backgroundColor);
             this.objectGroup = new THREE.Object3D();
             this.scene.add(this.objectGroup);
-            this._createLights();
+            this.createLights();
             this.createCamera();
             this._createRenderer();
             this._createDOMHandlers();
             this._animate();
             this._viewport.appendChild(this._loading);
             this._loading.appendChild(this._loadingBar);
+            this._loading.appendChild(this._loadingBarProgress);
+            this._loading.appendChild(this._spinner);
             this._loading.classList.add('beforeload');
             this._loadObject(this.options.data.file);
             // STATS //
@@ -321,6 +329,8 @@ var Virtex;
                 this._stats.domElement.style.top = '0px';
                 this._viewport.appendChild(this._stats.domElement);
             }
+            var canvas = this._element.querySelector('canvas');
+            canvas.oncontextmenu = function () { return false; };
         };
         Viewport.prototype.data = function () {
             return {
@@ -328,7 +338,7 @@ var Virtex;
                 ambientLightColor: 0xd0d0d0,
                 ambientLightIntensity: 1,
                 antialias: true,
-                cameraZ: 4.5,
+                cameraZ: 6,
                 directionalLight1Color: 0xffffff,
                 directionalLight1Intensity: 0.75,
                 directionalLight2Color: 0x002958,
@@ -364,8 +374,14 @@ var Virtex;
                 document.exitPointerLock();
             }
         };
-        Viewport.prototype._createLights = function () {
+        Viewport.prototype.createLights = function () {
+            // remove any existing lights
+            var existingLights = this.scene.getObjectByName('lights');
+            if (existingLights) {
+                this.scene.remove(existingLights);
+            }
             this._lightGroup = new THREE.Object3D();
+            this._lightGroup.name = "lights";
             this.scene.add(this._lightGroup);
             var light1 = new THREE.DirectionalLight(this.options.data.directionalLight1Color, this.options.data.directionalLight1Intensity);
             light1.position.set(1, 1, 1);
@@ -376,11 +392,17 @@ var Virtex;
             var ambientLight = new THREE.AmbientLight(this.options.data.ambientLightColor, this.options.data.ambientLightIntensity);
             this._lightGroup.add(ambientLight);
         };
-        Viewport.prototype.createCamera = function () {
-            this.camera = new THREE.PerspectiveCamera(this._getFov(), this._getAspectRatio(), this.options.data.near, this.options.data.far);
-            var cameraZ = this._getCameraZ();
-            this.camera.position.z = this._targetZoom = cameraZ;
+        Viewport.prototype.createCamera = function (camera) {
+            if (camera) {
+                this.camera = camera;
+            }
+            else {
+                this.camera = new THREE.PerspectiveCamera(this._getFov(), this._getAspectRatio(), this.options.data.near, this.options.data.far);
+                var cameraZ = this._getCameraZ();
+                this.camera.position.z = this._targetZoom = cameraZ;
+            }
             this.scene.add(this.camera);
+            //this.camera.updateProjectionMatrix();
         };
         Viewport.prototype._createRenderer = function () {
             this._viewport.innerHTML = '';
@@ -534,8 +556,17 @@ var Virtex;
                             break;
                     }
                 }, function (e) {
+                    // e.lengthComputable is false when content is gzipped.
+                    // https://stackoverflow.com/questions/11127654/why-is-progressevent-lengthcomputable-false/11848934?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
                     if (e.lengthComputable) {
+                        _this._loadingBarVisible(true);
+                        _this._spinnerVisible(false);
                         _this._loadProgress(e.loaded / e.total);
+                    }
+                    else {
+                        // show a spinner
+                        _this._loadingBarVisible(false);
+                        _this._spinnerVisible(true);
                     }
                 }, function (e) {
                     // error
@@ -543,41 +574,99 @@ var Virtex;
                 });
             });
         };
+        Viewport.prototype._loadingBarVisible = function (visible) {
+            if (visible) {
+                this._loadingBar.style.display = 'block';
+                this._loadingBarProgress.style.display = 'block';
+            }
+            else {
+                this._loadingBar.style.display = 'none';
+                this._loadingBarProgress.style.display = 'none';
+            }
+        };
+        Viewport.prototype._spinnerVisible = function (visible) {
+            if (visible) {
+                this._spinner.style.display = 'block';
+            }
+            else {
+                this._spinner.style.display = 'none';
+            }
+        };
         Viewport.prototype._loaded = function (obj) {
-            //const boundingBox = new THREE.BoxHelper(this.objectGroup, new THREE.Color(0xffffff));
-            //this.scene.add(boundingBox);
+            // const boundingBox = new THREE.BoxHelper(this.objectGroup, new THREE.Color(0xffffff));
+            // this.scene.add(boundingBox);
+            // obj.children[0].transparent = true;
+            // obj.children[0].material.opacity = 0.01;
             this._loading.classList.remove('duringload');
             this._loading.classList.add('afterload');
-            this.fire(Events.LOADED, obj);
+            this.fire(Events.LOADED, [obj]);
         };
+        /*
+        public annotate(): void {
+            
+            const intersects: THREE.Intersection[] = this._getObjectsIntersectingWithMouse();
+            
+            if (intersects.length) {
+
+                const intersection: THREE.Intersection = intersects[0];
+
+                // create a sphere
+                const sphereGeometry: THREE.SphereGeometry = new THREE.SphereGeometry(.1);
+                const sphereMaterial: THREE.MeshLambertMaterial = new THREE.MeshLambertMaterial({
+                    color: 0x0000ff
+                });
+                const sphere: THREE.Mesh = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+                sphere.position.copy(intersection.point);
+
+                // https://stackoverflow.com/questions/26400570/translate-a-vector-from-global-space-to-local-vector-in-three-js
+                this.objectGroup.updateMatrixWorld(false);
+                sphere.applyMatrix(new THREE.Matrix4().getInverse(this.objectGroup.matrixWorld));
+                //this.scene.add(sphere);
+                this.objectGroup.add(sphere);
+
+                this.fire(Events.ANNOTATION_TARGET, intersection);
+            }
+        }
+        */
         Viewport.prototype._getBoundingBox = function () {
             return new THREE.Box3().setFromObject(this.objectGroup);
         };
-        Viewport.prototype._getBoundingWidth = function () {
-            return this._getBoundingBox().getSize().x;
-        };
-        Viewport.prototype._getBoundingHeight = function () {
-            return this._getBoundingBox().getSize().y;
+        // private _getBoundingWidth(): number {
+        //     const target: THREE.Vector3 = new THREE.Vector3();
+        //     this._getBoundingBox().getSize(target);
+        //     return target.x;
+        // }
+        // private _getBoundingHeight(): number {
+        //     const target: THREE.Vector3 = new THREE.Vector3();
+        //     this._getBoundingBox().getSize(target);
+        //     return target.y;
+        // }
+        Viewport.prototype._getBoundingMag = function () {
+            var size = new THREE.Vector3();
+            this._getBoundingBox().getSize(size).length();
+            return size.length();
         };
         // private _getDistanceToObject(): number {
         //     return this.camera.position.distanceTo(this.objectGroup.position);
         // }
         Viewport.prototype._getCameraZ = function () {
-            return this._getBoundingWidth() * this.options.data.cameraZ;
+            return this._getBoundingMag() * this.options.data.cameraZ;
         };
         Viewport.prototype._getFov = function () {
-            var width = this._getBoundingWidth();
-            var height = this._getBoundingHeight(); // todo: use getSize and update definition
-            var dist = this._getCameraZ() - width;
+            // const width: number = this._getBoundingWidth();
+            // const height: number = this._getBoundingHeight(); // todo: use getSize and update definition
+            var dist = this._getCameraZ();
+            var mag = this._getBoundingMag();
             //http://stackoverflow.com/questions/14614252/how-to-fit-camera-to-object
-            var fov = 2 * Math.atan(height / (2 * dist)) * (180 / Math.PI);
+            var fov = 2 * Math.atan(mag / (2 * dist)) * (180 / Math.PI);
             //let fov: number = 2 * Math.atan((width / this._getAspectRatio()) / (2 * dist)) * (180 / Math.PI);
             return fov;
         };
         Viewport.prototype._loadProgress = function (progress) {
             var fullWidth = this._loading.offsetWidth;
             var width = Math.floor(fullWidth * progress);
-            this._loadingBar.style.width = String(width) + "px";
+            this._loadingBarProgress.style.width = String(width) + "px";
         };
         Viewport.prototype._onMouseDown = function (event) {
             event.preventDefault();
@@ -686,7 +775,6 @@ var Virtex;
         //     this.objectGroup.updateMatrix();
         // }
         Viewport.prototype._render = function () {
-            //const delta: number = this._clock.getDelta() * 60;
             // horizontal rotation
             this.rotateY((this._targetRotation.x - this.objectGroup.rotation.y) * 0.1);
             // vertical rotation
@@ -703,37 +791,33 @@ var Virtex;
             }
             var zoomDelta = (this._targetZoom - this.camera.position.z) * 0.1;
             this.camera.position.z += zoomDelta;
-            // cast a ray from the mouse position
-            if (this.objectGroup.children.length) {
-                this._raycaster.setFromCamera(this._mousePosNorm, this.camera);
-                var obj = this._getRaycastObject();
-                if (obj) {
-                    var intersects = this._raycaster.intersectObject(obj);
-                    if (intersects.length > 0) {
-                        this._isMouseOver = true;
-                        // var obj2 = intersects[0].object;
-                        // (<any>obj2).material.emissive.setHex( 0xff0000 );
-                        // console.log("hit");
-                    }
-                    else {
-                        this._isMouseOver = false;
-                    }
-                }
-            }
+            this._isMouseOver = this._getObjectsIntersectingWithMouse().length > 0;
+            // update mouse cursor
             if (this._isMouseOver) {
                 this._element.classList.add('grabbable');
-                if (this._isMouseDown) {
-                    this._element.classList.add('grabbing');
-                }
-                else {
-                    this._element.classList.remove('grabbing');
-                }
             }
             else {
                 this._element.classList.remove('grabbable');
+            }
+            if (this._isMouseDown) {
+                this._element.classList.add('grabbing');
+            }
+            else {
                 this._element.classList.remove('grabbing');
             }
             this.renderer.render(this.scene, this.camera);
+        };
+        Viewport.prototype._getObjectsIntersectingWithMouse = function () {
+            var intersects = [];
+            if (this.objectGroup.children.length) {
+                // cast a ray from the mouse position
+                this._raycaster.setFromCamera(this._mousePosNorm, this.camera);
+                var obj = this._getRaycastObject();
+                if (obj) {
+                    intersects = this._raycaster.intersectObject(obj);
+                }
+            }
+            return intersects;
         };
         Viewport.prototype._getRaycastObject = function () {
             var _this = this;
@@ -760,13 +844,13 @@ var Virtex;
             return this._element.offsetHeight;
         };
         Viewport.prototype._getZoomSpeed = function () {
-            return this._getBoundingWidth() * this.options.data.zoomSpeed;
+            return this._getBoundingMag() * this.options.data.zoomSpeed;
         };
         Viewport.prototype._getMaxZoom = function () {
-            return this._getBoundingWidth() * this.options.data.maxZoom;
+            return this._getBoundingMag() * this.options.data.maxZoom;
         };
         Viewport.prototype._getMinZoom = function () {
-            return this._getBoundingWidth() * this.options.data.minZoom;
+            return this._getBoundingMag() * this.options.data.minZoom;
         };
         Viewport.prototype.zoomIn = function () {
             var targetZoom = this.camera.position.z - this._getZoomSpeed();
@@ -792,7 +876,7 @@ var Virtex;
             this._prevCameraPosition = this.camera.position.clone();
             this._prevCameraRotation = this.camera.rotation.clone();
             this._prevObjectPosition = this.objectGroup.position.clone();
-            this.objectGroup.position.z -= this._getBoundingWidth();
+            this.objectGroup.position.z -= this._getBoundingMag();
         };
         Viewport.prototype.exitVR = function () {
             this._vrDisplay.exitPresent();
@@ -831,7 +915,7 @@ var Virtex;
             for (var _i = 1; _i < arguments.length; _i++) {
                 args[_i - 1] = arguments[_i];
             }
-            var data = [].slice.call(args, 1);
+            var data = [].slice.call(arguments, 1);
             var evtArr = ((this._e || (this._e = {}))[name] || []).slice();
             var i = 0;
             var len = evtArr.length;
@@ -913,6 +997,7 @@ var Virtex;
     var Events = /** @class */ (function () {
         function Events() {
         }
+        //static ANNOTATION_TARGET: string = 'annotationtarget';
         Events.LOADED = 'loaded';
         Events.VR_AVAILABLE = 'vravailable';
         Events.VR_UNAVAILABLE = 'vrunavailable';

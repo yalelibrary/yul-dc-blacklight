@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
+  concern :iiif_search, BlacklightIiifSearch::Routes.new
   concern :oai_provider, BlacklightOaiProvider::Routes.new
 
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
@@ -19,6 +20,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   concern :searchable, Blacklight::Routes::Searchable.new
 
+  get 'annotation/oid/:oid/canvas/:child_oid/fulltext', to: 'annotations#full_text'
+
   get 'mirador/:oid', to: 'mirador#show'
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
@@ -31,6 +34,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
     concerns [:exportable, :marc_viewable]
+    concerns :iiif_search
   end
 
   resources :bookmarks do

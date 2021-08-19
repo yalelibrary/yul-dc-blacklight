@@ -90,6 +90,11 @@ module BlacklightHelper
     safe_join(values, '<br/>'.html_safe)
   end
 
+  def join_as_paragraphs(arg)
+    values = arg[:value]
+    '<p>'.html_safe + safe_join(values, '</p><p>'.html_safe) + '</p>'.html_safe if values
+  end
+
   def archival_display(arg)
     values = arg[:document][arg[:field]].reverse
 
@@ -299,6 +304,16 @@ module BlacklightHelper
 
   def html_tag_attributes
     { lang: I18n.locale, prefix: "og: https://ogp.me/ns#" }
+  end
+
+  def fulltext_snippet_separation(options = {})
+    # Some snippets come back with new lines embedded without them. We don't want that.
+    # We do however want new lines after a snippet, to show separation
+    # the "tr" below has to use double quotes, otherwise it will remove the character 'n', instead of new line notations
+    snippets_without_new_lines = options[:value].map { |snippet| snippet.tr("\n", ' ') }
+    snippets_separated_by_line_break = snippets_without_new_lines.join('<br>')
+
+    simple_format(snippets_separated_by_line_break)
   end
 
   private
