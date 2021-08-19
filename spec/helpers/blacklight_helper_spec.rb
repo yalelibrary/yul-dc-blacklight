@@ -27,6 +27,16 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     end
   end
 
+  describe '#fulltext_snippet_separation' do
+    it 'separates the snippets by line breaks' do
+      options = { value: ["This is a test.\n\nThis is the OCR <span class='search-highlight'>text</span>", " for 1030368.\n\nSearch for some <span class='search-highlight'>text</span> to see"] }
+
+      expect(helper.fulltext_snippet_separation(options)).to eq(
+        "<p>This is a test.  This is the OCR <span class=\"search-highlight\">text</span><br> for 1030368.  Search for some <span class=\"search-highlight\">text</span> to see</p>"
+      )
+    end
+  end
+
   describe '#language_code' do
     context 'with a valid language code' do
       it 'returns the English name of the language' do
@@ -55,6 +65,20 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
       it 'returns a list of English names of the languages, if available' do
         expect(helper.language_codes(args)).to eq 'English (en), English (eng), zz'
       end
+    end
+  end
+
+  describe '#join_as_paragraphs' do
+    it 'returns multiple items in paragraphs' do
+      expect(helper.join_as_paragraphs({ value: %w[Test1 Test2 Test3] })).to eq '<p>Test1</p><p>Test2</p><p>Test3</p>'
+    end
+
+    it 'returns one item in paragraph' do
+      expect(helper.join_as_paragraphs({ value: %w[Test1] })).to eq '<p>Test1</p>'
+    end
+
+    it 'returns nil with nil value' do
+      expect(helper.join_as_paragraphs({ value: nil })).to be_nil
     end
   end
 
