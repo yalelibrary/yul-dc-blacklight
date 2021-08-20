@@ -542,6 +542,19 @@ class CatalogController < ApplicationController
         format: 'format'
       }
     )
+
+    fl_fields = config.index_fields.keys + config.show_fields.keys + config.facet_fields.keys + SearchBuilder.solr_record_fields + config.search_fields.values.map{|field| field.solr_parameters[:qf]}
+    fl_fields = fl_fields.uniq.flatten
+    fields_exclude_fl = ["fulltext_tesim",/^fulltext/,'child_fulltext_wstsim','child_fulltext_tesim']
+
+    fields_exclude_fl.each do |exclude_field|
+      fl_fields.reject! { |field| field.match exclude_field}
+    end
+
+    config.default_solr_params = {
+        fl: fl_fields.join(' ')
+    }
+
   end
 
   # This is for iiif_search
