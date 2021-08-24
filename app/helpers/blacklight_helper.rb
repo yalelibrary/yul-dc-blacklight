@@ -105,7 +105,7 @@ module BlacklightHelper
         values[i] = link_to values[i], request.params.merge('f' =>
             request&.params&.[]("f")&.except("ancestor_titles_hierarchy_ssim"))&.merge(
             "f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i]
-          )
+          )&.except("page")
       end
     end
     if values.count > 5
@@ -143,7 +143,7 @@ module BlacklightHelper
         hierarchy_params << @search_params.merge('f' =>
         @search_params&.[]("f")&.except("ancestor_titles_hierarchy_ssim"))&.merge(
           "f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i]
-        )
+        )&.except("page")
       end
     end
     hierarchy_params
