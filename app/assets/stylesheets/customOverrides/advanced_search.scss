@@ -142,6 +142,12 @@ input.btn:nth-child(2) {
   color: $medium_grey;
 }
 
+span#advanced-fulltext-info {
+  font-family: $mallory_book, $mallory_light, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: $medium_grey;;
+}
+
 //Do we want the advanced search to also change state?
 .btn-secondary:not(:disabled):not(.disabled):hover {
   color: $yale_blue;

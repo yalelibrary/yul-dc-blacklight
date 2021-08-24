@@ -37,7 +37,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       language_ssim: ['en', 'eng', 'zz'],
       description_tesim: ["Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.", "here is something else about it"],
       visibility_ssi: 'Public',
-      abstract_tesim: "this is an abstract",
+      abstract_tesim: ["this is an abstract", "abstract2"],
       alternativeTitle_tesim: ["this is an alternative title", "this is the second alternative title"],
       genre_ssim: ["this is the genre", "this is the second genre"],
       subjectGeographic_ssim: ['this is the geo subject', 'these are the geo subjects'],
@@ -123,7 +123,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(page).to have_text("Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.here is something else about it")
     end
     it 'displays the Abstract in results' do
-      expect(document).to have_content("this is an abstract")
+      expect(page.html).to match("<p>this is an abstract</p><p>abstract2</p>")
     end
     it 'displays the Alternative Title in results' do
       expect(page.html).to match("this is an alternative title<br/>")

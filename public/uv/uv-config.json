@@ -1,6 +1,7 @@
 {
     "options": {
-        "rightPanelEnabled": true
+        "rightPanelEnabled": true,
+        "zoomToSearchResultEnabled": false
     },
     "modules": {
         "footerPanel": {

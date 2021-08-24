@@ -44,6 +44,20 @@ module BlacklightHelper
     url.gsub(/[&?]range%5Byear_.*%5D%5Bbegin%5D=[\d]{1,4}&range%5Byear_.*5D%5Bend%5D=[\d]{1,4}/, '')
   end
 
+  # removes collection when repository is removed
+  def get_repository_constraint_params(params, url_in)
+    label = "Repository"
+    remove_url = url_in.gsub(/f%5Bcollection_title_ssi%5D%5B%5D=[^&]*/, '')
+    remove_url.gsub!(/f%5Brepository_ssi%5D%5B%5D=[^&]*/, '')
+    remove_url.gsub!(/&&/, '')
+    value = params["f"]["repository_ssi"].first
+    options = {
+      remove: remove_url,
+      classes: ["repository_ssi"]
+    }
+    [value, label, options]
+  end
+
   def language_codes(args)
     language_values = args[:document][args[:field]]
     language_values.map do |language_code|
@@ -74,6 +88,11 @@ module BlacklightHelper
   def join_with_br(arg)
     values = arg[:document][arg[:field]]
     safe_join(values, '<br/>'.html_safe)
+  end
+
+  def join_as_paragraphs(arg)
+    values = arg[:value]
+    '<p>'.html_safe + safe_join(values, '</p><p>'.html_safe) + '</p>'.html_safe if values
   end
 
   def archival_display(arg)
@@ -285,6 +304,16 @@ module BlacklightHelper
 
   def html_tag_attributes
     { lang: I18n.locale, prefix: "og: https://ogp.me/ns#" }
+  end
+
+  def fulltext_snippet_separation(options = {})
+    # Some snippets come back with new lines embedded without them. We don't want that.
+    # We do however want new lines after a snippet, to show separation
+    # the "tr" below has to use double quotes, otherwise it will remove the character 'n', instead of new line notations
+    snippets_without_new_lines = options[:value].map { |snippet| snippet.tr("\n", ' ') }
+    snippets_separated_by_line_break = snippets_without_new_lines.join('<br>')
+
+    simple_format(snippets_separated_by_line_break)
   end
 
   private

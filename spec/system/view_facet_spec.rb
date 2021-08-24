@@ -170,4 +170,15 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     click_on 'remove'
     expect(page).to have_no_css('.selected')
   end
+
+  it 'removes the collection facet when the repository facet is removed' do
+    click_on 'Repository'
+    click_on 'Yale University Arts Library'
+    click_on 'Collection Title'
+    click_on 'AAA'
+    within '#facet-repository_ssi' do
+      click_on 'remove'
+    end
+    expect(page).not_to have_content('AAA')
+  end
 end

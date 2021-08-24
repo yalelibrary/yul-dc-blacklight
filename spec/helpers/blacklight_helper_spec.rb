@@ -8,6 +8,16 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     user.present?
   end
 
+  describe '#fulltext_snippet_separation' do
+    it 'separates the snippets by line breaks' do
+      options = { value: ["This is a test.\n\nThis is the OCR <span class='search-highlight'>text</span>", " for 1030368.\n\nSearch for some <span class='search-highlight'>text</span> to see"] }
+
+      expect(helper.fulltext_snippet_separation(options)).to eq(
+        "<p>This is a test.  This is the OCR <span class=\"search-highlight\">text</span><br> for 1030368.  Search for some <span class=\"search-highlight\">text</span> to see</p>"
+      )
+    end
+  end
+
   describe '#aspace_link' do
     context 'with a valid aspace link' do
       let(:document) { SolrDocument.new(id: 'aspace_link', archiveSpaceUri_ssi: '/repositories/11/archival_objects/21463') }
@@ -58,6 +68,20 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     end
   end
 
+  describe '#join_as_paragraphs' do
+    it 'returns multiple items in paragraphs' do
+      expect(helper.join_as_paragraphs({ value: %w[Test1 Test2 Test3] })).to eq '<p>Test1</p><p>Test2</p><p>Test3</p>'
+    end
+
+    it 'returns one item in paragraph' do
+      expect(helper.join_as_paragraphs({ value: %w[Test1] })).to eq '<p>Test1</p>'
+    end
+
+    it 'returns nil with nil value' do
+      expect(helper.join_as_paragraphs({ value: nil })).to be_nil
+    end
+  end
+
   describe 'link to url with label' do
     context 'with a list of links with labels' do
       let(:document) { SolrDocument.new(id: 'xyz') }
@@ -99,6 +123,9 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
           id: 'test',
           visibility_ssi: 'Yale Community Only',
           oid_ssi: ['2055095'],
+          genre_ssim: 'Maps',
+          repository_ssi: 'Yale University Arts Library',
+          collection_title_ssi: ['AAA'],
           thumbnail_path_ss: "http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg"
         )
       end
@@ -116,6 +143,29 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
         sign_in(user) # sign_in so user_signed_in? works in method
 
         expect(helper.render_thumbnail(yale_only_document, {})).to match("<img [^>]* src=\"http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg\" />")
+      end
+
+      describe '#get_repository_constraint_params' do
+        let(:params) do
+          params = Hash.new { |h, k| h[k] = h.dup.clear }
+          params["f"]["repository_ssi"] = Object.new
+          params["f"]["repository_ssi"].define_singleton_method(:values) do
+            @values ||= [Hash.new { |h, k| h[k] = h.dup.clear }]
+            @values
+          end
+          params["f"]["repository_ssi"] = ["Yale University Arts Library"]
+          params
+        end
+        let(:request_url) { "/catalog?f%5Bcollection_title_ssi%5D%5B%5D=AAA&f%5Brepository_ssi%5D%5B%5D=Yale+University+Arts+Library&q=&search_field=all_fields" }
+        let(:clean_url) { "/catalog?q=&search_field=all_fields" }
+
+        it 'filters out collection when repository is clicked' do
+          value, label, options = helper.get_repository_constraint_params(params, request_url)
+          expect(value).to eq "Yale University Arts Library"
+          expect(label).to eq "Repository"
+          expect(options[:classes]).to match ["repository_ssi"]
+          expect(options[:remove]).to match clean_url
+        end
       end
 
       describe '#range_unknown_remove_url' do
@@ -155,7 +205,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
             expect(options[:remove]).to match clean_url
           end
         end
-        context 'with a date range face applied' do
+        context 'with a date range facet applied' do
           let(:params) do
             params = Hash.new { |h, k| h[k] = h.dup.clear }
             params["range"]["year_isim"]["missing"] = false
@@ -166,7 +216,6 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
             end
             params["range"].values[0]["begin"] = 1500
             params["range"].values[0]["end"] = 2000
-
             params
           end
           it 'assigns the correct values to options' do
