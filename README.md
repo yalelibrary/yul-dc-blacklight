@@ -205,6 +205,7 @@ Refer to the steps in the [Camerata repo](https://github.com/yalelibrary/yul-dc-
 3. Run `docker-compose up blacklight`
 
 ## Writing Integration Tests
+
 Integration tests run without styling by default. This allows for more stable tests involving Capybara and loads the pages faster.
 
 If styling is needed for a test to pass, tag the test with `style:true`
