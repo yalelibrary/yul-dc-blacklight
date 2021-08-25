@@ -5,10 +5,10 @@
       <% value, label, options = get_date_constraint_params(params, request.url)%>
       <%= render partial: "constraints_element", locals: { value: value, label: label, options: options } %>
     <% end %>
-      <% if params["f"] && params["f"]["repository_ssi"].present? %>
-        <% value, label, options = get_repository_constraint_params(params, request.url)%>
-        <%= render partial: "constraints_element", locals: { value: value, label: label, options: options } %>
-      <% end %>
+    <% if params["f"] && params["f"]["repository_ssi"].present? %>
+      <% value, label, options = get_repository_constraint_params(params, request.url)%>
+      <%= render partial: "constraints_element", locals: { value: value, label: label, options: options } %>
+    <% end %>
 
     <%= render_constraints(controller.params != params ? params : search_state) %>
     <%= render 'start_over', show_icon: true%>
