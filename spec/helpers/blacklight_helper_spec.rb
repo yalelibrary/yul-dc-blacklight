@@ -123,9 +123,6 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
           id: 'test',
           visibility_ssi: 'Yale Community Only',
           oid_ssi: ['2055095'],
-          genre_ssim: 'Maps',
-          repository_ssi: 'Yale University Arts Library',
-          collection_title_ssi: ['AAA'],
           thumbnail_path_ss: "http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg"
         )
       end
@@ -143,29 +140,6 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
         sign_in(user) # sign_in so user_signed_in? works in method
 
         expect(helper.render_thumbnail(yale_only_document, {})).to match("<img [^>]* src=\"http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg\" />")
-      end
-
-      describe '#get_repository_constraint_params' do
-        let(:params) do
-          params = Hash.new { |h, k| h[k] = h.dup.clear }
-          params["f"]["repository_ssi"] = Object.new
-          params["f"]["repository_ssi"].define_singleton_method(:values) do
-            @values ||= [Hash.new { |h, k| h[k] = h.dup.clear }]
-            @values
-          end
-          params["f"]["repository_ssi"] = ["Yale University Arts Library"]
-          params
-        end
-        let(:request_url) { "/catalog?f%5Bcollection_title_ssi%5D%5B%5D=AAA&f%5Brepository_ssi%5D%5B%5D=Yale+University+Arts+Library&q=&search_field=all_fields" }
-        let(:clean_url) { "/catalog?q=&search_field=all_fields" }
-
-        it 'filters out collection when repository is clicked' do
-          value, label, options = helper.get_repository_constraint_params(params, request_url)
-          expect(value).to eq "Yale University Arts Library"
-          expect(label).to eq "Repository"
-          expect(options[:classes]).to match ["repository_ssi"]
-          expect(options[:remove]).to match clean_url
-        end
       end
 
       describe '#range_unknown_remove_url' do
