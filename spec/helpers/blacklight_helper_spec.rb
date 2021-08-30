@@ -126,6 +126,12 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
           genre_ssim: 'Maps',
           repository_ssi: 'Yale University Arts Library',
           collection_title_ssi: ['AAA'],
+          ancestor_titles_hierarchy_ssim:  [
+            "Beinecke > ",
+            "Beinecke > David > ",
+            "Beinecke > David > Drawing > ",
+            "Beinecke > David > Drawing > June > "
+          ],
           thumbnail_path_ss: "http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg"
         )
       end
@@ -156,7 +162,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
           params["f"]["repository_ssi"] = ["Yale University Arts Library"]
           params
         end
-        let(:request_url) { "/catalog?f%5Bcollection_title_ssi%5D%5B%5D=AAA&f%5Brepository_ssi%5D%5B%5D=Yale+University+Arts+Library&q=&search_field=all_fields" }
+        let(:request_url) { "/catalog?f%5Bancestor_titles_hierarchy_ssim%5D%5B%5D=Beinecke+%3E+David+%3E+Photo+%3E+June+%3E+%5Bcollection_title_ssi%5D%5B%5D=AAA&f%5Brepository_ssi%5D%5B%5D=Yale+University+Arts+Library&q=&search_field=all_fields" }
         let(:clean_url) { "/catalog?q=&search_field=all_fields" }
 
         it 'filters out collection when repository is clicked' do

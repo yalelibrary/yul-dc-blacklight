@@ -49,6 +49,7 @@ module BlacklightHelper
     label = "Repository"
     remove_url = url_in.gsub(/f%5Bcollection_title_ssi%5D%5B%5D=[^&]*/, '')
     remove_url.gsub!(/f%5Brepository_ssi%5D%5B%5D=[^&]*/, '')
+    remove_url.gsub!(/f%5Bancestor_titles_hierarchy_ssim%5D%5B%5D=[^&]*/, '')
     remove_url.gsub!(/&&/, '')
     value = params["f"]["repository_ssi"].first
     options = {
