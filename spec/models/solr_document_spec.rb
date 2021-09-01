@@ -7,6 +7,7 @@ RSpec.describe SolrDocument, type: :model do
     let(:solr_document) { described_class.new(WORK_WITH_PUBLIC_VISIBILITY) }
     it "creates valid schema.org metadata" do
       schema = solr_document.to_schema_json_ld
+
       expect(schema[:@context]).to eq('https://schema.org/')
       expect(schema[:@type]).to eq('CreativeWork')
 
