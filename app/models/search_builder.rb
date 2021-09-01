@@ -25,7 +25,7 @@ class SearchBuilder < Blacklight::SearchBuilder
   # Add the `filter_by_visibility` method to the processor chain
   self.default_processor_chain += [:filter_by_visibility]
   self.default_processor_chain += [:highlight_fields]
-  self.default_processor_chain += [:sort_by_archival]
+  # self.default_processor_chain += [:sort_by_archival]
 
   #
   # This is list of fields for requests to Solr (the fl parameter)
@@ -43,6 +43,7 @@ class SearchBuilder < Blacklight::SearchBuilder
       accessRestrictions_tesim
       alternativeTitle_tesim
       alternativeTitleDisplay_tesim
+      archivalSort_ssi
       archiveSpaceUri_ssi
       ancestorDisplayStrings_tesim
       ancestorTitles_tesim
