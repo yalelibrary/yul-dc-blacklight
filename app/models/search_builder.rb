@@ -23,6 +23,7 @@ class SearchBuilder < Blacklight::SearchBuilder
   # Add the `filter_by_visibility` method to the processor chain
   self.default_processor_chain += [:filter_by_visibility]
   self.default_processor_chain += [:highlight_fields]
+  self.default_processor_chain += [:sort_by_archival]
 
   ##
   # Use the solr fq (filter query) parameter to limit search results to only those items
@@ -47,5 +48,10 @@ class SearchBuilder < Blacklight::SearchBuilder
     solr_parameters['hl.fl'] << "*"
     solr_parameters["hl.simple.pre"] = "<span class='search-highlight'>"
     solr_parameters["hl.simple.post"] = "</span>"
+  end
+
+  def sort_by_archival(solr_parameters)
+    solr_parameters[:sort] ||= []
+    solr_parameters[:sort] = 'score desc, archivalSort_ssi desc'
   end
 end

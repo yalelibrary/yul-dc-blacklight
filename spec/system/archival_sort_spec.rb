@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe 'archival sort', type: :system, clean: true do
+RSpec.describe 'archivalSort', type: :system, clean: true do
   before do
     solr = Blacklight.default_index.connection
     solr.add([dog,
@@ -23,7 +23,7 @@ RSpec.describe 'archival sort', type: :system, clean: true do
       callNumber_tesim: 'Beinecke MS 801',
       imageCount_isi: '23',
       visibility_ssi: 'Public',
-      archivalSort_ssi: '00001.00038',
+      archivalSort_ssi: '08001.00038',
       ancestorTitles_tesim: ['Beinecke Rare Book and Manuscript Library (BRBL)',
                              'Osborn Manuscript Files (OSB MSS FILE)',
                              'Numerical Sequence: 17975-19123',
@@ -128,9 +128,8 @@ RSpec.describe 'archival sort', type: :system, clean: true do
     }
   end
 
-
-  context 'search results sorts based on archivalSort conditions' do
-    it 'displays the first thing first' do
+  context 'search results' do
+    it 'sorts based on archivalSort conditions' do
       expect(page).to have_content('Osborn Manuscript Files (OSB MSS FILE)')
       expect(page).not_to have_content('Script Files')
     end
