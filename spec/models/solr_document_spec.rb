@@ -12,7 +12,6 @@ RSpec.describe SolrDocument, type: :model do
 
       expect(schema[:name]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:title_tesim])
       expect(schema[:alternateName]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:alternativeTitle_tesim])
-      expect(schema[:archivalSort]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:archivalSort_ssi])
       expect(schema[:description]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:description_tesim])
       expect(schema[:url]).to eq("https://collections.library.yale.edu/catalog/#{WORK_WITH_PUBLIC_VISIBILITY[:id]}")
       expect(schema[:genre]).to eq(WORK_WITH_PUBLIC_VISIBILITY[:genre_ssim])
