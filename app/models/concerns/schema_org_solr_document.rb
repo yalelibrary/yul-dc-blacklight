@@ -22,7 +22,6 @@ module SchemaOrgSolrDocument
       "genre": self[:genre_ssim],
       "materialExtent": self[:extent_ssim],
       "temporal": self[:date_ssim],
-      "archivalSort": self[:archivalSort_ssi],
       "thumbnailUrl": self[:visibility_ssi] == "Public" && self["thumbnail_path_ss"] || nil
     }.compact
   end
