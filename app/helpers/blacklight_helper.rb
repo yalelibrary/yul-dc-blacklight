@@ -76,14 +76,63 @@ module BlacklightHelper
     safe_join(values, '<br/>'.html_safe)
   end
 
+  def join_as_paragraphs(arg)
+    values = arg[:value]
+    '<p>'.html_safe + safe_join(values, '</p><p>'.html_safe) + '</p>'.html_safe if values
+  end
+
   def archival_display(arg)
-    values = arg[:document][arg[:field]]
-    values = values.reverse
+    values = arg[:document][arg[:field]].reverse
+
+    hierarchy = arg[:document][:ancestor_titles_hierarchy_ssim]
+
+    if hierarchy.present?
+      (0..values.size - 1).each do |i|
+        values[i] = link_to values[i], request.params.merge('f' =>
+            request&.params&.[]("f")&.except("ancestor_titles_hierarchy_ssim"))&.merge(
+            "f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i]
+          )&.except("page")
+      end
+    end
     if values.count > 5
       values[3] = "<span><button class='show-more-button' aria-label='Show More' title='Show More'>...</button> &gt; </span><span class='show-more-hidden-text'>".html_safe + values[3]
       values[values.count - 2] = "</span></span>".html_safe + values[values.count - 2]
     end
     safe_join(values, ' > ')
+  end
+
+  def archival_display_show(arg)
+    values = arg[:document][arg[:field]].reverse
+
+    hierarchy = arg[:document][:ancestor_titles_hierarchy_ssim]
+    hierarchy_params = (hierarchy_builder arg[:document]).reverse
+
+    if hierarchy.present?
+      (0..values.size - 1).each do |i|
+        values[i] = link_to values[i], url_for(hierarchy_params.pop&.merge(action: 'index')) if hierarchy_params.present?
+      end
+    end
+    if values.count > 5
+      values[3] = "<span><button class='show-more-button' aria-label='Show More' title='Show More'>...</button> &gt; </span><span class='show-more-hidden-text'>".html_safe + values[3]
+      values[values.count - 2] = "</span></span>".html_safe + values[values.count - 2]
+    end
+    safe_join(values, ' > ')
+  end
+
+  def hierarchy_builder(document)
+    hierarchy = document[:ancestor_titles_hierarchy_ssim]
+    hierarchy_params = []
+    @search_params ||= Hash.new { |h, k| h[k] = h.dup.clear }
+
+    if hierarchy.present? && @search_params
+      (0..hierarchy.size - 1).each do |i|
+        hierarchy_params << @search_params.merge('f' =>
+        @search_params&.[]("f")&.except("ancestor_titles_hierarchy_ssim"))&.merge(
+          "f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i]
+        )&.except("page")
+      end
+    end
+    hierarchy_params
   end
 
   def aspace_link(arg)
@@ -97,6 +146,7 @@ module BlacklightHelper
 
   def aspace_tree_display(arg)
     ancestor_display_strings = arg[:document][arg[:field]]
+    hierarchy_params = hierarchy_builder arg[:document]
     last = ancestor_display_strings.size
 
     img_home = image_tag("archival_icons/yaleASpaceHome.png", { class: 'ASpace_Home ASpace_Icon', alt: 'Main level' })
@@ -104,12 +154,13 @@ module BlacklightHelper
     img_folder = image_tag("archival_icons/yaleASpaceFolder.png", { class: 'ASpace_Folder ASpace_Icon', alt: 'Document or last level' })
 
     branch_connection = true
-    last_or_first = true
+    above_or_below = false
     collapsed = nil
     hierarchy_tree = nil
     # rubocop:disable Metrics/BlockLength
     (1..last).each do
       current = ancestor_display_strings.shift
+      current = link_to current, url_for(hierarchy_params.pop&.merge(action: 'index')) if hierarchy_params.present?
 
       case ancestor_display_strings.size
       when 0
@@ -117,7 +168,6 @@ module BlacklightHelper
         li_class = 'yaleASpaceHome'
         ul_class = 'yaleASpaceHomeNested'
         branch_connection = false
-        last_or_first = true
       when 1
         img = img_stack
         li_class = 'yaleASpaceStack'
@@ -128,24 +178,26 @@ module BlacklightHelper
         ul_class = 'yaleASpaceFolderNested'
       end
       hierarchy_tree = tag.li(class: li_class) do
-        tag.div(class: (!last_or_first ? 'show-full-tree-hidden-text' : '')) do
+        tag.div(class: (!(ancestor_display_strings.size < 3 || ancestor_display_strings.size > last - 4) ? 'show-full-tree-hidden-text' : '')) do
           concat tag.span(nil, class: 'aSpaceBranch') if branch_connection
           concat img
           concat current
-          concat collapsed if collapsed && last_or_first
+          concat collapsed if collapsed && above_or_below
           concat tag.ul(hierarchy_tree, class: ul_class) if hierarchy_tree
         end
       end
-      if last_or_first
-        collapsed = tag.ul do
-          tag.li do
-            concat tag.span(nil, class: 'aSpaceBranch')
-            concat button_tag '...', class: 'show-full-tree-button'
-            concat tag.ul(hierarchy_tree)
-          end
+
+      above_or_below = last > 6 && [3, last - 3].include?(ancestor_display_strings.size)
+      next unless above_or_below && collapsed.nil?
+
+      collapsed ||= tag.ul do
+        tag.li do
+          concat tag.span(nil, class: 'aSpaceBranch')
+          concat button_tag '...', class: 'show-full-tree-button'
+          concat tag.ul(hierarchy_tree)
         end
       end
-      last_or_first = false
+      above_or_below = false
     end
     # rubocop:enable Metrics/BlockLength
     tag.ul(hierarchy_tree, class: 'aSpace_tree') if hierarchy_tree
@@ -162,6 +214,31 @@ module BlacklightHelper
 
   def build_escaped_facet(field, value)
     "/catalog?f" + ERB::Util.url_encode("[#{field}][]") + "=#{value}"
+  end
+
+  def finding_aid_link(arg)
+    # rubocop:disable Naming/VariableName
+    findingAidUri = arg[:document][arg[:field]]
+    links = []
+    findingAidUri.each do |link|
+      popup_window = image_tag("YULPopUpWindow.png", { id: 'popup_window', alt: 'pop up window' })
+      links << link_to(safe_join(['View full finding aid for ', arg[:document]['collection_title_ssi']]) + popup_window, link, target: '_blank', rel: 'noopener')
+    end
+    links.first
+  end
+
+  def link_to_url_with_label(arg)
+    links = arg[:value].map do |value|
+      link_part = value.split('|')
+      next unless link_part.count <= 2
+      urls = link_part.select { |s| s.start_with? 'http' }
+      labels = link_part.select { |s| !s.start_with? 'http' }
+      if urls.count == 1
+        label = labels[0] || urls[0]
+        link_to(label, urls[0])
+      end
+    end.compact
+    safe_join(links, '<br/>'.html_safe)
   end
 
   def link_to_url(arg)
@@ -213,6 +290,16 @@ module BlacklightHelper
 
   def html_tag_attributes
     { lang: I18n.locale, prefix: "og: https://ogp.me/ns#" }
+  end
+
+  def fulltext_snippet_separation(options = {})
+    # Some snippets come back with new lines embedded without them. We don't want that.
+    # We do however want new lines after a snippet, to show separation
+    # the "tr" below has to use double quotes, otherwise it will remove the character 'n', instead of new line notations
+    snippets_without_new_lines = options[:value].map { |snippet| snippet.tr("\n", ' ') }
+    snippets_separated_by_line_break = snippets_without_new_lines.join('<br>')
+
+    simple_format(snippets_separated_by_line_break)
   end
 
   private

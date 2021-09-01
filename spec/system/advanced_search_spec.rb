@@ -24,8 +24,12 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       expect(page).to have_content('Date')
       expect(page).to have_content('Subject')
       expect(page).to have_content('Genre/format')
+      expect(page).to have_content('Full Text')
       expect(page).to have_content('OID [Parent/primary]')
       expect(page).to have_content('OID [Child/images]')
+      expect(page).to have_content('Search full text that occurs in a work. Not all works contain searchable full text.')
+      expect(page).to have_selector('input#all_fields_advanced[placeholder="Search words about the items"]')
+      expect(page).to have_selector('input#fulltext_tsim_advanced[placeholder="Search words within the items"]')
     end
   end
 
@@ -37,6 +41,16 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       within '#documents' do
         expect(page).not_to have_content('Record 1')
         expect(page).to have_content('Record 2')
+      end
+    end
+
+    it 'all fields search does not look in full text field' do
+      fill_in 'all_fields_advanced', with: 'fulltext'
+      click_on 'SEARCH'
+
+      within '#documents' do
+        expect(page).not_to have_content('Record 1')
+        expect(page).not_to have_content('Record 2')
       end
     end
 
@@ -82,6 +96,26 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       within '#documents' do
         expect(page).not_to have_content('Record 1')
         expect(page).to     have_content('Record 2')
+      end
+    end
+
+    it 'gets correct search results from full text field for both documents' do
+      fill_in 'fulltext_tsim_advanced', with: 'fulltext'
+      click_on 'SEARCH'
+
+      within '#documents' do
+        expect(page).to have_content('Record 1')
+        expect(page).to have_content('Record 2')
+      end
+    end
+
+    it 'gets correct search results from full text field for one documents' do
+      fill_in 'fulltext_tsim_advanced', with: 'four'
+      click_on 'SEARCH'
+
+      within '#documents' do
+        expect(page).not_to have_content('Record 1')
+        expect(page).to have_content('Record 2')
       end
     end
 
@@ -278,7 +312,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
   describe 'styling' do
     it 'renders field input style' do
       expect(page).to have_css '.advanced_search_fields'
-      expect(page).to have_css '.advanced-search-field', count: 9
+      expect(page).to have_css '.advanced-search-field', count: 10
     end
 
     it 'renders help section style' do

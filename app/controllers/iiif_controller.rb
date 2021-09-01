@@ -5,6 +5,8 @@ class IiifController < ApplicationController
   include Blacklight::Catalog
   include CheckAuthorization
 
+  before_action :check_authorization
+
   def show
     render plain: 'success', status: 200
   end

@@ -37,7 +37,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       language_ssim: ['en', 'eng', 'zz'],
       description_tesim: ["Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.", "here is something else about it"],
       visibility_ssi: 'Public',
-      abstract_tesim: "this is an abstract",
+      abstract_tesim: ["this is an abstract", "abstract2"],
       alternativeTitle_tesim: ["this is an alternative title", "this is the second alternative title"],
       genre_ssim: ["this is the genre", "this is the second genre"],
       subjectGeographic_ssim: ['this is the geo subject', 'these are the geo subjects'],
@@ -63,6 +63,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       containerGrouping_tesim: 'this is the container information',
       orbisBibId_ssi: '1234567',
       findingAid_ssim: 'this is the finding aid',
+      collection_title_ssi: 'this is the collection title',
       edition_ssim: 'this is the edition',
       material_tesim: "this is the material, using ssim",
       scale_tesim: "this is the scale, using ssim",
@@ -71,7 +72,11 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       projection_tesim: "this is the projection, using ssim",
       extent_ssim: ["this is the extent, using ssim", "here is another extent"],
       archiveSpaceUri_ssi: "/repositories/11/archival_objects/214638",
-      ancestorDisplayStrings_tesim: %w[third second first]
+      ancestorTitles_tesim: %w[seventh sixth fifth fourth third second first],
+      ancestorDisplayStrings_tesim: %w[seventh sixth fifth fourth third second first],
+      ancestor_titles_hierarchy_ssim: ['first > ', 'first > second > ', 'first > second > third > ',
+                                       'first > second > third > fourth > ', 'first > second > third > fourth > fifth > ',
+                                       'first > second > third > fourth > fifth > sixth > ', 'first > second > third > fourth > fifth > sixth > seventh > ']
     }
   end
 
@@ -118,7 +123,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(page).to have_text("Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.here is something else about it")
     end
     it 'displays the Abstract in results' do
-      expect(document).to have_content("this is an abstract")
+      expect(page.html).to match("<p>this is an abstract</p><p>abstract2</p>")
     end
     it 'displays the Alternative Title in results' do
       expect(page.html).to match("this is an alternative title<br/>")
@@ -198,9 +203,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the Orbis Bib ID in results' do
       expect(document).to have_content("1234567")
     end
-    it 'displays the Finding Aid in results' do
-      expect(document).to have_content("this is the finding aid")
-    end
     it 'displays the Edition in results' do
       expect(document).to have_content("this is the edition")
     end
@@ -232,9 +234,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'contains a link for the Creator field to the facet' do
       expect(page).to have_link('Frederick, Eric & Maggie', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Frederick%2C++Eric+%26+Maggie')
     end
-    it 'contains a link on the Finding Aid to the Finding Aid catalog record' do
-      expect(page).to have_link('this is the finding aid', href: 'this is the finding aid')
-    end
     it 'contains a link on the more info to the more info record' do
       expect(page).to have_link('http://0.0.0.0:3000/catalog/111', href: 'http://0.0.0.0:3000/catalog/111')
     end
@@ -257,24 +256,93 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(aspace_link).to have_content "View item information in Archives at Yale"
       expect(aspace_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
     end
-    context 'ASpace hierarchy display' do
+    context 'ASpace hierarchy graphical display' do
       it 'has an ellipsis instead of a full tree' do
         expect(page).to have_content "first"
-        expect(page).not_to have_text(type: :visible, text: "second")
+        expect(page).not_to have_text(type: :visible, text: "fourth")
         expect(page).to have_content "..."
-        expect(page).to have_content "third"
+        expect(page).to have_content "seventh"
       end
       it 'shows full tree on button click' do
         page.find('.show-full-tree-button').click
 
         expect(page).to have_content "first"
         expect(page).not_to have_text(type: :visible, text: "...")
-        expect(page).to have_content "second"
-        expect(page).to have_content "third"
+        expect(page).to have_content "fourth"
+        expect(page).to have_content "seventh"
+      end
+      it 'has links for each item' do
+        within '.aSpace_tree' do
+          page.find('.show-full-tree-button').click
+
+          expect(page).to have_link "first"
+          expect(page).to have_link "second"
+          expect(page).to have_link "third"
+          expect(page).to have_link "fourth"
+          expect(page).to have_link "fifth"
+          expect(page).to have_link "sixth"
+          expect(page).to have_link "seventh"
+        end
+      end
+      it 'searches on link click' do
+        within '.aSpace_tree' do
+          page.find('.show-full-tree-button').click
+
+          click_on 'fourth'
+        end
+        expect(page).to have_content "Diversity Bull Dogs"
+      end
+      it 'preserves search constraints', style: true do
+        visit '/catalog?q='
+        click_on 'Creator'
+        click_on 'Frederick'
+
+        visit '/catalog/111'
+        within '.aSpace_tree' do
+          page.find('.show-full-tree-button').click
+
+          click_on 'fourth'
+        end
+        expect(page).to have_css ".filter-name", text: "Found In", count: 1
+        expect(page).to have_css ".filter-name", text: "Creator", count: 1
       end
     end
-  end
+    context 'ASpace hierarchy breadcrumb' do
+      it 'has links for each item' do
+        within '.archival-context' do
+          expect(page).to have_link "first"
+          expect(page).to have_link "second"
+          expect(page).to have_link "third"
+        end
+      end
+      it 'searches on link click' do
+        within '.archival-context' do
+          click_on 'second'
+        end
+        expect(page).to have_content "Diversity Bull Dogs"
+      end
+      it 'preserves search constraints', style: true do
+        visit '/catalog?q='
+        click_on 'Creator'
+        click_on 'Frederick'
 
+        visit '/catalog/111'
+        within '.archival-context' do
+          click_on 'second'
+        end
+        expect(page).to have_css ".filter-name", text: "Found In", count: 1
+        expect(page).to have_css ".filter-name", text: "Creator", count: 1
+      end
+    end
+
+    it 'contains a link to Finding Aid' do
+      finding_aid_link = page.find("a[href = 'this is the finding aid']")
+
+      expect(finding_aid_link).to be_truthy
+      expect(finding_aid_link).to have_content "View full finding aid for this is the collection title"
+      expect(finding_aid_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
+    end
+  end
   it 'has expected css' do
     expect(page).to have_css '.card'
     expect(page).to have_css '.iiif-logo'

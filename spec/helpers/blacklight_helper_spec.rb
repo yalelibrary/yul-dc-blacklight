@@ -8,6 +8,16 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     user.present?
   end
 
+  describe '#fulltext_snippet_separation' do
+    it 'separates the snippets by line breaks' do
+      options = { value: ["This is a test.\n\nThis is the OCR <span class='search-highlight'>text</span>", " for 1030368.\n\nSearch for some <span class='search-highlight'>text</span> to see"] }
+
+      expect(helper.fulltext_snippet_separation(options)).to eq(
+        "<p>This is a test.  This is the OCR <span class=\"search-highlight\">text</span><br> for 1030368.  Search for some <span class=\"search-highlight\">text</span> to see</p>"
+      )
+    end
+  end
+
   describe '#aspace_link' do
     context 'with a valid aspace link' do
       let(:document) { SolrDocument.new(id: 'aspace_link', archiveSpaceUri_ssi: '/repositories/11/archival_objects/21463') }
@@ -54,6 +64,39 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
 
       it 'returns a list of English names of the languages, if available' do
         expect(helper.language_codes(args)).to eq 'English (en), English (eng), zz'
+      end
+    end
+  end
+
+  describe '#join_as_paragraphs' do
+    it 'returns multiple items in paragraphs' do
+      expect(helper.join_as_paragraphs({ value: %w[Test1 Test2 Test3] })).to eq '<p>Test1</p><p>Test2</p><p>Test3</p>'
+    end
+
+    it 'returns one item in paragraph' do
+      expect(helper.join_as_paragraphs({ value: %w[Test1] })).to eq '<p>Test1</p>'
+    end
+
+    it 'returns nil with nil value' do
+      expect(helper.join_as_paragraphs({ value: nil })).to be_nil
+    end
+  end
+
+  describe 'link to url with label' do
+    context 'with a list of links with labels' do
+      let(:document) { SolrDocument.new(id: 'xyz') }
+      let(:args) do
+        {
+          document: document,
+          field: 'relatedResourceOnline_ssim',
+          value: ['View Related Resource|http://library.somewhere.com/special_page', 'http://library.somewhereelse.com/special_page', 'View Related Resource| not']
+        }
+      end
+
+      it 'returns a list of links with labels' do
+        # rubocop:disable Layout/LineLength
+        expect(helper.link_to_url_with_label(args)).to eq "<a href=\"http://library.somewhere.com/special_page\">View Related Resource</a><br/><a href=\"http://library.somewhereelse.com/special_page\">http://library.somewhereelse.com/special_page</a>"
+        # rubocop:enable Layout/LineLength
       end
     end
   end
@@ -136,7 +179,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
             expect(options[:remove]).to match clean_url
           end
         end
-        context 'with a date range face applied' do
+        context 'with a date range facet applied' do
           let(:params) do
             params = Hash.new { |h, k| h[k] = h.dup.clear }
             params["range"]["year_isim"]["missing"] = false
@@ -147,7 +190,6 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
             end
             params["range"].values[0]["begin"] = 1500
             params["range"].values[0]["end"] = 2000
-
             params
           end
           it 'assigns the correct values to options' do
