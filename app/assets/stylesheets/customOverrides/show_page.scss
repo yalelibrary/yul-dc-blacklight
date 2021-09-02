@@ -211,15 +211,12 @@ DEFAULT MOBILE STYLING
 
 h2.yale-restricted-work-text {
   font-size: 1.5em;
+  margin-left: 8%;
+  width: 90%;
 }
 
 .tools-text-format{
   margin-left: -3%;
-}
-
-h2.yale-restricted-work-text{
-  margin-left: 8%;
-  width: 90%;
 }
 
 p.yale-restricted-work-text{
@@ -234,23 +231,26 @@ p.yale-restricted-work-text{
   margin-right: 6px;
 }
 
+.aSpace_tree {
+  margin-top: 14%;
+  margin-inline-start: -46%;
+  height: fit-content;
+  width: 500px;
+}
+
 .aSpace_tree ul{
   list-style: none;
   margin-top: 10px;
 }
 
 .aSpace_tree li {
-  right: 1%;
+  right: 9%;
   top: -4%;
-  padding-bottom: 0%;
+  padding-bottom: 0;
   list-style: none;
   position: relative;
   margin: 0;
-}
-
-.yaleASpaceHome li{
-  width: 620px;
-  //height: 620px;
+  left: -3%;
 }
 
 .yaleASpaceHomeNested li {
@@ -270,6 +270,7 @@ p.yale-restricted-work-text{
   list-style: none;
 }
 
+//Control the appearance of hierarchy icons and space
 .aSpaceBranch {
   position: absolute;
   height: 15px;
@@ -285,6 +286,31 @@ p.yale-restricted-work-text{
   position: absolute;
   height: 15px;
   width: 15px;
+}
+.showpage_no_label_tag,
+.blacklight-archivespaceuri_ssi {
+  font-family: Mallory-Bold;
+  background-color: $lighter_grey;
+  margin: 0;
+  padding-left: 2%;
+  width: 100%;
+  padding-top: 2%!important;
+  #popup_window{
+    padding-left: 1.5%;
+    padding-bottom: 0.75%
+  }
+}
+
+.showpage_no_label_tag,
+.blacklight-findingaid_ssim {
+  padding-bottom: 3%;
+  padding-left: 2%;
+  width: 100%;
+  padding-top: 0;
+  #popup_window{
+    padding-left: 1.5%;
+    padding-bottom: 0.75%
+  }
 }
 
 @media screen and (min-width: $medium_device) {
@@ -353,6 +379,13 @@ p.yale-restricted-work-text{
     margin-left: 8%;
   }
 
+  .aSpace_tree {
+    width: fit-content;
+  }
+
+  .aSpace_tree li {
+    left: 0;
+  }
 }
 
 
@@ -431,16 +464,31 @@ p.yale-restricted-work-text{
     width: 120%;
   }
 
+  .aSpace_tree {
+    margin-top: 11%;
+    margin-inline-start: -46%;
+  }
+
+  .aSpace_Data_Block{
+    width: 95%;
+  }
+
+  .showpage_no_label_tag, .blacklight-archivespaceuri_ssi{
+    margin: 0;
+    padding-left: 2%;
+  }
+
+  .showpage_no_label_tag,.blacklight-findingaid_ssim{
+    padding-bottom: 2%;
+    padding-left: 2%;
+  }
+
   .showpage_no_label_tag{
-    font-family: Mallory-Bold;
-    width: 100%;
-    padding-top: 2%;
-    position: -webkit-sticky;
     #popup_window{
-      padding-left: 0.5%;
-      padding-bottom: 0.5%;
+      padding-left: 1.5%;
+      padding-bottom: 0.75%;
     }
- }
+  }
 }
 
 
@@ -495,5 +543,9 @@ p.yale-restricted-work-text{
   }
   .show-tools.list-group{
     margin-left: -0.5%;
+  }
+
+  .aSpace_tree {
+    margin-top: 6%;
   }
 }
