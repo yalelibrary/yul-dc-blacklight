@@ -233,7 +233,6 @@ class CatalogController < ApplicationController
     # ancestorDisplayStrings must be first
     # archiveSpaceUri must be last
     #
-    config.add_show_field 'ancestorDisplayStrings_tesim', label: ' ', no_label: true, metadata: 'collection_information', helper_method: :aspace_tree_display
     config.add_show_field 'callNumber_ssim', label: 'Call Number', metadata: 'collection_information', link_to_facet: true
     config.add_show_field 'sourceTitle_tesim', label: 'Collection Title', metadata: 'collection_information'
     config.add_show_field 'sourceCreator_tesim', label: 'Collection/Other Creator', metadata: 'collection_information'
@@ -242,10 +241,11 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceNote_tesim', label: 'Collection Note', metadata: 'collection_information'
     config.add_show_field 'sourceEdition_tesim', label: 'Collection Edition', metadata: 'collection_information'
     config.add_show_field 'containerGrouping_tesim', label: 'Container / Volume Information', metadata: 'collection_information'
-    config.add_show_field 'archiveSpaceUri_ssi', label: ' ', no_label: true, metadata: 'collection_information', helper_method: :aspace_link
-    config.add_show_field 'findingAid_ssim', label: ' ', no_label: true, metadata: 'collection_information', helper_method: :finding_aid_link
     config.add_show_field 'relatedResourceOnline_ssim', label: 'Related Resource Online', metadata: 'collection_information', helper_method: :link_to_url_with_label
     config.add_show_field 'resourceVersionOnline_ssim', label: 'Resource Version Online', metadata: 'collection_information', helper_method: :link_to_url_with_label
+    config.add_show_field 'ancestorDisplayStrings_tesim', label: 'Item Within Collection Hierarchy', metadata: 'collection_information', helper_method: :aspace_tree_display
+    config.add_show_field 'archiveSpaceUri_ssi', label: ' ', no_label: true, metadata: 'collection_information', helper_method: :aspace_link
+    config.add_show_field 'findingAid_ssim', label: ' ', no_label: true, metadata: 'collection_information', helper_method: :finding_aid_link
 
     # Subjects, Formats, and Genres Group
     config.add_show_field 'format', label: 'Format', metadata: 'subjects,_formats,_and_genres', link_to_facet: true
