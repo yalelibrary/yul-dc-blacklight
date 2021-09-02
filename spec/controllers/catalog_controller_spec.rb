@@ -11,9 +11,22 @@ RSpec.describe CatalogController, type: :controller do
     describe 'search fields' do
       let(:search_fields) { controller.blacklight_config.search_fields.keys }
 
+      # All of the "config.add_search_field" values in the catalog controller
       let(:expected_search_fields) do
-        ["all_fields", "all_fields_advanced", "creator_tesim", "child_oids_ssim", "date_fields", "genre_fields",
-         "identifierShelfMark_tesim", "oid_ssi", "orbisBibId_ssi", "subjectName_ssim", "subject_fields", "title_tesim"]
+        ["all_fields",
+         "all_fields_advanced",
+         "callNumber_tesim",
+         "child_oids_ssim",
+         "creator_tesim",
+         "date_fields",
+         "genre_fields",
+         "oid_ssi",
+         "fulltext_tesim",
+         "orbisBibId_ssi",
+         "fulltext_tsim_advanced",
+         "subjectName_tesim",
+         "subject_fields",
+         "title_tesim"]
       end
 
       it { expect(search_fields).to contain_exactly(*expected_search_fields) }

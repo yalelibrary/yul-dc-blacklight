@@ -24,8 +24,12 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       expect(page).to have_content('Date')
       expect(page).to have_content('Subject')
       expect(page).to have_content('Genre/format')
+      expect(page).to have_content('Full Text')
       expect(page).to have_content('OID [Parent/primary]')
       expect(page).to have_content('OID [Child/images]')
+      expect(page).to have_content('Search full text that occurs in a work. Not all works contain searchable full text.')
+      expect(page).to have_selector('input#all_fields_advanced[placeholder="Search words about the items"]')
+      expect(page).to have_selector('input#fulltext_tsim_advanced[placeholder="Search words within the items"]')
     end
   end
 
@@ -40,6 +44,16 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
     end
 
+    it 'all fields search does not look in full text field' do
+      fill_in 'all_fields_advanced', with: 'fulltext'
+      click_on 'SEARCH'
+
+      within '#documents' do
+        expect(page).not_to have_content('Record 1')
+        expect(page).not_to have_content('Record 2')
+      end
+    end
+
     it 'gets correct search results from creator_tesim' do
       fill_in 'creator_tesim', with: 'Me and Frederick'
       click_on 'SEARCH'
@@ -49,17 +63,8 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
     end
 
-    it 'gets correct search results from identifierShelfMark_tesim' do
-      fill_in 'identifierShelfMark_tesim', with: '["Landberg MSS 596"]'
-      click_on 'SEARCH'
-      within '#documents' do
-        expect(page).to     have_content('Record 1')
-        expect(page).not_to have_content('Record 2')
-      end
-    end
-
-    it 'gets correct search results from date_fields with date_ssim' do
-      fill_in 'date_fields', with: '[17--?]'
+    it 'gets correct search results from callNumber_tesim' do
+      fill_in 'callNumber_tesim', with: '["Landberg MSS 596"]'
       click_on 'SEARCH'
       within '#documents' do
         expect(page).to     have_content('Record 1')
@@ -68,7 +73,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
     end
 
     it 'gets correct search results from date_fields with dateStructured_ssim' do
-      fill_in 'date_fields', with: '1700-00-00T00:00:00Z'
+      fill_in 'date_fields', with: '1459'
       click_on 'SEARCH'
       within '#documents' do
         expect(page).to     have_content('Record 1')
@@ -94,6 +99,26 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
     end
 
+    it 'gets correct search results from full text field for both documents' do
+      fill_in 'fulltext_tsim_advanced', with: 'fulltext'
+      click_on 'SEARCH'
+
+      within '#documents' do
+        expect(page).to have_content('Record 1')
+        expect(page).to have_content('Record 2')
+      end
+    end
+
+    it 'gets correct search results from full text field for one documents' do
+      fill_in 'fulltext_tsim_advanced', with: 'four'
+      click_on 'SEARCH'
+
+      within '#documents' do
+        expect(page).not_to have_content('Record 1')
+        expect(page).to have_content('Record 2')
+      end
+    end
+
     it 'gets correct search results from title_tesim' do
       fill_in 'title_tesim', with: '["Record 1"]'
       click_on 'SEARCH'
@@ -112,7 +137,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
     end
 
-    it 'gets correct search results from child oid_ssim' do
+    it 'gets correct search results from child oid_ssi' do
       fill_in 'child_oids_ssim', with: '11'
       click_on 'SEARCH'
       within '#documents' do
@@ -136,7 +161,39 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
     end
 
-    it 'maintains search results when re-querying' do
+    it 'maintains search results after changing sort dropdown' do
+      fill_in 'oid_ssi', with: '11607445'
+      click_on 'SEARCH'
+      within '#documents' do
+        expect(page).to     have_content('Record 1')
+        expect(page).not_to have_content('Record 2')
+      end
+      within '#sort-dropdown' do
+        click_on 'Year (ascending)'
+      end
+      within '#documents' do
+        expect(page).to     have_content('Record 1')
+        expect(page).not_to have_content('Record 2')
+      end
+    end
+
+    it 'maintains search results after clicking per page' do
+      fill_in 'oid_ssi', with: '11607445'
+      click_on 'SEARCH'
+      within '#documents' do
+        expect(page).to     have_content('Record 1')
+        expect(page).not_to have_content('Record 2')
+      end
+      within '#per_page-dropdown' do
+        click_on '50'
+      end
+      within '#documents' do
+        expect(page).to     have_content('Record 1')
+        expect(page).not_to have_content('Record 2')
+      end
+    end
+
+    it 'clears search results when re-querying' do
       fill_in 'oid_ssi', with: '11607445'
       click_on 'SEARCH'
       within '#documents' do
@@ -146,49 +203,34 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       click_on 'Advanced Search'
       click_on 'SEARCH'
       within '#documents' do
-        expect(page).to     have_content('Record 1')
-        expect(page).not_to have_content('Record 2')
+        expect(page).to have_content('Record 1')
+        expect(page).to have_content('Record 2')
+      end
+    end
+  end
+
+  describe 'sanitizing quotes' do
+    context 'when quotes are consecutive' do
+      it 'removes one quote' do
+        fill_in 'all_fields_advanced', with: '""nested""'
+        click_on 'SEARCH'
+
+        searched_text = find 'span .filter-value'
+        expect(searched_text).to have_content '"nested"'
+      end
+    end
+    context 'when a quote is not closed' do
+      it 'removes all quotes' do
+        fill_in 'all_fields_advanced', with: '"not" "closed'
+        click_on 'SEARCH'
+
+        searched_text = find 'span .filter-value'
+        expect(searched_text).to have_content 'not closed'
       end
     end
   end
 
   context 'sorting' do
-    xit 'can sort by date from oldest to newest' do
-      within '#sort' do
-        find("option[value='dateStructured_ssim desc, title_si asc']").click
-      end
-
-      click_on 'SEARCH'
-      within '#documents' do
-        expect(page).to have_content("1.\nRecord 1")
-        expect(page).to have_content("2.\nRecord 2")
-      end
-    end
-
-    xit 'can sort by date from newest to oldest' do
-      within '#sort' do
-        find("option[value='dateStructured_ssim asc, title_si asc']").click
-      end
-
-      click_on 'SEARCH'
-      within '#documents' do
-        expect(page).to have_content("1.\nRecord 2")
-        expect(page).to have_content("2.\nRecord 1")
-      end
-    end
-
-    xit 'can sort by year' do
-      within '#sort' do
-        find("option[value='pub_date_si desc, title_si asc']").click
-      end
-
-      click_on 'SEARCH'
-      within '#documents' do
-        expect(page).to have_content("1.\nRecord 1")
-        expect(page).to have_content("2.\nRecord 2")
-      end
-    end
-
     it 'can sort by title' do
       within '#sort' do
         find("option[value='title_ssim asc, oid_ssi desc']").click
@@ -207,6 +249,29 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
 
       click_on 'SEARCH'
+      within '#documents' do
+        expect(page).to have_content("1.\nRecord 1")
+        expect(page).to have_content("2.\nRecord 2")
+      end
+    end
+
+    it 'can sort by date asc' do
+      within '#sort' do
+        find("option[value='year_isim asc, id desc']").click
+      end
+      click_on 'SEARCH'
+      within '#documents' do
+        expect(page).to have_content("1.\nRecord 1")
+        expect(page).to have_content("2.\nRecord 2")
+      end
+    end
+
+    it 'can sort by date desc' do
+      within '#sort' do
+        find("option[value='year_isim desc, id desc']").click
+      end
+      click_on 'SEARCH'
+      # same order as asc because Record 1's dates strattle Record 2's
       within '#documents' do
         expect(page).to have_content("1.\nRecord 1")
         expect(page).to have_content("2.\nRecord 2")
@@ -247,7 +312,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
   describe 'styling' do
     it 'renders field input style' do
       expect(page).to have_css '.advanced_search_fields'
-      expect(page).to have_css '.advanced-search-field', count: 9
+      expect(page).to have_css '.advanced-search-field', count: 10
     end
 
     it 'renders help section style' do
@@ -256,8 +321,8 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
 
     it 'renders footer buttons' do
       expect(page).to have_button 'SEARCH'
-      expect(page).to have_link 'CLEAR', href: "/advanced"
-      expect(page).to have_link 'BASIC SEARCH', href: "/"
+      expect(page).to have_button 'CLEAR'
+      expect(page).to have_button 'BASIC SEARCH'
     end
 
     it 'renders header border' do
@@ -280,7 +345,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
     it 'renders the button on the homepage' do
       visit search_catalog_path
       expect(page).to have_css '.advanced_search'
-      expect(page).to have_link('Advanced Search', href: '/advanced')
+      expect(page).to have_button('Advanced Search')
       find('.advanced_search').hover
     end
   end

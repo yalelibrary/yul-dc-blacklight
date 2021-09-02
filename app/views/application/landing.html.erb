@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%= content_tag :html, class: 'no-js', **html_tag_attributes do %>
   <head>
+    <%= render partial: 'shared/ga_header' %>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="float: left; width=device-float: left; width, initial-scale=1, shrink-to-fit=no">
@@ -17,6 +18,8 @@
     <%= content_for(:head) %>
   </head>
   <body class="<%= render_body_class %>">
+  <%= render partial: 'shared/ga_body' %>
+  <div id="banner" class="alert alert-warning hidden"></div>
   <nav id="skip-link" role="navigation" aria-label="<%= t('blacklight.skip_links.label') %>">
     <%= link_to t('blacklight.skip_links.search_field'), '#search_field', class: 'element-invisible element-focusable rounded-bottom py-2 px-3', data: { turbolinks: 'false' } %>
     <%= link_to t('blacklight.skip_links.main_content'), '#main-container', class: 'element-invisible element-focusable rounded-bottom py-2 px-3', data: { turbolinks: 'false' } %>
@@ -27,112 +30,78 @@
   <%= render partial: 'shared/flash_msg', layout: 'shared/flash_messages' %>
 
   <div id='hero'>
-
-    <div id="hero-carousel" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#heroCarouselIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#heroCarouselIndicators" data-slide-to="1"></li>
-        <li data-target="#heroCarouselIndicators" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <%= image_tag("landing/hero-gutenberg.png", class: "d-block w-100", alt: " Prologue the Gutenberg Bible") %>
-          <div class="carousel-caption d-none d-md-block">
-            <p>From Gutenberg Bible, 1454</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <%= image_tag("landing/hero-camp-spingarn.png", class: "d-block w-100", alt: 'Conference attendees at "Camp Spingarn," Amenia, N.Y., August 24-26, 1916') %>
-          <div class="carousel-caption d-none d-md-block">
-            <p>Conference at "Camp Spingarn," Amenia, N.Y.” </p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <%= image_tag("landing/hero-chart.png", class: "d-block w-100", alt: 'Portolan Chart of the Mediterranean Sea') %>
-          <div class="carousel-caption d-none d-md-block">
-            <p>Portolan Chart of the Mediterranean Sea</p>
-          </div>
-        </div>
+    <div class="intro">
+      <%= image_tag("", class: "d-block w-100", id: "hero-image", alt: "") %>
+      <div class="image-overlay"></div>
+      <div class="hero-caption d-md-block">
+        <p id="hero-image-caption"></p>
       </div>
-      <a class="carousel-control-prev" href="#heroCarouselIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#heroCarouselIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
     </div>
 
     <div id='hero-search' class="container d-flex h-100">
-    <div class="row justify-content-left align-self-center">
-
-      <h1>Digital <br/> Collections</h1>
-
-      <%= form_tag search_action_url, method: :get, class: 'search-query-form', role: 'search', 'aria-label' => t('blacklight.search.form.submit') do %>
-        <div class="input-group">
+      <div class="hero-info">
+        <h1>Digital Collections</h1>
+        <%= form_tag search_action_url, method: :get, class: 'search-query-form', role: 'search', 'aria-label' => t('blacklight.search.form.submit') do %>
+          <div class="input-group">
             <%= hidden_field_tag :search_field, search_fields.first.last %>
-
-          <label for="q" class="sr-only"><%= t('blacklight.search.form.search.label') %></label>
-          <%= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}", id: "q", aria: { label: 'search' }  %>
-
-          <span class="input-group-append">
-            <button type="submit" class="btn btn-primary search-btn" id="search">
-              <span class="submit-search-text"><%= t('blacklight.search.form.submit') %></span>
-              <%= blacklight_icon :search, aria_hidden: true %>
-            </button>
-          </span>
-        </div>
-      <% end %>
-
-      <p class="d-none d-lg-block">Yale University Libraries Digital Collections provides access to millions of digitized works and images from our collections.
-        At launch, you can browse hundreds of thousands of works from the Beinecke Rare Book & Manuscript Library’s collections of
-        literary archives, early manuscripts, and rare books.
-      </p>
+            <label for="q" class="sr-only"><%= t('blacklight.search.form.search.label') %></label>
+            <%= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}", id: "q", aria: { label: 'search' } %>
+            <span class="input-group-append">
+              <button type="submit" class="btn btn-primary search-btn" id="search">
+                <span class="submit-search-text"><%= t('blacklight.search.form.submit') %></span>
+                <%= blacklight_icon :search, aria_hidden: true %>
+              </button>
+            </span>
+          </div>
+        <% end %>
+        <p class="d-none d-xl-block" style="font-size: medium;">
+          Yale University Library’s digital collections provide access to millions of digitized works and images. As of January 2021, Beinecke Library digital collections have been moved to a new platform for improved viewing. Over time, material from other Yale Library digital collections will be added to the platform. Click on an image or use the search box to explore Beinecke digital collections. Begin your <a href="https://web.library.yale.edu/digital-collections" class="link-white">search for all other Yale Library digital collections here</a>.
+        </p>
+      </div>
     </div>
   </div>
 
-  </div>
-
   <main id="main-container" class="<%= container_classes %>" role="main" aria-label="<%= t('blacklight.main.aria.main_container') %>">
-
-
     <div id='highlights'>
-      <h2>HIGHLIGHTS</h2>
+      <h2>Highlights</h2>
       <ul class='clearfix'>
-        <li><%= link_to( search_catalog_path(search_field: 'identifierShelfMark_tesim', q: '"JWJ MSS 26"'), id: 'hughes-papers', class: 'btn float-left') do %>
+        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"JWJ MSS 26"'), id: 'hughes-papers', class: 'btn float-left') do %>
           <div class='highlight-link'>Langston Hughes Papers</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'identifierShelfMark_tesim', q: '"YCAL MSS 46"'), id: 'carson-papers', class: 'btn float-left') do %>
+        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"YCAL MSS 46"'), id: 'carson-papers', class: 'btn float-left') do %>
           <div class='highlight-link'>Rachel Carson Papers</div>
           <% end %>
         </li>
-        <li><%= link_to( solr_document_path('2052913'), id: 'divina-commedia', class: 'btn float-left') do %>
+        <li><%= link_to( solr_document_path('2052913'), id: 'divina-commedia', class: 'btn') do %>
           <div class='highlight-link'>Divina Commedia</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'identifierShelfMark_tesim', q: '"JWJ MSS 1050"'), id: 'van-vechten-papers', class: 'btn float-left') do %>
+        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"JWJ MSS 1050"'), id: 'van-vechten-papers', class: 'btn float-left') do %>
           <div class='highlight-link'>Carl Van Vechten Papers</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'identifierShelfMark_tesim', q: '"WA MSS S-2368"'), id: 'stenzel-collection', class: 'btn float-left') do %>
+        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"WA MSS S-2368"'), id: 'stenzel-collection', class: 'btn float-left') do %>
           <div class='highlight-link'>Stenzel Collection of <br/> Western American Art</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'identifierShelfMark_tesim', q: '"WA Photos 466"'), id: 'lewis-photographs', class: 'btn float-left') do %>
+        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"WA Photos 466"'), id: 'lewis-photographs', class: 'btn float-left') do %>
           <div class='highlight-link'>Jon Lewis Photographs</div>
           <% end %>
         </li>
-        <li><%= link_to( solr_document_path('2003775'), id: 'declaration-of-independence', class: 'btn float-left') do %>
+        <li><%= link_to( solr_document_path('2003775'), id: 'declaration-of-independence', class: 'btn') do %>
           <div class='highlight-link'>Declaration of Independence</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'all_fields', q: ''), id: 'coming-soon', class: 'btn float-left ') do %>
-          <div class='highlight-link'>Coming soon...</div>
-          <% end %>
+        <li>
+          <div id="coming-soon" class="btn cursor-default">
+            <div class='highlight-link'>More coming soon...</div>
+          </div>
         </li>
       </ul>
+      <div id="content-statement">
+       <h2>Statement on Potentially Harmful Content</h2>
+        <p>Yale University Library’s collections contain historical and contemporary materials documenting human expression and lived experience. Content may include images or language that library users may find harmful, offensive, or inappropriate. Some of these words or images are now recognized as offensive and unacceptable; some may have been viewed as unacceptable when they were created. Yale University Library staff are engaged in addressing or contextualizing this content and language; for more information, see the <a href="https://guides.library.yale.edu/statementharmfulcontent">Statement on Potentially Harmful Content</a>.</p>      </div>
     </div>
   </main>
 
@@ -141,5 +110,39 @@
   </body>
 <% end %>
 
+<script>
+  $(document).ready(function() {
+    const images = [
+      {
+        alt: 'Conference attendees at "Camp Spingarn," Amenia, N.Y., August 24-26, 1916',
+        caption: 'Conference at "Camp Spingarn," Amenia, N.Y.',
+        src: '<%= asset_path("landing/hero-images/camp-spingarn.jpg") %>',
+      },
+      {
+        alt: 'Prologue the Gutenberg Bible',
+        caption: 'From Gutenberg Bible, 1454',
+        src: '<%= asset_path("landing/hero-images/gutenberg-bible.jpg") %>'
+      },
+      {
+        alt: 'Portolan Chart of the Mediterranean Sea',
+        caption: 'Portolan Chart of the Mediterranean Sea',
+        src: '<%= asset_path("landing/hero-images/portolan-chart.jpg") %>',
+      },
+    ]
 
+    const lastIndex = window.localStorage.getItem('lastIndex') || 0
 
+    let index = Math.floor(Math.random() * images.length)
+    while (index == lastIndex) {
+      index = Math.floor(Math.random() * images.length)
+    }
+    window.localStorage.setItem('lastIndex', JSON.stringify(index))
+
+    const alt = images[index].alt;
+    const caption = images[index].caption;
+    const src = images[index].src;
+
+    $('#hero-image').attr({ 'src': src, 'alt': alt });
+    $('#hero-image-caption').text(caption);
+  })
+</script>

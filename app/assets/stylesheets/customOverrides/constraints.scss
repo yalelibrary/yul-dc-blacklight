@@ -64,12 +64,32 @@ DEFAULT MOBILE STYLING
   filter: invert(54%) sepia(54%) saturate(3969%) hue-rotate(192deg) brightness(103%) contrast(108%);
 }
 
+.catalog_startOverLink:active a {
+  color: white;
+}
+
+.constraints-container {
+  .catalog_startOverLink {
+    color: $yale_blue
+  }
+  .catalog_startOverLink:focus, .catalog_startOverLink:hover, .catalog_startOverLink:active {
+    background: $yale_blue;
+    color: white;
+    a {
+      color: white;
+    }
+    .start-over-image {
+      filter: invert(100%);
+    }
+  }
+}
+
 .filter-name{
   margin-top: 1px;
   position: relative;
   top: 3px;
   color: $medium_grey;
-  font-family: $mallory_medium;
+  font-family: $mallory_medium, Arial, Helvetica, sans-serif;
   font-size: 12px;
   text-transform: capitalize;
 }
@@ -78,7 +98,7 @@ DEFAULT MOBILE STYLING
   position: relative;
   top: 3px;
   color: $medium_grey;
-  font-family: $mallory_medium;
+  font-family: $mallory_medium, Arial, Helvetica, sans-serif;
   font-size: 12px;
   padding-right: 5px;
   text-transform: capitalize;
@@ -86,7 +106,7 @@ DEFAULT MOBILE STYLING
 
 .searched-heading {
   font-size: 14px;
-  font-family: $mallory_medium;
+  font-family: $mallory_medium, Arial, Helvetica, sans-serif;
   text-align: left;
   color: $medium_grey;
   text-transform: uppercase;

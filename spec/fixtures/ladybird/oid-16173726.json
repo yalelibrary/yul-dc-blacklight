@@ -2,7 +2,7 @@
   "source": "ladybird",
   "recordType": "oid",
   "uri": "/ladybird/oid/16173726",
-  "identifierShelfMark": "Covers 5626 +1880",
+  "callNumber": "Covers 5626 +1880",
   "creator": [
     "Li, Mengquan (Cartographer), cartographer.",
     "李蒙泉 (Cartographer), cartographer."
@@ -40,7 +40,6 @@
     "Pictorial maps."
   ],
   "format": "cartographic",
-  "partOf": "Beinecke Library",
   "rights": [
     "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
   ],

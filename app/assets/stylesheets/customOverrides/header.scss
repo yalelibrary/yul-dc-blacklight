@@ -6,6 +6,11 @@ DEFAULT MOBILE STYLING
   background-color: $yale_blue !important;
 }
 
+.login-button {
+  border: none;
+  background-color: $yale_blue !important;
+}
+
 .dropdown-menu {
   color: $white !important;
   text-transform: capitalize !important;
@@ -44,13 +49,13 @@ DEFAULT MOBILE STYLING
   transform: rotate(180deg);
   -ms-transform: rotate(180deg); /* for IE */
   -webkit-transform: rotate(180deg); /* for browsers supporting webkit (such as chrome, firefox, safari etc.). */
-  font-size: 14px;
+  font-size: 12px;
   display: inline-block;
-  padding-top: 3px;
 }
 
 .nav-link-title {
   margin-bottom: 0px;
+  cursor: pointer;
 }
 
 .navbar-brand {
@@ -204,4 +209,11 @@ DEFAULT MOBILE STYLING
     flex-direction: initial;
     padding-bottom: 0.15rem;
   }
+}
+
+#banner {
+  margin-bottom: 0;
+  display: none;
+  border: none;
+  border-radius: 0;
 }

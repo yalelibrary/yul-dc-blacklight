@@ -15,6 +15,15 @@ RSpec/DescribeClass:
     - spec/system/search_result_pagination_spec.rb
     - spec/system/date_slider_spec.rb
 
+RSpec/InstanceVariable:
+  Exclude:
+    - spec/helpers/blacklight_helper_spec.rb
+
 RSpec/RepeatedExample:
   Exclude:
     - spec/system/access_restrictions_spec.rb
+
+RSpec/AnyInstance:
+  Exclude:
+    - spec/system/access_restrictions_spec.rb
+    - spec/system/view_images_in_search_spec.rb

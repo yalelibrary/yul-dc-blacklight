@@ -12,7 +12,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
   let(:search_fields) { CatalogController.blacklight_config.search_fields.keys }
   let(:expected_search_fields) do
     ["all_fields", "all_fields_advanced", "creator_tesim", "child_oids_ssim", "date_fields", "genre_fields",
-     "identifierShelfMark_tesim", "oid_ssi", "orbisBibId_ssi", "subjectName_ssim", "subject_fields", "title_tesim"]
+     "callNumber_tesim", "oid_ssi", "fulltext_tsim_advanced", "orbisBibId_ssi", "fulltext_tesim", "subjectName_tesim", "subject_fields", "title_tesim"]
   end
 
   let(:dog) do
@@ -20,9 +20,10 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       id: '111',
       title_tesim: 'Handsome Dan is a bull dog.',
       creator_tesim: 'Eric & Frederick',
-      subjectName_ssim: "this is the subject name",
+      fulltext_tesim: ['fulltext text one'],
+      subjectName_tesim: "this is the subject name",
       sourceTitle_tesim: "this is the source title",
-      identifierShelfMark_tesim: 'WA MSS 987',
+      callNumber_tesim: 'WAMSS987',
       orbisBibId_ssi: '1238901',
       visibility_ssi: 'Public'
     }
@@ -33,9 +34,11 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       id: '212',
       title_tesim: 'Handsome Dan is not a cat.',
       creator_tesim: 'Frederick & Eric',
+      fulltext_tesim: ['fulltext text two'],
       sourceTitle_tesim: "this is the source title",
       orbisBibId_ssi: '1234567',
-      identifierShelfMark_tesim: 'Yale MS 123',
+      subjectName_tesim: "WAMSS987",
+      callNumber_tesim: 'Yale MS 123',
       visibility_ssi: 'Public'
     }
   end
@@ -45,34 +48,52 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       expect(search_fields).to contain_exactly(*expected_search_fields)
     end
 
-    it 'contains displays the correct record when searching by call number' do
-      visit '/catalog?search_field=identifierShelfMark_tesim&q=WA+MSS+987'
+    it 'displays the correct record when searching by call number' do
+      visit '/catalog?search_field=callNumber_tesim&q=WAMSS987'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).not_to have_content 'Handsome Dan is not a cat.'
     end
 
-    it 'contains displays the correct record when searching by BibId' do
+    it 'displays the correct record when searching by BibId' do
       visit '/catalog?search_field=orbisBibId_ssi&q=1238901'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).not_to have_content 'Handsome Dan is not a cat.'
     end
 
-    it 'contains displays the correct record when searching by creator' do
+    it 'displays the correct record when searching by creator' do
       visit '/catalog?search_field=creator&q=Eric'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).to have_content 'Handsome Dan is not a cat.'
     end
 
-    it 'contains displays the correct record when searching by subject' do
-      visit '/catalog?search_field=subjectName_ssim&q=this+is+the+subject+name'
+    it 'displays the correct record when searching by subject' do
+      visit '/catalog?search_field=subjectName_tesim&q=this+is+the+subject+name'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).not_to have_content 'Handsome Dan is not a cat.'
     end
 
-    it 'contains displays the correct record when searching by title' do
+    it 'displays the correct record when searching by a subject name that appears in call number' do
+      visit '/catalog?search_field=subjectName_tesim&q=WAMSS987'
+      expect(page).not_to have_content 'Handsome Dan is a bull dog.'
+      expect(page).to have_content 'Handsome Dan is not a cat.'
+    end
+
+    it 'displays the correct record when searching by title' do
       visit '/catalog?search_field=title_tesim&q=handsome'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).to have_content 'Handsome Dan is not a cat.'
+    end
+
+    it 'displays the correct records when searching by fulltext' do
+      visit '/catalog?search_field=fulltext_tesim&q=fulltext'
+      expect(page).to have_content 'Handsome Dan is a bull dog.'
+      expect(page).to have_content 'Handsome Dan is not a cat.'
+    end
+
+    it 'displays the correct record when searching by fulltext' do
+      visit '/catalog?search_field=fulltext_tesim&q=one'
+      expect(page).to have_content 'Handsome Dan is a bull dog.'
+      expect(page).not_to have_content 'Handsome Dan is not a cat.'
     end
   end
 end

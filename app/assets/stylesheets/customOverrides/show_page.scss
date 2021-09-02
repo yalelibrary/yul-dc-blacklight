@@ -21,10 +21,14 @@ DEFAULT MOBILE STYLING
   margin-top: -3px;
 }
 
+.record-not-found {
+  font-family: $yale_new_roman;
+}
+
 .show-tools .list-group {
   flex-direction: row;
   flex-wrap: wrap;
-  padding-left: 15px;
+  margin-left: -1%;
 }
 
 .list-group-item {
@@ -45,7 +49,6 @@ DEFAULT MOBILE STYLING
 
 .show-buttons {
   justify-self: center;
-  margin-right: 137px;
 }
 
 .show-links {
@@ -86,7 +89,7 @@ DEFAULT MOBILE STYLING
 }
 
 .show-tools a.nav-link, .show-tools span.nav-link {
-  padding: 0.5rem 0.25rem;
+  padding: 0.5rem 0.25rem 1rem;
 }
 
 #citationLink:after, #manifestLink:after, #miradorLink:after, #pdfLink:after {
@@ -101,18 +104,25 @@ DEFAULT MOBILE STYLING
 //Title on Single Items and Search Result pages
 //Replace Yale Roman with Yale Display when its available.
 .show-header {
-  font-family: $yale_new_roman, $mallory_medium, Arial, Helvetica, sans-serif !important;
+  font-family: $yale_new_roman, 'Times New Roman', Times, serif !important;
   font-size: 1.5rem;
   color: $yale_blue;
-  padding-left: 8%;
   padding-bottom: 1.5%;
   padding-top: 1.5%;
+  width: 82%;
+  left: 8%;
+  position: relative;
 }
 
 .universal-viewer-iframe {
   width: 90%;
   padding-left: 8%;
   align-content: center;
+}
+
+#uv-pages,
+#parent-oid {
+  display: none;
 }
 
 // metadata-block is shared class on search results page
@@ -151,9 +161,9 @@ DEFAULT MOBILE STYLING
   padding-bottom: 25px;
 }
 
-.single-item-show.metadata-block h4 {
+.single-item-show.metadata-block h2 {
   color: $yale_blue;
-  font-family: $yale_new_roman, $mallory_medium, Arial, Helvetica, sans-serif !important;
+  font-family: $yale_new_roman, 'Times New Roman', Times, serif !important;
   font-size: 28px;
 }
 
@@ -175,6 +185,23 @@ DEFAULT MOBILE STYLING
   font-weight: 300;
 }
 
+h2.yale-restricted-work-text {
+  font-size: 1.5em;
+}
+.tools-text-format{
+  margin-left: -3%;
+}
+
+h2.yale-restricted-work-text{
+  margin-left: 8%;
+  width: 90%;
+}
+
+p.yale-restricted-work-text{
+  margin-left: 8%;
+  width: 90%;
+}
+
 @media screen and (min-width: $medium_device) {
   .constraints-container {
     margin-left: -.5%;
@@ -194,8 +221,7 @@ DEFAULT MOBILE STYLING
 
   .show-header,
   .yale-restricted-work-text {
-    padding-left: 10%;
-    width: 640px;
+    width: 92%;
   }
 
   .single-item-show {
@@ -206,21 +232,53 @@ DEFAULT MOBILE STYLING
     padding-left: 8%;
   }
 
+  .hidden {
+    display: none;
+  }
+
+  .item-page-fulltext-wrapper {
+    width: 118%;
+    padding-bottom: 25px;
+
+    .fulltext-button {
+      font-size: 14px;
+      color: $medium_grey;
+      font-family: $mallory_medium, Arial, Helvetica, sans-serif !important;
+      font-weight: 900;
+      padding-bottom: 15px;
+      background: none;
+      border: none;
+      margin-right: 0;
+      margin-left: auto;
+      display: block;
+    }
+  }
+
   .show-buttons {
     justify-self: center;
-    margin-right: 176px;
   }
+
+  .item-page__tools-wrapper {
+    max-width: 628px;
+    margin-left: 8%;
+  }
+
 }
 
 
 @media screen and (min-width: $large_device) {
   .constraints-container {
+    margin-left: 0.5%;
     width: 140%;
     justify-self: center;
     justify-content: space-between;
     display: flex;
     z-index: 1;
     position: relative;
+  }
+
+  .record-not-found {
+    min-height: 200px;
   }
 
   .show-tools {
@@ -239,8 +297,8 @@ DEFAULT MOBILE STYLING
 
   .show-header,
   .yale-restricted-work-text {
-    padding-left: 19%;
-    width: 790px;
+    width: 97%;
+    left: 19%;
   }
 
   .single-item-show {
@@ -253,20 +311,45 @@ DEFAULT MOBILE STYLING
 
   .show-buttons {
     justify-self: center;
-    margin-right: 52%;
+  }
+
+  .tools-text-format{
+    margin-left: -2.5%;
+  }
+
+  .item-page__tools-wrapper{
+    max-width: 740px;
+    margin-left: 19%;
+  }
+
+  .show-document #appliedParams {
+    width: 130%;
+  }
+
+  h2.yale-restricted-work-text{
+    margin-left: 19%;
+    width: 120%;
+  }
+
+  p.yale-restricted-work-text{
+    margin-left: 19%;
+    width: 120%;
   }
 }
 
 
 @media screen and (min-width: $xlarge_device) {
   .constraints-container {
-    margin-left: -1%;
     width: 144%;
     justify-self: center;
     justify-content: space-between;
     display: flex;
     z-index: 1;
     position: relative;
+  }
+
+  .record-not-found {
+    min-height: 400px;
   }
 
   .show-tools {
@@ -285,8 +368,7 @@ DEFAULT MOBILE STYLING
 
   .show-header,
   .yale-restricted-work-text {
-    padding-left: 19%;
-    width: 895px;
+    width: 96%;
   }
 
   .single-item-show {
@@ -295,5 +377,17 @@ DEFAULT MOBILE STYLING
 
   .item-page__metadata-wrapper {
     padding-left: 19%;
+  }
+
+  .item-page__tools-wrapper{
+    max-width: 890px;
+    min-width: 880px;
+  }
+
+  .tools-text-format{
+    margin-left: -2.25%;
+  }
+  .show-tools.list-group{
+    margin-left: -0.5%;
   }
 }

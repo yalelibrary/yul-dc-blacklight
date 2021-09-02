@@ -2,12 +2,35 @@
 class CatalogController < ApplicationController
   include BlacklightAdvancedSearch::Controller
   include Blacklight::Catalog
+  include BlacklightOaiProvider::Controller
   include Blacklight::Marc::Catalog
   include BlacklightRangeLimit::ControllerOverride
-
+  include AccessHelper
+  include CheckAuthorization
+  before_action :check_authorization, only: [:iiif_search, :iiif_suggest]
   before_action :determine_per_page
+  helper_method :gallery_view?
+
+  self.search_service_class = YulBlacklight::SearchService
+
+  rescue_from Blacklight::Exceptions::RecordNotFound do
+    render 'record_not_found', status: 404
+  end
+
+  # CatalogController-scope behavior and configuration for BlacklightIiifSearch
+  include BlacklightIiifSearch::Controller
 
   configure_blacklight do |config|
+    # configuration for Blacklight IIIF Content Search
+    config.iiif_search = {
+      full_text_field: 'child_fulltext_wstsim',
+      full_text_q_field: 'child_fulltext_tesim',
+      object_relation_field: 'parent_ssi',
+      supported_params: %w[q page],
+      autocomplete_handler: 'iiif_suggest'
+      # suggester_name: 'iiifSuggester'
+    }
+
     # default advanced config values
     config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
     # config.advanced_search[:qt] ||= 'advanced'
@@ -19,6 +42,7 @@ class CatalogController < ApplicationController
     config.view.gallery.partials = [:index_header]
     config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
     config.show.partials.insert(1, :openseadragon)
+    config.http_method = :post
 
     ## Class for sending and receiving requests from a search index
     # config.repository_class = Blacklight::Solr::Repository
@@ -98,6 +122,7 @@ class CatalogController < ApplicationController
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case sensitive when searching values)
 
     config.add_facet_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', limit: true
+    config.add_facet_field 'visibility_ssi', label: 'Access', limit: true
     config.add_facet_field 'format', label: 'Format', limit: true
     config.add_facet_field 'genre_ssim', label: 'Genre', limit: true
     config.add_facet_field 'resourceType_ssim', label: 'Resource Type', limit: true
@@ -106,20 +131,22 @@ class CatalogController < ApplicationController
     config.add_facet_field 'subjectTopic_ssim', label: 'Subject (Topic)', limit: true
     config.add_facet_field 'subjectName_ssim', label: 'Subject (Name)', limit: true
     config.add_facet_field 'subject_ssim', label: 'Topic', limit: 20, index_range: 'A'..'Z'
-    config.add_facet_field 'publicationPlace_ssim', label: 'Publication Place', limit: true
-    config.add_facet_field 'partOf_ssim', label: 'Digital Collection', limit: true
+    config.add_facet_field 'creationPlace_ssim', label: 'Publication Place', limit: true
     config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true
-    config.add_facet_field 'dateStructured_ssim', label: 'Publication Date',
-                                                  range: {
-                                                    num_segments: 6,
-                                                    assumed_boundaries: [800, Time.current.year + 2],
-                                                    segments: true,
-                                                    maxlength: 4
-                                                  }, solr_params: { 'facet.pivot.mincount' => 2 }
+    config.add_facet_field 'year_isim', label: 'Date Created',
+                                        range: {
+                                          segments: true,
+                                          maxlength: 4
+                                        },
+                                        if: lambda { |_context, _field_config, facet|
+                                              facet.items.length > 1
+                                            }
 
     # the facets below are set to false because we aren't filtering on them from the main search page
     # but we need to be able to provide a label when they are filtered upon from an individual show page
-    config.add_facet_field 'identifierShelfMark_ssim', label: 'Call Number', show: false
+    config.add_facet_field 'callNumber_ssim', label: 'Call Number', show: false
+    config.add_facet_field 'subjectGeographic_ssim', label: 'Subject (Geographic)', show: false
+    config.add_facet_field 'has_fulltext_ssi', label: "Full Text Available", limit: true
 
     # This was example code after running rails generate blacklight_range_limit:install
     # config.add_facet_field 'example_query_facet_field', label: 'Publish Date', query: {
@@ -130,11 +157,16 @@ class CatalogController < ApplicationController
     disp_highlight_on_search_params = {
       'hl': true,
       'hl.method': 'original',
+      'hl.requireFieldMatch': true,
       'hl.usePhraseHighlighter': true,
       'hl.preserveMulti': false,
       "hl.simple.pre": "<span class='search-highlight'>",
       "hl.simple.post": "</span>",
       "hl.fragsize": 40
+    }
+
+    disp_req_fieldmatch_on_search_params = {
+      'hl.requireFieldMatch': true
     }
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -143,22 +175,23 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field 'creator_tesim', label: 'Creator', highlight: true
-    config.add_index_field 'date_ssim', label: 'Date', highlight: true
-    config.add_index_field 'identifierShelfMark_tesim', label: 'Call Number', highlight: true
+    config.add_index_field 'creator_tesim', label: 'Creator', highlight: true, solr_params: disp_req_fieldmatch_on_search_params
+    config.add_index_field 'date_ssim', label: 'Published / Created', highlight: true, solr_params: disp_req_fieldmatch_on_search_params
+    config.add_index_field 'callNumber_tesim', label: 'Call Number', highlight: true, solr_params: disp_req_fieldmatch_on_search_params
+    config.add_index_field 'sourceTitle_tesim', label: 'Collection Title', highlight: true, solr_params: disp_req_fieldmatch_on_search_params
     config.add_index_field 'imageCount_isi', label: 'Image Count'
-    config.add_index_field 'partOf_ssim', label: 'Collection Name'
-    config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true
+    config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true, solr_params: disp_req_fieldmatch_on_search_params
+    config.add_index_field 'fulltext_tesim', label: 'Full Text', highlight: true, solr_params: disp_highlight_on_search_params.merge({ 'hl.snippets': 4 }), helper_method: :fulltext_snippet_separation
     config.add_index_field 'abstract_tesim', label: 'Abstract', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'alternativeTitle_tesim', label: 'Alternative Title', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'description_tesim', label: 'Description', highlight: true, solr_params: disp_highlight_on_search_params
-    config.add_index_field 'subjectGeographic_tesim', label: 'Subject (Geographic)', highlight: true, solr_params: disp_highlight_on_search_params
-    config.add_index_field 'orbisBidId_ssi', label: 'Orbis BidId', highlight: true, solr_params: disp_highlight_on_search_params
+    config.add_index_field 'orbisBidId_ssi', label: 'Orbis Record', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'publicatonPlace_tesim', label: 'Publication Place', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'publisher_tesim', label: 'Publisher', highlight: true, solr_params: disp_highlight_on_search_params
-    config.add_index_field 'sourceCreated_tesim', label: 'Created Source', highlight: true, solr_params: disp_highlight_on_search_params
+    config.add_index_field 'subjectGeographic_tesim', label: 'Subject (Geographic)', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'subjectName_tesim', label: 'Subject (Name)', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'subjectTopic_tesim', label: 'Subject (Topic)', highlight: true, solr_params: disp_highlight_on_search_params
+    config.add_index_field 'sourceCreated_tesim', label: 'Collection Created', highlight: true, solr_params: disp_highlight_on_search_params
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -167,74 +200,66 @@ class CatalogController < ApplicationController
     # For example add 'metadata: 'description'` to add a show field to the description block
     # metadata = [
     #     'description',
-    #     'keyword',
-    #     'origin',
-    #     'identifier',
-    #     'usage',
-    #     'migration_source'
+    #     'subjects_,_formats_and_genres',
+    #     'collection_information',
+    #     'access_and_usage_rights',
+    #     'identifier'
+    # ]
 
     # Description Group
-    config.add_show_field 'abstract_tesim', label: 'Abstract', metadata: 'description'
-    config.add_show_field 'alternativeTitle_tesim', label: 'Alternative Title', metadata: 'description'
-    config.add_show_field 'description_tesim', label: 'Description', metadata: 'description'
-    config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description'
+    config.add_show_field 'title_tesim', label: 'Title', metadata: 'description', helper_method: :join_with_br
+    config.add_show_field 'alternativeTitle_tesim', label: 'Alternative Title', metadata: 'description', helper_method: :join_with_br
+    config.add_show_field 'creator_ssim', label: 'Creator', metadata: 'description', link_to_facet: true
+    config.add_show_field 'date_ssim', label: 'Published / Created', metadata: 'description'
+    config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date', metadata: 'description'
+    config.add_show_field 'creationPlace_ssim', label: 'Publication Place', metadata: 'description'
+    config.add_show_field 'publisher_ssim', label: 'Publisher', metadata: 'description'
+    config.add_show_field 'abstract_tesim', label: 'Abstract', metadata: 'description', helper_method: :join_as_paragraphs
+    config.add_show_field 'description_tesim', label: 'Description', metadata: 'description', helper_method: :join_with_br
+    config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', metadata: 'description'
-    config.add_show_field 'numberOfPages_ssim', label: 'Number of Pages', metadata: 'description'
-    config.add_show_field 'references_tesim', label: 'References', metadata: 'description'
     config.add_show_field 'projection_tesim', label: 'Projection', metadata: 'description'
     config.add_show_field 'scale_tesim', label: 'Scale', metadata: 'description'
-    config.add_show_field 'subtitle_tesim', label: 'Subtitle', metadata: 'description'
-    config.add_show_field 'subtitle_vern_ssim', label: 'Subtitle', metadata: 'description'
+    config.add_show_field 'coordinates_ssim', label: 'Coordinates', metadata: 'description'
+    config.add_show_field 'digital_ssim', label: 'Digital', metadata: 'description'
+    config.add_show_field 'edition_ssim', label: 'Edition', metadata: 'description'
+    config.add_show_field 'language_ssim', label: 'Language', metadata: 'description', helper_method: :language_codes_as_links
 
-    # Keywords Group
-    config.add_show_field 'format', label: 'Format', metadata: 'keyword', link_to_facet: true
-    config.add_show_field 'genre_ssim', label: 'Genre', metadata: 'keyword', link_to_facet: true
-    config.add_show_field 'geoSubject_ssim', label: 'Subject (Geographic)', metadata: 'keyword', helper_method: :join_with_br
-    config.add_show_field 'material_tesim', label: 'Material', metadata: 'keyword'
-    config.add_show_field 'resourceType_ssim', label: 'Resource Type', metadata: 'keyword', link_to_facet: true
-    config.add_show_field 'subjectName_ssim', label: 'Subject (Name)', metadata: 'keyword', helper_method: :join_with_br
-    config.add_show_field 'subjectTopic_tesim', label: 'Subject (Topic)', metadata: 'keyword', helper_method: :join_with_br
+    # Collection Information Group
+    config.add_show_field 'callNumber_ssim', label: 'Call Number', metadata: 'collection_information', link_to_facet: true
+    config.add_show_field 'sourceTitle_tesim', label: 'Collection Title', metadata: 'collection_information'
+    config.add_show_field 'sourceCreator_tesim', label: 'Collection/Other Creator', metadata: 'collection_information'
+    config.add_show_field 'sourceCreated_tesim', label: 'Collection Created', metadata: 'collection_information'
+    config.add_show_field 'sourceDate_tesim', label: 'Collection Date', metadata: 'collection_information'
+    config.add_show_field 'sourceNote_tesim', label: 'Collection Note', metadata: 'collection_information'
+    config.add_show_field 'sourceEdition_tesim', label: 'Collection Edition', metadata: 'collection_information'
+    config.add_show_field 'containerGrouping_tesim', label: 'Container / Volume Information', metadata: 'collection_information'
+    config.add_show_field 'relatedResourceOnline_ssim', label: 'Related Resource Online', metadata: 'collection_information', helper_method: :link_to_url_with_label
+    config.add_show_field 'resourceVersionOnline_ssim', label: 'Resource Version Online', metadata: 'collection_information', helper_method: :link_to_url_with_label
+    config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'collection_information', helper_method: :link_to_url
 
-    # Origin Group
-    config.add_show_field 'creator_ssim', label: 'Creator', metadata: 'origin', link_to_facet: true
-    config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date', metadata: 'origin'
-    config.add_show_field 'coordinates_ssim', label: 'Coordinates', metadata: 'origin'
-    config.add_show_field 'date_ssim', label: 'Date', metadata: 'origin'
-    config.add_show_field 'digital_ssim', label: 'Digital', metadata: 'origin'
-    config.add_show_field 'edition_ssim', label: 'Edition', metadata: 'origin'
-    config.add_show_field 'language_ssim', label: 'Language', metadata: 'origin', helper_method: :language_codes_as_links
-    config.add_show_field 'publicationPlace_ssim', label: 'Publication Place', metadata: 'origin'
-    config.add_show_field 'publisher_ssim', label: 'Publisher', metadata: 'origin'
-    config.add_show_field 'published_ssim', label: 'Published', metadata: 'origin'
-    config.add_show_field 'sourceCreated_tesim', label: 'Source Created', metadata: 'origin'
-    config.add_show_field 'sourceDate_tesim', label: 'Source Date', metadata: 'origin'
-    config.add_show_field 'sourceEdition_tesim', label: 'Source Edition', metadata: 'origin'
-    config.add_show_field 'sourceNote_tesim', label: 'Source Note', metadata: 'origin'
-    config.add_show_field 'sourceTitle_tesim', label: 'Source Title', metadata: 'origin'
+    # Subjects, Formats, and Genres Group
+    config.add_show_field 'format', label: 'Format', metadata: 'subjects,_formats,_and_genres', link_to_facet: true
+    config.add_show_field 'genre_ssim', label: 'Genre', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
+    config.add_show_field 'material_tesim', label: 'Material', metadata: 'subjects,_formats,_and_genres'
+    config.add_show_field 'resourceType_ssim', label: 'Resource Type', metadata: 'subjects,_formats,_and_genres', link_to_facet: true
+    config.add_show_field 'subjectGeographic_ssim', label: 'Subject (Geographic)', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
+    config.add_show_field 'subjectName_ssim', label: 'Subject (Name)', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
+    config.add_show_field 'subjectTopic_ssim', label: 'Subject (Topic)', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
+
+    # Access and Usage Rights Group
+    config.add_show_field 'visibility_ssi', label: 'Access', metadata: 'access_and_usage_rights'
+    config.add_show_field 'rights_ssim', label: 'Rights', metadata: 'access_and_usage_rights', helper_method: :html_safe_converter
+    config.add_show_field 'preferredCitation_tesim', label: 'Citation', metadata: 'access_and_usage_rights', helper_method: :join_with_br
 
     # Identifiers Group
-    config.add_show_field 'box_ssim', label: 'Box', metadata: 'identifier'
-    config.add_show_field 'children_ssim', label: 'Children', metadata: 'identifier'
-    config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'identifier', helper_method: :link_to_url
-    config.add_show_field 'folder_ssim', label: 'Folder', metadata: 'identifier'
-    config.add_show_field 'identifierMfhd_ssim', label: 'Identifier MFHD', metadata: 'identifier'
-    config.add_show_field 'identifierShelfMark_ssim', label: 'Call Number', metadata: 'identifier', link_to_facet: true
-    config.add_show_field 'importUrl_ssim', label: 'Import URL', metadata: 'identifier'
-    config.add_show_field 'isbn_ssim', label: 'ISBN', metadata: 'identifier'
-    config.add_show_field 'orbisBarcode_ssi', label: 'Orbis Bar Code', metadata: 'identifier'
-    config.add_show_field 'orbisBibId_ssi', label: 'Orbis Bib ID', metadata: 'identifier', helper_method: :link_to_orbis_bib_id
-    config.add_show_field 'oid_ssi', label: 'OID', metadata: 'identifier'
-    config.add_show_field 'partOf_ssim', label: 'Collection Name', metadata: 'identifier'
-    config.add_show_field 'uri_ssim', label: 'URI', metadata: 'identifier'
-    config.add_show_field 'url_fulltext_ssim', label: 'URL', metadata: 'identifier'
-    config.add_show_field 'url_suppl_ssim', label: 'More Information', metadata: 'identifier'
+    config.add_show_field 'orbisBibId_ssi', label: 'Orbis Record', metadata: 'identifiers', helper_method: :link_to_orbis_bib_id
+    config.add_show_field 'oid_ssi', label: 'OID', metadata: 'identifiers'
+    config.add_show_field 'url_suppl_ssim', label: 'More Information', metadata: 'identifiers', helper_method: :link_to_url
 
-    # Usage Group
-    config.add_show_field 'rights_ssim', label: 'Rights', metadata: 'usage'
-
-    # Migration Source Group
-    config.add_show_field 'recordType_ssi', label: 'Record Type', metadata: 'migration_source'
-    config.add_show_field 'source_ssim', label: 'Source', metadata: 'migration_source'
+    # # Migration Source Group
+    #     config.add_show_field 'recordType_ssi', label: 'Record Type', metadata: 'migration_source'
+    #     config.add_show_field 'source_ssim', label: 'Source', metadata: 'migration_source'
 
     config.add_field_configuration_to_solr_request!
 
@@ -258,30 +283,16 @@ class CatalogController < ApplicationController
 
     # Blacklight 'out of box code'
     # config.add_search_field 'all_fields', label: 'All Fields'
-
-    # Array allows for only listed Solr fields to be searched in the 'Common Fields'
-    search_fields = ['abstract_tesim', 'creator_tesim', 'alternativeTitle_tesim', 'description_tesim', 'subjectGeographic_tesim',
-                     'identifierShelfMark_tesim', 'orbisBibId_ssi', 'publicatonPlace_tesim', 'publisher_tesim',
-                     'resourceType_tesim', 'sourceCreated_tesim', 'subjectName_tesim', 'subjectTopic_tesim',
-                     'title_tesim']
-
-    config.add_search_field('all_fields', label: 'Common Fields') do |field|
-      field.qt = 'search'
-      field.include_in_advanced_search = false
-      field.solr_parameters = {
-        qf: search_fields,
-        pf: ''
-      }
-    end
-
-    advanced_search_fields = [
+    # Array allows for only listed Solr fields to be searched in the 'All Fields'
+    search_fields = [
       'abstract_tesim',
       'accessRestrictions_tesim',
       'accessionNumber_ssi',
       'alternativeTitle_tesim',
       'alternativeTitleDisplay_tesim',
       'archiveSpaceUri_ssi',
-      'box_ssim',
+      'callNumber_tesim',
+      'containerGrouping_tesim',
       'collectionId_tesim',
       'contents_tesim',
       'contributor_tsim',
@@ -302,8 +313,8 @@ class CatalogController < ApplicationController
       'format_tesim',
       'genre_tesim',
       'identifierMfhd_ssim',
-      'identifierShelfMark_tesim',
-      'identifierShelfMark_ssim',
+      'callNumber_tesim',
+      'callNumber_ssim',
       'illustrativeMatter_tesim',
       'caption_tesim',
       'label_tesim',
@@ -314,11 +325,11 @@ class CatalogController < ApplicationController
       'child_oids_ssim',
       'orbisBarcode_ssi',
       'orbisBibId_ssi',
-      'partOf_tesim',
       'projection_tesim',
+      'creationPlace_tesim',
       'publicationPlace_tesim',
       'publisher_tesim',
-      'references_tesim',
+      'preferredCitation_tesim',
       'repository_ssim',
       'resourceType_tesim',
       'rights_tesim',
@@ -337,11 +348,22 @@ class CatalogController < ApplicationController
       'visibility_ssi'
     ]
 
+    # Basic Search
+    config.add_search_field('all_fields', label: 'All Fields') do |field|
+      field.qt = 'search'
+      field.include_in_advanced_search = false
+      field.solr_parameters = {
+        qf: search_fields,
+        pf: ''
+      }
+    end
+
+    # Advanced Search
     config.add_search_field('all_fields_advanced', label: 'All Fields') do |field|
       field.qt = 'search'
       field.include_in_simple_select = false
       field.solr_parameters = {
-        qf: advanced_search_fields.join(' '),
+        qf: search_fields.join(' '),
         pf: ''
       }
     end
@@ -364,10 +386,10 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('identifierShelfMark_tesim', label: 'Call Number') do |field|
+    config.add_search_field('callNumber_tesim', label: 'Call Number') do |field|
       field.qt = 'search'
       field.solr_parameters = {
-        qf: 'identifierShelfMark_tesim',
+        qf: 'callNumber_tesim',
         pf: ''
       }
     end
@@ -385,16 +407,23 @@ class CatalogController < ApplicationController
     # Specifying a :qt only to show it's possible, and so our internal automated
     # tests can test it. In this case it's the same as
     # config[:default_solr_parameters][:qt], so isn't actually neccesary.
-    config.add_search_field('subjectName_ssim', label: 'Subject') do |field|
+    config.add_search_field('subjectName_tesim', label: 'Subject') do |field|
       field.qt = 'search'
       field.include_in_advanced_search = false
       field.solr_parameters = {
-        qf: '',
-        pf: 'subjectName_ssim'
+        qf: 'subjectName_tesim',
+        pf: ''
       }
     end
 
-    subject_fields = ['subjectEra_ssim', 'subjectGeographic_tesim', 'subjectTitle_tsim', 'subjectTitleDisplay_tsim', 'subjectName_ssim', 'subjectName_tesim', 'subjectTopic_tesim', 'subjectTopic_ssim']
+    subject_fields = ['subjectEra_ssim',
+                      'subjectGeographic_tesim',
+                      'subjectTitle_tsim',
+                      'subjectTitleDisplay_tsim',
+                      'subjectName_ssim',
+                      'subjectName_tesim',
+                      'subjectTopic_tesim',
+                      'subjectTopic_ssim']
 
     config.add_search_field('subject_fields', label: 'Subject') do |field|
       field.qt = 'search'
@@ -416,12 +445,31 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('orbisBibId_ssi', label: 'BibID') do |field|
+    config.add_search_field('fulltext_tsim_advanced', label: 'Full Text') do |field|
+      field.qt = 'search'
+      field.include_in_simple_select = false
+      field.solr_parameters = {
+        qf: 'fulltext_tesim',
+        pf: ''
+      }
+    end
+
+    config.add_search_field('orbisBibId_ssi', label: 'Orbis ID') do |field|
       field.qt = 'search'
       field.include_in_advanced_search = false
       field.solr_parameters = {
         qf: 'orbisBibId_ssi',
         pf: ''
+      }
+    end
+
+    config.add_search_field('fulltext_tesim', label: 'Full Text') do |field|
+      field.qt = 'search'
+      field.include_in_advanced_search = false
+      field.solr_parameters = {
+        qf: 'fulltext_tesim',
+        pf: '',
+        'hl.requireFieldMatch': true
       }
     end
 
@@ -452,6 +500,8 @@ class CatalogController < ApplicationController
     config.add_sort_field 'creator_ssim desc, title_ssim asc', label: 'Creator (Z --> A)'
     config.add_sort_field 'title_ssim asc, oid_ssi desc', label: 'Title (A --> Z)'
     config.add_sort_field 'title_ssim desc, oid_ssi desc', label: 'Title (Z --> A)'
+    config.add_sort_field 'year_isim asc, id desc', label: 'Year (ascending)'
+    config.add_sort_field 'year_isim desc, id desc', label: 'Year (descending)'
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
@@ -463,10 +513,102 @@ class CatalogController < ApplicationController
     # if the name of the solr.SuggestComponent provided in your solrcongig.xml is not the
     # default 'mySuggester', uncomment and provide it below
     # config.autocomplete_suggester = 'mySuggester'
+
+    # OAI provider config
+    config.oai = {
+      provider: {
+        repository_name: 'Yale University Library Digital Collections',
+        repository_url: "#{ENV['BLACKLIGHT_BASE_URL']}/catalog/oai",
+        record_prefix: 'oai:collections.library.yale.edu',
+        admin_email: 'root@localhost',
+        sample_id: '2002046'
+      },
+      document: {
+        limit: 25, # number of records returned with each request, default: 15
+        set_fields: [ # ability to define ListSets, optional, default: nil
+          { label: 'language', solr_field: 'language_ssim' }
+        ]
+      }
+    }
+
+    # Configure Dublin Core field mapping
+    SolrDocument.field_semantics.merge!(
+      {
+        title: 'title_tesim',
+        creator: 'creator_ssim',
+        date: 'date_ssim',
+        language: 'languageCode_ssim',
+        description: %w[abstract_tesim description_tesim],
+        format: 'format'
+      }
+    )
+
+    fl_fields = config.index_fields.keys + config.show_fields.keys + config.facet_fields.keys + SearchBuilder.solr_record_fields + config.search_fields.values.map { |f| f.solr_parameters[:qf] }
+    fl_fields = fl_fields.uniq.flatten
+    fields_exclude_fl = ["fulltext_tesim", /^fulltext/, 'child_fulltext_wstsim', 'child_fulltext_tesim']
+
+    fields_exclude_fl.each do |exclude_field|
+      fl_fields.reject! { |field| field.match exclude_field }
+    end
+
+    config.default_solr_params = {
+      fl: fl_fields.join(' ')
+    }
+  end
+
+  # This is for iiif_search
+  def search_for_item
+    search_service.fetch(params[:solr_document_id])
+  end
+
+  def gallery_view?
+    params[:view] == 'gallery' || (params[:view].nil? && session['preferred_view'].eql?("gallery"))
   end
 
   def determine_per_page
-    grouping = params[:view] == 'gallery' ? [9, 30, 60, 99] : [10, 20, 50, 100]
+    grouping = gallery_view? ? [9, 30, 60, 99] : [10, 20, 50, 100]
     blacklight_config[:per_page] = grouping
+  end
+
+  def show
+    super
+    render "catalog/show_unauthorized", status: :unauthorized unless client_can_view_metadata?(@document)
+  end
+
+  def iiif_suggest
+    @query = params[:q] || ""
+    @document_id = params[:solr_document_id]
+    #  search children to get the count
+    params = {
+      "rows": 0,
+      "facet.field": "child_fulltext_wstsim",
+      "facet": "on",
+      "q": "parent_ssi:#{@document_id}",
+      "facet.contains": @query,
+      "facet.contains.ignoreCase": "true"
+    }
+    results = search_service.repository.search(params)['facet_counts']['facet_fields']['child_fulltext_wstsim']
+    terms_for_list = []
+    results.each_slice(2) do |term, freq|
+      term_hash = { match: term, url: solr_document_iiif_search_url(@document_id, q: term), count: freq }
+      terms_for_list << term_hash
+    end
+    response = term_list(terms_for_list)
+    response['terms'] = [] unless response['terms']
+    render json: response.to_json
+  end
+
+  ##
+  # Constructs the termList as IIIF::Presentation::Resource
+  # @return [IIIF::OrderedHash]
+  def term_list(terms)
+    ignored = params.keys - ['q', 'solr_document_id', 'action', 'controller']
+    list_id = request.original_url
+    term_list = IIIF::Presentation::Resource.new('@id' => list_id)
+    term_list['@context'] = 'http://iiif.io/api/search/1/context.json'
+    term_list['@type'] = 'search:TermList'
+    term_list['terms'] = terms
+    term_list['ignored'] = ignored
+    term_list.to_ordered_hash(force: true, include_context: false)
   end
 end

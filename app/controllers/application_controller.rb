@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
 
   layout :determine_layout if respond_to? :layout
 
+  rescue_from Blacklight::Exceptions::RecordNotFound do
+    render template: 'errors/not_found'
+  end
+
   def landing
     render layout: false
   end

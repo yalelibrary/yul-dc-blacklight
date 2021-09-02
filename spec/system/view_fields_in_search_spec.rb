@@ -15,8 +15,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       creator_tesim: 'Me and You',
       date_ssim: '1999',
       resourceType_ssim: 'Archives or Manuscripts',
-      partOf_ssim: 'Beinecke Library',
-      identifierShelfMark_tesim: 'Beinecke MS 801',
+      callNumber_tesim: 'Beinecke MS 801',
       imageCount_isi: '23',
       visibility_ssi: 'Public'
     }
@@ -33,9 +32,6 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     end
     it 'displays Resource Type in results' do
       expect(content).to have_content('Archives or Manuscripts')
-    end
-    it 'displays Collection Name in results' do
-      expect(content).to have_content('Beinecke Library')
     end
     it 'displays Call Number in results' do
       expect(content).to have_content('Beinecke MS 801')

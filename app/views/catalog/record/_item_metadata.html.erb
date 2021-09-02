@@ -1,18 +1,19 @@
 <% doc_presenter = show_presenter(document) %>
-
+<% unless doc_presenter.metadata_section_empty? metadata %>
   <div class='metadata-block single-item-show'>
-    <h4 class='metadata-block__title'><%= metadata.titlecase %></h4>
+    <h2 class='metadata-block__title'><%= metadata.titlecase %></h2>
     <dl class='metadata-block__group'>
 
       <% doc_presenter.metadata_fields_to_render(metadata).each do |field_name, field, field_presenter| %>
+        <!-- KEY -->
         <dt class='blacklight-<%= field_name.parameterize %> metadata-block__label-key'>
-          <!-- KEY -->
           <%= (render_document_show_field_label document, field: field_name).tr(':', '') %>
-          <!-- VALUE -->
         </dt>
+        <!-- VALUE -->
         <dd class='blacklight-<%= field_name.parameterize %> metadata-block__label-value metadata-block__label-value--yul'>
-          <%= field_presenter.render%>
+          <%= field_presenter.render %>
         </dd>
       <% end %>
     </dl>
   </div>
+<% end %>

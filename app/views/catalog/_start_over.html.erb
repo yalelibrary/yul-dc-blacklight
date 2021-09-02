@@ -1,7 +1,6 @@
 <% href = 'start_over.png' %>
-<%= link_to safe_join([
-                    content_tag(:span,t('blacklight.search.start_over')),
-                    content_tag(
+  <%= content_tag(:span,t('blacklight.search.start_over')) %>
+  <%=  content_tag(
                         :span, image_tag(href, class:'start-over-image', alt: ""),
                         class: 'start-over-icon'
                     )]),

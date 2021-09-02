@@ -1,7 +1,7 @@
 <% if show_doc_actions? %>
-    <div class="card show-tools">
+    <div class="card show-tools item-page__tools-wrapper">
         <div class="card-header">
-            <h2 class="mb-0 h6"><%= t('blacklight.tools.title') %></h2>
+            <h2 class="mb-0 h6 tools-text-format"><%= t('blacklight.tools.title') %></h2>
         </div>
 
         <ul class="list-group list-group-flush">
@@ -22,7 +22,7 @@
               <%= link_to 'View in Mirador', mirador_url(oid), target: '_blank', id: 'miradorLink', class: 'nav-link' %>
             </li>
             <li class="list-group-item pdfItem">
-              <%= link_to 'Download as PDF', pdf_url(oid), target: '_blank', id: 'pdfLink', rel: 'external', class: 'nav-link' %>
+              <%= link_to 'Download as PDF', pdf_url(oid, format: 'pdf'), target: '_blank', id: 'pdfLink', rel: 'external', class: 'nav-link' %>
             </li>
         </ul>
     </div>

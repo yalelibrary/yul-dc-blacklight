@@ -16,32 +16,54 @@ RSpec.describe Yul::MetadataPresenter do
 
   context '#metadata_fields_to_render with block' do
     let(:migration_source_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
-    it 'returns only MS fields in block' do
-      record_found = false
-      source_found = false
-      counter = 0
-      migration_source_presenter_object.metadata_fields_to_render('migration_source') do |field, _field_config|
-        record_found = true if field.include? 'recordType_ssi'
-        source_found = true if field.include? 'source_ssim'
-        counter += 1
+    it 'returns only identifiers fields in block' do
+      bib_found = false
+      oid_found = false
+      migration_source_presenter_object.metadata_fields_to_render('identifiers') do |field, _field_config|
+        bib_found = true if field.include? 'orbisBibId_ssi'
+        oid_found = true if field.include? 'oid_ssi'
       end
-      expect(record_found).to be_truthy
-      expect(source_found).to be_truthy
-      expect(counter).to be 2
+      expect(bib_found).to be_truthy
+      expect(oid_found).to be_truthy
     end
   end
 
   context 'with a description document' do
     let(:description_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
     let(:fields) { description_presenter_object.metadata_fields_to_render('description') }
+
     context 'containing overview metadata' do
       describe 'config' do
-        it 'returns the Abstract Key' do
-          expect(fields.any? { |field| field.include? 'abstract_tesim' }).to be_truthy
+        it 'returns the Title Key' do
+          expect(fields.any? { |field| field.include? 'title_tesim' }).to be_truthy
         end
 
         it 'returns the Alternative Title Key' do
           expect(fields.any? { |field| field.include? 'alternativeTitle_tesim' }).to be_truthy
+        end
+
+        it 'returns the Creator Key' do
+          expect(fields.any? { |field| field.include? 'creator_ssim' }).to be_truthy
+        end
+
+        it 'returns the Date Key' do
+          expect(fields.any? { |field| field.include? 'date_ssim' }).to be_truthy
+        end
+
+        it 'returns the Copyright Date Key' do
+          expect(fields.any? { |field| field.include? 'copyrightDate_ssim' }).to be_truthy
+        end
+
+        it 'returns the Publication Place Key' do
+          expect(fields.any? { |field| field.include? 'creationPlace_ssim' }).to be_truthy
+        end
+
+        it 'returns the Publisher Key' do
+          expect(fields.any? { |field| field.include? 'publisher_ssim' }).to be_truthy
+        end
+
+        it 'returns the Abstract Key' do
+          expect(fields.any? { |field| field.include? 'abstract_tesim' }).to be_truthy
         end
 
         it 'returns the Description Key' do
@@ -56,166 +78,16 @@ RSpec.describe Yul::MetadataPresenter do
           expect(fields.any? { |field| field.include? 'extentOfDigitization_ssim' }).to be_truthy
         end
 
-        it 'returns the Number of Pages Key' do
-          expect(fields.any? { |field| field.include? 'numberOfPages_ssim' }).to be_truthy
-        end
-
         it 'returns the Projection Key' do
           expect(fields.any? { |field| field.include? 'projection_tesim' }).to be_truthy
-        end
-
-        it 'returns the References Key' do
-          expect(fields.any? { |field| field.include? 'references_tesim' }).to be_truthy
         end
 
         it 'returns the Scale Key' do
           expect(fields.any? { |field| field.include? 'scale_tesim' }).to be_truthy
         end
 
-        it 'returns the Subtitle Key' do
-          expect(fields.any? { |field| field.include? 'subtitle_tesim' }).to be_truthy
-        end
-      end
-    end
-  end
-
-  context 'with an identifier document' do
-    let(:identifier_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
-    let(:fields) { identifier_presenter_object.metadata_fields_to_render('identifier') }
-    context 'containing overview metadata' do
-      describe 'config' do
-        it 'returns the Box Key' do
-          expect(fields.any? { |field| field.include? 'box_ssim' }).to be_truthy
-        end
-
-        it 'returns the Children Key' do
-          expect(fields.any? { |field| field.include? 'children_ssim' }).to be_truthy
-        end
-
-        it 'returns the Finding Aid Key' do
-          expect(fields.any? { |field| field.include? 'findingAid_ssim' }).to be_truthy
-        end
-
-        it 'returns the Folder Key' do
-          expect(fields.any? { |field| field.include? 'folder_ssim' }).to be_truthy
-        end
-
-        it 'returns the Identifier MFHD Key' do
-          expect(fields.any? { |field| field.include? 'identifierMfhd_ssim' }).to be_truthy
-        end
-
-        it 'returns the Call Number Key' do
-          expect(fields.any? { |field| field.include? 'identifierShelfMark_ssim' }).to be_truthy
-        end
-
-        it 'returns the Import URL Key' do
-          expect(fields.any? { |field| field.include? 'importUrl_ssim' }).to be_truthy
-        end
-
-        it 'returns the ISBN Key' do
-          expect(fields.any? { |field| field.include? 'isbn_ssim' }).to be_truthy
-        end
-
-        it 'returns the Orbis Barcode Key' do
-          expect(fields.any? { |field| field.include? 'orbisBarcode_ssi' }).to be_truthy
-        end
-
-        it 'returns the Orbis Bib ID Key' do
-          expect(fields.any? { |field| field.include? 'orbisBibId_ssi' }).to be_truthy
-        end
-
-        it 'returns the OID Key' do
-          expect(fields.any? { |field| field.include? 'oid_ssi' }).to be_truthy
-        end
-
-        it 'returns the Collection Name Key' do
-          expect(fields.any? { |field| field.include? 'partOf_ssim' }).to be_truthy
-        end
-
-        it 'returns the URI Key' do
-          expect(fields.any? { |field| field.include? 'uri_ssim' }).to be_truthy
-        end
-
-        it 'returns the URL Key' do
-          expect(fields.any? { |field| field.include? 'url_fulltext_ssim' }).to be_truthy
-        end
-
-        it 'returns the More Information Key' do
-          expect(fields.any? { |field| field.include? 'url_suppl_ssim' }).to be_truthy
-        end
-      end
-    end
-  end
-
-  context 'with a keyword document' do
-    let(:keyword_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
-    let(:fields) { keyword_presenter_object.metadata_fields_to_render('keyword') }
-
-    context 'containing overview metadata' do
-      describe 'config' do
-        it 'returns the Format Key' do
-          expect(fields.any? { |field| field.include? 'format' }).to be_truthy
-        end
-
-        it 'returns the Genre Key' do
-          expect(fields.any? { |field| field.include? 'genre_ssim' }).to be_truthy
-        end
-
-        it 'returns the Geo Subject Key' do
-          expect(fields.any? { |field| field.include? 'geoSubject_ssim' }).to be_truthy
-        end
-
-        it 'returns the Material Key' do
-          expect(fields.any? { |field| field.include? 'material_tesim' }).to be_truthy
-        end
-
-        it 'returns the Resource Type Key' do
-          expect(fields.any? { |field| field.include? 'resourceType_ssim' }).to be_truthy
-        end
-
-        it 'returns the Subject Name Key' do
-          expect(fields.any? { |field| field.include? 'subjectName_ssim' }).to be_truthy
-        end
-
-        it 'returns the Subject Topic Key' do
-          expect(fields.any? { |field| field.include? 'subjectTopic_tesim' }).to be_truthy
-        end
-      end
-    end
-  end
-
-  context 'with a migration source document' do
-    let(:migration_source_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
-    let(:fields) { migration_source_presenter_object.metadata_fields_to_render('migration_source') }
-    context 'containing overview metadata' do
-      describe 'config' do
-        it 'returns the Record Type Key' do
-          expect(fields.any? { |field| field.include? 'recordType_ssi' }).to be_truthy
-        end
-
-        it 'returns the Source Key' do
-          expect(fields.any? { |field| field.include? 'source_ssim' }).to be_truthy
-        end
-      end
-    end
-  end
-
-  context 'with an origin document' do
-    let(:origin_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
-    let(:fields) { origin_presenter_object.metadata_fields_to_render('origin') }
-
-    context 'containing overview metadata' do
-      describe 'config' do
         it 'returns the Coordinates Key' do
           expect(fields.any? { |field| field.include? 'coordinates_ssim' }).to be_truthy
-        end
-
-        it 'returns the Copyright Date Key' do
-          expect(fields.any? { |field| field.include? 'copyrightDate_ssim' }).to be_truthy
-        end
-
-        it 'returns the Date Key' do
-          expect(fields.any? { |field| field.include? 'date_ssim' }).to be_truthy
         end
 
         it 'returns the Digital Key' do
@@ -229,17 +101,54 @@ RSpec.describe Yul::MetadataPresenter do
         it 'returns the Language Key' do
           expect(fields.any? { |field| field.include? 'language_ssim' }).to be_truthy
         end
+      end
+    end
+  end
 
-        it 'returns the Publication Place Key' do
-          expect(fields.any? { |field| field.include? 'publicationPlace_ssim' }).to be_truthy
+  context 'with a subjects formats and genres document' do
+    let(:keyword_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
+    let(:fields) { keyword_presenter_object.metadata_fields_to_render('subjects,_formats,_and_genres') }
+
+    context 'containing overview metadata' do
+      describe 'config' do
+        it 'returns the Format Key' do
+          expect(fields.any? { |field| field.include? 'format' }).to be_truthy
         end
 
-        it 'returns the Publisher Key' do
-          expect(fields.any? { |field| field.include? 'publisher_ssim' }).to be_truthy
+        it 'returns the Genre Key' do
+          expect(fields.any? { |field| field.include? 'genre_ssim' }).to be_truthy
         end
 
-        it 'returns the Published Key' do
-          expect(fields.any? { |field| field.include? 'published_ssim' }).to be_truthy
+        it 'returns the Material Key' do
+          expect(fields.any? { |field| field.include? 'material_tesim' }).to be_truthy
+        end
+
+        it 'returns the Resource Type Key' do
+          expect(fields.any? { |field| field.include? 'resourceType_ssim' }).to be_truthy
+        end
+
+        it 'returns the Subject Geo Key' do
+          expect(fields.any? { |field| field.include? 'subjectGeographic_ssim' }).to be_truthy
+        end
+
+        it 'returns the Subject Name Key' do
+          expect(fields.any? { |field| field.include? 'subjectName_ssim' }).to be_truthy
+        end
+
+        it 'returns the Subject Topic Key' do
+          expect(fields.any? { |field| field.include? 'subjectTopic_ssim' }).to be_truthy
+        end
+      end
+    end
+  end
+
+  context 'with a collection information document' do
+    let(:identifier_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
+    let(:fields) { identifier_presenter_object.metadata_fields_to_render('collection_information') }
+    context 'containing overview metadata' do
+      describe 'config' do
+        it 'returns the Call Number Key' do
+          expect(fields.any? { |field| field.include? 'callNumber_ssim' }).to be_truthy
         end
 
         it 'returns the Source Created Key' do
@@ -261,20 +170,70 @@ RSpec.describe Yul::MetadataPresenter do
         it 'returns the Source Title Key' do
           expect(fields.any? { |field| field.include? 'sourceTitle_tesim' }).to be_truthy
         end
-      end
-    end
-  end
 
-  context 'with a usage document' do
-    let(:usage_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
-    let(:fields) { usage_presenter_object.metadata_fields_to_render('usage') }
+        it 'returns the Container/Volume Information Key' do
+          expect(fields.any? { |field| field.include? 'containerGrouping_tesim' }).to be_truthy
+        end
 
-    context 'containing overview metadata' do
-      describe 'config' do
-        it 'returns the Rights Key' do
-          expect(fields.any? { |field| field.include? 'rights_ssim' }).to be_truthy
+        it 'returns the Finding Aid Key' do
+          expect(fields.any? { |field| field.include? 'findingAid_ssim' }).to be_truthy
         end
       end
     end
   end
+
+  context 'with an access and rights document' do
+    let(:usage_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
+    let(:fields) { usage_presenter_object.metadata_fields_to_render('access_and_usage_rights') }
+
+    context 'containing overview metadata' do
+      describe 'config' do
+        it 'returns the Access Key' do
+          expect(fields.any? { |field| field.include? 'visibility_ssi' }).to be_truthy
+        end
+        it 'returns the Rights Key' do
+          expect(fields.any? { |field| field.include? 'rights_ssim' }).to be_truthy
+        end
+        it 'returns the Citation Key' do
+          expect(fields.any? { |field| field.include? 'preferredCitation_tesim' }).to be_truthy
+        end
+      end
+    end
+  end
+
+  context 'with an identifier document' do
+    let(:identifier_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
+    let(:fields) { identifier_presenter_object.metadata_fields_to_render('identifiers') }
+    context 'containing overview metadata' do
+      describe 'config' do
+        it 'returns the Orbis Bib ID Key' do
+          expect(fields.any? { |field| field.include? 'orbisBibId_ssi' }).to be_truthy
+        end
+
+        it 'returns the OID Key' do
+          expect(fields.any? { |field| field.include? 'oid_ssi' }).to be_truthy
+        end
+
+        it 'returns the More Information Key' do
+          expect(fields.any? { |field| field.include? 'url_suppl_ssim' }).to be_truthy
+        end
+      end
+    end
+  end
+
+  #   context 'with a migration source document' do
+  #     let(:migration_source_presenter_object) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context, config) }
+  #     let(:fields) { migration_source_presenter_object.metadata_fields_to_render('migration_source') }
+  #     context 'containing overview metadata' do
+  #       describe 'config' do
+  #         it 'returns the Record Type Key' do
+  #           expect(fields.any? { |field| field.include? 'recordType_ssi' }).to be_truthy
+  #         end
+  #
+  #         it 'returns the Source Key' do
+  #           expect(fields.any? { |field| field.include? 'source_ssim' }).to be_truthy
+  #         end
+  #       end
+  #     end
+  #   end
 end

@@ -5,22 +5,29 @@
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "4.2.2",
+    "@rails/webpacker": "4.3.0",
+    "glob-parent": "^6.0.0",
     "node-forge": "^0.10.0",
+    "normalize-url": "^6.0.1",
+    "postcss": "^8.3.2",
     "serialize-javascript": "^3.1.0",
+    "ssri": "^8.0.1",
+    "tar": "^6.1.6",
+    "trim-newlines": "^4.0.2",
     "turbolinks": "^5.2.0",
-    "universalviewer": "3.0.16",
+    "universalviewer": "3.1.1",
+    "ws": "^7.4.6",
     "yargs-parser": "^13.1.2"
   },
   "scripts": {
     "preinstall": "rm -rf ./public/uv",
     "postinstall": "yarn run uv-install && yarn run uv-config",
-    "uv-install": "shx cp -r ./node_modules/universalviewer/uv ./public/",
+    "uv-install": "shx cp -r ./node_modules/universalviewer/dist ./public/uv",
     "uv-config": "shx cp ./config/uv/uv.html ./public/uv/uv.html & shx cp ./config/uv/uv-config.json ./public/uv/"
   },
   "version": "0.1.0",
   "devDependencies": {
     "shx": "^0.3.2",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.11.2"
   }
 }

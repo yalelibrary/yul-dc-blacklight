@@ -3,12 +3,12 @@ DEFAULT MOBILE STYLING
 ********************************************************/
 .search-area {
 .advanced_search {
-  padding: 14px 0px 11px 23px;
+  padding: 14px 5px 11px 23px;
   color: $light_blue;
   background: transparent;
   border: transparent;
   font-size: 16px;
-  font-family: $mallory_medium;
+  font-family: $mallory_medium, Arial, Helvetica, sans-serif;
   text-transform: uppercase;
   display: block !important;
 }
@@ -55,7 +55,7 @@ DEFAULT MOBILE STYLING
 .navbar-search .submit-search-text {
   text-transform: uppercase;
   font-size: 16px;
-  font-family: $mallory_medium;
+  font-family: $mallory_medium, Arial, Helvetica, sans-serif;
 }
 
 
@@ -102,24 +102,48 @@ DEFAULT MOBILE STYLING
 .search-q {
   font-size: 16px;
   color: $black;
-  font-family: $mallory_book $mallory_light, Arial, Helvetica, sans-serif !important;
+  font-family: $mallory_book, $mallory_light, Arial, Helvetica, sans-serif !important;
 }
+
+  .fulltext-info {
+    font-size: 14px;
+    font-family: $mallory_book, $mallory_light, Arial, Helvetica, sans-serif;
+    top: 123%;
+    right: 52%;
+    width: 46%;
+    color: $medium_grey;
+    position:absolute;
+    background-color: none;
+  }
+
 
 
 @media screen and (min-width: $medium_device) {
   .input-group {
     max-width: 96%;
   }
+  .fulltext-info {
+    right: 45%;
+    width: 61%;
+    left: 2%;
+  }
 }
+
+
 
 
 @media screen and (min-width: $large_device) {
   .advanced_search {
     margin-top: 0;
   }
+  .fulltext-info {
+    right: 45%;
+    width: 38%;
+    left: 29%;
+  }
 
   .form-control {
-    border-left: none;
+    border-left: 1px solid $border_grey;;
     border-top: 1px solid $border_grey;
   }
 
@@ -175,5 +199,12 @@ DEFAULT MOBILE STYLING
   .navbar-search .search-query-form {
     flex: 0 0 100%;
   }
+
+  .fulltext-info {
+    top: 125%;
+    left: 24%;
+    width: 46%;
+  }
+
 }
 }

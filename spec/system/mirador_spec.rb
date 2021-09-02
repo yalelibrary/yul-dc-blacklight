@@ -9,6 +9,12 @@ RSpec.describe 'Mirador viewer', type: :system do
       expect(page.html).to match(/const manifest =.*#{value}/)
     end
 
+    it 'contains a noindex tag' do
+      value = 123_456
+      visit "/mirador/#{value}"
+      expect(page).to have_css("meta[name=robots][content=noindex]", visible: false)
+    end
+
     it 'builds a blank configuration given an invalid value' do
       value = '1_malicious_stuff_here'
       visit "/mirador/#{value}"

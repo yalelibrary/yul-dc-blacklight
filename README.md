@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master.svg?style=svg)](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/master) ![Docker Image CI](https://github.com/yalelibrary/yul-dc-blacklight/workflows/Docker%20Image%20CI/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/yalelibrary/yul-dc-blacklight/badge.svg?branch=master)](https://coveralls.io/github/yalelibrary/yul-dc-blacklight?branch=master)
+[![CircleCI](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/main.svg?style=svg)](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/main) ![Docker Image CI](https://github.com/yalelibrary/yul-dc-blacklight/workflows/Docker%20Image%20CI/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/yalelibrary/yul-dc-blacklight/badge.svg?branch=main)](https://coveralls.io/github/yalelibrary/yul-dc-blacklight?branch=main)
 
 # Yale Digital Library Discovery Application
 
@@ -16,25 +16,25 @@ This is one of the microservices applications that form the Yale digital library
 git clone https://github.com/yalelibrary/yul-dc-blacklight.git
 ```
 
-## Change to the application directory
+### Change to the application directory
 
 ```bash
 cd ./yul-dc-blacklight
 ```
 
-## Create needed files on your command line
+### Create needed files on your command line
 
 ```bash
 touch .secrets
 ```
 
-## If this is your first time working in this repo or the Dockerfile has been updated you will need to pull your services
+### If this is your first time working in this repo or the Dockerfile has been updated you will need to pull your services
 
 ```bash
   docker-compose pull blacklight
 ```
 
-## Install Camerata
+### Install Camerata
 
 Clone the yul-dc-camerata repo and install the gem.
 
@@ -45,21 +45,21 @@ bundle install
 rake install
 ```
 
-## Update Camerata
+### Update Camerata
 
 - You can get the latest version at any point by updating the code and reinstalling
 
 ```bash
 cd yul-dc-camerata
-git pull origin master
+git pull origin main
 bundle install
 rake install
 ```
 
-## Dynatrace
+### Dynatrace
 
-- We've integrated Dynatrace OneAgent for monitoring our Docker container environments. 
-  - Instructions on configuring OneAgent can be found [here](https://github.com/yalelibrary/yul-dc-camerata/tree/master/base)
+- We've integrated Dynatrace OneAgent for monitoring our Docker container environments.
+  - Instructions on configuring OneAgent can be found [here](https://github.com/yalelibrary/yul-dc-camerata/tree/main/base)
 
 ## General Use
 
@@ -84,7 +84,7 @@ To start the application stack, run `cam up` in the blacklight directory. This s
 ## Troubleshooting
 
 If you receive a `please set your AWS_PROFILE and AWS_DEFAULT_REGION (RuntimeError)` error when you `cam up`, you will need to set your AWS credentials. Credentials can be set in the `~/.aws/credentials` file in the following format:
-(The word "yale" in the straight brackets can be whatever you want it to be)
+(The word "yale" in the straight brackets can be whatever you want it to be).
 
 ```bash
 [yale]
@@ -190,73 +190,22 @@ In order to prevent search engine crawling of the system before it's ready to la
 
 For the image instance to properly access images, you must also create a .secrets file with valid S3 credentials and basic auth credentials; see secrets-template for the correct format.
 
-## Releasing a new version of yul-dc-blacklight
+## Releasing a new version of Blacklight
+Refer to the steps in the [Camerata repo](https://github.com/yalelibrary/yul-dc-camerata#releasing-a-new-app-version)
 
-1. Checkout to the `master` branch and run `git pull`
-
-2. Ensure you have a github personal access token.
-
-    Instructions here: <https://github.com/github-changelog-generator/github-changelog-generator#github-token> You will need to make your token available via an environment variable called `CHANGELOG_GITHUB_TOKEN`, e.g.:
-
-    ```
-    export CHANGELOG_GITHUB_TOKEN=YOUR_TOKEN_HERE
-    ```
-
-3. Use the camerata gem to increment the blacklight version and deploy:
-  Note: See [the camerata readme](https://github.com/yalelibrary/yul-dc-camerata) for details on installing camerata.
-
-    ```
-    cam release blacklight
-    ```
-
-4. Proceed with the steps for the Yale infrastructure or the DCE infrastructure
-##### Using the Yale infrastructure
-  - Log on to VPN
-  - Go to Jenkins website in your browser (request it from a member of the team if you don't have it)
-  - Click on "YUL-DC-Test-Deploy" on the dashboard
-  - Click on "Build with Parameters" in the left side navigation panel
-  - In the "BLACKLIGHT_VERSION" input box, type in the version you released with the command in step 3 (e.g.: v1.30.0)
-  - Check the UPDATE_SSM box
-  - Press "Build"
-  - You will see your build in the "Build History" section in the left side navigation panel with a blinking blue circle, indicating it's in progress
-    - If you press the number associated with the build, you can see the details
-    - The build typically takes 10-15 minutes
-    - A successful build will show a solid blue circle when finished
-    - An unsuccessful build will show a solid red circle when finished
-
-
-##### Using the DCE infrastructure
-```
-  PUBLIC_IP=ENABLED cam get-params yul-test
-    - This will create 3 "yul-test...yml" files
-  BLACKLIGHT_VERSION=NEW_BLACKLIGHT_VERSION_NUMBER cam deploy-main yul-test
-  - e.g. `BLACKLIGHT_VERSION=v1.23.4 cam deploy-main yul-test
-  YUL_DC_SERVER=collections-test.curationexperts.com cam smoke
-    - This command must be run from the camerata repo
-    - You'll need "chromedriver" for it to work. If you don't already have it installed, run `brew cask install chromedriver`
-    - Afterwards, you'll need to give the app permission to run in your system preferences
-  NOTE: Make sure the expected changes show on collections-test.curationexperts.com after the smoke tests pass
-  cam push_version blacklight NEW_BLACKLIGHT_VERSION_NUMBER
-
-  cam deploy-main yul-demo
-  PUBLIC_IP=ENABLED cam get-params yul-demo
-  - This will create 3 "yul-demo...yml" files
-  YUL_DC_SERVER=collections-demo.curationexperts.com cam smoke
-  NOTE: Make sure the expected changes show on collections-demo.curationexperts.com after the smoke tests pass
-  NOTE: You can delete all 6 untracked yml files
-  ```
-
-5. Move any tickets that were included in this release from `For Release` to `Ready for Acceptance`
+## Deploy an individual branch
+Refer to the steps in the [Camerata repo](https://github.com/yalelibrary/yul-dc-camerata#deploy-a-branch)
 
 ## Using a New Release of the Management App or other microservices
 
-1. Go to the yul-dc-camerata repository on Github and check the latest release number in the [.env file.](https://github.com/yalelibrary/yul-dc-camerata/blob/master/.env)
+1. Go to the yul-dc-camerata repository on Github and check the latest release number in the [.env file.](https://github.com/yalelibrary/yul-dc-camerata/blob/main/.env)
 
 2. Edit your .env file to match
 
 3. Run `docker-compose up blacklight`
 
 ## Writing Integration Tests
+
 Integration tests run without styling by default. This allows for more stable tests involving Capybara and loads the pages faster.
 
 If styling is needed for a test to pass, tag the test with `style:true`
@@ -264,3 +213,9 @@ If styling is needed for a test to pass, tag the test with `style:true`
 ## Test coverage
 
 We use [coveralls](https://coveralls.io/github/yalelibrary/yul-dc-blacklight) to measure test coverage. More details [here](https://github.com/yalelibrary/yul-dc-blacklight/wiki/code-coverage).
+
+## Testing IP Access Restrictions
+
+By default, when running locally, your IP will not be considered "On Campus," so you will not be able to view Yale Community Only items unless you log in.
+
+To test having an IP which is considered "On Campus" so that you can view Yale Community Only items without logging in, start with `YALE_NETWORK_IPS=10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1 cam up`.

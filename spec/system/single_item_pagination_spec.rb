@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
   before do
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/111.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/22/22/222.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/33/33/333.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+
     solr = Blacklight.default_index.connection
     solr.add([test_record,
               same_call_record,
@@ -14,7 +21,7 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
     {
       id: '222',
       visibility_ssi: 'Public',
-      identifierShelfMark_ssim: 'this is the call number'
+      callNumber_ssim: 'this is the call number'
     }
   end
 
@@ -22,7 +29,7 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
     {
       id: '333',
       visibility_ssi: 'Public',
-      identifierShelfMark_ssim: 'this is the call number, but different'
+      callNumber_ssim: 'this is the call number, but different'
     }
   end
 
@@ -30,7 +37,7 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
     {
       id: '111',
       visibility_ssi: "Public",
-      identifierShelfMark_ssim: 'this is the call number, but moderately different'
+      callNumber_ssim: 'this is the call number, but moderately different'
     }
   end
 

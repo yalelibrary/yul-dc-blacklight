@@ -3,7 +3,7 @@
   "recordType": "oid",
   "uri": "/ladybird/oid/16854582",
   "identifierMfhd": "/repositories/11/archival_objects/699963",
-  "identifierShelfMark": "YCAL MSS 702",
+  "callNumber": "YCAL MSS 702",
   "box": "8",
   "sourceTitle": "Robert Giard papers",
   "sourceDate": "1972-2002",
@@ -32,7 +32,6 @@
     "Typescripts"
   ],
   "format": "text",
-  "partOf": "Beinecke Library",
   "rights": [
     "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
   ],

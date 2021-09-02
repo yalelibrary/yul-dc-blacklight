@@ -5,12 +5,23 @@ then
     export PASSENGER_APP_ENV=development
 fi
 
+# TODO remove fall back after camerata release 4.1
+if [ -z $NGINX_RESOLVER ]
+then
+  export NGINX_RESOLVER=10.5.68.2
+fi
+
 rm -rf /home/app/webapp/.ruby*
 /bin/bash -l -c 'chown -fR app:app /home/app/webapp/tmp/cache' # mounted volume may have wrong permissions
 /bin/bash -l -c 'chown -fR app:app /home/app/webapp/public' # mounted volume may have wrong permissions
 /bin/bash -l -c 'chown -fR app:app /home/app/webapp/node_modules' # mounted volume may have wrong permissions
 
 declare -p | grep -Ev 'BASHOPTS|PWD|BASH_VERSINFO|EUID|PPID|SHELLOPTS|UID' > /container.env
+# change out IIIF placeholder to support different environments
+sed -i "s]@@image_internal_url@@]${IIIF_IMAGE_INTERNAL_URL}]g" /etc/nginx/sites-enabled/webapp.conf
+sed -i "s]@@image_internal_proto_override@@]${IIIF_IMAGE_UPSTREAM_PROTO}]g" /etc/nginx/sites-enabled/webapp.conf
+sed -i "s]@@image_internal_port_override@@]${IIIF_IMAGE_UPSTREAM_PORT}]g" /etc/nginx/sites-enabled/webapp.conf
+sed -i "s]@@nginx_resolver@@]${NGINX_RESOLVER}]g" /etc/nginx/sites-enabled/webapp.conf
 
 if [[ $PASSENGER_APP_ENV == "development" ]] || [[ $PASSENGER_APP_ENV == "test" ]]
 then

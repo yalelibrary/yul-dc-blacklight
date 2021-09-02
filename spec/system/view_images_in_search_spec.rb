@@ -66,6 +66,17 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
 
   describe 'Yale community only records', style: true do
     context 'as a logged out user' do
+      around do |example|
+        original_yale_networks = ENV['YALE_NETWORK_IPS']
+        ENV['YALE_NETWORK_IPS'] = "101.10.5.4,3.4.2.3"
+        example.run
+        ENV['YALE_NETWORK_IPS'] = original_yale_networks
+      end
+
+      before do
+        allow_any_instance_of(ActionDispatch::Request).to receive(:remote_ip).and_return('109.10.5.4')
+      end
+
       it 'displays the placeholder_restricted.png' do
         visit '/catalog?q=&search_field=all_fields'
         expect(page).to have_css("img[src ^= '/assets/placeholder_restricted']")
@@ -76,7 +87,7 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
         visit '/catalog?q=&search_field=all_fields'
         click_link 'test_record_2'
 
-        expect(page).to have_content('The digital version of this work is restricted to the Yale Community.')
+        expect(page).to have_content('The digital version of this work is restricted due to copyright or other restrictions.')
         expect(page).to have_content('Please login using your Yale NetID or contact library staff to inquire about access to a physical copy.')
       end
     end
@@ -98,7 +109,7 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
         visit '/catalog?q=&search_field=all_fields'
         click_link 'test_record_2'
 
-        expect(page).not_to have_content('The digital version of this work is restricted to the Yale Community.')
+        expect(page).not_to have_content('The digital version of this work is restricted due to copyright or other restrictions.')
         expect(page).not_to have_content('Please login using your Yale NetID or contact library staff to inquire about access to a physical copy.')
       end
     end

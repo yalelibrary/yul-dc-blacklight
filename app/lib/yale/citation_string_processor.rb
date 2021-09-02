@@ -2,7 +2,7 @@
 module Yale
   module CitationStringProcessor
     def url
-      "http://collections-demo.curationexperts.com/catalog/#{obj[:id]}" if obj[:id].present?
+      "https://collections.library.yale.edu/catalog/#{obj[:id]}" if obj[:id].present?
     end
 
     def append_string_with_period(field)
@@ -14,7 +14,7 @@ module Yale
     end
 
     def apa_box
-      " (#{obj[:box_ssim]})" if obj[:box_ssim].present?
+      " (#{obj[:containerGrouping_tesim]})" if obj[:containerGrouping_tesim].present?
     end
 
     def sanitized_citation(citation)
@@ -46,7 +46,6 @@ module Yale
         apa_box,
         ("(#{obj[:date_ssim]&.first})" unless obj[:date_ssim].nil?),
         ("[#{obj[:title_tesim]&.first}#{apa_edition}]. " unless obj[:title_tesim].nil?),
-        append_string_with_period(obj[:partOf_ssim]),
         url,
         "."
       ].join('')
@@ -56,9 +55,8 @@ module Yale
       [
         formatted_mla_creator,
         append_string_with_period(obj[:title_tesim]),
-        append_string_with_period(obj[:box_ssim]),
+        append_string_with_period(obj[:containerGrouping_tesim]),
         append_string_with_period(obj[:date_ssim]),
-        append_string_with_period(obj[:partOf_ssim]),
         url,
         "."
       ].join('')

@@ -9,7 +9,7 @@ DEFAULT MOBILE STYLING
   .document-title > a {
     color: $light_blue;
     max-width: 420px;
-    font-family: $mallory_medium;
+    font-family: $mallory_medium, Arial, Helvetica, sans-serif;
     font-size: 15px;
   }
 
@@ -76,7 +76,7 @@ DEFAULT MOBILE STYLING
     text-align: left;
     position: relative;
     color: $medium_grey;
-    font-family: $mallory_mp_black;
+    font-family: $mallory_mp_black, $mallory_medium, Arial, Helvetica, sans-serif;
     font-size: 12px;
     display: contents;
     left: -38px;
@@ -85,7 +85,7 @@ DEFAULT MOBILE STYLING
   //Solr field details
   .dl-invert dd {
     font-size: 12px;
-    font: $mallory_medium;
+    font-family:  $mallory_medium, Arial, Helvetica, sans-serif;
     color: $medium_grey;
     flex-wrap: wrap;
     margin-top: -21px;
@@ -171,7 +171,7 @@ DEFAULT MOBILE STYLING
       text-align: left;
       position: relative;
       color: $medium_grey;
-      font-family: $mallory_mp_black;
+      font-family: $mallory_mp_black, $mallory_medium, Arial, Helvetica, sans-serif;
       font-size: 12px;
       display: contents;
       left: -38px;
@@ -180,7 +180,7 @@ DEFAULT MOBILE STYLING
     //Solr field details
     .dl-invert dd {
       font-size: 12px;
-      font: $mallory_medium;
+      font-family: $mallory_medium, Arial, Helvetica, sans-serif;
       color: $medium_grey;
       flex-wrap: wrap;
       margin-top: -21px;
@@ -262,7 +262,7 @@ DEFAULT MOBILE STYLING
     //Solr field details
     .dl-invert dd {
       font-size: 12px;
-      font: $mallory_medium;
+      font-family: $mallory_medium, Arial, Helvetica, sans-serif;
       color: $medium_grey;
       flex-wrap: wrap;
       margin-top: -21px;

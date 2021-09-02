@@ -1,14 +1,46 @@
-<% oid = @document.id %>
-
-<div class="uv-container">
+<% oid=@document.id %>
+<%
+  order_param=''
+  if @document[:child_oids_ssim]
+    order_param="&cv=#{@document[:child_oids_ssim].index(params[:child_oid])|| 0}"
+  end
+%>
+<div class='uv-container'>
 <iframe
-    class="universal-viewer-iframe"
-    title="Universal Viewer"
-    src="<%= request&.base_url %>/uv/uv.html#?manifest=<%= manifest_url(oid) %>"
-    width="924"
-    height="668"
+    class='universal-viewer-iframe'
+    title='Universal Viewer'
+    src='<%= request&.base_url %>/uv/uv.html#?manifest=<%= manifest_url(oid) %><%= order_param %><%= uv_fulltext_search_param %>'
+    width='924'
+    height='668'
     allowfullscreen
-    frameborder="0">
+    frameborder='0'>
 </iframe>
 </div>
 </br>
+
+<div id='uv-pages'></div>
+<div id='parent-oid'><%= @document.id %></div>
+
+<script>
+  $(document).ready(function(){
+    window.addEventListener('message', (event) => {
+      if (event.origin.match('<%= request.protocol %><%= request.host %>')) {
+        const index = event.data
+        const is_even = index % 2 === 0
+        const array = '<%= @document[:child_oids_ssim] %>'
+        const viewing_hint = '<%= @document[:viewing_hint_ssi] %>'
+        const child_oids = JSON.parse(array.replace(/&quot;/g,'"'))
+        const selected = $('iframe').contents().find('[id^="thumb"].thumb.selected')
+        let uv_thumbnail = child_oids[index]
+
+        if (selected.length > 1) {
+          uv_thumbnail = is_even
+            ? `${child_oids[index - 1] || ''} ${child_oids[index]}`
+            : `${child_oids[index]} ${child_oids[index + 1] || ''}`
+        }
+
+        $('#uv-pages').html(uv_thumbnail)
+      }
+    }, false)
+  })
+</script>
