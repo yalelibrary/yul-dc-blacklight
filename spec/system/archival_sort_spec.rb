@@ -135,7 +135,7 @@ RSpec.describe 'archivalSort', type: :system, clean: true do
 
   context 'search results' do
     it 'sorts based on archivalSort conditions' do
-      expect(page).to have_content('Osborn Manuscript Files (OSB MSS FILE)')
+      expect(page).to have_content('Llama Files')
       expect(page).not_to have_content('Script Files')
     end
   end
