@@ -46,6 +46,7 @@ class SearchBuilder < Blacklight::SearchBuilder
        indexedBy_tsim
        languageCode_ssim
        number_of_pages_ss
+       parent_ssi
        partOf_tesim
        public_bsi
        recordType_ssi
