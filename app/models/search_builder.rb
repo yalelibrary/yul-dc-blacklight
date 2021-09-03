@@ -42,6 +42,7 @@ class SearchBuilder < Blacklight::SearchBuilder
       accessRestrictions_tesim
       alternativeTitle_tesim
       alternativeTitleDisplay_tesim
+      archivalSort_ssi
       archiveSpaceUri_ssi
       ancestorDisplayStrings_tesim
       ancestorTitles_tesim
