@@ -49,6 +49,12 @@ RSpec.describe "Iiif Search", type: :request do
       hits = JSON.parse(response.body)["hits"]
       expect(hits.count).to eq 1
     end
+    it 'includes proper "on" property in resources' do
+      get solr_document_iiif_search_path(yale_work[:id], { q: 'BaskeTball' })
+      expect(response).to have_http_status(:success)
+      on_id = JSON.parse(response.body)["resources"][0]["on"]
+      expect(on_id).to end_with('manifests/oid/1234567/canvas/3456#xywh=0,0,0,0')
+    end
   end
 
   describe "IIIF search suggestion" do
