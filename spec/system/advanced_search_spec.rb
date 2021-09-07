@@ -233,7 +233,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
   context 'sorting' do
     it 'can sort by title' do
       within '#sort' do
-        find("option[value='title_ssim asc, oid_ssi desc']").click
+        find("option[value='title_ssim asc, oid_ssi desc, archivalSort_ssi asc']").click
       end
 
       click_on 'SEARCH'
@@ -245,7 +245,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
 
     it 'can sort by creator' do
       within '#sort' do
-        find("option[value='creator_ssim asc, title_ssim asc']").click
+        find("option[value='creator_ssim asc, title_ssim asc, archivalSort_ssi asc']").click
       end
 
       click_on 'SEARCH'
@@ -257,7 +257,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
 
     it 'can sort by date asc' do
       within '#sort' do
-        find("option[value='year_isim asc, id desc']").click
+        find("option[value='year_isim asc, id desc, archivalSort_ssi asc']").click
       end
       click_on 'SEARCH'
       within '#documents' do
@@ -268,7 +268,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
 
     it 'can sort by date desc' do
       within '#sort' do
-        find("option[value='year_isim desc, id desc']").click
+        find("option[value='year_isim desc, id desc, archivalSort_ssi asc']").click
       end
       click_on 'SEARCH'
       # same order as asc because Record 1's dates strattle Record 2's
