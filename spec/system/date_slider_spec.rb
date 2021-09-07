@@ -113,7 +113,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
       sliders = find_all('.slider-handle.round')
 
       beg_slider = sliders.first
-      beg_slider.drag_by(30, 0)
+      beg_slider.drag_by(25, 0)
 
       end_slider = sliders.last
       end_slider.drag_by(-105, 0)
@@ -123,11 +123,11 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     end
 
     within '.blacklight-year_isim' do
-      expect(page.text).to match(/12\d\d to 16\d\d/)
+      expect(page.text).to match(/11\d\d to 16\d\d/)
     end
 
     within '.constraints-container' do
-      expect(page.text).to match(/Date 12\d\d - 16\d\d/)
+      expect(page.text).to match(/Date 11\d\d - 16\d\d/)
     end
 
     # makes sure that it includes the turtle record with years: 1555-1800
