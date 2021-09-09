@@ -33,7 +33,8 @@ class SearchBuilder < Blacklight::SearchBuilder
   #   When a new Solr field is indexed and needed in blacklight, it must be added to this list.
   #   See: https://solr.apache.org/guide/8_0/common-query-parameters.html#fl-field-list-parameter
   def self.solr_record_fields
-    %w[id
+    %w[
+       id
        timestamp
        score
        box_ssim
@@ -54,7 +55,9 @@ class SearchBuilder < Blacklight::SearchBuilder
        thumbnail_path_ss
        title_ssim
        uri_ssim
-       viewing_hint_ssi]
+       viewing_hint_ssi
+       visibility_ssi
+    ]
   end
 
   ##
