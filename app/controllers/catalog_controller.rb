@@ -241,6 +241,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceNote_tesim', label: 'Collection Note', metadata: 'collection_information'
     config.add_show_field 'sourceEdition_tesim', label: 'Collection Edition', metadata: 'collection_information'
     config.add_show_field 'containerGrouping_tesim', label: 'Container / Volume Information', metadata: 'collection_information'
+    config.add_show_field 'findingAid_ssim', label: 'Finding Aid', metadata: 'collection_information', helper_method: :link_to_url
     config.add_show_field 'relatedResourceOnline_ssim', label: 'Related Resource Online', metadata: 'collection_information', helper_method: :link_to_url_with_label
     config.add_show_field 'resourceVersionOnline_ssim', label: 'Resource Version Online', metadata: 'collection_information', helper_method: :link_to_url_with_label
     config.add_show_field 'ancestorDisplayStrings_tesim', label: 'Item Within Collection Hierarchy', metadata: 'collection_information', helper_method: :aspace_tree_display
@@ -554,6 +555,23 @@ class CatalogController < ApplicationController
         format: 'format'
       }
     )
+
+    fl_fields = config.index_fields.keys + config.show_fields.keys + config.facet_fields.keys + SearchBuilder.solr_record_fields + config.search_fields.values.map { |f| f.solr_parameters[:qf] }
+    fl_fields = fl_fields.uniq.flatten
+    fields_exclude_fl = ["fulltext_tesim", /^fulltext/, 'child_fulltext_wstsim', 'child_fulltext_tesim']
+
+    fields_exclude_fl.each do |exclude_field|
+      fl_fields.reject! { |field| field.match exclude_field }
+    end
+
+    config.default_solr_params = {
+      fl: fl_fields.join(' ')
+    }
+  end
+
+  # This is for iiif_search
+  def search_for_item
+    search_service.fetch(params[:solr_document_id])
   end
 
   # This is for iiif_search
