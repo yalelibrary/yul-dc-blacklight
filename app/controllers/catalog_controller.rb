@@ -574,11 +574,6 @@ class CatalogController < ApplicationController
     search_service.fetch(params[:solr_document_id])
   end
 
-  # This is for iiif_search
-  def search_for_item
-    search_service.fetch(params[:solr_document_id])
-  end
-
   def repository_facet?
     helpers.facet_field_in_params?('repository_ssi')
   end
