@@ -22,7 +22,7 @@ module AccessHelper
   def restriction_message(document)
     case document['visibility_ssi']
     when 'Yale Community Only'
-      return "The digital version of this work is restricted to the Yale Community."
+      return "The digital version of this work is restricted due to copyright or other restrictions."
     end
     "The digital version is restricted."
   end
