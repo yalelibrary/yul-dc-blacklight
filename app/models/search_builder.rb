@@ -34,29 +34,29 @@ class SearchBuilder < Blacklight::SearchBuilder
   #   See: https://solr.apache.org/guide/8_0/common-query-parameters.html#fl-field-list-parameter
   def self.solr_record_fields
     %w[
-       id
-       timestamp
-       score
-       box_ssim
-       collectionId_ssim
-       containerGrouping_ssim
-       dependentUris_ssim
-       edition_tesim
-       geoSubject_ssim
-       hashed_id_ssi
-       indexedBy_tsim
-       languageCode_ssim
-       number_of_pages_ss
-       parent_ssi
-       partOf_tesim
-       public_bsi
-       recordType_ssi
-       source_ssim
-       thumbnail_path_ss
-       title_ssim
-       uri_ssim
-       viewing_hint_ssi
-       visibility_ssi
+      id
+      timestamp
+      score
+      box_ssim
+      collectionId_ssim
+      containerGrouping_ssim
+      dependentUris_ssim
+      edition_tesim
+      geoSubject_ssim
+      hashed_id_ssi
+      indexedBy_tsim
+      languageCode_ssim
+      number_of_pages_ss
+      parent_ssi
+      partOf_tesim
+      public_bsi
+      recordType_ssi
+      source_ssim
+      thumbnail_path_ss
+      title_ssim
+      uri_ssim
+      viewing_hint_ssi
+      visibility_ssi
     ]
   end
 
