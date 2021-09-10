@@ -37,104 +37,24 @@ class SearchBuilder < Blacklight::SearchBuilder
       id
       timestamp
       score
-      abstract_tesim
-      accessionNumber_ssi
-      accessRestrictions_tesim
-      alternativeTitle_tesim
-      alternativeTitleDisplay_tesim
-      archivalSort_ssi
-      archiveSpaceUri_ssi
-      ancestorDisplayStrings_tesim
-      ancestorTitles_tesim
-      ancestor_titles_hierarchy_ssim
       box_ssim
-      callNumber_ssim
-      callNumber_tesim
-      caption_tesim
-      child_oids_ssim
       collectionId_ssim
-      collectionId_tesim
-      collection_title_ssi
       containerGrouping_ssim
-      containerGrouping_tesim
-      contents_tesim
-      contributor_tsim
-      contributorDisplay_tsim
-      coordinates_ssim
-      copyrightDate_ssim
-      creator_ssim
-      creator_tesim
-      creatorDisplay_tsim
-      creationPlace_ssim
-      creationPlace_tesim
-      date_ssim
-      dateDepicted_ssim
-      year_isim
-      dateStructured_ssim
       dependentUris_ssim
-      description_tesim
-      digital_ssim
-      edition_ssim
       edition_tesim
-      extent_ssim
-      extentOfDigitization_ssim
-      findingAid_ssim
-      folder_ssim
-      format
-      format_tesim
-      genre_ssim
-      genre_tesim
       geoSubject_ssim
-      has_fulltext_ssi
       hashed_id_ssi
-      identifierMfhd_ssim
-      imageCount_isi
       indexedBy_tsim
-      label_tesim
-      language_ssim
       languageCode_ssim
-      localRecordNumber_ssim
-      material_tesim
       number_of_pages_ss
-      oid_ssi
-      orbisBarcode_ssi
-      orbisBibId_ssi
+      parent_ssi
       partOf_tesim
-      preferredCitation_tesim
-      projection_tesim
       public_bsi
-      publisher_tesim
-      publisher_ssim
       recordType_ssi
-      relatedResourceOnline_ssim
-      resourceVersionOnline_ssim
-      repository_ssim
-      resourceType_ssim
-      resourceType_tesim
-      rights_ssim
-      rights_tesim
-      scale_tesim
       source_ssim
-      sourceCreated_tesim
-      sourceDate_tesim
-      sourceEdition_tesim
-      sourceNote_tesim
-      sourceTitle_tesim
-      sourceCreator_tesim
-      subjectEra_ssim
-      subjectGeographic_ssim
-      subjectGeographic_tesim
-      subjectTitle_tsim
-      subjectTitleDisplay_tsim
-      subjectName_ssim
-      subjectName_tesim
-      subjectTopic_tesim
-      subjectTopic_ssim
       thumbnail_path_ss
-      title_tesim
       title_ssim
       uri_ssim
-      url_suppl_ssim
       viewing_hint_ssi
       visibility_ssi
     ]
@@ -172,7 +92,5 @@ class SearchBuilder < Blacklight::SearchBuilder
   end
 end
 # rubocop:enable Metrics/ClassLength
-
-# TODO: add RelatedResourceOnline and ResourceVersionOnline to the list in def self.solr_record_fields
 
 # TODO: add RelatedResourceOnline and ResourceVersionOnline to the list in def self.solr_record_fields
