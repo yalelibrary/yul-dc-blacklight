@@ -232,10 +232,14 @@ p.yale-restricted-work-text{
 }
 
 .aSpace_tree {
-  margin-top: 14%;
-  margin-inline-start: -46%;
+  margin-top: 90px;
+  height: -moz-fit-content;
+  height: -webkit-fit-content;
   height: fit-content;
-  width: 500px;
+  width: fit-content;
+  margin-left: -45%;
+  float: left;
+
 }
 
 .aSpace_tree ul{
@@ -277,9 +281,9 @@ p.yale-restricted-work-text{
   width: 15px;
   border-left: 2px solid #dddddd;
   border-bottom: 2px solid #dddddd;
-  padding: 20px 20px 0 1px;
+  padding: 20px 16px 0 1px;
   top: -12px;
-  left: -25px;
+  left: -20px;
 }
 
 .aSpaceBranch img {
@@ -380,7 +384,12 @@ p.yale-restricted-work-text{
   }
 
   .aSpace_tree {
-    width: fit-content;
+    margin-top: 17%;
+  }
+
+  .aSpaceBranch {
+    padding: 20px 20px 0 1px;
+    left: -31px;
   }
 
   .aSpace_tree li {
@@ -465,8 +474,8 @@ p.yale-restricted-work-text{
   }
 
   .aSpace_tree {
-    margin-top: 11%;
-    margin-inline-start: -46%;
+    margin-top: 14%;
+    width: fit-content;
   }
 
   .aSpace_Data_Block{
