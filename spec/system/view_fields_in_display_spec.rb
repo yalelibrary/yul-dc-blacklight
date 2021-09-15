@@ -6,7 +6,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     solr = Blacklight.default_index.connection
     solr.add([test_record,
               same_call_record,
-              diff_call_record])
+              diff_call_record,
+              no_collection_record])
     solr.commit
     visit '/catalog/111'
   end
@@ -24,6 +25,14 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       id: '333',
       visibility_ssi: 'Public',
       callNumber_ssim: 'this is the call number, but different'
+    }
+  end
+
+  let(:no_collection_record) do
+    {
+      id: '444',
+      visibility_ssi: 'Public',
+      findingAid_ssim: 'this is the finding aid'
     }
   end
 
@@ -353,5 +362,16 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     expect(page).to have_css '.show-header'
     expect(page).to have_css '.universal-viewer-iframe'
     expect(page).to have_css '.showpage_no_label_tag'
+  end
+
+  context 'when record has no collection title' do
+    it 'the finding aid contains fallback text in the link' do
+      visit '/catalog/444'
+      finding_aid_link = page.find("a[href = 'this is the finding aid']")
+
+      expect(finding_aid_link).to be_truthy
+      expect(finding_aid_link).to have_content "View full finding aid for this collection"
+      expect(finding_aid_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
+    end
   end
 end
