@@ -147,7 +147,7 @@ module BlacklightHelper
   def aspace_tree_display(arg)
     ancestor_display_strings = arg[:document][arg[:field]]
     hierarchy_params = hierarchy_builder arg[:document]
-    last = ancestor_display_strings.size
+    last = ancestor_display_strings.size + 1
 
     img_home = image_tag("archival_icons/yaleASpaceHome.png", { class: 'ASpace_Home ASpace_Icon', alt: 'Main level' })
     img_stack = image_tag("archival_icons/yaleASpaceStack.png", { class: 'ASpace_Stack ASpace_Icon', alt: 'Second level' })
@@ -157,10 +157,18 @@ module BlacklightHelper
     above_or_below = false
     collapsed = nil
     hierarchy_tree = nil
+    ancestor_display_strings.unshift(arg[:document][:title_tesim].first)
     # rubocop:disable Metrics/BlockLength
     (1..last).each do
       current = ancestor_display_strings.shift
-      current = link_to current, url_for(hierarchy_params.pop&.merge(action: 'index')) if hierarchy_params.present?
+
+      current = if current == arg[:document][:title_tesim].first
+                  tag.p(current, class: 'yaleASpaceItemTitle')
+                elsif hierarchy_params.present?
+                  link_to current, url_for(hierarchy_params.pop&.merge(action: 'index'))
+                else
+                  tag.p(current, class: 'yaleASpaceItem')
+                end
 
       case ancestor_display_strings.size
       when 0
