@@ -222,7 +222,11 @@ module BlacklightHelper
     links = []
     findingAidUri.each do |link|
       popup_window = image_tag("YULPopUpWindow.png", { id: 'popup_window', alt: 'pop up window' })
-      links << link_to(safe_join(['View full finding aid for ', arg[:document]['collection_title_ssi']]) + popup_window, link, target: '_blank', rel: 'noopener')
+      links << link_to(safe_join(['View full finding aid for ',
+                                  arg[:document]['collection_title_ssi'].presence || 'this collection']) + popup_window,
+                                  link,
+                                  target: '_blank',
+                                  rel: 'noopener')
     end
     links.first
   end
