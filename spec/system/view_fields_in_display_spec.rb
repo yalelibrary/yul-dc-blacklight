@@ -309,7 +309,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         end
         expect(page).to have_content "Diversity Bull Dogs"
       end
-      it 'preserves search constraints', style: true do
+      it 'does not preserve search constraints', style: true do
         visit '/catalog?q='
         click_on 'Creator'
         click_on 'Frederick'
@@ -321,7 +321,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
           click_on 'fourth'
         end
         expect(page).to have_css ".filter-name", text: "Found In", count: 1
-        expect(page).to have_css ".filter-name", text: "Creator", count: 1
+        expect(page).to have_css ".filter-name", text: "Creator", count: 0
       end
     end
     context 'ASpace hierarchy breadcrumb' do
@@ -343,7 +343,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
           expect(page).to have_content("Diversity Bull Dogs, this is the second title")
         end
       end
-      it 'preserves search constraints', style: true do
+      it 'does not preserves search constraints', style: true do
         visit '/catalog?q='
         click_on 'Creator'
         click_on 'Frederick'
@@ -353,7 +353,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
           click_on 'second'
         end
         expect(page).to have_css ".filter-name", text: "Found In", count: 1
-        expect(page).to have_css ".filter-name", text: "Creator", count: 1
+        expect(page).to have_css ".filter-name", text: "Creator", count: 0
       end
     end
 

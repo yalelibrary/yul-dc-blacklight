@@ -88,10 +88,7 @@ module BlacklightHelper
 
     if hierarchy.present?
       (0..values.size - 1).each do |i|
-        values[i] = link_to values[i], request.params.merge('f' =>
-            request&.params&.[]("f")&.except("ancestor_titles_hierarchy_ssim"))&.merge(
-            "f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i]
-          )&.except("page")
+        values[i] = link_to values[i], search_catalog_path("f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i])
       end
     end
     if values.count > 5
@@ -109,7 +106,7 @@ module BlacklightHelper
 
     if hierarchy.present?
       (0..values.size - 1).each do |i|
-        values[i] = link_to values[i], url_for(hierarchy_params.pop&.merge(action: 'index')) if hierarchy_params.present?
+        values[i] = link_to values[i], search_catalog_path(hierarchy_params.pop) if hierarchy_params.present?
       end
     end
     values << arg[:document][:title_tesim].join(", ") if arg[:document][:title_tesim]
@@ -127,10 +124,7 @@ module BlacklightHelper
 
     if hierarchy.present? && @search_params
       (0..hierarchy.size - 1).each do |i|
-        hierarchy_params << @search_params.merge('f' =>
-        @search_params&.[]("f")&.except("ancestor_titles_hierarchy_ssim"))&.merge(
-          "f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i]
-        )&.except("page")
+        hierarchy_params << { "f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i] }
       end
     end
     hierarchy_params
@@ -162,15 +156,13 @@ module BlacklightHelper
     # rubocop:disable Metrics/BlockLength
     (1..last).each do
       current = ancestor_display_strings.shift
-
       current = if current == arg[:document][:title_tesim].first
                   tag.p(current, class: 'yaleASpaceItemTitle')
                 elsif hierarchy_params.present?
-                  link_to current, url_for(hierarchy_params.pop&.merge(action: 'index'))
+                  link_to current, search_catalog_path(hierarchy_params.pop)
                 else
                   tag.p(current, class: 'yaleASpaceItem')
                 end
-
       case ancestor_display_strings.size
       when 0
         img = img_home
