@@ -293,6 +293,14 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
           expect(page).to have_link "seventh"
         end
       end
+      it 'has title of display item as text' do
+        within '.aSpace_tree' do
+          page.find('.show-full-tree-button').click
+
+          expect(page).to have_content "Diversity Bull Dogs"
+          expect(page).not_to have_link "Diversity Bull Dogs"
+        end
+      end
       it 'searches on link click' do
         within '.aSpace_tree' do
           page.find('.show-full-tree-button').click
@@ -329,6 +337,11 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
           click_on 'second'
         end
         expect(page).to have_content "Diversity Bull Dogs"
+      end
+      it 'displays title of current document' do
+        within '.archival-context' do
+          expect(page).to have_content("Diversity Bull Dogs, this is the second title")
+        end
       end
       it 'does not preserves search constraints', style: true do
         visit '/catalog?q='
