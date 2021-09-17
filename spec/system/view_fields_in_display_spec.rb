@@ -301,7 +301,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         end
         expect(page).to have_content "Diversity Bull Dogs"
       end
-      it 'preserves search constraints', style: true do
+      it 'does not preserve search constraints', style: true do
         visit '/catalog?q='
         click_on 'Creator'
         click_on 'Frederick'
@@ -330,7 +330,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         end
         expect(page).to have_content "Diversity Bull Dogs"
       end
-      it 'preserves search constraints', style: true do
+      it 'does not preserves search constraints', style: true do
         visit '/catalog?q='
         click_on 'Creator'
         click_on 'Frederick'

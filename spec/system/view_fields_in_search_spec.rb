@@ -82,7 +82,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
         # makes sure "found in" does not stack
         expect(page).to have_css ".filter-name", text: "Found In", count: 1
       end
-      it 'keeps other constraints when facet links are clicked' do
+      it 'does not keep other constraints when facet links are clicked' do
         click_on "Creator"
         click_on "Me and You"
         expect(page).to have_css ".filter-name", text: "Creator", count: 1
