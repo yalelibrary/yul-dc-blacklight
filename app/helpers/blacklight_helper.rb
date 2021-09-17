@@ -113,7 +113,14 @@ module BlacklightHelper
   end
 
   def html_safe_converter(arg)
-    sanitize arg[:value][0], tags: %w[a], attributes: %w[href]
+    value = arg[:value].first
+    values = value.split("\n")
+    sanitized_values = []
+    values.each do |v|
+      sanitize v, tags: %w[a], attributes: %w[href]
+      sanitized_values << v
+    end
+    safe_join(sanitized_values, '<br/>'.html_safe)
   end
 
   def search_field_value_link(args)
