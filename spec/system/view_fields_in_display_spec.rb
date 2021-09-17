@@ -6,7 +6,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     solr = Blacklight.default_index.connection
     solr.add([test_record,
               same_call_record,
-              diff_call_record])
+              diff_call_record,
+              no_collection_record])
     solr.commit
     visit '/catalog/111'
   end
@@ -24,6 +25,14 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       id: '333',
       visibility_ssi: 'Public',
       callNumber_ssim: 'this is the call number, but different'
+    }
+  end
+
+  let(:no_collection_record) do
+    {
+      id: '444',
+      visibility_ssi: 'Public',
+      findingAid_ssim: 'this is the finding aid'
     }
   end
 
@@ -284,6 +293,14 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
           expect(page).to have_link "seventh"
         end
       end
+      it 'has title of display item as text' do
+        within '.aSpace_tree' do
+          page.find('.show-full-tree-button').click
+
+          expect(page).to have_content "Diversity Bull Dogs"
+          expect(page).not_to have_link "Diversity Bull Dogs"
+        end
+      end
       it 'searches on link click' do
         within '.aSpace_tree' do
           page.find('.show-full-tree-button').click
@@ -292,7 +309,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         end
         expect(page).to have_content "Diversity Bull Dogs"
       end
-      it 'preserves search constraints', style: true do
+      it 'does not preserve search constraints', style: true do
         visit '/catalog?q='
         click_on 'Creator'
         click_on 'Frederick'
@@ -304,7 +321,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
           click_on 'fourth'
         end
         expect(page).to have_css ".filter-name", text: "Found In", count: 1
-        expect(page).to have_css ".filter-name", text: "Creator", count: 1
+        expect(page).to have_css ".filter-name", text: "Creator", count: 0
       end
     end
     context 'ASpace hierarchy breadcrumb' do
@@ -321,7 +338,12 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         end
         expect(page).to have_content "Diversity Bull Dogs"
       end
-      it 'preserves search constraints', style: true do
+      it 'displays title of current document' do
+        within '.archival-context' do
+          expect(page).to have_content("Diversity Bull Dogs, this is the second title")
+        end
+      end
+      it 'does not preserves search constraints', style: true do
         visit '/catalog?q='
         click_on 'Creator'
         click_on 'Frederick'
@@ -331,7 +353,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
           click_on 'second'
         end
         expect(page).to have_css ".filter-name", text: "Found In", count: 1
-        expect(page).to have_css ".filter-name", text: "Creator", count: 1
+        expect(page).to have_css ".filter-name", text: "Creator", count: 0
       end
     end
 
@@ -353,5 +375,16 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     expect(page).to have_css '.show-header'
     expect(page).to have_css '.universal-viewer-iframe'
     expect(page).to have_css '.showpage_no_label_tag'
+  end
+
+  context 'when record has no collection title' do
+    it 'the finding aid contains fallback text in the link' do
+      visit '/catalog/444'
+      finding_aid_link = page.find("a[href = 'this is the finding aid']")
+
+      expect(finding_aid_link).to be_truthy
+      expect(finding_aid_link).to have_content "View full finding aid for this collection"
+      expect(finding_aid_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
+    end
   end
 end

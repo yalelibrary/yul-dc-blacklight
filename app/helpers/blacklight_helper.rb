@@ -88,10 +88,7 @@ module BlacklightHelper
     # byebug
     if hierarchy.present?
       (0..values.size - 1).each do |i|
-        values[i] = link_to values[i], request.params.merge('f' =>
-            request&.params&.[]("f")&.except("ancestor_titles_hierarchy_ssim"))&.merge(
-            "f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i]
-          )&.except("page")
+        values[i] = link_to values[i], search_catalog_path("f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i])
       end
     end
     if values.count > 5
@@ -109,12 +106,13 @@ module BlacklightHelper
 
     if hierarchy.present?
       (0..values.size - 1).each do |i|
-        values[i] = link_to values[i], url_for(hierarchy_params.pop&.merge(action: 'index')) if hierarchy_params.present?
+        values[i] = link_to values[i], search_catalog_path(hierarchy_params.pop) if hierarchy_params.present?
       end
     end
-    if values.count > 5
+    values << arg[:document][:title_tesim].join(", ") if arg[:document][:title_tesim]
+    if values.count > 6
       values[3] = "<span><button class='show-more-button' aria-label='Show More' title='Show More'>...</button> &gt; </span><span class='show-more-hidden-text'>".html_safe + values[3]
-      values[values.count - 2] = "</span></span>".html_safe + values[values.count - 2]
+      values[values.count - 3] = "</span></span>".html_safe + values[values.count - 3]
     end
     safe_join(values, ' > ')
   end
@@ -127,10 +125,7 @@ module BlacklightHelper
 
     if hierarchy.present? && @search_params
       (0..hierarchy.size - 1).each do |i|
-        hierarchy_params << @search_params.merge('f' =>
-        @search_params&.[]("f")&.except("ancestor_titles_hierarchy_ssim"))&.merge(
-          "f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i]
-        )&.except("page")
+        hierarchy_params << { "f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i] }
       end
     end
     hierarchy_params
@@ -147,8 +142,8 @@ module BlacklightHelper
 
   def aspace_tree_display(arg)
     ancestor_display_strings = arg[:document][arg[:field]]
-    hierarchy_params = hierarchy_builder arg[:document]    
-    last = ancestor_display_strings.size
+    hierarchy_params = hierarchy_builder arg[:document]
+    last = ancestor_display_strings.size + 1
 
     img_home = image_tag("archival_icons/yaleASpaceHome.png", { class: 'ASpace_Home ASpace_Icon', alt: 'Main level' })
     img_stack = image_tag("archival_icons/yaleASpaceStack.png", { class: 'ASpace_Stack ASpace_Icon', alt: 'Second level' })
@@ -158,11 +153,17 @@ module BlacklightHelper
     above_or_below = false
     collapsed = nil
     hierarchy_tree = nil
+    ancestor_display_strings.unshift(arg[:document][:title_tesim].first)
     # rubocop:disable Metrics/BlockLength
     (1..last).each do
       current = ancestor_display_strings.shift
-      current = link_to current, url_for(hierarchy_params.pop&.merge(action: 'index')) if hierarchy_params.present?
-
+      current = if current == arg[:document][:title_tesim].first
+                  tag.p(current, class: 'yaleASpaceItemTitle')
+                elsif hierarchy_params.present?
+                  link_to current, search_catalog_path(hierarchy_params.pop)
+                else
+                  tag.p(current, class: 'yaleASpaceItem')
+                end
       case ancestor_display_strings.size
       when 0
         img = img_home
@@ -223,7 +224,11 @@ module BlacklightHelper
     links = []
     findingAidUri.each do |link|
       popup_window = image_tag("YULPopUpWindow.png", { id: 'popup_window', alt: 'pop up window' })
-      links << link_to(safe_join(['View full finding aid for ', arg[:document]['collection_title_ssi']]) + popup_window, link, target: '_blank', rel: 'noopener')
+      links << link_to(safe_join(['View full finding aid for ',
+                                  arg[:document]['collection_title_ssi'].presence || 'this collection']) + popup_window,
+                                  link,
+                                  target: '_blank',
+                                  rel: 'noopener')
     end
     links.first
   end
