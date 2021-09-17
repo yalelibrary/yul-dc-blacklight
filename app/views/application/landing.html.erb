@@ -25,41 +25,44 @@
     <%= link_to t('blacklight.skip_links.main_content'), '#main-container', class: 'element-invisible element-focusable rounded-bottom py-2 px-3', data: { turbolinks: 'false' } %>
     <%= content_for(:skip_links) %>
   </nav>
-  <%= render partial: 'shared/header_navbar' %>
 
-  <%= render partial: 'shared/flash_msg', layout: 'shared/flash_messages' %>
+  <header>
+    <%= render partial: 'shared/header_navbar' %>
 
-  <div id='hero'>
-    <div class="intro">
-      <%= image_tag("", class: "d-block w-100", id: "hero-image", alt: "") %>
-      <div class="image-overlay"></div>
-      <div class="hero-caption d-md-block">
-        <p id="hero-image-caption"></p>
+    <%= render partial: 'shared/flash_msg', layout: 'shared/flash_messages' %>
+
+    <div id='hero'>
+      <div class="intro">
+        <%= image_tag("", class: "d-block w-100", id: "hero-image", alt: "") %>
+        <div class="image-overlay"></div>
+        <div class="hero-caption d-md-block">
+          <p id="hero-image-caption"></p>
+        </div>
+      </div>
+
+      <div id='hero-search' class="container d-flex h-100">
+        <div class="hero-info">
+          <h1>Digital Collections</h1>
+          <%= form_tag search_action_url, method: :get, class: 'search-query-form', role: 'search', 'aria-label' => t('blacklight.search.form.submit') do %>
+            <div class="input-group">
+              <%= hidden_field_tag :search_field, search_fields.first.last %>
+              <label for="q" class="sr-only"><%= t('blacklight.search.form.search.label') %></label>
+              <%= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}", id: "q", aria: { label: 'search' } %>
+              <span class="input-group-append">
+                <button type="submit" class="btn btn-primary search-btn" id="search">
+                  <span class="submit-search-text"><%= t('blacklight.search.form.submit') %></span>
+                  <%= blacklight_icon :search, aria_hidden: true %>
+                </button>
+              </span>
+            </div>
+          <% end %>
+          <p class="d-none d-xl-block" style="font-size: medium;">
+            Yale Library's digital collections provide access to millions of digitized works and images. This site is a living database, and new materials are added regularly. Search or click an image below to begin your exploration. There are Yale Library digital collections not available on this site. More information on these additional collections can be found <a href=" https://web.library.yale.edu/digital-collections" class="link-white"> here</a>.
+          </p>
+        </div>
       </div>
     </div>
-
-    <div id='hero-search' class="container d-flex h-100">
-      <div class="hero-info">
-        <h1>Digital Collections</h1>
-        <%= form_tag search_action_url, method: :get, class: 'search-query-form', role: 'search', 'aria-label' => t('blacklight.search.form.submit') do %>
-          <div class="input-group">
-            <%= hidden_field_tag :search_field, search_fields.first.last %>
-            <label for="q" class="sr-only"><%= t('blacklight.search.form.search.label') %></label>
-            <%= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}", id: "q", aria: { label: 'search' } %>
-            <span class="input-group-append">
-              <button type="submit" class="btn btn-primary search-btn" id="search">
-                <span class="submit-search-text"><%= t('blacklight.search.form.submit') %></span>
-                <%= blacklight_icon :search, aria_hidden: true %>
-              </button>
-            </span>
-          </div>
-        <% end %>
-        <p class="d-none d-xl-block" style="font-size: medium;">
-          Yale Library's digital collections provide access to millions of digitized works and images. This site is a living database, and new materials are added regularly. Search or click an image below to begin your exploration. There are Yale Library digital collections not available on this site. More information on these additional collections can be found <a href=" https://web.library.yale.edu/digital-collections" class="link-white"> here</a>.
-        </p>
-      </div>
-    </div>
-  </div>
+  </header>
 
   <main id="main-container" class="<%= container_classes %>" role="main" aria-label="<%= t('blacklight.main.aria.main_container') %>">
     <div id='highlights'>
