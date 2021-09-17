@@ -90,7 +90,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
         click_on "Level0"
 
         expect(page).to have_css ".filter-name", text: "Found In", count: 1
-        expect(page).to have_css ".filter-name", text: "Creator", count: 1
+        expect(page).to have_css ".filter-name", text: "Creator", count: 0
       end
     end
   end
