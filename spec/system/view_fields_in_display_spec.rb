@@ -330,6 +330,11 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         end
         expect(page).to have_content "Diversity Bull Dogs"
       end
+      it 'displays title of current document' do
+        within '.archival-context' do
+          expect(page).to have_content("Diversity Bull Dogs, this is the second title")
+        end
+      end
       it 'preserves search constraints', style: true do
         visit '/catalog?q='
         click_on 'Creator'

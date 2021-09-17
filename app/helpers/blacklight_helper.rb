@@ -112,9 +112,10 @@ module BlacklightHelper
         values[i] = link_to values[i], url_for(hierarchy_params.pop&.merge(action: 'index')) if hierarchy_params.present?
       end
     end
-    if values.count > 5
+    values << arg[:document][:title_tesim].join(", ") if arg[:document][:title_tesim]
+    if values.count > 6
       values[3] = "<span><button class='show-more-button' aria-label='Show More' title='Show More'>...</button> &gt; </span><span class='show-more-hidden-text'>".html_safe + values[3]
-      values[values.count - 2] = "</span></span>".html_safe + values[values.count - 2]
+      values[values.count - 3] = "</span></span>".html_safe + values[values.count - 3]
     end
     safe_join(values, ' > ')
   end
