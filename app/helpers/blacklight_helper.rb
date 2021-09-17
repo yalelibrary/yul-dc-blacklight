@@ -83,9 +83,9 @@ module BlacklightHelper
 
   def archival_display(arg)
     values = arg[:document][arg[:field]].reverse
-
+    title = arg[:document]["title_tesim"].presence || []
     hierarchy = arg[:document][:ancestor_titles_hierarchy_ssim]
-
+    # byebug
     if hierarchy.present?
       (0..values.size - 1).each do |i|
         values[i] = link_to values[i], request.params.merge('f' =>
@@ -98,7 +98,7 @@ module BlacklightHelper
       values[3] = "<span><button class='show-more-button' aria-label='Show More' title='Show More'>...</button> &gt; </span><span class='show-more-hidden-text'>".html_safe + values[3]
       values[values.count - 2] = "</span></span>".html_safe + values[values.count - 2]
     end
-    safe_join(values, ' > ')
+    safe_join(values + title, ' > ')
   end
 
   def archival_display_show(arg)
@@ -120,6 +120,7 @@ module BlacklightHelper
   end
 
   def hierarchy_builder(document)
+    # byebug
     hierarchy = document[:ancestor_titles_hierarchy_ssim]
     hierarchy_params = []
     @search_params ||= Hash.new { |h, k| h[k] = h.dup.clear }
@@ -146,7 +147,7 @@ module BlacklightHelper
 
   def aspace_tree_display(arg)
     ancestor_display_strings = arg[:document][arg[:field]]
-    hierarchy_params = hierarchy_builder arg[:document]
+    hierarchy_params = hierarchy_builder arg[:document]    
     last = ancestor_display_strings.size
 
     img_home = image_tag("archival_icons/yaleASpaceHome.png", { class: 'ASpace_Home ASpace_Icon', alt: 'Main level' })
