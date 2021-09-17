@@ -112,8 +112,10 @@ module BlacklightHelper
     link_to(arg[:value][0], arg[:value][0])
   end
 
-  def html_safe_converter(arg)
-    sanitize arg[:value][0], tags: %w[a], attributes: %w[href]
+  def line_break_converter(arg)
+    value = arg[:value].first
+    values = value.split("\n")
+    safe_join(values, '<br/>'.html_safe)
   end
 
   def search_field_value_link(args)

@@ -45,7 +45,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       subjectName_ssim: ['this is the subject name', 'these are the subject names'],
       subjectTopic_ssim: ['this is the subject topic', 'these are the subject topics'],
       extentOfDigitization_ssim: 'this is the extent of digitization',
-      rights_ssim: "these are the rights",
+      rights_ssim: "these are the rights.\nThese are additional rights.",
       creationPlace_ssim: "this is the publication place",
       sourceCreated_tesim: "this is the source created",
       publisher_ssim: "this is the publisher",
@@ -147,7 +147,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("Public")
     end
     it 'displays the Rights in results' do
-      expect(document).to have_content("these are the rights")
+      expect(document).to have_content("these are the rights.These are additional rights.")
     end
     it 'displays the Publication Place in results' do
       expect(document).to have_content("this is the publication place")
