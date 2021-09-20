@@ -119,7 +119,6 @@ module BlacklightHelper
   end
 
   def hierarchy_builder(document)
-    # byebug
     hierarchy = document[:ancestor_titles_hierarchy_ssim]
     hierarchy_params = []
     @search_params ||= Hash.new { |h, k| h[k] = h.dup.clear }
