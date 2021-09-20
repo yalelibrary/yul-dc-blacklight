@@ -70,15 +70,16 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     context 'Ancestor Title (Found in)' do
       it 'is displayed in results with links' do
         expect(content).to have_link("Level0")
+        expect(content).to have_link("Amor Perro")
         click_on "Level0"
-        expect(page).to have_content "111"
+        expect(page).to have_content "Amor Perro"
 
         click_on "Beinecke Rare Book and Manuscript Library (BRBL)"
-        expect(page).to have_content "111"
+        expect(page).to have_content "Amor Perro"
 
         click_on("...")
         click_on "Level3"
-        expect(page).to have_content "111"
+        expect(page).to have_content "Amor Perro"
 
         # makes sure "found in" does not stack
         expect(page).to have_css ".filter-name", text: "Found In", count: 1

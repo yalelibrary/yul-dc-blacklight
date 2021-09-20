@@ -83,9 +83,9 @@ module BlacklightHelper
 
   def archival_display(arg)
     values = arg[:document][arg[:field]].reverse
-    title = arg[:document]["title_tesim"].presence || []
+    title = link_to arg[:document][:title_tesim] ? arg[:document][:title_tesim].join(", ") : arg[:document][:id], solr_document_path(arg[:document][:id])
     hierarchy = arg[:document][:ancestor_titles_hierarchy_ssim]
-    # byebug
+
     if hierarchy.present?
       (0..values.size - 1).each do |i|
         values[i] = link_to values[i], search_catalog_path("f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i])
@@ -95,7 +95,8 @@ module BlacklightHelper
       values[3] = "<span><button class='show-more-button' aria-label='Show More' title='Show More'>...</button> &gt; </span><span class='show-more-hidden-text'>".html_safe + values[3]
       values[values.count - 2] = "</span></span>".html_safe + values[values.count - 2]
     end
-    safe_join(values + title, ' > ')
+    values << title
+    safe_join(values, ' > ')
   end
 
   def archival_display_show(arg)
