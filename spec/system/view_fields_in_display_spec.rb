@@ -361,7 +361,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       finding_aid_link = page.find("a[href = 'this is the finding aid']")
 
       expect(finding_aid_link).to be_truthy
-      expect(finding_aid_link).to have_content "View full finding aid for this is the collection title"
+      expect(finding_aid_link).to have_content "View full finding aid for this is the source title"
       expect(finding_aid_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
     end
   end
