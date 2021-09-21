@@ -23,7 +23,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
               void])
     solr.commit
     visit '/catalog?search_field=all_fields&q='
-    click_on 'Amor Llama'
+    click_on 'Amor Llama', match: :first
   end
 
   let(:llama) do
