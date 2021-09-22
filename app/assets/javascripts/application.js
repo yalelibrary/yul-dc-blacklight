@@ -144,6 +144,7 @@ $(document).ready(() => {
 
 // Get the full text and render it on screen
 const fulltext = () => {
+    // check if fulltext is present
     const fulltextTranscription = $('.item-page-fulltext-wrapper .row')
     fulltextTranscription.empty() // Delete the old full text
     const child_oids_array = $('#uv-pages').html().split(' ')
@@ -157,16 +158,41 @@ const fulltext = () => {
 }
 
 const getFulltext = async (child_oid) => {
-    const result = await $.ajax({
+    shouldGet = await $.ajax({
         type:'GET',
         url:`/annotation/oid/${$('#parent-oid').text()}/canvas/${child_oid}/fulltext`,
-        data: {
-            oid: $('#parent-oid').text(),
-            child_oid: $('#uv-pages').text()
-        },
+        error: function (x) {
+            if (x.status == 500) {
+                console.log('500')
+                return false
+            } else {
+                console.log('else')
+                return true
+            }
+        }
     })
-
-    return result.body.value
+    if(shouldGet == true) {
+        const result = await $.ajax({
+            type:'GET',
+            url:`/annotation/oid/${$('#parent-oid').text()}/canvas/${child_oid}/fulltext`,
+            data: {
+                oid: $('#parent-oid').text(),
+                child_oid: $('#uv-pages').text()
+            },
+        })
+        return result.body.value
+    } else {
+        console.log('billow')
+    }
+    // const result = await $.ajax({
+    //     type:'GET',
+    //     url:`/annotation/oid/${$('#parent-oid').text()}/canvas/${child_oid}/fulltext`,
+    //     data: {
+    //         oid: $('#parent-oid').text(),
+    //         child_oid: $('#uv-pages').text()
+    //     },
+    // })
+    // return result.body.value
 }
 
 $(document).on('turbolinks:load', function() {
