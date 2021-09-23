@@ -16,6 +16,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       date_ssim: '1999',
       resourceType_ssim: 'Archives or Manuscripts',
       callNumber_tesim: 'Beinecke MS 801',
+      containerGrouping_tesim: 'BRBL_091081',
       imageCount_isi: '23',
       visibility_ssi: 'Public'
     }
@@ -35,6 +36,9 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     end
     it 'displays Call Number in results' do
       expect(content).to have_content('Beinecke MS 801')
+    end
+    it 'displays Container / Volume in results' do
+      expect(content).to have_content('BRBL_091081')
     end
     it 'displays Image Count in results' do
       expect(content).to have_content('23')
