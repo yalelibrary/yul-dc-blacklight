@@ -147,7 +147,7 @@ const fulltext = () => {
     // check if fulltext is present on page
     const fulltextTranscription = $('.item-page-fulltext-wrapper .row')
     fulltextTranscription.empty() // Delete the old full text
-    // check if fulltext is present on child object - button will only display if fulltext is available
+    // check if fulltext is present on child object - button will only display if 'has_fulltext_ssi' is Yes
     if($('.fulltext-button').length) {
         const child_oids_array = $('#uv-pages').html().split(' ')
         const pageWidth = child_oids_array.length === 1 ? 'col-md-12' : 'col-md-6'
