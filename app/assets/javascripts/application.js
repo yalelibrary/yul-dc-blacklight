@@ -144,55 +144,34 @@ $(document).ready(() => {
 
 // Get the full text and render it on screen
 const fulltext = () => {
-    // check if fulltext is present
+    // check if fulltext is present on page
     const fulltextTranscription = $('.item-page-fulltext-wrapper .row')
     fulltextTranscription.empty() // Delete the old full text
-    const child_oids_array = $('#uv-pages').html().split(' ')
-    const pageWidth = child_oids_array.length === 1 ? 'col-md-12' : 'col-md-6'
-
-    child_oids_array.forEach(async child_oid => {
-        const transcription = await getFulltext(child_oid)
-
-        return fulltextTranscription.append(`<span class='${pageWidth}'>${transcription}</span>`)
-    })
+    // check if fulltext is present on child object - button will only display if fulltext is available
+    if($('.fulltext-button').length) {
+        const child_oids_array = $('#uv-pages').html().split(' ')
+        const pageWidth = child_oids_array.length === 1 ? 'col-md-12' : 'col-md-6'
+    
+        child_oids_array.forEach(async child_oid => {
+            const transcription = await getFulltext(child_oid)
+    
+            return fulltextTranscription.append(`<span class='${pageWidth}'>${transcription}</span>`)
+        })
+    } else {
+        return
+    }
 }
 
 const getFulltext = async (child_oid) => {
-    shouldGet = await $.ajax({
+    const result = await $.ajax({
         type:'GET',
         url:`/annotation/oid/${$('#parent-oid').text()}/canvas/${child_oid}/fulltext`,
-        error: function (x) {
-            if (x.status == 500) {
-                console.log('500')
-                return false
-            } else {
-                console.log('else')
-                return true
-            }
-        }
+        data: {
+            oid: $('#parent-oid').text(),
+            child_oid: $('#uv-pages').text()
+        },
     })
-    if(shouldGet == true) {
-        const result = await $.ajax({
-            type:'GET',
-            url:`/annotation/oid/${$('#parent-oid').text()}/canvas/${child_oid}/fulltext`,
-            data: {
-                oid: $('#parent-oid').text(),
-                child_oid: $('#uv-pages').text()
-            },
-        })
-        return result.body.value
-    } else {
-        console.log('billow')
-    }
-    // const result = await $.ajax({
-    //     type:'GET',
-    //     url:`/annotation/oid/${$('#parent-oid').text()}/canvas/${child_oid}/fulltext`,
-    //     data: {
-    //         oid: $('#parent-oid').text(),
-    //         child_oid: $('#uv-pages').text()
-    //     },
-    // })
-    // return result.body.value
+    return result.body.value
 }
 
 $(document).on('turbolinks:load', function() {
