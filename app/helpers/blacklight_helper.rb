@@ -247,12 +247,33 @@ module BlacklightHelper
     safe_join(links, '<br/>'.html_safe)
   end
 
+  def link_to_url_with_label(arg)
+    links = arg[:value].map do |value|
+      link_part = value.split('|')
+      next unless link_part.count <= 2
+      urls = link_part.select { |s| s.start_with? 'http' }
+      labels = link_part.select { |s| !s.start_with? 'http' }
+      if urls.count == 1
+        label = labels[0] || urls[0]
+        link_to(label, urls[0])
+      end
+    end.compact
+    safe_join(links, '<br/>'.html_safe)
+  end
+
   def link_to_url(arg)
     link_to(arg[:value][0], arg[:value][0])
   end
 
   def html_safe_converter(arg)
-    sanitize arg[:value][0], tags: %w[a], attributes: %w[href]
+    value = arg[:value].first
+    values = value.split("\n")
+    sanitized_values = []
+    values.each do |v|
+      sanitize v, tags: %w[a], attributes: %w[href]
+      sanitized_values << v
+    end
+    safe_join(sanitized_values, '<br/>'.html_safe)
   end
 
   def search_field_value_link(args)
