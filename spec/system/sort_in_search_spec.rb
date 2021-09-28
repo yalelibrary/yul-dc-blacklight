@@ -20,8 +20,10 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       format: 'text',
       language_ssim: 'la',
       visibility_ssi: 'Public',
+      archivalSort_ssi: '00000.00040',
       creationPlace_ssim: 'Spain',
       resourceType_ssim: 'Maps, Atlases & Globes',
+      creator_tesim: 'Anna Elizabeth Dewdney',
       creator_ssim: ['Anna Elizabeth Dewdney'],
       dateStructured_ssim: ['1911'],
       year_isim: [1690]
@@ -36,8 +38,10 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       format: 'three dimensional object',
       language_ssim: 'en',
       visibility_ssi: 'Public',
+      archivalSort_ssi: '08001.00038',
       creationPlace_ssim: 'New Haven',
       resourceType_ssim: 'Books, Journals & Pamphlets',
+      creator_tesim: 'Andy Graves',
       creator_ssim: ['Andy Graves'],
       dateStructured_ssim: ['1755'],
       year_isim: [1755]
@@ -52,8 +56,10 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       format: 'text',
       language_ssim: 'fr',
       visibility_ssi: 'Public',
+      archivalSort_ssi: '04000.00040',
       creationPlace_ssim: 'Constantinople or southern Italy',
       resourceType_ssim: 'Archives or Manuscripts',
+      creator_tesim: 'Paulo Coelho',
       creator_ssim: ['Paulo Coelho'],
       dateStructured_ssim: ['1972'],
       year_isim: [1790]
@@ -68,8 +74,10 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       format: 'still image',
       language_ssim: 'it',
       visibility_ssi: 'Public',
+      archivalSort_ssi: '00020.00040',
       creationPlace_ssim: 'White-Hall, printed upon the ice, on the River Thames',
       resourceType_ssim: 'Archives or Manuscripts',
+      creator_tesim: 'Andrew Norriss',
       creator_ssim: ['Andrew Norriss'],
       dateStructured_ssim: ['1699'],
       year_isim: [1830]

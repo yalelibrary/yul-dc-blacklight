@@ -12,6 +12,7 @@
 //= require twitter/typeahead
 //= require bootstrap
 //= require blacklight/blacklight
+//= require show_more
 
 
 
@@ -151,10 +152,10 @@ const fulltext = () => {
     if($('.fulltext-button').length) {
         const child_oids_array = $('#uv-pages').html().split(' ')
         const pageWidth = child_oids_array.length === 1 ? 'col-md-12' : 'col-md-6'
-    
+
         child_oids_array.forEach(async child_oid => {
             const transcription = await getFulltext(child_oid)
-    
+
             return fulltextTranscription.append(`<span class='${pageWidth}'>${transcription}</span>`)
         })
     } else {

@@ -18,6 +18,25 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     end
   end
 
+  describe '#aspace_link' do
+    context 'with a valid aspace link' do
+      let(:document) { SolrDocument.new(id: 'aspace_link', archiveSpaceUri_ssi: '/repositories/11/archival_objects/21463') }
+      let(:args) do
+        {
+          document: document,
+          field: 'archiveSpaceUri_ssi',
+          value: '/repositories/11/archival_objects/21463'
+        }
+      end
+      it 'has a valid aspace link' do
+        # rubocop:disable Layout/LineLength
+        aspace_test_link = helper.aspace_link(args)
+        expect(aspace_test_link).to match "<a target=\"_blank\" rel=\"noopener\" href=\"https://archives.yale.edu/repositories/11/archival_objects/21463\">View item information in Archives at Yale<img id=\"popup_window\" alt=\"pop up window\" src=\"/assets/YULPopUpWindow-6875f3abe2978f95c415644269f3a1765897b5fd06976b6762dc3b06736b3324.png\" /></a>"
+        # rubocop:enable Layout/LineLength
+      end
+    end
+  end
+
   describe '#language_code' do
     context 'with a valid language code' do
       it 'returns the English name of the language' do
@@ -160,7 +179,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
             expect(options[:remove]).to match clean_url
           end
         end
-        context 'with a date range face applied' do
+        context 'with a date range facet applied' do
           let(:params) do
             params = Hash.new { |h, k| h[k] = h.dup.clear }
             params["range"]["year_isim"]["missing"] = false
@@ -171,7 +190,6 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
             end
             params["range"].values[0]["begin"] = 1500
             params["range"].values[0]["end"] = 2000
-
             params
           end
           it 'assigns the correct values to options' do

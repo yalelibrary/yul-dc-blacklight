@@ -81,6 +81,130 @@ module BlacklightHelper
     '<p>'.html_safe + safe_join(values, '</p><p>'.html_safe) + '</p>'.html_safe if values
   end
 
+  def archival_display(arg)
+    values = arg[:document][arg[:field]].reverse
+    title = link_to arg[:document][:title_tesim] ? arg[:document][:title_tesim].join(", ") : arg[:document][:id], solr_document_path(arg[:document][:id])
+    hierarchy = arg[:document][:ancestor_titles_hierarchy_ssim]
+
+    if hierarchy.present?
+      (0..values.size - 1).each do |i|
+        values[i] = link_to values[i], search_catalog_path("f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i])
+      end
+    end
+    if values.count > 5
+      values[3] = "<span><button class='show-more-button' aria-label='Show More' title='Show More'>...</button> &gt; </span><span class='show-more-hidden-text'>".html_safe + values[3]
+      values[values.count - 2] = "</span></span>".html_safe + values[values.count - 2]
+    end
+    values << title
+    safe_join(values, ' > ')
+  end
+
+  def archival_display_show(arg)
+    values = arg[:document][arg[:field]].reverse
+
+    hierarchy = arg[:document][:ancestor_titles_hierarchy_ssim]
+    hierarchy_params = (hierarchy_builder arg[:document]).reverse
+
+    if hierarchy.present?
+      (0..values.size - 1).each do |i|
+        values[i] = link_to values[i], search_catalog_path(hierarchy_params.pop) if hierarchy_params.present?
+      end
+    end
+    values << arg[:document][:title_tesim].join(", ") if arg[:document][:title_tesim]
+    if values.count > 6
+      values[3] = "<span><button class='show-more-button' aria-label='Show More' title='Show More'>...</button> &gt; </span><span class='show-more-hidden-text'>".html_safe + values[3]
+      values[values.count - 3] = "</span></span>".html_safe + values[values.count - 3]
+    end
+    safe_join(values, ' > ')
+  end
+
+  def hierarchy_builder(document)
+    hierarchy = document[:ancestor_titles_hierarchy_ssim]
+    hierarchy_params = []
+    @search_params ||= Hash.new { |h, k| h[k] = h.dup.clear }
+
+    if hierarchy.present? && @search_params
+      (0..hierarchy.size - 1).each do |i|
+        hierarchy_params << { "f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i] }
+      end
+    end
+    hierarchy_params
+  end
+
+  def aspace_link(arg)
+    # rubocop:disable Naming/VariableName
+    archiveSpaceUri = arg[:document][arg[:field]]
+    link = "https://archives.yale.edu#{archiveSpaceUri}"
+    popup_window = image_tag("YULPopUpWindow.png", { id: 'popup_window', alt: 'pop up window' })
+    link_to 'View item information in Archives at Yale'.html_safe + popup_window, link, target: '_blank', rel: 'noopener'
+    # rubocop:enable Naming/VariableName
+  end
+
+  def aspace_tree_display(arg)
+    ancestor_display_strings = arg[:document][arg[:field]]
+    hierarchy_params = hierarchy_builder arg[:document]
+    last = ancestor_display_strings.size + 1
+
+    img_home = image_tag("archival_icons/yaleASpaceHome.png", { class: 'ASpace_Home ASpace_Icon', alt: 'Main level' })
+    img_stack = image_tag("archival_icons/yaleASpaceStack.png", { class: 'ASpace_Stack ASpace_Icon', alt: 'Second level' })
+    img_folder = image_tag("archival_icons/yaleASpaceFolder.png", { class: 'ASpace_Folder ASpace_Icon', alt: 'Document or last level' })
+
+    branch_connection = true
+    above_or_below = false
+    collapsed = nil
+    hierarchy_tree = nil
+    ancestor_display_strings.unshift(arg[:document][:title_tesim].first)
+    # rubocop:disable Metrics/BlockLength
+    (1..last).each do
+      current = ancestor_display_strings.shift
+      current = if current == arg[:document][:title_tesim].first
+                  tag.p(current, class: 'yaleASpaceItemTitle')
+                elsif hierarchy_params.present?
+                  link_to current, search_catalog_path(hierarchy_params.pop)
+                else
+                  tag.p(current, class: 'yaleASpaceItem')
+                end
+      case ancestor_display_strings.size
+      when 0
+        img = img_home
+        li_class = 'yaleASpaceHome'
+        ul_class = 'yaleASpaceHomeNested'
+        branch_connection = false
+      when 1
+        img = img_stack
+        li_class = 'yaleASpaceStack'
+        ul_class = 'yaleASpaceStackNested'
+      else
+        img = img_folder
+        li_class = 'yaleASpaceFolder'
+        ul_class = 'yaleASpaceFolderNested'
+      end
+      hierarchy_tree = tag.li(class: li_class) do
+        tag.div(class: (!(ancestor_display_strings.size < 3 || ancestor_display_strings.size > last - 4) ? 'show-full-tree-hidden-text' : '')) do
+          concat tag.span(nil, class: 'aSpaceBranch') if branch_connection
+          concat img
+          concat current
+          concat collapsed if collapsed && above_or_below
+          concat tag.ul(hierarchy_tree, class: ul_class) if hierarchy_tree
+        end
+      end
+
+      above_or_below = last > 6 && [3, last - 3].include?(ancestor_display_strings.size)
+      next unless above_or_below && collapsed.nil?
+
+      collapsed ||= tag.ul do
+        tag.li do
+          concat tag.span(nil, class: 'aSpaceBranch')
+          concat button_tag '...', class: 'show-full-tree-button'
+          concat tag.ul(hierarchy_tree)
+        end
+      end
+      above_or_below = false
+    end
+    # rubocop:enable Metrics/BlockLength
+    tag.ul(hierarchy_tree, class: 'aSpace_tree') if hierarchy_tree
+  end
+
   def faceted_join_with_br(arg)
     values = arg[:document][arg[:field]]
     links = []
@@ -92,6 +216,21 @@ module BlacklightHelper
 
   def build_escaped_facet(field, value)
     "/catalog?f" + ERB::Util.url_encode("[#{field}][]") + "=#{value}"
+  end
+
+  def finding_aid_link(arg)
+    # rubocop:disable Naming/VariableName
+    findingAidUri = arg[:document][arg[:field]]
+    links = []
+    findingAidUri.each do |link|
+      popup_window = image_tag("YULPopUpWindow.png", { id: 'popup_window', alt: 'pop up window' })
+      links << link_to(safe_join(['View full finding aid for ',
+                                  arg[:document]['collection_title_ssi'].presence || arg[:document]['sourceTitle_tesim'].presence || 'this collection']) + popup_window,
+                                  link,
+                                  target: '_blank',
+                                  rel: 'noopener')
+    end
+    links.first
   end
 
   def link_to_url_with_label(arg)

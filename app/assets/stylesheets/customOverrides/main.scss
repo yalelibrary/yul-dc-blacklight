@@ -113,6 +113,23 @@ a {
   position: relative;
 }
 
+.show-more-hidden-text {
+  display: none;
+
+} .show-full-tree-hidden-text {
+  display: none;
+}
+
+.show-full-tree-button {
+  border: none;
+  background: none;
+}
+
+.show-more-button {
+  border: none;
+  background: none;
+}
+
 .text-success, .facet-values li .selected {
   color: $light_blue !important;
 }
