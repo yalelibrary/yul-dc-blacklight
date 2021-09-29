@@ -205,7 +205,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the OID in results' do
       expect(document).to have_content("2345678")
     end
-
     it 'displays the Container/Volume in results' do
       expect(document).to have_content("this is the container information")
     end
