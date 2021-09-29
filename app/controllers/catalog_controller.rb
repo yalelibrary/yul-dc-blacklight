@@ -123,8 +123,8 @@ class CatalogController < ApplicationController
 
     config.add_facet_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', limit: true
     config.add_facet_field 'visibility_ssi', label: 'Access', limit: true
-    config.add_facet_field 'repository_ssi', label: 'Repository', limit: true
-    config.add_facet_field 'collection_title_ssi', label: 'Collection Title', limit: true, if: :repository_facet?
+    config.add_facet_field 'repository_ssim', label: 'Repository', limit: true
+    config.add_facet_field 'collection_title_ssim', label: 'Collection Title', limit: true, if: :repository_facet?
     config.add_facet_field 'format', label: 'Format', limit: true
     config.add_facet_field 'genre_ssim', label: 'Genre', limit: true
     config.add_facet_field 'resourceType_ssim', label: 'Resource Type', limit: true
@@ -231,8 +231,8 @@ class CatalogController < ApplicationController
     config.add_show_field 'language_ssim', label: 'Language', metadata: 'description', helper_method: :language_codes_as_links
 
     # Collection Information Group
-    # ancestorDisplayStrings must be first
-    # archiveSpaceUri must be last
+    # ancestorDisplayStrings must be first and the information of the ASpace tree
+    # archiveSpaceUri and findingAid must be last
     #
     config.add_show_field 'callNumber_ssim', label: 'Call Number', metadata: 'collection_information', link_to_facet: true
     config.add_show_field 'sourceTitle_tesim', label: 'Collection Title', metadata: 'collection_information'
@@ -241,10 +241,10 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceDate_tesim', label: 'Collection Date', metadata: 'collection_information'
     config.add_show_field 'sourceNote_tesim', label: 'Collection Note', metadata: 'collection_information'
     config.add_show_field 'sourceEdition_tesim', label: 'Collection Edition', metadata: 'collection_information'
-    config.add_show_field 'containerGrouping_tesim', label: 'Container / Volume Information', metadata: 'collection_information'
     config.add_show_field 'relatedResourceOnline_ssim', label: 'Related Resource Online', metadata: 'collection_information', helper_method: :link_to_url_with_label
     config.add_show_field 'resourceVersionOnline_ssim', label: 'Resource Version Online', metadata: 'collection_information', helper_method: :link_to_url_with_label
     config.add_show_field 'ancestorDisplayStrings_tesim', label: 'Item Within Collection Hierarchy', metadata: 'collection_information', helper_method: :aspace_tree_display
+    config.add_show_field 'containerGrouping_tesim', label: 'Container / Volume', metadata: 'collection_information'
     config.add_show_field 'archiveSpaceUri_ssi', label: ' ', no_label: true, metadata: 'collection_information', helper_method: :aspace_link
     config.add_show_field 'findingAid_ssim', label: ' ', no_label: true, metadata: 'collection_information', helper_method: :finding_aid_link
 
