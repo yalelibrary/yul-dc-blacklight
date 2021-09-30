@@ -60,6 +60,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       publisher_ssim: "this is the publisher",
       copyrightDate_ssim: "this is the copyright date",
       source_ssim: "this is the source",
+      repository_ssi: "this is the repository name",
       recordType_ssi: "this is the record type",
       sourceTitle_tesim: "this is the source title",
       sourceCreator_tesim: "this is the source creator",
@@ -213,6 +214,9 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays the Edition in results' do
       expect(document).to have_content("this is the edition")
+    end
+    it 'displays the repository name in results' do
+      expect(document).to have_content("this is the repository name")
     end
     it 'displays the call number in results as link' do
       expect(page).to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number')

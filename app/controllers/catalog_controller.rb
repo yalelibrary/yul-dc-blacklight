@@ -234,6 +234,7 @@ class CatalogController < ApplicationController
     # ancestorDisplayStrings must be first and the information of the ASpace tree
     # archiveSpaceUri and findingAid must be last
     #
+    config.add_show_field 'repository_ssi', label: 'Repository', metadata: 'collection_information'
     config.add_show_field 'callNumber_ssim', label: 'Call Number', metadata: 'collection_information', link_to_facet: true
     config.add_show_field 'sourceTitle_tesim', label: 'Collection Title', metadata: 'collection_information'
     config.add_show_field 'sourceCreator_tesim', label: 'Collection/Other Creator', metadata: 'collection_information'
