@@ -273,10 +273,6 @@ p.yale-restricted-work-text{
   list-style: none;
 }
 
-.yaleASpaceItemTitle {
-  display: inline;
-}
-
 //Control the appearance of hierarchy icons and space
 .aSpaceBranch {
   position: absolute;
@@ -294,6 +290,18 @@ p.yale-restricted-work-text{
   height: 15px;
   width: 15px;
 }
+
+.yaleASpaceItemThis {
+  color: white;
+  background-color: green;
+  border: solid 4px green;
+}
+
+.yaleASpaceItemThis span {
+  display: block;
+  margin-right: 5px;
+}
+
 .showpage_no_label_tag,
 .blacklight-archivespaceuri_ssi {
   font-family: Mallory-Bold;

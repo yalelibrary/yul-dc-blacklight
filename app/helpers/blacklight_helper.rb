@@ -148,6 +148,7 @@ module BlacklightHelper
     img_home = image_tag("archival_icons/yaleASpaceHome.png", { class: 'ASpace_Home ASpace_Icon', alt: 'Main level' })
     img_stack = image_tag("archival_icons/yaleASpaceStack.png", { class: 'ASpace_Stack ASpace_Icon', alt: 'Second level' })
     img_folder = image_tag("archival_icons/yaleASpaceFolder.png", { class: 'ASpace_Folder ASpace_Icon', alt: 'Document or last level' })
+    content_this = tag.span("THIS ITEM", class: ['yaleASpaceItemThis'])
 
     branch_connection = true
     above_or_below = false
@@ -158,7 +159,7 @@ module BlacklightHelper
     (1..last).each do
       current = ancestor_display_strings.shift
       current = if current == arg[:document][:title_tesim].first
-                  tag.p(current, class: 'yaleASpaceItemTitle')
+                  tag.span(current, class: 'yaleASpaceItemTitle')
                 elsif hierarchy_params.present?
                   link_to current, search_catalog_path(hierarchy_params.pop)
                 else
@@ -174,15 +175,21 @@ module BlacklightHelper
         img = img_stack
         li_class = 'yaleASpaceStack'
         ul_class = 'yaleASpaceStackNested'
+      when last - 1
+        img = content_this
+        li_class = 'yaleASpaceItemTitle'
+        ul_class = 'yaleASpaceItemTitleNested'
       else
         img = img_folder
         li_class = 'yaleASpaceFolder'
         ul_class = 'yaleASpaceFolderNested'
       end
+      spacer = tag.span(' ')
       hierarchy_tree = tag.li(class: li_class) do
         tag.div(class: (!(ancestor_display_strings.size < 3 || ancestor_display_strings.size > last - 4) ? 'show-full-tree-hidden-text' : '')) do
           concat tag.span(nil, class: 'aSpaceBranch') if branch_connection
           concat img
+          concat spacer if img == content_this
           concat current
           concat collapsed if collapsed && above_or_below
           concat tag.ul(hierarchy_tree, class: ul_class) if hierarchy_tree
