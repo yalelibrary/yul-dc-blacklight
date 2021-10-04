@@ -277,17 +277,13 @@ p.yale-restricted-work-text{
   list-style: none;
 }
 
-.yaleASpaceItemTitle {
-  display: inline;
-}
-
 //Control the appearance of hierarchy icons and space
 .aSpaceBranch {
   position: absolute;
   height: 15px;
   width: 15px;
-  border-left: 2px solid #dddddd;
-  border-bottom: 2px solid #dddddd;
+  border-left: 2px solid $light_grey;
+  border-bottom: 2px solid $light_grey;
   padding: 20px 16px 0 1px;
   top: -12px;
   left: -20px;
@@ -298,6 +294,18 @@ p.yale-restricted-work-text{
   height: 15px;
   width: 15px;
 }
+
+.yaleASpaceItemThis {
+  color: $white;
+  background-color: $medium_green;
+  border: solid 4px $medium_green;
+}
+
+.yaleASpaceItemThis span {
+  display: block;
+  margin-right: 5px;
+}
+
 .showpage_no_label_tag,
 .blacklight-archivespaceuri_ssi {
   font-family: Mallory-Bold;
