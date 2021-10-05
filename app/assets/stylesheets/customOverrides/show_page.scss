@@ -14,9 +14,11 @@ DEFAULT MOBILE STYLING
 }
 
 dt.blacklight-containergrouping_tesim.metadata-block__label-key {
-  width: available;
-  width: -webkit-fill-available;
-  width: -moz-available;
+  //width: available;
+  //width: -webkit-fill-available;
+  //width: -moz-available;
+  width: 31%;
+  margin-bottom: 2%;
 }
 
 dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block__label-value--yul{
@@ -24,7 +26,8 @@ dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block
   flex: -moz-available;
   position: relative;
   left: 31%;
-  margin-top: -4.25%;
+  margin-top: -12%;
+  //margin-top: -4.25%;
 }
 
 dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
@@ -467,6 +470,9 @@ p.yale-restricted-work-text{
 
   .aSpace_tree li {
     left: 0;
+  }
+  dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block__label-value--yul {
+  margin-top: -3.75;
   }
 }
 
