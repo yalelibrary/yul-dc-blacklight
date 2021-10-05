@@ -108,4 +108,25 @@ RSpec.describe 'Manifests', type: :request, clean: true do
       expect(manifest['error']).to eq('unauthorized')
     end
   end
+
+  describe 'Not found Manifests' do
+    before do
+      stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/manifests/02/20/202')
+        .to_return(status: 404, body: 'not found')
+    end
+
+    around do |example|
+      original_sample_bucket = ENV['S3_SOURCE_BUCKET_NAME']
+      ENV['S3_SOURCE_BUCKET_NAME'] = 'yul-test-samples'
+      example.run
+      ENV['S3_SOURCE_BUCKET_NAME'] = original_sample_bucket
+    end
+
+    describe 'GET /show' do
+      it 'redirects to HTML page' do      
+        get '/manifests/202'
+        expect(response.body).to include "the item you've requested does not appear to exist"
+      end
+    end
+  end
 end
