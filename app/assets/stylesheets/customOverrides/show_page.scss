@@ -13,6 +13,25 @@ DEFAULT MOBILE STYLING
   font-size: 14px;
 }
 
+dt.blacklight-containergrouping_tesim.metadata-block__label-key {
+  width: available;
+  width: -webkit-fill-available;
+  width: -moz-available;
+}
+
+dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block__label-value--yul{
+  flex: available;
+  flex: -moz-available;
+  position: relative;
+  left: 31%;
+  margin-top: -4.25%;
+}
+
+dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
+  width: fit-content;
+  width: -moz-fit-content;
+}
+
 .archival-context {
   display: flex;
   width: 83%;
@@ -41,8 +60,53 @@ DEFAULT MOBILE STYLING
   border: none;
 }
 
-.iiif-logo img {
-  margin-top: -3px;
+//Control the appearance of hierarchy icons and space
+.aSpaceBranch {
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  border-left: 2px solid $light_grey;
+  border-bottom: 2px solid $light_grey;
+  padding: 20px 16px 0 1px;
+  top: -12px;
+  left: -20px;
+}
+
+.aSpaceBranch img {
+  position: absolute;
+  height: 15px;
+  width: 15px;
+}
+
+.yaleASpaceItemThis {
+  color: $white;
+  background-color: $medium_green;
+  border: solid 4px $medium_green;
+}
+
+.yaleASpaceItemThis span {
+  display: block;
+  margin-right: 5px;
+}
+
+.showpage_no_label_tag,
+.blacklight-archivespaceuri_ssi {
+  font-family: Mallory-Bold;
+  font-size: 14px;
+  background-color: $lighter_grey;
+  margin: 0;
+  padding-left: 2%;
+  width: 100%;
+  padding-top: 2% !important;
+
+  #popup_window {
+    padding-left: 1.5%;
+    padding-bottom: 0.75%;
+
+    .iiif-logo img {
+      margin-top: -3px;
+    }
+  }
 }
 
 .record-not-found {
@@ -235,12 +299,12 @@ p.yale-restricted-work-text{
 }
 
 .aSpace_tree {
-  margin-top: 90px;
+  margin-top: 5%;
   height: -moz-fit-content;
   height: -webkit-fit-content;
   height: fit-content;
   width: fit-content;
-  margin-left: -45%;
+  margin-left: -5%;
   float: left;
 
 }
@@ -277,13 +341,17 @@ p.yale-restricted-work-text{
   list-style: none;
 }
 
+.yaleASpaceItemTitle {
+  display: inline;
+}
+
 //Control the appearance of hierarchy icons and space
 .aSpaceBranch {
   position: absolute;
   height: 15px;
   width: 15px;
-  border-left: 2px solid $light_grey;
-  border-bottom: 2px solid $light_grey;
+  border-left: 2px solid #dddddd;
+  border-bottom: 2px solid #dddddd;
   padding: 20px 16px 0 1px;
   top: -12px;
   left: -20px;
@@ -294,18 +362,6 @@ p.yale-restricted-work-text{
   height: 15px;
   width: 15px;
 }
-
-.yaleASpaceItemThis {
-  color: $white;
-  background-color: $medium_green;
-  border: solid 4px $medium_green;
-}
-
-.yaleASpaceItemThis span {
-  display: block;
-  margin-right: 5px;
-}
-
 .showpage_no_label_tag,
 .blacklight-archivespaceuri_ssi {
   font-family: Mallory-Bold;
@@ -400,7 +456,8 @@ p.yale-restricted-work-text{
   }
 
   .aSpace_tree {
-    margin-top: 17%;
+    margin-top: 3%;
+    width: fit-content;
   }
 
   .aSpaceBranch {
@@ -490,7 +547,6 @@ p.yale-restricted-work-text{
   }
 
   .aSpace_tree {
-    margin-top: 14%;
     width: fit-content;
   }
 
@@ -506,6 +562,14 @@ p.yale-restricted-work-text{
   .showpage_no_label_tag,.blacklight-findingaid_ssim{
     padding-bottom: 2%;
     padding-left: 2%;
+  }
+
+  dt.blacklight-containergrouping_tesim.metadata-block__label-key{
+    padding-bottom: 2%;
+  }
+
+  dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block__label-value--yul{
+    margin-top: -5%;
   }
 
   .showpage_no_label_tag{
@@ -571,6 +635,11 @@ p.yale-restricted-work-text{
   }
 
   .aSpace_tree {
-    margin-top: 6%;
+    margin-top: 2%;
+    margin-left: -3%;
+  }
+
+  dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block__label-value--yul{
+    margin-top: -4.5%;
   }
 }
