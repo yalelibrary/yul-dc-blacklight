@@ -123,7 +123,7 @@ RSpec.describe 'Manifests', type: :request, clean: true do
     end
 
     describe 'GET /show' do
-      it 'redirects to HTML page' do      
+      it 'redirects to HTML page' do
         get '/manifests/202'
         expect(response.body).to include "the item you've requested does not appear to exist"
       end
