@@ -75,7 +75,7 @@ $(document).on('turbolinks:load', function() {
 
     if (fullTextSearchSelected) {
         fullTextButton.click();
-    } else {
+    } else if($("#fulltext_search_1").is(":visible")) {
         descriptionButton.click();
     }
 });
