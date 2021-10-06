@@ -343,6 +343,7 @@ class CatalogController < ApplicationController
       'publicationPlace_tesim',
       'publisher_tesim',
       'preferredCitation_tesim',
+      'project_identifier_tesi',
       'repository_ssim',
       "repository_ssi",
       'resourceType_tesim',
