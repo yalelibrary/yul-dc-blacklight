@@ -14,9 +14,6 @@ DEFAULT MOBILE STYLING
 }
 
 dt.blacklight-containergrouping_tesim.metadata-block__label-key {
-  //width: available;
-  //width: -webkit-fill-available;
-  //width: -moz-available;
   width: 31%;
   margin-bottom: 2%;
 }
@@ -91,16 +88,15 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   margin-right: 5px;
 }
 
-.showpage_no_label_tag,
-.blacklight-archivespaceuri_ssi {
+.showpage_no_label_tag.blacklight-archivespaceuri_ssi {
   font-family: Mallory-Bold;
   font-size: 14px;
   background-color: $lighter_grey;
   margin: 0;
-  padding-left: 2%;
+  padding-left: 3%;
   width: 100%;
-  padding-top: 2% !important;
-
+  height: 37px;
+  padding-top: 2%!important;
   #popup_window {
     padding-left: 1.5%;
     padding-bottom: 0.75%;
@@ -108,6 +104,20 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
     .iiif-logo img {
       margin-top: -3px;
     }
+  }
+}
+
+.showpage_no_label_tag.blacklight-findingaid_ssim {
+  font-family: Mallory-Bold;
+  font-size: 14px;
+  padding-bottom: 2%;
+  padding-left: 3%;
+  background-color: $lighter_grey;
+  width: 100%;
+  padding-top: 0;
+  #popup_window{
+    padding-left: 1.5%;
+    padding-bottom: 0.75%
   }
 }
 
@@ -308,7 +318,6 @@ p.yale-restricted-work-text{
   width: fit-content;
   margin-left: -5%;
   float: left;
-
 }
 
 .aSpace_tree ul{
@@ -363,32 +372,6 @@ p.yale-restricted-work-text{
   position: absolute;
   height: 15px;
   width: 15px;
-}
-.showpage_no_label_tag,
-.blacklight-archivespaceuri_ssi {
-  font-family: Mallory-Bold;
-  font-size: 14px;
-  background-color: $lighter_grey;
-  margin: 0;
-  padding-left: 2%;
-  width: 100%;
-  padding-top: 2%!important;
-  #popup_window{
-    padding-left: 1.5%;
-    padding-bottom: 0.75%
-  }
-}
-
-.showpage_no_label_tag,
-.blacklight-findingaid_ssim {
-  padding-bottom: 3%;
-  padding-left: 2%;
-  width: 100%;
-  padding-top: 0;
-  #popup_window{
-    padding-left: 1.5%;
-    padding-bottom: 0.75%
-  }
 }
 
 @media screen and (min-width: $medium_device) {
@@ -472,6 +455,9 @@ p.yale-restricted-work-text{
   }
   dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block__label-value--yul {
   margin-top: -5.5%;
+  }
+  .showpage_no_label_tag.blacklight-archivespaceuri_ssi {
+    height: 42px;
   }
 }
 
@@ -646,5 +632,8 @@ p.yale-restricted-work-text{
 
   dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block__label-value--yul{
     margin-top: -6.5%;
+  }
+  .showpage_no_label_tag.blacklight-archivespaceuri_ssi {
+    height: 50px;
   }
 }
