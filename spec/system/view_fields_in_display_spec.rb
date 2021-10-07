@@ -16,7 +16,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     {
       id: '222',
       visibility_ssi: 'Public',
-      callNumber_ssim: 'this is the call number'
+      callNumber_ssim: 'this is the call number',
+      source_ssim: 'this is the source'
     }
   end
 
@@ -59,7 +60,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       sourceCreated_tesim: "this is the source created",
       publisher_ssim: "this is the publisher",
       copyrightDate_ssim: "this is the copyright date",
-      source_ssim: "this is the source",
+      source_ssim: "aspace",
       repository_ssi: "this is the repository name",
       recordType_ssi: "this is the record type",
       sourceTitle_tesim: "this is the source title",
@@ -218,6 +219,9 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the repository name in results' do
       expect(document).to have_content("this is the repository name")
     end
+    it 'displays the item location header correctly' do
+      expect(document).to have_content("Item Location")
+    end
     it 'displays the call number in results as link' do
       expect(page).to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number')
       expect(page).not_to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number+but+different')
@@ -325,6 +329,10 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         end
         expect(page).to have_css ".filter-name", text: "Found In", count: 1
         expect(page).to have_css ".filter-name", text: "Creator", count: 0
+      end
+      it 'shows collection information for not ASpace records' do
+        visit '/catalog/222'
+        expect(page).to have_content "Collection Information"
       end
     end
     context 'ASpace hierarchy breadcrumb' do
