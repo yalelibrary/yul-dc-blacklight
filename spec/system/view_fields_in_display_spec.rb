@@ -17,7 +17,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       id: '222',
       visibility_ssi: 'Public',
       callNumber_ssim: 'this is the call number',
-      source_ssim: 'this is the source',
+      source_ssim: 'this is the source'
     }
   end
 
@@ -330,7 +330,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         expect(page).to have_css ".filter-name", text: "Found In", count: 1
         expect(page).to have_css ".filter-name", text: "Creator", count: 0
       end
-      it 'shows collection information for not ASpace records'do
+      it 'shows collection information for not ASpace records' do
         visit '/catalog/222'
         expect(page).to have_content "Collection Information"
       end
