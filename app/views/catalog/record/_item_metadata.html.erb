@@ -1,7 +1,11 @@
 <% doc_presenter = show_presenter(document) %>
 <% unless doc_presenter.metadata_section_empty? metadata %>
   <div class='metadata-block single-item-show'>
+    <% if document[:source_ssim]&.flatten&.include?('aspace') && metadata.titlecase.eql?('Collection Information') %>
+      <h2 class='metadata-block__title'><%= 'Item Location' %></h2>
+    <% else  %>
     <h2 class='metadata-block__title'><%= metadata.titlecase %></h2>
+    <% end  %>
     <dl class='metadata-block__group'>
 
       <% doc_presenter.metadata_fields_to_render(metadata).each do |field_name, field, field_presenter| %>
