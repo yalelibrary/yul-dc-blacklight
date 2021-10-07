@@ -10,7 +10,11 @@
 <span class="btn-group applied-filter constraint query <%= options[:classes].join if options[:classes] %>">
   <button class="constraint-value btn btn-outline-secondary href-button" href="<%=options[:remove]%>">
     <% unless label.blank? %>
-      <span class="filter-name"><%= label %> </span>
+      <% if label == "Project Identifier Tesi" %>
+        <span class="filter-name"><%= label[0...label.rindex(" ")] %> </span>
+      <% else %>
+        <span class="filter-name"><%= label %> </span>
+      <% end %>
     <% end %>
 
     <% unless value.blank? %>
