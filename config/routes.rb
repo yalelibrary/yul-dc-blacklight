@@ -46,7 +46,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   end
 
   get '/check-iiif', to: 'iiif#show', as: :iiif
-  get '/pdfs/not_found.html', to: 'pdfs#not_found'
+  get '/pdfs/not_found', to: 'pdfs#not_found'
 
   # Custom error page
   get '/404', to: 'errors#not_found', via: :all

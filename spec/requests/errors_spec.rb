@@ -28,4 +28,10 @@ RSpec.describe 'Errors', type: :request do
       expect(response.body).to include("The page you were looking for doesn't exist.")
     end
   end
+
+  it 'has content for PDF not found page' do
+    get '/pdfs/not_found.html'
+    expect(response.body).to include("We're sorry, but the item you've requested does not appear to exist")
+    expect(response).to have_http_status(:not_found)
+  end
 end
