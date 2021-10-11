@@ -379,7 +379,7 @@ class CatalogController < ApplicationController
       field.include_in_simple_select = false
       field.solr_parameters = {
         qf: search_fields.join(' '),
-        pf: ''
+        pf: search_fields.join(' ')
       }
     end
 
@@ -389,7 +389,7 @@ class CatalogController < ApplicationController
     config.add_search_field('creator_tesim', label: 'Creator') do |field|
       field.solr_parameters = {
         qf: 'creator_tesim',
-        pf: ''
+        pf: 'creator_tesim'
       }
     end
 
@@ -397,7 +397,7 @@ class CatalogController < ApplicationController
       field.qt = 'search'
       field.solr_parameters = {
         qf: 'title_tesim',
-        pf: ''
+        pf: 'title_tesim'
       }
     end
 
@@ -405,7 +405,7 @@ class CatalogController < ApplicationController
       field.qt = 'search'
       field.solr_parameters = {
         qf: 'callNumber_tesim',
-        pf: ''
+        pf: 'callNumber_tesim'
       }
     end
 
@@ -415,7 +415,7 @@ class CatalogController < ApplicationController
       field.qt = 'search'
       field.solr_parameters = {
         qf: date_fields.join(' '),
-        pf: ''
+        pf: date_fields.join(' ')
       }
     end
 
@@ -427,7 +427,7 @@ class CatalogController < ApplicationController
       field.include_in_advanced_search = false
       field.solr_parameters = {
         qf: 'subjectName_tesim',
-        pf: ''
+        pf: 'subjectName_tesim'
       }
     end
 
@@ -445,7 +445,7 @@ class CatalogController < ApplicationController
       field.include_in_simple_select = false
       field.solr_parameters = {
         qf: subject_fields.join(' '),
-        pf: ''
+        pf: subject_fields.join(' ')
       }
     end
 
@@ -456,7 +456,7 @@ class CatalogController < ApplicationController
       field.include_in_simple_select = false
       field.solr_parameters = {
         qf: genre_fields.join(' '),
-        pf: ''
+        pf: genre_fields.join(' ')
       }
     end
 
@@ -465,7 +465,7 @@ class CatalogController < ApplicationController
       field.include_in_simple_select = false
       field.solr_parameters = {
         qf: 'fulltext_tesim',
-        pf: ''
+        pf: 'fulltext_tesim'
       }
     end
 
@@ -474,7 +474,7 @@ class CatalogController < ApplicationController
       field.include_in_advanced_search = false
       field.solr_parameters = {
         qf: 'orbisBibId_ssi',
-        pf: ''
+        pf: 'orbisBibId_ssi'
       }
     end
 
@@ -483,7 +483,7 @@ class CatalogController < ApplicationController
       field.include_in_advanced_search = false
       field.solr_parameters = {
         qf: 'fulltext_tesim',
-        pf: '',
+        pf: 'fulltext_tesim',
         'hl.requireFieldMatch': true
       }
     end
@@ -493,7 +493,7 @@ class CatalogController < ApplicationController
       field.include_in_simple_select = false
       field.solr_parameters = {
         qf: 'oid_ssi',
-        pf: ''
+        pf: 'oid_ssi'
       }
     end
 
@@ -502,7 +502,7 @@ class CatalogController < ApplicationController
       field.include_in_simple_select = false
       field.solr_parameters = {
         qf: 'child_oids_ssim',
-        pf: ''
+        pf: 'child_oids_ssim'
       }
     end
 

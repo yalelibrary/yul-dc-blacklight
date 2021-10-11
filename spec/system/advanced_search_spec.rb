@@ -307,6 +307,15 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
         expect(page).not_to have_content('Record 2')
       end
     end
+
+    it 'combines results with complex "OR" query' do
+      fill_in 'all_fields_advanced', with: '(zeno OR me)'
+      click_on 'SEARCH'
+      within '#documents' do
+        expect(page).to have_content('Record 1')
+        expect(page).to have_content('Record 2')
+      end
+    end
   end
 
   describe 'styling' do
