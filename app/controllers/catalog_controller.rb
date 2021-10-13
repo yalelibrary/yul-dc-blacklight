@@ -223,6 +223,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'description_tesim', label: 'Description', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', metadata: 'description'
+    config.add_show_field 'digitization_note_tesi', label: 'Digitization Note', metadata: 'description'
     config.add_show_field 'projection_tesim', label: 'Projection', metadata: 'description'
     config.add_show_field 'scale_tesim', label: 'Scale', metadata: 'description'
     config.add_show_field 'coordinates_ssim', label: 'Coordinates', metadata: 'description'

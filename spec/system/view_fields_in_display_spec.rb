@@ -47,6 +47,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       language_ssim: ['en', 'eng', 'zz'],
       description_tesim: ["Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.", "here is something else about it"],
       visibility_ssi: 'Public',
+      digitization_note_tesi: "Digitization note",
       abstract_tesim: ["this is an abstract", "abstract2"],
       alternativeTitle_tesim: ["this is an alternative title", "this is the second alternative title"],
       genre_ssim: ["this is the genre", "this is the second genre"],
@@ -160,6 +161,9 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays the Extent of Digitization in results' do
       expect(document).to have_content("this is the extent of digitization")
+    end
+    it 'displays the digitization note' do
+      expect(document).to have_content("Digitization note")
     end
     it 'displays the Access in results' do
       expect(document).to have_content("Public")
