@@ -14,7 +14,7 @@
             <% oid = @document.id %>
 
             <%# MANIFEST LINK %>
-            <% if false %>
+            <% if remote_file_exists?(manifest_url(oid)) %>
                 <li class="list-group-item manifestItem">
                     <span class='nav-link'>
                         <%= link_to(image_tag('iiif.png', alt: '') + t('blacklight.sidebar.manifest'), manifest_url(oid), target: '_blank', id: 'manifestLink', class: 'iiif-logo')
@@ -31,7 +31,7 @@
             <% end %>
 
             <%# MIRADOR LINK %>
-            <% if false %>
+            <% if remote_file_exists?(mirador_url(oid)) %>
                 <li class="list-group-item miradorItem">
                     <%= link_to 'View in Mirador', mirador_url(oid), target: '_blank', id: 'miradorLink', class: 'nav-link' %>
                 </li>
@@ -44,7 +44,7 @@
             <% end %>
 
             <%# PDF LINK %>
-            <% if false %>
+            <% if remote_file_exists?(pdf_url(oid)) %>
                 <li class="list-group-item pdfItem">
                     <%= link_to 'Download as PDF', pdf_url(oid, format: 'pdf'), target: '_blank', id: 'pdfLink', rel: 'external', class: 'nav-link' %>
                 </li>

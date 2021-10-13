@@ -1,4 +1,7 @@
 # frozen_string_literal: true
+
+require "net/http"
+
 module CatalogHelper
   include Blacklight::CatalogHelperBehavior
 
@@ -34,5 +37,19 @@ module CatalogHelper
       q = search_params['fulltext_tsim_advanced']
     end
     "&q=#{url_encode(q)}" if q
+  end
+
+  def remote_file_exists?(given_url)
+    if given_url.include?('mirador')
+      url = URI.parse("#{ENV["BLACKLIGHT_BASE_URL"]}" + given_url)
+      Net::HTTP.start(url.host, url.port) do |http|
+        return http.head(url.request_uri).code == "200"
+      end
+    else
+      url = URI.parse(given_url)
+      Net::HTTP.start(url.host, url.port) do |http|
+        return http.head(url.request_uri).code == "200"
+      end
+    end
   end
 end
