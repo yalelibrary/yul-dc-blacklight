@@ -15,31 +15,33 @@ RSpec.describe 'catalog/_show_tools.html.erb' do
   end
 
   context 'with documents and user access' do
-
     before do
-      stub_request(:head, "http://test.host/manifests/xyz").
-          with(
+      stub_request(:head, "http://test.host/manifests/xyz")
+        .with(
             headers: {
-            'Accept'=>'*/*',
-            'User-Agent'=>'Ruby'
-            }).
-          to_return(status: 200, body: "", headers: {})
-      stub_request(:head, "http://test.host/mirador/xyz").
-          with(
+              'Accept' => '*/*',
+              'User-Agent' => 'Ruby'
+            }
+          )
+        .to_return(status: 200, body: "", headers: {})
+      stub_request(:head, "http://test.host/mirador/xyz")
+        .with(
             headers: {
-            'Accept'=>'*/*',
-            'User-Agent'=>'Ruby'
-            }).
-          to_return(status: 200, body: "", headers: {})
-      stub_request(:head, "http://test.host/pdfs/xyz").
-          with(
+              'Accept' => '*/*',
+              'User-Agent' => 'Ruby'
+            }
+          )
+        .to_return(status: 200, body: "", headers: {})
+      stub_request(:head, "http://test.host/pdfs/xyz")
+        .with(
             headers: {
-            'Accept'=>'*/*',
-            'User-Agent'=>'Ruby'
-            }).
-          to_return(status: 200, body: "", headers: {})
+              'Accept' => '*/*',
+              'User-Agent' => 'Ruby'
+            }
+          )
+        .to_return(status: 200, body: "", headers: {})
     end
-    
+
     describe 'links' do
       it 'renders the iiif manifest link' do
         render partial: 'catalog/show_tools'
