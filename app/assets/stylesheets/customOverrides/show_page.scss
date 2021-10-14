@@ -23,12 +23,13 @@ dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block
   flex: -moz-available;
   position: relative;
   left: 30%;
-  margin-top: -12%;
+  margin-top: -6.25%;
 }
 
 dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   width: fit-content;
   width: -moz-fit-content;
+  margin-top: 2%;
 }
 
 .archival-context {
@@ -81,6 +82,7 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   color: $white;
   background-color: $medium_green;
   border: solid 4px $medium_green;
+  font-size: 10px
 }
 
 .yaleASpaceItemThis span {
