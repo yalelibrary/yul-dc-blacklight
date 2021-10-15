@@ -38,15 +38,4 @@ module CatalogHelper
     end
     "&q=#{url_encode(q)}" if q
   end
-
-  def remote_file_exists?(given_url)
-    url = if given_url.include?('mirador')
-            URI.parse((ENV['BLACKLIGHT_BASE_URL']).to_s + given_url)
-          else
-            URI.parse(given_url)
-          end
-    Net::HTTP.start(url.host, url.port) do |http|
-      return http.head(url.request_uri).code == "200"
-    end
-  end
 end
