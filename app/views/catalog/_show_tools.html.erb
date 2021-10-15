@@ -12,18 +12,49 @@
             <% end %>
 
             <% oid = @document.id %>
-            <li class="list-group-item manifestItem">
-                <span class='nav-link'>
-                  <%= link_to(image_tag('iiif.png', alt: '') + t('blacklight.sidebar.manifest'), manifest_url(oid), target: '_blank', id: 'manifestLink', class: 'iiif-logo')
-                  %>
-                </span>
-            </li>
-            <li class="list-group-item miradorItem">
-              <%= link_to 'View in Mirador', mirador_url(oid), target: '_blank', id: 'miradorLink', class: 'nav-link' %>
-            </li>
-            <li class="list-group-item pdfItem">
-              <%= link_to 'Download as PDF', pdf_url(oid, format: 'pdf'), target: '_blank', id: 'pdfLink', rel: 'external', class: 'nav-link' %>
-            </li>
+
+            <%# MANIFEST LINK %>
+            <% if client_can_view_digital?(@document) %>
+                <li class="list-group-item manifestItem">
+                    <span class='nav-link'>
+                        <%= link_to(image_tag('iiif.png', alt: '') + t('blacklight.sidebar.manifest'), manifest_url(oid), target: '_blank', id: 'manifestLink', class: 'iiif-logo')
+                        %>
+                    </span>
+                </li>
+            <% else %>
+                <li class="list-group-item manifestItem">
+                    <span class='nav-link not-found iiif-logo' title='The digital version of this work is restricted due to copyright or other restrictions.  Please log in using your Yale NetID or contact library staff to inquire about access to a physical copy.' >
+                        <%= image_tag('iiif.png', alt: '', id: 'manifestLink') %> 
+                        <span id="manifestLink"> Manifest Link</span>
+                    </span>
+                </li>
+            <% end %>
+
+            <%# MIRADOR LINK %>
+            <% if client_can_view_digital?(@document) %>
+                <li class="list-group-item miradorItem">
+                    <%= link_to 'View in Mirador', mirador_url(oid), target: '_blank', id: 'miradorLink', class: 'nav-link' %>
+                </li>
+            <% else %>
+                <li class="list-group-item manifestItem">
+                    <span class='nav-link not-found iiif-logo' title='The digital version of this work is restricted due to copyright or other restrictions.  Please log in using your Yale NetID or contact library staff to inquire about access to a physical copy.' >
+                    <span id="miradorLink"> View in Mirador </span>
+                    </span>
+                </li>
+            <% end %>
+
+            <%# PDF LINK %>
+            <% if client_can_view_digital?(@document) %>
+                <li class="list-group-item pdfItem">
+                    <%= link_to 'Download as PDF', pdf_url(oid, format: 'pdf'), target: '_blank', id: 'pdfLink', rel: 'external', class: 'nav-link' %>
+                </li>
+            <% else %>
+                <li class="list-group-item manifestItem">
+                    <span class='nav-link not-found iiif-logo' title='The digital version of this work is restricted due to copyright or other restrictions.  Please log in using your Yale NetID or contact library staff to inquire about access to a physical copy.' >
+                    <span id="pdfLink"> Download as PDF </span>
+                    </span>
+                </li>
+            <% end %>
         </ul>
     </div>
 <% end %>

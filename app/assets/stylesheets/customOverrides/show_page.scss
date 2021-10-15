@@ -177,7 +177,6 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   top: -47px;
   margin-left: 55px;
   background: transparent;
-
 }
 
 .show-tools a, .show-tools a#citationLink {
@@ -189,6 +188,14 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
 
 .show-tools a:hover {
   text-decoration: underline;
+}
+
+.show-tools .not-found span {
+  color: $medium_grey !important;
+}
+
+.show-tools .not-found a:hover {
+  text-decoration: none;
 }
 
 .show-tools a.nav-link, .show-tools span.nav-link {
