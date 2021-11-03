@@ -118,7 +118,6 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     click_on 'Grouping'
     click_on 'Series Title'
     expect(page).to have_content('Amor Llama')
-    expect(page).to have_content('Amor Llama')
     expect(page).not_to have_content('HandsomeDan Bulldog')
     expect(page).not_to have_content('Aquila Eccellenza')
   end
