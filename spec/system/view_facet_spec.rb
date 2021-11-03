@@ -23,7 +23,8 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       visibility_ssi: 'Yale Community Only',
       genre_ssim: 'Maps',
       resourceType_ssim: 'Maps, Atlases & Globes',
-      creator_ssim: ['Anna Elizabeth Dewdney']
+      creator_ssim: ['Anna Elizabeth Dewdney'],
+      series_ssi: "Series Title"
     }
   end
 
@@ -95,11 +96,27 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     expect(page).not_to have_css('.blacklight-collection_title_ssi')
   end
 
+  it 'does not display the series title facet by default' do
+    expect(page).not_to have_css('.blacklight-series_ssi')
+  end
+
   it 'can filter results with collection title facets when a repository is selected' do
     click_on 'Repository'
     click_on 'Yale University Arts Library'
     click_on 'Collection Title'
     click_on 'AAA'
+    expect(page).to have_content('Amor Llama')
+    expect(page).not_to have_content('HandsomeDan Bulldog')
+    expect(page).not_to have_content('Aquila Eccellenza')
+  end
+
+  it 'can filter results with grouping facets when a collection title is selected' do
+    click_on 'Repository'
+    click_on 'Yale University Arts Library'
+    click_on 'Collection Title'
+    click_on 'AAA'
+    click_on 'Grouping'
+    click_on 'Series Title'
     expect(page).to have_content('Amor Llama')
     expect(page).not_to have_content('HandsomeDan Bulldog')
     expect(page).not_to have_content('Aquila Eccellenza')
