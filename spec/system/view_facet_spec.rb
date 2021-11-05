@@ -92,10 +92,6 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     expect(page).not_to have_content('Aquila Eccellenza')
   end
 
-  it 'does not display the collection title facet by default' do
-    expect(page).not_to have_css('.blacklight-collection_title_ssi')
-  end
-
   it 'does not display the series title facet by default' do
     expect(page).not_to have_css('.blacklight-series_ssi')
   end

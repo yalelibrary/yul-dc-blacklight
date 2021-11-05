@@ -35,6 +35,8 @@ WORK_WITH_ALL_FIELDS = {
   sourceDate_tesim: "this is the source date",
   sourceNote_tesim: "this is the source note",
   sourceEdition_tesim: 'Source Edition',
+  repository_ssi: "this is the repository name",
+  collection_title_ssi: 'this is the collection title',
   preferredCitation_tesim: "these are the references",
   date_ssim: "this is the date",
   children_ssim: "these are the children",

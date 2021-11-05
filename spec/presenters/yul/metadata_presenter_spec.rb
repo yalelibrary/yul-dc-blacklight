@@ -147,6 +147,10 @@ RSpec.describe Yul::MetadataPresenter do
     let(:fields) { identifier_presenter_object.metadata_fields_to_render('collection_information') }
     context 'containing overview metadata' do
       describe 'config' do
+        it 'returns the Repository Key' do
+          expect(fields.any? { |field| field.include? 'repository_ssi' }).to be_truthy
+        end
+
         it 'returns the Call Number Key' do
           expect(fields.any? { |field| field.include? 'callNumber_ssim' }).to be_truthy
         end
@@ -167,8 +171,8 @@ RSpec.describe Yul::MetadataPresenter do
           expect(fields.any? { |field| field.include? 'sourceNote_tesim' }).to be_truthy
         end
 
-        it 'returns the Source Title Key' do
-          expect(fields.any? { |field| field.include? 'sourceTitle_tesim' }).to be_truthy
+        it 'returns the Collection Title Key' do
+          expect(fields.any? { |field| field.include? 'collection_title_ssi' }).to be_truthy
         end
 
         it 'returns the Container/Volume Key' do
