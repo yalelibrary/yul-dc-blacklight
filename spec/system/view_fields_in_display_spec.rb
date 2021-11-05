@@ -220,8 +220,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the Edition in results' do
       expect(document).to have_content("this is the edition")
     end
-    it 'displays the repository name in results' do
-      expect(document).to have_content("this is the repository name")
+    it 'displays the repository name in results as a link' do
+      expect(document).to have_link("this is the repository name", href: '/catalog?f%5Brepository_ssi%5D%5B%5D=this+is+the+repository+name')
     end
     it 'displays the item location header correctly' do
       expect(document).to have_content("Item Location")
