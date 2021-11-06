@@ -86,9 +86,11 @@ module BlacklightHelper
     title = link_to arg[:document][:title_tesim] ? arg[:document][:title_tesim].join(", ") : arg[:document][:id], solr_document_path(arg[:document][:id])
     hierarchy = arg[:document][:ancestor_titles_hierarchy_ssim]
 
+    hierarchy_params = (hierarchy_builder arg[:document]).reverse
+
     if hierarchy.present?
       (0..values.size - 1).each do |i|
-        values[i] = link_to values[i], search_catalog_path("f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i])
+        values[i] = link_to values[i], search_catalog_path(hierarchy_params.pop) if hierarchy_params.present?
       end
     end
     if values.count > 5
@@ -120,12 +122,28 @@ module BlacklightHelper
 
   def hierarchy_builder(document)
     hierarchy = document[:ancestor_titles_hierarchy_ssim]
-    hierarchy_params = []
+    hierarchy_params = [
+      { "f[repository_ssi][]" => document[:repository_ssi] },
+      { "f[repository_ssi][]" => document[:repository_ssi], "f[collection_title_ssi][]" => document[:collection_title_ssi] }
+    ]
+
+    default_params = { "f[repository_ssi][]" => document[:repository_ssi], "f[collection_title_ssi][]" => document[:collection_title_ssi] }
+
+    start_index = 2
+    if document[:series_sort_ssi]
+      start_index = 3
+      params = default_params.clone
+      params["f[series_sort_ssi][]"] = document[:series_sort_ssi]
+      hierarchy_params << params
+    end
+
     @search_params ||= Hash.new { |h, k| h[k] = h.dup.clear }
 
     if hierarchy.present? && @search_params
-      (0..hierarchy.size - 1).each do |i|
-        hierarchy_params << { "f[ancestor_titles_hierarchy_ssim][]" => hierarchy[i] }
+      (start_index..hierarchy.size - 1).each do |i|
+        params = default_params.clone
+        params["f[ancestor_titles_hierarchy_ssim][]"] = hierarchy[i]
+        hierarchy_params << params
       end
     end
     hierarchy_params
