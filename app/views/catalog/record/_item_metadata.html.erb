@@ -10,6 +10,7 @@
 
       <% doc_presenter.metadata_fields_to_render(metadata).each do |field_name, field, field_presenter| %>
         <%unless field[:no_label].presence %>
+          <% next if field_presenter.render.blank? %>
           <!-- KEY -->
           <dt class='blacklight-<%= field_name.parameterize %> metadata-block__label-key'>
             <%= (render_document_show_field_label document, field: field_name).tr(':', '') %>

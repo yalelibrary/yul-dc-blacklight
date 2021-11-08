@@ -240,19 +240,31 @@ module BlacklightHelper
     links.first
   end
 
-  def link_to_url_with_label(arg)
+  def link_to_url_with_label(arg, filters = [])
     links = arg[:value].map do |value|
       link_part = value.split('|')
       next unless link_part.count <= 2
       urls = link_part.select { |s| s.start_with? 'http' }
       labels = link_part.select { |s| !s.start_with? 'http' }
-      if urls.count == 1
-        label = labels[0] || urls[0]
-        link_to(label, urls[0])
+      next unless urls.count == 1
+      ils_filters = filters.any? do |ils|
+        urls[0].start_with?(ils)
       end
+      return nil if ils_filters
+      label = labels[0] || urls[0]
+      link_to(label, urls[0])
     end.compact
+    return nil if links.empty?
     safe_join(links, '<br/>'.html_safe)
   end
+
+  # Filters apply to only data on the showpage for the ils information
+  # rubocop:disable Layout/DefEndAlignment
+  def link_to_url_with_label_and_filter(arg)
+    ils_filters = %w[http://brbl-archive.library.yale.edu http://divinity-adhoc.library.yale.edu/FosterPapers http://digital.library.yale.edu http://beinecke.library.yale.edu http://beinecke1.library.yale.edu]
+    link_to_url_with_label(arg, ils_filters)
+  end
+  # rubocop:enable Layout/DefEndAlignment
 
   def link_to_url(arg)
     link_to(arg[:value][0], arg[:value][0])
