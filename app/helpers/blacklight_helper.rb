@@ -322,6 +322,12 @@ module BlacklightHelper
     simple_format(snippets_separated_by_line_break)
   end
 
+  def strip_order(string)
+    pos = string.index('|')
+    string = string[pos + 1, string.length - pos - 1] if pos && pos >= 0
+    string
+  end
+
   private
 
   def language_code_to_english(language_code)
