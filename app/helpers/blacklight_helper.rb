@@ -132,7 +132,7 @@ module BlacklightHelper
     start_index = 2
     if document[:series_sort_ssi]
       start_index = 3
-      params = default_params.clone
+      params = default_params
       params["f[series_sort_ssi][]"] = document[:series_sort_ssi]
       hierarchy_params << params
     end
