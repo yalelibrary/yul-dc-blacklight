@@ -367,7 +367,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         within '.archival-context' do
           click_on 'second'
         end
-        expect(page).to have_css ".filter-name", text: "Found In", count: 1
+        expect(page).to have_css ".filter-name", text: "Collection Title", count: 1
+        expect(page).to have_css ".filter-name", text: "Repository", count: 1
         expect(page).to have_css ".filter-name", text: "Creator", count: 0
       end
     end
