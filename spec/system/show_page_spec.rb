@@ -11,6 +11,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/22/22/222.json')
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/12/11/112.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
 
     solr = Blacklight.default_index.connection
     solr.add([llama,
@@ -56,7 +58,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       genre_ssim: 'Maps',
       resourceType_ssim: 'Maps, Atlases & Globes',
       creator_ssim: ['Anna Elizabeth Dewdney'],
-      fulltext_tesim: ['fulltext text for llama child one.']
+      fulltext_tesim: ['fulltext text for llama child one.'],
+      has_fulltext_ssi: 'Partial'
     }
   end
 
@@ -195,6 +198,12 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     context 'with full text available' do
       it 'has a "Show Full Text" button' do
         visit 'catalog/111'
+
+        expect(page).to have_css('.fulltext-button')
+        expect(page).to have_content('Show Full Text')
+      end
+      it 'has a "Show Full Text" button with a partial fulltext status' do
+        visit 'catalog/112'
 
         expect(page).to have_css('.fulltext-button')
         expect(page).to have_content('Show Full Text')
