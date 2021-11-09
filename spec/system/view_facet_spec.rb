@@ -24,7 +24,8 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
       genre_ssim: 'Maps',
       resourceType_ssim: 'Maps, Atlases & Globes',
       creator_ssim: ['Anna Elizabeth Dewdney'],
-      series_ssi: "Series Title"
+      series_ssi: "Series Title",
+      series_sort_ssi: "0938203483204|Series Title"
     }
   end
 

@@ -125,7 +125,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'visibility_ssi', label: 'Access', limit: true
     config.add_facet_field 'repository_ssi', label: 'Repository', limit: true
     config.add_facet_field 'collection_title_ssi', label: 'Collection Title', limit: true, if: :repository_facet?
-    config.add_facet_field 'series_ssi', label: 'Grouping', limit: true, if: :collection_facet?
+    config.add_facet_field 'series_sort_ssi', label: 'Grouping', limit: true, if: :collection_facet?, helper_method: :strip_order, sort: 'index'
     config.add_facet_field 'format', label: 'Format', limit: true
     config.add_facet_field 'genre_ssim', label: 'Genre', limit: true
     config.add_facet_field 'resourceType_ssim', label: 'Resource Type', limit: true
