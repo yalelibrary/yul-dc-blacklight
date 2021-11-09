@@ -15,6 +15,8 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       creator_ssim: 'Me and You',
       title_tesim: ['Amor Perro'],
       date_ssim: '1999',
+      repository_ssi: 'Beinecke Rare Book and Manuscript Library (BRBL)',
+      collection_name_ssi: 'Osborn Manuscript Files (OSB MSS FILE)',
       resourceType_ssim: 'Archives or Manuscripts',
       callNumber_tesim: 'Beinecke MS 801',
       containerGrouping_tesim: 'BRBL_091081',
@@ -95,7 +97,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
 
         click_on "Level0"
 
-        expect(page).to have_css ".filter-name", text: "Found In", count: 1
+        expect(page).to have_css ".filter-name", text: "Repository", count: 1
         expect(page).to have_css ".filter-name", text: "Creator", count: 0
       end
     end
