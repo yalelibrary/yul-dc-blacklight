@@ -1,16 +1,60 @@
 [![CircleCI](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/main.svg?style=svg)](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/main) ![Docker Image CI](https://github.com/yalelibrary/yul-dc-blacklight/workflows/Docker%20Image%20CI/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/yalelibrary/yul-dc-blacklight/badge.svg?branch=main)](https://coveralls.io/github/yalelibrary/yul-dc-blacklight?branch=main)
 
+# Table of contents
+
+- [Prerequisites](#prerequisites)
+- [Quick Start Guide](#quick-start-guide)
+- [Docker Development Setup](#docker-development-setup)
+- [Install Camerata](#install-camerata)
+- [Update Camerata](#update-camerata)
+- [General Use](#general-use)
+- [Troubleshooting](#troubleshooting)
+- [Pulling or Building Docker Images](#pulling-or-building-docker-images)
+- [When Installing a New Gem](#when-installing-a-new-gem)
+- [Deploy an individual branch](#deploy-an-individual-branch)
+- [Test coverage](#test-coverage)
+
 # Yale Digital Library Discovery Application
 
 This is one of the microservices applications that form the Yale digital library.
-
-## Development guide
 
 ### Prerequisites
 
 - Download [Docker Desktop](https://www.docker.com/products/docker-desktop) and log in
 
-### Docker Development Setup
+# Quick Start Guide
+
+- To start the application without VPN and without management: 
+
+```bash
+git clone git@github.com:yalelibrary/yul-dc-camerata.git
+cd yul-dc-camerata
+bundle install
+rake install
+```
+cd back into your main directory.
+
+```
+git clone git@github.com:yalelibrary/yul-dc-blacklight.git
+cd yul-dc-blacklight
+cam build
+VPN=false cam up blacklight --without management
+access at localhost:3000
+```
+If you get a bundle gem issue, open a new terminal window or tab and with the running blacklight server, run: 
+```bash
+  cam bundle blacklight
+```
+
+- To bash into containers and run specs: 
+
+With the application already started: 
+```
+cam sh blacklight
+bundle exec rspec spec/file/path
+```
+
+# Docker Development Setup
 
 ```bash
 git clone https://github.com/yalelibrary/yul-dc-blacklight.git
@@ -61,7 +105,7 @@ rake install
 - We've integrated Dynatrace OneAgent for monitoring our Docker container environments.
   - Instructions on configuring OneAgent can be found [here](https://github.com/yalelibrary/yul-dc-camerata/tree/main/base)
 
-## General Use
+# General Use
 
 Once camerata is installed on your system, interactions happen through the camerata command-line tool or through its alias `cam`. The camerata tool can be used to bring the development stack up and down locally, interact with the docker containers, deploy, run the smoke tests and otherwise do development tasks common to the various applications in the yul-dc application stack.
 
@@ -81,26 +125,8 @@ To start the application stack, run `cam up` in the blacklight directory. This s
 
   - If you cannot access this url, try the [troubleshooting steps](#accessing-the-management-app)
 
-## Troubleshooting
-
-If you receive a `please set your AWS_PROFILE and AWS_DEFAULT_REGION (RuntimeError)` error when you `cam up`, you will need to set your AWS credentials. Credentials can be set in the `~/.aws/credentials` file in the following format:
-(The word "yale" in the straight brackets can be whatever you want it to be).
-
-```bash
-[yale]
-aws_access_key_id=YOUR_YALE_ACCESS_KEY
-aws_secret_access_key=YOUR_YALE_SECRET_ACCESS_KEY
-```
-
-After the credentials have been set, you will need to export the following settings via the command line:
-
-```bash
-export AWS_PROFILE=yale && export AWS_DEFAULT_REGION=us-east-1
-```
-
-Note: AWS_PROFILE name needs to match the credentials profile name inside of the straight brackets (`[yale]`). After you set the credentials, you will need to re-install camerata from the camerata repo: `rake install`
-
-If you use rbenv, you must run the following command after installing camerata: `rbenv rehash`
+### Troubleshooting
+- See the [wiki](https://github.com/yalelibrary/yul-dc-documentation/wiki/Blacklight-Development-Setup#troubleshooting) for further information on troubleshooting.
 
 ### Running `bundle install`
 
@@ -111,68 +137,10 @@ If you use rbenv, you must run the following command after installing camerata: 
   ```
 
 ### Accessing the blacklight container
-
-- In a separate terminal window or tab than the running blacklight server, run:
-
-  ```bash
-  cam sh blacklight
-  ```
-
-- You will need to be inside the container to:
-
-  - Run migrations
-  - Access the seed file
-  - Access the rails console for debugging
-
-    ```
-    rails c
-    ```
-
-  - Run rubocop
-
-    ```
-    rubocop -a
-    ```
-
-  - Run rspec
-
-    ```
-    rspec
-    ```
-
-  - Rebuild the code documentation
-
-    ```
-    rake yale:docs:blacklight
-    ```
-
-### Accessing the management app
-
-If you're unable to load the [management app](http://localhost:3001/management) try the following:
-
-- Stop the blacklight app from running with `ctrl + c`
-- Run `cam down` followed by `cam up`
-- In a new tab, cd into the management repo and run `git pull`
-- In the same tab, cd into the blacklight repo and run `cam bundle management`
-- Once that completes, refresh the [management app](http://localhost:3001/management) and the [blacklight app](http://localhost:3000)
+- See the [wiki](https://github.com/yalelibrary/yul-dc-documentation/wiki/Blacklight-Development-Setup#accessing-the-blacklight-container) for further information on containers.
 
 ### Indexing data
-
-- First, connect to the running management application:
-
-  - <http://localhost:3001/management/>
-
-- Second, pull up <http://0.0.0.0:8983> in your browser
-
-  - Connect to the blacklight-core and execute a query to confirm no data present
-
-- Then, in the running management application(:3001), click the button 'Index Ladybird Records to Solr'
-
-  - When the message appears above the buttons the data has been indexed
-
-  - Visit :8983 and run the same query again and confirm data is present
-
-  - Connect to the running blacklight app at localhost:3000
+- See the [wiki](https://github.com/yalelibrary/yul-dc-documentation/wiki/Blacklight-Development-Setup#accessing-the-blacklight-container) for information on indexing data.
 
 ## Pulling or Building Docker Images
 
