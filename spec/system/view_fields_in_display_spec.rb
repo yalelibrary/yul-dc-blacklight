@@ -17,7 +17,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       id: '222',
       visibility_ssi: 'Public',
       callNumber_ssim: 'this is the call number',
-      source_ssim: 'this is the source',
+      source_ssim: 'this is the source'
     }
   end
 
@@ -25,9 +25,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     {
       id: '333',
       visibility_ssi: 'Public',
-      callNumber_ssim: 'this is the call number, but different',
-      resourceVersionOnline_ssim: ["this is the online resource|https://this/is/the/link"]
-
+      callNumber_ssim: 'this is the call number, but different'
     }
   end
 
@@ -36,7 +34,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       id: '444',
       visibility_ssi: 'Public',
       findingAid_ssim: 'this is the finding aid',
-      resourceVersionOnline_ssim: ["this is the online resource that does not display|https://brbl-archive.library.yale.edu"]
+      resourceVersionOnline_ssim: ["this is the online resource that does not display|http://brbl-archive.library.yale.edu"]
     }
   end
 
@@ -86,6 +84,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       coordinates_ssim: "this is the coordinates, using ssim",
       projection_tesim: "this is the projection, using ssim",
       extent_ssim: ["this is the extent, using ssim", "here is another extent"],
+      resourceVersionOnline_ssim: ["this is the online resource|http://this/is/the/link"],
       ancestorTitles_tesim: %w[seventh sixth fifth fourth third second first],
       ancestorDisplayStrings_tesim: %w[seventh sixth fifth fourth third second first],
       ancestor_titles_hierarchy_ssim: ['first > ', 'first > second > ', 'first > second > third > ',
@@ -229,8 +228,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(document).to have_content("Item Location")
     end
     it 'displays the resource version online' do
-      expect(page).to have_link("this is the online resource", href: 'https://this/is/the/link')
-      expect(page).not_to have_link(href: 'https://brbl-archive.library.yale.edu')
+      expect(page).to have_link("this is the online resource", href: 'http://this/is/the/link')
     end
     it 'displays the call number in results as link' do
       expect(page).to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number')
@@ -406,6 +404,13 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(finding_aid_link).to be_truthy
       expect(finding_aid_link).to have_content "View full finding aid for this collection"
       expect(finding_aid_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
+    end
+  end
+
+  context 'when record has no resource version online link' do
+    it 'does not display online resource version' do
+      visit '/catalog/444'
+      expect(page).not_to have_link(href: 'http://brbl-archive.library.yale.edu')
     end
   end
 end

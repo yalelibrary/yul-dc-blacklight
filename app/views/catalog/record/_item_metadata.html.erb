@@ -10,6 +10,7 @@
 
       <% doc_presenter.metadata_fields_to_render(metadata).each do |field_name, field, field_presenter| %>
         <%unless field[:no_label].presence %>
+          <% next unless field_name.eql?('ancestorDisplayStrings_tesim') || field_presenter.render.present? %>
           <!-- KEY -->
           <dt class='blacklight-<%= field_name.parameterize %> metadata-block__label-key'>
             <%= (render_document_show_field_label document, field: field_name).tr(':', '') %>

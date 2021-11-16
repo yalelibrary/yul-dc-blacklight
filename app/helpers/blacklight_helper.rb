@@ -248,7 +248,7 @@ module BlacklightHelper
       labels = link_part.select { |s| !s.start_with? 'http' }
       next unless urls.count == 1
       ils_filters = filters.any? do |ils|
-        urls[0].start_with?(ils)
+        urls[0].include?(ils)
       end
       return nil if ils_filters
       label = labels[0] || urls[0]
@@ -261,7 +261,7 @@ module BlacklightHelper
   # Filters apply to only data on the showpage for the ils information
   # rubocop:disable Layout/DefEndAlignment
   def link_to_url_with_label_and_filter(arg)
-    ils_filters = %w[http://brbl-archive.library.yale.edu http://divinity-adhoc.library.yale.edu/FosterPapers http://digital.library.yale.edu http://beinecke.library.yale.edu http://beinecke1.library.yale.edu]
+    ils_filters = %w[brbl-archive.library.yale.edu divinity-adhoc.library.yale.edu/FosterPapers digital.library.yale.edu beinecke.library.yale.edu beinecke1.library.yale.edu]
     link_to_url_with_label(arg, ils_filters)
   end
   # rubocop:enable Layout/DefEndAlignment
