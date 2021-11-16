@@ -75,6 +75,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       callNumber_ssim: 'this is the call number',
       containerGrouping_tesim: 'this is the container information',
       orbisBibId_ssi: '1234567',
+      archiveSpaceUri_ssi: "/repositories/11/archival_objects/214638",
       findingAid_ssim: 'this is the finding aid',
       collection_title_ssi: 'this is the collection title',
       edition_ssim: 'this is the edition',
