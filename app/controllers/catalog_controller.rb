@@ -245,8 +245,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'sourceNote_tesim', label: 'Collection Note', metadata: 'collection_information'
     config.add_show_field 'sourceEdition_tesim', label: 'Collection Edition', metadata: 'collection_information'
     config.add_show_field 'relatedResourceOnline_ssim', label: 'Related Resource Online', metadata: 'collection_information', helper_method: :link_to_url_with_label
-    # config.add_show_field 'resourceVersionOnline_ssim', label: 'Resource Version Online', metadata: 'collection_information', helper_method: :link_to_url_with_label_and_filter
-    config.add_show_field 'resourceVersionOnline_ssim', label: ' ', no_label: false, metadata: 'collection_information', helper_method: :link_to_url_with_label_and_filter
+    config.add_show_field 'resourceVersionOnline_ssim', label: 'Related Version Online', metadata: 'collection_information', helper_method: :link_to_url_with_label_and_filter
     config.add_show_field 'ancestorDisplayStrings_tesim', label: 'Search for Additional Digitized Material in This Collection', metadata: 'collection_information', helper_method: :aspace_tree_display
     config.add_show_field 'containerGrouping_tesim', label: 'Container / Volume', metadata: 'collection_information'
     config.add_show_field 'archiveSpaceUri_ssi', label: ' ', no_label: true, metadata: 'collection_information', helper_method: :aspace_link
