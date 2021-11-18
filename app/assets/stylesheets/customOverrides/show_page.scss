@@ -18,12 +18,13 @@ dt.blacklight-containergrouping_tesim.metadata-block__label-key {
   margin-bottom: 2%;
 }
 
-dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block__label-value--yul{
+dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block__label-value--yul {
   flex: available;
   flex: -moz-available;
   position: relative;
-  left: 30%;
-  margin-top: -6.25%;
+  left: 0;
+  min-width: 5%;
+  max-width: 31%;
 }
 
 dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
@@ -463,9 +464,7 @@ p.yale-restricted-work-text{
   .aSpace_tree li {
     left: 0;
   }
-  dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block__label-value--yul {
-  margin-top: -5.5%;
-  }
+
   .showpage_no_label_tag.blacklight-archivespaceuri_ssi {
     height: 42px;
   }
@@ -569,10 +568,6 @@ p.yale-restricted-work-text{
     padding-bottom: 2%;
   }
 
-  dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block__label-value--yul{
-    margin-top: -7%;
-  }
-
   .showpage_no_label_tag{
     #popup_window{
       padding-left: 1.5%;
@@ -640,9 +635,6 @@ p.yale-restricted-work-text{
     margin-left: -3%;
   }
 
-  dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block__label-value--yul{
-    margin-top: -6.5%;
-  }
   .showpage_no_label_tag.blacklight-archivespaceuri_ssi {
     height: 50px;
   }
