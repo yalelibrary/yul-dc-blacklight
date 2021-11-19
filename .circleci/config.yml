@@ -47,6 +47,7 @@ jobs:
             POSTGRES_DB: blacklight_yul_test
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: password
+    parallelism: 4 
     executor: docker/docker
     steps:
       - setup_remote_docker
