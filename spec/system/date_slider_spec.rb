@@ -61,7 +61,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
   let(:elephant) do
     {
       id: '401',
-      identifierShelfMark_ssim: 'unique call number',
+      callNumber_ssim: 'unique call number',
       title_tesim: 'Handsome Dan is not a elephant.',
       year_isim: [1555],
       creator_tesim: 'Frederick & Eric',
@@ -102,7 +102,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
   end
 
   it "does not show the date slider if only one date" do
-    visit '/catalog?search_field=identifierShelfMark_ssim&q="unique call number"'
+    visit '/catalog?search_field=callNumber_ssim&q="unique call number"'
     expect(page).not_to have_css('.card.facet-limit.blacklight-year_isim')
   end
 
