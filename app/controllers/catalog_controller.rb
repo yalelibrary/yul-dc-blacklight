@@ -342,7 +342,6 @@ class CatalogController < ApplicationController
       'orbisBibId_ssi',
       'projection_tesim',
       'creationPlace_tesim',
-      'publicationPlace_tesim',
       'publisher_tesim',
       'preferredCitation_tesim',
       'project_identifier_tesi',
