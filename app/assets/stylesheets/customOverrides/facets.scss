@@ -125,6 +125,13 @@ h2.facets-heading {
   padding: 0 0.25px 0 0.25px;
 }
 
+.more_facets a {
+  font-size: 12px;
+  margin-left: -4px;
+  color: $light_blue;
+  text-transform: capitalize;
+}
+
 @media screen and (min-width: $small_device) {
 
 }
