@@ -29,7 +29,7 @@ gem 'jquery-rails'
 gem 'omniauth'
 gem 'omniauth-cas'
 # This addresses CVE-2015-9284 https://github.com/advisories/GHSA-ww4x-rwq6-qpgf
-gem 'ogp', '~> 0.4.0'
+gem 'opengraph_parser', '~> 0.2.3'
 gem 'omniauth-rails_csrf_protection', '~> 0.1'
 gem 'partridge', '~> 0.1.2'
 gem 'pg'
