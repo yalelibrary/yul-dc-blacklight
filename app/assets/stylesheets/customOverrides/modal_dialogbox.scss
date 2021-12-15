@@ -1,0 +1,30 @@
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
+
+.modal-body a.facet-select {
+  font-size: 14px;
+}
+
+.modal-body span.facet-count {
+  font-size: 14px;
+}
+
+a.sort_change.az.btn.btn-outline-secondary{
+  background-color: $light_grey;
+  margin-right: 10px;
+}
+
+span.active.numeric.btn.btn-outline-secondary{
+  background-color: $light_grey;
+}
+
+@media screen and (min-width: $medium_device) {
+}
+
+@media screen and (min-width: $large_device) {
+}
+
+
+@media screen and (min-width: $xlarge_device) {
+}
