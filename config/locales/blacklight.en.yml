@@ -3,8 +3,8 @@ en:
     pagination:
       first: "&laquo;"
       last: "&raquo;"
-      previous: '« PREVIOUS'
-      next: 'NEXT »'
+      previous: 'PREVIOUS'
+      next: 'NEXT'
   blacklight:
     application_name: 'Yale University Library'
     sidebar:
