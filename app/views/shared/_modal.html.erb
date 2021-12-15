@@ -1,0 +1,9 @@
+<div id="blacklight-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  2	  <div class="modal-dialog modal-lg" role="document">
+  3	    <div class="modal-content">
+          <% @documents&.each do |document| %>
+            <h2 class="modal-title"><%= document_heading(document) %></h2>
+          <% end %>
+  4	    </div>
+  5	  </div>
+  6	</div>
