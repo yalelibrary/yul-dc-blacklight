@@ -16,7 +16,7 @@ module OgpSolrDocument
         'og:image:type': self[:visibility_ssi] == "Public" && 'image/jpeg' || nil,
         'og:image:secure_url': self[:visibility_ssi] == "Public" && self["thumbnail_path_ss"] || nil }.compact
 
-      meta_tag = []
+    meta_tag = []
     ogp_metadata.each do |key, value|
       meta_tag << tag.meta({ property: key, content: value })
     end
