@@ -19,12 +19,21 @@ span.active.numeric.btn.btn-outline-secondary{
   background-color: $light_grey;
 }
 
+.facet-pagination .prev_next_links:nth-child(1)::before {
+  content: "«";
+  margin: 5px -10px 0px 0px;
+}
+
+.facet-pagination .prev_next_links:nth-child(1)::after{
+  content:"»";
+  margin: 5px 20px 0 -10px;
+}
+
 @media screen and (min-width: $medium_device) {
 }
 
 @media screen and (min-width: $large_device) {
 }
-
 
 @media screen and (min-width: $xlarge_device) {
 }
