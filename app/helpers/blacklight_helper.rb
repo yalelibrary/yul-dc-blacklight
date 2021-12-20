@@ -81,6 +81,22 @@ module BlacklightHelper
     '<p>'.html_safe + safe_join(values, '</p><p>'.html_safe) + '</p>'.html_safe if values
   end
 
+  def subject_heading_display(arg)
+    values = arg[:value]
+    links = values.map do |value|
+      subject_heading_fields = []
+      subject_heading_links = []
+      value.split(" > ").each do |subject_heading|
+        subject_heading_fields << subject_heading
+        path = subject_heading_fields.join(" > ")
+        subject_heading_links << link_to(subject_heading.to_s, search_catalog_path({ "f[subjectHeadingFacet_ssim][]" => path }),
+                                         { "title" => path })
+      end
+      safe_join(subject_heading_links, " > ")
+    end
+    safe_join(links, "<br />".html_safe)
+  end
+
   def archival_display(arg)
     values = arg[:document][arg[:field]].reverse
     title = link_to arg[:document][:title_tesim] ? arg[:document][:title_tesim].join(", ") : arg[:document][:id], solr_document_path(arg[:document][:id])
