@@ -69,6 +69,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       sourceCreator_tesim: "this is the source creator",
       sourceDate_tesim: "this is the source date",
       sourceNote_tesim: "this is the source note",
+      subjectHeading_ssim: ["Dog > Horse", "Fish"],
+      subjectHeadingFacet_ssim: ["Dog", "Dog > Horse", "Fish"],
       preferredCitation_tesim: ["these are the references", "this is the second reference"],
       date_ssim: "this is the date",
       oid_ssi: '2345678',
@@ -384,6 +386,16 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(finding_aid_link).to be_truthy
       expect(finding_aid_link).to have_content "View full finding aid for this is the collection title"
       expect(finding_aid_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
+    end
+
+    it 'contains subject heading links' do
+      subject_heading_link = page.find("a[title = 'Dog > Horse']")
+      expect(subject_heading_link).to be_truthy
+      expect(subject_heading_link).to have_content("Horse")
+      expect(subject_heading_link['href']).to eq("/catalog?f%5BsubjectHeadingFacet_ssim%5D%5B%5D=Dog+%3E+Horse")
+      subject_heading_link.click
+      expect(page).to have_css ".filter-name", text: "Subject Heading", count: 1
+      expect(page).to have_css ".filter-value", text: "Dog > Horse", count: 1
     end
   end
   it 'has expected css' do

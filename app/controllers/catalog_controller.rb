@@ -150,6 +150,8 @@ class CatalogController < ApplicationController
     config.add_facet_field 'callNumber_ssim', label: 'Call Number', show: false
     config.add_facet_field 'ancestor_titles_hierarchy_ssim', label: "Found In", show: false
     config.add_facet_field 'subjectGeographic_ssim', label: 'Subject (Geographic)', show: false
+    config.add_facet_field 'subjectHeadingFacet_ssim', label: 'Subject Heading', show: false
+
     config.add_facet_field 'has_fulltext_ssi', label: "Full Text Available", limit: true
 
     # This was example code after running rails generate blacklight_range_limit:install
@@ -259,6 +261,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'subjectGeographic_ssim', label: 'Subject (Geographic)', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
     config.add_show_field 'subjectName_ssim', label: 'Subject (Name)', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
     config.add_show_field 'subjectTopic_ssim', label: 'Subject (Topic)', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
+    config.add_show_field 'subjectHeading_ssim', label: 'Subjects', metadata: 'subjects,_formats,_and_genres', helper_method: :subject_heading_display
 
     # Access and Usage Rights Group
     config.add_show_field 'visibility_ssi', label: 'Access', metadata: 'access_and_usage_rights'
