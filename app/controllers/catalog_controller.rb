@@ -265,6 +265,7 @@ class CatalogController < ApplicationController
 
     # Access and Usage Rights Group
     config.add_show_field 'visibility_ssi', label: 'Access', metadata: 'access_and_usage_rights'
+    config.add_show_field 'redirect_to_tesi', label: 'Redirect To', metadata: 'access_and_usage_rights'
     config.add_show_field 'rights_ssim', label: 'Rights', metadata: 'access_and_usage_rights', helper_method: :html_safe_converter
     config.add_show_field 'preferredCitation_tesim', label: 'Citation', metadata: 'access_and_usage_rights', helper_method: :join_with_br
 
@@ -604,8 +605,13 @@ class CatalogController < ApplicationController
 
   def show
     super
+    # byebug
     @search_params = session[:search_params]
-    render "catalog/show_unauthorized", status: :unauthorized unless client_can_view_metadata?(@document)
+    if @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present?
+      redirect_to @document["redirect_to_tesi"]
+    else
+      render "catalog/show_unauthorized", status: :unauthorized unless client_can_view_metadata?(@document)
+    end
   end
 
   def iiif_suggest
