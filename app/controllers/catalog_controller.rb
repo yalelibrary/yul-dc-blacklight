@@ -605,7 +605,6 @@ class CatalogController < ApplicationController
 
   def show
     super
-    # byebug
     @search_params = session[:search_params]
     if @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present?
       redirect_to @document["redirect_to_tesi"]
