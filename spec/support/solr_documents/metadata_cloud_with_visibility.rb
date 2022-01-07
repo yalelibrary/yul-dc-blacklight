@@ -114,3 +114,9 @@ WORK_WITH_YALE_ONLY_VISIBILITY = {
   "public_bsi": true,
   "visibility_ssi": "Yale Community Only"
 }.freeze
+
+WORK_REDIRECTED = {
+  "id": 1_668_591,
+  "redirect_to_tesi": "https://collections-uat.library.yale.edu/catalog/234567",
+  "visibility_ssi": "Redirect"
+}.freeze

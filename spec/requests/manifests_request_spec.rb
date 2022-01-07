@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Manifests', type: :request, clean: true do
   let(:user) { FactoryBot.create(:user) }
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY }
+  let(:redirected_work) { WORK_REDIRECTED }
   let(:yale_work) do
     {
       "id": "1618909",
@@ -40,7 +41,7 @@ RSpec.describe 'Manifests', type: :request, clean: true do
       )
 
     solr = Blacklight.default_index.connection
-    solr.add([public_work, yale_work, no_visibility_work])
+    solr.add([public_work, yale_work, no_visibility_work, redirected_work])
     solr.commit
     allow(User).to receive(:on_campus?).and_return(false)
   end
@@ -106,6 +107,11 @@ RSpec.describe 'Manifests', type: :request, clean: true do
       manifest = JSON.parse(response.body)
 
       expect(manifest['error']).to eq('unauthorized')
+    end
+
+    it 'returns a 404 if redirected' do
+      get '/manifests/16685691'
+      expect(response.body).to include "the item you've requested does not appear to exist"
     end
   end
 
