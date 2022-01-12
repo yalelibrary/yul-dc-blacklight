@@ -42,8 +42,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     {
       id: '111',
       title_tesim: ["Diversity Bull Dogs", "this is the second title"],
-      creator_ssim: ['Frederick',  'Martin', 'Eric', 'Maggie'],
-      collectionCreators_ssim: ['Martin', 'Maggie'] ,
+      creator_ssim: ['Frederick', 'Martin', 'Eric', 'Maggie'],
+      collectionCreators_ssim: ['Martin', 'Maggie'],
       format: 'three dimensional object',
       url_suppl_ssim: 'http://0.0.0.0:3000/catalog/111',
       language_ssim: ['en', 'eng', 'zz'],
