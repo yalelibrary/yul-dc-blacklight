@@ -42,7 +42,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     {
       id: '111',
       title_tesim: ["Diversity Bull Dogs", "this is the second title"],
-      creator_ssim: ['Frederick,  Eric & Maggie'],
+      creator_ssim: ['Frederick',  'Martin', 'Eric', 'Maggie'],
+      collectionCreators_ssim: ['Martin', 'Maggie'] ,
       format: 'three dimensional object',
       url_suppl_ssim: 'http://0.0.0.0:3000/catalog/111',
       language_ssim: ['en', 'eng', 'zz'],
@@ -259,7 +260,16 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(page).to have_link('1234567', href: 'http://hdl.handle.net/10079/bibid/1234567')
     end
     it 'contains a link for the Creator field to the facet' do
-      expect(page).to have_link('Frederick, Eric & Maggie', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Frederick%2C++Eric+%26+Maggie')
+      expect(page).to have_link('Frederick', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Frederick')
+      expect(page).to have_link('Eric', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Eric')
+      expect(page).to have_link('Martin', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Martin')
+      expect(page).to have_link('Maggie', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Maggie')
+    end
+    it 'contains a link for the From Collection Creator field to the facet' do
+      expect(page).to have_content("From the Collection: Maggie")
+      expect(page).to have_content("From the Collection: Martin")
+      expect(page).not_to have_content("From the Collection: Frederick")
+      expect(page).not_to have_content("From the Collection: Eric")
     end
     it 'contains a link on the more info to the more info record' do
       expect(page).to have_link('http://0.0.0.0:3000/catalog/111', href: 'http://0.0.0.0:3000/catalog/111')
