@@ -57,6 +57,7 @@ class SearchBuilder < Blacklight::SearchBuilder
       uri_ssim
       viewing_hint_ssi
       visibility_ssi
+      collectionCreators_ssim
     ]
   end
 

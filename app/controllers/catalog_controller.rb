@@ -181,7 +181,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field 'creator_tesim', label: 'Creator', highlight: true, solr_params: disp_req_fieldmatch_on_search_params
+    config.add_index_field 'creator_tesim', label: 'Creator', highlight: true, solr_params: disp_req_fieldmatch_on_search_params, helper_method: :generate_creators_links
     config.add_index_field 'date_ssim', label: 'Published / Created', highlight: true, solr_params: disp_req_fieldmatch_on_search_params
     config.add_index_field 'callNumber_tesim', label: 'Call Number', highlight: true, solr_params: disp_req_fieldmatch_on_search_params
     config.add_index_field 'sourceTitle_tesim', label: 'Collection Title', highlight: true, solr_params: disp_req_fieldmatch_on_search_params
@@ -217,7 +217,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'ancestorTitles_tesim', label: 'Found In', metadata: 'ancestorTitles', helper_method: :archival_display_show
     config.add_show_field 'title_tesim', label: 'Title', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'alternativeTitle_tesim', label: 'Alternative Title', metadata: 'description', helper_method: :join_with_br
-    config.add_show_field 'creator_ssim', label: 'Creator', metadata: 'description', link_to_facet: true
+    config.add_show_field 'creator_ssim', label: 'Creator', metadata: 'description', link_to_facet: true, helper_method: :generate_creators_links
     config.add_show_field 'date_ssim', label: 'Published / Created', metadata: 'description'
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date', metadata: 'description'
     config.add_show_field 'creationPlace_ssim', label: 'Publication Place', metadata: 'description'
