@@ -275,8 +275,8 @@ module BlacklightHelper
   end
 
   def generate_creators_text(args)
-    generate_creators(args) do |creator|
-      creator
+    generate_creators(args) do |_creator, creator_highlight|
+      creator_highlight
     end
   end
 
@@ -291,8 +291,9 @@ module BlacklightHelper
     out = []
 
     creator_values = args[:document][args[:field]]
-    creator_values.map do |creator|
-      creator_change = yield creator
+    creator_highlight = args[:document].highlight_field(args[:field])
+    creator_values.each_with_index.map do |creator, ix|
+      creator_change = yield creator, creator_highlight.try(:[], ix) || creator
       label = 'From the Collection: ' if args[:document]['collectionCreators_ssim']&.include?(creator)
       out << safe_join(["<span class = 'from-the-collection' >".html_safe, label, "</span>".html_safe, creator_change])
     end
