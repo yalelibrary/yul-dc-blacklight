@@ -103,9 +103,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(page.html).to match("Diversity Bull Dogs<br/>")
       expect(document).to have_content("this is the second title")
     end
-    it 'displays Creator in results' do
-      expect(document).to have_content("Frederick, Eric & Maggie")
-    end
     it 'displays format in results' do
       expect(document).to have_content("three dimensional object")
     end
@@ -259,13 +256,13 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'contains a link on the Orbis Bib ID to the Orbis catalog record' do
       expect(page).to have_link('1234567', href: 'http://hdl.handle.net/10079/bibid/1234567')
     end
-    it 'contains a link for the Creator field to the facet' do
+    it 'contains a link for the Creator field to the facet and displays' do
       expect(page).to have_link('Frederick', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Frederick')
       expect(page).to have_link('Eric', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Eric')
       expect(page).to have_link('Martin', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Martin')
       expect(page).to have_link('Maggie', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Maggie')
     end
-    it 'contains a link for the From Collection Creator field to the facet' do
+    it 'contains a link for the From Collection Creator field to the facet and displays' do
       expect(page).to have_content("From the Collection: Maggie")
       expect(page).to have_content("From the Collection: Martin")
       expect(page).not_to have_content("From the Collection: Frederick")
