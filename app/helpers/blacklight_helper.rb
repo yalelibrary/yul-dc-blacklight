@@ -274,6 +274,32 @@ module BlacklightHelper
     links.first
   end
 
+  def generate_creators_text(args)
+    generate_creators(args) do |_creator, creator_highlight|
+      creator_highlight
+    end
+  end
+
+  def generate_creators_links(args)
+    generate_creators(args) do |creator|
+      link = "/catalog?f%5Bcreator_ssim%5D%5B%5D=#{creator}"
+      link_to(creator, link)
+    end
+  end
+
+  def generate_creators(args)
+    out = []
+
+    creator_values = args[:document][args[:field]]
+    creator_highlight = args[:document].highlight_field(args[:field])
+    creator_values.each_with_index.map do |creator, ix|
+      creator_change = yield creator, creator_highlight.try(:[], ix) || creator
+      label = 'From the Collection: ' if args[:document]['collectionCreators_ssim']&.include?(creator)
+      out << safe_join(["<span class = 'from-the-collection' >".html_safe, label, "</span>".html_safe, creator_change])
+    end
+    safe_join(out, '<br/>'.html_safe)
+  end
+
   def link_to_url_with_label(arg, filters = [])
     links = arg[:value].map do |value|
       link_part = value.split('|')

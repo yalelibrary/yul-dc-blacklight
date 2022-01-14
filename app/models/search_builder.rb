@@ -38,6 +38,7 @@ class SearchBuilder < Blacklight::SearchBuilder
       timestamp
       score
       box_ssim
+      collectionCreators_ssim
       collectionId_ssim
       containerGrouping_ssim
       dependentUris_ssim
