@@ -176,12 +176,12 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
 
     context 'sending child oid as a parameter' do
       it 'uses child\'s page when oid is valid' do
-        visit 'catalog/111?child_oid=113'
+        visit 'catalog/111?image_id=113'
         src = find('.universal-viewer-iframe')['src']
         expect(src).to include '&cv=1'
       end
       it 'uses first page when oid is invalid' do
-        visit 'catalog/111?child_oid=11312321'
+        visit 'catalog/111?image_id=11312321'
         src = find('.universal-viewer-iframe')['src']
         expect(src).to include '&cv=0'
       end
