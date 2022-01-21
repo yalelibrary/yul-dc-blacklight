@@ -2,7 +2,8 @@
 <%
   order_param=''
   if @document[:child_oids_ssim]
-    order_param="&cv=#{@document[:child_oids_ssim].index(params[:child_oid])|| 0}"
+    child_oid = params[:child_oid] || params[:image_id]
+    order_param="&cv=#{@document[:child_oids_ssim].index(child_oid)|| 0}"
   end
 %>
 <div class='uv-container'>
