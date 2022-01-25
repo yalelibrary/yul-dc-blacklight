@@ -7,6 +7,7 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.3.0",
     "glob-parent": "^6.0.0",
+    "json-schema": "^0.4.0",
     "node-fetch": "2.6.7",
     "node-forge": "^1.0.0",
     "normalize-url": "^6.0.1",
