@@ -25,7 +25,9 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       sourceTitle_tesim: "this is the source title",
       callNumber_tesim: 'WAMSS987',
       orbisBibId_ssi: '1238901',
-      visibility_ssi: 'Public'
+      visibility_ssi: 'Public',
+      ancestorDisplayStrings_tesim: ['first', 'second', 'third'],
+      ancestor_titles_hierarchy_ssim: ['first > ', 'first > second > ', 'first > second > third > ']
     }
   end
 
@@ -92,6 +94,12 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
 
     it 'displays the correct record when searching by fulltext' do
       visit '/catalog?search_field=fulltext_tesim&q=one'
+      expect(page).to have_content 'Handsome Dan is a bull dog.'
+      expect(page).not_to have_content 'Handsome Dan is not a cat.'
+    end
+
+    it 'displays the finds the item by a value in the hierarchy' do
+      visit '/catalog?q=first'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).not_to have_content 'Handsome Dan is not a cat.'
     end

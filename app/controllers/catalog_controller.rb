@@ -307,7 +307,7 @@ class CatalogController < ApplicationController
       'accessionNumber_ssi',
       'alternativeTitle_tesim',
       'alternativeTitleDisplay_tesim',
-      'ancestor_titles_hierarchy_ssim',
+      'ancestorDisplayStrings_tesim',
       'archiveSpaceUri_ssi',
       'callNumber_tesim',
       'containerGrouping_tesim',
