@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 module AccessHelper
   def viewable_metadata_visibilities
-    ["Public", "Redirect", "Yale Community Only"]
+    ["Public", "Yale Community Only"]
   end
 
   def client_can_view_digital?(document)
     Rails.logger.warn("starting client can view digital check for #{request.env['HTTP_X_ORIGIN_URI']}")
     case document['visibility_ssi']
     when 'Public'
-      return true
-    when 'Redirect'
       return true
     when 'Yale Community Only'
       return true if current_user || User.on_campus?(request.remote_ip)
