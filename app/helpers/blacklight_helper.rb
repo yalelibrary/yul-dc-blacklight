@@ -97,8 +97,14 @@ module BlacklightHelper
     safe_join(links, "<br />".html_safe)
   end
 
+  def swap_out_series_title(values, series_full_title)
+    return unless series_full_title
+    values[2] = series_full_title if values[2] && series_full_title&.include?(values[2])
+  end
+
   def archival_display(arg)
     values = arg[:document][arg[:field]].reverse
+    swap_out_series_title(values, arg[:document][:series_ssi])
     title = link_to arg[:document][:title_tesim] ? arg[:document][:title_tesim].join(", ") : arg[:document][:id], solr_document_path(arg[:document][:id])
     hierarchy = arg[:document][:ancestor_titles_hierarchy_ssim]
 
@@ -119,6 +125,7 @@ module BlacklightHelper
 
   def archival_display_show(arg)
     values = arg[:document][arg[:field]].reverse
+    swap_out_series_title(values, arg[:document][:series_ssi])
 
     hierarchy = arg[:document][:ancestor_titles_hierarchy_ssim]
     hierarchy_params = (hierarchy_builder arg[:document]).reverse

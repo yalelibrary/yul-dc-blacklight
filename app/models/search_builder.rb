@@ -52,6 +52,7 @@ class SearchBuilder < Blacklight::SearchBuilder
       partOf_tesim
       public_bsi
       recordType_ssi
+      series_ssi
       source_ssim
       thumbnail_path_ss
       title_ssim
