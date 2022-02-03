@@ -21,7 +21,7 @@ RSpec.describe 'header', type: :system do
     expect(page).to have_link('Ask Yale Library', href: 'http://ask.library.yale.edu/')
     expect(page).to have_link('Reserve Rooms', href: 'https://schedule.yale.edu/')
     expect(page).to have_link('Places to Study', href: 'https://web.library.yale.edu/places/to-study')
-    expect(page).to have_link('Yale University Library', href: '/')
+    expect(page).to have_link('Yale University Library', href: 'https://library.yale.edu/')
   end
 
   it 'has expected links in the submenu' do
