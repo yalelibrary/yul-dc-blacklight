@@ -44,7 +44,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       oid_ssi: 111,
       thumbnail_path_ss: 'https://this/is/an/image',
       callNumber_ssim: "call number",
-      has_fulltext_ssi: 'Yes'
+      has_fulltext_ssi: 'Yes',
+      series_ssi: "Series 1: Oversize"
     }
   end
 
@@ -154,9 +155,9 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   context 'Archival Context breadcrumbs' do
     it 'renders the Archival Context' do
       expect(page).to have_content 'Found In:'
-      expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Oversize > ... >'
+      expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > ... >'
       click_on("...")
-      expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Oversize > Level3 > Level2 > Level1 > Level0'
+      expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > Level3 > Level2 > Level1 > Level0'
     end
   end
 
