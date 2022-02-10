@@ -78,6 +78,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       callNumber_ssim: 'this is the call number',
       containerGrouping_tesim: 'this is the container information',
       orbisBibId_ssi: '1234567',
+      quicksearchId_ssi: 'b1234567',
       archiveSpaceUri_ssi: "/repositories/11/archival_objects/214638",
       findingAid_ssim: 'this is the finding aid',
       collection_title_ssi: 'this is the collection title',
@@ -218,6 +219,10 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays the Orbis Bib ID in results' do
       expect(document).to have_content("1234567")
+    end
+    it 'displays the Quicksearch ID in results' do
+      expect(document).to have_content("b1234567")
+      expect(document).to have_link("b1234567", href: "https://search.library.yale.edu/catalog/b1234567")
     end
     it 'displays the Edition in results' do
       expect(document).to have_content("this is the edition")
