@@ -71,6 +71,13 @@ module BlacklightHelper
     link_to(bib_id, link)
   end
 
+  def link_to_quicksearch_id(arg)
+    qs_id = arg[:document][arg[:field]]
+    link = "https://search.library.yale.edu/catalog/#{qs_id}"
+
+    link_to(qs_id, link)
+  end
+
   def join_with_br(arg)
     values = arg[:document][arg[:field]]
     safe_join(values, '<br/>'.html_safe)
