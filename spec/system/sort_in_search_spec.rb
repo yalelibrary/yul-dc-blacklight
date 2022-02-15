@@ -213,7 +213,9 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
   context 'sorts by collection with correct facets' do
     it 'does not have sort by collection by default' do
       visit "/catalog?f[collection_title_ssi][]=Test"
-      click_on 'search'
+      content = find(:css, '#content')
+      expect(content).to have_content("1.\nHandsomeDan Bulldog")
+      expect(content).to have_content("2.\nRhett Lecheire")
       click_on 'Sort by relevance'
       within('div#sort-dropdown') do
         expect(page).to have_content("Collection Order")
