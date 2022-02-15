@@ -44,6 +44,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       creator_tesim: 'Andy Graves',
       creator_ssim: ['Andy Graves'],
       dateStructured_ssim: ['1755'],
+      collection_title_ssi: "Test",
       year_isim: [1755]
     }
   end
@@ -62,6 +63,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       creator_tesim: 'Paulo Coelho',
       creator_ssim: ['Paulo Coelho'],
       dateStructured_ssim: ['1972'],
+      collection_title_ssi: "Test",
       year_isim: [1790]
     }
   end
@@ -195,6 +197,31 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       expect(content).to have_content("2.\nRhett Lecheire")
       expect(content).to have_content("3.\nHandsomeDan Bulldog")
       expect(content).to have_content("4.\nAmor Llama")
+    end
+  end
+
+  context 'sorts by collection with correct facets' do
+    it 'does not have sort by collection by default' do
+      click_on 'search'
+      click_on 'Sort by relevance'
+      within('div#sort-dropdown') do
+        expect(page).not_to have_content("Collection Order")
+      end
+    end
+  end
+
+  context 'sorts by collection with correct facets' do
+    it 'does not have sort by collection by default' do
+      visit "/catalog?f[collection_title_ssi][]=Test"
+      click_on 'search'
+      click_on 'Sort by relevance'
+      within('div#sort-dropdown') do
+        expect(page).to have_content("Collection Order")
+        click_on "Collection Order"
+      end
+      content = find(:css, '#content')
+      expect(content).to have_content("1.\nRhett Lecheire")
+      expect(content).to have_content("2.\nHandsomeDan Bulldog")
     end
   end
 end
