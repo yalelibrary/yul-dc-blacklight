@@ -517,7 +517,8 @@ class CatalogController < ApplicationController
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case).
-    config.add_sort_field 'score desc, pub_date_si desc, title_si asc, archivalSort_ssi asc', label: 'relevance'
+    config.add_sort_field 'score desc, pub_date_si desc, title_ssim asc, archivalSort_ssi asc', label: 'relevance'
+    config.add_sort_field 'archivalSort_ssi asc, score desc, pub_date_si desc, title_ssim asc', label: 'Collection Order', if: :collection_order_sort?
     config.add_sort_field 'creator_ssim asc, title_ssim asc, archivalSort_ssi asc', label: 'Creator (A --> Z)'
     config.add_sort_field 'creator_ssim desc, title_ssim asc, archivalSort_ssi asc', label: 'Creator (Z --> A)'
     config.add_sort_field 'title_ssim asc, oid_ssi desc, archivalSort_ssi asc', label: 'Title (A --> Z)'
@@ -589,6 +590,10 @@ class CatalogController < ApplicationController
 
   def collection_facet?
     helpers.facet_field_in_params?('collection_title_ssi')
+  end
+
+  def collection_order_sort?
+    helpers.facet_field_in_params?('collection_title_ssi') || helpers.facet_field_in_params?('series_sort_ssi')
   end
 
   def gallery_view?
