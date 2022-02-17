@@ -337,7 +337,8 @@ module BlacklightHelper
   def link_to_url_with_label_and_filter(arg)
     ils_filters = %w[brbl-archive.library.yale.edu
                      divinity-adhoc.library.yale.edu/FosterPapers digital.library.yale.edu
-                     beinecke.library.yale.edu beinecke1.library.yale.edu collections.library.yale.edu]
+                     beinecke.library.yale.edu beinecke1.library.yale.edu collections.library.yale.edu
+                     hdl.handle.net/10079/digcoll/]
     link_to_url_with_label(arg, ils_filters)
   end
   # rubocop:enable Layout/DefEndAlignment
