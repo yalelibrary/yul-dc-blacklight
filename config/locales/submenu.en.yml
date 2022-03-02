@@ -94,7 +94,7 @@ en:
         description: ''
       off-CampusAccess:
         title: Off-Campus Access
-        url: https://library.yale.edu/help/off-campus-access-vpn
+        url: https://guides.library.yale.edu/OffCampusAccess
         description: Connect your computer to the Yale VPN (network) while off-campus.
       eliScholar:
         title: EliScholar
@@ -114,23 +114,23 @@ en:
     librariesCollections:
       artsLibrary:
         title: Arts Library
-        url: https://library.yale.edu/building/arts-library
+        url: https://web.library.yale.edu/building/haas-family-arts-library
         description: Robert B. Haas Family Arts Library
       bassLibrary:
         title: Bass Library
-        url: https://library.yale.edu/building/bass-library
+        url: https://web.library.yale.edu/building/bass-library
         description: Anne T. and Robert M. Bass Library
       beineckeLibrary:
         title: Beinecke Library
-        url: https://library.yale.edu/building/beinecke-library
+        url: https://web.library.yale.edu/building/beinecke-rare-book-library
         description: Beinecke Rare Book & Manuscript Library
       classicsLibrary:
         title: Classics Library
-        url: https://library.yale.edu/building/classics-library
+        url: https://web.library.yale.edu/building/classics-library
         description: ''
       divinityLibrary:
         title: Divinity Library
-        url: https://library.yale.edu/building/divinity-library
+        url: https://web.library.yale.edu/building/divinity-library
         description: Divinity School Library
       filmStudyCenter:
         title: Film Study Center
@@ -146,19 +146,19 @@ en:
         description: ''
       internationalCollections:
         title: International Collections
-        url: https://library.yale.edu/international-collections
+        url: https://web.library.yale.edu/international-collections
         description: ''
       lawLibrary:
         title: Law Library
-        url: https://library.yale.edu/building/law-library
+        url: https://web.library.yale.edu/building/lillian-goldman-law-library
         description: Lillian Goldman Law Library in Memory of Sol Goldman
       lewisWalpoleLibrary:
         title: Lewis Walpole Library
-        url: https://library.yale.edu/building/lewis-walpole-library
+        url: https://web.library.yale.edu/building/lewis-walpole-library
         description: ''
       libraryCollectionServices:
         title: Library Collection Services
-        url: https://library.yale.edu/departments/lcs
+        url:  https://web.library.yale.edu/sd/dept/library-collection-services-and-operations
         description: ''
       manuScriptsArchives:
         title: Manuscripts & Archives
@@ -170,15 +170,15 @@ en:
         description: ''
       marxScienceSocialScienceLibrary:
         title: Marx Science & Social Science Library
-        url: https://library.yale.edu/building/marx-science-and-social-science-library
+        url:  https://web.library.yale.edu/building/marx-science-and-social-science-library
         description: ''
       mathematicsLibrary:
         title: Mathematics Library
-        url: https://library.yale.edu/building/math-library
+        url: https://web.library.yale.edu/building/mathematics-library
         description: ''
       medicalLibrary:
         title: Medical Library
-        url: https://library.yale.edu/building/medical-library
+        url:  https://web.library.yale.edu/building/cushingwhitney-medical-library
         description: Harvey Cushing / John Hay Whitney Medical Library
       musicLibrary:
         title: Music Library
@@ -186,20 +186,20 @@ en:
         description: Irving S. Gilmore Music Library
       sterlingLibrary:
         title: Sterling Library
-        url: https://library.yale.edu/building/sterling-library
+        url: https://web.library.yale.edu/building/sterling-memorial-library
         description: Sterling Memorial Library
       yaleCenterBritishArt:
         title: Yale Center for British Art
-        url: https://library.yale.edu/building/yale-center-for-british-art
+        url: https://web.library.yale.edu/building/yale-center-for-british-art
         description: ''
     informationPolicies:
       libraryHours:
         title: Library Hours
-        url: https://library.yale.edu/buildings
+        url: https://library.yale.edu/visit-and-study
         description: ''
       departmentsStaff:
         title: Departments & Staff
-        url: https://library.yale.edu/sd
+        url: https://library.yale.edu/staff-directory
         description: ''
       borrowingCirculation:
         title: Borrowing & Circulation
@@ -207,7 +207,7 @@ en:
         description: Information about accessing and borrowing print material
       servicesPersonsWithDisabilities:
         title: Services for Persons with Disabilities
-        url: https://library.yale.edu/services-persons-disabilities
+        url: https://web.library.yale.edu/services-persons-disabilities
         description: ''
       copyrightBasics:
         title: Copyright Basics
@@ -215,11 +215,11 @@ en:
         description: ''
       scanningPrintingCopying:
         title: Scanning, Printing & Copying
-        url: https://library.yale.edu/help/scanning-printing-copying
+        url: https://web.library.yale.edu/help/scanning-printing-copying
         description: ''
       computersWireless:
         title: Computers Wireless
-        url: https://library.yale.edu/help/computers-and-wireless
+        url: https://web.library.yale.edu/help/computers-and-wireless
         description: ''
       libraryPolicies:
         title: Library Policies
@@ -235,7 +235,7 @@ en:
         description: ''
       purchaseRequest:
         title: Purchase Request
-        url: https://library.yale.edu/form/purchase-request
+        url: https://ask.library.yale.edu/faq/174852
         description: ''
       workingAtTheLibrary:
         title: Working at the Library
