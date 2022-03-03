@@ -1,4 +1,4 @@
-FROM yalelibraryit/dc-base:v1.2.1
+FROM yalelibraryit/dc-base:v1.3.0
 
 COPY ops/webapp.conf /etc/nginx/sites-enabled/webapp.conf
 COPY ops/env.conf /etc/nginx/main.d/env.conf
@@ -9,12 +9,15 @@ RUN rm -f /etc/service/nginx/down
 
 ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
 BUNDLE_JOBS=4
-RUN gem install bundler -v 2.1.4
+RUN /sbin/setuser app bash -l -c "gem install bundler -v 2.3.8"
 
 COPY --chown=app Gemfile* $APP_HOME/
 RUN /sbin/setuser app bash -l -c "bundle check || bundle install"
 
 COPY  --chown=app . $APP_HOME
+
+RUN sh -l -c " \
+  sed -i '/require .enumerator./d' /usr/local/rvm/gems/ruby-2.7.5/gems/oai-1.1.0/lib/oai/provider/resumption_token.rb"
 
 # Assets and packs are moved aside - building them means you find out early if the asset compilation is broken
 # not on final deploy. It means that public/assets and public/packs can be volumes in production allowing for
