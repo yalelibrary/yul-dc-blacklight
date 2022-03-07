@@ -73,7 +73,7 @@ RSpec.describe 'header', type: :system do
     expect(page).to have_link('Services for Persons with Disabilities', href: 'https://web.library.yale.edu/services-persons-disabilities')
     expect(page).to have_link('Copyright Basics', href: 'http://guides.library.yale.edu/copyright-guidance/copyright-basics')
     expect(page).to have_link('Scanning, Printing & Copying', href: 'https://web.library.yale.edu/help/scanning-printing-copying')
-    expect(page).to have_link('Computers Wireless', href: 'https://web.library.yale.edu/help/computers-and-wireless')
+    expect(page).to have_link('Computers & Wireless', href: 'https://web.library.yale.edu/help/computers-and-wireless')
     expect(page).to have_link('Library Policies', href: 'http://guides.library.yale.edu/about/policies')
     expect(page).to have_link('About the Library', href: 'http://guides.library.yale.edu/about')
     expect(page).to have_link('Giving to the Library', href: 'https://library.yale.edu/development')
