@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Sitemap Show', type: :feature do
+  let(:thumbnail_size) { "!1200,630" }
+
   before do
     solr = Blacklight.default_index.connection
     solr.add([test_record_0, test_record_1, test_record_2, test_record_3, test_record_4])
@@ -21,7 +23,7 @@ RSpec.describe 'Sitemap Show', type: :feature do
       isbn_ssim: '2321321389',
       timestamp: "2021-04-05T17:43:23.382Z",
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
-      thumbnail_path_ss: "http://localhost:8182/iiif/2/10962176/full/!200,200/0/default.jpg",
+      thumbnail_path_ss: "http://localhost:8182/iiif/2/10962176/full/#{thumbnail_size}/0/default.jpg",
       visibility_ssi: 'Public',
       year_isim: (600..1050).to_a
     }
@@ -42,7 +44,7 @@ RSpec.describe 'Sitemap Show', type: :feature do
       timestamp: "2021-04-05T17:43:23.382Z",
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       visibility_ssi: 'Public',
-      thumbnail_path_ss: "http://localhost:8182/iiif/2/10962124/full/!200,200/0/default.jpg",
+      thumbnail_path_ss: "http://localhost:8182/iiif/2/10962124/full/#{thumbnail_size}/0/default.jpg",
       year_isim: (1920..2000).to_a
     }
   end
@@ -62,7 +64,7 @@ RSpec.describe 'Sitemap Show', type: :feature do
       timestamp: "2021-04-05T17:43:23.382Z",
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       visibility_ssi: 'Public',
-      thumbnail_path_ss: "http://localhost:8182/iiif/2/10962124/full/!200,200/0/default.jpg",
+      thumbnail_path_ss: "http://localhost:8182/iiif/2/10962124/full/#{thumbnail_size}/0/default.jpg",
       year_isim: [1900]
     }
   end
@@ -82,7 +84,7 @@ RSpec.describe 'Sitemap Show', type: :feature do
       timestamp: "2021-04-05T17:43:23.382Z",
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       visibility_ssi: 'Yale Community Only',
-      thumbnail_path_ss: "http://localhost:8182/iiif/2/10962334/full/!200,200/0/default.jpg",
+      thumbnail_path_ss: "http://localhost:8182/iiif/2/10962334/full/#{thumbnail_size}/0/default.jpg",
       year_isim: [2020, 2021]
     }
   end
@@ -102,7 +104,7 @@ RSpec.describe 'Sitemap Show', type: :feature do
       timestamp: "2021-04-05T17:43:23.382Z",
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       visibility_ssi: 'Private',
-      thumbnail_path_ss: "http://localhost:8182/iiif/2/10962664/full/!200,200/0/default.jpg",
+      thumbnail_path_ss: "http://localhost:8182/iiif/2/10962664/full/#{thumbnail_size}/0/default.jpg",
       year_isim: [2020, 2021]
     }
   end
@@ -124,11 +126,11 @@ RSpec.describe 'Sitemap Show', type: :feature do
   end
   it 'does render a thumbnail for public images' do
     visit blacklight_dynamic_sitemap.sitemap_path('2')
-    expect(page.body).to include('<image:loc>http://localhost:8182/iiif/2/10962124/full/!200,200/0/default.jpg</image:loc>')
+    expect(page.body).to include("<image:loc>http://localhost:8182/iiif/2/10962124/full/#{thumbnail_size}/0/default.jpg</image:loc>")
   end
   it 'does not render a thumbnail for non-public images' do
     visit blacklight_dynamic_sitemap.sitemap_path('0')
-    expect(page).not_to have_content('http://localhost:8182/iiif/2/10962334/full/!200,200/0/default.jpg')
+    expect(page).not_to have_content("http://localhost:8182/iiif/2/10962334/full/#{thumbnail_size}/0/default.jpg")
   end
   it 'does not display a private record' do
     visit blacklight_dynamic_sitemap.sitemap_path('0')

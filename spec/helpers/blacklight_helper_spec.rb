@@ -2,6 +2,7 @@
 
 RSpec.describe BlacklightHelper, helper: true, style: true do
   include Devise::Test::ControllerHelpers
+  let(:thumbnail_size) { "!1200,630" }
 
   # used so render_thumbnail can get user info from rspec
   def user_signed_in?
@@ -103,14 +104,19 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
 
   describe '#render_thumbnail' do
     context 'with public record and oid with images' do
-      let(:valid_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Public', oid_ssi: ['2055095'], thumbnail_path_ss: "http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg") }
+      let(:valid_document) do
+        SolrDocument.new(id: 'test',
+                         visibility_ssi: 'Public',
+                         oid_ssi: ['2055095'],
+                         thumbnail_path_ss: "http://localhost:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg")
+      end
       let(:non_valid_document) { SolrDocument.new(id: 'test', visibility_ssi: 'Public', oid_ssi: ['9999999999999999']) }
       before do
-        stub_request(:get, "http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg")
+        stub_request(:get, "http://iiif_image:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg")
           .to_return(status: 200, body: File.open("spec/fixtures/images/Sun.png").read, headers: { "Content-Type" => /image\/.+/ })
       end
       it 'returns an image_tag for oids that have images' do
-        expect(helper.render_thumbnail(valid_document, { alt: "" })).to match "<img [^>]* src=\"http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg\" />"
+        expect(helper.render_thumbnail(valid_document, { alt: "" })).to match "<img [^>]* src=\"http://localhost:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg\" />"
       end
       it 'returns an image_tag pointing to image_not_found.png for oids without images' do
         expect(helper.render_thumbnail(non_valid_document, {})).to include("<img src=\"/assets/image_not_found-")
@@ -123,11 +129,11 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
           id: 'test',
           visibility_ssi: 'Yale Community Only',
           oid_ssi: ['2055095'],
-          thumbnail_path_ss: "http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg"
+          thumbnail_path_ss: "http://localhost:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg"
         )
       end
       before do
-        stub_request(:get, "http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg")
+        stub_request(:get, "http://iiif_image:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg")
           .to_return(status: 200, body: File.open("spec/fixtures/images/Sun.png").read, headers: { "Content-Type" => /image\/.+/ })
       end
 
@@ -139,7 +145,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
         user = FactoryBot.create(:user)
         sign_in(user) # sign_in so user_signed_in? works in method
 
-        expect(helper.render_thumbnail(yale_only_document, {})).to match("<img [^>]* src=\"http://localhost:8182/iiif/2/1234822/full/!200,200/0/default.jpg\" />")
+        expect(helper.render_thumbnail(yale_only_document, {})).to match("<img [^>]* src=\"http://localhost:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg\" />")
       end
 
       describe '#range_unknown_remove_url' do
