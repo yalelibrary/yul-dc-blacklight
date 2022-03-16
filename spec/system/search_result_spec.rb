@@ -2,11 +2,13 @@
 require 'rails_helper'
 
 RSpec.describe 'search result', type: :system, clean: true do
+  let(:thumbnail_size) { "!1200,630" }
+
   before do
     solr = Blacklight.default_index.connection
     solr.add(document_with_image)
     solr.commit
-    stub_request(:get, "http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg")
+    stub_request(:get, "http://iiif_image:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg")
       .to_return(status: 200, body: File.open("spec/fixtures/images/Sun.png").read, headers: { "Content-Type" => /image\/.+/ })
   end
 
@@ -16,7 +18,7 @@ RSpec.describe 'search result', type: :system, clean: true do
       oid_ssi: '2055095',
       visibility_ssi: 'Public',
       callNumber_tesim: 'Call Number',
-      thumbnail_path_ss: "http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg"
+      thumbnail_path_ss: "http://iiif_image:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg"
     }
   end
 

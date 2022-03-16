@@ -54,7 +54,7 @@ WORK_WITH_PUBLIC_VISIBILITY = {
   "subjectTopic_ssim": ["Manuscripts, Medieval--Connecticut--New Haven"],
   "subjectGeographic_ssim": ["Connecticut--New Haven"],
   "scale_tesim": ["Scale not given."],
-  "thumbnail_path_ss": "http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg"
+  "thumbnail_path_ss": "http://iiif_image:8182/iiif/2/1234822/full/!1200,600/0/default.jpg"
 }.freeze
 
 WORK_WITH_PRIVATE_VISIBILITY = {
