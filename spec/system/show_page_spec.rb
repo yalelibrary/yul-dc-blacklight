@@ -42,7 +42,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       creator_tesim: ['Anna Elizabeth Dewdney'],
       child_oids_ssim: [112, 113],
       oid_ssi: 111,
-      thumbnail_path_ss: 'https://this/is/an/image',
+      thumbnail_path_ss: 'https://collections-test.library.yale.edu/iiif/2/17120080/full/!200,200/0/default.jpg',
       callNumber_ssim: "call number",
       has_fulltext_ssi: 'Yes',
       series_ssi: "Series 1: Oversize"
@@ -127,7 +127,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       resourceType_ssim: 'Archives or Manuscripts',
       creator_ssim: ['France A. Cordova'],
       oid_ssi: 555,
-      thumbnail_path_ss: 'https://this/is/an/image'
+      thumbnail_path_ss: 'https://collections-test.library.yale.edu/iiif/2/17120080/full/!200,200/0/default.jpg'
     }
   end
 
@@ -218,7 +218,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).to have_css("meta[property='og:url'][content='https://collections.library.yale.edu/catalog/111']", visible: false)
       expect(page).to have_css("meta[property='og:type'][content='website']", visible: false)
       expect(page).to have_css("meta[property='og:description'][content='Anna Elizabeth Dewdney']", visible: false)
-      expect(page).to have_css("meta[property='og:image'][content='https://this/is/an/image']", visible: false)
+      expect(page).to have_css("meta[property='og:image'][content='https://collections-test.library.yale.edu/iiif/2/17120080/full/!1200x630/0/default.jpg']", visible: false)
       expect(page).to have_css("meta[property='og:image:type'][content='image/jpeg']", visible: false)
     end
     it 'has og namespace' do
@@ -231,7 +231,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       visit 'catalog/555'
     end
     it 'does not have image of og tag' do
-      expect(page).not_to have_css("meta[property='og:image'][content='https://this/is/an/image']", visible: false)
+      expect(page).not_to have_css("meta[property='og:image'][content='https://collections-test.library.yale.edu/iiif/2/17120080/full/!1200x630/0/default.jpg']", visible: false)
       expect(page).not_to have_css("meta[property='og:image:type'][content='image/jpeg']", visible: false)
     end
   end
