@@ -218,7 +218,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).to have_css("meta[property='og:url'][content='https://collections.library.yale.edu/catalog/111']", visible: false)
       expect(page).to have_css("meta[property='og:type'][content='website']", visible: false)
       expect(page).to have_css("meta[property='og:description'][content='Anna Elizabeth Dewdney']", visible: false)
-      expect(page).to have_css("meta[property='og:image'][content='https://collections-test.library.yale.edu/iiif/2/17120080/full/!1200x630/0/default.jpg']", visible: false)
+      expect(page).to have_css("meta[property='og:image'][content='https://collections-test.library.yale.edu/iiif/2/17120080/full/!1200,630/0/default.jpg']", visible: false)
       expect(page).to have_css("meta[property='og:image:type'][content='image/jpeg']", visible: false)
     end
     it 'has og namespace' do
@@ -231,7 +231,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       visit 'catalog/555'
     end
     it 'does not have image of og tag' do
-      expect(page).not_to have_css("meta[property='og:image'][content='https://collections-test.library.yale.edu/iiif/2/17120080/full/!1200x630/0/default.jpg']", visible: false)
+      expect(page).not_to have_css("meta[property='og:image'][content='https://collections-test.library.yale.edu/iiif/2/17120080/full/!1200,630/0/default.jpg']", visible: false)
       expect(page).not_to have_css("meta[property='og:image:type'][content='image/jpeg']", visible: false)
     end
   end
