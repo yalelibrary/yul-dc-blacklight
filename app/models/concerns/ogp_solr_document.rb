@@ -3,6 +3,7 @@
 module OgpSolrDocument
   extend ActiveSupport::Concern
   include ActionView::Helpers::TagHelper
+  include CatalogHelper
 
   def to_ogp_metadata
     description = ogp_description
@@ -12,9 +13,9 @@ module OgpSolrDocument
         'og:url': "https://collections.library.yale.edu/catalog/#{id}",
         'og:type': 'website',
         'og:description': description,
-        'og:image': self[:visibility_ssi] == "Public" && self["thumbnail_path_ss"] || nil,
+        'og:image': self[:visibility_ssi] == "Public" && change_iiif_image_size(self["thumbnail_path_ss"], '!1200,630') || nil,
         'og:image:type': self[:visibility_ssi] == "Public" && 'image/jpeg' || nil,
-        'og:image:secure_url': self[:visibility_ssi] == "Public" && self["thumbnail_path_ss"] || nil }.compact
+        'og:image:secure_url': self[:visibility_ssi] == "Public" && change_iiif_image_size(self["thumbnail_path_ss"], '!1200,630') || nil }.compact
 
     meta_tag = []
     ogp_metadata.each do |key, value|

@@ -2,7 +2,7 @@
 require 'rails_helper'
 
 RSpec.describe 'search result', type: :system, clean: true do
-  let(:thumbnail_size) { "!1200,630" }
+  let(:thumbnail_size) { "!200,200" }
 
   before do
     solr = Blacklight.default_index.connection

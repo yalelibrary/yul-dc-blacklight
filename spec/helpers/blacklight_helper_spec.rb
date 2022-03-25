@@ -2,7 +2,7 @@
 
 RSpec.describe BlacklightHelper, helper: true, style: true do
   include Devise::Test::ControllerHelpers
-  let(:thumbnail_size) { "!1200,630" }
+  let(:thumbnail_size) { "!200,200" }
 
   # used so render_thumbnail can get user info from rspec
   def user_signed_in?
