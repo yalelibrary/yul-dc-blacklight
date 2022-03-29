@@ -20,15 +20,15 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
   end
 
   describe '#aspace_link' do
+    let(:document) { SolrDocument.new(id: 'aspace_link', archiveSpaceUri_ssi: '/repositories/11/archival_objects/21463') }
+    let(:args) do
+      {
+        document: document,
+        field: 'archiveSpaceUri_ssi',
+        value: '/repositories/11/archival_objects/21463'
+      }
+    end
     context 'with a valid aspace link' do
-      let(:document) { SolrDocument.new(id: 'aspace_link', archiveSpaceUri_ssi: '/repositories/11/archival_objects/21463') }
-      let(:args) do
-        {
-          document: document,
-          field: 'archiveSpaceUri_ssi',
-          value: '/repositories/11/archival_objects/21463'
-        }
-      end
       around do |example|
         original_value = ENV["ARCHIVES_SPACE_BASE_URL"]
         ENV["ARCHIVES_SPACE_BASE_URL"] = "http://testaspace.base.url/"
@@ -39,6 +39,20 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
         # rubocop:disable Layout/LineLength
         aspace_test_link = helper.aspace_link(args)
         expect(aspace_test_link).to match "<a target=\"_blank\" rel=\"noopener\" href=\"http://testaspace.base.url/repositories/11/archival_objects/21463\">View item information in Archives at Yale<img id=\"popup_window\" alt=\"pop up window\" src=\"/assets/YULPopUpWindow-6875f3abe2978f95c415644269f3a1765897b5fd06976b6762dc3b06736b3324.png\" /></a>"
+        # rubocop:enable Layout/LineLength
+      end
+    end
+    context "with out environment variable set" do
+      around do |example|
+        original_value = ENV["ARCHIVES_SPACE_BASE_URL"]
+        ENV["ARCHIVES_SPACE_BASE_URL"] = nil
+        example.run
+        ENV["ARCHIVES_SPACE_BASE_URL"] = original_value
+      end
+      it 'has a valid aspace link with default url' do
+        # rubocop:disable Layout/LineLength
+        aspace_test_link = helper.aspace_link(args)
+        expect(aspace_test_link).to match "<a target=\"_blank\" rel=\"noopener\" href=\"https://archives.yale.edu/repositories/11/archival_objects/21463\">View item information in Archives at Yale<img id=\"popup_window\" alt=\"pop up window\" src=\"/assets/YULPopUpWindow-6875f3abe2978f95c415644269f3a1765897b5fd06976b6762dc3b06736b3324.png\" /></a>"
         # rubocop:enable Layout/LineLength
       end
     end
