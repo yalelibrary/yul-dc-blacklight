@@ -41,6 +41,16 @@
             const data = urlAdapter.getInitialData();
             uv = UV.init('uv', data);
 
+            uv.on("configure", function ({ config, cb }) {
+                  cb(
+                    new Promise(function (resolve) {
+                      fetch("uv-config.json").then(function (response) {
+                        resolve(response.json());
+                      });
+                    })
+                  );
+                });
+
             uv.on('canvasIndexChanged', function (event) {
                 window.parent.postMessage(event, "*")
             })
