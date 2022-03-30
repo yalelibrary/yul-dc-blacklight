@@ -288,14 +288,19 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(page).to have_link('this is the geo subject', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=this is the geo subject')
       expect(page).to have_link('these are the geo subjects', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=these are the geo subjects')
     end
-    it 'contains a link to Aspace' do
-      aspace_link = page.find("a[href = 'https://archives.yale.edu/repositories/11/archival_objects/214638']")
-
-      expect(aspace_link).to be_truthy
-      expect(aspace_link).to have_content "View item information in Archives at Yale"
-      expect(aspace_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
-    end
     context 'ASpace hierarchy graphical display' do
+      around do |example|
+        original_value = ENV["ARCHIVES_SPACE_BASE_URL"]
+        ENV["ARCHIVES_SPACE_BASE_URL"] = "http://testaspace.base.url/"
+        example.run
+        ENV["ARCHIVES_SPACE_BASE_URL"] = original_value
+      end
+      it 'contains a link to Aspace' do
+        aspace_link = page.find("a[href = 'http://testaspace.base.url/repositories/11/archival_objects/214638']")
+        expect(aspace_link).to be_truthy
+        expect(aspace_link).to have_content "View item information in Archives at Yale"
+        expect(aspace_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
+      end
       it 'has an ellipsis instead of a full tree' do
         expect(page).to have_content "first"
         expect(page).not_to have_text(type: :visible, text: "fourth")
