@@ -20,8 +20,10 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       format: 'text',
       language_ssim: 'la',
       visibility_ssi: 'Public',
+      archivalSort_ssi: '00000.00040',
       creationPlace_ssim: 'Spain',
       resourceType_ssim: 'Maps, Atlases & Globes',
+      creator_tesim: 'Anna Elizabeth Dewdney',
       creator_ssim: ['Anna Elizabeth Dewdney'],
       dateStructured_ssim: ['1911'],
       year_isim: [1690]
@@ -36,10 +38,13 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       format: 'three dimensional object',
       language_ssim: 'en',
       visibility_ssi: 'Public',
+      archivalSort_ssi: '08001.00038',
       creationPlace_ssim: 'New Haven',
       resourceType_ssim: 'Books, Journals & Pamphlets',
+      creator_tesim: 'Andy Graves',
       creator_ssim: ['Andy Graves'],
       dateStructured_ssim: ['1755'],
+      collection_title_ssi: "Test",
       year_isim: [1755]
     }
   end
@@ -52,10 +57,13 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       format: 'text',
       language_ssim: 'fr',
       visibility_ssi: 'Public',
+      archivalSort_ssi: '04000.00040',
       creationPlace_ssim: 'Constantinople or southern Italy',
       resourceType_ssim: 'Archives or Manuscripts',
+      creator_tesim: 'Paulo Coelho',
       creator_ssim: ['Paulo Coelho'],
       dateStructured_ssim: ['1972'],
+      collection_title_ssi: "Test",
       year_isim: [1790]
     }
   end
@@ -68,8 +76,10 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       format: 'still image',
       language_ssim: 'it',
       visibility_ssi: 'Public',
+      archivalSort_ssi: '00020.00040',
       creationPlace_ssim: 'White-Hall, printed upon the ice, on the River Thames',
       resourceType_ssim: 'Archives or Manuscripts',
+      creator_tesim: 'Andrew Norriss',
       creator_ssim: ['Andrew Norriss'],
       dateStructured_ssim: ['1699'],
       year_isim: [1830]
@@ -187,6 +197,33 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       expect(content).to have_content("2.\nRhett Lecheire")
       expect(content).to have_content("3.\nHandsomeDan Bulldog")
       expect(content).to have_content("4.\nAmor Llama")
+    end
+  end
+
+  context 'sorts by collection with correct facets' do
+    it 'does not have sort by collection by default' do
+      click_on 'search'
+      click_on 'Sort by relevance'
+      within('div#sort-dropdown') do
+        expect(page).not_to have_content("Collection Order")
+      end
+    end
+  end
+
+  context 'sorts by collection with correct facets' do
+    it 'does not have sort by collection by default' do
+      visit "/catalog?f[collection_title_ssi][]=Test"
+      content = find(:css, '#content')
+      expect(content).to have_content("1.\nHandsomeDan Bulldog")
+      expect(content).to have_content("2.\nRhett Lecheire")
+      click_on 'Sort by relevance'
+      within('div#sort-dropdown') do
+        expect(page).to have_content("Collection Order")
+        click_on "Collection Order"
+      end
+      content = find(:css, '#content')
+      expect(content).to have_content("1.\nRhett Lecheire")
+      expect(content).to have_content("2.\nHandsomeDan Bulldog")
     end
   end
 end

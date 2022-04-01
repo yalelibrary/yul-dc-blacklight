@@ -31,6 +31,8 @@ RSpec.describe 'PdfController', type: :request do
       "title_tesim": ["Fake Work"]
     }
   end
+  let(:redirected_work) { WORK_REDIRECTED }
+
   describe 'PDFs' do
     before do
       stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/pdfs/00/20/34/60/2034600.pdf')
@@ -38,7 +40,7 @@ RSpec.describe 'PdfController', type: :request do
       stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/pdfs/09/16/18/90/1618909.pdf')
         .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2034600.pdf')).read)
       solr = Blacklight.default_index.connection
-      solr.add([public_work, yale_work, no_visibility_work, pubic_work_with_no_pdf])
+      solr.add([public_work, yale_work, no_visibility_work, pubic_work_with_no_pdf, redirected_work])
       solr.commit
       allow(User).to receive(:on_campus?).and_return(false)
     end
@@ -65,6 +67,10 @@ RSpec.describe 'PdfController', type: :request do
       it 'returns unauthorized for oid with Yale Only' do
         get '/pdfs/1618909.pdf'
         expect(response).to have_http_status(:unauthorized)
+      end
+      it 'returns not found for oid with Redirect' do
+        get '/pdfs/16685691.pdf'
+        expect(response).to have_http_status(:not_found)
       end
     end
 

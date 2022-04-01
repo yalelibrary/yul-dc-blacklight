@@ -2,6 +2,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Show Page', type: :system, js: true, clean: true do
+  let(:thumbnail_size_in_opengraph) { "!1200,630" }
+  let(:thumbnail_size_in_solr) { "!200,200" }
+
   before do
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/111.json')
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
@@ -10,6 +13,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/113.json')
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/22/22/222.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/12/11/112.json')
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
 
     solr = Blacklight.default_index.connection
@@ -23,7 +28,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
               void])
     solr.commit
     visit '/catalog?search_field=all_fields&q='
-    click_on 'Amor Llama'
+    click_on 'Amor Llama', match: :first
   end
 
   let(:llama) do
@@ -34,14 +39,16 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       language_ssim: 'la',
       visibility_ssi: 'Public',
       genre_ssim: 'Maps',
+      ancestorTitles_tesim: ['Level0', 'Level1', 'Level2', 'Level3', 'Oversize', 'Abraham Lincoln collection (GEN MSS 257)', 'Beinecke Rare Book and Manuscript Library (BRBL)'],
       resourceType_ssim: 'Maps, Atlases & Globes',
       creator_ssim: ['Anna Elizabeth Dewdney'],
       creator_tesim: ['Anna Elizabeth Dewdney'],
       child_oids_ssim: [112, 113],
       oid_ssi: 111,
-      thumbnail_path_ss: 'https://this/is/an/image',
+      thumbnail_path_ss: "https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_solr}/0/default.jpg",
       callNumber_ssim: "call number",
-      has_fulltext_ssi: 'Yes'
+      has_fulltext_ssi: 'Yes',
+      series_ssi: "Series 1: Oversize"
     }
   end
 
@@ -55,7 +62,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       genre_ssim: 'Maps',
       resourceType_ssim: 'Maps, Atlases & Globes',
       creator_ssim: ['Anna Elizabeth Dewdney'],
-      fulltext_tesim: ['fulltext text for llama child one.']
+      fulltext_tesim: ['fulltext text for llama child one.'],
+      has_fulltext_ssi: 'Partial'
     }
   end
 
@@ -122,7 +130,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       resourceType_ssim: 'Archives or Manuscripts',
       creator_ssim: ['France A. Cordova'],
       oid_ssi: 555,
-      thumbnail_path_ss: 'https://this/is/an/image'
+      thumbnail_path_ss: "https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_solr}/0/default.jpg"
     }
   end
 
@@ -147,6 +155,15 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     end
   end
 
+  context 'Archival Context breadcrumbs' do
+    it 'renders the Archival Context' do
+      expect(page).to have_content 'Found In:'
+      expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > ... >'
+      click_on("...")
+      expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > Level3 > Level2 > Level1 > Level0'
+    end
+  end
+
   context '"New Search" button' do
     it 'returns user to homepage' do
       expect(page).to have_button "New Search"
@@ -163,12 +180,12 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
 
     context 'sending child oid as a parameter' do
       it 'uses child\'s page when oid is valid' do
-        visit 'catalog/111?child_oid=113'
+        visit 'catalog/111?image_id=113'
         src = find('.universal-viewer-iframe')['src']
         expect(src).to include '&cv=1'
       end
       it 'uses first page when oid is invalid' do
-        visit 'catalog/111?child_oid=11312321'
+        visit 'catalog/111?image_id=11312321'
         src = find('.universal-viewer-iframe')['src']
         expect(src).to include '&cv=0'
       end
@@ -189,6 +206,12 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
         expect(page).to have_css('.fulltext-button')
         expect(page).to have_content('Show Full Text')
       end
+      it 'has a "Show Full Text" button with a partial fulltext status' do
+        visit 'catalog/112'
+
+        expect(page).to have_css('.fulltext-button')
+        expect(page).to have_content('Show Full Text')
+      end
     end
   end
 
@@ -198,7 +221,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).to have_css("meta[property='og:url'][content='https://collections.library.yale.edu/catalog/111']", visible: false)
       expect(page).to have_css("meta[property='og:type'][content='website']", visible: false)
       expect(page).to have_css("meta[property='og:description'][content='Anna Elizabeth Dewdney']", visible: false)
-      expect(page).to have_css("meta[property='og:image'][content='https://this/is/an/image']", visible: false)
+      expect(page).to have_css("meta[property='og:image'][content='https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_opengraph}/0/default.jpg']", visible: false)
       expect(page).to have_css("meta[property='og:image:type'][content='image/jpeg']", visible: false)
     end
     it 'has og namespace' do
@@ -211,7 +234,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       visit 'catalog/555'
     end
     it 'does not have image of og tag' do
-      expect(page).not_to have_css("meta[property='og:image'][content='https://this/is/an/image']", visible: false)
+      expect(page).not_to have_css("meta[property='og:image'][content='https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_opengraph}/0/default.jpg']", visible: false)
       expect(page).not_to have_css("meta[property='og:image:type'][content='image/jpeg']", visible: false)
     end
   end

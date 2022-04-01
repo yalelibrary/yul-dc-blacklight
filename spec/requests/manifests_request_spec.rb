@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Manifests', type: :request, clean: true do
   let(:user) { FactoryBot.create(:user) }
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY }
+  let(:redirected_work) { WORK_REDIRECTED }
   let(:yale_work) do
     {
       "id": "1618909",
@@ -40,7 +41,7 @@ RSpec.describe 'Manifests', type: :request, clean: true do
       )
 
     solr = Blacklight.default_index.connection
-    solr.add([public_work, yale_work, no_visibility_work])
+    solr.add([public_work, yale_work, no_visibility_work, redirected_work])
     solr.commit
     allow(User).to receive(:on_campus?).and_return(false)
   end
@@ -106,6 +107,32 @@ RSpec.describe 'Manifests', type: :request, clean: true do
       manifest = JSON.parse(response.body)
 
       expect(manifest['error']).to eq('unauthorized')
+    end
+
+    it 'returns a 404 if redirected' do
+      get '/manifests/16685691'
+      expect(response.body).to include "the item you've requested does not appear to exist"
+    end
+  end
+
+  describe 'Not found Manifests' do
+    before do
+      stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/manifests/02/20/202')
+        .to_return(status: 404, body: 'not found')
+    end
+
+    around do |example|
+      original_sample_bucket = ENV['S3_SOURCE_BUCKET_NAME']
+      ENV['S3_SOURCE_BUCKET_NAME'] = 'yul-test-samples'
+      example.run
+      ENV['S3_SOURCE_BUCKET_NAME'] = original_sample_bucket
+    end
+
+    describe 'GET /show' do
+      it 'redirects to HTML page' do
+        get '/manifests/202'
+        expect(response.body).to include "the item you've requested does not appear to exist"
+      end
     end
   end
 end

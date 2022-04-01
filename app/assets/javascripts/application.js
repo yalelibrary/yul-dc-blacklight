@@ -12,6 +12,7 @@
 //= require twitter/typeahead
 //= require bootstrap
 //= require blacklight/blacklight
+//= require show_more
 
 
 
@@ -74,7 +75,7 @@ $(document).on('turbolinks:load', function() {
 
     if (fullTextSearchSelected) {
         fullTextButton.click();
-    } else {
+    } else if($("#fulltext_search_1").is(":visible")) {
         descriptionButton.click();
     }
 });
@@ -144,16 +145,22 @@ $(document).ready(() => {
 
 // Get the full text and render it on screen
 const fulltext = () => {
+    // check if fulltext is present on page
     const fulltextTranscription = $('.item-page-fulltext-wrapper .row')
     fulltextTranscription.empty() // Delete the old full text
-    const child_oids_array = $('#uv-pages').html().split(' ')
-    const pageWidth = child_oids_array.length === 1 ? 'col-md-12' : 'col-md-6'
+    // check if fulltext is present on child object - button will only display if 'has_fulltext_ssi' is Yes
+    if($('.fulltext-button').length) {
+        const child_oids_array = $('#uv-pages').html().split(' ')
+        const pageWidth = child_oids_array.length === 1 ? 'col-md-12' : 'col-md-6'
 
-    child_oids_array.forEach(async child_oid => {
-        const transcription = await getFulltext(child_oid)
+        child_oids_array.forEach(async child_oid => {
+            const transcription = await getFulltext(child_oid)
 
-        return fulltextTranscription.append(`<span class='${pageWidth}'>${transcription}</span>`)
-    })
+            return fulltextTranscription.append(`<span class='${pageWidth}'>${transcription}</span>`)
+        })
+    } else {
+        return
+    }
 }
 
 const getFulltext = async (child_oid) => {
@@ -165,7 +172,6 @@ const getFulltext = async (child_oid) => {
             child_oid: $('#uv-pages').text()
         },
     })
-
     return result.body.value
 }
 

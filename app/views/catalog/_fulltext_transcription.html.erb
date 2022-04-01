@@ -1,4 +1,4 @@
-<% if @document['has_fulltext_ssi'] == 'Yes' && client_can_view_digital?(@document) %>
+<% if @document['has_fulltext_ssi'] == 'Yes' || @document['has_fulltext_ssi'] == "Partial" && client_can_view_digital?(@document) %>
   <section class='item-page-fulltext-wrapper'>
     <button class='fulltext-button'>
       Show Full Text

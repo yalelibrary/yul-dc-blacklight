@@ -171,7 +171,7 @@ RSpec.describe Yul::MetadataPresenter do
           expect(fields.any? { |field| field.include? 'sourceTitle_tesim' }).to be_truthy
         end
 
-        it 'returns the Container/Volume Information Key' do
+        it 'returns the Container/Volume Key' do
           expect(fields.any? { |field| field.include? 'containerGrouping_tesim' }).to be_truthy
         end
 

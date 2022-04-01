@@ -61,7 +61,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
   let(:elephant) do
     {
       id: '401',
-      identifierShelfMark_ssim: 'unique call number',
+      callNumber_ssim: 'unique call number',
       title_tesim: 'Handsome Dan is not a elephant.',
       year_isim: [1555],
       creator_tesim: 'Frederick & Eric',
@@ -102,18 +102,18 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
   end
 
   it "does not show the date slider if only one date" do
-    visit '/catalog?search_field=identifierShelfMark_ssim&q="unique call number"'
+    visit '/catalog?search_field=callNumber_ssim&q="unique call number"'
     expect(page).not_to have_css('.card.facet-limit.blacklight-year_isim')
   end
 
-  it "is able to search with the slider", :style, js: true do
+  it "is able to search with the slider", :style, style: true, js: true do
     visit search_catalog_path
     click_button 'Date Created'
     within '#facet-year_isim' do
       sliders = find_all('.slider-handle.round')
 
       beg_slider = sliders.first
-      beg_slider.drag_by(30, 0)
+      beg_slider.drag_by(25, 0)
 
       end_slider = sliders.last
       end_slider.drag_by(-105, 0)
@@ -123,11 +123,11 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     end
 
     within '.blacklight-year_isim' do
-      expect(page.text).to match(/12\d\d to 16\d\d/)
+      expect(page.text).to match(/11\d\d to 16\d\d/)
     end
 
     within '.constraints-container' do
-      expect(page.text).to match(/Date 12\d\d - 16\d\d/)
+      expect(page.text).to match(/Date 11\d\d - 16\d\d/)
     end
 
     # makes sure that it includes the turtle record with years: 1555-1800
