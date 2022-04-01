@@ -58,7 +58,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       subjectName_ssim: ['this is the subject name', 'these are the subject names'],
       subjectTopic_ssim: ['this is the subject topic', 'these are the subject topics'],
       extentOfDigitization_ssim: 'this is the extent of digitization',
-      rights_ssim: "these are the rights.\nThese are additional rights.",
+      rights_ssim: "these are <a href='test' class='remove_me'>the</a> rights.\nThese are additional rights.",
       creationPlace_ssim: "this is the publication place",
       sourceCreated_tesim: "this is the source created",
       publisher_ssim: "this is the publisher",
@@ -171,8 +171,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the Access in results' do
       expect(document).to have_content("Public")
     end
-    it 'displays the Rights in results' do
-      expect(document).to have_content("these are the rights.These are additional rights.")
+    it 'displays the Rights in results with link intact, but class removed' do
+      expect(page.html).to include('these are <a href="test">the</a> rights.<br/>These are additional rights.')
     end
     it 'displays the Publication Place in results' do
       expect(document).to have_content("this is the publication place")
