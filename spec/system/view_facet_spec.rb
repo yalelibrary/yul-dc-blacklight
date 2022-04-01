@@ -16,12 +16,16 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     {
       id: '111',
       title_tesim: ['Amor Llama'],
+      repository_ssi: 'Yale University Arts Library',
+      collection_title_ssi: ['AAA'],
       format: 'text',
       language_ssim: 'la',
       visibility_ssi: 'Yale Community Only',
       genre_ssim: 'Maps',
       resourceType_ssim: 'Maps, Atlases & Globes',
-      creator_ssim: ['Anna Elizabeth Dewdney']
+      creator_ssim: ['Anna Elizabeth Dewdney'],
+      series_ssi: "Series Title",
+      series_sort_ssi: "0938203483204|Series Title"
     }
   end
 
@@ -29,6 +33,7 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     {
       id: '222',
       title_tesim: ['HandsomeDan Bulldog'],
+      repository_ssi: 'Yale University Arts Library',
       format: 'three dimensional object',
       language_ssim: 'en',
       visibility_ssi: 'Public',
@@ -78,6 +83,44 @@ RSpec.describe 'Facets should display', type: :system, js: :true, clean: true do
     expect(page).to have_content('Amor Llama')
     expect(page).not_to have_content('Aquila Eccellenza')
     expect(page).not_to have_content('HandsomeDan Bulldog')
+  end
+
+  it 'can filter results with repository facets' do
+    click_on 'Repository'
+    click_on 'Yale University Arts Library'
+    expect(page).to have_content('Amor Llama')
+    expect(page).to have_content('HandsomeDan Bulldog')
+    expect(page).not_to have_content('Aquila Eccellenza')
+  end
+
+  it 'does not display the collection title facet by default' do
+    expect(page).not_to have_css('.blacklight-collection_title_ssi')
+  end
+
+  it 'does not display the series title facet by default' do
+    expect(page).not_to have_css('.blacklight-series_ssi')
+  end
+
+  it 'can filter results with collection title facets when a repository is selected' do
+    click_on 'Repository'
+    click_on 'Yale University Arts Library'
+    click_on 'Collection Title'
+    click_on 'AAA'
+    expect(page).to have_content('Amor Llama')
+    expect(page).not_to have_content('HandsomeDan Bulldog')
+    expect(page).not_to have_content('Aquila Eccellenza')
+  end
+
+  it 'can filter results with grouping facets when a collection title is selected' do
+    click_on 'Repository'
+    click_on 'Yale University Arts Library'
+    click_on 'Collection Title'
+    click_on 'AAA'
+    click_on 'Grouping'
+    click_on 'Series Title'
+    expect(page).to have_content('Amor Llama')
+    expect(page).not_to have_content('HandsomeDan Bulldog')
+    expect(page).not_to have_content('Aquila Eccellenza')
   end
 
   it 'can filter results with genre facets' do

@@ -1,18 +1,30 @@
 <% doc_presenter = show_presenter(document) %>
 <% unless doc_presenter.metadata_section_empty? metadata %>
   <div class='metadata-block single-item-show'>
+    <% if document[:source_ssim]&.flatten&.include?('aspace') && metadata.titlecase.eql?('Collection Information') %>
+      <h2 class='metadata-block__title'><%= 'Item Location' %></h2>
+    <% else  %>
     <h2 class='metadata-block__title'><%= metadata.titlecase %></h2>
+    <% end  %>
     <dl class='metadata-block__group'>
 
       <% doc_presenter.metadata_fields_to_render(metadata).each do |field_name, field, field_presenter| %>
-        <!-- KEY -->
-        <dt class='blacklight-<%= field_name.parameterize %> metadata-block__label-key'>
-          <%= (render_document_show_field_label document, field: field_name).tr(':', '') %>
-        </dt>
-        <!-- VALUE -->
-        <dd class='blacklight-<%= field_name.parameterize %> metadata-block__label-value metadata-block__label-value--yul'>
-          <%= field_presenter.render %>
-        </dd>
+        <%unless field[:no_label].presence %>
+          <% next unless field_name.eql?('ancestorDisplayStrings_tesim') || field_presenter.render.present? %>
+          <!-- KEY -->
+          <dt class='blacklight-<%= field_name.parameterize %> metadata-block__label-key'>
+            <%= (render_document_show_field_label document, field: field_name).tr(':', '') %>
+          </dt>
+          <!-- VALUE -->
+          <dd class='blacklight-<%= field_name.parameterize %> metadata-block__label-value metadata-block__label-value--yul'>
+            <%= field_presenter.render %>
+          </dd>
+        <%else  %>
+          <p class='blacklight-<%= field_name.parameterize %> showpage_no_label_tag'>
+            <%= field_presenter.render%>
+          </p>
+
+        <% end %>
       <% end %>
     </dl>
   </div>

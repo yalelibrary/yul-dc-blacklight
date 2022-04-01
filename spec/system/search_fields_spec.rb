@@ -25,7 +25,11 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       sourceTitle_tesim: "this is the source title",
       callNumber_tesim: 'WAMSS987',
       orbisBibId_ssi: '1238901',
-      visibility_ssi: 'Public'
+      visibility_ssi: 'Public',
+      ancestorDisplayStrings_tesim: ['Oversized', 'collection', 'repo'],
+      ancestorTitles_tesim: ['Oversized', 'collection', 'repo'],
+      ancestor_titles_hierarchy_ssim: ['repo > ', 'repo > collection > ', 'repo > collection > Oversized > '],
+      series_ssi: 'Series 1: Oversized'
     }
   end
 
@@ -94,6 +98,17 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       visit '/catalog?search_field=fulltext_tesim&q=one'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
       expect(page).not_to have_content 'Handsome Dan is not a cat.'
+    end
+
+    it 'finds the item by a value in the hierarchy' do
+      visit '/catalog?q=Oversized'
+      expect(page).to have_content 'Handsome Dan is a bull dog.'
+      expect(page).not_to have_content 'Handsome Dan is not a cat.'
+    end
+
+    it 'displays the series name in the hierarchy' do
+      visit '/catalog?q=Oversized'
+      expect(page).to have_content 'repo > collection > Series 1: Oversized'
     end
   end
 end

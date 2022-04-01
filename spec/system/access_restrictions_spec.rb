@@ -43,6 +43,13 @@ RSpec.describe "access restrictions", type: :system, clean: true do
       expect(page).not_to have_content('[Map of China]. [private copy]')
     end
 
+    it 'manifest, mirador, and pdf links are disabled' do
+      visit '/catalog/16189097-yale'
+      expect(page).not_to have_link 'Manifest Link'
+      expect(page).not_to have_link 'View in Mirador'
+      expect(page).not_to have_link 'Download as PDF'
+    end
+
     it "displays universal viewer for public works" do
       visit solr_document_path(public_work[:id])
       expect(page.html).to match(/universal-viewer-iframe/)
@@ -110,6 +117,13 @@ RSpec.describe "access restrictions", type: :system, clean: true do
     it "displays universal viewer for public works" do
       visit solr_document_path(public_work[:id])
       expect(page.html).to match(/universal-viewer-iframe/)
+    end
+
+    it 'manifest, mirador, and pdf links are disabled' do
+      visit '/catalog/2055095'
+      expect(page).to have_link 'Manifest Link'
+      expect(page).to have_link 'View in Mirador'
+      expect(page).to have_link 'Download as PDF'
     end
 
     it "displays universal viewer for yale-only works" do

@@ -19,7 +19,7 @@ class SearchBuilder < Blacklight::SearchBuilder
   include BlacklightRangeLimit::RangeLimitBuilder
   include AccessHelper
 
-  self.default_processor_chain += [:add_advanced_parse_q_to_solr, :add_advanced_search_to_solr]
+  self.default_processor_chain += [:add_advanced_parse_q_to_solr, :add_advanced_search_to_solr, :setup_field_list]
   # include BlacklightRangeLimit::RangeLimitBuilder
 
   # Add the `filter_by_visibility` method to the processor chain
@@ -33,27 +33,33 @@ class SearchBuilder < Blacklight::SearchBuilder
   #   When a new Solr field is indexed and needed in blacklight, it must be added to this list.
   #   See: https://solr.apache.org/guide/8_0/common-query-parameters.html#fl-field-list-parameter
   def self.solr_record_fields
-    %w[id
-       timestamp
-       score
-       box_ssim
-       collectionId_ssim
-       containerGrouping_ssim
-       dependentUris_ssim
-       edition_tesim
-       geoSubject_ssim
-       hashed_id_ssi
-       indexedBy_tsim
-       languageCode_ssim
-       number_of_pages_ss
-       partOf_tesim
-       public_bsi
-       recordType_ssi
-       source_ssim
-       thumbnail_path_ss
-       title_ssim
-       uri_ssim
-       viewing_hint_ssi]
+    %w[
+      id
+      timestamp
+      score
+      box_ssim
+      collectionCreators_ssim
+      collectionId_ssim
+      containerGrouping_ssim
+      dependentUris_ssim
+      edition_tesim
+      geoSubject_ssim
+      hashed_id_ssi
+      indexedBy_tsim
+      languageCode_ssim
+      number_of_pages_ss
+      parent_ssi
+      partOf_tesim
+      public_bsi
+      recordType_ssi
+      series_ssi
+      source_ssim
+      thumbnail_path_ss
+      title_ssim
+      uri_ssim
+      viewing_hint_ssi
+      visibility_ssi
+    ]
   end
 
   ##

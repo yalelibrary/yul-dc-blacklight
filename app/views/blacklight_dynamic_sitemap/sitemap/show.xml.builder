@@ -15,7 +15,7 @@ xml.urlset(
       xml.lastmod(config.format_last_modified&.call(last_modified) || last_modified)
       if doc['visibility_ssi'] == "Public" && doc['thumbnail_path_ss']
         xml.tag!("image:image") do
-          xml.tag!("image:loc", doc['thumbnail_path_ss'])
+          xml.tag!("image:loc", change_iiif_image_size(doc['thumbnail_path_ss'], "!1200,630"))
         end
       end
     end

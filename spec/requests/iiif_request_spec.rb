@@ -2,6 +2,8 @@
 require 'rails_helper'
 
 RSpec.describe "Iiifs", type: :request do
+  let(:thumbnail_size) { "!1200,630" }
+
   let(:user) { FactoryBot.create(:user) }
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY.merge({ "child_oids_ssim": ["5555555"] }) }
   let(:yale_work) do
@@ -32,35 +34,35 @@ RSpec.describe "Iiifs", type: :request do
       let(:logger_mock) { instance_double("Rails.logger").as_null_object }
       it 'redirects to HTML page' do
         allow(Rails.logger).to receive(:warn) { :logger_mock }
-        get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/5555555/full/!200,200/0/default.jpg" }
+        get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/5555555/full/#{thumbnail_size}/0/default.jpg" }
         expect(response).to have_http_status(:success)
         expect(Rails.logger).to have_received(:warn)
-          .with("starting search for item for /iiif/2/5555555/full/!200,200/0/default.jpg")
-          .with("starting authorization check for /iiif/2/5555555/full/!200,200/0/default.jpg")
-          .with("starting client can view digital check for /iiif/2/5555555/full/!200,200/0/default.jpg")
+          .with("starting search for item for /iiif/2/5555555/full/#{thumbnail_size}/0/default.jpg")
+          .with("starting authorization check for /iiif/2/5555555/full/#{thumbnail_size}/0/default.jpg")
+          .with("starting client can view digital check for /iiif/2/5555555/full/#{thumbnail_size}/0/default.jpg")
       end
     end
 
     it 'display if set to public' do
-      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/5555555/full/!200,200/0/default.jpg" }
+      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/5555555/full/#{thumbnail_size}/0/default.jpg" }
 
       expect(response).to have_http_status(:success)
     end
 
     it 'do not display if set to yale only' do
-      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/1111111/full/!200,200/0/default.jpg" }
+      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/1111111/full/#{thumbnail_size}/0/default.jpg" }
 
       expect(response).to have_http_status(:unauthorized)
     end
 
     it 'returns an unauthorized response if there is no visibility key' do
-      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/2222222/full/!200,200/0/default.jpg" }
+      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/2222222/full/#{thumbnail_size}/0/default.jpg" }
 
       expect(response).to have_http_status(:unauthorized)
     end
 
     it 'returns an unauthorized response if there child is not found' do
-      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/9328239/full/!200,200/0/default.jpg" }
+      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/9328239/full/#{thumbnail_size}/0/default.jpg" }
 
       expect(response).to have_http_status(:unauthorized)
     end
@@ -71,19 +73,19 @@ RSpec.describe "Iiifs", type: :request do
       sign_in user
     end
     it 'display if set to public' do
-      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/5555555/full/!200,200/0/default.jpg" }
+      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/5555555/full/#{thumbnail_size}/0/default.jpg" }
 
       expect(response).to have_http_status(:success)
     end
 
     it 'do not display if set to yale only' do
-      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/1111111/full/!200,200/0/default.jpg" }
+      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/1111111/full/#{thumbnail_size}/0/default.jpg" }
 
       expect(response).to have_http_status(:success)
     end
 
     it 'returns an unauthorized response if there is no visibility key' do
-      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/2222222/full/!200,200/0/default.jpg" }
+      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/2222222/full/#{thumbnail_size}/0/default.jpg" }
 
       expect(response).to have_http_status(:unauthorized)
     end
