@@ -353,8 +353,7 @@ module BlacklightHelper
     values = value.split("\n")
     sanitized_values = []
     values.each do |v|
-      sanitize v, tags: %w[a], attributes: %w[href]
-      sanitized_values << v
+      sanitized_values << sanitize(v, tags: %w[a], attributes: %w[href])
     end
     safe_join(sanitized_values, '<br/>'.html_safe)
   end
