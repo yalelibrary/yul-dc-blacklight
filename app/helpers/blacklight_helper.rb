@@ -83,6 +83,11 @@ module BlacklightHelper
     safe_join(values, '<br/>'.html_safe)
   end
 
+  def html_safe_join_with_br(arg)
+    values = arg[:document][arg[:field]]
+    sanitize_values(values)
+  end
+
   def join_as_paragraphs(arg)
     values = arg[:value]
     '<p>'.html_safe + safe_join(values, '</p><p>'.html_safe) + '</p>'.html_safe if values
@@ -351,6 +356,10 @@ module BlacklightHelper
   def html_safe_converter(arg)
     value = arg[:value].first
     values = value.split("\n")
+    sanitize_values(values)
+  end
+
+  def sanitize_values(values)
     sanitized_values = []
     values.each do |v|
       sanitized_values << sanitize(v, tags: %w[a], attributes: %w[href])
