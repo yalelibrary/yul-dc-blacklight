@@ -223,7 +223,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'creationPlace_ssim', label: 'Publication Place', metadata: 'description'
     config.add_show_field 'publisher_ssim', label: 'Publisher', metadata: 'description'
     config.add_show_field 'abstract_tesim', label: 'Abstract', metadata: 'description', helper_method: :join_as_paragraphs
-    config.add_show_field 'description_tesim', label: 'Description', metadata: 'description', helper_method: :html_safe_join_with_br
+    config.add_show_field 'description_tesim', label: 'Description', metadata: 'description', helper_method: :sanitize_join_with_br
     config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', metadata: 'description'
     config.add_show_field 'digitization_note_tesi', label: 'Digitization Note', metadata: 'description'
@@ -266,7 +266,7 @@ class CatalogController < ApplicationController
     # Access and Usage Rights Group
     config.add_show_field 'visibility_ssi', label: 'Access', metadata: 'access_and_usage_rights'
     config.add_show_field 'redirect_to_tesi', label: 'Redirect To', metadata: 'access_and_usage_rights'
-    config.add_show_field 'rights_ssim', label: 'Rights', metadata: 'access_and_usage_rights', helper_method: :html_safe_converter
+    config.add_show_field 'rights_ssim', label: 'Rights', metadata: 'access_and_usage_rights', helper_method: :sanitize_first_value
     config.add_show_field 'preferredCitation_tesim', label: 'Citation', metadata: 'access_and_usage_rights', helper_method: :join_with_br
 
     # Identifiers Group

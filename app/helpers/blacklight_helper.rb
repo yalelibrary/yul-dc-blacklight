@@ -83,7 +83,7 @@ module BlacklightHelper
     safe_join(values, '<br/>'.html_safe)
   end
 
-  def html_safe_join_with_br(arg)
+  def sanitize_join_with_br(arg)
     values = arg[:document][arg[:field]]
     sanitize_values(values)
   end
@@ -353,7 +353,7 @@ module BlacklightHelper
     link_to(arg[:value][0], arg[:value][0])
   end
 
-  def html_safe_converter(arg)
+  def sanitize_first_value(arg)
     value = arg[:value].first
     values = value.split("\n")
     sanitize_values(values)
