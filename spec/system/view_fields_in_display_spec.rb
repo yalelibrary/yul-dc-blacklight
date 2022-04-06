@@ -47,7 +47,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       format: 'three dimensional object',
       url_suppl_ssim: 'http://0.0.0.0:3000/catalog/111',
       language_ssim: ['en', 'eng', 'zz'],
-      description_tesim: ["Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.", "here is something else about it"],
+      description_tesim: ["<a href='https://news.yale.edu/2021/03/18/meet-handsome-dan-xix' class='dontallow'>Handsome Dan</a> is a bulldog who serves as Yale Univeristy's mascot.", "here is more"],
       visibility_ssi: 'Public',
       digitization_note_tesi: "Digitization note",
       abstract_tesim: ["this is an abstract", "abstract2"],
@@ -134,8 +134,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays description in results' do
       expect(document).to have_content("Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.")
-      # extent should be separated by new line
-      expect(page).to have_text("Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.here is something else about it")
+      expect(page.html).to include('<a href="https://news.yale.edu/2021/03/18/meet-handsome-dan-xix">Handsome Dan</a> is a bulldog who serves as Yale Univeristy\'s mascot.<br/>here is more')
     end
     it 'displays the Abstract in results' do
       expect(page.html).to match("<p>this is an abstract</p><p>abstract2</p>")
