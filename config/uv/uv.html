@@ -93,17 +93,18 @@
     <div id="uv" class="uv"></div>
 
     <script>
-        $(function () {
-            var $UV = $('#uv');
+        document.addEventListener("DOMContentLoaded", function () {
+            var $UV = document.getElementById("uv");
+
             function resize() {
-                var windowWidth = window.innerWidth;
-                var windowHeight = window.innerHeight;
-                $UV.width(windowWidth);
-                $UV.height(windowHeight);
+                $UV.setAttribute("style", "width:" + window.innerWidth + "px");
+                $UV.setAttribute("style", "height:" + window.innerHeight + "px");
             }
-            $(window).on('resize', function () {
+
+            document.addEventListener("resize", function () {
                 resize();
             });
+
             resize();
         });
     </script>
