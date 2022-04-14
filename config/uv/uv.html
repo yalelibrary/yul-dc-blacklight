@@ -79,7 +79,7 @@
                   );
                 });
 
-            uv.on('canvasIndexChanged', function (event) {
+            uv.on('canvasIndexChange', function (event) {
                 window.parent.postMessage(event, "*")
             })
         }, false);
