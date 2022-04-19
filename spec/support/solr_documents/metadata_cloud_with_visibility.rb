@@ -80,7 +80,7 @@ WORK_WITH_PRIVATE_VISIBILITY = {
   "containerGrouping_ssim": ["Lanman Covers 56 189x"],
   "orbisBibId_ssi": "8330740",
   "scale_tesim": ["Scale not given."],
-  "coordinates_ssim": ["a"],
+  "coordinateDisplay_ssim": ["a"],
   "date_ssim": ["[189x?]"],
   "public_bsi": true,
   "visibility_ssi": "Private"
@@ -109,7 +109,7 @@ WORK_WITH_YALE_ONLY_VISIBILITY = {
   "containerGrouping_ssim": ["Lanman Covers 56 189x"],
   "orbisBibId_ssi": "8330740",
   "scale_tesim": ["Scale not given."],
-  "coordinates_ssim": ["a"],
+  "coordinateDisplay_ssim": ["a"],
   "date_ssim": ["[189x?]"],
   "public_bsi": true,
   "visibility_ssi": "Yale Community Only"

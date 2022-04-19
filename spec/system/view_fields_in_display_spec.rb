@@ -86,7 +86,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       material_tesim: "this is the material, using ssim",
       scale_tesim: "this is the scale, using ssim",
       digital_ssim: "this is the digital, using ssim",
-      coordinates_ssim: "this is the coordinates, using ssim",
+      coordinateDisplay_ssim: "this is the coordinates, using ssim",
       projection_tesim: "this is the projection, using ssim",
       extent_ssim: ["this is the extent, using ssim", "here is another extent"],
       resourceVersionOnline_ssim: ["this is the online resource|http://this/is/the/link"],
