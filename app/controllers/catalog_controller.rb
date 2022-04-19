@@ -229,7 +229,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'digitization_note_tesi', label: 'Digitization Note', metadata: 'description'
     config.add_show_field 'projection_tesim', label: 'Projection', metadata: 'description'
     config.add_show_field 'scale_tesim', label: 'Scale', metadata: 'description'
-    config.add_show_field 'coordinates_ssim', label: 'Coordinates', metadata: 'description'
+    config.add_show_field 'coordinateDisplay_ssim', label: 'Coordinates', metadata: 'description'
     config.add_show_field 'digital_ssim', label: 'Digital', metadata: 'description'
     config.add_show_field 'edition_ssim', label: 'Edition', metadata: 'description'
     config.add_show_field 'language_ssim', label: 'Language', metadata: 'description', helper_method: :language_codes_as_links
@@ -317,7 +317,7 @@ class CatalogController < ApplicationController
       'contents_tesim',
       'contributor_tsim',
       'contributorDisplay_tsim',
-      'coordinates_ssim',
+      'coordinateDisplay_ssim',
       'creator_tesim',
       'creatorDisplay_tsim',
       'date_ssim',
