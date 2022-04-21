@@ -75,15 +75,10 @@
 					const data = urlAdapter.getInitialData()
 					uv = UV.init('uv', data)
 
-					uv.on('configure', function ({ config, cb }) {
-						cb(
-							new Promise(function (resolve) {
-								fetch('uv-config.json').then(function (response) {
-									resolve(response.json())
-								})
-							})
-						)
-					})
+            const data = urlAdapter.getInitialData({
+                highlight: urlAdapter.get('q'),
+            });
+            uv = UV.init('uv', data);
 
 					uv.on('canvasIndexChange', function (event) {
 						window.parent.postMessage(event, '*')
@@ -94,8 +89,29 @@
 		</script>
 	</head>
 
-	<body>
-		<div id="uv" class="uv"></div>
+<body>
+
+    <div id="uv" class="uv"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var $UV = document.getElementById("uv");
+
+            function resize() {
+                $UV.setAttribute("style", "width:" + window.innerWidth + "px");
+                $UV.setAttribute("style", "height:" + window.innerHeight + "px");
+            }
+
+            document.addEventListener("resize", function () {
+                resize();
+            });
+
+            resize();
+        });
+    </script>
+
+
+</body>
 
 		<script>
 			$(function () {
