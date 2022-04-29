@@ -54,7 +54,7 @@ WORK_WITH_PUBLIC_VISIBILITY = {
   "subjectTopic_ssim": ["Manuscripts, Medieval--Connecticut--New Haven"],
   "subjectGeographic_ssim": ["Connecticut--New Haven"],
   "scale_tesim": ["Scale not given."],
-  "thumbnail_path_ss": "http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg"
+  "thumbnail_path_ss": "http://iiif_image:8182/iiif/2/1234822/full/!1200,600/0/default.jpg"
 }.freeze
 
 WORK_WITH_PRIVATE_VISIBILITY = {
@@ -80,7 +80,7 @@ WORK_WITH_PRIVATE_VISIBILITY = {
   "containerGrouping_ssim": ["Lanman Covers 56 189x"],
   "orbisBibId_ssi": "8330740",
   "scale_tesim": ["Scale not given."],
-  "coordinates_ssim": ["a"],
+  "coordinateDisplay_ssim": ["a"],
   "date_ssim": ["[189x?]"],
   "public_bsi": true,
   "visibility_ssi": "Private"
@@ -109,7 +109,7 @@ WORK_WITH_YALE_ONLY_VISIBILITY = {
   "containerGrouping_ssim": ["Lanman Covers 56 189x"],
   "orbisBibId_ssi": "8330740",
   "scale_tesim": ["Scale not given."],
-  "coordinates_ssim": ["a"],
+  "coordinateDisplay_ssim": ["a"],
   "date_ssim": ["[189x?]"],
   "public_bsi": true,
   "visibility_ssi": "Yale Community Only"

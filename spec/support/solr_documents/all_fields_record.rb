@@ -50,7 +50,7 @@ WORK_WITH_ALL_FIELDS = {
   material_tesim: "this is the material, using ssim",
   scale_tesim: "this is the scale, using ssim",
   digital_ssim: "this is the digital, using ssim",
-  coordinates_ssim: "this is the coordinates, using ssim",
+  coordinateDisplay_ssim: "this is the coordinates, using ssim",
   projection_tesim: "this is the projection, using ssim",
   extent_ssim: "this is the extent, using ssim"
 }.freeze

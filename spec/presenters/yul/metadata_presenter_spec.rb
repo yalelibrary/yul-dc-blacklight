@@ -87,7 +87,7 @@ RSpec.describe Yul::MetadataPresenter do
         end
 
         it 'returns the Coordinates Key' do
-          expect(fields.any? { |field| field.include? 'coordinates_ssim' }).to be_truthy
+          expect(fields.any? { |field| field.include? 'coordinateDisplay_ssim' }).to be_truthy
         end
 
         it 'returns the Digital Key' do

@@ -47,7 +47,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       format: 'three dimensional object',
       url_suppl_ssim: 'http://0.0.0.0:3000/catalog/111',
       language_ssim: ['en', 'eng', 'zz'],
-      description_tesim: ["Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.", "here is something else about it"],
+      description_tesim: ["<a href='https://news.yale.edu/2021/03/18/meet-handsome-dan-xix' class='dontallow'>Handsome Dan</a> is a bulldog who serves as Yale Univeristy's mascot.", "here is more"],
       visibility_ssi: 'Public',
       digitization_note_tesi: "Digitization note",
       abstract_tesim: ["this is an abstract", "abstract2"],
@@ -58,7 +58,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       subjectName_ssim: ['this is the subject name', 'these are the subject names'],
       subjectTopic_ssim: ['this is the subject topic', 'these are the subject topics'],
       extentOfDigitization_ssim: 'this is the extent of digitization',
-      rights_ssim: "these are the rights.\nThese are additional rights.",
+      rights_ssim: "these are <a href='test' class='remove_me'>the</a> rights.\nThese are additional rights.",
       creationPlace_ssim: "this is the publication place",
       sourceCreated_tesim: "this is the source created",
       publisher_ssim: "this is the publisher",
@@ -86,7 +86,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       material_tesim: "this is the material, using ssim",
       scale_tesim: "this is the scale, using ssim",
       digital_ssim: "this is the digital, using ssim",
-      coordinates_ssim: "this is the coordinates, using ssim",
+      coordinateDisplay_ssim: "this is the coordinates, using ssim",
       projection_tesim: "this is the projection, using ssim",
       extent_ssim: ["this is the extent, using ssim", "here is another extent"],
       resourceVersionOnline_ssim: ["this is the online resource|http://this/is/the/link"],
@@ -134,8 +134,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays description in results' do
       expect(document).to have_content("Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.")
-      # extent should be separated by new line
-      expect(page).to have_text("Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.here is something else about it")
+      expect(page.html).to include('<a href="https://news.yale.edu/2021/03/18/meet-handsome-dan-xix">Handsome Dan</a> is a bulldog who serves as Yale Univeristy\'s mascot.<br/>here is more')
     end
     it 'displays the Abstract in results' do
       expect(page.html).to match("<p>this is an abstract</p><p>abstract2</p>")
@@ -171,8 +170,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     it 'displays the Access in results' do
       expect(document).to have_content("Public")
     end
-    it 'displays the Rights in results' do
-      expect(document).to have_content("these are the rights.These are additional rights.")
+    it 'displays the Rights in results with link intact, but class removed' do
+      expect(page.html).to include('these are <a href="test">the</a> rights.<br/>These are additional rights.')
     end
     it 'displays the Publication Place in results' do
       expect(document).to have_content("this is the publication place")
@@ -288,14 +287,19 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       expect(page).to have_link('this is the geo subject', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=this is the geo subject')
       expect(page).to have_link('these are the geo subjects', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=these are the geo subjects')
     end
-    it 'contains a link to Aspace' do
-      aspace_link = page.find("a[href = 'https://archives.yale.edu/repositories/11/archival_objects/214638']")
-
-      expect(aspace_link).to be_truthy
-      expect(aspace_link).to have_content "View item information in Archives at Yale"
-      expect(aspace_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
-    end
     context 'ASpace hierarchy graphical display' do
+      around do |example|
+        original_value = ENV["ARCHIVES_SPACE_BASE_URL"]
+        ENV["ARCHIVES_SPACE_BASE_URL"] = "http://testaspace.base.url/"
+        example.run
+        ENV["ARCHIVES_SPACE_BASE_URL"] = original_value
+      end
+      it 'contains a link to Aspace' do
+        aspace_link = page.find("a[href = 'http://testaspace.base.url/repositories/11/archival_objects/214638']")
+        expect(aspace_link).to be_truthy
+        expect(aspace_link).to have_content "View item information in Archives at Yale"
+        expect(aspace_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
+      end
       it 'has an ellipsis instead of a full tree' do
         expect(page).to have_content "first"
         expect(page).not_to have_text(type: :visible, text: "fourth")
