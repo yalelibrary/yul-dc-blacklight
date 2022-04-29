@@ -2,492 +2,500 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 #hero {
-  position: relative;
-  margin-top: -1px;
+	position: relative;
+	margin-top: -1px;
 
-  .hero-caption {
-    position: absolute;
-    bottom: 0px;
-    color: #fff;
-    text-align: center;
-    background-color: black;
-    width: 100%;
-    opacity: 0.5;
+	.hero-caption {
+		position: absolute;
+		bottom: 0px;
+		color: #fff;
+		text-align: center;
+		background-color: black;
+		width: 100%;
+		opacity: 0.5;
 
-    p {
-      font-size: 10px;
-      font-family: $mallory_mp_medium_italic;
-      margin: 10px auto;
-    }
-  }
+		p {
+			font-size: 10px;
+			font-family: $mallory_mp_medium_italic;
+			margin: 10px auto;
+		}
+	}
 
-  .link-white {
-    color: #fff;
-    text-decoration: underline;
-  }
+	.link-white {
+		color: #fff;
+		text-decoration: underline;
+	}
 
-  #hero-image {
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
+	#hero-image {
+		height: 100%;
+		object-fit: cover;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
 
-  .image-overlay {
-    background-color: $black;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.65;
-  }
+	.image-overlay {
+		background-color: $black;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0.65;
+	}
 
-  .intro {
-    height: 220px;
-    position: relative;
-  }
+	.intro {
+		height: 220px;
+		position: relative;
+	}
 }
 
 #hero-search {
-  position: absolute;
-  height: 100%;
-  top: 0px;
-  color: $white;
-  padding-left: 15px;
-  max-width: inherit;
+	position: absolute;
+	height: 100%;
+	top: 0px;
+	color: $white;
+	padding-left: 15px;
+	max-width: inherit;
 
-  h1 {
-    font-family: $yale_display_roman, 'Times New Roman', Times, serif;
-    margin: 31px auto 15px;
-    text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
-    font-size: 36px;
-    line-height: normal;
-    text-align: center;
-    color: #ffffff;
-  }
+	h1 {
+		font-family: $yale_display_roman, 'Times New Roman', Times, serif;
+		margin: 31px auto 15px;
+		text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+		font-size: 36px;
+		line-height: normal;
+		text-align: center;
+		color: #ffffff;
+	}
 
-  .hero-info {
-    width: 100%;
-  }
+	.hero-info {
+		width: 100%;
+	}
 
-  #search {
-    display: none;
-  }
+	#search {
+		display: none;
+	}
 
-  .search-query-form {
-    min-width: 342px;
-  }
+	.search-query-form {
+		min-width: 342px;
+	}
 
-  // search input box
-  #q {
-    min-height: 44px;
-    height: 50px;
-    font-size: 20px;
-    font-family: $mallory_mp_medium;
-  }
+	// search input box
+	#q {
+		min-height: 44px;
+		height: 50px;
+		font-size: 20px;
+		font-family: $mallory_mp_medium;
+	}
 }
 ///// BODY //////
 #highlights {
-  margin-top: 15px;
-  width: 343px;
-  margin-left: auto;
-  margin-right: auto;
+	margin-top: 15px;
+	width: 343px;
+	margin-left: auto;
+	margin-right: auto;
 
-  h2 {
-    max-width: 343px;
-    font-family: $yale_display_roman, 'Times New Roman', Times, serif;
-    font-size: 30px;
-    line-height: 2.25;
-    color: $yale_blue;
-    border-bottom: 1px solid $light_grey;
-    margin-bottom: 0;
-    display: flex;
-    margin-right: auto;
-  }
+	h2 {
+		max-width: 343px;
+		font-family: $yale_display_roman, 'Times New Roman', Times, serif;
+		font-size: 30px;
+		line-height: 2.25;
+		color: $yale_blue;
+		border-bottom: 1px solid $light_grey;
+		margin-bottom: 0;
+		display: flex;
+		margin-right: auto;
+	}
 
-  a {
-    margin-bottom: 1%;
-  }
+	a {
+		margin-bottom: 1%;
+	}
 
-  ul {
-    list-style-type: none;
-    overflow: hidden;
-    max-width: 100%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
-    margin-bottom: 18%;
+	ul {
+		list-style-type: none;
+		overflow: hidden;
+		max-width: 100%;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 0;
+		margin-bottom: 18%;
 
-    li {
-      position: relative;
-      line-height: 22px;
-      display: flex;
-      float: left;
-      padding-left: 0;
-    }
+		li {
+			position: relative;
+			line-height: 22px;
+			display: flex;
+			float: left;
+			padding-left: 0;
+		}
 
-    .btn {
-      display: block;
-      position: relative;
-      overflow: hidden;
-      min-width: 343px;
-      min-height: 225px;
-      width: 23%;
-      background-size: 100% 193px;
-      background-repeat: no-repeat;
-      margin-top: 8%;
-    }
+		.btn {
+			display: block;
+			position: relative;
+			overflow: hidden;
+			min-width: 343px;
+			min-height: 225px;
+			width: 23%;
+			background-size: 100% 193px;
+			background-repeat: no-repeat;
+			margin-top: 8%;
+		}
 
-    .highlight-link {
-      color: $yale_blue;
-      position: absolute;
-      margin-top:57%;
-      left: 0;
-      display: flex;
-      font-size: 16px;
-      font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
-    }
+		.highlight-link {
+			color: $yale_blue;
+			position: absolute;
+			margin-top: 57%;
+			left: 0;
+			display: flex;
+			font-size: 16px;
+			font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica,
+				sans-serif;
+		}
 
-    .cursor-default {
-      cursor: default;
-    }
+		.cursor-default {
+			cursor: default;
+		}
 
-    #main-container {
-      max-width: max-content;
-      position: relative;
-      display: flex;
-      max-block-size: max-content;
-    }
-  }
+		#main-container {
+			max-width: max-content;
+			position: relative;
+			display: flex;
+			max-block-size: max-content;
+		}
+	}
 }
 
 #stenzel-collection div {
-  text-align: left
+	text-align: left;
 }
 
 #stenzel-collection {
-  min-width: 343px;
-  height: 250px;
-  margin-bottom: 5%;
+	min-width: 343px;
+	height: 250px;
+	margin-bottom: 5%;
 }
 
 #hughes-papers {
-  background-image: image-url('landing/highlight-hughes.png');
+	background-image: image-url('landing/highlight-hughes.png');
 }
 
 #carson-papers {
-  background-image: image-url('landing/highlight-carson.png');
+	background-image: image-url('landing/highlight-carson.png');
 }
 
 #divina-commedia {
-  background-image: image-url('landing/highlight-commedia.png');
+	background-image: image-url('landing/highlight-commedia.png');
 }
 
 #van-vechten-papers {
-  background-image: image-url('landing/highlight-van-vechten.png');
+	background-image: image-url('landing/highlight-van-vechten.png');
 }
 
 #stenzel-collection {
-  background-image: image-url('landing/highlight-stenzel.png');
+	background-image: image-url('landing/highlight-stenzel.png');
 }
 
 #lewis-photographs {
-  background-image: image-url('landing/highlight-lewis.png');
+	background-image: image-url('landing/highlight-lewis.png');
 }
 
 #declaration-of-independence {
-  background-image: image-url('landing/highlight-independence.png');
+	background-image: image-url('landing/highlight-independence.png');
 }
 
 #coming-soon {
-  background-image: image-url('landing/highlight-coming-soon.png');
+	background-image: image-url('landing/highlight-coming-soon.png');
 }
 
 #content-statement a {
-  margin-left: 0px !important;
+	margin-left: 0px !important;
 }
 
 #content-statement p {
-  width: 95%;
+	width: 95%;
 }
-
 
 @media screen and (min-width: $small_device) {
-  #hero {
-    .intro {
-      height: 300px;
-    }
+	#hero {
+		.intro {
+			height: 300px;
+		}
 
-    #hero-image {
-      object-position: 0 -45px;
-    }
-  }
+		#hero-image {
+			object-position: 0 -45px;
+		}
+	}
 
-  #hero-search {
-    h1 {
-      margin: 60px auto 30px;
-    }
-  }
+	#hero-search {
+		h1 {
+			margin: 60px auto 30px;
+		}
+	}
 
-  #content-statement {
-    margin-top: -5px;
-    margin-bottom: 50px;
-  }
-  
+	#content-statement {
+		margin-top: -5px;
+		margin-bottom: 50px;
+	}
 }
-
 
 @media screen and (min-width: $medium_device) {
-  #hero {
-    .intro {
-      height: 325px;
-    }
+	#hero {
+		.intro {
+			height: 325px;
+		}
 
-    #hero-image {
-      object-position: 0 -65px;
-    }
-  }
+		#hero-image {
+			object-position: 0 -65px;
+		}
+	}
 
-  #hero-search {
-    h1 {
-      margin: 70px auto 35px;
-      font-size: 55px;
-    }
+	#hero-search {
+		h1 {
+			margin: 70px auto 35px;
+			font-size: 55px;
+		}
 
-    .hero-info {
-      width: 85%;
-      margin: 0 auto;
-    }
-  }
+		.hero-info {
+			width: 85%;
+			margin: 0 auto;
+		}
+	}
 
+	////// BODY //////
+	#highlights {
+		width: 726px;
 
-////// BODY //////
- #highlights {
-   width: 726px;
+		.highlight-link {
+			margin-left: 1%;
+			max-width: 261px;
+		}
 
-      .highlight-link {
-        margin-left: 1%;
-        max-width: 261px;
-      }
+		h2 {
+			max-width: 695px;
+			margin-left: 0;
+			align-content: center;
+			display: flex;
+			margin-bottom: 2%;
+		}
 
-     h2 {
-       max-width: 695px;
-       margin-left: 0;
-       align-content: center;
-       display: flex;
-       margin-bottom: 2%;
-     }
+		ul {
+			padding-left: 0;
+			margin-left: 0;
+			margin-top: -2%;
 
-     ul {
-       padding-left: 0;
-       margin-left: 0;
-       margin-top: -2%;
+			li {
+				padding-left: 10px;
+				margin-left: 0;
+			}
 
-       li {
-         padding-left: 10px;
-         margin-left: 0;
-       }
+			.btn {
+				height: 250px;
+			}
+		}
 
-       .btn {
-         height: 250px;
-       }
-     }
+		a {
+			margin-left: -4%;
+		}
+	}
 
-     a {
-       margin-left: -4%;
-     }
-   }
+	.item-lewis-photographs {
+		margin-top: 0;
+	}
 
-   .item-lewis-photographs {
-     margin-top: 0;
-   }
-
-   #content-statement {
-    margin-top: -50px;
-    margin-bottom: 50px;
-  }
-  #coming-soon {
-    left: -4%;
-  }
- }
-
-
-@media screen and (min-width: $large_device) {
-  #hero {
-    .intro {
-      height: 354px;
-    }
-
-    #hero-image {
-      object-position: 0 -85px;
-    }
-  }
-
-  #hero-search {
-    .btn-primary:hover {
-      border: 2px solid $darkest_grey;
-      background: white;
-    }
-    .btn-primary:hover:active {
-      background: $yale_blue;
-    }
-
-    h1 {
-      font-size: 72px;
-    }
-
-    .hero-info {
-      width: 70%;
-    }
-
-    #search {
-      display: initial;
-      margin-left: 8px;
-      font-size: 20px;
-      font-family: $mallory_mp_medium, Arial, Helvetica, sans-serif !important;
-      width: 129px;
-      text-transform: uppercase;
-    }
-
-    .blacklight-icon-search {
-      display: none;
-    }
-  }
-
-///// BODY //////
-  #highlights {
-    max-width: 860px;
-    width: auto;
-
-      a {
-        margin-bottom: -48%;
-      }
-
-      h2 {
-        margin-bottom: 3%;
-        max-width: 860px;
-        width: auto;
-
-      }
-
-      ul {
-        .btn {
-          width: auto;
-          min-width: 205px;
-          height: 270px;
-          background-size: 100% 127px;
-          top: 0;
-        }
-        .highlight-link {
-          font-size: 14px;
-          padding-top: 10px;
-        }
-      }
-    }
-
-  .item-lewis-photographs {
-    margin-top: 0;
-  }
-
-  #declaration-of-independence {
-    text-align: left;
-  }
-
-  #content-statement {
-    margin-top: -175px;
-    margin-bottom: 50px;
-  }
-  
-  #content-statement p{
-    width: 98%;
-  }
+	#content-statement {
+		margin-top: -50px;
+		margin-bottom: 50px;
+	}
+	#coming-soon {
+		left: -4%;
+	}
 }
 
+@media screen and (min-width: $large_device) {
+	#hero {
+		.intro {
+			height: 354px;
+		}
+
+		#hero-image {
+			object-position: 0 -85px;
+		}
+	}
+
+	#hero-search {
+		.btn-primary:hover {
+			border: 2px solid $darkest_grey;
+			background: white;
+		}
+		.btn-primary:hover:active {
+			background: $yale_blue;
+		}
+
+		h1 {
+			font-size: 72px;
+		}
+
+		.hero-info {
+			width: 70%;
+		}
+
+		#search {
+			display: initial;
+			margin-left: 8px;
+			font-size: 20px;
+			font-family: $mallory_mp_medium, Arial, Helvetica, sans-serif !important;
+			width: 129px;
+			text-transform: uppercase;
+		}
+
+		.blacklight-icon-search {
+			display: none;
+		}
+	}
+
+	///// BODY //////
+	#highlights {
+		max-width: 860px;
+		width: auto;
+
+		a {
+			margin-bottom: -48%;
+		}
+
+		h2 {
+			margin-bottom: 3%;
+			max-width: 860px;
+			width: auto;
+		}
+
+		ul {
+			.btn {
+				width: auto;
+				min-width: 205px;
+				height: 270px;
+				background-size: 100% 127px;
+				top: 0;
+			}
+			.highlight-link {
+				font-size: 14px;
+				padding-top: 10px;
+			}
+		}
+	}
+
+	.item-lewis-photographs {
+		margin-top: 0;
+	}
+
+	#declaration-of-independence {
+		text-align: left;
+	}
+
+	#content-statement {
+		margin-top: -175px;
+		margin-bottom: 50px;
+	}
+
+	#content-statement p {
+		width: 98%;
+	}
+}
 
 @media screen and (min-width: $xlarge_device) {
-  #hero {
-    .intro {
-      height: 472px;
-    }
+	#hero {
+		.intro {
+			height: 472px;
+		}
 
-    #hero-image {
-      object-position: 0 -105px;
-    }
-  }
+		#hero-image {
+			object-position: 0 -105px;
+		}
+	}
 
-  #hero-search {
-    p {
-      margin-top: 47px;
-      font-size: 18px;
-      font-family: $mallory_mp_medium;
-      font-size: 18px;
-      line-height: 1.67;
-      text-align: center;
-      color: #ffffff;
-    }
+	#hero-search {
+		p {
+			margin-top: 47px;
+			font-size: 18px;
+			font-family: $mallory_mp_medium;
+			font-size: 18px;
+			line-height: 1.67;
+			text-align: center;
+			color: #ffffff;
+		}
 
-    .search-query-form {
-      width: 80%;
-      margin: auto;
-    }
-  }
+		.search-query-form {
+			width: 80%;
+			margin: auto;
+			border: 5px solid rgba(0, 0, 0, 0.5);
+		}
 
-////// BODY //////
-    #highlights {
-      width: 1111px;
-      max-width: initial;
+		.adv-search-link {
+			background-color: rgba(0, 0, 0, 0.5);
+			text-align: center;
+		}
 
-      h2 {
-        max-width: 1098px;
-        margin-bottom: 1.75%;
-        margin-left: -3%;
-        margin-top: 40px;
-      }
+		.adv-search-link a {
+			color: #ffffff;
+			font-size: 14px;
+			font-weight: 500;
+			font-family: $mallory_mp_medium;
+			text-decoration: underline;
+		}
+	}
 
-      ul {
-        margin-left: -3%;
+	////// BODY //////
+	#highlights {
+		width: 1111px;
+		max-width: initial;
 
-        .btn {
-          min-width: 270px;
-          margin-top: 12%;
-          background-size: 100% 151px;
-          top: 0;
-          height: 335px;
-        }
+		h2 {
+			max-width: 1098px;
+			margin-bottom: 1.75%;
+			margin-left: -3%;
+			margin-top: 40px;
+		}
 
-        .highlight-link {
-          padding-top: 0;
-        }
+		ul {
+			margin-left: -3%;
 
-        li {
-          display: inline-flex;
-          margin-left: -3px;
-          justify-content: center;
-          padding-left: 9px;
-        }
-      }
-    }
- 
-   .item-lewis-photographs {
-     margin-top: 0;
-   }
+			.btn {
+				min-width: 270px;
+				margin-top: 12%;
+				background-size: 100% 151px;
+				top: 0;
+				height: 335px;
+			}
 
-    #stenzel-collection div {
-      margin-bottom: 55%;
-    }
+			.highlight-link {
+				padding-top: 0;
+			}
 
-    #content-statement {
-      margin-top: -175px;
-      margin-bottom: 50px;
-    }
+			li {
+				display: inline-flex;
+				margin-left: -3px;
+				justify-content: center;
+				padding-left: 9px;
+			}
+		}
+	}
 
-    #content-statement p {
-      margin-left:-30px;
-    }
-    #coming-soon {
-      left: -2%;
-    }
-  }
+	.item-lewis-photographs {
+		margin-top: 0;
+	}
+
+	#stenzel-collection div {
+		margin-bottom: 55%;
+	}
+
+	#content-statement {
+		margin-top: -175px;
+		margin-bottom: 50px;
+	}
+
+	#content-statement p {
+		margin-left: -30px;
+	}
+	#coming-soon {
+		left: -2%;
+	}
+}

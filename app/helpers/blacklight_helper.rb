@@ -83,6 +83,11 @@ module BlacklightHelper
     safe_join(values, '<br/>'.html_safe)
   end
 
+  def sanitize_join_with_br(arg)
+    values = arg[:document][arg[:field]]
+    sanitize_values(values)
+  end
+
   def join_as_paragraphs(arg)
     values = arg[:value]
     '<p>'.html_safe + safe_join(values, '</p><p>'.html_safe) + '</p>'.html_safe if values
@@ -182,7 +187,8 @@ module BlacklightHelper
   def aspace_link(arg)
     # rubocop:disable Naming/VariableName
     archiveSpaceUri = arg[:document][arg[:field]]
-    link = "https://archives.yale.edu#{archiveSpaceUri}"
+    base_url = ENV['ARCHIVES_SPACE_BASE_URL'] || "https://archives.yale.edu"
+    link = "#{base_url.chomp('/')}#{archiveSpaceUri}"
     popup_window = image_tag("YULPopUpWindow.png", { id: 'popup_window', alt: 'pop up window' })
     link_to 'View item information in Archives at Yale'.html_safe + popup_window, link, target: '_blank', rel: 'noopener'
     # rubocop:enable Naming/VariableName
@@ -347,13 +353,16 @@ module BlacklightHelper
     link_to(arg[:value][0], arg[:value][0])
   end
 
-  def html_safe_converter(arg)
+  def sanitize_first_value(arg)
     value = arg[:value].first
     values = value.split("\n")
+    sanitize_values(values)
+  end
+
+  def sanitize_values(values)
     sanitized_values = []
     values.each do |v|
-      sanitize v, tags: %w[a], attributes: %w[href]
-      sanitized_values << v
+      sanitized_values << sanitize(v, tags: %w[a], attributes: %w[href])
     end
     safe_join(sanitized_values, '<br/>'.html_safe)
   end

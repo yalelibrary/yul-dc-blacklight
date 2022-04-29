@@ -22,6 +22,15 @@ module CatalogHelper
     constraints.join(' / ')
   end
 
+  def change_iiif_image_size(url, new_size)
+    return nil unless url
+    url = URI.parse(url) # e.g. https://collections-test.library.yale.edu/iiif/2/17120080/full/!200,200/0/default.jpg
+    path_components = url.path.split("/")
+    path_components[5] = new_size
+    url.path = path_components.join("/")
+    url.to_s
+  end
+
   # Extract fulltext param from search
   # Simple: ...search_field=fulltext_tsim&q=XXX
   # Advanced: fulltext_tsim_advanced=XXX

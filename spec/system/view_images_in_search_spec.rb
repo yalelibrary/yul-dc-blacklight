@@ -2,6 +2,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Search results displays images', type: :system, clean: true, js: true do
+  let(:thumbnail_size) { "!200,200" }
+
   before do
     solr = Blacklight.default_index.connection
     solr.add([document_with_image,
@@ -9,7 +11,7 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
               document_yale_only_image,
               document_with_broken_image])
     solr.commit
-    stub_request(:get, "http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg")
+    stub_request(:get, "http://iiif_image:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg")
       .to_return(status: 200, body: File.open("spec/fixtures/images/small_jpeg.jpeg").read)
   end
 
@@ -18,7 +20,7 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
       id: 'test_record_1',
       oid_ssi: '2055095',
       visibility_ssi: 'Public',
-      thumbnail_path_ss: "http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg"
+      thumbnail_path_ss: "http://iiif_image:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg"
     }
   end
   let(:document_yale_only_image) do
@@ -26,7 +28,7 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
       id: 'test_record_2',
       oid_ssi: '2107188',
       visibility_ssi: 'Yale Community Only',
-      thumbnail_path_ss: "http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg"
+      thumbnail_path_ss: "http://iiif_image:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg"
     }
   end
   let(:document_without_image) do
@@ -48,7 +50,7 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
   context 'public records with images', style: true, js: false do
     it 'displays thumbnail for oids with images' do
       visit '/catalog?q=&search_field=all_fields'
-      expect(page).to have_xpath("//img[@src = 'http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg']")
+      expect(page).to have_xpath("//img[@src = 'http://iiif_image:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg']")
     end
 
     it 'displays the image_not_found.png for records without images' do
@@ -98,7 +100,7 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
         login_as(user, scope: :user)
 
         visit '/catalog?q=&search_field=all_fields'
-        expect(page).to have_xpath("//img[@src = 'http://iiif_image:8182/iiif/2/1234822/full/!200,200/0/default.jpg']")
+        expect(page).to have_xpath("//img[@src = 'http://iiif_image:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg']")
       end
 
       it 'does not display yale only restricted messaging' do
