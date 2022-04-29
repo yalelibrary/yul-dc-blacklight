@@ -6,9 +6,9 @@
         This is what the embed iframe src links to. It doesn't need to communicate with the parent page, only fill the available space and look for #? parameters
     -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta http-equiv="Cache-Control" content="no-cache" />
-		<meta http-equiv="Pragma" content="no-cache" />
-		<meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" type="text/css" href="uv.css">
     <style>
@@ -96,22 +96,21 @@
     <div id="uv" class="uv"></div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        window.addEventListener("DOMContentLoaded", function () {
             var $UV = document.getElementById("uv");
 
             function resize() {
-                $UV.setAttribute("style", "width:" + window.innerWidth + "px");
-                $UV.setAttribute("style", "height:" + window.innerHeight + "px");
+                $UV.setAttribute("style", `width: ${window.innerWidth}px`);
+                $UV.setAttribute("style", `height: ${window.innerHeight}px`);
             }
 
-            document.addEventListener("resize", function () {
+            window.addEventListener("resize", function () {
                 resize();
             });
 
             resize();
         });
     </script>
-
 
 </body>
 

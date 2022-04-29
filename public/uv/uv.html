@@ -96,15 +96,15 @@
     <div id="uv" class="uv"></div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        window.addEventListener("DOMContentLoaded", function () {
             var $UV = document.getElementById("uv");
 
             function resize() {
-                $UV.setAttribute("style", "width:" + window.innerWidth + "px");
-                $UV.setAttribute("style", "height:" + window.innerHeight + "px");
+                $UV.setAttribute("style", `width: ${window.innerWidth}px`);
+                $UV.setAttribute("style", `height: ${window.innerHeight}px`);
             }
 
-            document.addEventListener("resize", function () {
+            window.addEventListener("resize", function () {
                 resize();
             });
 
