@@ -9,6 +9,7 @@
 <div class='uv-container'>
 <iframe
     class='universal-viewer-iframe'
+    id='uv-iframe'
     title='Universal Viewer'
     src='<%= request&.base_url %>/uv/uv.html#?manifest=<%= manifest_url(oid) %><%= order_param %><%= uv_fulltext_search_param %>'
     width='924'
