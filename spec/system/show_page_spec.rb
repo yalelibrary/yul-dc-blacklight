@@ -216,8 +216,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
         visit 'catalog/111'
         click_on 'Show Full Text'
 
-        expect(page).to have_css('.visible')
-        expect(page).to have_content('fulltext text for llama child one.')
+        expect(page).to have_content('fulltext text for llama child one.').once
       end
     end
   end
