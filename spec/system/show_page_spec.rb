@@ -214,7 +214,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       end
       it 'shows full text of one child oid when in 1 up viewing mode' do
         visit 'catalog/111'
-        click_on 'Show Full Text'
+        click_button 'Show Full Text'
 
         expect(page).to have_content('fulltext text for llama child one.').once
       end
