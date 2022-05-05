@@ -212,6 +212,12 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
         expect(page).to have_css('.fulltext-button')
         expect(page).to have_content('Show Full Text')
       end
+      it 'shows full text of one child oid when in 1 up viewing mode' do
+        visit 'catalog/112'
+        click_button 'Show Full Text'
+
+        expect(page).to have_content('fulltext text for llama child one.').once
+      end
     end
   end
 
