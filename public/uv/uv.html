@@ -98,13 +98,15 @@
     <script>
         window.addEventListener("DOMContentLoaded", function () {
             var $UV = document.getElementById("uv");
+            var $UV_Iframe = document.getElementById("uv-iframe");
 
             function resize() {
                 $UV.setAttribute("style", `width: ${window.innerWidth}px`);
-                $UV.setAttribute("style", `height: ${window.innerHeight}px`);
+                $UV.setAttribute("style", `height: ${window.innerHeight}px`); 
             }
 
             window.addEventListener("resize", function () {
+                $UV_Iframe.contentDocument.location.reload(true)
                 resize();
             });
 
