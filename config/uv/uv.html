@@ -11,8 +11,6 @@
     <meta http-equiv="Expires" content="0" />
     <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" type="text/css" href="uv.css">
-    <script type="text/javascript" src="lib/offline.js"></script>
-    <script type="text/javascript" src="helpers.js"></script>
     <style>
         body {
             margin: 0;
@@ -20,21 +18,42 @@
             overflow: hidden;
         }
 
-        .uv .mobileFooterPanel .options .btn.fullScreen {
-            display: inline !important;
-            margin-right: 0;
-            float: right;
+        @media only screen and (min-width: 600px){
+            .uv .mainPanel .leftPanel {
+                display: block !important;
+                visibility: visible;
+            }
+
+            .uv .mainPanel .rightPanel {
+                display: block !important;
+                visibility: visible;
+            }
+
+            .uv .headerPanel {
+                display: block !important;
+                visibility: visible;
+            }
+
+            .uv .footerPanel {
+                display: block !important;
+                visibility: visible;
+            }
+
+            .uv .mobileFooterPanel {
+                display: none !important;
+                visibility: hidden;
+            }
         }
 
-        .uv .mobileFooterPanel .options {
-            width: auto !important;
-        }
     </style>
+
+    <script type="text/javascript" src="umd/UV.js"></script>
     <script type="text/javascript">
-        window.addEventListener('uvLoaded', function (e) {
-            urlDataProvider = new UV.URLDataProvider(true);
+        document.addEventListener("DOMContentLoaded", function () {
+            var uv;
+            let urlAdapter = new UV.IIIFURLAdapter();
             var formattedLocales;
-            var locales = urlDataProvider.get('locales', '');
+            var locales = urlAdapter.get('locales', '');
             if (locales) {
                 var names = locales.split(',');
                 formattedLocales = [];
@@ -49,23 +68,23 @@
                     }
                 ]
             }
-            uv = createUV('#uv', {
-                root: '.',
-                iiifResourceUri: urlDataProvider.get('manifest'),
-                configUri: 'uv-config.json',
-                collectionIndex: Number(urlDataProvider.get('c', 0)),
-                manifestIndex: Number(urlDataProvider.get('m', 0)),
-                sequenceIndex: Number(urlDataProvider.get('s', 0)),
-                canvasIndex: Number(urlDataProvider.get('cv', 0)),
-                rangeId: urlDataProvider.get('rid', 0),
-                rotation: Number(urlDataProvider.get('r', 0)),
-                xywh: urlDataProvider.get('xywh', ''),
-                embedded: true,
-                highlight: urlDataProvider.get('q'),
-                locales: formattedLocales
-            }, urlDataProvider);
 
-            uv.on('canvasIndexChanged', function (event) {
+            const data = urlAdapter.getInitialData({
+                highlight: urlAdapter.get('q'),
+            });
+            uv = UV.init('uv', data);
+
+            uv.on("configure", function ({ config, cb }) {
+                  cb(
+                    new Promise(function (resolve) {
+                      fetch("uv-config.json").then(function (response) {
+                        resolve(response.json());
+                      });
+                    })
+                  );
+                });
+
+            uv.on('canvasIndexChange', function (event) {
                 window.parent.postMessage(event, "*")
             })
         }, false);
@@ -77,22 +96,24 @@
     <div id="uv" class="uv"></div>
 
     <script>
-        $(function () {
-            var $UV = $('#uv');
+        window.addEventListener("DOMContentLoaded", function () {
+            var $UV = document.getElementById("uv");
+            var $UV_Iframe = document.getElementById("uv-iframe");
+
             function resize() {
-                var windowWidth = window.innerWidth;
-                var windowHeight = window.innerHeight;
-                $UV.width(windowWidth);
-                $UV.height(windowHeight);
+                $UV.setAttribute("style", `width: ${window.innerWidth}px`);
+                $UV.setAttribute("style", `height: ${window.innerHeight}px`); 
             }
-            $(window).on('resize', function () {
+
+            window.addEventListener("resize", function () {
+                $UV_Iframe.contentDocument.location.reload(true)
                 resize();
             });
+
             resize();
         });
     </script>
 
-    <script type="text/javascript" src="uv.js"></script>
 
 </body>
 

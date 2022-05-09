@@ -155,7 +155,9 @@ const fulltext = () => {
 
         child_oids_array.forEach(async child_oid => {
             const transcription = await getFulltext(child_oid)
-
+            if (child_oids_array.length === 1) {
+                fulltextTranscription.empty()
+            }   
             return fulltextTranscription.append(`<span class='${pageWidth}'>${transcription}</span>`)
         })
     } else {
