@@ -157,8 +157,10 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
           .to_return(status: 200, body: File.open("spec/fixtures/images/Sun.png").read, headers: { "Content-Type" => /image\/.+/ })
       end
 
-      it 'returns placeholder when logged out' do
-        expect(helper.render_thumbnail(yale_only_document, {})).to include("<img src=\"/assets/placeholder_restricted-")
+      it 'returns placeholder with alt text when logged out' do
+        placeholder_image = "/assets/placeholder_restricted-"
+        alt_text = "Access Available on YALE network only due to copyright or other restrictions. OFF-SITE? Log in with NetID"
+        expect(helper.render_thumbnail(yale_only_document, {})).to include(alt_text, placeholder_image)
       end
 
       it 'returns image when logged in' do
