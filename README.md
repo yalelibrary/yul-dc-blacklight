@@ -152,7 +152,7 @@ For the most part images are created and maintained by the CI process. However, 
 
 ## HTTP password protection
 
-In order to prevent search engine crawling of the system before it's ready to launch, we use HTTP password protection. This is set via environment variables. Set `HTTP_PASSWORD_PROTECT='true'` to enable this feature. Set `HTTP_PASSWORD_PROTECT='false'` to disable this feature. Set the login and password via environment variables `HTTP_USERNAME` and `HTTP_PASSWORD` in the .secrets file
+In order to prevent search engine crawling of the system before it's ready to launch, we use HTTP password protection. This is set via environment variables. Set `HTTP_PASSWORD_PROTECT='true'` to enable this feature. Set `HTTP_PASSWORD_PROTECT='false'` to disable this feature. Set the log in and password via environment variables `HTTP_USERNAME` and `HTTP_PASSWORD` in the .secrets file
 
 ## Secrets
 

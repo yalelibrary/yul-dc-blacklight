@@ -90,7 +90,7 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
         click_link 'test_record_2'
 
         expect(page).to have_content('The digital version of this work is restricted due to copyright or other restrictions.')
-        expect(page).to have_content('Please login using your Yale NetID or contact library staff to inquire about access to a physical copy.')
+        expect(page).to have_content('Please log in using your Yale NetID or contact library staff to inquire about access to a physical copy.')
       end
     end
 
@@ -112,7 +112,7 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
         click_link 'test_record_2'
 
         expect(page).not_to have_content('The digital version of this work is restricted due to copyright or other restrictions.')
-        expect(page).not_to have_content('Please login using your Yale NetID or contact library staff to inquire about access to a physical copy.')
+        expect(page).not_to have_content('Please log in using your Yale NetID or contact library staff to inquire about access to a physical copy.')
       end
     end
   end

@@ -30,7 +30,7 @@ module AccessHelper
   def restriction_instructions(document)
     case document['visibility_ssi']
     when 'Yale Community Only'
-      return "Please login using your Yale NetID or contact library staff to inquire about access to a physical copy."
+      return "Please log in using your Yale NetID or contact library staff to inquire about access to a physical copy."
     end
     "You are not authorized to view this item."
   end

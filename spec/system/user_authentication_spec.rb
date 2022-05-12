@@ -9,7 +9,7 @@ RSpec.describe 'User Authentication', type: :system, js: false, clean: true do
   context 'an unauthenticated user' do
     it 'gets the omniauth redirect endpoint for Yale CAS authentication' do
       visit search_catalog_path
-      expect(page).to have_button('Sign in')
+      expect(page).to have_button('Log in')
     end
   end
 
@@ -25,7 +25,7 @@ RSpec.describe 'User Authentication', type: :system, js: false, clean: true do
       visit search_catalog_path
       travel(13.hours)
       visit search_catalog_path
-      expect(page).to have_button('Sign in')
+      expect(page).to have_button('Log in')
       travel_back
     end
   end
