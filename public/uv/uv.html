@@ -71,6 +71,7 @@
 
             const data = urlAdapter.getInitialData({
                 highlight: urlAdapter.get('q'),
+                embedded: true
             });
             uv = UV.init('uv', data);
 
@@ -102,11 +103,13 @@
 
             function resize() {
                 $UV.setAttribute("style", `width: ${window.innerWidth}px`);
-                $UV.setAttribute("style", `height: ${window.innerHeight}px`); 
+                $UV.setAttribute("style", `height: ${window.innerHeight}px`);
             }
 
             window.addEventListener("resize", function () {
-                $UV_Iframe.contentDocument.location.reload(true)
+                if ($UV_Iframe && $UV_Iframe.contentDocument) {
+                    $UV_Iframe.contentDocument.location.reload(true)
+                }
                 resize();
             });
 
