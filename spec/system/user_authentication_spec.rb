@@ -17,7 +17,7 @@ RSpec.describe 'User Authentication', type: :system, js: false, clean: true do
     it 'gets a logout option' do
       login_as user
       visit search_catalog_path
-      expect(page).to have_button('Sign out')
+      expect(page).to have_button('Log out')
     end
 
     it 'expires the user session' do

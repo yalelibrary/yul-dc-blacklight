@@ -15,7 +15,7 @@ en:
       modern-language-association: 'MLA'
     header_links:
       login: Log in
-      logout: Sign out
+      logout: Log out
     search:
       search_constraints_header: You Searched For
       page_title:
