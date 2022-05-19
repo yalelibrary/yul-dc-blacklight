@@ -8962,7 +8962,7 @@ unique-slug@^2.0.0:
   dependencies:
     imurmurhash "^0.1.4"
 
-universalviewer@^4.0.0-pre.105:
+universalviewer@4.0.0-pre.105:
   version "4.0.0-pre.105"
   resolved "https://registry.yarnpkg.com/universalviewer/-/universalviewer-4.0.0-pre.105.tgz#fa7298865e81cc194b684841f9025f8ce6df98e0"
   integrity sha512-1ytcyI29rGU/zX4tuZeLtkmhGrSH+oko123AIgZ8F4mm8sZk6HbjE0vxgS1jP8UFDaxrNCukP2sH1qEjntEZwQ==
