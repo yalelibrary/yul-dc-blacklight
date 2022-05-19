@@ -70,7 +70,8 @@
             }
 
             const data = urlAdapter.getInitialData({
-                highlight: urlAdapter.get('q')
+                highlight: urlAdapter.get('q'),
+                embedded: true
             });
             uv = UV.init('uv', data);
 
