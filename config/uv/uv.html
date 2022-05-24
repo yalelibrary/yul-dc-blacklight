@@ -78,7 +78,7 @@
             uv.on("configure", function ({ config, cb }) {
                   cb(
                     new Promise(function (resolve) {
-                      fetch("uv-config.json").then(function (response) {
+                      fetch("uv-config.json?v=v1.60.25").then(function (response) {
                         resolve(response.json());
                       });
                     })
