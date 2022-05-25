@@ -61,15 +61,33 @@ jobs:
           command: |
             mkdir /tmp/test-results
             cd /home/app/webapp && bundle exec rspec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-      # collect reports
-      - store_test_results:
-          path: /tmp/test-results
+       - run:
+          name: Stash Coverage Results
+          command: |
+            mkdir coverage_results
+            cp -R /home/app/webapp/coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}.json
+      - persist_to_workspace:
+          root: .
+          paths:
+            - coverage_results
+  coverage:
+    docker:
+      - image: yalelibraryit/dc-management:$CIRCLE_SHA1
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: /home/app/webapp
+      - run:
+          name: Bundle Install
+          command: cd /home/app/webapp && bundle check || bundle install
+      - run:
+          name: Merge and check coverage
+          command: |
+            cd /home/app/webapp && bundle exec rake coverage:report
       - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
-      - deploy:
-          command: curl -k https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN -d "payload[build_num]=$CIRCLE_BUILD_NUM&payload[status]=done"
-
+          path: /home/app/webapp/coverage
   publish-latest:
     # Testing fix in publish latest (it will run automatically)
     executor: docker/docker
@@ -125,6 +143,9 @@ workflows:
       - run-tests:
           requires:
             - build-and-push
+      - coverage:
+          requires:
+            - run-tests
       - publish-latest:
           context: yul-dc
           requires:

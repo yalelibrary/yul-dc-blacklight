@@ -63,7 +63,7 @@ group :test do
   gem 'apparition'
   gem 'axe-matchers'
   gem 'capybara', '>= 2.15'
-  gem 'coveralls', require: false
+  gem 'coveralls_reborn', require: false
   gem 'factory_bot_rails'
   gem 'ffaker'
   gem 'rails-controller-testing'
