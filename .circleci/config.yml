@@ -61,7 +61,7 @@ jobs:
           command: |
             mkdir /tmp/test-results
             cd /home/app/webapp && bundle exec rspec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-       - run:
+      - run:
           name: Stash Coverage Results
           command: |
             mkdir coverage_results
