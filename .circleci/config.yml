@@ -72,7 +72,7 @@ jobs:
             - coverage_results
   coverage:
     docker:
-      - image: yalelibraryit/dc-management:$CIRCLE_SHA1
+      - image: yalelibraryit/dc-blacklight:$CIRCLE_SHA1
     executor: docker/docker
     steps:
       - setup_remote_docker
