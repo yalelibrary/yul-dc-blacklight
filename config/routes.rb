@@ -56,7 +56,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   get '/pdfs/*id', to: 'pdfs#show', as: :pdf
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  get '/uv.html', to: redirect { |_params, request| URI.parse(request.original_url).query ? "/posts?#{URI.parse(request.original_url).query}" : "/uv/uv.html" }
+  get '/uv.html', to: redirect { |_params, request| URI.parse(request.original_url).query ? "/uv.html?#{URI.parse(request.original_url).query}" : "/uv/uv.html" }
 
   # Match all unknown paths to the 404 page
   Rails.application.routes.draw do
