@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/main.svg?style=svg)](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/main) ![Docker Image CI](https://github.com/yalelibrary/yul-dc-blacklight/workflows/Docker%20Image%20CI/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/yalelibrary/yul-dc-blacklight/badge.svg?branch=main)](https://coveralls.io/github/yalelibrary/yul-dc-blacklight?branch=main)
+[![CircleCI](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/main.svg?style=svg)](https://circleci.com/gh/yalelibrary/yul-dc-blacklight/tree/main) ![Docker Image CI](https://github.com/yalelibrary/yul-dc-blacklight/workflows/Docker%20Image%20CI/badge.svg)
 
 # Table of contents
 
@@ -180,7 +180,7 @@ If styling is needed for a test to pass, tag the test with `style:true`
 
 ## Test coverage
 
-We use [coveralls](https://coveralls.io/github/yalelibrary/yul-dc-blacklight) to measure test coverage. More details [here](https://github.com/yalelibrary/yul-dc-blacklight/wiki/code-coverage).
+We use [simplecov](https://app.circleci.com/pipelines/github/yalelibrary/yul-dc-blacklight) to measure test coverage. More details [here](https://github.com/yalelibrary/yul-dc-documentation/wiki/Code-Coverage).
 
 ## Testing IP Access Restrictions
 
