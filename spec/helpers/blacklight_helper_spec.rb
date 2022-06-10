@@ -38,7 +38,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
       it 'has a valid aspace link' do
         # rubocop:disable Layout/LineLength
         aspace_test_link = helper.aspace_link(args)
-        expect(aspace_test_link).to match "<a target=\"_blank\" rel=\"noopener\" href=\"http://testaspace.base.url/repositories/11/archival_objects/21463\">View item information in Archives at Yale<img id=\"popup_window\" alt=\"pop up window\" src=\"/assets/YULPopUpWindow-6875f3abe2978f95c415644269f3a1765897b5fd06976b6762dc3b06736b3324.png\" /></a>"
+        expect(aspace_test_link).to match "<a target=\"_blank\" rel=\"noopener\" href=\"http://testaspace.base.url/repositories/11/archival_objects/21463\">View item information in Archives at Yale<img id=\"popup_window\" alt=\"pop up window\" src=\"/assets/YULPopUpWindow-1c59edaa31bd75f4397080dd0d8ec793700944190826143cf2db06a08fd09ed4.png\" /></a>"
         # rubocop:enable Layout/LineLength
       end
     end
@@ -52,7 +52,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
       it 'has a valid aspace link with default url' do
         # rubocop:disable Layout/LineLength
         aspace_test_link = helper.aspace_link(args)
-        expect(aspace_test_link).to match "<a target=\"_blank\" rel=\"noopener\" href=\"https://archives.yale.edu/repositories/11/archival_objects/21463\">View item information in Archives at Yale<img id=\"popup_window\" alt=\"pop up window\" src=\"/assets/YULPopUpWindow-6875f3abe2978f95c415644269f3a1765897b5fd06976b6762dc3b06736b3324.png\" /></a>"
+        expect(aspace_test_link).to match "<a target=\"_blank\" rel=\"noopener\" href=\"https://archives.yale.edu/repositories/11/archival_objects/21463\">View item information in Archives at Yale<img id=\"popup_window\" alt=\"pop up window\" src=\"/assets/YULPopUpWindow-1c59edaa31bd75f4397080dd0d8ec793700944190826143cf2db06a08fd09ed4.png\" /></a>"
         # rubocop:enable Layout/LineLength
       end
     end
