@@ -170,6 +170,13 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
         expect(helper.render_thumbnail(yale_only_document, {})).to match("<img [^>]* src=\"http://localhost:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg\" />")
       end
 
+      it 'has lazy loading for the thumbnail image' do
+        user = FactoryBot.create(:user)
+        sign_in(user)
+
+        expect(helper.render_thumbnail(yale_only_document, {})).to match("<img[^>]* loading=\"lazy\"")
+      end
+
       describe '#range_unknown_remove_url' do
         let(:missing_url) { "/catalog?range%5Byear_isim%5D%5Bmissing%5D=true&search_field=all_fields" }
         let(:clean_url) { %r{catalog[?&]search_field=all_fields} }

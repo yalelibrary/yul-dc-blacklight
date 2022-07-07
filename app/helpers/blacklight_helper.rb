@@ -391,7 +391,7 @@ module BlacklightHelper
     url = document[:thumbnail_path_ss]
     if url.present?
       error_image_url = image_url('image_not_found.png')
-      return image_tag(url, onerror: "this.error=null;this.src='#{error_image_url}'")
+      return image_tag(url, onerror: "this.error=null;this.src='#{error_image_url}'", loading: "lazy")
     end
     image_tag('image_not_found.png')
   end
