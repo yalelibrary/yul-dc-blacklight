@@ -182,7 +182,7 @@ $(document).on('turbolinks:load', function() {
 });
 
 function renderBanner() {
-    fetch("https://banner.library.yale.edu/banner.json")
+    fetch("https://banner.library.yale.edu/test/banner.json")
         .then(response => response.json())
         .then(data => {
             let allBanners = data.banners;
