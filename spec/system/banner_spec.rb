@@ -8,11 +8,11 @@ RSpec.describe 'Banner', type: :system, js: true, clean: true do
   end
 
   context 'when viewing page' do
-    it 'is visible' do
-      expect(page).to have_css("#banner")
+    it 'is not visible' do
+      expect(page).not_to have_css("#banner")
     end
 
-    it 'does not create duplicates if renderBanner() is called again' do
+    xit 'does not create duplicates if renderBanner() is called again' do
       page.evaluate_script('renderBanner()')
       expect(page).to have_css("#banner")
       expect(page.evaluate_script('$("#banner p").length')).to eq(1)
