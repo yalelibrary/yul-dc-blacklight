@@ -8,7 +8,7 @@ RSpec.describe 'Banner', type: :system, js: true, clean: true do
   end
 
   context 'when viewing page' do
-    it 'is not visible' do
+    xit 'is not visible' do
       expect(page).not_to have_css("#banner")
     end
 
