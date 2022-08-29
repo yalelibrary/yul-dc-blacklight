@@ -146,6 +146,15 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
     end
 
+    it 'gets correct search results from digitization_note_tesi' do
+      fill_in 'digitization_note_tesi', with: 'microfilm'
+      click_on 'SEARCH'
+      within '#documents' do
+        expect(page).to     have_content('Record 1')
+        expect(page).not_to have_content('Record 2')
+      end
+    end
+
     it 'maintains search results in gallery' do
       fill_in 'oid_ssi', with: '11607445'
       click_on 'SEARCH'

@@ -467,6 +467,15 @@ class CatalogController < ApplicationController
       }
     end
 
+    config.add_search_field('digitization_note_tesi', label: 'Digitization Note') do |field|
+      field.qt = 'search'
+      field.include_in_simple_select = false
+      field.solr_parameters = {
+        qf: 'digitization_note_tesi',
+        pf: 'digitization_note_tesi'
+      }
+    end
+
     config.add_search_field('fulltext_tsim_advanced', label: 'Full Text') do |field|
       field.qt = 'search'
       field.include_in_simple_select = false
