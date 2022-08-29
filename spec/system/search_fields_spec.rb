@@ -11,7 +11,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
 
   let(:search_fields) { CatalogController.blacklight_config.search_fields.keys }
   let(:expected_search_fields) do
-    ["all_fields", "all_fields_advanced", "creator_tesim", "child_oids_ssim", "date_fields", "genre_fields",
+    ["all_fields", "all_fields_advanced", "creator_tesim", "child_oids_ssim", "date_fields", "genre_fields", "digitization_note_tesi",
      "callNumber_tesim", "oid_ssi", "fulltext_tsim_advanced", "orbisBibId_ssi", "fulltext_tesim", "subjectName_tesim", "subject_fields", "title_tesim"]
   end
 
