@@ -187,7 +187,7 @@ module BlacklightHelper
   def aspace_link(arg)
     # rubocop:disable Naming/VariableName
     archiveSpaceUri = arg[:document][arg[:field]]
-    base_url = ENV['ARCHIVES_SPACE_BASE_URL'].presense || "https://archives.yale.edu"
+    base_url = ENV['ARCHIVES_SPACE_BASE_URL'].presence || "https://archives.yale.edu"
     link = "#{base_url.chomp('/')}#{archiveSpaceUri}"
     popup_window = image_tag("YULPopUpWindow.png", { id: 'popup_window', alt: 'pop up window' })
     link_to 'View item information in Archives at Yale'.html_safe + popup_window, link, target: '_blank', rel: 'noopener'
