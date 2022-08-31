@@ -14,8 +14,8 @@ en:
       apa: 'APA, 6th edition'
       modern-language-association: 'MLA'
     header_links:
-      login: Sign in
-      logout: Sign out
+      login: Log in
+      logout: Log out
     search:
       search_constraints_header: You Searched For
       page_title:

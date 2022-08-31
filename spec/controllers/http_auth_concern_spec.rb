@@ -16,7 +16,7 @@ RSpec.describe HttpAuthConcern, type: :request do
     expect(response.status).to eq 401
   end
 
-  it 'after sign-in user has access' do
+  it 'after log-in user has access' do
     http_auth = http_login
     get '/', headers: { 'HTTP_AUTHORIZATION' => http_auth }
     expect(response.status).to eq 200

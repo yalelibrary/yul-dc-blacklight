@@ -38,7 +38,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
       it 'has a valid aspace link' do
         # rubocop:disable Layout/LineLength
         aspace_test_link = helper.aspace_link(args)
-        expect(aspace_test_link).to match "<a target=\"_blank\" rel=\"noopener\" href=\"http://testaspace.base.url/repositories/11/archival_objects/21463\">View item information in Archives at Yale<img id=\"popup_window\" alt=\"pop up window\" src=\"/assets/YULPopUpWindow-6875f3abe2978f95c415644269f3a1765897b5fd06976b6762dc3b06736b3324.png\" /></a>"
+        expect(aspace_test_link).to match "<a target=\"_blank\" rel=\"noopener\" href=\"http://testaspace.base.url/repositories/11/archival_objects/21463\">View item information in Archives at Yale<img id=\"popup_window\" alt=\"pop up window\" src=\"/assets/YULPopUpWindow-1c59edaa31bd75f4397080dd0d8ec793700944190826143cf2db06a08fd09ed4.png\" /></a>"
         # rubocop:enable Layout/LineLength
       end
     end
@@ -52,7 +52,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
       it 'has a valid aspace link with default url' do
         # rubocop:disable Layout/LineLength
         aspace_test_link = helper.aspace_link(args)
-        expect(aspace_test_link).to match "<a target=\"_blank\" rel=\"noopener\" href=\"https://archives.yale.edu/repositories/11/archival_objects/21463\">View item information in Archives at Yale<img id=\"popup_window\" alt=\"pop up window\" src=\"/assets/YULPopUpWindow-6875f3abe2978f95c415644269f3a1765897b5fd06976b6762dc3b06736b3324.png\" /></a>"
+        expect(aspace_test_link).to match "<a target=\"_blank\" rel=\"noopener\" href=\"https://archives.yale.edu/repositories/11/archival_objects/21463\">View item information in Archives at Yale<img id=\"popup_window\" alt=\"pop up window\" src=\"/assets/YULPopUpWindow-1c59edaa31bd75f4397080dd0d8ec793700944190826143cf2db06a08fd09ed4.png\" /></a>"
         # rubocop:enable Layout/LineLength
       end
     end
@@ -157,8 +157,10 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
           .to_return(status: 200, body: File.open("spec/fixtures/images/Sun.png").read, headers: { "Content-Type" => /image\/.+/ })
       end
 
-      it 'returns placeholder when logged out' do
-        expect(helper.render_thumbnail(yale_only_document, {})).to include("<img src=\"/assets/placeholder_restricted-")
+      it 'returns placeholder with alt text when logged out' do
+        placeholder_image = "/assets/placeholder_restricted-"
+        alt_text = "Access Available on YALE network only due to copyright or other restrictions. OFF-SITE? Log in with NetID"
+        expect(helper.render_thumbnail(yale_only_document, {})).to include(alt_text, placeholder_image)
       end
 
       it 'returns image when logged in' do
@@ -166,6 +168,13 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
         sign_in(user) # sign_in so user_signed_in? works in method
 
         expect(helper.render_thumbnail(yale_only_document, {})).to match("<img [^>]* src=\"http://localhost:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg\" />")
+      end
+
+      it 'has lazy loading for the thumbnail image' do
+        user = FactoryBot.create(:user)
+        sign_in(user)
+
+        expect(helper.render_thumbnail(yale_only_document, {})).to match("<img[^>]* loading=\"lazy\"")
       end
 
       describe '#range_unknown_remove_url' do

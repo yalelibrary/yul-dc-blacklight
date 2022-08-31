@@ -628,7 +628,7 @@ class CatalogController < ApplicationController
       "rows": 0,
       "facet.field": "child_fulltext_wstsim",
       "facet": "on",
-      "q": "parent_ssi:#{@document_id}",
+      "fq": "parent_ssi:#{@document_id}",
       "facet.contains": @query,
       "facet.contains.ignoreCase": "true"
     }

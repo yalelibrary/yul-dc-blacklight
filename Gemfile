@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.5'
+ruby '2.7.6'
 
 gem 'awesome_print'
 gem 'aws-sdk-s3'
@@ -33,7 +33,7 @@ gem 'omniauth-rails_csrf_protection', '~> 0.1'
 gem 'partridge', '~> 0.1.2'
 gem 'pg'
 gem 'puma', '~> 4.3'
-gem 'rails', '~> 6.0.3.7'
+gem 'rails', '~> 6.0.5.1'
 gem "rails_semantic_logger", ">=4.4.4"
 gem 'rsolr', '>= 1.0', '< 3'
 gem 'sass-rails', '>= 6'
@@ -63,7 +63,7 @@ group :test do
   gem 'apparition'
   gem 'axe-matchers'
   gem 'capybara', '>= 2.15'
-  gem 'coveralls', require: false
+  gem 'coveralls_reborn', require: false
   gem 'factory_bot_rails'
   gem 'ffaker'
   gem 'rails-controller-testing'

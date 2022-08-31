@@ -27,5 +27,8 @@ module BlacklightYul
 
     # Add gzip compression for HTML, JSON and other Rails generated responses
     config.middleware.use Rack::Deflater
+
+    # See https://github.com/projectblacklight/blacklight/issues/2768
+    config.active_record.yaml_column_permitted_classes = [HashWithIndifferentAccess]
   end
 end

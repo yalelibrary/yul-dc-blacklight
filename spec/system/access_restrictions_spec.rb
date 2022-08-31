@@ -58,7 +58,7 @@ RSpec.describe "access restrictions", type: :system, clean: true do
     it "does NOT display universal viewer for yale-only works" do
       visit solr_document_path(yale_work[:id])
       expect(page.html).not_to match(/universal-viewer-iframe/)
-      expect(page.html).to have_content('Please login using your Yale NetID or contact library staff to inquire about access to a physical copy.')
+      expect(page.html).to have_content('Please log in using your Yale NetID or contact library staff to inquire about access to a physical copy.')
       expect(page.html).to have_content("[Map of China]. [yale-only copy]")
     end
 

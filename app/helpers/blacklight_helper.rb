@@ -385,11 +385,13 @@ module BlacklightHelper
 
   def render_thumbnail(document, _options)
     # return placeholder image if not logged in for yale only works
-    return image_tag('placeholder_restricted.png') unless client_can_view_digital?(document)
+    unless client_can_view_digital?(document)
+      return image_tag('placeholder_restricted.png', alt: 'Access Available on YALE network only due to copyright or other restrictions. OFF-SITE? Log in with NetID')
+    end
     url = document[:thumbnail_path_ss]
     if url.present?
       error_image_url = image_url('image_not_found.png')
-      return image_tag(url, onerror: "this.error=null;this.src='#{error_image_url}'")
+      return image_tag(url, onerror: "this.error=null;this.src='#{error_image_url}'", loading: "lazy")
     end
     image_tag('image_not_found.png')
   end
