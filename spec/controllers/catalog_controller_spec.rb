@@ -21,6 +21,7 @@ RSpec.describe CatalogController, type: :controller do
          "date_fields",
          "genre_fields",
          "oid_ssi",
+         "digitization_note_tesi",
          "fulltext_tesim",
          "orbisBibId_ssi",
          "fulltext_tsim_advanced",

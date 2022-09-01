@@ -23,6 +23,7 @@ ADVANCED_SEARCH_TESTING_1 = {
   "description_tesim": ["A few leaves supplied in a later hand.",
                         "Fair modern (18th century?) naskhī, in red and black.",
                         "Islamic binding, paper covered, with flap."],
+  "digitization_note_tesi": "Digitized from microfilm",
   "extent_ssim": ["81 leaves ; 20.5 x 14.5 cm."],
   "extentOfDigitization_ssim": ["Complete work digitized."],
   "format_tesim": ["mixed material"],
