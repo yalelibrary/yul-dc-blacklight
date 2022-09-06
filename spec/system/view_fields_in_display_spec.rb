@@ -50,6 +50,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       description_tesim: ["<a href='https://news.yale.edu/2021/03/18/meet-handsome-dan-xix' class='dontallow'>Handsome Dan</a> is a bulldog who serves as Yale Univeristy's mascot.", "here is more"],
       visibility_ssi: 'Public',
       digitization_note_tesi: "Digitization note",
+      digitization_funding_source_tesi: "Digitization Funding Source",
       abstract_tesim: ["this is an abstract", "abstract2"],
       alternativeTitle_tesim: ["this is an alternative title", "this is the second alternative title"],
       genre_ssim: ["this is the genre", "this is the second genre"],
@@ -166,6 +167,9 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
     it 'displays the digitization note' do
       expect(document).to have_content("Digitization note")
+    end
+    it 'displays the digitization funding source' do
+      expect(document).to have_content("Digitization Funding Source")
     end
     it 'displays the Access in results' do
       expect(document).to have_content("Public")
