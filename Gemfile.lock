@@ -287,7 +287,7 @@ GEM
       builder (>= 3.1.0)
       faraday
       faraday_middleware
-    omniauth (1.9.1)
+    omniauth (1.9.2)
       hashie (>= 3.4.6)
       rack (>= 1.6.2, < 3)
     omniauth-cas (1.1.1)
