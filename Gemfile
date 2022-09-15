@@ -68,6 +68,6 @@ group :test do
   gem 'ffaker'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'
-  gem 'webdrivers'
+  gem 'webdrivers', require: false
   gem 'webmock'
 end
