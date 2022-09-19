@@ -43,7 +43,7 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
     before do
       sign_in user
     end
-    
+
     it 'can view all full text search results' do
       visit '/catalog?search_field=fulltext_tesim&fulltext_search=2&q=full'
       expect(page).to have_content 'full text Yale only'
