@@ -8,6 +8,7 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
     {
       "id": "2034600",
       "title_tesim": ["[Map of China]. [public copy]"],
+      "fulltext_tesim": ["This is the full text public"],
       "visibility_ssi": "Public"
     }
   end
@@ -22,6 +23,7 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
     {
       "id": "1618909",
       "title_tesim": ["[Map of China]. [yale-only copy]"],
+      "fulltext_tesim": ["This is the full text Yale only"],
       "visibility_ssi": "Yale Community Only"
     }
   end
@@ -41,7 +43,7 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
 
   context 'User with all permissions' do
     before do
-      sign_in user
+      login_as user
     end
 
     it 'can view all full text search results' do
@@ -58,7 +60,7 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
 
     it 'can see some but not all full text search results' do
       visit '/catalog?search_field=fulltext_tesim&fulltext_search=2&q=full'
-      expect(page).not_to have_content 'full text Yale only'
+      expect(page).to have_content 'full text Yale only'
       expect(page).to have_content 'full text public'
     end
   end
