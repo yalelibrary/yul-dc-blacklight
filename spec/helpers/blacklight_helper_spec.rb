@@ -10,8 +10,19 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
   end
 
   describe '#fulltext_snippet_separation' do
+    let(:document) do
+      SolrDocument.new(
+      id: 'fulltext',
+      visibility_ssi: 'Public',
+      fulltext_tesim: ["This is a test.\n\nThis is the OCR <span class='search-highlight'>text</span>", " for 1030368.\n\nSearch for some <span class='search-highlight'>text</span> to see"]
+    )
+    end
+
     it 'separates the snippets by line breaks' do
-      options = { value: ["This is a test.\n\nThis is the OCR <span class='search-highlight'>text</span>", " for 1030368.\n\nSearch for some <span class='search-highlight'>text</span> to see"] }
+      options = {
+        value: ["This is a test.\n\nThis is the OCR <span class='search-highlight'>text</span>", " for 1030368.\n\nSearch for some <span class='search-highlight'>text</span> to see"],
+        document: document
+      }
 
       expect(helper.fulltext_snippet_separation(options)).to eq(
         "<p>This is a test.  This is the OCR <span class=\"search-highlight\">text</span><br> for 1030368.  Search for some <span class=\"search-highlight\">text</span> to see</p>"
