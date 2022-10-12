@@ -7,7 +7,7 @@ DEFAULT MOBILE STYLING
 .blacklight-ancestortitles_tesim {
   padding-right: 4px;
   width: 1080px;
-  font-family: Mallory-Medium;
+  font-family: $mallory_medium;
   color: $medium_grey;
   font-weight: 500;
   font-size: 14px;
@@ -93,7 +93,7 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
 }
 
 .showpage_no_label_tag.blacklight-archivespaceuri_ssi {
-  font-family: Mallory-Bold;
+  font-family: $mallory_bold;
   font-size: 14px;
   background-color: $lighter_grey;
   margin: 0;
@@ -112,7 +112,7 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
 }
 
 .showpage_no_label_tag.blacklight-findingaid_ssim {
-  font-family: Mallory-Bold;
+  font-family: $mallory_bold;
   font-size: 14px;
   padding-bottom: 2%;
   padding-left: 3%;
