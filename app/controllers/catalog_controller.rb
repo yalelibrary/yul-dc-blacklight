@@ -189,6 +189,8 @@ class CatalogController < ApplicationController
     config.add_index_field 'imageCount_isi', label: 'Image Count'
     config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true, solr_params: disp_req_fieldmatch_on_search_params
     config.add_index_field 'fulltext_tesim', label: 'Full Text', highlight: true, solr_params: disp_highlight_on_search_params.merge({ 'hl.snippets': 4 }), helper_method: :fulltext_snippet_separation
+    config.add_index_field 'caption_tesim', label: 'Image Caption', highlight: true, solr_params: disp_highlight_on_search_params.merge({ 'hl.snippets': 1000 }), helper_method: :count_highlights
+    config.add_index_field 'label_tesim', label: 'Image Label', highlight: true, solr_params: disp_highlight_on_search_params.merge({ 'hl.snippets': 1000 }), helper_method: :count_highlights
     config.add_index_field 'abstract_tesim', label: 'Abstract', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'alternativeTitle_tesim', label: 'Alternative Title', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'description_tesim', label: 'Description', highlight: true, solr_params: disp_highlight_on_search_params

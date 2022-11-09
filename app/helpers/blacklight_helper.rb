@@ -300,6 +300,10 @@ module BlacklightHelper
     end
   end
 
+  def count_highlights(args)
+    args[:value] && !args[:value].empty? && safe_join([args[:value][0], " (#{args[:value].length} matches)"], "<br/>".html_safe)
+  end
+
   def generate_creators_links(args)
     generate_creators(args) do |creator|
       link = "/catalog?f%5Bcreator_ssim%5D%5B%5D=#{creator}"
