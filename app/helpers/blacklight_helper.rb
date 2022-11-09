@@ -301,7 +301,7 @@ module BlacklightHelper
   end
 
   def count_highlights(args)
-    args[:value] && !args[:value].empty? && safe_join([args[:value][0], " (#{args[:value].length} matches)"], "<br/>".html_safe)
+    args[:value].present? && safe_join([args[:value][0], " (#{args[:value].length} matches)"], "<br/>".html_safe)
   end
 
   def generate_creators_links(args)
