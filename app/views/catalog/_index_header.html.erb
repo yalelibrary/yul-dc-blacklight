@@ -23,12 +23,10 @@
   unless title_class == :none
   end
 
-  original_url = request.original_url
-  parsed_url = Addressable::URI.parse(original_url)
-  view = parsed_url.query_values['view']
 -%>
 
 <div class='documentHeader row'>
+  <%= render_index_doc_actions document, wrapping_class: "index-document-functions col-sm-3 col-lg-2" %>
   <h3 class='index_title document-title-heading <%= title_class %>'>
     <% if !gallery_view? %>
       <span class='counter_no_show' ><%= counter %> </span>
