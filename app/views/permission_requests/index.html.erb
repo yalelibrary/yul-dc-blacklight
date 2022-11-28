@@ -1,0 +1,9 @@
+<%= form_with url: "/api/permission/request", method: :post do |form| %>
+  <%= form.label :parent_object, "Parent Object OID" %>
+  <%= form.text_field :parent_object %>
+  <br >
+  <%= form.label :user_note, "Note" %>
+  <%= form.text_field :user_note %>
+  <br >
+  <%= form.submit "Submit Request" %>
+<% end %>

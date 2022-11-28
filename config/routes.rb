@@ -45,6 +45,10 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
   end
 
+  scope '/permission' do
+    resources :permission_requests
+  end  
+
   get '/check-iiif', to: 'iiif#show', as: :iiif
   get '/pdfs/not_found', to: 'pdfs#not_found'
 
