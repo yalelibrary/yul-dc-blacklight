@@ -2,4 +2,5 @@
 
 class PermissionRequest < ApplicationRecord
 
+
 end
