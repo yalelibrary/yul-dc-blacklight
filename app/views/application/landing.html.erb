@@ -74,38 +74,37 @@
     <div id='highlights'>
       <h2>Highlights</h2>
       <ul class='clearfix'>
-        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"JWJ MSS 26"'), id: 'hughes-papers', class: 'btn float-left') do %>
-          <div class='highlight-link'>Langston Hughes Papers</div>
+        <li><%= link_to File.join(root_path, "/catalog?f%5Bcollection_title_ssi%5D%5B%5D=Garvin+City+Planning+Image+Collection+%28VRC+1990a%29&f%5Brepository_ssi%5D%5B%5D=Robert+B.+Haas+Family+Arts+Library+Special+Collections"), id: 'west-yale', class: 'btn float-left', alt: "Occupy movement blue tents pitched on the New Haven Green with Yale’s Phelps Hall in the background" do %>
+          <div class='highlight-link'>Garvin City Planning Image Collection, Arts Library</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"YCAL MSS 46"'), id: 'carson-papers', class: 'btn float-left') do %>
-          <div class='highlight-link'>Rachel Carson Papers</div>
+        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"JWJ MSS 26"'), id: 'hughes-papers', class: 'btn float-left', alt: "Langston Hughes (center) with Zora Neale Hurston (right) and Jessie Fauset (left) in Tuskegee, Alabama, in front of a statue of Booker T. Washington") do %>
+          <div class='highlight-link'>Langston Hughes Papers, Beinecke Library</div>
           <% end %>
         </li>
-        <li><%= link_to( solr_document_path('2052913'), id: 'divina-commedia', class: 'btn') do %>
-          <div class='highlight-link'>Divina Commedia</div>
+        <li><%= link_to File.join(root_path, "/catalog?f%5Bcollection_title_ssi%5D%5B%5D=Lindbergh+picture+collection+%28MS+325B%29&f%5Brepository_ssi%5D%5B%5D=Manuscripts+and+Archives"), id: 'lindbergh', class: 'btn float-left', alt: "Photograph of a plane flying over fields, with mountains in the background, inscribed “To our ambassador, Anne and Charles Lindbergh” in the upper left" do %>
+          <div class='highlight-link'>Lindbergh Picture Collection, Manuscripts and Archives</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"JWJ MSS 1050"'), id: 'van-vechten-papers', class: 'btn float-left') do %>
-          <div class='highlight-link'>Carl Van Vechten Papers</div>
+        <li><%= link_to( search_catalog_path(search_field: '', q: '"China Records Project Miscellaneous Personal Papers Collection"'), id: 'china-papers', class: 'btn float-left', alt: "Missionary children playing with a goat-drawn cart in China, with two Chinese men in the background, 1895") do %>
+          <div class='highlight-link'>China Records Project Miscellaneous Personal Papers Collection, Divinity Library</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"WA MSS S-2368"'), id: 'stenzel-collection', class: 'btn float-left') do %>
-          <div class='highlight-link'>Stenzel Collection of <br/> Western American Art</div>
+        <li><%= link_to( search_catalog_path(search_field: 'project_identifier', q: '"71"'), id: 'litchfield-law', class: 'btn float-left', alt: "Lectures on Law by Hon. Tapping Reeve and James Gould Esq., Litchfield, 1812-1813") do %>
+          <div class='highlight-link'>Litchfield Law School, Student Notebooks, Law Library</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"WA Photos 466"'), id: 'lewis-photographs', class: 'btn float-left') do %>
-          <div class='highlight-link'>Jon Lewis Photographs</div>
+        <li><%= link_to( search_catalog_path(search_field: 'repository', q: '"Lewis Walpole Library"'), id: 'weather', class: 'btn float-left', alt: "Satirical 19th century print of a man sitting on the pavement, having fallen backwards, with his wig falling off and coins spilling from his pockets; four men observing prints posted in a shop window are behind him.") do %>
+          <div class='highlight-link'>Very slippy-weather, Satirical Print, Lewis Walpole Library</div>
           <% end %>
         </li>
-        <li><%= link_to( solr_document_path('2003775'), id: 'declaration-of-independence', class: 'btn') do %>
-          <div class='highlight-link'>Declaration of Independence</div>
+        <li><%= link_to( search_catalog_path(search_field: 'repository', q: '"Medical Historical Library, Cushing/Whitney Medical Library"'), id: 'muscles', class: 'btn', alt: "Black and white seventeenth century print of the muscles in the human body in perspective, with three views of an individual and a smaller skeleton") do %>
+          <div class='highlight-link'>Plate of the Muscles, Graphic, Medical Historical Library</div>
           <% end %>
         </li>
-        <li>
-          <div id="coming-soon" class="btn cursor-default">
-            <div class='highlight-link'>More coming soon...</div>
-          </div>
+        <li><%= link_to( search_catalog_path(search_field: 'repository', q: '"Gilmore Music Library"'), id: 'wickhambrook', class: 'btn', alt: "Handwritten music noted in tablature from the Wickhambrook lute manuscript, with “finis si vou voules” written at the end") do %>
+          <div class='highlight-link'>Wickhambrook Lute Manuscript, Music Library</div>
+          <% end %>
         </li>
       </ul>
       <div id="content-statement">
