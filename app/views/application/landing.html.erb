@@ -86,7 +86,7 @@
           <div class='highlight-link'>Lindbergh Picture Collection, Manuscripts and Archives</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: '', q: '"China Records Project Miscellaneous Personal Papers Collection"'), id: 'china-papers', class: 'btn float-left', alt: "Missionary children playing with a goat-drawn cart in China, with two Chinese men in the background, 1895") do %>
+        <li><%= link_to File.join(root_path, "/catalog?fulltext_search=1&q=%22China+Records+Project+Miscellaneous+Personal+Papers+Collection%22&search_field=all_fields&sort=creator_ssim+asc%2C+title_ssim+asc%2C+archivalSort_ssi+asc"), id: 'china-papers', class: 'btn float-left', alt: "Missionary children playing with a goat-drawn cart in China, with two Chinese men in the background, 1895" do %>
           <div class='highlight-link'>China Records Project Miscellaneous Personal Papers Collection, Divinity Library</div>
           <% end %>
         </li>
