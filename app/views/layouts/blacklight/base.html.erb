@@ -15,7 +15,10 @@
     <%= stylesheet_link_tag "application", media: "all" unless ENV["NO_STYLE"] %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
-    <script async src="https://siteimproveanalytics.com/js/siteanalyze_66356571.js"></script>
+    <script 
+      src="https://siteimproveanalytics.com/js/siteanalyze_66356571.js" 
+      integrity="sha384-+UDF3vONlJedq8Qs46tfIjWocYiqI5ySeRdhOdWMygoYjnOJUiN1AeV6TyHpNkBN" 
+      crossorigin="anonymous"></script>
     <%= content_for(:head) %>
   </head>
   <body class="<%= render_body_class %>">
