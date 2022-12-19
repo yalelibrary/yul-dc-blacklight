@@ -93,7 +93,7 @@
           <div class='highlight-link'>China Records Project Miscellaneous Personal Papers Collection, Divinity Library</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'project_identifier', q: '"71"'), id: 'litchfield-law', class: 'btn float-left', alt: "Lectures on Law by Hon. Tapping Reeve and James Gould Esq., Litchfield, 1812-1813") do %>
+        <li><%= link_to File.join(root_path, "/catalog?f%5Bproject_identifier_tesi%5D%5B%5D=71"), id: 'litchfield-law', class: 'btn float-left', alt: "Lectures on Law by Hon. Tapping Reeve and James Gould Esq., Litchfield, 1812-1813" do %>
           <div class='highlight-link'>Litchfield Law School, Student Notebooks, Law Library</div>
           <% end %>
         </li>
