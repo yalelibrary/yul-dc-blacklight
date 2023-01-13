@@ -2,7 +2,7 @@
 require 'rails_helper'
 
 RSpec.describe "Download Original", type: :request do
-  let(:thumbnail_size) { "!1200,630" }
+  # let(:thumbnail_size) { "!1200,630" }
 
   let(:user) { FactoryBot.create(:user) }
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY.merge({ "child_oids_ssim": ["5555555"] }) }
@@ -22,10 +22,47 @@ RSpec.describe "Download Original", type: :request do
       "child_oids_ssim": ["2222222"]
     }
   end
+  let(:not_available_yet) do
+    {
+      "id": "2345678",
+      "title_tesim": ["Fictional Work"],
+      "visibility_ssi": "Public",
+      "child_oids_ssim": ["3333333"]
+    }
+  end
+
+  around do |example|
+    original_download_bucket = ENV['S3_DOWNLOAD_BUCKET_NAME']
+    # original_root = root_path
+    ENV['S3_DOWNLOAD_BUCKET_NAME'] = 'yul-test-samples'
+    # root_path = 'www.example.com'
+    example.run
+    ENV['S3_DOWNLOAD_BUCKET_NAME'] = original_download_bucket
+    # root_path = original_root
+  end
 
   before do
+    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/55/55/55/55/5555555.tif')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', 'sample.tiff')).read)
+    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/11/11/11/11/1111111.tif')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', 'sample.tiff')).read)
+    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/22/22/22/22/2222222.tif')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', 'sample.tiff')).read)
+    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/33/33/33/33/3333333.tif')
+      .to_return(status: 404)
+    stub_request(:post, "https://\\/management/api/download/stage/child/3333333")
+      .with(
+        body: { "oid" => "3333333" },
+        headers: {
+          'Accept' => '*/*',
+          'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Content-Type' => 'application/x-www-form-urlencoded',
+          'User-Agent' => 'Ruby'
+        }
+      )
+      .to_return(status: 200, body: "Child object staged for download.", headers: {})
     solr = Blacklight.default_index.connection
-    solr.add([public_work, yale_work, private_work])
+    solr.add([public_work, yale_work, private_work, not_available_yet])
     solr.commit
     allow(User).to receive(:on_campus?).and_return(false)
   end
@@ -49,17 +86,26 @@ RSpec.describe "Download Original", type: :request do
     before do
       sign_in user
     end
-    it 'display if set to public' do
-      get "/download/tiff/#{public_work[:child_oids_ssim].first}"
-      expect(response).to have_http_status(:success)
+    context 'when file is present on S3' do
+      it 'display if set to public' do
+        get "/download/tiff/#{public_work[:child_oids_ssim].first}"
+        expect(response).to have_http_status(:success)
+      end
+      it 'display if set to YCO' do
+        get "/download/tiff/#{yale_work[:child_oids_ssim].first}"
+        expect(response).to have_http_status(:success)
+      end
+      it 'does not display if set to private' do
+        get "/download/tiff/#{private_work[:child_oids_ssim].first}"
+        expect(response).to have_http_status(:unauthorized)
+      end
     end
-    it 'display if set to YCO' do
-      get "/download/tiff/#{yale_work[:child_oids_ssim].first}"
-      expect(response).to have_http_status(:success)
-    end
-    it 'does not display if set to private' do
-      get "/download/tiff/#{private_work[:child_oids_ssim].first}"
-      expect(response).to have_http_status(:unauthorized)
+    context 'when file is not present on S3' do
+      it 'presents user with try again message' do
+        get "/download/tiff/#{not_available_yet[:child_oids_ssim].first}"
+        expect(response).to have_http_status(:redirect)
+        expect(response.redirect_url).to eq 'http://www.example.com/download_original/downloading.html'
+      end
     end
   end
 end

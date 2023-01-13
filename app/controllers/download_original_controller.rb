@@ -25,17 +25,35 @@ class DownloadOriginalController < ApplicationController
     client.get_object(bucket: ENV['S3_DOWNLOAD_BUCKET_NAME'], key: tiff_pairtree_path) do |chunk|
       response.stream.write(chunk)
     end
-    # if user authorized but file does not exist in the S3 bucket
-    # need to specify more specific not found error
-  rescue StandardError => e
-    Rails.logger.error("Error reading TIFF with id [#{params[:id]}]: #{e.message}")
+  rescue Aws::S3::Errors::NotFound => e
+    Rails.logger.error("TIFF with id [#{params[:child_oid]}] not found: #{e.message}")
+    stage_params = { oid: params[:child_oid] }
+    url = URI.parse("https://#{root_path}/management/api/download/stage/child/#{params[:child_oid]}")
+    req = Net::HTTP::Post.new(url.path)
+    req.form_data = stage_params
+    req.basic_auth url.user, url.password if url.user
+    con = Net::HTTP.new(url.host, url.port)
+    con.use_ssl = true
+    con.start { |http| http.request(req) }
     redirect_to '/download_original/downloading.html'
+  rescue StandardError => e
+    Rails.logger.error("TIFF with id [#{params[:child_oid]}] error: #{e.message}")
+    redirect_to root_path
   ensure
     response.stream.close
   end
 
   def tiff_pairtree_path
-    pairtree = Partridge::Pairtree.oid_to_pairtree(params[:id])
-    File.join('download', 'tiff', pairtree, "#{params[:id]}.tif")
+    pairtree = Partridge::Pairtree.oid_to_pairtree(params[:child_oid])
+    File.join('download', 'tiff', pairtree, "#{params[:child_oid]}.tif")
+  end
+
+  def search_for_item
+    child_oid = params[:child_oid]
+    search_state[:q] = { child_oids_ssim: child_oid }
+    search_state[:rows] = 1
+    search_service_class.new(config: blacklight_config, search_state: search_state, user_params: search_state.to_h, **search_service_context)
+    response, document = search_service.search_results
+    [response, document.first]
   end
 end
