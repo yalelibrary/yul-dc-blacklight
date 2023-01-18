@@ -2,6 +2,7 @@
 require 'rails_helper'
 
 RSpec.describe "Download Original", type: :request do
+  let(:sample) { 'sample.tiff' }
   let(:user) { FactoryBot.create(:user) }
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY.merge({ "child_oids_ssim": ["5555555"] }) }
   let(:yale_work) do
@@ -38,11 +39,11 @@ RSpec.describe "Download Original", type: :request do
 
   before do
     stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/55/55/55/55/5555555.tif')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', 'sample.tiff')).read)
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', sample)).read)
     stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/11/11/11/11/1111111.tif')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', 'sample.tiff')).read)
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', sample)).read)
     stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/22/22/22/22/2222222.tif')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', 'sample.tiff')).read)
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', sample)).read)
     stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/33/33/33/33/3333333.tif')
       .to_return(status: 404)
     stub_request(:post, "https://\\/management/api/download/stage/child/3333333")
