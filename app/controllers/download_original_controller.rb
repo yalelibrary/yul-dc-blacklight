@@ -26,7 +26,7 @@ class DownloadOriginalController < ApplicationController
       response.stream.write(chunk)
     end
   rescue Aws::S3::Errors::NotFound => e
-    Rails.logger.error("TIFF with id [#{params[:child_oid]}] not found: #{e.message}")
+    Rails.logger.error("TIFF with id [#{params[:child_oid]}] not found - staging for download: #{e.message}")
     stage_params = { oid: params[:child_oid] }
     url = URI.parse("https://#{root_path}/management/api/download/stage/child/#{params[:child_oid]}")
     req = Net::HTTP::Post.new(url.path)
@@ -37,7 +37,7 @@ class DownloadOriginalController < ApplicationController
     con.start { |http| http.request(req) }
     redirect_to '/download_original/downloading.html'
   rescue StandardError => e
-    Rails.logger.error("TIFF with id [#{params[:child_oid]}] error: #{e.message}")
+    Rails.logger.error("TIFF with id [#{params[:child_oid]}] - error: #{e.message}")
     redirect_to root_path
   ensure
     response.stream.close

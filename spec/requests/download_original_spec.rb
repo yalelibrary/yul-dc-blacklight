@@ -70,15 +70,15 @@ RSpec.describe "Download Original", type: :request do
   context 'as an unauthenticated user' do
     it 'display if set to public' do
       get "/download/tiff/#{public_work[:child_oids_ssim].first}"
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:success) # 200
     end
     it 'does not display if set to YCO' do
       get "/download/tiff/#{yale_work[:child_oids_ssim].first}"
-      expect(response).to have_http_status(:unauthorized)
+      expect(response).to have_http_status(:unauthorized) # 401
     end
     it 'does not display if set to private' do
       get "/download/tiff/#{private_work[:child_oids_ssim].first}"
-      expect(response).to have_http_status(:unauthorized)
+      expect(response).to have_http_status(:unauthorized) # 401
     end
   end
 
@@ -89,22 +89,28 @@ RSpec.describe "Download Original", type: :request do
     context 'when file is present on S3' do
       it 'display if set to public' do
         get "/download/tiff/#{public_work[:child_oids_ssim].first}"
-        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status(:success) # 200
       end
       it 'display if set to YCO' do
         get "/download/tiff/#{yale_work[:child_oids_ssim].first}"
-        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status(:success) # 200
       end
       it 'does not display if set to private' do
         get "/download/tiff/#{private_work[:child_oids_ssim].first}"
-        expect(response).to have_http_status(:unauthorized)
+        expect(response).to have_http_status(:unauthorized) # 401
       end
     end
     context 'when file is not present on S3' do
       it 'presents user with try again message' do
         get "/download/tiff/#{not_available_yet[:child_oids_ssim].first}"
-        expect(response).to have_http_status(:redirect)
+        expect(response).to have_http_status(:redirect) # 302
         expect(response.redirect_url).to eq 'http://www.example.com/download_original/downloading.html'
+      end
+    end
+    context 'when child object does not exist' do
+      it 'presents user with not found message' do
+        get '/download/tiff/00000089'
+        expect(response).to have_http_status(:not_found) # 404
       end
     end
   end
