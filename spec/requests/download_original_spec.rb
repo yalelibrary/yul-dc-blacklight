@@ -2,8 +2,6 @@
 require 'rails_helper'
 
 RSpec.describe "Download Original", type: :request do
-  # let(:thumbnail_size) { "!1200,630" }
-
   let(:user) { FactoryBot.create(:user) }
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY.merge({ "child_oids_ssim": ["5555555"] }) }
   let(:yale_work) do
@@ -33,12 +31,9 @@ RSpec.describe "Download Original", type: :request do
 
   around do |example|
     original_download_bucket = ENV['S3_DOWNLOAD_BUCKET_NAME']
-    # original_root = root_path
     ENV['S3_DOWNLOAD_BUCKET_NAME'] = 'yul-test-samples'
-    # root_path = 'www.example.com'
     example.run
     ENV['S3_DOWNLOAD_BUCKET_NAME'] = original_download_bucket
-    # root_path = original_root
   end
 
   before do
@@ -78,7 +73,7 @@ RSpec.describe "Download Original", type: :request do
     end
     it 'does not display if set to private' do
       get "/download/tiff/#{private_work[:child_oids_ssim].first}"
-      expect(response).to have_http_status(:unauthorized) # 401
+      expect(response).to have_http_status(:not_found) # 404
     end
   end
 
@@ -97,13 +92,13 @@ RSpec.describe "Download Original", type: :request do
       end
       it 'does not display if set to private' do
         get "/download/tiff/#{private_work[:child_oids_ssim].first}"
-        expect(response).to have_http_status(:unauthorized) # 401
+        expect(response).to have_http_status(:not_found) # 404
       end
     end
     context 'when file is not present on S3' do
       it 'presents user with try again message' do
         get "/download/tiff/#{not_available_yet[:child_oids_ssim].first}"
-        expect(response).to have_http_status(:redirect) # 302
+        expect(response).to have_http_status(:accepted) # 202
         expect(response.redirect_url).to eq 'http://www.example.com/download_original/downloading.html'
       end
     end
