@@ -21,6 +21,7 @@ class DownloadOriginalController < ApplicationController
   def send_tiff
     response.set_header('Content-Type', 'application/tiff')
     response.set_header('X-Robots-Tag', 'noindex')
+    response.set_header('Cache-Control', 'no-store')
     client = Aws::S3::Client.new
     client.get_object(bucket: ENV['S3_DOWNLOAD_BUCKET_NAME'], key: tiff_pairtree_path) do |chunk|
       response.stream.write(chunk)
@@ -35,7 +36,7 @@ class DownloadOriginalController < ApplicationController
     con = Net::HTTP.new(url.host, url.port)
     con.use_ssl = true
     con.start { |http| http.request(req) }
-    redirect_to '/download_original/downloading.html'
+    redirect_to '/download_original/downloading.html', status: 202
   rescue StandardError => e
     Rails.logger.error("TIFF with id [#{params[:child_oid]}] - error: #{e.message}")
     redirect_to root_path
