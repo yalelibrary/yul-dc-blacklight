@@ -58,21 +58,20 @@ RSpec.describe OmniauthCallbacksController do
     end
   end
 
-  # describe 'when user has invalid params' do
-  #   before do
-  #     request.env["devise.mapping"] = Devise.mappings[:user]
-  #     request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:not_cas]
-  #   end
-  #   OmniAuth.config.mock_auth[:not_cas] =
-  #     OmniAuth::AuthHash.new(
-  #       provider: 'not_cas'
-  #     )
+  describe 'when user has invalid params' do
+    before do
+      request.env["devise.mapping"] = Devise.mappings[:user]
+      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:not_cas]
+    end
+    OmniAuth.config.mock_auth[:not_cas] =
+      OmniAuth::AuthHash.new(
+        provider: 'not_cas'
+      )
 
-  #   it 'can redirect to root path' do
-  #     auth = { provider: 'not_cas' }
-  #     post :cas, params: auth
-  #     expect(response.redirect_url).to eq 'http://test.host/'
-  #     expect(User.where(provider: 'not_cas').count).to eq 0
-  #   end
-  # end
+    it 'can redirect to root path' do
+      auth = { provider: 'not_cas' }
+      post :cas, params: auth
+      expect(response.redirect_url).to eq 'http://test.host/'
+    end
+  end
 end
