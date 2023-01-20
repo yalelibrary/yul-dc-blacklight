@@ -27,32 +27,27 @@ class DownloadOriginalController < ApplicationController
       response.stream.write(chunk)
     end
   rescue Aws::S3::Errors::NotFound => e
-    Rails.logger.error("TIFF with id [#{params[:child_oid]}] not found - staging for download: #{e.message}")
-    stage_params = { oid: params[:child_oid] }
-    url = URI.parse("https://#{root_path}/management/api/download/stage/child/#{params[:child_oid]}")
-    req = Net::HTTP::Post.new(url.path)
-    req.form_data = stage_params
-    req.basic_auth url.user, url.password if url.user
-    con = Net::HTTP.new(url.host, url.port)
-    con.use_ssl = true
-    con.start { |http| http.request(req) }
-    redirect_to '/download_original/downloading.html', status: 202
+    stage_download(params, e)
   rescue Aws::S3::Errors::NoSuchKey => e
-    Rails.logger.error("TIFF with id [#{params[:child_oid]}] not found - staging for download: #{e.message}")
-    stage_params = { oid: params[:child_oid] }
-    url = URI.parse("https://#{root_path}/management/api/download/stage/child/#{params[:child_oid]}")
-    req = Net::HTTP::Post.new(url.path)
-    req.form_data = stage_params
-    req.basic_auth url.user, url.password if url.user
-    con = Net::HTTP.new(url.host, url.port)
-    con.use_ssl = true
-    con.start { |http| http.request(req) }
-    redirect_to '/download_original/downloading.html', status: 202
+    stage_download(params, e)
   rescue StandardError => e
     Rails.logger.error("TIFF with id [#{params[:child_oid]}] - error: #{e.message}")
     redirect_to root_path
   ensure
     response.stream.close
+  end
+
+  def stage_download(params, e)
+    Rails.logger.error("TIFF with id [#{params[:child_oid]}] not found - staging for download: #{e.message}")
+    stage_params = { oid: params[:child_oid] }
+    url = URI.parse("https://#{root_path}/management/api/download/stage/child/#{params[:child_oid]}")
+    req = Net::HTTP::Post.new(url.path)
+    req.form_data = stage_params
+    req.basic_auth url.user, url.password if url.user
+    con = Net::HTTP.new(url.host, url.port)
+    con.use_ssl = true
+    con.start { |http| http.request(req) }
+    redirect_to '/download_original/downloading.html', status: 202
   end
 
   def tiff_pairtree_path
