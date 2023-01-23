@@ -9,11 +9,12 @@ class DownloadOriginalController < ApplicationController
   before_action :check_authorization
 
   def tiff
-    send_tiff
-  end
-
-  def downloading
-    send_file 'public/downloading.html', disposition: 'inline', type: 'text/html; charset=utf-8', status: 202
+    if S3Service.exists_in_s3(tiff_pairtree_path)
+      send_tiff
+    else
+      stage_download(params)
+      redirect_to search_catalog_path(search_field: 'child_oids_ssim', q: params[:child_oid].to_s), status: 202, notice: 'Item not available for download yet.  Please try again later.'
+    end
   end
 
   private
@@ -26,28 +27,21 @@ class DownloadOriginalController < ApplicationController
     client.get_object(bucket: ENV['S3_DOWNLOAD_BUCKET_NAME'], key: tiff_pairtree_path) do |chunk|
       response.stream.write(chunk)
     end
-  rescue Aws::S3::Errors::NotFound => e
-    stage_download(params, e)
-  rescue Aws::S3::Errors::NoSuchKey => e
-    stage_download(params, e)
   rescue StandardError => e
     Rails.logger.error("TIFF with id [#{params[:child_oid]}] - error: #{e.message}")
-    redirect_to root_path
+    redirect_to root_path, notice: 'There was an error downloading the file.  Please try again later.'
   ensure
     response.stream.close
   end
 
-  def stage_download(params, e)
-    Rails.logger.error("TIFF with id [#{params[:child_oid]}] not found - staging for download: #{e.message}")
+  def stage_download(params)
+    Rails.logger.info("TIFF with id [#{params[:child_oid]}] not found - staging for download.")
     stage_params = { oid: params[:child_oid] }
-    url = URI.parse("https://#{root_path}/management/api/download/stage/child/#{params[:child_oid]}")
+    url = URI.parse("#{root_url}management/api/download/stage/child/#{params[:child_oid]}")
     req = Net::HTTP::Post.new(url.path)
     req.form_data = stage_params
-    req.basic_auth url.user, url.password if url.user
     con = Net::HTTP.new(url.host, url.port)
-    con.use_ssl = true
     con.start { |http| http.request(req) }
-    redirect_to '/download_original/downloading.html', status: 202
   end
 
   def tiff_pairtree_path

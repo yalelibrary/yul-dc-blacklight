@@ -2,7 +2,6 @@
 require 'rails_helper'
 
 RSpec.describe "Download Original", type: :request do
-  let(:sample) { 'sample.tiff' }
   let(:user) { FactoryBot.create(:user) }
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY.merge({ "child_oids_ssim": ["5555555"] }) }
   let(:yale_work) do
@@ -39,14 +38,20 @@ RSpec.describe "Download Original", type: :request do
 
   before do
     stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/55/55/55/55/5555555.tif')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', sample)).read)
+      .to_return(status: 200, body: '')
+    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/55/55/55/55/5555555.tif')
+      .to_return(status: 200, body: '')
     stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/11/11/11/11/1111111.tif')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', sample)).read)
-    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/22/22/22/22/2222222.tif')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', sample)).read)
+      .to_return(status: 200, body: '')
+    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/11/11/11/11/1111111.tif')
+      .to_return(status: 200, body: '')
+    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/22/22/22/22/2222222.tif')
+      .to_return(status: 200, body: '')
     stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/33/33/33/33/3333333.tif')
       .to_return(status: 404)
-    stub_request(:post, "https://\\/management/api/download/stage/child/3333333")
+    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/33/33/33/33/3333333.tif')
+      .to_return(status: 404)
+    stub_request(:post, "http://www.example.com/management/api/download/stage/child/3333333")
       .with(
         body: { "oid" => "3333333" },
         headers: {
@@ -56,7 +61,7 @@ RSpec.describe "Download Original", type: :request do
           'User-Agent' => 'Ruby'
         }
       )
-      .to_return(status: 200, body: "Child object staged for download.", headers: {})
+      .to_return(status: 200, body: '', headers: {})
     solr = Blacklight.default_index.connection
     solr.add([public_work, yale_work, private_work, not_available_yet])
     solr.commit
@@ -100,7 +105,7 @@ RSpec.describe "Download Original", type: :request do
       it 'presents user with try again message' do
         get "/download/tiff/#{not_available_yet[:child_oids_ssim].first}"
         expect(response).to have_http_status(:accepted) # 202
-        expect(response.redirect_url).to eq 'http://www.example.com/download_original/downloading.html'
+        expect(response.redirect_url).to eq 'http://www.example.com/catalog?q=3333333&search_field=child_oids_ssim'
       end
     end
     context 'when child object does not exist' do
