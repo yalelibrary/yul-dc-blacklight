@@ -11,4 +11,9 @@ class S3Service
   rescue Aws::S3::Errors::NoSuchKey, Aws::S3::Errors::NotFound, Aws::S3::Errors::BadRequest
     nil
   end
+
+  def self.exists_in_s3(remote_path, bucket = ENV['S3_DOWNLOAD_BUCKET_NAME'])
+    object = Aws::S3::Object.new(bucket_name: bucket, key: remote_path)
+    object.exists?
+  end
 end
