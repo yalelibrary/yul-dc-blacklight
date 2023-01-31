@@ -3,8 +3,6 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.6'
-
 gem 'awesome_print'
 gem 'aws-sdk-s3'
 gem 'blacklight', '>= 7.0'
