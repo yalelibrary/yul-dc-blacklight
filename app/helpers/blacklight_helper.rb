@@ -114,6 +114,10 @@ module BlacklightHelper
     values[2] = series_full_title if values[2] && series_full_title&.include?(values[2])
   end
 
+  def format_digitization(arg)
+    "This object has been #{arg[:value]&.first&.downcase}." unless arg[:value].empty?
+  end
+
   def archival_display(arg)
     values = arg[:document][arg[:field]].reverse
     swap_out_series_title(values, arg[:document][:series_ssi])
