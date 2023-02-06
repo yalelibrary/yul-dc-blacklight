@@ -28,10 +28,11 @@ gem 'omniauth'
 gem 'omniauth-cas'
 # This addresses CVE-2015-9284 https://github.com/advisories/GHSA-ww4x-rwq6-qpgf
 gem 'omniauth-rails_csrf_protection', '~> 0.1'
+gem 'openseadragon'
 gem 'partridge', '~> 0.1.2'
 gem 'pg'
 gem 'puma', '~> 4.3'
-gem 'rails', '6.1'
+gem 'rails', '~> 6.1'
 gem "rails_semantic_logger", ">=4.4.4"
 gem 'rsolr', '>= 1.0', '< 3'
 gem 'sass-rails', '>= 6'
