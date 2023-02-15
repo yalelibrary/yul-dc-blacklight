@@ -8,7 +8,7 @@ Capybara.default_driver = :rack_test
 ENV['WEB_HOST'] ||= `hostname -s`.strip
 
 options = Selenium::WebDriver::Options.chrome
-options.page_load_strategy = :none
+options.page_load_strategy = :normal
 
 Capybara.register_driver :chrome do |app|
   d = Capybara::Selenium::Driver.new(app,

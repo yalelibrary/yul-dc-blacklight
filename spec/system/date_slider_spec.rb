@@ -119,7 +119,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
       end_slider.drag_by(-70, 0)
     end
     within '#facet-year_isim' do
-      click_on "Apply"
+      click_on 'Apply', match: :first
     end
 
     within '.blacklight-year_isim' do

@@ -151,6 +151,8 @@ class CatalogController < ApplicationController
     config.add_facet_field 'ancestor_titles_hierarchy_ssim', label: "Found In", show: false
     config.add_facet_field 'subjectGeographic_ssim', label: 'Subject (Geographic)', show: false
     config.add_facet_field 'subjectHeadingFacet_ssim', label: 'Subject Heading', show: false
+    config.add_facet_field 'project_identifier_tesi', label: 'Project Id', show: false
+    config.add_facet_field 'child_oids_ssim', label: "Child OID", show: false
 
     config.add_facet_field 'has_fulltext_ssi', label: "Full Text Available", limit: true
 
