@@ -12,7 +12,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     {
       id: '111',
       title_tesim: 'Handsome Dan is a bull dog.',
-      year_isim: [2022],
+      year_isim: [2023],
       creator_tesim: 'Eric & Frederick',
       subjectName_ssim: "this is the subject name",
       sourceTitle_tesim: "this is the source title",
