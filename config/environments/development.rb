@@ -61,4 +61,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.file_watcher = ActiveSupport::FileUpdateChecker
+
+  # configure web console's allow list for developer's IP address
+  config.web_console.permissions = '10.160.1.1'
 end

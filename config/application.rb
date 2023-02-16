@@ -17,9 +17,6 @@ module BlacklightYul
     config.rails_semantic_logger.add_file_appender = false # turn off regular file appenders
     config.semantic_logger.add_appender(io: STDOUT, level: config.log_level, formatter: config.rails_semantic_logger.format)
     
-    # configure web console's allow list for developer's IP address
-    config.web_console.permissions = '10.160.1.1'
-    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
