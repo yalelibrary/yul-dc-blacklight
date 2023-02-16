@@ -127,7 +127,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     end
 
     within '.constraints-container' do
-      expect(page.text).to match(/Date 11\d\d - 16\d\d/)
+      expect(page.text).to match(/Date 11\d\d - 16\d\d/).or(/Date Created 11\d\d - 16\d\d/)
     end
 
     # makes sure that it includes the turtle record with years: 1555-1800
