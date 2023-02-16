@@ -63,5 +63,6 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::FileUpdateChecker
 
   # configure web console's allow list for developer's IP address
-  config.web_console.permissions = '10.160.1.1'
+  # replace with actual 'request.remote_ip' during debugging
+  config.web_console.permissions = '0.0.0.0'
 end
