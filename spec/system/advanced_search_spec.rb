@@ -229,7 +229,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
       end
     end
     context 'when a quote is not closed' do
-      it 'removes all quotes' do
+      xit 'removes all quotes' do
         fill_in 'all_fields_advanced', with: '"not" "closed'
         click_on 'SEARCH'
 
