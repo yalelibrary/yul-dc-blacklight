@@ -12,7 +12,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     {
       id: '111',
       title_tesim: 'Handsome Dan is a bull dog.',
-      year_isim: [2022],
+      year_isim: [2023],
       creator_tesim: 'Eric & Frederick',
       subjectName_ssim: "this is the subject name",
       sourceTitle_tesim: "this is the source title",
@@ -119,7 +119,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
       end_slider.drag_by(-70, 0)
     end
     within '#facet-year_isim' do
-      click_on "Apply"
+      click_on 'Apply', match: :first
     end
 
     within '.blacklight-year_isim' do
@@ -127,7 +127,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     end
 
     within '.constraints-container' do
-      expect(page.text).to match(/Date 11\d\d - 16\d\d/)
+      expect(page.text).to match(/Date 11\d\d - 16\d\d/).or(/Date Created 11\d\d - 16\d\d/)
     end
 
     # makes sure that it includes the turtle record with years: 1555-1800

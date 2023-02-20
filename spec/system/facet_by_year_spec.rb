@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.feature "View Search Results", type: :system, clean: true, js: false do
+RSpec.feature "View Search Results", type: :system, clean: true, js: false, style: true do
   before do
     solr = Blacklight.default_index.connection
     solr.add([test_record_0, test_record_1, test_record_2, test_record_3])
@@ -90,7 +90,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
 
     fill_in 'range_year_isim_begin', with: '1910'
     fill_in 'range_year_isim_end', with: '1950'
-    click_on 'Apply'
+    click_on 'Apply', match: :first
 
     within '#documents' do
       expect(page).to     have_content("211")
@@ -113,7 +113,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
 
     fill_in 'range_year_isim_begin', with: '610'
     fill_in 'range_year_isim_end', with: '950'
-    click_on 'Apply'
+    click_on 'Apply', match: :first
 
     within '#documents' do
       expect(page).to have_content("111")
