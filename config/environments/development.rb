@@ -61,4 +61,8 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.file_watcher = ActiveSupport::FileUpdateChecker
+
+  # configure web console's allow list for developer's IP address
+  # replace with actual 'request.remote_ip' during debugging
+  config.web_console.permissions = '0.0.0.0'
 end

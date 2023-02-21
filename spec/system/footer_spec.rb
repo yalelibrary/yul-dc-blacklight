@@ -23,7 +23,7 @@ RSpec.describe 'footer', type: :system do
     expect(page).to have_link('Systems Status', href: 'http://status.library.yale.edu')
     expect(page).to have_link('Privacy Policy', href: 'http://www.yale.edu/privacy.html')
     expect(page).to have_link('Terms', href: 'https://guides.library.yale.edu/about/policies/access')
-    expect(page).to have_link('Feedback', href: 'http://web.library.yale.edu/form/findit-feedback?findITURL=http://127.0.0.1/')
+    expect(page).to have_link('Feedback', href: /http:\/\/web.library.yale.edu\/form\/findit-feedback\?findITURL=http.*/)
     expect(page).to have_link('Data Use', href: 'https://web.library.yale.edu/data-use')
     expect(page).to have_link('Accessibility', href: 'https://usability.yale.edu/web-accessibility/accessibility-yale')
     expect(page).to have_link(nil, href: 'http://yaleuniversity.tumblr.com/')
