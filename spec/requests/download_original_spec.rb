@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe "Download Original", type: :request do
+RSpec.describe "Download Original", type: :request, clean: true do
   let(:user) { FactoryBot.create(:user) }
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY.merge({ "child_oids_ssim": ["5555555"] }) }
   let(:yale_work) do
@@ -9,7 +9,7 @@ RSpec.describe "Download Original", type: :request do
       "id": "1618909",
       "title_tesim": ["[Map of China]. [yale-only copy]"],
       "visibility_ssi": "Yale Community Only",
-      "child_oids_ssim": ["1111111"]
+      "child_oids_ssim": ["11111"]
     }
   end
   let(:private_work) do
@@ -37,19 +37,19 @@ RSpec.describe "Download Original", type: :request do
   end
 
   before do
-    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/55/55/55/55/5555555.tif')
+    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/55/55/55/55/5555555.tiff')
       .to_return(status: 200, body: '')
-    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/55/55/55/55/5555555.tif')
+    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/55/55/55/55/5555555.tiff')
       .to_return(status: 200, body: '')
-    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/11/11/11/11/1111111.tif')
+    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/11/11/11/11111.tiff')
       .to_return(status: 200, body: '')
-    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/11/11/11/11/1111111.tif')
+    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/11/11/11/11111.tiff')
       .to_return(status: 200, body: '')
-    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/22/22/22/22/2222222.tif')
+    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/22/22/22/22/2222222.tiff')
       .to_return(status: 200, body: '')
-    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/33/33/33/33/3333333.tif')
+    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/33/33/33/33/3333333.tiff')
       .to_return(status: 404)
-    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/33/33/33/33/3333333.tif')
+    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/33/33/33/33/3333333.tiff')
       .to_return(status: 404)
     stub_request(:post, "http://www.example.com/management/api/download/stage/child/3333333")
       .with(
@@ -72,6 +72,7 @@ RSpec.describe "Download Original", type: :request do
     it 'display if set to public' do
       get "/download/tiff/#{public_work[:child_oids_ssim].first}"
       expect(response).to have_http_status(:success) # 200
+      expect(response.content_type).to eq 'image/tiff'
     end
     it 'does not display if set to YCO' do
       get "/download/tiff/#{yale_work[:child_oids_ssim].first}"
@@ -91,10 +92,12 @@ RSpec.describe "Download Original", type: :request do
       it 'display if set to public' do
         get "/download/tiff/#{public_work[:child_oids_ssim].first}"
         expect(response).to have_http_status(:success) # 200
+        expect(response.content_type).to eq 'image/tiff'
       end
       it 'display if set to YCO' do
         get "/download/tiff/#{yale_work[:child_oids_ssim].first}"
         expect(response).to have_http_status(:success) # 200
+        expect(response.content_type).to eq 'image/tiff'
       end
       it 'does not display if set to private' do
         get "/download/tiff/#{private_work[:child_oids_ssim].first}"
