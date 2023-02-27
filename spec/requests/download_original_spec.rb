@@ -2,6 +2,7 @@
 require 'rails_helper'
 
 RSpec.describe "Download Original", type: :request, clean: true do
+  let(:imgtiff) { 'image/tiff' }
   let(:user) { FactoryBot.create(:user) }
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY.merge({ "child_oids_ssim": ["5555555"] }) }
   let(:yale_work) do
@@ -72,7 +73,7 @@ RSpec.describe "Download Original", type: :request, clean: true do
     it 'display if set to public' do
       get "/download/tiff/#{public_work[:child_oids_ssim].first}"
       expect(response).to have_http_status(:success) # 200
-      expect(response.content_type).to eq 'image/tiff'
+      expect(response.content_type).to eq imgtiff
     end
     it 'does not display if set to YCO' do
       get "/download/tiff/#{yale_work[:child_oids_ssim].first}"
@@ -92,12 +93,12 @@ RSpec.describe "Download Original", type: :request, clean: true do
       it 'display if set to public' do
         get "/download/tiff/#{public_work[:child_oids_ssim].first}"
         expect(response).to have_http_status(:success) # 200
-        expect(response.content_type).to eq 'image/tiff'
+        expect(response.content_type).to eq imgtiff
       end
       it 'display if set to YCO' do
         get "/download/tiff/#{yale_work[:child_oids_ssim].first}"
         expect(response).to have_http_status(:success) # 200
-        expect(response.content_type).to eq 'image/tiff'
+        expect(response.content_type).to eq imgtiff
       end
       it 'does not display if set to private' do
         get "/download/tiff/#{private_work[:child_oids_ssim].first}"
