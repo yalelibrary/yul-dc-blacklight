@@ -38,19 +38,19 @@ RSpec.describe "Download Original", type: :request, clean: true do
   end
 
   before do
-    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/55/55/55/55/5555555.tiff')
+    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/55/55/55/55/5555555.tif')
       .to_return(status: 200, body: '')
-    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/55/55/55/55/5555555.tiff')
+    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/55/55/55/55/5555555.tif')
       .to_return(status: 200, body: '')
-    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/11/11/11/11111.tiff')
+    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/11/11/11/11111.tif')
       .to_return(status: 200, body: '')
-    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/11/11/11/11111.tiff')
+    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/11/11/11/11111.tif')
       .to_return(status: 200, body: '')
-    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/22/22/22/22/2222222.tiff')
+    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/22/22/22/22/2222222.tif')
       .to_return(status: 200, body: '')
-    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/33/33/33/33/3333333.tiff')
+    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/33/33/33/33/3333333.tif')
       .to_return(status: 404)
-    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/33/33/33/33/3333333.tiff')
+    stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/33/33/33/33/3333333.tif')
       .to_return(status: 404)
     stub_request(:post, "http://www.example.com/management/api/download/stage/child/3333333")
       .with(
