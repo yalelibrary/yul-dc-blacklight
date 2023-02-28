@@ -46,7 +46,7 @@ class DownloadOriginalController < ApplicationController
 
   def tiff_pairtree_path
     pairtree = Partridge::Pairtree.oid_to_pairtree(params[:child_oid])
-    File.join('download', 'tiff', pairtree, "#{params[:child_oid]}.tiff")
+    File.join('download', 'tiff', pairtree, "#{params[:child_oid]}.tif")
   end
 
   def search_for_item
