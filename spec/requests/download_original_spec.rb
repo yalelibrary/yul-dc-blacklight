@@ -55,13 +55,11 @@ RSpec.describe "Download Original", type: :request, clean: true do
       .to_return(status: 404)
     stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/33/33/33/33/3333333.tif')
       .to_return(status: 404)
-    stub_request(:post, "http://www.example.com/management/api/download/stage/child/3333333")
+    stub_request(:get, "http://www.example.com/management/api/download/stage/child/3333333")
       .with(
-        body: { "oid" => "3333333" },
         headers: {
           'Accept' => '*/*',
           'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-          'Content-Type' => 'application/x-www-form-urlencoded',
           'User-Agent' => 'Ruby'
         }
       )
