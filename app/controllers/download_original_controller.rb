@@ -37,7 +37,7 @@ class DownloadOriginalController < ApplicationController
   def stage_download(params)
     Rails.logger.info("TIFF with id [#{params[:child_oid]}] not found - staging for download.")
     stage_params = { oid: params[:child_oid] }
-    url = URI.parse("#{root_url}management/api/download/stage/child/#{params[:child_oid]}")
+    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/download/stage/child/#{params[:child_oid]}")
     req = Net::HTTP::Post.new(url.path)
     req.form_data = stage_params
     con = Net::HTTP.new(url.host, url.port)

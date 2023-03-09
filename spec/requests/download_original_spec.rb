@@ -32,9 +32,12 @@ RSpec.describe "Download Original", type: :request, clean: true do
 
   around do |example|
     original_download_bucket = ENV['S3_DOWNLOAD_BUCKET_NAME']
+    original_management_url = ENV['MANAGEMENT_HOST']
     ENV['S3_DOWNLOAD_BUCKET_NAME'] = 'yul-test-samples'
+    ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
     example.run
     ENV['S3_DOWNLOAD_BUCKET_NAME'] = original_download_bucket
+    ENV['MANAGEMENT_HOST'] = original_management_url
   end
 
   before do
