@@ -6,7 +6,7 @@ class DownloadOriginalController < ApplicationController
   include Blacklight::Catalog
   include CheckAuthorization
 
-  before_action :check_authorization
+  before_action :check_authorization, except: [:staged]
 
   def tiff
     if S3Service.exists_in_s3(tiff_pairtree_path)
@@ -14,6 +14,12 @@ class DownloadOriginalController < ApplicationController
     else
       stage_download(params)
       redirect_to search_catalog_path(search_field: 'child_oids_ssim', q: params[:child_oid].to_s), status: 202, notice: 'Item not available for download yet.  Please try again later.'
+    end
+  end
+
+  def staged
+    respond_to do |format|
+      format.html { render 'tiff_staged.html' }
     end
   end
 

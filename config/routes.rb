@@ -25,6 +25,14 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   get 'mirador/:oid', to: 'mirador#show'
 
   get '/download/tiff/:child_oid', to: 'download_original#tiff'
+  # resources :download_original do
+  #   get 'tiff_staged'
+  # end
+
+  get '/download/tiff/:child_oid/staged', to: 'download_original#staged'
+
+  # get 'download/tiff/staged', to: 'download_original#staged'
+  # resource :download_original, only: [:index]
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :oai_provider
