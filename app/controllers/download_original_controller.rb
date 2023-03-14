@@ -13,7 +13,7 @@ class DownloadOriginalController < ApplicationController
       send_tiff
     else
       stage_download(params)
-      redirect_to search_catalog_path(search_field: 'child_oids_ssim', q: params[:child_oid].to_s), status: 202, notice: 'Item not available for download yet.  Please try again later.'
+      redirect_to "#{root_url}download/tiff/#{params[:child_oid]}/staged", status: 202
     end
   end
 
