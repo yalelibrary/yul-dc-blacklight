@@ -18,8 +18,14 @@ class DownloadOriginalController < ApplicationController
   end
 
   def staged
-    respond_to do |format|
-      format.html { render 'tiff_staged.html' }
+    render 'tiff_staged.html'
+  end
+
+  def available
+    if S3Service.exists_in_s3(tiff_pairtree_path)
+      render plain: 'true'
+    else
+      render plain: 'false'
     end
   end
 

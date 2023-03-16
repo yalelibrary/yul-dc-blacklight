@@ -28,6 +28,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   get '/download/tiff/:child_oid/staged', to: 'download_original#staged'
   get '/download/tiff/:child_oid', to: 'download_original#index'
   get '/download/tiff/:child_oid/suggest', to: 'download_original#suggest'
+  get '/download/tiff/:child_oid/available', to: 'download_original#available'
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :oai_provider
