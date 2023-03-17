@@ -115,7 +115,7 @@ RSpec.describe "Download Original", type: :request, clean: true do
     end
     context 'when child object does not exist' do
       it 'presents user with not found message' do
-        get '/download/tiff/00000089'
+        get '/download/tiff/89'
         expect(response).to have_http_status(:not_found) # 404
       end
     end
