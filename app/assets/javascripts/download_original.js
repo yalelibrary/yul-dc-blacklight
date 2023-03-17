@@ -17,6 +17,7 @@ function check_availability(childOid, hostPath) {
                 setTimeout(()=> check_availability(childOid, hostPath), 30000)
             } else if (r.responseText === 'true') {
                 window.location.href = hostPath + '/download/tiff/' + childOid
+                setTimeout(() => window.close(), 3000);
             }
         }
     });
