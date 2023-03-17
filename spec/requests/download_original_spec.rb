@@ -109,8 +109,8 @@ RSpec.describe "Download Original", type: :request, clean: true do
     context 'when file is not present on S3' do
       it 'presents user with try again message' do
         get "/download/tiff/#{not_available_yet[:child_oids_ssim].first}"
-        expect(response).to have_http_status(:accepted) # 202
-        expect(response.redirect_url).to eq 'http://www.example.com/catalog?q=3333333&search_field=child_oids_ssim'
+        expect(response).to have_http_status(:see_other) # 303
+        expect(response.redirect_url).to eq 'http://www.example.com/download/tiff/3333333/staged'
       end
     end
     context 'when child object does not exist' do

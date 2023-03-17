@@ -12,6 +12,7 @@
 //= require twitter/typeahead
 //= require bootstrap
 //= require blacklight/blacklight
+//= require download_original
 //= require show_more
 
 
