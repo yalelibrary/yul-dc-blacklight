@@ -16,7 +16,7 @@ function checkAvailability(childOid, hostPath) {
         complete: function(r) {
             if (r.responseText === 'false' && retryCount < 10) {
                 retryCount = retryCount + 1;
-                setTimeout(()=> checkAvailability(childOid, hostPath), 5000);
+                setTimeout(()=> checkAvailability(childOid, hostPath), 30000);
             } else if (retryCount === 10) {
                 $('#download-instructions').html('The file could not be downloaded at this time. Please try again later.');
             } else if (r.responseText === 'true') {
