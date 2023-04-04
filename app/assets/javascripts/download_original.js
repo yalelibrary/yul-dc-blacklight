@@ -21,7 +21,7 @@ function checkAvailability(childOid, hostPath) {
                 $('#download-instructions').html('The file could not be downloaded at this time. Please try again later.');
             } else if (r.responseText === 'true') {
                 window.location.href = hostPath + '/download/tiff/' + childOid;
-                setTimeout(() => window.close(), 3000);
+                setTimeout(() => window.close(), 10000);
             }
         }
     });
