@@ -5,7 +5,7 @@
       <%= yield %>
     </section>
 
-    <section id="sidebar" class="<%= sidebar_classes %> order-first" aria-label="<%= t('blacklight.search.documents.aria.limit_search') %>">
+    <section id="sidebar" class="page-sidebar order-first" aria-label="<%= t('blacklight.search.documents.aria.limit_search') %>">
       <%= content_for(:sidebar) %>
     </section>
   <% else %>
