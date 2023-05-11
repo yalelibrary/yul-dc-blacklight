@@ -625,7 +625,7 @@ class CatalogController < ApplicationController
   def show
     super
     @search_params = session[:search_params]
-    redirect_to @document["redirect_to_tesi"] if @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present? && return
+    redirect_to @document["redirect_to_tesi"] and return if @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present?
     render "catalog/show_unauthorized", status: :unauthorized unless client_can_view_metadata?(@document)
   end
 
