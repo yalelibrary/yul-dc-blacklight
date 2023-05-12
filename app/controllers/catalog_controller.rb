@@ -629,7 +629,7 @@ class CatalogController < ApplicationController
     if @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present? && !request.original_url.include?("oai_dc_xml")
       redirect_to @document["redirect_to_tesi"]
     elsif @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present? && request.original_url.include?("oai_dc_xml")
-      nil
+      not_found
     else
       render "catalog/show_unauthorized", status: :unauthorized unless client_can_view_metadata?(@document)
     end
