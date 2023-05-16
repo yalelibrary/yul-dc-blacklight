@@ -41,7 +41,7 @@ jobs:
         environment:
           SOLR_HEAP: 4G
         entrypoint: bash -c '/opt/docker-solr/scripts/precreate-core blacklight-test /opt/config; chown -R solr:solr /var/solr/data/ ; /boot.sh'
-      - image: circleci/postgres:9.5-alpine-ram
+      - image: cimg/postgres:9.5-alpine-ram
         environment:
             POSTGRES_DB: blacklight_yul_test
             POSTGRES_USER: postgres
