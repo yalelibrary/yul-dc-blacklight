@@ -8,7 +8,7 @@ module CheckAuthorization
     # checking authorization
     @response, @document = search_for_item
     if @document.blank?
-      render json: { error: 'not-found' }.to_json, status: 401
+      render json: { error: 'not-found' }.to_json, status: 404
       return false
     end
     return true if client_can_view_digital?(@document)

@@ -13,6 +13,8 @@ RSpec.describe S3Service do
   before do
     stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/testing_test/test.txt')
       .to_return(status: 200, body: 'these are some test words')
+    stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/not_going_to_be_found/test.txt')
+      .to_return(status: 404, body: 'not found')
   end
 
   around do |example|
@@ -24,5 +26,8 @@ RSpec.describe S3Service do
 
   it 'can download metadata from a given bucket' do
     expect(described_class.download('testing_test/test.txt')).to eq 'these are some test words'
+  end
+  it 'returns nil when not found' do
+    expect(described_class.download('not_going_to_be_found/test.txt')).to eq nil
   end
 end

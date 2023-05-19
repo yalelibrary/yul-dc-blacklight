@@ -13,6 +13,11 @@ DEFAULT MOBILE STYLING
 
 }
 
+// hides duplicate range constraint
+.btn-group.applied-filter.constraint.query.year_isim {
+  display: none;
+}
+
 .constraints-container-index.constraints-container {
   background-color: $lighter_grey;
   padding: 5px 0;

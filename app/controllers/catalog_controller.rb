@@ -149,6 +149,8 @@ class CatalogController < ApplicationController
     config.add_facet_field 'ancestor_titles_hierarchy_ssim', label: "Found In", show: false
     config.add_facet_field 'subjectGeographic_ssim', label: 'Subject (Geographic)', show: false
     config.add_facet_field 'subjectHeadingFacet_ssim', label: 'Subject Heading', show: false
+    config.add_facet_field 'project_identifier_tesi', label: 'Project Id', show: false
+    config.add_facet_field 'child_oids_ssim', label: "Child OID", show: false
 
     config.add_facet_field 'has_fulltext_ssi', label: "Full Text Available", limit: true
 
@@ -223,7 +225,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'abstract_tesim', label: 'Abstract', metadata: 'description', helper_method: :join_as_paragraphs
     config.add_show_field 'description_tesim', label: 'Description', metadata: 'description', helper_method: :sanitize_join_with_br
     config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description', helper_method: :join_with_br
-    config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', metadata: 'description'
+    config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', metadata: 'description', helper_method: :format_digitization
     config.add_show_field 'digitization_note_tesi', label: 'Digitization Note', metadata: 'description'
     config.add_show_field 'digitization_funding_source_tesi', label: 'Digitization Funding Source', metadata: 'description'
     config.add_show_field 'projection_tesim', label: 'Projection', metadata: 'description'
@@ -618,15 +620,19 @@ class CatalogController < ApplicationController
     super
   end
 
+  # rubocop:disable Metrics/PerceivedComplexity
   def show
     super
     @search_params = session[:search_params]
-    if @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present?
+    if @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present? && !request.original_url.include?("oai_dc_xml")
       redirect_to @document["redirect_to_tesi"]
+    elsif @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present? && request.original_url.include?("oai_dc_xml")
+      not_found
     else
       render "catalog/show_unauthorized", status: :unauthorized unless client_can_view_metadata?(@document)
     end
   end
+  # rubocop:enable Metrics/PerceivedComplexity
 
   def iiif_suggest
     @query = params[:q] || ""

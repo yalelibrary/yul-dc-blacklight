@@ -11,7 +11,7 @@ Bundler.require(*Rails.groups)
 module BlacklightYul
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 6.1
     config.log_level = :debug
     STDOUT.sync = true # turn off log buffering
     config.rails_semantic_logger.add_file_appender = false # turn off regular file appenders

@@ -8,13 +8,15 @@
 
     <!-- Internet Explorer use the highest version available -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <title><%= render_page_title %></title>
     <%= opensearch_description_tag application_name, opensearch_catalog_url(format: 'xml') %>
     <%= favicon_link_tag %>
+    <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-precomposed.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon.png">
     <%= stylesheet_link_tag "application", media: "all" unless ENV["NO_STYLE"] %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
+    <script async src="https://siteimproveanalytics.com/js/siteanalyze_66356571.js"></script>
     <%= content_for(:head) %>
   </head>
   <body class="<%= render_body_class %>">
