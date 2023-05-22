@@ -12,6 +12,8 @@
     <title>Yale University Libraries - Digital Collections</title>
     <%= opensearch_description_tag application_name, opensearch_catalog_url(format: 'xml') %>
     <%= favicon_link_tag %>
+    <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-precomposed.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon.png">
     <%= stylesheet_link_tag "application", media: "all" unless ENV["NO_STYLE"] %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>

@@ -620,12 +620,19 @@ class CatalogController < ApplicationController
     super
   end
 
+  # rubocop:disable Metrics/PerceivedComplexity
   def show
     super
     @search_params = session[:search_params]
-    redirect_to @document["redirect_to_tesi"] and return if @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present?
-    render "catalog/show_unauthorized", status: :unauthorized unless client_can_view_metadata?(@document)
+    if @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present? && !request.original_url.include?("oai_dc_xml")
+      redirect_to @document["redirect_to_tesi"]
+    elsif @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present? && request.original_url.include?("oai_dc_xml")
+      not_found
+    else
+      render "catalog/show_unauthorized", status: :unauthorized unless client_can_view_metadata?(@document)
+    end
   end
+  # rubocop:enable Metrics/PerceivedComplexity
 
   def iiif_suggest
     @query = params[:q] || ""
