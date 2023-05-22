@@ -50,7 +50,7 @@ RSpec.describe 'search result', type: :system, clean: true do
     end
 
     it 'shows the index number' do
-      expect(page).to have_selector '#documents > .document-position-0 span', visible: true
+      expect(page).to have_selector '#documents > .document-position-1 span', visible: true
     end
 
     it 'has a no index meta tag in header' do
@@ -128,7 +128,7 @@ RSpec.describe 'search result', type: :system, clean: true do
     end
 
     it 'shows the index number' do
-      expect(page).to have_selector '#documents > .document-position-0 span', visible: true
+      expect(page).to have_selector '#documents > .document-position-1 span', visible: true
     end
   end
 

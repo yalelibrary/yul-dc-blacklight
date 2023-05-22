@@ -12,7 +12,7 @@ module BlacklightHelper
     label = "Date"
 
     # if date is unknown
-    if params["range"].try(:[], "year_isim").try(:[], "missing")
+    if params["range"].try(:[], "-year_isim")
       value = "Unknown"
       remove_url = range_unknown_remove_url(url)
     else
@@ -32,7 +32,7 @@ module BlacklightHelper
 
   # removes date range params from link with unknown date
   def range_unknown_remove_url(url_in)
-    url = url_in.gsub(/[?&]range%5Byear_.*%5D%5Bmissing%5D=true/, '')
+    url = url_in.gsub(/[?&]range%5B-year_isim%5D%5B%5D=%5B*+TO+*%5D/, '')
     url.gsub!("&commit=Apply", '')
     url.gsub(/[?&]range%5Byear_.*%5D%5Bmissing%5D=true/, '')
   end
@@ -112,6 +112,10 @@ module BlacklightHelper
   def swap_out_series_title(values, series_full_title)
     return unless series_full_title
     values[2] = series_full_title if values[2] && series_full_title&.include?(values[2])
+  end
+
+  def format_digitization(arg)
+    "This object has been #{arg[:value]&.first&.downcase}." unless arg[:value].empty?
   end
 
   def archival_display(arg)

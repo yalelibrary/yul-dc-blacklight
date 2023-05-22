@@ -61,10 +61,10 @@ RSpec.describe "Iiifs", type: :request do
       expect(response).to have_http_status(:unauthorized)
     end
 
-    it 'returns an unauthorized response if there child is not found' do
+    it 'returns an not found response if there child is not found' do
       get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/9328239/full/#{thumbnail_size}/0/default.jpg" }
 
-      expect(response).to have_http_status(:unauthorized)
+      expect(response).to have_http_status(:not_found)
     end
   end
 
