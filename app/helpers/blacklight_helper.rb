@@ -71,7 +71,7 @@ module BlacklightHelper
 
     link_to(bib_id, link)
   end
-  
+
   def link_to_morris_bib_id(arg)
     return nil if arg[:document][:source_ssim].first != "sierra"
     bib_id = arg[:document][arg[:field]]
