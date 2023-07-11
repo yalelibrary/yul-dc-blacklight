@@ -172,10 +172,6 @@ en:
         title: Marx Science & Social Science Library
         url:  https://web.library.yale.edu/building/marx-science-and-social-science-library
         description: ''
-      mathematicsLibrary:
-        title: Mathematics Library
-        url: https://web.library.yale.edu/building/mathematics-library
-        description: ''
       medicalLibrary:
         title: Medical Library
         url:  https://web.library.yale.edu/building/cushingwhitney-medical-library
@@ -190,7 +186,7 @@ en:
         description: Sterling Memorial Library
       yaleCenterBritishArt:
         title: Yale Center for British Art
-        url: https://web.library.yale.edu/building/yale-center-for-british-art
+        url: https://britishart.yale.edu/while-we-are-closed
         description: ''
     informationPolicies:
       libraryHours:
