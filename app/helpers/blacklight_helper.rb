@@ -324,6 +324,25 @@ module BlacklightHelper
     safe_join(out, '<br/>'.html_safe)
   end
 
+  def generate_contributor_links(args)
+    generate_contributor(args) do |creator|
+      creator
+    end
+  end
+
+  def generate_contributor(args)
+    out = []
+
+    creator_values = args[:document][args[:field]]
+    creator_highlight = args[:document].highlight_field(args[:field])
+    creator_values.each_with_index.map do |creator, ix|
+      creator_change = yield creator, creator_highlight.try(:[], ix) || creator
+      label = 'From the Collection: ' if args[:document]['contributor_tsim']&.include?(creator)
+      out << safe_join(["<span class = 'from-the-collection' >".html_safe, label, "</span>".html_safe, creator_change])
+    end
+    safe_join(out, '<br/>'.html_safe)
+  end
+
   def link_to_url_with_label(arg, filters = [])
     links = arg[:value].map do |value|
       link_part = value.split('|')
