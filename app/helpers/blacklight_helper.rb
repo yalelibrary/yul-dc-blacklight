@@ -337,7 +337,7 @@ module BlacklightHelper
     creator_highlight = args[:document].highlight_field(args[:field])
     creator_values.each_with_index.map do |creator, ix|
       creator_change = yield creator, creator_highlight.try(:[], ix) || creator
-      label = 'From the Collection: ' if args[:document]['contributor_tsim']&.include?(creator)
+      label = 'From the Collection: ' if args[:document][:source_ssim].first == "aspace"
       out << safe_join(["<span class = 'from-the-collection' >".html_safe, label, "</span>".html_safe, creator_change])
     end
     safe_join(out, '<br/>'.html_safe)
