@@ -7,6 +7,9 @@ en:
       next: 'NEXT'
   blacklight:
     application_name: 'Yale University Library'
+    bookmarks:
+      clear:
+        action_title: 'Clear All Bookmarks'
     sidebar:
       links: Links
       manifest: Manifest Link
