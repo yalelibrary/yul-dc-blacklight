@@ -154,6 +154,9 @@ class CatalogController < ApplicationController
 
     config.add_facet_field 'has_fulltext_ssi', label: "Full Text Available", limit: true
 
+    # add parent_ssi to the facet fields list so the search builder will use it
+    config.add_facet_field 'parent_ssi', label: 'n/a', show: false
+
     # This was example code after running rails generate blacklight_range_limit:install
     # config.add_facet_field 'example_query_facet_field', label: 'Publish Date', query: {
     #    years_5: { label: 'within 5 Years', fq: "pub_date_ssim:[#{Time.zone.now.year - 5} TO *]" },
