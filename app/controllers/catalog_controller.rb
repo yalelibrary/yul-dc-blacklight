@@ -221,6 +221,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'title_tesim', label: 'Title', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'alternativeTitle_tesim', label: 'Alternative Title', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'creator_ssim', label: 'Creator', metadata: 'description', link_to_facet: true, helper_method: :generate_creators_links
+    config.add_show_field 'contributor_tsim', label: 'Contributor', metadata: 'description', link_to_facet: true, helper_method: :generate_contributor_links
     config.add_show_field 'date_ssim', label: 'Published / Created', metadata: 'description'
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date', metadata: 'description'
     config.add_show_field 'creationPlace_ssim', label: 'Publication Place', metadata: 'description'
