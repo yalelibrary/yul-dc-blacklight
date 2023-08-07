@@ -11,6 +11,7 @@ DEFAULT MOBILE STYLING
     max-width: 420px;
     font-family: $mallory_medium, Arial, Helvetica, sans-serif;
     font-size: 15px;
+    font-weight: 600;
   }
 
   .search-highlight {
@@ -86,6 +87,7 @@ DEFAULT MOBILE STYLING
   .dl-invert dd {
     font-size: 12px;
     font-family:  $mallory_medium, Arial, Helvetica, sans-serif;
+    font-weight: 600;
     color: $medium_grey;
     flex-wrap: wrap;
     margin-top: -21px;
@@ -182,6 +184,7 @@ DEFAULT MOBILE STYLING
     .dl-invert dd {
       font-size: 12px;
       font-family: $mallory_medium, Arial, Helvetica, sans-serif;
+      font-weight: 600;
       color: $medium_grey;
       flex-wrap: wrap;
       margin-top: -21px;
@@ -265,6 +268,7 @@ DEFAULT MOBILE STYLING
     .dl-invert dd {
       font-size: 12px;
       font-family: $mallory_medium, Arial, Helvetica, sans-serif;
+      font-weight: 600;
       color: $medium_grey;
       flex-wrap: wrap;
       margin-top: -21px;
