@@ -301,3 +301,31 @@ DEFAULT MOBILE STYLING
     }
   }
 }
+/********************************************************
+BOOKMARK STYLING
+********************************************************/
+
+// This is to prevent the bookmark-toggle css below to not have an effect on the gallery view checkboxes.
+.gallery .bookmark-toggle {
+  padding-left: 0px;
+}
+
+// List item search results bookmark styling
+.bookmark-toggle {
+  padding-left: 200px;
+}
+@media screen and (max-width: 1600px) {
+  .bookmark-toggle {
+    padding-left: 100px;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .bookmark-toggle {
+    padding-left: 0px;
+  }
+}
+@media screen and (max-width: 1275px) {
+  .bookmark-toggle {
+    margin-left: -10px;
+  }
+}
