@@ -10,3 +10,11 @@
 .uv > div.loaded {
   background-image: none;
 }
+
+.mainPanel .centerPanel .title {
+  font-family: Arial !important;
+}
+
+.uv .rightPanel .main {
+  font-family: Arial !important;
+}
