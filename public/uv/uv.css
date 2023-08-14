@@ -11,10 +11,6 @@
   background-image: none;
 }
 
-.mainPanel .centerPanel .title {
-  font-family: Arial !important;
-}
-
-.uv .rightPanel .main {
-  font-family: Arial !important;
+.uv-iiif-extension-host {
+  font-family: Arial, sans-serif !important;
 }
