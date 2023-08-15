@@ -1,8 +1,10 @@
 <ul class="navbar-nav">
 
-  <li class="nav-item">
-    <%= link_to 'Bookmarks', '/bookmarks', class: 'nav-link' %>
-  </li>
+  <% if current_user %>
+    <li class="nav-item">
+      <%= link_to 'Bookmarks', '/bookmarks', class: 'nav-link' %>
+    </li>
+  <% end %>
 
   <% if has_user_authentication_provider? %>
     <% if current_user %>

@@ -31,7 +31,9 @@
     <% end %>
     <div class='document-title'>
       <%= link_to_document document, document.highlight_field('title_tesim').try(:[],0) || document['title_tesim'], counter:document_counter %>
-      <%= render_index_doc_actions document, wrapping_class: "index-document-functions col-sm-3 col-lg-2" %>
+      <% if current_user %>
+        <%= render_index_doc_actions document, wrapping_class: "index-document-functions col-sm-3 col-lg-2" %>
+      <% end %>
     </div>
   </h3>
 </header>

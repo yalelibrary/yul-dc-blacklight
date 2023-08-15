@@ -18,7 +18,6 @@ gem 'bootstrap', '~> 4.0'
 gem 'citeproc-ruby'
 gem 'csl-styles'
 gem 'devise'
-gem 'devise-guests', '~> 0.6'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'honeybadger', '~> 4.0'
 gem 'iso-639'
