@@ -311,21 +311,30 @@ BOOKMARK STYLING
 }
 
 // List item search results bookmark styling
-.bookmark-toggle {
-  padding-left: 200px;
+.index_title.document-title-heading.title_tesim {
+  display: flex;
 }
-@media screen and (max-width: 1600px) {
-  .bookmark-toggle {
-    padding-left: 100px;
+
+.index-document-functions { 
+  padding-left: 175px;
+}
+
+.bookmark-toggle {
+  font-size: 17px;
+}
+
+@media screen and (max-width: 1650px) {
+  .index-document-functions {
+    padding-left: 90px;
   }
 }
-@media screen and (max-width: 1440px) {
-  .bookmark-toggle {
+@media screen and (max-width: 1530px) {
+  .index-document-functions {
     padding-left: 0px;
   }
 }
-@media screen and (max-width: 1275px) {
-  .bookmark-toggle {
-    margin-left: -10px;
+@media screen and (max-width: 1380px) {
+  .index-document-functions {
+    margin-left: -105px;
   }
 }
