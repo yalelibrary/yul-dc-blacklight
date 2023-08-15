@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 # note that while this is mostly restful routing, the #update and #destroy actions
 # take the Solr document ID as the :id, NOT the id of the actual Bookmark action.
+# rubocop:disable Metrics/ModuleLength
 module Blacklight::Bookmarks
   extend ActiveSupport::Concern
 
@@ -34,7 +35,7 @@ module Blacklight::Bookmarks
 
   # Blacklight uses #search_action_url to figure out the right URL for
   # the global search box
-  def search_action_url *args
+  def search_action_url(*args)
     search_catalog_url(*args)
   end
 
@@ -65,6 +66,7 @@ module Blacklight::Bookmarks
   # It can also be used for creating a single bookmark by including keys
   # bookmark[title] and bookmark[document_id], but in that case #update
   # is simpler.
+  # rubocop:disable Metrics/PerceivedComplexity
   def create
     @bookmarks = if params[:bookmarks]
                    permit_bookmarks[:bookmarks]
@@ -106,7 +108,7 @@ module Blacklight::Bookmarks
 
     success = @bookmarks.all? do |bookmark|
       bookmark = current_or_guest_user.bookmarks.find_by(bookmark)
-      bookmark && bookmark.delete && bookmark.destroyed?
+      bookmark&.delete && bookmark.destroyed?
     end
 
     if success
@@ -121,6 +123,7 @@ module Blacklight::Bookmarks
       redirect_back fallback_location: bookmarks_path, flash: { error: I18n.t('blacklight.bookmarks.remove.failure') }
     end
   end
+  # rubocop:enable Metrics/PerceivedComplexity
 
   def clear
     if current_or_guest_user.bookmarks.clear
@@ -134,10 +137,9 @@ module Blacklight::Bookmarks
   private
 
   def verify_user
-    unless current_or_guest_user || (action == "index" && token_or_current_or_guest_user)
-      flash[:notice] = I18n.t('blacklight.bookmarks.need_login')
-      raise Blacklight::Exceptions::AccessDenied
-    end
+    return if current_or_guest_user || (action == "index" && token_or_current_or_guest_user)
+    flash[:notice] = I18n.t('blacklight.bookmarks.need_login')
+    raise Blacklight::Exceptions::AccessDenied
   end
 
   def start_new_search_session?
@@ -148,4 +150,4 @@ module Blacklight::Bookmarks
     params.permit(bookmarks: [:document_id, :document_type])
   end
 end
-
+# rubocop:enable Metrics/ModuleLength
