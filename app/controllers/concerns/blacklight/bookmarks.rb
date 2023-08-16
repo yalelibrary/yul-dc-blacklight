@@ -13,7 +13,7 @@ module Blacklight::Bookmarks
 
     copy_blacklight_config_from(CatalogController)
 
-    before_action :verify_user
+    # before_action :verify_user
 
     blacklight_config.track_search_session = false
     blacklight_config.http_method = Blacklight::Engine.config.blacklight.bookmarks_http_method
@@ -136,11 +136,11 @@ module Blacklight::Bookmarks
 
   private
 
-  def verify_user
-    return if current_or_guest_user || (action == "index" && token_or_current_or_guest_user)
-    flash[:notice] = I18n.t('blacklight.bookmarks.need_login')
-    raise Blacklight::Exceptions::AccessDenied
-  end
+  # def verify_user
+  #   return if current_or_guest_user || (action == "index" && token_or_current_or_guest_user)
+  #   flash[:notice] = I18n.t('blacklight.bookmarks.need_login')
+  #   raise Blacklight::Exceptions::AccessDenied
+  # end
 
   def start_new_search_session?
     action_name == "index"
