@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'awesome_print'
+gem "aws-sdk-cloudwatch"
 gem 'aws-sdk-s3'
 gem 'blacklight', '>= 7.33'
 gem 'blacklight-gallery', '~> 2.1.0'

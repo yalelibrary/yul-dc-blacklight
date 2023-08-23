@@ -19,6 +19,7 @@ class PdfsController < ApplicationController
   private
 
   def send_pdf
+    log_download
     response.set_header('Content-Type', 'application/pdf')
     response.set_header('X-Robots-Tag', 'noindex')
     client = Aws::S3::Client.new
@@ -30,6 +31,12 @@ class PdfsController < ApplicationController
     redirect_to '/pdfs/not_found.html'
   ensure
     response.stream.close
+  end
+
+  def log_download
+    AwsMetrics.new.publish_download_metric_data("PDF")
+  rescue StandardError => e
+    Rails.logger.error("Error logging PDF download to Cloudwatch: #{e.message}")
   end
 
   def pdf_pairtree_path
