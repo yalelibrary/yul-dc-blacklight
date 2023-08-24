@@ -32,6 +32,7 @@ class DownloadOriginalController < ApplicationController
   private
 
   def send_tiff
+    log_download
     response.set_header('Content-Type', 'image/tiff')
     response.set_header('X-Robots-Tag', 'noindex')
     response.set_header('Cache-Control', 'no-store')
@@ -45,6 +46,12 @@ class DownloadOriginalController < ApplicationController
     redirect_to root_path, notice: 'There was an error downloading the file.  Please try again later.'
   ensure
     response.stream.close
+  end
+
+  def log_download
+    AwsMetrics.new.publish_download_metric_data("TIFF")
+  rescue StandardError => e
+    Rails.logger.error("Error logging TIFF download to Cloudwatch: #{e.message}")
   end
 
   def stage_download

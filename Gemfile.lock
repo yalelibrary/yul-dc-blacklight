@@ -83,6 +83,9 @@ GEM
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.704.0)
+    aws-sdk-cloudwatch (1.73.0)
+      aws-sdk-core (~> 3, >= 3.165.0)
+      aws-sigv4 (~> 1.1)
     aws-sdk-core (3.170.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -556,6 +559,7 @@ DEPENDENCIES
   amazing_print (>= 1.2.1)
   apparition
   awesome_print
+  aws-sdk-cloudwatch
   aws-sdk-s3
   axe-matchers
   bixby (~> 3.0.0)
