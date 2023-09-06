@@ -54,6 +54,10 @@ cam sh blacklight
 bundle exec rspec spec/file/path
 ```
 
+## Managing Packages
+
+Use ‘yarn’ to update all packages - stop using ‘npm’ to upgrade and manage versions.
+
 # Docker Development Setup
 
 ```bash
