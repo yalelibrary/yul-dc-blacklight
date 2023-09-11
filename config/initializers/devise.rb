@@ -44,7 +44,7 @@ Devise.setup do |config|
   require "omniauth-cas"
 
   config.omniauth :cas,
-                  host: 'secure.its.yale.edu',
+                  host: 'secure-tst.its.yale.edu',
                   login_url: '/cas/login',
                   service_validate_url: '/cas/serviceValidate',
                   disable_ssl_verification: true
