@@ -7,11 +7,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def cas
-    @user = User.where(provider: auth.provider, uid: auth.uid).first
+    @user = User.where(provider: auth.provider, uid: auth.uid, sub: auth.sub).first
     if @user.nil?
       @user = User.create(
           provider: auth.provider,
-          uid: auth.uid
+          uid: auth.uid,
+          sub: auth.sub
         )
     end
 

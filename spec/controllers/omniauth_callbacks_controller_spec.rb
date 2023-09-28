@@ -49,11 +49,12 @@ RSpec.describe OmniauthCallbacksController do
     OmniAuth.config.mock_auth[:cas] =
       OmniAuth::AuthHash.new(
         provider: 'cas',
-        uid: 'handsome_stan'
+        uid: 'handsome_stan',
+        sub: 'sub_id'
       )
 
     it 'can create a new user' do
-      auth = { provider: 'cas', uid: 'handsome_stan' }
+      auth = { provider: 'cas', uid: 'handsome_stan', sub: 'sub_id' }
       post :cas, params: auth
       expect(response.redirect_url).to eq 'http://test.host/yale-only-map-of-china'
       expect(User.where(uid: 'handsome_stan').count).to eq 1
