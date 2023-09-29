@@ -6,14 +6,17 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     request.env['omniauth.auth']
   end
 
-  def cas
-    @user = User.where(provider: auth.provider, uid: auth.uid, sub: auth.sub).first
+  def openid_connect
+    sub = auth.extra.raw_info.sub
+    @user = User.where(provider: auth.provider, uid: auth.uid, sub: sub).first
     if @user.nil?
       @user = User.create(
           provider: auth.provider,
           uid: auth.uid,
-          sub: auth.sub
+          sub: sub,
+          email: auth.info.email
         )
+        
     end
 
     if @user

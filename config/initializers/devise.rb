@@ -41,13 +41,26 @@ Devise.setup do |config|
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
   # config.authentication_keys = [:email]
-  require "omniauth-cas"
+  # require "omniauth-cas"
 
-  config.omniauth :cas,
-                  host: 'secure.its.yale.edu',
-                  login_url: '/cas/login',
-                  service_validate_url: '/cas/serviceValidate',
-                  disable_ssl_verification: true
+  config.omniauth :openid_connect, {
+    scope: [:openid, :email],
+    response_type: :code,
+    uid_field: "username",
+    issuer: "#{ENV['SSO_ISS']}",
+    client_options: {
+      host: "#{ENV['SSO_HOST']}",
+      port: 443,
+      scheme: "https",
+      jwks_uri: "#{ENV['SSO_JWKS']}",
+      authorization_endpoint: '/oauth2/authorize',
+      token_endpoint: '/oauth2/token',
+      userinfo_endpoint: '/oauth2/userInfo',
+      identifier: "#{ENV['SSO_ID']}",
+      secret: "#{ENV['SSO_SECRET']}",
+      redirect_uri: "#{ENV['BLACKLIGHT_BASE_URL']}/users/auth/openid_connect/callback"
+    }
+  }
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
