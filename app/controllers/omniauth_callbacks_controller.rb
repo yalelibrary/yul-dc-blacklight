@@ -7,9 +7,11 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def openid_connect
-    netid = auth.extra.raw_info.identities.pluck(:userId)
     sub = auth.extra.raw_info.sub
-    @user = User.where(provider: auth.provider, uid: auth.uid, sub: sub, netid: netid).first
+    yale_issuers = %w[ https://auth.yale.edu/idp/shibboleth  https://auth-test.yale.edu/idp/shibboleth ]
+    yale_identity = auth.extra.raw_info.identities.find{ |i| yale_issuers.include?(i.issuer) }
+    netid = yale_identity&.userId
+    @user = User.where(provider: auth.provider, uid: auth.uid, sub: sub).first
     if @user.nil?
       @user = User.create(
           provider: auth.provider,
