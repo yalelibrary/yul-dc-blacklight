@@ -47,17 +47,17 @@ Devise.setup do |config|
     scope: [:openid, :email],
     response_type: :code,
     uid_field: "username",
-    issuer: "#{ENV['SSO_ISS']}",
+    issuer: (ENV['SSO_ISS']).to_s,
     client_options: {
-      host: "#{ENV['SSO_HOST']}",
+      host: (ENV['SSO_HOST']).to_s,
       port: 443,
       scheme: "https",
-      jwks_uri: "#{ENV['SSO_JWKS']}",
+      jwks_uri: (ENV['SSO_JWKS']).to_s,
       authorization_endpoint: '/oauth2/authorize',
       token_endpoint: '/oauth2/token',
       userinfo_endpoint: '/oauth2/userInfo',
-      identifier: "#{ENV['SSO_ID']}",
-      secret: "#{ENV['SSO_SECRET']}",
+      identifier: (ENV['SSO_ID']).to_s,
+      secret: (ENV['SSO_SECRET']).to_s,
       redirect_uri: "#{ENV['BLACKLIGHT_BASE_URL']}/users/auth/openid_connect/callback"
     }
   }
