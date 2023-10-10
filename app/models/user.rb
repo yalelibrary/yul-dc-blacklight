@@ -5,7 +5,7 @@ require 'resolv'
 class User < ApplicationRecord
   # Connects this user object to Blacklights Bookmarks.
   include Blacklight::User
-  devise :timeoutable, :omniauthable, omniauth_providers: [:cas]
+  devise :timeoutable, :omniauthable, omniauth_providers: [:openid_connect]
   validates :sub, presence: true
 
   def self.on_campus?(ip_address)

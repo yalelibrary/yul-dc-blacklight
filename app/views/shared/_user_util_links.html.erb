@@ -6,7 +6,7 @@
       </li>
     <% else %>
       <li class="nav-item">
-        <%= button_to t('blacklight.header_links.login'), user_cas_omniauth_authorize_path, class: 'nav-link login-button' %>
+        <%= button_to t('blacklight.header_links.login'), user_openid_connect_omniauth_authorize_path, class: 'nav-link login-button' %>
       </li>
     <% end %>
   <% end %>
