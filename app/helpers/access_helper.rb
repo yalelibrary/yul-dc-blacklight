@@ -10,7 +10,7 @@ module AccessHelper
     when 'Public'
       return true
     when 'Yale Community Only'
-      return true if current_user || User.on_campus?(request.remote_ip)
+      return true if (current_user && current_user.netid.present?) || User.on_campus?(request.remote_ip)
     end
     false
   end
