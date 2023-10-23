@@ -1,3 +1,9 @@
+.help-guide-table-of-contents li {
+  list-style-type: none;
+  font-size: 16px;
+  font-family: Mallory;
+}
+
 .help-guide-title {
   color: $yale_blue;
   font-size: 2.5em;
@@ -78,4 +84,28 @@
 .help-guide-download i {
   font-size: 9px;
   font-family: Arial;
+}
+
+.help-guide-view-dc h2 {
+  color: $yale_blue;
+  font-size: 2.1em;
+  font-family: $yale_new_roman
+}
+
+.help-guide-view-dc p {
+  font-size: 16px;
+  font-family: Mallory;
+}
+
+.help-guide-view-dc i {
+  font-size: 9px;
+  font-family: Arial;
+}
+
+.footer_image img {
+  width: 75%;
+}
+
+.uv_image img {
+  width: 75%;
 }
