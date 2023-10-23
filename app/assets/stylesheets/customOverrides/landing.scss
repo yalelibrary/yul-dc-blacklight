@@ -48,7 +48,46 @@ DEFAULT MOBILE STYLING
 		height: 220px;
 		position: relative;
 	}
+
+	.about-section {
+		margin-top: 3%;
+	}
+
+	.need-help-section {
+		margin-top: 3%;
+	}
+
+	.about-title {
+		font-family: $yale_new_roman;
+	}
+
+	.need-help-title {
+		font-family: $yale_new_roman;
+	}
+
+	.about-content {
+		font-size: small; 
+		text-align: left; 
+		margin-top: 2%;
+	}
+
+	.need-help-content {
+		font-size: small; 
+		text-align: left; 
+		margin-top: 2%;
+	}
+
+	.dc-help-link {
+		color: white;
+		text-decoration: underline;
+	}
+
+	.about-link {
+		color: white;
+		text-decoration: underline;
+	}
 }
+
 
 #hero-search {
 	position: absolute;
