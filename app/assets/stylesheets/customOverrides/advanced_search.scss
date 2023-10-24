@@ -9,6 +9,14 @@ DEFAULT MOBILE STYLING
   margin-left: 12px;
   padding-top: 25px;
   margin-bottom: 13px;
+  font-family: $yale_new_roman;
+}
+
+.advanced-help-more-information a {
+  font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: $yale_blue;
 }
 
 .adv-search-border-top {
@@ -117,6 +125,15 @@ input.btn:nth-child(2) {
   font-size: 14px;
   font-weight: 500;
   color: $medium_grey;
+}
+
+.advanced-help-more-information {
+  font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: $medium_grey;
+  list-style-type: none;
+  padding-left: 25px;
 }
 
 .adv-search-fields {
