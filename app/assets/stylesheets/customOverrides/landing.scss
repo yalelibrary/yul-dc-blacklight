@@ -45,7 +45,7 @@ DEFAULT MOBILE STYLING
 	}
 
 	.intro {
-		height: 220px;
+		height: 425px;
 		position: relative;
 	}
 
@@ -69,12 +69,14 @@ DEFAULT MOBILE STYLING
 		font-size: small; 
 		text-align: left; 
 		margin-top: 2%;
+		font-family: MalloryMP-Medium;
 	}
 
 	.need-help-content {
 		font-size: small; 
 		text-align: left; 
 		margin-top: 2%;
+		font-family: MalloryMP-Medium;
 	}
 
 	.dc-help-link {
@@ -258,11 +260,25 @@ DEFAULT MOBILE STYLING
 @media screen and (min-width: $small_device) {
 	#hero {
 		.intro {
-			height: 300px;
+			height: 460px;
 		}
 
 		#hero-image {
 			object-position: 0 -45px;
+		}
+
+		.about-content {
+			font-size: small; 
+			text-align: left; 
+			margin-top: 2%;
+			font-family: MalloryMP-Medium;
+		}
+
+		.need-help-content {
+			font-size: small; 
+			text-align: left; 
+			margin-top: 2%;
+			font-family: MalloryMP-Medium;
 		}
 	}
 
@@ -281,11 +297,25 @@ DEFAULT MOBILE STYLING
 @media screen and (min-width: $medium_device) {
 	#hero {
 		.intro {
-			height: 325px;
+			height: 480px;
 		}
 
 		#hero-image {
 			object-position: 0 -65px;
+		}
+
+		.about-content {
+			font-size: small; 
+			text-align: left; 
+			margin-top: 2%;
+			font-family: MalloryMP-Medium;
+		}
+
+		.need-help-content {
+			font-size: small; 
+			text-align: left; 
+			margin-top: 2%;
+			font-family: MalloryMP-Medium;
 		}
 	}
 
@@ -354,11 +384,25 @@ DEFAULT MOBILE STYLING
 @media screen and (min-width: $large_device) {
 	#hero {
 		.intro {
-			height: 354px;
+			height: 470px;
 		}
 
 		#hero-image {
 			object-position: 0 -85px;
+		}
+
+		.about-content {
+			font-size: small; 
+			text-align: left; 
+			margin-top: 2%;
+			font-family: MalloryMP-Medium;
+		}
+
+		.need-help-content {
+			font-size: small; 
+			text-align: left; 
+			margin-top: 2%;
+			font-family: MalloryMP-Medium;
 		}
 	}
 
@@ -444,7 +488,7 @@ DEFAULT MOBILE STYLING
 @media screen and (min-width: $xlarge_device) {
 	#hero {
 		.intro {
-			height: 472px;
+			height: 480px;
 		}
 
 		#hero-image {
