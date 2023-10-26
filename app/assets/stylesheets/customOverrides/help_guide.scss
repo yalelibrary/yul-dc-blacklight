@@ -1,7 +1,7 @@
 .help-guide-table-of-contents li {
   list-style-type: none;
   font-size: 16px;
-  font-family: $mallory_medium;
+  font-family: $mallory_light;
 }
 
 .help-guide-title {
@@ -18,7 +18,7 @@
 
 .help-guide-dc-site p {
   font-size: 16px;
-  font-family: $mallory_medium;
+  font-family: $mallory_light;
 }
 
 .help-guide-search h2 {
@@ -35,12 +35,12 @@
 
 .help-guide-search p {
   font-size: 16px;
-  font-family: $mallory_medium;
+  font-family: $mallory_light;
 }
 
 .help-guide-search li {
   font-size: 16px;
-  font-family: $mallory_medium;
+  font-family: $mallory_light;
 }
 
 .help-guide-information h2 {
@@ -57,12 +57,12 @@
 
 .help-guide-information p {
   font-size: 16px;
-  font-family: $mallory_medium;
+  font-family: $mallory_light;
 }
 
 .help-guide-information li {
   font-size: 16px;
-  font-family: $mallory_medium;
+  font-family: $mallory_light;
 }
 
 .help-guide-download h2 {
@@ -73,16 +73,16 @@
 
 .help-guide-download p {
   font-size: 16px;
-  font-family: $mallory_medium;
+  font-family: $mallory_light;
 }
 
 .help-guide-download li {
   font-size: 16px;
-  font-family: $mallory_medium;
+  font-family: $mallory_light;
 }
 
 .help-guide-download i {
-  font-size: 9px;
+  font-size: 14px;
   font-family: Arial;
 }
 
@@ -94,18 +94,36 @@
 
 .help-guide-view-dc p {
   font-size: 16px;
-  font-family: $mallory_medium;
+  font-family: $mallory_light;
 }
 
 .help-guide-view-dc i {
-  font-size: 9px;
+  font-size: 14px;
   font-family: Arial;
+}
+
+.uv_caption {
+  text-align: center;
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.footer_caption {
+  text-align: center;
+  margin-top: 3em;
+  margin-bottom: 3em;
 }
 
 .footer_image img {
   width: 75%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .uv_image img {
   width: 75%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
