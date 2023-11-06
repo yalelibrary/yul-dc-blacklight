@@ -22,7 +22,7 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
     ENV['S3_DOWNLOAD_BUCKET_NAME'] = original_download_bucket
     ENV['MANAGEMENT_HOST'] = original_management_url
   end
-
+  # rubocop:disable Layout/LineLength
   before do
     stub_request(:get, 'http://www.example.com/management/api/permission_sets/123')
       .to_return(status: 200, body: '{"timestamp":"2023-11-02","user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},"permission_set_terms_agreed":[],"permissions":[{"oid":1618909,"permission_set":1,"permission_set_terms":1,"request_status":null,"request_date":"2023-11-02T20:23:18.824Z","access_until":"2024-11-02T20:23:18.824Z"}]}', headers: [])
@@ -31,6 +31,7 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
     solr.commit
     allow(User).to receive(:on_campus?).and_return(false)
   end
+  # rubocop:enable Layout/LineLength
 
   context 'as an authenticated user' do
     before do

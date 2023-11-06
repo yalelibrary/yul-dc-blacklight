@@ -17,13 +17,11 @@ module AccessHelper
 
   def client_can_view_owp?(document)
     Rails.logger.warn("starting client can view digital check for #{request.env['HTTP_X_ORIGIN_URI']}")
-    if document['visibility_ssi'] == 'Open with Permission' && user_has_permission?(document)
-      return true
-    end
+    return true if document['visibility_ssi'] == 'Open with Permission' && user_has_permission?(document)
     false
   end
 
-  def is_object_owp?(document)
+  def object_owp?(document)
     case document['visibility_ssi']
     when 'Open with Permission'
       return true
@@ -35,9 +33,7 @@ module AccessHelper
     parent_oid = document[:id]
     if current_user
       retrieve_user_permissions['permissions'].each do |permission|
-        if (permission['oid'].to_s == parent_oid) && Time.parse(permission['access_until']) > Time.zone.today
-          return true
-        end
+        return true if (permission['oid'].to_s == parent_oid) && Time.zone.parse(permission['access_until']) > Time.zone.today
       end
     end
     false
@@ -48,7 +44,6 @@ module AccessHelper
     response = Net::HTTP.get(url)
     JSON.parse(response)
   end
-
 
   def client_can_view_metadata?(document)
     viewable_metadata_visibilities.include? document['visibility_ssi']
@@ -70,17 +65,21 @@ module AccessHelper
     "You are not authorized to view this item."
   end
 
+  # rubocop:disable Layout/LineLength
+  # rubocop:disable Rails/OutputSafety
   def owp_login_message(document)
     case document['visibility_ssi']
     when 'Open with Permission'
-      return "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please #{link_to 'log in', user_openid_connect_omniauth_authorize_path, method: :post} to your account to request permission or to view the materials in this folder.".html_safe
+      "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please #{link_to 'log in', user_openid_connect_omniauth_authorize_path, method: :post} to your account to request permission or to view the materials in this folder.".html_safe
     end
   end
 
   def owp_restriction_message(document)
     case document['visibility_ssi']
     when 'Open with Permission'
-      return "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
+      "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
     end
   end
+  # rubocop:disable Layout/LineLength
+  # rubocop:disable Rails/OutputSafety
 end

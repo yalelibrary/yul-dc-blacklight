@@ -15,7 +15,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     ENV['S3_DOWNLOAD_BUCKET_NAME'] = original_download_bucket
     ENV['MANAGEMENT_HOST'] = original_management_url
   end
-
+  # rubocop:disable Layout/LineLength
   before do
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/111.json')
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
@@ -45,6 +45,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     visit '/catalog?search_field=all_fields&q='
     click_on 'Amor Llama', match: :first
   end
+  # rubocop:enable Layout/LineLength
 
   let(:llama) do
     {
@@ -299,6 +300,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     end
   end
 
+  # rubocop:disable Layout/LineLength
   context "Open with Permission objects" do
     it 'displays login message when accessing an OwP object and not logged in' do
       visit 'catalog/12345'
@@ -326,4 +328,5 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
     end
   end
+  # rubocop:enable Layout/LineLength
 end

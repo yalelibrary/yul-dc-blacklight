@@ -22,7 +22,7 @@
       <%= render_document_partials @document, [:show_header] %>
       <h2 class='yale-restricted-work-text'><%= owp_restriction_message(@document) %></h2>
       <%= render "grouped_metadata" %>
-    <% elsif is_object_owp?(@document) && !current_user %>
+    <% elsif object_owp?(@document) && !current_user %>
       <%= render_document_partials @document, [:show_header] %>
       <h2 class='yale-restricted-work-text'><%= owp_login_message(@document) %></h2>
       <%= render "grouped_metadata" %>
