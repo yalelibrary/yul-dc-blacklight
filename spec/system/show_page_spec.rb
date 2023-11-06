@@ -2,8 +2,19 @@
 require 'rails_helper'
 
 RSpec.describe 'Show Page', type: :system, js: true, clean: true do
+  let(:user) { FactoryBot.create(:user) }
   let(:thumbnail_size_in_opengraph) { "!1200,630" }
   let(:thumbnail_size_in_solr) { "!200,200" }
+
+  around do |example|
+    original_download_bucket = ENV['S3_DOWNLOAD_BUCKET_NAME']
+    original_management_url = ENV['MANAGEMENT_HOST']
+    ENV['S3_DOWNLOAD_BUCKET_NAME'] = 'yul-test-samples'
+    ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
+    example.run
+    ENV['S3_DOWNLOAD_BUCKET_NAME'] = original_download_bucket
+    ENV['MANAGEMENT_HOST'] = original_management_url
+  end
 
   before do
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/111.json')
@@ -16,6 +27,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/12/11/112.json')
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'http://www.example.com/management/api/permission_sets/123')
+      .to_return(status: 200, body: '{"timestamp":"2023-11-02","user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},"permission_set_terms_agreed":[],"permissions":[{"oid":12345,"permission_set":1,"permission_set_terms":1,"request_status":null,"request_date":"2023-11-02T20:23:18.824Z","access_until":"2024-11-02T20:23:18.824Z"}]}', headers: [])
 
     solr = Blacklight.default_index.connection
     solr.add([llama,
@@ -24,6 +37,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
               dog,
               eagle,
               puppy,
+              owp_work,
+              owp_work_2,
               train,
               void])
     solr.commit
@@ -49,6 +64,32 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       callNumber_ssim: "call number",
       has_fulltext_ssi: 'Yes',
       series_ssi: "Series 1: Oversize"
+    }
+  end
+
+  let(:owp_work) do
+    {
+      id: '12345',
+      title_tesim: ['Rhett Lecheire'],
+      format: 'text',
+      language_ssim: 'fr',
+      visibility_ssi: 'Open with Permission',
+      genre_ssim: 'Animation',
+      resourceType_ssim: 'Archives or Manuscripts',
+      creator_ssim: ['Paulo Coelho']
+    }
+  end
+
+  let(:owp_work_2) do
+    {
+      id: '54321',
+      title_tesim: ['Rhett Lecheire'],
+      format: 'text',
+      language_ssim: 'fr',
+      visibility_ssi: 'Open with Permission',
+      genre_ssim: 'Animation',
+      resourceType_ssim: 'Archives or Manuscripts',
+      creator_ssim: ['Paulo Coelho']
     }
   end
 
@@ -255,6 +296,34 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).to have_content "Subjects, Formats, And Genres"
       expect(page).to have_content "Access And Usage Rights"
       expect(page).to have_content "Identifiers"
+    end
+  end
+
+  context "Open with Permission objects" do
+    it 'displays login message when accessing an OwP object and not logged in' do
+      visit 'catalog/12345'
+      expect(page).to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
+    end
+  end
+
+  context "Open with Permission objects signed in with permission" do
+    before do
+      login_as user
+    end
+    it 'displays login message when accessing an OwP object and not logged in' do
+      visit 'catalog/12345'
+      expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
+      expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
+    end
+  end
+
+  context "Open with Permission objects signed in without permission to object" do
+    before do
+      login_as user
+    end
+    it 'displays login message when accessing an OwP object and not logged in' do
+      visit 'catalog/54321'
+      expect(page).to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
     end
   end
 end

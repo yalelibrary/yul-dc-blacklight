@@ -16,10 +16,8 @@ module AccessHelper
   end
 
   def client_can_view_owp?(document)
-    # api response method
     Rails.logger.warn("starting client can view digital check for #{request.env['HTTP_X_ORIGIN_URI']}")
-    case document['visibility_ssi']
-    when 'Open with Permission' && user_has_permission?(document)
+    if document['visibility_ssi'] == 'Open with Permission' && user_has_permission?(document)
       return true
     end
     false
@@ -34,11 +32,11 @@ module AccessHelper
   end
 
   def user_has_permission?(document)
-    parent_oid = document[:parent_ssi]
+    parent_oid = document[:id]
     if current_user
       retrieve_user_permissions['permissions'].each do |permission|
-        if (permission['oid'] == parent_oid) && permission['access_until'] > Date.zone.today
-          true
+        if (permission['oid'].to_s == parent_oid) && Time.parse(permission['access_until']) > Time.zone.today
+          return true
         end
       end
     end
@@ -46,12 +44,9 @@ module AccessHelper
   end
 
   def retrieve_user_permissions
-    url = URI.parse("http://localhost:3001/management/api/permission_sets/#{current_user.sub}") if current_user
-    req = Net::HTTP::Get.new(url)
-    https = Net::HTTP.new(url.host, url.port)
-    https.use_ssl = true
-    res = https.request(req)
-    JSON.parse(res.body)
+    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{current_user.sub}") if current_user
+    response = Net::HTTP.get(url)
+    JSON.parse(response)
   end
 
 
