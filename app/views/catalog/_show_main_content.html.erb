@@ -44,7 +44,7 @@
   <span class="Z3988" title="<%= @document.export_as_openurl_ctx_kev(document_partial_name(@document)) %>"></span>
 <% end %>
 
-<%= render 'show_tools' %>
+<%= render 'show_tools' unless object_owp?(@document) && !client_can_view_owp?(@document) %>
 
 <% unless @document.more_like_this.empty? %>
   <div class="card">

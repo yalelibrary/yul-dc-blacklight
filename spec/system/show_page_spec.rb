@@ -319,6 +319,9 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     it 'displays login message when accessing an OwP object and not logged in' do
       visit 'catalog/12345'
       expect(page).to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
+      expect(page).not_to have_content "TOOLS"
+      expect(page).not_to have_content "Manifest Link"
+      expect(page).not_to have_content "Download as PDF"
     end
   end
 
@@ -334,6 +337,9 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     it 'displays login message when accessing an OwP object without access' do
       visit 'catalog/54321'
       expect(page).to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
+      expect(page).not_to have_content "TOOLS"
+      expect(page).not_to have_content "Manifest Link"
+      expect(page).not_to have_content "Download as PDF"
     end
   end
   # rubocop:enable Layout/LineLength
