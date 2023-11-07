@@ -34,7 +34,7 @@ module AccessHelper
   def user_has_permission?(document)
     parent_oid = document[:id]
     if current_user
-      retrieve_user_permissions['permissions'].each do |permission|
+      retrieve_user_permissions['permissions']&.each do |permission|
         return true if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today)
       end
     end
