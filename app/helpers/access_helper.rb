@@ -11,6 +11,8 @@ module AccessHelper
       return true
     when 'Yale Community Only'
       return true if (current_user && current_user.netid.present?) || User.on_campus?(request.remote_ip)
+    when 'Open with Permission'
+      return true if client_can_view_owp?(document)
     end
     false
   end
@@ -33,7 +35,7 @@ module AccessHelper
     parent_oid = document[:id]
     if current_user
       retrieve_user_permissions['permissions'].each do |permission|
-        return true unless permission['access_until'].nil? || !(permission['oid'].to_s == parent_oid) && Time.zone.parse(permission['access_until']) > Time.zone.today
+        return true if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today)
       end
     end
     false
