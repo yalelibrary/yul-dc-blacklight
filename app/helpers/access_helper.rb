@@ -33,7 +33,7 @@ module AccessHelper
     parent_oid = document[:id]
     if current_user
       retrieve_user_permissions['permissions'].each do |permission|
-        return true if (permission['oid'].to_s == parent_oid) && Time.zone.parse(permission['access_until']) > Time.zone.today
+        return true unless permission['access_until'].nil? || !(permission['oid'].to_s == parent_oid) && Time.zone.parse(permission['access_until']) > Time.zone.today
       end
     end
     false
@@ -66,14 +66,6 @@ module AccessHelper
   end
 
   # rubocop:disable Layout/LineLength
-  # rubocop:disable Rails/OutputSafety
-  def owp_login_message(document)
-    case document['visibility_ssi']
-    when 'Open with Permission'
-      "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please #{link_to 'log in', user_openid_connect_omniauth_authorize_path, method: :post} to your account to request permission or to view the materials in this folder.".html_safe
-    end
-  end
-
   def owp_restriction_message(document)
     case document['visibility_ssi']
     when 'Open with Permission'
@@ -81,5 +73,4 @@ module AccessHelper
     end
   end
   # rubocop:disable Layout/LineLength
-  # rubocop:disable Rails/OutputSafety
 end
