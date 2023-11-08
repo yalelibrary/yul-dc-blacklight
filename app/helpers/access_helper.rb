@@ -42,6 +42,7 @@ module AccessHelper
   end
 
   def retrieve_user_permissions
+    return nil if current_user.nil?
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{current_user.sub}")
     response = Net::HTTP.get(url)
     JSON.parse(response)
