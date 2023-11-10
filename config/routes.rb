@@ -51,8 +51,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  get '/help_guide', to: "application#help_guide"
-
   get '/check-iiif', to: 'iiif#show', as: :iiif
   get '/pdfs/not_found', to: 'pdfs#not_found'
 
