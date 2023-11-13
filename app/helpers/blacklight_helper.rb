@@ -127,7 +127,7 @@ module BlacklightHelper
     if arg[:value]&.first&.downcase == "unspecified"
       nil
     else
-      "This object has been #{arg[:value]&.first&.downcase}."
+      "This object has been #{arg[:value]&.first&.downcase}." unless arg[:value].empty?
     end
   end
 
