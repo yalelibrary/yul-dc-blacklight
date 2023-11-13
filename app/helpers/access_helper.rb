@@ -19,7 +19,7 @@ module AccessHelper
 
   def client_can_view_owp?(document)
     Rails.logger.warn("starting client can view digital check for #{request.env['HTTP_X_ORIGIN_URI']}")
-    return true if document['visibility_ssi'] == 'Open with Permission' && user_has_permission?(document)
+    return true if object_owp?(document) && user_has_permission?(document)
     false
   end
 
