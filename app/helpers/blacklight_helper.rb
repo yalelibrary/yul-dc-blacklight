@@ -124,7 +124,11 @@ module BlacklightHelper
   end
 
   def format_digitization(arg)
-    "This object has been #{arg[:value]&.first&.downcase}." unless arg[:value].empty?
+    if arg[:value]&.first&.downcase == "unspecified"
+      nil
+    else
+      "This object has been #{arg[:value]&.first&.downcase}." unless arg[:value].empty?
+    end
   end
 
   def archival_display(arg)
