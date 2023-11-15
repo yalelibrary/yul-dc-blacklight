@@ -13,6 +13,19 @@
       <%= render_document_partials @document, [:archival_context] %>
       <%= render_document_partials @document, [:uv] %>
       <%= render "grouped_metadata" %>
+    <% elsif client_can_view_owp?(@document) && current_user %>
+      <%= render_document_partials @document, [:show_header] %>
+      <%= render_document_partials @document, [:archival_context] %>
+      <%= render_document_partials @document, [:uv] %>
+      <%= render "grouped_metadata" %>
+    <% elsif object_owp?(@document) && !client_can_view_owp?(@document) && current_user %>
+      <%= render_document_partials @document, [:show_header] %>
+      <h2 class='yale-restricted-work-text'><%= owp_restriction_message(@document) %></h2>
+      <%= render "grouped_metadata" %>
+    <% elsif object_owp?(@document) && !current_user %>
+      <%= render_document_partials @document, [:show_header] %>
+      <h2 class='yale-restricted-work-text'><%= "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please #{link_to 'log in', user_openid_connect_omniauth_authorize_path, method: :post} to your account to request permission or to view the materials in this folder.".html_safe %></h2>
+      <%= render "grouped_metadata" %>
     <% else %>
       <%= render_document_partials @document, [:show_header] %>
       <h2 class='yale-restricted-work-text'><%= restriction_message(@document) %></h2>
