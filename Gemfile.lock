@@ -363,6 +363,7 @@ GEM
     partridge (0.1.2)
     pg (1.4.5)
     popper_js (1.16.1)
+    psych (3.3.4)
     public_suffix (5.0.1)
     puma (5.6.7)
       nio4r (~> 2.0)
@@ -601,6 +602,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-nulldb-adapter
+  addressable
   amazing_print (>= 1.2.1)
   apparition
   awesome_print
@@ -639,6 +641,7 @@ DEPENDENCIES
   openseadragon
   partridge (~> 0.1.2)
   pg
+  psych (< 4)
   puma (~> 5.6)
   rails (~> 6.1.7.4)
   rails-controller-testing
