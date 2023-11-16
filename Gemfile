@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+gem 'addressable'
 gem 'awesome_print'
 gem "aws-sdk-cloudwatch"
 gem 'aws-sdk-s3'
@@ -33,6 +34,8 @@ gem 'openseadragon'
 gem 'partridge', '~> 0.1.2'
 gem 'pg'
 gem 'puma', '~> 5.6'
+# pinned to before 4 due to https://stackoverflow.com/questions/71191685/visit-psych-nodes-alias-unknown-alias-default-psychbadalias
+gem 'psych', '< 4'
 gem 'rails', '~> 6.1.7.4'
 gem "rails_semantic_logger", ">=4.4.4"
 gem 'rsolr', '>= 1.0', '< 3'
