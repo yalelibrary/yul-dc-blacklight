@@ -1,0 +1,24 @@
+<div id='doc_<%= @document.id.to_s.parameterize %>'>
+  <%= "Title: #{@document['title_tesim'].first}" %><br />
+  <%= "Creator: #{@document['creator_ssim'].first}" %><br />
+  <%= "Published/Created: #{@document['dateStructured_ssim']}" %><br />
+  <%= "Call Number: #{@document['callNumber_tesim'].first}" %><br />
+  <%= "Container/Volume: #{@document['containerGrouping_tesim'].first}" %><br />
+  <%= "Image Count: #{@document['child_oids_ssim'].count}" %><br />
+  <%= "Found In: #{@document['ancestorTitles_tesim'].reverse.join(' > ')}" %>
+</div>
+<br />
+<div class="submit_form">
+  <h3>Request Information</h3>
+  <%= form_for :permission_request, url: "#{ENV['MANAGEMENT_HOST']}/api/permission_requests", method: :post do |f| %>
+    <%= hidden_field_tag "user", "#{current_user.sub}" %>
+    <%= hidden_field_tag "oid", "#{@document.id.to_s}" %>
+    <%= "User ID: #{current_user}" %><br />
+    <%= "Email: #{current_user.email}" %><br />
+    <%= f.label 'Full Name' %>
+    <%= f.text_field :name %><br />
+    <%= f.label 'Reason for request' %>
+    <%= f.text_area :user_note %>
+    <%= submit_tag "Create" %>
+  <% end %>
+</div>
