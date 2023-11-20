@@ -43,7 +43,7 @@ module AccessHelper
 
   def retrieve_user_permissions
     return nil if current_user.nil?
-    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{current_user.sub}")
+    url = URI.parse("http://yul-dc-management-1:3001/management/api/permission_sets/#{current_user.sub}")
     response = Net::HTTP.get(url)
     JSON.parse(response)
   end
@@ -72,7 +72,7 @@ module AccessHelper
   def owp_restriction_message(document)
     case document['visibility_ssi']
     when 'Open with Permission'
-      "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
+      "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this #{link_to "form", "/catalog/#{document.id}/request_form"}".html_safe
     end
   end
   # rubocop:disable Layout/LineLength

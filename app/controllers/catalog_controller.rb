@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 class CatalogController < ApplicationController
-  # https://stackoverflow.com/questions/12602788/updating-from-rails-3-2-0-to-3-2-8-caused-uninitialized-constant-addressable
-  require 'addressable/uri'
   include BlacklightAdvancedSearch::Controller
   include Blacklight::Catalog
   include BlacklightOaiProvider::Controller
@@ -641,6 +639,11 @@ class CatalogController < ApplicationController
     end
   end
   # rubocop:enable Metrics/PerceivedComplexity
+
+  def request_form
+    @response, @document = search_service.fetch(params[:oid])
+    render 'catalog/request_form'
+  end
 
   def iiif_suggest
     @query = params[:q] || ""

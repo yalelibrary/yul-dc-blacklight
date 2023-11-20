@@ -1,11 +1,49 @@
-<div id='doc_<%= @document.id.to_s.parameterize %>'>
-  <%= "Title: #{@document['title_tesim'].first}" %><br />
-  <%= "Creator: #{@document['creator_ssim'].first}" %><br />
-  <%= "Published/Created: #{@document['dateStructured_ssim']}" %><br />
-  <%= "Call Number: #{@document['callNumber_tesim'].first}" %><br />
-  <%= "Container/Volume: #{@document['containerGrouping_tesim'].first}" %><br />
-  <%= "Image Count: #{@document['child_oids_ssim'].count}" %><br />
-  <%= "Found In: #{@document['ancestorTitles_tesim'].reverse.join(' > ')}" %>
+<div class="metadata-block single-item-show">
+  <dl class='metadata-block__group'>
+    <dt class='metadata-block__label-key'>
+      <%= "Title:" %>
+    </dt>
+    <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+      <%= @document['title_tesim'].first %>
+    </dd>
+    <dt class='metadata-block__label-key'>
+      <%= "Creator:" %>
+    </dt>
+    <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+      <%= @document['creator_ssim'].first %>
+    </dd>
+    <dt class='metadata-block__label-key'>
+      <%= "Published/Created:" %>
+    </dt>
+    <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+      <%= @document['dateStructured_ssim'] %>
+    </dd>
+    <dt class='metadata-block__label-key'>
+      <%= "Call Number:" %>
+    </dt>
+    <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+      <%= @document['callNumber_tesim'].first %>
+    </dd>
+    <dt class='metadata-block__label-key'>
+      <%= "Container/Volume:" %>
+    </dt>
+    <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+      <%= @document['containerGrouping_tesim'].first %>
+    </dd>
+    <dt class='metadata-block__label-key'>
+      <%= "Image Count:" %>
+    </dt>
+    <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+      <%= @document['child_oids_ssim'].count %>
+    </dd>
+    <dt class='metadata-block__label-key'>
+      <%= "Found In:" %>
+    </dt>
+    <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+      <%= @document['ancestorTitles_tesim'].reverse.join(' > ') %>
+    </dd>
+    </div>
+  </dl>
 </div>
 <br />
 <div class="submit_form">

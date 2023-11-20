@@ -24,6 +24,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   get 'mirador/:oid', to: 'mirador#show'
 
+  get '/catalog/:oid/request_form', to: 'catalog#request_form'
+
   get '/download/tiff/:child_oid', to: 'download_original#tiff'
   get '/download/tiff/:child_oid/staged', to: 'download_original#staged'
   get '/download/tiff/:child_oid', to: 'download_original#index'
