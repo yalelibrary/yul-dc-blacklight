@@ -1,47 +1,61 @@
 <div class="metadata-block single-item-show">
   <dl class='metadata-block__group'>
-    <dt class='metadata-block__label-key'>
-      <%= "Title:" %>
-    </dt>
-    <dd class='metadata-block__label-value metadata-block__label-value--yul'>
-      <%= @document['title_tesim']&.first %>
-    </dd>
-    <dt class='metadata-block__label-key'>
-      <%= "Creator:" %>
-    </dt>
-    <dd class='metadata-block__label-value metadata-block__label-value--yul'>
-      <%= @document['creator_ssim']&.first %>
-    </dd>
-    <dt class='metadata-block__label-key'>
-      <%= "Published/Created:" %>
-    </dt>
-    <dd class='metadata-block__label-value metadata-block__label-value--yul'>
-      <%= @document['dateStructured_ssim']&.first %>
-    </dd>
-    <dt class='metadata-block__label-key'>
-      <%= "Call Number:" %>
-    </dt>
-    <dd class='metadata-block__label-value metadata-block__label-value--yul'>
-      <%= @document['callNumber_tesim']&.first %>
-    </dd>
-    <dt class='metadata-block__label-key'>
-      <%= "Container/Volume:" %>
-    </dt>
-    <dd class='metadata-block__label-value metadata-block__label-value--yul'>
-      <%= @document['containerGrouping_tesim']&.first %>
-    </dd>
-    <dt class='metadata-block__label-key'>
-      <%= "Image Count:" %>
-    </dt>
-    <dd class='metadata-block__label-value metadata-block__label-value--yul'>
-      <%= @document['child_oids_ssim'].count %>
-    </dd>
-    <dt class='metadata-block__label-key'>
-      <%= "Found In:" %>
-    </dt>
-    <dd class='metadata-block__label-value metadata-block__label-value--yul'>
-      <%= @document['ancestorTitles_tesim'].reverse.join(' > ') %>
-    </dd>
+    <% if @document['title_tesim'] %>
+      <dt class='metadata-block__label-key'>
+        <%= "Title:" %>
+      </dt>
+      <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+        <%= @document['title_tesim'].first %>
+      </dd>
+    <% end %>
+    <% if @document['creator_ssim'] %>
+      <dt class='metadata-block__label-key'>
+        <%= "Creator:" %>
+      </dt>
+      <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+        <%= @document['creator_ssim'].first %>
+      </dd>
+    <% end %>
+    <% if @document['dateStructured_ssim'] %>
+      <dt class='metadata-block__label-key'>
+        <%= "Published/Created:" %>
+      </dt>
+      <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+        <%= @document['dateStructured_ssim'].first %>
+      </dd>
+    <% end %>
+    <% if @document['callNumber_tesim'] %>
+      <dt class='metadata-block__label-key'>
+        <%= "Call Number:" %>
+      </dt>
+      <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+        <%= @document['callNumber_tesim'].first %>
+      </dd>
+    <% end %>
+    <% if @document['containerGrouping_tesim'] %>
+      <dt class='metadata-block__label-key'>
+        <%= "Container/Volume:" %>
+      </dt>
+      <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+        <%= @document['containerGrouping_tesim'].first %>
+      </dd>
+    <% end %>
+    <% if @document['child_oids_ssim'] %>
+      <dt class='metadata-block__label-key'>
+        <%= "Image Count:" %>
+      </dt>
+      <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+        <%= @document['child_oids_ssim'].count %>
+      </dd>
+    <% end %>
+    <% if @document['ancestorTitles_tesim'] %>
+      <dt class='metadata-block__label-key'>
+        <%= "Found In:" %>
+      </dt>
+      <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+        <%= @document['ancestorTitles_tesim'].reverse.join(' > ') %>
+      </dd>
+    <% end %>
   </dl>
 </div>
 <br />
@@ -55,13 +69,13 @@
     <%= "<b>Email:</b> #{current_user.email}".html_safe %><br />
     <div class="request-name">
       <%= f.label 'Full Name:' %>
-      <%= f.text_field :name %>
+      <%= f.text_field :name, :required => true %>
     </div>
     <div class="request-label">
       <%= f.label 'Reason for request:' %>
     </div>
     <div class="request-user-note">
-      <%= f.text_area :user_note %>
+      <%= f.text_area :user_note, :rows => 3, :required => true %>
     </div>
     <div class="sumbit_form_buttons">
       <button type="button" class="request-form-cancel btn btn-danger" onclick="javascript:history.back()">Cancel</button>
