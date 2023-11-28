@@ -4,33 +4,31 @@
       <%= "Title:" %>
     </dt>
     <dd class='metadata-block__label-value metadata-block__label-value--yul'>
-      <%= @document['title_tesim'].first %>
+      <%= @document['title_tesim']&.first %>
     </dd>
     <dt class='metadata-block__label-key'>
       <%= "Creator:" %>
     </dt>
-    <% if @document['creator_ssim'] %>
-      <dd class='metadata-block__label-value metadata-block__label-value--yul'>
-        <%= @document['creator_ssim'].first %>
-      </dd>
-    <% end %>
+    <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+      <%= @document['creator_ssim']&.first %>
+    </dd>
     <dt class='metadata-block__label-key'>
       <%= "Published/Created:" %>
     </dt>
     <dd class='metadata-block__label-value metadata-block__label-value--yul'>
-      <%= @document['dateStructured_ssim'] %>
+      <%= @document['dateStructured_ssim']&.first %>
     </dd>
     <dt class='metadata-block__label-key'>
       <%= "Call Number:" %>
     </dt>
     <dd class='metadata-block__label-value metadata-block__label-value--yul'>
-      <%= @document['callNumber_tesim'].first %>
+      <%= @document['callNumber_tesim']&.first %>
     </dd>
     <dt class='metadata-block__label-key'>
       <%= "Container/Volume:" %>
     </dt>
     <dd class='metadata-block__label-value metadata-block__label-value--yul'>
-      <%= @document['containerGrouping_tesim'].first %>
+      <%= @document['containerGrouping_tesim']&.first %>
     </dd>
     <dt class='metadata-block__label-key'>
       <%= "Image Count:" %>
