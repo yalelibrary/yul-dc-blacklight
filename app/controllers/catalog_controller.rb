@@ -641,8 +641,12 @@ class CatalogController < ApplicationController
   # rubocop:enable Metrics/PerceivedComplexity
 
   def request_form
-    @response, @document = search_service.fetch(params[:oid])
-    render 'catalog/request_form'
+    if current_user
+      @response, @document = search_service.fetch(params[:oid])
+      render 'catalog/request_form'
+    else
+      redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: "Please log in to request access to these materials.")
+    end
   end
 
   def iiif_suggest
