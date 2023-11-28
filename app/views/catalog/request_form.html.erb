@@ -44,7 +44,6 @@
     <dd class='metadata-block__label-value metadata-block__label-value--yul'>
       <%= @document['ancestorTitles_tesim'].reverse.join(' > ') %>
     </dd>
-    </div>
   </dl>
 </div>
 <br />
@@ -53,13 +52,22 @@
   <%= form_for :permission_request, url: "#{ENV['MANAGEMENT_HOST']}/api/permission_requests", method: :post do |f| %>
     <%= hidden_field_tag "user", "#{current_user.sub}" %>
     <%= hidden_field_tag "oid", "#{@document.id.to_s}" %>
-    <%= "User ID: #{current_user}" %><br />
-    <%= "Email: #{current_user.email}" %><br />
-    <%= f.label 'Full Name' %>
-    <%= f.text_field :name, :required => true %><br />
-    <%= f.label 'Reason for request' %>
-    <%= f.text_area :user_note, :rows => 3, :required => true %>
-    <%= link_to 'Cancel', "#{ENV['BLACKLIGHT_HOST']}/catalog/#{@document['oid_ssi']}" %>
-    <%= submit_tag "Submit request" %>
+    <div class="request-key">
+    <%= "<b>User ID:</b> #{current_user}".html_safe %><br />
+    <%= "<b>Email:</b> #{current_user.email}".html_safe %><br />
+    <div class="request-name">
+      <%= f.label 'Full Name:' %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="request-label">
+      <%= f.label 'Reason for request:' %>
+    </div>
+    <div class="request-user-note">
+      <%= f.text_area :user_note %>
+    </div>
+    <div class="sumbit_form_buttons">
+      <button type="button" class="request-form-cancel btn btn-danger" onclick="javascript:history.back()">Cancel</button>
+      <%= submit_tag "Submit Request", class: "request-form-submit" %>
+    </div>
   <% end %>
 </div>
