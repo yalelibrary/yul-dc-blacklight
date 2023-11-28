@@ -641,8 +641,8 @@ class CatalogController < ApplicationController
   # rubocop:enable Metrics/PerceivedComplexity
 
   def request_form
-    if current_user
-      @response, @document = search_service.fetch(params[:oid])
+    @response, @document = search_service.fetch(params[:oid])
+    if current_user && @document['visibility_ssi'] == 'Open with Permission'
       render 'catalog/request_form'
     else
       redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: "Please log in to request access to these materials.")
