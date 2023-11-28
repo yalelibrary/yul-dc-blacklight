@@ -9,9 +9,11 @@
     <dt class='metadata-block__label-key'>
       <%= "Creator:" %>
     </dt>
-    <dd class='metadata-block__label-value metadata-block__label-value--yul'>
-      <%= @document['creator_ssim'].first %>
-    </dd>
+    <% if @document['creator_ssim'] %>
+      <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+        <%= @document['creator_ssim'].first %>
+      </dd>
+    <% end %>
     <dt class='metadata-block__label-key'>
       <%= "Published/Created:" %>
     </dt>
@@ -54,9 +56,10 @@
     <%= "User ID: #{current_user}" %><br />
     <%= "Email: #{current_user.email}" %><br />
     <%= f.label 'Full Name' %>
-    <%= f.text_field :name %><br />
+    <%= f.text_field :name, :required => true %><br />
     <%= f.label 'Reason for request' %>
-    <%= f.text_area :user_note %>
-    <%= submit_tag "Create" %>
+    <%= f.text_area :user_note, :rows => 3, :required => true %>
+    <%= link_to 'Cancel', "#{ENV['BLACKLIGHT_HOST']}/catalog/#{@document['oid_ssi']}" %>
+    <%= submit_tag "Submit request" %>
   <% end %>
 </div>
