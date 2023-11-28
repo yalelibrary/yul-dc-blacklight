@@ -33,12 +33,15 @@ module AccessHelper
 
   def user_has_permission?(document)
     parent_oid = document[:id]
+    allowance = false
     if current_user
       user_owp_permissions['permissions']&.each do |permission|
-        return true if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today)
+        if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today) && (permission['request_status'] == 'Approved')
+          allowance = true
+        end
       end
     end
-    false
+    allowance
   end
 
   def user_owp_permissions
@@ -59,7 +62,7 @@ module AccessHelper
     when 'Yale Community Only'
       return "The digital version of this work is restricted due to copyright or other restrictions."
     when 'Open with Permission'
-      "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this #{link_to "form", "/catalog/#{document.id}/request_form"}".html_safe
+      "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this #{link_to 'form', "/catalog/#{document.id}/request_form"}"
     end
     "The digital version is restricted."
   end

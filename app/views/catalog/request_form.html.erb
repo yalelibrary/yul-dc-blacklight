@@ -16,12 +16,12 @@
         <%= @document['creator_ssim'].first %>
       </dd>
     <% end %>
-    <% if @document['dateStructured_ssim'] %>
+    <% if @document['date_ssim'] %>
       <dt class='metadata-block__label-key'>
         <%= "Published/Created:" %>
       </dt>
       <dd class='metadata-block__label-value metadata-block__label-value--yul'>
-        <%= @document['dateStructured_ssim'].first %>
+        <%= @document['date_ssim'].first %>
       </dd>
     <% end %>
     <% if @document['callNumber_tesim'] %>

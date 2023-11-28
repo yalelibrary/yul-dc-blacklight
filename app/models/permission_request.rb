@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class PermissionRequest
   include ActiveModel::Model
   include ActiveModel::Attributes
