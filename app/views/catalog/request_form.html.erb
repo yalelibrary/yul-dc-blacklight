@@ -61,15 +61,17 @@
 <br />
 <div class="submit_form">
   <h3>Request Information</h3>
-  <%= form_for :permission_request, url: "#{ENV['MANAGEMENT_HOST']}/api/permission_requests", method: :post do |f| %>
-    <%= hidden_field_tag "user", "#{current_user.sub}" %>
+  <%= form_for :permission_request, url: url_for(controller: 'PermissionRequestsController', action: 'prep_request') do |f| %>
+    <%= hidden_field_tag "user_sub", "#{current_user.sub}" %>
+    <%= hidden_field_tag "user_email", "#{current_user.email}" %>
+    <%= hidden_field_tag "user_netid", "#{current_user.netid}" %>
     <%= hidden_field_tag "oid", "#{@document.id.to_s}" %>
     <div class="request-key">
     <%= "<b>User ID:</b> #{current_user}".html_safe %><br />
     <%= "<b>Email:</b> #{current_user.email}".html_safe %><br />
     <div class="request-name">
       <%= f.label 'Full Name:' %>
-      <%= f.text_field :name, :required => true %>
+      <%= f.text_field :user_full_name, :required => true %>
     </div>
     <div class="request-label">
       <%= f.label 'Reason for request:' %>

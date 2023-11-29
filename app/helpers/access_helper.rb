@@ -47,7 +47,7 @@ module AccessHelper
   def user_owp_permissions
     return nil if current_user.nil?
     # for local debugging - http://yul-dc-management-1:3001/management
-    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{current_user.sub}")
+    url = URI.parse("http://yul-dc_management_1:3001/management/api/permission_sets/#{current_user.sub}")
     response = Net::HTTP.get(url)
     JSON.parse(response)
   end
@@ -62,7 +62,7 @@ module AccessHelper
     when 'Yale Community Only'
       return "The digital version of this work is restricted due to copyright or other restrictions."
     when 'Open with Permission'
-      "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this #{link_to 'form', "/catalog/#{document.id}/request_form"}"
+      return "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this #{link_to 'form', "/catalog/#{document.id}/request_form"}"
     end
     "The digital version is restricted."
   end
