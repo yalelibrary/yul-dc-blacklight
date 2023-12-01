@@ -649,6 +649,15 @@ class CatalogController < ApplicationController
     end
   end
 
+  def request_confirmation
+    @response, @document = search_service.fetch(params[:oid])
+    if current_user && @document['visibility_ssi'] == 'Open with Permission'
+      render 'catalog/request_confirmation'
+    else
+      redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: "Please log in to request access to these materials.")
+    end
+  end
+
   def iiif_suggest
     @query = params[:q] || ""
     @document_id = params[:solr_document_id]

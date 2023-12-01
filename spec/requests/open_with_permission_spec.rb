@@ -99,17 +99,4 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
       expect(response).to have_http_status(:redirect)
     end
   end
-
-  # TODO: build the confirmation page and it's route
-  context 'as an authenticated user on the confirmation page' do
-    xit 'can display flash message, metadata, status, request info and continue button' do
-      get '/catalog/1718909/request_form/confirmation'
-      expect(response).to have_http_status(:success)
-      expect(response.body).to include('Your request has been submitted for review by Library staff')
-      expect(response.body).to include(owp_work_with_permission['title'])
-      expect(response.body).to include('Pending')
-      expect(response.body).to include('Reason for request')
-      expect(response.body).to include('Continue')
-    end
-  end
 end
