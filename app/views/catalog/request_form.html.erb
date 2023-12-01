@@ -61,7 +61,7 @@
 <br />
 <div class="submit_form">
   <h3>Request Information</h3>
-  <%= form_for :permission_request, url: url_for(controller: 'PermissionRequestsController', action: 'prep_request') do |f| %>
+  <%= form_for :permission_request do |f| %>
     <%= hidden_field_tag "user_sub", "#{current_user.sub}" %>
     <%= hidden_field_tag "user_email", "#{current_user.email}" %>
     <%= hidden_field_tag "user_netid", "#{current_user.netid}" %>

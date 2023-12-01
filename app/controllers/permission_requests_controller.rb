@@ -6,7 +6,7 @@ class PermissionRequestsController < ApplicationController
     # create a permission request in blacklight to save the data and be able to be updated later
     permission_request = PermissionRequest.new(
       oid: params['oid'],
-      user_sub: params['user_sub'], 
+      user_sub: params['user_sub'],
       user_email: params['user_email'],
       user_full_name: params['user_full_name'],
       user_note: params['user_note'],
@@ -21,5 +21,11 @@ class PermissionRequestsController < ApplicationController
     # redirect to request page with flash message if not successfull
     # redirect to confirmation page if successfull
     redirect root_path
+  end
+
+  private 
+
+  def permission_request_params
+    params.require(:permission_request).permit(:oid, :user_sub, :user_email, :user_full_name, :user_note, :user_netid)
   end
 end
