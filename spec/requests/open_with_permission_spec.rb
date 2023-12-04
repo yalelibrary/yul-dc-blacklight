@@ -85,7 +85,7 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
       expect(response.body).to include('Map of India')
       expect(response.body).to include(user.uid.to_s)
       expect(response.body).to include(user.email.to_s)
-      expect(response.body).to include('input required="required" type="text" name="permission_request[name]" id="permission_request_name"')
+      expect(response.body).to include('input required="required" type="text" name="permission_request[user_full_name]" id="permission_request_user_full_name"')
       expect(response.body).to include('textarea rows="3" required="required" name="permission_request[user_note]" id="permission_request_user_note"')
       expect(response.body).to include('Cancel')
       expect(response.body).to include('Submit Request')

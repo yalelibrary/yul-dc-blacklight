@@ -46,9 +46,8 @@ module AccessHelper
 
   def user_owp_permissions
     return nil if current_user.nil?
-    # for local debugging - http://yul-dc-management-1:3001/management
-    # TODO: revert to ENV['MANAGEMENT_HOST']
-    url = URI.parse("http://yul-dc_management_1:3001/management/api/permission_sets/#{current_user.sub}")
+    # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
+    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{current_user.sub}")
     response = Net::HTTP.get(url)
     JSON.parse(response)
   end
@@ -58,16 +57,18 @@ module AccessHelper
   end
 
   # rubocop:disable Layout/LineLength
+  # rubocop:disable Rails/OutputSafety
   def restriction_message(document)
     case document['visibility_ssi']
     when 'Yale Community Only'
       return "The digital version of this work is restricted due to copyright or other restrictions."
     when 'Open with Permission'
-      return "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this #{link_to "form", "/catalog/#{document.id}/request_form"}".html_safe
+      return "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this #{link_to 'form', "/catalog/#{document.id}/request_form"}".html_safe
     end
     "The digital version is restricted."
   end
   # rubocop:disable Layout/LineLength
+  # rubocop:disable Rails/OutputSafety
 
   def restriction_instructions(document)
     case document['visibility_ssi']

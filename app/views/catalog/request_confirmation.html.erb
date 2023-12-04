@@ -65,12 +65,8 @@
     <%= "<b>Status:</b> Pending".html_safe %><br />
     <%= "<b>User ID:</b> #{current_user}".html_safe %><br />
     <%= "<b>Email:</b> #{current_user.email}".html_safe %><br />
-    <%= "<b>Full Name:</b> #{params['permission_request']['user_full_name']}".html_safe %><br />
-    <%= "<b>Reason for request:</b> #{params['permission_request']['user_note']}".html_safe %><br />
-  <%
-=begin%>
- # TODO: add continue button 
-<%
-=end%>
+    <%= "<b>Full Name:</b> TODO".html_safe %><br />
+    <%= "<b>Reason for request:</b> TODO".html_safe %><br />
+    <button type="button" class="request-continue" onclick="javascript:history.go(-2)">Continue</button>
   </div>
 </div>
