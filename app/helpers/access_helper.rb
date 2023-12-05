@@ -47,7 +47,7 @@ module AccessHelper
   def user_owp_permissions
     return nil if current_user.nil?
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
-    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{current_user.sub}")
+    url = URI.parse("http://yul-dc_management_1:3001/management/api/permission_sets/#{current_user.sub}")
     response = Net::HTTP.get(url)
     JSON.parse(response)
   end

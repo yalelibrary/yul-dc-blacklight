@@ -6,7 +6,8 @@ class PermissionRequestsController < ApplicationController
       redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: 'Please log in to request access to these materials.')
       return false
     end
-    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_requests")
+    # TODO: Revert back to ENV['MANAGEMENT_HOST']
+    url = URI.parse("http://yul-dc_management_1:3001/management/api/permission_requests")
     req = Net::HTTP::Post.new(url.path)
     req.set_form_data({
                         'oid': params['oid'],
@@ -19,11 +20,11 @@ class PermissionRequestsController < ApplicationController
     con = Net::HTTP.new(url.host, url.port)
     con.start { |http| http.request(req) }
 
-    handle_response(response.status, response.body)
+    handle_request_response(response.status, response.body)
   end
 
   # rubocop:disable Metrics/PerceivedComplexity
-  def handle_response(http_status, body)
+  def handle_request_response(http_status, body)
     if http_status == 400 && body == 'Invalid Parent OID'
       redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}/request_form", notice: 'Object not found')
     elsif http_status == 400 && body == 'Parent Object is private'
