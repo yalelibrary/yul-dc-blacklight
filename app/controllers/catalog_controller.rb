@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 class CatalogController < ApplicationController
-  # https://stackoverflow.com/questions/12602788/updating-from-rails-3-2-0-to-3-2-8-caused-uninitialized-constant-addressable
-  require 'addressable/uri'
   include BlacklightAdvancedSearch::Controller
   include Blacklight::Catalog
   include BlacklightOaiProvider::Controller
@@ -641,6 +639,24 @@ class CatalogController < ApplicationController
     end
   end
   # rubocop:enable Metrics/PerceivedComplexity
+
+  def request_form
+    @response, @document = search_service.fetch(params[:oid])
+    if current_user && @document['visibility_ssi'] == 'Open with Permission'
+      render 'catalog/request_form'
+    else
+      redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: "Please log in to request access to these materials.")
+    end
+  end
+
+  def request_confirmation
+    @response, @document = search_service.fetch(params[:oid])
+    if current_user && @document['visibility_ssi'] == 'Open with Permission'
+      render 'catalog/request_confirmation'
+    else
+      redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: "Please log in to request access to these materials.")
+    end
+  end
 
   def iiif_suggest
     @query = params[:q] || ""
