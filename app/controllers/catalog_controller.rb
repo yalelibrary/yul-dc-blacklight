@@ -659,11 +659,13 @@ class CatalogController < ApplicationController
                             @request_status = permission['request_status']
         else
           redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params['oid']}/request_form", notice: "Please submit a request for this item.  No request was found.")
+          return false
         end
       end
       render 'catalog/request_confirmation', user_full_name: @user_full_name, user_note: @user_note, request_status: @request_status
     else
       redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params['oid']}", notice: "Please log in to request access to these materials.")
+      return false
     end
   end
 
