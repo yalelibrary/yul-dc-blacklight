@@ -230,6 +230,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'publisher_ssim', label: 'Publisher', metadata: 'description'
     config.add_show_field 'abstract_tesim', label: 'Abstract', metadata: 'description', helper_method: :join_as_paragraphs
     config.add_show_field 'description_tesim', label: 'Description', metadata: 'description', helper_method: :sanitize_join_with_br
+    config.add_show_field 'provenanceUncontrolled_tesi', label: 'Provenance', metadata: 'description'
     config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', metadata: 'description', helper_method: :format_digitization
     config.add_show_field 'digitization_note_tesi', label: 'Digitization Note', metadata: 'description'
