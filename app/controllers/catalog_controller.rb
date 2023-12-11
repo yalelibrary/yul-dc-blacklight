@@ -650,24 +650,23 @@ class CatalogController < ApplicationController
   end
 
   def request_confirmation
-    # byebug
     @response, @document = search_service.fetch(params[:oid])
     if current_user && @document['visibility_ssi'] == 'Open with Permission'
+      @render_confirmation = false
       user_owp_permissions['permissions']&.each do |permission|
-        # byebug
-        @render_confirmation = false
         if permission['oid'].to_s == params['oid']
-          render_confirmation = true
-          @user_full_name = permission['user_full_name'],
-                            @user_note = permission['user_note'],
-                            @request_status = permission['request_status']
+          @render_confirmation = true
+          @user_full_name = permission['user_full_name']
+          @user_note = permission['user_note']
+          @request_status = permission['request_status']
         end
       end
       if @render_confirmation
+        # flash[:notice] = ''
         render 'catalog/request_confirmation', user_full_name: @user_full_name, user_note: @user_note, request_status: @request_status
       else
         redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params['oid']}/request_form", notice: "Please submit a request for this item.  No request was found.")
-        return false
+        false
       end
     else
       redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params['oid']}", notice: "Please log in to request access to these materials.")

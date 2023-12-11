@@ -81,20 +81,10 @@ RSpec.describe "Permission Requests", type: :system do
 
   it 'submitting a successful permission request will load the confirmation page' do
     visit 'catalog/1718909/request_confirmation'
-    # click_on 'form'
-    # within '.submit_form' do
-    #   fill_in 'user_full_name', with: 'Request Full Name'
-    #   fill_in 'user_note', with: 'lorem ipsum'
-    #   click_on 'Submit Request'
-    # end
-    # within '.confirmation-key' do
-      # byebug
-      expect(page.body).to include "Your request has been submitted for review by Library staff"
-      expect(page.body).to include "Map of India"
-      expect(page.body).to include "Pending"
-      expect(page.body).to include "Request Full Name"
-      expect(page.body).to include "lorem ipsum"
-      expect(page.body).to include "Continue"
-    # end
+    expect(page.body).to include "Map of India"
+    expect(page.body).to include "Pending"
+    expect(page.body).to include "Request Full Name"
+    expect(page.body).to include "lorem ipsum"
+    expect(page.body).to include "Continue"
   end
 end
