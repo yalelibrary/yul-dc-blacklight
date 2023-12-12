@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe "Permission Requests", type: :request, clean: true do
+RSpec.describe "Permission Requests", type: :system do
   let(:user) { FactoryBot.create(:user, netid: "net_id", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6e", uid: 'some_name', email: 'not_real@example.com') }
   let(:owp_work_with_permission) do
     {
@@ -26,6 +26,7 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
     example.run
     ENV['MANAGEMENT_HOST'] = original_management_url
   end
+
   before do
     stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
       .to_return(status: 200, body: '{
@@ -75,34 +76,15 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
     solr.add([owp_work_with_permission, owp_work_without_permission])
     solr.commit
     allow(User).to receive(:on_campus?).and_return(false)
-    sign_in user
+    login_as user
   end
 
-  context 'with an authenticated user' do
-    it 'will create a new permission request and redirect to the confirmation page' do
-      post '/catalog/1718909/request_form', params: {
-        'oid': '1718909',
-        'permission_request': {
-          'user_full_name': 'Request Full Name',
-          'user_note': 'lorem ipsum'
-        }
-      }
-      expect(response).to have_http_status(:redirect)
-      expect(response.redirect_url).to eq('http://www.example.com/catalog/1718909/request_confirmation')
-    end
-  end
-
-  context 'with a NOT authenticated user' do
-    it 'will redirect to the show page' do
-      sign_out user
-      post '/catalog/1718909/request_form', params: {
-        'oid': '1718909',
-        'permission_request': {
-          'user_full_name': 'Request Full Name',
-          'user_note': 'lorem ipsum'
-        }
-      }
-      expect(response.redirect_url).to eq('http://www.example.com/catalog/1718909')
-    end
+  it 'submitting a successful permission request will load the confirmation page' do
+    visit 'catalog/1718909/request_confirmation'
+    expect(page.body).to include "Map of India"
+    expect(page.body).to include "Pending"
+    expect(page.body).to include "Request Full Name"
+    expect(page.body).to include "lorem ipsum"
+    expect(page.body).to include "Continue"
   end
 end
