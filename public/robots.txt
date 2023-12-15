@@ -7,6 +7,7 @@ Disallow: /mirador/
 User-agent: GPTBot
 Disallow: /pdfs/
 Disallow: /iiif/
+Disallow: /annotation/
 
 
 Sitemap: https://collections.library.yale.edu/sitemap
