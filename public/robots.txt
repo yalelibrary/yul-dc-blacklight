@@ -8,6 +8,7 @@ User-agent: GPTBot
 Disallow: /pdfs/
 Disallow: /iiif/
 Disallow: /annotation/
-
+Disallow: /catalog/*/iiif_suggest
+Disallow: /catalog/*/iiif_search
 
 Sitemap: https://collections.library.yale.edu/sitemap
