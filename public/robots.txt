@@ -4,4 +4,9 @@ Disallow: /manifests/
 Disallow: /pdfs/
 Disallow: /mirador/
 
+User-agent: GPTBot
+Disallow: /pdfs/
+Disallow: /iiif/
+
+
 Sitemap: https://collections.library.yale.edu/sitemap
