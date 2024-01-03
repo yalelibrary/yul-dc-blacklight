@@ -3,6 +3,7 @@ require 'rails_helper'
 
 RSpec.describe "Open with Permission", type: :request, clean: true do
   let(:user) { FactoryBot.create(:user, netid: "net_id", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6e", uid: 'some_name', email: 'not_real@example.com') }
+  let(:non_approved_user) { FactoryBot.create(:user, netid: "net_id", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6f", uid: 'some_name', email: 'not_real@example.com') }
   let(:owp_work_with_permission) do
     {
       "id": "1618909",
@@ -36,7 +37,7 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
           "oid":1618909,
           "permission_set":1,
           "permission_set_terms":1,
-          "request_status":"Approved",
+          "request_status":true,
           "request_date":"2023-11-02T20:23:18.824Z",
           "access_until":"2034-11-02T20:23:18.824Z"},
           {
@@ -49,16 +50,38 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
           }
         ]}',
                  headers: [])
+    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6f')
+      .to_return(status: 200, body: '{
+        "timestamp":"2023-11-02",
+        "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6f"},
+        "permission_set_terms_agreed":[],
+        "permissions":[{
+          "oid":1618909,
+          "permission_set":1,
+          "permission_set_terms":1,
+          "request_status":false,
+          "request_date":"2023-11-02T20:23:18.824Z",
+          "access_until":"2034-11-02T20:23:18.824Z"},
+          {
+            "oid":1718909,
+            "permission_set":1,
+            "permission_set_terms":1,
+            "request_status":null,
+            "request_date":"2023-11-02T20:23:18.824Z",
+            "access_until":null
+          }
+        ]}',
+                headers: [])
     solr = Blacklight.default_index.connection
     solr.add([owp_work_with_permission, owp_work_without_permission])
     solr.commit
     allow(User).to receive(:on_campus?).and_return(false)
-    sign_in user
   end
 
   context 'as an authenticated user on the show page' do
     context 'with correct permission' do
       it 'can display uv, metadata, and tools' do
+        sign_in user
         get "/catalog/1618909"
         expect(response).to have_http_status(:success)
         expect(response.body).to include('universal-viewer-iframe')
@@ -76,10 +99,22 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
         expect(response.body).to include('The digital version of this work is restricted')
       end
     end
+    context 'with pending request' do
+      it 'displays pending request notification' do
+        sign_in non_approved_user
+        get "/catalog/1718909"
+        expect(response).to have_http_status(:success)
+        expect(response.body).not_to include('universal-viewer-iframe')
+        expect(response.body).to include('Access And Usage Rights')
+        # this is part of the alt tag for the tool links when they are disabled
+        expect(response.body).to include('Your request to access this item has been received. Thank you for your patience as we consider your request. You will be notified of the results of your request once a decision has been made.')
+      end
+    end
   end
 
   context 'as an authenticated user on the request form page' do
     it 'displays metadata, username, email, input fields, and buttons' do
+      sign_in user
       get "/catalog/1718909/request_form"
       expect(response).to have_http_status(:success)
       expect(response.body).to include('Map of India')
