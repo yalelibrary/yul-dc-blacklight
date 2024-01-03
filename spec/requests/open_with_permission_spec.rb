@@ -71,7 +71,7 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
             "access_until":null
           }
         ]}',
-                headers: [])
+                 headers: [])
     solr = Blacklight.default_index.connection
     solr.add([owp_work_with_permission, owp_work_without_permission])
     solr.commit
@@ -106,8 +106,9 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
         expect(response).to have_http_status(:success)
         expect(response.body).not_to include('universal-viewer-iframe')
         expect(response.body).to include('Access And Usage Rights')
-        # this is part of the alt tag for the tool links when they are disabled
+        # rubocop:disable Layout/LineLength
         expect(response.body).to include('Your request to access this item has been received. Thank you for your patience as we consider your request. You will be notified of the results of your request once a decision has been made.')
+        # rubocop:enable Layout/LineLength
       end
     end
   end

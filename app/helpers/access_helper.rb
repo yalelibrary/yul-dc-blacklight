@@ -33,13 +33,12 @@ module AccessHelper
 
   def pending_request?(document)
     parent_oid = document[:id]
-    if current_user
-      user_owp_permissions['permissions']&.each do |permission|
-        if (permission['oid'].to_s == parent_oid) && (!permission['request_date'].nil?) && (permission['request_status'] == false)
-          true
-        else
-          false
-        end
+    return unless current_user
+    user_owp_permissions['permissions']&.each do |permission|
+      if (permission['oid'].to_s == parent_oid) && !permission['request_date'].nil? && (permission['request_status'] == false)
+        true
+      else
+        false
       end
     end
   end
@@ -47,11 +46,10 @@ module AccessHelper
   def user_has_permission?(document)
     parent_oid = document[:id]
     allowance = false
-    if current_user
-      user_owp_permissions['permissions']&.each do |permission|
-        if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today) && (permission['request_status'] == true)
-          allowance = true
-        end
+    return unless current_user
+    user_owp_permissions['permissions']&.each do |permission|
+      if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today) && (permission['request_status'] == true)
+        allowance = true
       end
     end
     allowance
