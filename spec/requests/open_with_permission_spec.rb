@@ -55,20 +55,14 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6f"},
         "permission_set_terms_agreed":[],
-        "permissions":[{
-          "oid":1618909,
-          "permission_set":1,
-          "permission_set_terms":1,
-          "request_status":false,
-          "request_date":"2023-11-02T20:23:18.824Z",
-          "access_until":"2034-11-02T20:23:18.824Z"},
+        "permissions":[
           {
             "oid":1718909,
             "permission_set":1,
             "permission_set_terms":1,
-            "request_status":null,
+            "request_status":false,
             "request_date":"2023-11-02T20:23:18.824Z",
-            "access_until":null
+            "access_until":"2034-11-02T20:23:18.824Z"
           }
         ]}',
                  headers: [])
