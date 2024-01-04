@@ -33,14 +33,14 @@ module AccessHelper
 
   def pending_request?(document)
     parent_oid = document[:id]
+    pending = false
     return unless current_user
     user_owp_permissions['permissions']&.each do |permission|
       if (permission['oid'].to_s == parent_oid) && !permission['request_date'].nil? && (permission['request_status'] == false)
-        true
-      else
-        false
+        pending = true
       end
     end
+    pending
   end
 
   def user_has_permission?(document)
