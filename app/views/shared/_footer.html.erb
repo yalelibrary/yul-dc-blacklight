@@ -20,7 +20,7 @@
             <a href="https://guides.library.yale.edu/about/policies/access" target="_blank" rel="noopener">Terms</a>
           </li>
           <!--<% url = request.path() %>-->
-          <% url = request.original_url %>
+          <% url = request.original_url.gsub("&", "%26") %>
           <li>
             <%= link_to(:"Feedback", "http://web.library.yale.edu/form/findit-feedback?findITURL=#{url}", :target => '_blank' ) %>
           </li>
