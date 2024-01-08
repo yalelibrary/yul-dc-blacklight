@@ -656,9 +656,9 @@ class CatalogController < ApplicationController
       user_owp_permissions['permissions']&.each do |permission|
         if permission['oid'].to_s == params['oid']
           @render_confirmation = true
-          @user_full_name = permission['user_full_name']
+          @user_full_name = permission['permission_request']['user_full_name']
           @user_note = permission['user_note']
-          @request_status = permission['request_status']
+          @request_status = permission['permission_request']['request_status']
         end
       end
       if @render_confirmation
