@@ -36,7 +36,7 @@ module AccessHelper
     pending = false
     return unless current_user
     user_owp_permissions['permissions']&.each do |permission|
-      pending = true if (permission['oid'].to_s == parent_oid) && !permission['request_date'].nil? && (permission['request_status'] == false)
+      pending = true if (permission['oid'].to_s == parent_oid) && !permission['request_date'].nil? && (permission['request_status'] == false || permission['request_status'].nil?)
     end
     pending
   end
