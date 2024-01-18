@@ -32,7 +32,7 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
-        "permission_set_terms_agreed":[],
+        "permission_set_terms_agreed":[1],
         "permissions":[{
           "oid":1618909,
           "permission_set":1,
@@ -66,6 +66,10 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
           }
         ]}',
                  headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/1718909/terms")
+      .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: {})
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/1618909/terms")
+      .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: {})
     solr = Blacklight.default_index.connection
     solr.add([owp_work_with_permission, owp_work_without_permission])
     solr.commit

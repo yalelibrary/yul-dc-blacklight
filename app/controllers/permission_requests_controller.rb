@@ -39,8 +39,19 @@ class PermissionRequestsController < ApplicationController
                       })
     con = Net::HTTP.new(url.host, url.port)
     con.start { |http| http.request(req) }
-    # TODO: : UPDATE HOW AGREEMENT TERM IN MANAGEMENT IS EXPECTING/ITS RESPONSE
-    handle_request_response(response.status, response.body)
+    handle_agreement_request_response(response.status, response.body)
+  end
+
+  def handle_agreement_request_response(http_status, body)
+    if http_status == 400 && body == 'Term not found.'
+      redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: 'Term not found')
+    elsif http_status == 400 && body == 'User not found.'
+      redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: 'User not found.')
+    elsif http_status == 201 || http_status == 200
+      redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}/request_form", notice: 'Terms Accepted.')
+    else
+      redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: "An error has occured.  Please try again later.")
+    end
   end
 
   # rubocop:disable Metrics/PerceivedComplexity

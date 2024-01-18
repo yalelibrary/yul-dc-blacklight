@@ -63,7 +63,7 @@ module AccessHelper
 
   def retrieve_permission_set_terms
     return nil if current_user.nil?
-    # {ENV['MANAGEMENT_HOST']}
+    # #{ENV['MANAGEMENT_HOST']}
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{@document[:id]}/terms")
     response = Net::HTTP.get(url)
