@@ -3,6 +3,7 @@ require 'rails_helper'
 
 RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   let(:user) { FactoryBot.create(:user) }
+  let(:request_user) { FactoryBot.create(:user, netid: "net_id", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6e", uid: 'some_name', email: 'not_real@example.com') }
   let(:thumbnail_size_in_opengraph) { "!1200,630" }
   let(:thumbnail_size_in_solr) { "!200,200" }
 
@@ -27,8 +28,42 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/12/11/112.json')
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/45/12/34/12345.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, 'http://www.example.com/management/api/permission_sets/123')
       .to_return(status: 200, body: '{"timestamp":"2023-11-02","user":{"sub":"123"},"permission_set_terms_agreed":[],"permissions":[{"oid":12345,"permission_set":1,"permission_set_terms":1,"request_status":true,"request_date":"2023-11-02T20:23:18.824Z","access_until":"2024-11-02T20:23:18.824Z"}]}', headers: [])
+    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+      .to_return(status: 200, body: '{
+        "timestamp":"2023-11-02",
+        "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
+        "permission_set_terms_agreed":[],
+        "permissions":[{
+          "oid":12345,
+          "permission_set":1,
+          "permission_set_terms":1,
+          "request_status":true,
+          "request_date":"2023-11-02T20:23:18.824Z",
+          "access_until":"2034-11-02T20:23:18.824Z"}
+        ]}',
+                 headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/terms")
+      .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: {})
+      stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+      .to_return(status: 200, body: '{
+        "timestamp":"2023-11-02",
+        "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
+        "permission_set_terms_agreed":[2],
+        "permissions":[{
+          "oid":54321,
+          "permission_set":1,
+          "permission_set_terms":2,
+          "request_status":true,
+          "request_date":"2023-11-02T20:23:18.824Z",
+          "access_until":"2034-11-02T20:23:18.824Z"}
+        ]}',
+                 headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/54321/terms")
+      .to_return(status: 200, body: "{\"id\":2,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: {})
 
     solr = Blacklight.default_index.connection
     solr.add([llama,
@@ -334,6 +369,30 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     it 'displays login message when accessing an OwP object without access' do
       visit 'catalog/54321'
       expect(page).to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
+    end
+  end
+
+  context "Open with Permission objects and signed in" do
+    before do
+      login_as request_user
+    end
+    it 'displays the terms and conditions if the user has not accepted them' do
+      visit 'catalog/12345/request_form'
+      expect(page).to have_content "You must accept the following terms and conditions in order to proceed."
+      expect(page).to have_content "Permission Set Terms"
+      expect(page).to have_content "These are some terms"
+    end
+  end
+
+  context "Open with Permission objects and signed in" do
+    before do
+      login_as request_user
+    end
+    it 'displays the request form if the user has accepted the terms and conditions' do
+      visit 'catalog/54321/request_form'
+      expect(page).to have_content "Request Information"
+      expect(page).to have_content "Full name:"
+      expect(page).to have_content "Reason for request:"
     end
   end
   # rubocop:enable Layout/LineLength

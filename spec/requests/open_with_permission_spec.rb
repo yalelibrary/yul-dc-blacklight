@@ -112,7 +112,7 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
   end
 
   context 'as an authenticated user on the request form page' do
-    it 'displays metadata, username, email, input fields, and buttons' do
+    it 'displays metadata, username, email, input fields, and buttons if user has accepted the terms and conditions' do
       sign_in user
       get "/catalog/1718909/request_form"
       expect(response).to have_http_status(:success)
@@ -124,6 +124,12 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
       expect(response.body).to include('Cancel')
       expect(response.body).to include('Submit Request')
     end
+  end
+
+  it 'displays the terms and conditions page if user has not accepted the terms' do
+    sign_in non_approved_user
+    get "/catalog/1718909/request_form"
+    expect(response.body).to include('You must accept the following terms and conditions in order to proceed.')
   end
 
   context 'as a not authenticated user on the request form page' do
