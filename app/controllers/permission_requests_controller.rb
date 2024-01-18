@@ -30,16 +30,16 @@ class PermissionRequestsController < ApplicationController
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/agreement_term")
     req = Net::HTTP::Post.new(url.path)
     req.set_form_data({
-      'oid': params['oid'],
-      'user_email': current_user.email,
-      'user_netid': current_user.netid,
-      'user_sub': current_user.sub,
-      'user_full_name': "new",
-      'permission_set_terms_id': params['permission_set_terms_id']
-    })
+                        'oid': params['oid'],
+                        'user_email': current_user.email,
+                        'user_netid': current_user.netid,
+                        'user_sub': current_user.sub,
+                        'user_full_name': "new",
+                        'permission_set_terms_id': params['permission_set_terms_id']
+                      })
     con = Net::HTTP.new(url.host, url.port)
     con.start { |http| http.request(req) }
-    # TODO:: UPDATE HOW AGREEMENT TERM IN MANAGEMENT IS EXPECTING/ITS RESPONSE
+    # TODO: : UPDATE HOW AGREEMENT TERM IN MANAGEMENT IS EXPECTING/ITS RESPONSE
     handle_request_response(response.status, response.body)
   end
 
