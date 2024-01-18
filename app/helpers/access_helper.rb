@@ -61,18 +61,6 @@ module AccessHelper
     JSON.parse(response)
   end
 
-  def permission_set_terms(document)
-    parent_oid = document[:id]
-    terms_accepted = false
-    return unless current_user
-    user_owp_permissions['permissions']&.each do |permission|    
-      if permission['oid'].to_s == parent_oid && !permission['permission_set_terms'].nil?
-        terms_accepted = true
-      end
-    end
-    terms_accepted
-  end
-
   def retrieve_permission_set_terms
     return nil if current_user.nil?
     # {ENV['MANAGEMENT_HOST']}
