@@ -22,6 +22,27 @@ class PermissionRequestsController < ApplicationController
     handle_request_response(response.status, response.body)
   end
 
+  def agreement_term
+    if current_user.nil?
+      redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: 'Please log in to request access to these materials.')
+      return false
+    end
+    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/agreement_term")
+    req = Net::HTTP::Post.new(url.path)
+    req.set_form_data({
+      'oid': params['oid'],
+      'user_email': current_user.email,
+      'user_netid': current_user.netid,
+      'user_sub': current_user.sub,
+      'user_full_name': "new",
+      'permission_set_terms_id': params['permission_set_terms_id']
+    })
+    con = Net::HTTP.new(url.host, url.port)
+    con.start { |http| http.request(req) }
+    # TODO:: UPDATE HOW AGREEMENT TERM IN MANAGEMENT IS EXPECTING/ITS RESPONSE
+    handle_request_response(response.status, response.body)
+  end
+
   # rubocop:disable Metrics/PerceivedComplexity
   def handle_request_response(http_status, body)
     if http_status == 400 && body == 'Invalid Parent OID'

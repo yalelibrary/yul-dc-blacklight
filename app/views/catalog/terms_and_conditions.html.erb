@@ -1,0 +1,15 @@
+<p> You must accept the following terms and conditions in order to proceed. </p>
+<hr>
+
+<%= form_with url: "terms_and_conditions", method: :post do |form| %>
+  <%= hidden_field_tag 'permission_set_terms_id', "#{@permission_set_terms['id']}"  %>
+  <%= hidden_field_tag 'oid', "#{params['oid']}"  %>
+
+  <%= @permission_set_terms['title'] %>
+  <%= @permission_set_terms['body'] %>
+
+  <div class="form_buttons">
+    <button type="button" class="request-form-cancel btn btn-danger" onclick="javascript:history.back()">Cancel</button>
+    <%= submit_tag "Agree", class: "request-form-submit" %>
+  </div>
+<% end %>

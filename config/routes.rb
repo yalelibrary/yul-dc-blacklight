@@ -25,9 +25,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   get 'mirador/:oid', to: 'mirador#show'
 
   resources :permission_requests, controller: 'permission_requests'
-
   get '/catalog/:oid/request_form', to: 'catalog#request_form'
   post '/catalog/:oid/request_form', to: 'permission_requests#prep_request'
+  post '/catalog/:oid/terms_and_conditions', to: 'permission_requests#agreement_term'
   get '/catalog/:oid/request_confirmation', to: 'catalog#request_confirmation'
 
   get '/download/tiff/:child_oid', to: 'download_original#tiff'

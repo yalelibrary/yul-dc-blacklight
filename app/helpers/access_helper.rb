@@ -61,6 +61,27 @@ module AccessHelper
     JSON.parse(response)
   end
 
+  def permission_set_terms(document)
+    parent_oid = document[:id]
+    terms_accepted = false
+    return unless current_user
+    user_owp_permissions['permissions']&.each do |permission|    
+      if permission['oid'].to_s == parent_oid && !permission['permission_set_terms'].nil?
+        terms_accepted = true
+      end
+    end
+    terms_accepted
+  end
+
+  def retrieve_permission_set_terms
+    return nil if current_user.nil?
+    # {ENV['MANAGEMENT_HOST']}
+    # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
+    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{@document[:id]}/terms")
+    response = Net::HTTP.get(url)
+    JSON.parse(response)
+  end
+
   def client_can_view_metadata?(document)
     viewable_metadata_visibilities.include? document['visibility_ssi']
   end
