@@ -48,7 +48,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
                  headers: [])
     stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/terms")
       .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: {})
-      stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
