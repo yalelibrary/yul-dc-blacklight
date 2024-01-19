@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class PermissionRequestsController < ApplicationController
-  skip_before_action :verify_authenticity_token
 
   def prep_request
     if current_user.nil?
