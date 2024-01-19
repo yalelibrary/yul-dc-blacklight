@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class PermissionRequestsController < ApplicationController
-
   def prep_request
     if current_user.nil?
       redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: 'Please log in to request access to these materials.')
