@@ -2,7 +2,7 @@
 
 class PermissionRequestsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  
+
   def prep_request
     if current_user.nil?
       redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: 'Please log in to request access to these materials.')
