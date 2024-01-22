@@ -32,7 +32,7 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
-        "permission_set_terms_agreed":[],
+        "permission_set_terms_agreed":[1],
         "permissions":[{
           "oid":1618909,
           "permission_set":1,
@@ -66,6 +66,10 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
           }
         ]}',
                  headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/1718909/terms")
+      .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: {})
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/1618909/terms")
+      .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: {})
     solr = Blacklight.default_index.connection
     solr.add([owp_work_with_permission, owp_work_without_permission])
     solr.commit
@@ -108,7 +112,7 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
   end
 
   context 'as an authenticated user on the request form page' do
-    it 'displays metadata, username, email, input fields, and buttons' do
+    it 'displays metadata, username, email, input fields, and buttons if user has accepted the terms and conditions' do
       sign_in user
       get "/catalog/1718909/request_form"
       expect(response).to have_http_status(:success)
@@ -120,6 +124,12 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
       expect(response.body).to include('Cancel')
       expect(response.body).to include('Submit Request')
     end
+  end
+
+  it 'displays the terms and conditions page if user has not accepted the terms' do
+    sign_in non_approved_user
+    get "/catalog/1718909/request_form"
+    expect(response.body).to include('You must accept the following terms and conditions in order to proceed.')
   end
 
   context 'as a not authenticated user on the request form page' do
