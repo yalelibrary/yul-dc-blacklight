@@ -270,6 +270,22 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   width: 70%;
 }
 
+.terms-form-cancel {
+  color: white;
+  background-color: red;
+  border-radius: 8px;
+  height: 36px;
+  margin-right: 190px;
+}
+
+.terms-form-submit {
+  color: white;
+  background-color: $light_blue; 
+  border-radius: 8px;
+  height: 38px;
+  width: 80px;
+}
+
 .request-form-cancel {
   color: white;
   background-color: red;
@@ -283,6 +299,19 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   background-color: $light_blue; 
   border-radius: 8px;
   height: 38px;
+}
+
+.terms-heading {
+  color: #ad1c2a;
+  font-family: 'YaleDisplay-Roman'
+}
+
+.terms-title {
+  font-family:'Mallory-Book', 'Mallory-Light', Arial, Helvetica, sans-serif !important
+}
+
+.terms-body {
+  font-family:'Mallory-Book', 'Mallory-Light', Arial, Helvetica, sans-serif !important
 }
 
 #permission_request_user_note {
