@@ -14,7 +14,7 @@ class CatalogController < ApplicationController
   self.search_service_class = YulBlacklight::SearchService
 
   rescue_from Blacklight::Exceptions::RecordNotFound do
-    render 'record_not_found', status: 404
+    render 'record_not_found', status: :not_found
   end
 
   # CatalogController-scope behavior and configuration for BlacklightIiifSearch

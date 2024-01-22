@@ -5,6 +5,7 @@ module OgpSolrDocument
   include ActionView::Helpers::TagHelper
   include CatalogHelper
 
+  # rubocop:disable Metrics/PerceivedComplexity
   def to_ogp_metadata
     description = ogp_description
 
@@ -23,6 +24,7 @@ module OgpSolrDocument
     end
     meta_tag
   end
+  # rubocop:enable Metrics/PerceivedComplexity
 
   private
 

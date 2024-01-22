@@ -15,7 +15,7 @@ class AnnotationsController < ApplicationController
     if child_doc["parent_ssi"] == @oid
       render json: fulltext_response(child_doc["child_fulltext_wstsim"].join('\n'))
     else
-      render json: { error: 'unauthorized' }.to_json, status: 401
+      render json: { error: 'unauthorized' }.to_json, status: :unauthorized
     end
   end
 

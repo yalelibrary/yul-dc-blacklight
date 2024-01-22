@@ -8,7 +8,7 @@ class IiifController < ApplicationController
   before_action :check_authorization
 
   def show
-    render plain: 'success', status: 200
+    render plain: 'success', status: :ok
   end
 
   protected
