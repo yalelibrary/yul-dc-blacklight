@@ -6,12 +6,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'awesome_print'
 gem "aws-sdk-cloudwatch"
 gem 'aws-sdk-s3'
-gem 'blacklight', '>= 7.33'
-gem 'blacklight-gallery', '~> 4.0.2'
-gem 'blacklight-marc', '>= 7.0.0.rc1', '< 8'
+gem 'blacklight', '~> 7.36.2'
 gem "blacklight_advanced_search"
 gem 'blacklight_dynamic_sitemap'
+gem 'blacklight-gallery', '~> 4.0.2'
 gem 'blacklight_iiif_search', git: 'https://github.com/yalelibrary/blacklight_iiif_search', branch: 'main'
+gem 'blacklight-marc', '>= 7.0.0.rc1', '< 8'
 gem 'blacklight_oai_provider', git: 'https://github.com/projectblacklight/blacklight_oai_provider.git'
 gem 'blacklight_range_limit'
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -45,7 +45,7 @@ gem 'webpacker', '~> 4.0'
 gem 'yard'
 
 group :development, :test do
-  gem 'bixby', '~> 3.0.0'
+  gem 'bixby', '~> 5.0.1'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 5.0.0'
   gem 'solr_wrapper', '>= 0.3'

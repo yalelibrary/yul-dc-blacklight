@@ -126,13 +126,13 @@ GEM
     base64 (0.2.0)
     bcrypt (3.1.20)
     bindex (0.8.1)
-    bixby (3.0.2)
-      rubocop (= 0.85.1)
-      rubocop-ast (~> 0.3.0)
+    bixby (5.0.2)
+      rubocop (= 1.28.2)
+      rubocop-ast
       rubocop-performance
       rubocop-rails
       rubocop-rspec
-    blacklight (7.35.0)
+    blacklight (7.36.2)
       deprecation
       globalid
       hashdiff
@@ -331,6 +331,8 @@ GEM
     nio4r (2.7.0)
     nokogiri (1.16.0-x86_64-darwin)
       racc (~> 1.4)
+    nokogiri (1.16.0-x86_64-linux)
+      racc (~> 1.4)
     oai (1.2.1)
       builder (>= 3.1.0)
       faraday (< 3)
@@ -351,7 +353,7 @@ GEM
     orm_adapter (0.5.0)
     ostruct (0.6.0)
     parallel (1.24.0)
-    parser (3.3.0.4)
+    parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
     parslet (2.0.0)
@@ -437,25 +439,26 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.12.1)
-    rubocop (0.85.1)
+    rubocop (1.28.2)
       parallel (~> 1.10)
-      parser (>= 2.7.0.1)
+      parser (>= 3.1.0.0)
       rainbow (>= 2.2.2, < 4.0)
-      regexp_parser (>= 1.7)
+      regexp_parser (>= 1.8, < 3.0)
       rexml
-      rubocop-ast (>= 0.0.3)
+      rubocop-ast (>= 1.17.0, < 2.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (>= 1.4.0, < 2.0)
-    rubocop-ast (0.3.0)
-      parser (>= 2.7.1.4)
-    rubocop-performance (1.7.1)
-      rubocop (>= 0.82.0)
-    rubocop-rails (2.6.0)
+      unicode-display_width (>= 1.4.0, < 3.0)
+    rubocop-ast (1.30.0)
+      parser (>= 3.2.1.0)
+    rubocop-performance (1.19.1)
+      rubocop (>= 1.7.0, < 2.0)
+      rubocop-ast (>= 0.4.0)
+    rubocop-rails (2.15.2)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
-      rubocop (>= 0.82.0)
-    rubocop-rspec (1.41.0)
-      rubocop (>= 0.68.1)
+      rubocop (>= 1.7.0, < 2.0)
+    rubocop-rspec (2.11.1)
+      rubocop (~> 1.19)
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
     sass-rails (6.0.0)
@@ -530,7 +533,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.9.1)
-    unicode-display_width (1.8.0)
+    unicode-display_width (2.5.0)
     uri (0.13.0)
     view_component (3.10.0)
       activesupport (>= 5.2.0, < 8.0)
@@ -572,6 +575,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   activerecord-nulldb-adapter
@@ -581,8 +585,8 @@ DEPENDENCIES
   aws-sdk-cloudwatch
   aws-sdk-s3
   axe-matchers
-  bixby (~> 3.0.0)
-  blacklight (>= 7.33)
+  bixby (~> 5.0.1)
+  blacklight (~> 7.36.2)
   blacklight-gallery (~> 4.0.2)
   blacklight-marc (>= 7.0.0.rc1, < 8)
   blacklight_advanced_search
