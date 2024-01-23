@@ -110,7 +110,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     visit search_catalog_path
     click_button 'Date Created'
     within '#facet-year_isim' do
-      sliders = find_all('.slider-handle.round')
+      sliders = all('.slider-handle.round')
 
       beg_slider = sliders.first
       beg_slider.drag_by(5, 0)
