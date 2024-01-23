@@ -27,6 +27,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   resources :permission_requests, controller: 'permission_requests'
   get '/catalog/:oid/request_form', to: 'catalog#request_form'
   post '/catalog/:oid/request_form', to: 'permission_requests#prep_request'
+  get '/catalog/:oid/terms_and_conditions', to: 'catalog#terms_and_conditions'
   post '/catalog/:oid/terms_and_conditions', to: 'permission_requests#agreement_term'
   get '/catalog/:oid/request_confirmation', to: 'catalog#request_confirmation'
 
