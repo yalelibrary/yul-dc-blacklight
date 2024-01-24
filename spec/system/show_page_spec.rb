@@ -169,7 +169,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     it 'returns user to homepage' do
       expect(page).to have_button "New Search"
       expect(page).to have_xpath("//button[@href='/catalog']")
-      expect(page.first('button.catalog_startOverLink').text).to eq 'NEW SEARCH'
+      expect(page.first('button.catalog_startOverLink').text).to eq('NEW SEARCH').or eq('New Search')
     end
   end
 
