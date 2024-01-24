@@ -644,21 +644,7 @@ class CatalogController < ApplicationController
     @response, @document = search_service.fetch(params[:oid])
     if current_user && @document['visibility_ssi'] == 'Open with Permission'
       @permission_set_terms = retrieve_permission_set_terms
-      if user_owp_permissions['permission_set_terms_agreed'].include?(@permission_set_terms['id'])
-        render 'catalog/request_form'
-      else
-        redirect_to 'terms_and_conditions'
-      end
-    else
-      redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: "Please log in to request access to these materials.")
-    end
-  end
-
-  def terms_and_conditions
-    @response, @document = search_service.fetch(params[:oid])
-    if current_user && @document['visibility_ssi'] == 'Open with Permission'
-      @permission_set_terms = retrieve_permission_set_terms
-      if user_owp_permissions['permission_set_terms_agreed'].include?(@permission_set_terms['id'])
+      if user_owp_permissions['permission_set_terms_agreed']&.include?(@permission_set_terms['id'])
         render 'catalog/request_form'
       else
         render 'catalog/terms_and_conditions'
