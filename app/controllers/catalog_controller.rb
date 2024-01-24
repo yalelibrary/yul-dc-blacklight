@@ -644,7 +644,7 @@ class CatalogController < ApplicationController
     @response, @document = search_service.fetch(params[:oid])
     if current_user && @document['visibility_ssi'] == 'Open with Permission'
       @permission_set_terms = retrieve_permission_set_terms
-      if user_owp_permissions['permission_set_terms_agreed'].include?(@permission_set_terms['id'])
+      if user_owp_permissions['permission_set_terms_agreed']&.include?(@permission_set_terms['id'])
         render 'catalog/request_form'
       else
         render 'catalog/terms_and_conditions'

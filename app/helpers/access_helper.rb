@@ -81,7 +81,7 @@ module AccessHelper
     when 'Yale Community Only'
       return "The digital version of this work is restricted due to copyright or other restrictions."
     when 'Open with Permission'
-      return "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this #{link_to 'form', "/catalog/#{document.id}/request_form"}.".html_safe
+      return "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this #{link_to 'form', "/catalog/#{document.id}/request_form", data: { turbolinks: false }}.".html_safe
     end
     "The digital version is restricted."
   end
