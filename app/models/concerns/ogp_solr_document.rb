@@ -20,7 +20,7 @@ module OgpSolrDocument
 
     meta_tag = []
     ogp_metadata.each do |key, value|
-      meta_tag << tag.meta({ property: key, content: value })
+      meta_tag << tag.meta(property: key, content: value)
     end
     meta_tag
   end
