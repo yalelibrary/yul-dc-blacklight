@@ -307,7 +307,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       it 'has an ellipsis instead of a full tree' do
         within '.aSpace_tree' do
           expect(page).to have_content "first"
-          expect(page).not_to have_text(:visible, "fourth")
+          expect(page).to have_css('.show-full-tree-button', visible: true)
           expect(page).to have_content "..."
           expect(page).to have_content "seventh"
         end
@@ -316,7 +316,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         page.find('.show-full-tree-button').click
         within '.aSpace_tree' do
           expect(page).to have_content "first"
-          expect(page).not_to have_text(:visible, "...")
+          expect(page).to have_css('.show-full-tree-button', visible: false)
           expect(page).to have_content "fourth"
           expect(page).to have_content "seventh"
         end
