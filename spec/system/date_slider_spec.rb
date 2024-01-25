@@ -98,7 +98,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     visit search_catalog_path
     click_button 'Date Created'
     el = page.find(:css, '.slider.slider-horizontal > .tooltip.top.hide > .tooltip-inner', visible: false)
-    expect(el).to have_content("1100 : 2023")
+    expect(el).to have_text(:all, "1100 : 2023")
   end
 
   it "does not show the date slider if only one date" do
