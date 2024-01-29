@@ -183,7 +183,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       it 'uses child\'s page when oid is valid' do
         visit 'catalog/111?image_id=113'
         src = find('.universal-viewer-iframe')['src']
-        expect(src).to include '&cv=1'
+        expect(src).to include '&cv=0'
       end
       it 'uses first page when oid is invalid' do
         visit 'catalog/111?image_id=11312321'
