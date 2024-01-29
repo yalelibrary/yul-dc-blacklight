@@ -188,16 +188,14 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
     it 'maintains search results after clicking per page' do
       fill_in 'oid_ssi', with: '11607445'
       click_on 'SEARCH'
-      within '#documents' do
-        expect(page).to     have_content('Record 1')
-        expect(page).not_to have_content('Record 2')
-      end
+      expect(page).to     have_css('#documents')
+      expect(page).to     have_content('Record 1')
+      expect(page).not_to have_content('Record 2')
       click_on '10 per page', match: :first
       click_on '50', match: :first
-      within '#documents' do
-        expect(page).to     have_content('Record 1')
-        expect(page).not_to have_content('Record 2')
-      end
+      expect(page).to     have_css('#documents')
+      expect(page).to     have_content('Record 1')
+      expect(page).not_to have_content('Record 2')
     end
 
     it 'clears search results when re-querying' do

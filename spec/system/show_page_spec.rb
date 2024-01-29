@@ -237,10 +237,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   end
 
   context 'with yale-only works' do
-    before do
-      visit 'catalog/555'
-    end
     it 'does not have image of og tag' do
+      visit 'catalog/555'
       expect(page).not_to have_css("meta[property='og:image'][content='https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_opengraph}/0/default.jpg']", visible: false)
       expect(page).not_to have_css("meta[property='og:image:type'][content='image/jpeg']", visible: false)
     end
@@ -257,6 +255,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).not_to have_content "Identifiers"
     end
     it 'is displayed when they have values' do
+      visit 'catalog/111'
+
       expect(page).to have_content "Description", count: 2
       expect(page).to have_content "Collection Information"
       expect(page).to have_content "Subjects, Formats, And Genres"
