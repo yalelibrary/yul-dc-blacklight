@@ -173,7 +173,7 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   text-transform: uppercase;
 }
 
-.link-card-header{
+.link-card-header {
   display: none;
 }
 
@@ -218,15 +218,26 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
 
 //Title on Single Items and Search Result pages
 //Replace Yale Roman with Yale Display when its available.
-.show-header {
-  font-family: $yale_new_roman, 'Times New Roman', Times, serif !important;
-  font-size: 1.5rem;
-  color: $yale_blue;
+.show-header-container {
   padding-bottom: 1.5%;
   padding-top: 1.5%;
   width: 82%;
   left: 8%;
   position: relative;
+}
+
+.show-header {
+  font-family: $yale_new_roman, 'Times New Roman', Times, serif !important;
+  font-size: 1.5rem;
+  color: $yale_blue;
+  width: 80%;
+}
+
+.show-bookmark {
+  width: 2%;
+  position: absolute;
+  right: 6.5%;
+  top: 18%;
 }
 
 .universal-viewer-iframe {
@@ -466,7 +477,7 @@ p.yale-restricted-work-text{
     align-content: center;
   }
 
-  .show-header,
+  .show-header-container,
   .yale-restricted-work-text {
     width: 92%;
   }
@@ -567,7 +578,7 @@ p.yale-restricted-work-text{
     align-content: center;
   }
 
-  .show-header,
+  .show-header-container,
   .yale-restricted-work-text {
     width: 97%;
     left: 19%;
@@ -674,7 +685,7 @@ p.yale-restricted-work-text{
     align-content: center;
   }
 
-  .show-header,
+  .show-header-container,
   .yale-restricted-work-text {
     width: 96%;
   }

@@ -7,6 +7,7 @@ FactoryBot.define do
   factory :user do
     uid { FFaker::Internet.user_name }
     sub { "123" }
-    provider { "cas" }
+    netid { "az123" }
+    provider { "openid" }
   end
 end
