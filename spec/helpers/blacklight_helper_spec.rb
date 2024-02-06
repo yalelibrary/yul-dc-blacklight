@@ -183,7 +183,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
 
       # rubocop:disable Layout/LineLength
       it 'user cannot access YCO without a netid' do
-        user = FactoryBot.create(:user)
+        user = FactoryBot.create(:user, netid: nil)
         sign_in(user)
         expect(helper.render_thumbnail(yale_only_document, {})).to match("<img alt=\"Access Available on YALE network only due to copyright or other restrictions. OFF-SITE? Log in with NetID\" src=\"/assets/placeholder_restricted-4d0037c54ed3900f4feaf705e801f4c980164e45ee556f60065c39b4bd4af345.png\" />")
       end
