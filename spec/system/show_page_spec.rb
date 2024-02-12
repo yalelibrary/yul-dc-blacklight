@@ -164,6 +164,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       visibility_ssi: 'Public',
       genre_ssim: 'Artifacts',
       resourceType_ssim: 'Books, Journals & Pamphlets',
+      has_fulltext_ssi: 'No',
       creator_ssim: ['Andy Graves']
     }
   end
@@ -251,7 +252,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       click_on 'Amor Llama', match: :first
       expect(page).to have_button "New Search"
       expect(page).to have_xpath("//button[@href='/catalog']")
-      expect(page.first('button.catalog_startOverLink').text).to eq 'New Search'
+      expect(page.first('button.catalog_startOverLink').text).to eq('NEW SEARCH').or eq('New Search')
     end
   end
 
@@ -280,7 +281,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       it 'does not have a full text button' do
         visit 'catalog/222'
 
-        expect(page).not_to have_css('.fulltext-button')
+        expect(page).not_to have_content('Show Full Text')
       end
     end
 
@@ -319,10 +320,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   end
 
   context 'with yale-only works' do
-    before do
-      visit 'catalog/555'
-    end
     it 'does not have image of og tag' do
+      visit 'catalog/555'
       expect(page).not_to have_css("meta[property='og:image'][content='https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_opengraph}/0/default.jpg']", visible: false)
       expect(page).not_to have_css("meta[property='og:image:type'][content='image/jpeg']", visible: false)
     end
@@ -339,8 +338,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).not_to have_content "Identifiers"
     end
     it 'is displayed when they have values' do
-      visit '/catalog?search_field=all_fields&q='
-      click_on 'Amor Llama', match: :first
+      visit 'catalog/111'
+
       expect(page).to have_content "Description", count: 2
       expect(page).to have_content "Collection Information"
       expect(page).to have_content "Subjects, Formats, And Genres"

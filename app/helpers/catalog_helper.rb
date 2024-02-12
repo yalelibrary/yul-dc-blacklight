@@ -2,6 +2,7 @@
 module CatalogHelper
   include Blacklight::CatalogHelperBehavior
 
+  # rubocop:disable Metrics/PerceivedComplexity
   def render_search_to_page_title(params, response = nil)
     constraints = []
 
@@ -21,6 +22,7 @@ module CatalogHelper
 
     constraints.join(' / ')
   end
+  # rubocop:enable Metrics/PerceivedComplexity
 
   def change_iiif_image_size(url, new_size)
     return nil unless url

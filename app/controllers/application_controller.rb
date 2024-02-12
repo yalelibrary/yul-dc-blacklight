@@ -17,4 +17,8 @@ class ApplicationController < ActionController::Base
   def landing
     render layout: false
   end
+
+  def help_guide
+    render "/help_guide"
+  end
 end

@@ -12,7 +12,7 @@ class ManifestsController < ApplicationController
     response.set_header('Access-Control-Allow-Origin', '*')
     render json: download_from_s3(remote_path)
   rescue ArgumentError
-    render json: { error: 'unauthorized' }.to_json, status: 401
+    render json: { error: 'unauthorized' }.to_json, status: :unauthorized
   end
 
   private
