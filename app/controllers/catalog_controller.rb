@@ -638,6 +638,7 @@ class CatalogController < ApplicationController
   end
   # rubocop:enable Metrics/PerceivedComplexity
 
+  # rubocop:disable Layout/LineLength
   def request_form
     @response, @document = search_service.fetch(params[:oid])
     if current_user && @document['visibility_ssi'] == 'Open with Permission'
@@ -653,6 +654,7 @@ class CatalogController < ApplicationController
       redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: "Please log in to request access to these materials.")
     end
   end
+  # rubocop:enable Layout/LineLength
 
   def request_confirmation
     @response, @document = search_service.fetch(params[:oid])
