@@ -185,6 +185,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(src).not_to include('.json')
     end
 
+    # rubocop:disable Layout/LineLength
     context 'sending child oid as a parameter' do
       it 'uses child\'s page when oid is valid' do
         visit 'catalog/111?image_id=113'
@@ -197,6 +198,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
         expect(src).to include '&cv=0'
       end
     end
+    # rubocop:enable Layout/LineLength
 
     context 'without full text available' do
       it 'does not have a full text button' do
