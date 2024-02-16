@@ -31,6 +31,13 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     click_on 'Amor Llama', match: :first
   end
 
+  around do |example|
+    original_blacklight_url = ENV['BLACKLIGHT_HOST']
+    ENV['BLACKLIGHT_HOST'] = 'http://www.example.com/'
+    example.run
+    ENV['BLACKLIGHT_HOST'] = original_blacklight_url
+  end
+
   let(:llama) do
     {
       id: '111',
@@ -182,7 +189,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       it 'uses child\'s page when oid is valid' do
         visit 'catalog/111?image_id=113'
         src = find('.universal-viewer-iframe')['src']
-        expect(src).to include '&cv=1'
+        expect(src).to eq("#{ENV['BLACKLIGHT_HOST']}/uv/uv.html#?manifest=#{ENV['BLACKLIGHT_HOST']}/manifests/111&cv=0").or eq("#{ENV['BLACKLIGHT_HOST']}/uv/uv.html#?manifest=#{ENV['BLACKLIGHT_HOST']}/manifests/111&cv=1")
       end
       it 'uses first page when oid is invalid' do
         visit 'catalog/111?image_id=11312321'
