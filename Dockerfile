@@ -1,4 +1,5 @@
-FROM yalelibraryit/dc-base:v1.4.2
+FROM yalelibraryit/dc-base:v1.4.4
+ENV NODE_OPTIONS="--openssl-legacy-provider"
 
 COPY ops/webapp.conf /etc/nginx/sites-enabled/webapp.conf
 COPY ops/env.conf /etc/nginx/main.d/env.conf
@@ -22,6 +23,6 @@ COPY  --chown=app . $APP_HOME
 # cached pages / assets to be kept and cleaned the way Rails expects them to be while keeping deployment very fast.
 # The assets/packs get copied back by rsync on app load (see ops/nginx.sh)
 RUN /sbin/setuser app bash -l -c " \
-    DB_ADAPTER=nulldb bundle exec rake assets:precompile && \
+    DB_ADAPTER=nulldb yarn install && bundle exec rake assets:precompile && \
     mv ./public/assets ./public/assets-new && \
     mv ./public/packs ./public/packs-new"

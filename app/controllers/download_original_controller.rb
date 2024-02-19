@@ -13,7 +13,7 @@ class DownloadOriginalController < ApplicationController
       send_tiff
     else
       stage_download
-      redirect_to "#{root_url}download/tiff/#{child_oid}/staged", status: 303
+      redirect_to "#{root_url}download/tiff/#{child_oid}/staged", status: :see_other
     end
   end
 
