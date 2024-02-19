@@ -2,7 +2,7 @@
   <% if has_user_authentication_provider? %>
     <% if current_user %>
       <li class="nav-item">
-        <%= button_to "#{current_user} , #{t('blacklight.header_links.logout')}", destroy_user_session_path, method: :delete, class: 'nav-link login-button' %>
+        <%= button_to "#{current_user.email ? current_user.email : current_user} , #{t('blacklight.header_links.logout')}", destroy_user_session_path, method: :delete, class: 'nav-link login-button' %>
       </li>
     <% else %>
       <li class="nav-item">
