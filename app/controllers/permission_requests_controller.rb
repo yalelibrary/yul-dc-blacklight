@@ -1,6 +1,50 @@
 # frozen_string_literal: true
 
 class PermissionRequestsController < ApplicationController
+  include Blacklight::Catalog
+  include Blacklight::Configurable
+  include Blacklight::TokenBasedUser
+  include AccessHelper
+
+  copy_blacklight_config_from(CatalogController)
+
+  def index
+    @table_data = []
+    if current_user.nil?
+      redirect_to((ENV['BLACKLIGHT_HOST']).to_s, notice: 'Please log in to gain access to this page.')
+      return false
+    end
+    # retrive permission requests for user
+    user_owp_permissions['permissions']&.each do |permission|
+      oid = permission['oid']
+      request_date = DateTime.parse(permission['request_date']).strftime("%m/%d/%y")
+      request_status = create_readable_status(permission['request_status'])
+      access_until = create_readable_access_until(permission)
+      # oid, status, date requested, access until
+      document = search_service.fetch(oid)
+      request_details = {
+        document: document.first[:response][:docs].first,
+        status: request_status,
+        request_date: request_date,
+        access_until: access_until
+      }
+      @table_data << request_details
+    end
+    @table_data
+  end
+
+  def create_readable_access_until(permission_request)
+    readable_access_until = 'N/A'
+    readable_access_until = DateTime.parse(permission_request['access_until']).strftime("%m/%d/%y") if permission_request['request_status']
+    readable_access_until
+  end
+
+  # Blacklight uses #search_action_url to figure out the right URL for
+  # the global search box - Override from Blacklight v7.36.2
+  def search_action_url(*args)
+    search_catalog_url(*args)
+  end
+
   def prep_request
     if current_user.nil?
       redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: 'Please log in to request access to these materials.')
@@ -44,9 +88,9 @@ class PermissionRequestsController < ApplicationController
 
   def handle_agreement_request_response(http_status, body)
     if http_status == 400 && body == 'Term not found.'
-      redirect_to("/catalog/#{params[:oid]}", notice: 'Term not found')
+      redirect_to("/catalog/#{params[:oid]}", notice: body)
     elsif http_status == 400 && body == 'User not found.'
-      redirect_to("/catalog/#{params[:oid]}", notice: 'User not found.')
+      redirect_to("/catalog/#{params[:oid]}", notice: body)
     elsif http_status == 201 || http_status == 200
       redirect_to("/catalog/#{params[:oid]}/request_form", notice: 'Terms Accepted.')
     else
@@ -58,9 +102,9 @@ class PermissionRequestsController < ApplicationController
   def handle_request_response(http_status, body)
     if http_status == 400 && body == 'Invalid Parent OID'
       redirect_to("/catalog/#{params[:oid]}/request_form", notice: 'Object not found')
-    elsif http_status == 400 && body == 'Parent Object is private'
+    elsif http_status == 400 && body == 'Object is private'
       redirect_to("/catalog/#{params[:oid]}/request_form", notice: body)
-    elsif http_status == 400 && body == 'Parent Object is public, permission not required'
+    elsif http_status == 400 && body == 'Object is public, permission not required'
       redirect_to("/catalog/#{params[:oid]}/request_form", notice: body)
     elsif http_status == 403
       redirect_to("/catalog/#{params[:oid]}/request_form", notice: 'Too many pending requests')

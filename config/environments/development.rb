@@ -65,4 +65,8 @@ Rails.application.configure do
   # configure web console's allow list for developer's IP address
   # replace with actual 'request.remote_ip' during debugging
   config.web_console.permissions = '0.0.0.0'
+
+  # for open with permission testing
+  config.hosts << 'yul-dc_management_1'
+  config.hosts << '0.0.0.0'
 end

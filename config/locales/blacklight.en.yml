@@ -27,3 +27,9 @@ en:
         results_with_constraint: '%{count} results for %{label}: %{value}'
       start_over: 'New Search'
     back_to_search: 'Back to Search Results'
+    permission_requests:
+      bookmark_button: 'BACK TO BOOKMARKS'
+      need_login: 'Please log in to view your requests'
+      no_requests: 'No requests found'
+      title: 'Digital Access Requests'
+      page_title: 'User Digital Access Requests'
