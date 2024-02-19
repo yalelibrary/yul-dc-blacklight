@@ -28,4 +28,8 @@ class ApplicationController < ActionController::Base
     end
     readable_status
   end
+
+  def help_guide
+    render "/help_guide"
+  end
 end

@@ -18,6 +18,7 @@ module Yul
       list_of_fields.empty?
     end
 
+    # rubocop:disable Metrics/PerceivedComplexity
     def metadata_fields_to_render(metadata_section = nil)
       return fields_to_render unless @metadata_sections.include? metadata_section
       if block_given?
@@ -32,5 +33,6 @@ module Yul
         end
       end
     end
+    # rubocop:enable Metrics/PerceivedComplexity
   end
 end

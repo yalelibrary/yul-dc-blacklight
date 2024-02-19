@@ -14,7 +14,7 @@ class CatalogController < ApplicationController
   self.search_service_class = YulBlacklight::SearchService
 
   rescue_from Blacklight::Exceptions::RecordNotFound do
-    render 'record_not_found', status: 404
+    render 'record_not_found', status: :not_found
   end
 
   # CatalogController-scope behavior and configuration for BlacklightIiifSearch
@@ -228,6 +228,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'publisher_ssim', label: 'Publisher', metadata: 'description'
     config.add_show_field 'abstract_tesim', label: 'Abstract', metadata: 'description', helper_method: :join_as_paragraphs
     config.add_show_field 'description_tesim', label: 'Description', metadata: 'description', helper_method: :sanitize_join_with_br
+    config.add_show_field 'provenanceUncontrolled_tesi', label: 'Provenance', metadata: 'description'
     config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', metadata: 'description', helper_method: :format_digitization
     config.add_show_field 'digitization_note_tesi', label: 'Digitization Note', metadata: 'description'
@@ -276,6 +277,7 @@ class CatalogController < ApplicationController
 
     # Identifiers Group
     config.add_show_field 'orbisBibId_ssi', label: 'Orbis Record', metadata: 'identifiers', helper_method: :link_to_orbis_bib_id
+    config.add_show_field 'morris_link', field: 'orbisBibId_ssi', label: 'Morris Record', metadata: 'identifiers', helper_method: :link_to_morris_bib_id
     config.add_show_field 'quicksearchId_ssi', label: 'Quicksearch ID', metadata: 'identifiers', helper_method: :link_to_quicksearch_id
     config.add_show_field 'oid_ssi', label: 'Object ID (OID)', metadata: 'identifiers'
     config.add_show_field 'url_suppl_ssim', label: 'More Information', metadata: 'identifiers', helper_method: :link_to_url
@@ -658,6 +660,7 @@ class CatalogController < ApplicationController
   end
   # rubocop:enable Layout/LineLength
 
+  # rubocop:disable Metrics/PerceivedComplexity
   def request_confirmation
     @response, @document = search_service.fetch(params[:oid])
     if current_user && @document['visibility_ssi'] == 'Open with Permission'
@@ -681,6 +684,7 @@ class CatalogController < ApplicationController
       false
     end
   end
+  # rubocop:enable Metrics/PerceivedComplexity
 
   # ~~~ OPEN WITH PERMISSION - END ~~~
 

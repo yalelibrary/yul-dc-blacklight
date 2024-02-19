@@ -98,7 +98,7 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     visit search_catalog_path
     click_button 'Date Created'
     el = page.find(:css, '.slider.slider-horizontal > .tooltip.top.hide > .tooltip-inner', visible: false)
-    expect(el).to have_content("1100 : 2023")
+    expect(el).to have_text(:all, "1100 : 2023")
   end
 
   it "does not show the date slider if only one date" do
@@ -106,12 +106,13 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     expect(page).not_to have_css('.card.facet-limit.blacklight-year_isim')
   end
 
-  # TODO: Fix flaky spec
+  # TODO: Fix page.find(:css, '.slider-handle') returning []
   xit "is able to search with the slider", :style, style: true, js: true do
     visit search_catalog_path
     click_button 'Date Created'
+
     within '#facet-year_isim' do
-      sliders = find_all('.slider-handle.round')
+      sliders = page.find(:css, '.slider-handle')
 
       beg_slider = sliders.first
       beg_slider.drag_by(5, 0)

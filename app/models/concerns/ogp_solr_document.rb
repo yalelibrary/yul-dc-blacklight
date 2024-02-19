@@ -5,6 +5,7 @@ module OgpSolrDocument
   include ActionView::Helpers::TagHelper
   include CatalogHelper
 
+  # rubocop:disable Metrics/PerceivedComplexity
   def to_ogp_metadata
     description = ogp_description
 
@@ -19,10 +20,11 @@ module OgpSolrDocument
 
     meta_tag = []
     ogp_metadata.each do |key, value|
-      meta_tag << tag.meta({ property: key, content: value })
+      meta_tag << tag.meta(property: key, content: value)
     end
     meta_tag
   end
+  # rubocop:enable Metrics/PerceivedComplexity
 
   private
 

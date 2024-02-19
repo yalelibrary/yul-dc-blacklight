@@ -30,81 +30,28 @@ DEFAULT MOBILE STYLING
   font-size: 1.1rem;
   color: $yale_blue;
   border-top: none;
-  // position: relative;
 }
-
-
-
-// #permission-requests-page .double-arrow {
-//   width: .5rem;
-// }
-// #permission-requests-page th {
-//   width: 100%;
-// }
 
 #permission-requests-page th > p {
   display: flex;
-}
-
-// #permission-requests-page th {
-//   display: table;
-//   width: 100%;
-//   > p, i {
-//     display: table-cell;
-//     white-space: nowrap;
-//   }
-//   > p {
-//     width: 99%;
-//   }
-
-  // display: grid;
-  // width: 100%;
-  // height: 1.2rem;
-  // grid-template-areas: 'a b';
-  // grid-template-columns: 1fr .5rem;
-  // display: flex;
-  // align-items: flex-end;
-  // flex-wrap: wrap;
-  // position: absolute;
-  // left: 0;
-// }
-
-// #permission-requests-page th > p {
-//   grid-area: a;
-// }
-
-// #permission-requests-page th > i {
-//   grid-area: b;
-// }
-
-// #permission-requests-page th > span > p {
-//   flex-grow: 1;
-// }
-
-// #permission-requests-page th > span {
-//   white-space: nowrap;
-// }
-
-#permission-requests-page td {
-  font-size: .9rem;
-  color: $darkest_grey;
-  border: 1px solid $medium_grey;
 }
 
 #permission-requests-page .double-arrow {
   background-position-y: center;
   background-position-x: left;
   display: block;
-  // width: 66%;
   width: .5rem;
   height: 1.7rem !important;
   background-repeat: no-repeat;
   background-size: .5rem;
   background-image: image-url('light-blue-double-arrow.png');
   margin-left: .5rem;
-  // white-space: nowrap;
-  // position: absolute;
-  // right: 0;
+}
+
+#permission-requests-page td {
+  font-size: .9rem;
+  color: $darkest_grey;
+  border: 1px solid $medium_grey;
 }
 
 @media screen and (min-width: $small_device) {

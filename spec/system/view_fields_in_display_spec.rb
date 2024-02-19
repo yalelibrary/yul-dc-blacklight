@@ -305,18 +305,21 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         expect(aspace_link).to have_css("img[src ^= '/assets/YULPopUpWindow']")
       end
       it 'has an ellipsis instead of a full tree' do
-        expect(page).to have_content "first"
-        expect(page).not_to have_text(type: :visible, text: "fourth")
-        expect(page).to have_content "..."
-        expect(page).to have_content "seventh"
+        within '.aSpace_tree' do
+          expect(page).to have_content "first"
+          expect(page).to have_css('.show-full-tree-button', visible: true)
+          expect(page).to have_content "..."
+          expect(page).to have_content "seventh"
+        end
       end
       it 'shows full tree on button click' do
         page.find('.show-full-tree-button').click
-
-        expect(page).to have_content "first"
-        expect(page).not_to have_text(type: :visible, text: "...")
-        expect(page).to have_content "fourth"
-        expect(page).to have_content "seventh"
+        within '.aSpace_tree' do
+          expect(page).to have_content "first"
+          expect(page).to have_css('.show-full-tree-button', visible: false)
+          expect(page).to have_content "fourth"
+          expect(page).to have_content "seventh"
+        end
       end
       it 'has links for each item' do
         within '.aSpace_tree' do

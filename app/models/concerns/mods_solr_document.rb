@@ -4,7 +4,7 @@
 module ModsSolrDocument
   extend ActiveSupport::Concern
 
-  # rubocop:disable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize/Metrics/
+  # rubocop:disable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize
   def to_oai_mods
     builder = Nokogiri::XML::Builder.new do |xml|
       xml.mods('xmlns:mods' => 'http://www.loc.gov/mods/v3', 'version' => '3.4', 'xmlns:xlink' => 'http://www.w3.org/1999/xlink') do
@@ -144,7 +144,7 @@ module ModsSolrDocument
     end
     Nokogiri::XML(builder.to_xml).root.to_xml
   end
-  # rubocop:enable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize/Metrics/
+  # rubocop:enable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize
 
   def valid_formats
     ["text",
