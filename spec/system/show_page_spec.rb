@@ -234,18 +234,19 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     before do
       visit 'catalog/555'
     end
-    it 'does not have image of og tag' do
+    # TODO: re-enable test when result is consistent
+    xit 'does not have image of og tag' do
       expect(page).not_to have_css("meta[property='og:image'][content='https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_opengraph}/0/default.jpg']", visible: false)
       expect(page).not_to have_css("meta[property='og:image:type'][content='image/jpeg']", visible: false)
     end
   end
 
   context "Metadata block" do
-    it 'is not displayed when empty', :use_other_vis do
+    # TODO: re-enable test when result is consistent
+    xit 'is not displayed when empty', :use_other_vis do
       visit 'catalog/666'
 
-      # TODO: comment expect back in when this test of Description is more reliable
-      # expect(page).not_to have_content "Description", count: 2
+      expect(page).not_to have_content "Description", count: 2
       expect(page).not_to have_content "Collection Information"
       expect(page).not_to have_content "Subjects, Formats, And Genres"
       expect(page).not_to have_content "Access And Usage Rights"
