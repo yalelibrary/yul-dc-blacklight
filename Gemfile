@@ -26,7 +26,7 @@ gem 'honeybadger', '~> 4.0'
 gem 'iso-639'
 gem 'jbuilder', '~> 2.7'
 gem 'jquery-rails'
-gem 'omniauth'
+gem 'omniauth', '~> 1.9.2'
 gem 'omniauth_openid_connect'
 # This addresses CVE-2015-9284 https://github.com/advisories/GHSA-ww4x-rwq6-qpgf
 gem 'omniauth-rails_csrf_protection', '~> 0.1'
