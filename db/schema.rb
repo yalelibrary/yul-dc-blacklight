@@ -46,7 +46,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_15_173008) do
     t.boolean "guest", default: false
     t.string "provider"
     t.string "uid"
+    t.string "netid"
+    t.string "sub"
+    t.index ["netid"], name: "index_users_on_netid", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["sub"], name: "index_users_on_sub", unique: true
   end
 
 end
