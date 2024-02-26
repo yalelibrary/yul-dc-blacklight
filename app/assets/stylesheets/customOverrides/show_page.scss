@@ -371,6 +371,24 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   font-weight: 300;
 }
 
+.yale-owp-restricted-work-text {
+  font-family: $mallory_medium, Arial, Helvetica, sans-serif;
+  font-size: .9rem;
+  color: $yale_blue;
+}
+
+.yale-owp-restricted-work-text a {
+  font-family: $mallory_bold, Arial, Helvetica, sans-serif;
+  text-decoration: underline;
+}
+
+.text-container {
+  background-color: $lightest_blue;
+  border: 1px solid $yale_blue;
+  border-radius: 5px;
+  padding: 2%;
+}
+
 h2.yale-restricted-work-text {
   font-size: 1.5em;
   margin-left: 8%;
@@ -491,6 +509,11 @@ p.yale-restricted-work-text{
     width: 625px;
   }
 
+  .text-container {
+    margin-left: 8%;
+
+margin-bottom: 2%;  }
+
   .item-page__metadata-wrapper {
     padding-left: 8%;
   }
@@ -593,6 +616,11 @@ p.yale-restricted-work-text{
     width: 735px;
   }
 
+  .text-container {
+    margin-left: 19%;
+    margin-bottom: 2%;
+  }
+
   .item-page__metadata-wrapper {
     padding-left: 19%;
   }
@@ -692,6 +720,15 @@ p.yale-restricted-work-text{
 
   .single-item-show {
     width: 880px;
+  }
+
+  .text-container {
+    margin-left: 19%;
+    margin-bottom: 2%;
+  }
+
+  .text-container p {
+    margin: 0;
   }
 
   .item-page__metadata-wrapper {
