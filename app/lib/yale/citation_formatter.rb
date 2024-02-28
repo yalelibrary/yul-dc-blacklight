@@ -28,7 +28,7 @@ module Yale
 
     # @return [CiteProc::Item],a CiteProc::Item instance containing values from the key_value_* chunks
     def item
-      CiteProc::Item.new(key_value_chunk_1.merge(key_value_chunk_2).merge(key_value_chunk_3))
+      CiteProc::Item.new(key_value_chunk_one.merge(key_value_chunk_two).merge(key_value_chunk_three))
     end
 
     # @return [Boolean],returns true if creator_ssim has a character that not in any language, else false
@@ -38,7 +38,7 @@ module Yale
 
     # @return [Hash], a hash with a Solr Document's fields and values as key,value pairs
     # Note: Although in this codebase we are using 'creator', the citation gem expects to receive 'author'
-    def key_value_chunk_1
+    def key_value_chunk_one
       {
         id: :item,
         abstract: obj[:abstract_tesim]&.join(', '),
@@ -51,7 +51,9 @@ module Yale
     end
 
     # @return [Hash], a hash with a Solr Document's fields and values as key,value pairs
-    def key_value_chunk_2
+    # rubocop:disable Metrics/PerceivedComplexity
+    # rubocop:disable Metrics/CyclomaticComplexity
+    def key_value_chunk_two
       {
         archive: obj[:holding_repository_tesim]&.join(', '),
         publisher: obj[:publisher_ssim]&.join(', '),
@@ -62,9 +64,11 @@ module Yale
         issued: (obj[:date_ssim] || obj[:year_issued_isim] || obj[:year_created_isim] || [0])&.first&.to_i
       }
     end
+    # rubocop:enable Metrics/PerceivedComplexity
+    # rubocop:enable Metrics/CyclomaticComplexity
 
     # @return [Hash], a hash with a Solr Document's fields and values as key,value pairs
-    def key_value_chunk_3
+    def key_value_chunk_three
       {
         dimensions: obj[:extent_ssim]&.join(', '),
         event: obj[:conference_name_tesim]&.join(', '),

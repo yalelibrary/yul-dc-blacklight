@@ -2,6 +2,7 @@
 
 class OaiMods < OAI::Provider::Metadata::Format
   def initialize
+    super
     @prefix = 'oai_mods'
     @element_namespace = 'mods'
     @namespace = 'http://www.loc.gov/mods/v3'

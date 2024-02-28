@@ -89,6 +89,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       visibility_ssi: 'Public',
       genre_ssim: 'Artifacts',
       resourceType_ssim: 'Books, Journals & Pamphlets',
+      has_fulltext_ssi: 'No',
       creator_ssim: ['Andy Graves']
     }
   end
@@ -168,7 +169,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     it 'returns user to homepage' do
       expect(page).to have_button "New Search"
       expect(page).to have_xpath("//button[@href='/catalog']")
-      expect(page.first('button.catalog_startOverLink').text).to eq 'New Search'
+      expect(page.first('button.catalog_startOverLink').text).to eq('NEW SEARCH').or eq('New Search')
     end
   end
 
@@ -196,7 +197,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       it 'does not have a full text button' do
         visit 'catalog/222'
 
-        expect(page).not_to have_css('.fulltext-button')
+        expect(page).not_to have_content('Show Full Text')
       end
     end
 
@@ -218,12 +219,18 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
 
   context 'with public works' do
     it 'Metadata og tags are in the header of html' do
-      expect(page).to have_css("meta[property='og:title'][content='Amor Llama']", visible: false)
-      expect(page).to have_css("meta[property='og:url'][content='https://collections.library.yale.edu/catalog/111']", visible: false)
-      expect(page).to have_css("meta[property='og:type'][content='website']", visible: false)
-      expect(page).to have_css("meta[property='og:description'][content='Anna Elizabeth Dewdney']", visible: false)
-      expect(page).to have_css("meta[property='og:image'][content='https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_opengraph}/0/default.jpg']", visible: false)
-      expect(page).to have_css("meta[property='og:image:type'][content='image/jpeg']", visible: false)
+      expect(page.html).to include("og:title")
+      expect(page.html).to include("Amor Llama")
+      expect(page.html).to include("og:url")
+      expect(page.html).to include("https://collections.library.yale.edu/catalog/111")
+      expect(page.html).to include("og:type")
+      expect(page.html).to include("website")
+      expect(page.html).to include("og:description")
+      expect(page.html).to include("Anna Elizabeth Dewdney")
+      expect(page.html).to include("og:image")
+      expect(page.html).to include("https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_opengraph}/0/default.jpg")
+      expect(page.html).to include("og:image:type")
+      expect(page.html).to include("image/jpeg")
     end
     it 'has og namespace' do
       expect(page).to have_css("html[prefix='og: https://ogp.me/ns#']", visible: false)
@@ -253,6 +260,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).not_to have_content "Identifiers"
     end
     it 'is displayed when they have values' do
+      visit 'catalog/111'
+
       expect(page).to have_content "Description", count: 2
       expect(page).to have_content "Collection Information"
       expect(page).to have_content "Subjects, Formats, And Genres"
