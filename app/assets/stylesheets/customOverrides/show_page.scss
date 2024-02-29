@@ -305,11 +305,23 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   margin-right: 190px;
 }
 
-.request-form-submit, .request-continue {
+.request-form-submit {
   color: white;
   background-color: $light_blue; 
   border-radius: 8px;
   height: 38px;
+}
+
+.request-continue {
+  color: white;
+  background-color: $light_blue; 
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.request-continue:hover {
+  text-decoration: none !important;
+  color: white !important;
 }
 
 .terms-heading {
