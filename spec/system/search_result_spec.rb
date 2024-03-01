@@ -72,7 +72,7 @@ RSpec.describe 'search result', type: :system, clean: true do
     end
 
     it 'does not show the index number' do
-      expect(page).not_to have_selector '#documents > .document.col:first-child span'
+      expect(page).not_to have_selector('.document-counter span', visible: true)
     end
 
     it 'has a no index meta tag in header' do
@@ -95,7 +95,7 @@ RSpec.describe 'search result', type: :system, clean: true do
     end
 
     it 'does not show the index number' do
-      expect(page).not_to have_selector '#documents > .document.col:first-child span'
+      expect(page).not_to have_selector('.document-counter span', visible: true)
     end
   end
 
