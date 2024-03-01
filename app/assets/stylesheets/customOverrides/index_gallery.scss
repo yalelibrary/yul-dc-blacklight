@@ -2,8 +2,7 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 
-.caption,
-.caption > .documentHeader {
+.documents-gallery > .documentHeader {
   width: 200px;
 }
 
@@ -12,11 +11,7 @@ DEFAULT MOBILE STYLING
   margin-bottom: 50px;
 }
 
-.document.col .caption .documentHeader {
-  padding-left: 15px !important;
-}
-
-.caption .document-title {
+.document-title-heading {
   font-size: 14px;
   font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
   padding-left: 0;
@@ -25,11 +20,11 @@ DEFAULT MOBILE STYLING
   margin-top: 14px;
 }
 
-.document-title > a {
+.document-title-heading > a {
   color: $light_blue;
 }
 
-#documents .thumbnail > a {
+.documents-gallery .thumbnail-container > a {
   width: 200px;
   display: block;
 }
@@ -39,9 +34,12 @@ DEFAULT MOBILE STYLING
   flex: 0 0 100%;
 }
 
+.documents-gallery .document-metadata, .document-counter {
+  display: none;
+}
 
 @media screen and (min-width: $small_device) {
-  #documents .thumbnail > a {
+  .documents-gallery .thumbnail-container > a {
     height: 200px;
   }
 
