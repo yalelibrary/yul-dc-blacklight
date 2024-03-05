@@ -157,7 +157,7 @@ GEM
     blacklight_dynamic_sitemap (1.0.0)
       blacklight (> 7.0)
       rails
-    blacklight_range_limit (8.4.0)
+    blacklight_range_limit (8.5.0)
       blacklight (>= 7.25.2, < 9)
       deprecation
       view_component (>= 2.54, < 4)
@@ -530,7 +530,7 @@ GEM
     unf_ext (0.0.9.1)
     unicode-display_width (2.5.0)
     uri (0.13.0)
-    view_component (3.10.0)
+    view_component (2.83.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
