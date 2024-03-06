@@ -1,3 +1,47 @@
 <div id='doc_<%= @document.id.to_s.parameterize %>'>
   <%= render_document_partials @document, [:show] %>
 </div>
+
+<% if @permission_set_terms.present? %>
+  <script>
+    let rights = document.querySelector('dd.blacklight-rights_ssim');
+
+    function expandText() {
+      document.querySelector('dd.blacklight-terms').classList.remove('line-clamp-five')
+      document.querySelector('dt.blacklight-terms_show_truncate_link').classList.add('hidden');
+      document.querySelector('dd.blacklight-terms_show_truncate_link').classList.add('hidden');
+      document.querySelector('dt.blacklight-terms_hide_truncate_link').classList.remove('hidden');
+      document.querySelector('dd.blacklight-terms_hide_truncate_link').classList.remove('hidden');
+    }
+
+    function truncateText() {
+      document.querySelector('dd.blacklight-terms').classList.add('line-clamp-five')
+      document.querySelector('dt.blacklight-terms_show_truncate_link').classList.remove('hidden');
+      document.querySelector('dd.blacklight-terms_show_truncate_link').classList.remove('hidden');
+      document.querySelector('dt.blacklight-terms_hide_truncate_link').classList.add('hidden');
+      document.querySelector('dd.blacklight-terms_hide_truncate_link').classList.add('hidden');
+    }
+
+    rights.outerHTML += "<dt class='blacklight-terms metadata-block__label-key'>Terms & Conditions</dt><dd class='blacklight-terms metadata-block__label-value metadata-block__label-value--yul line-clamp-five'><%= @permission_set_terms['body'] %></dd><dt class='blacklight-terms_show_truncate_link'></dt><dd class='blacklight-terms_show_truncate_link metadata-block__label-value metadata-block__label-value--yul' onclick='expandText()'>Show Full Terms & Conditions</dd><dt class='blacklight-terms_hide_truncate_link'></dt><dd class='blacklight-terms_hide_truncate_link metadata-block__label-value metadata-block__label-value--yul' onclick='truncateText()'>Hide Full Terms & Conditions</dd>";
+
+    let terms = document.querySelector('dd.blacklight-terms');
+
+    if (terms.offsetHeight < terms.scrollHeight ||
+    terms.offsetWidth < terms.scrollWidth) {
+      // your element has overflow and truncated
+      // show read more / read less button
+      console.log('it is shorter than really is')
+      document.querySelector('dt.blacklight-terms_show_truncate_link').classList.remove('hidden');
+      document.querySelector('dd.blacklight-terms_show_truncate_link').classList.remove('hidden');
+      document.querySelector('dt.blacklight-terms_hide_truncate_link').classList.add('hidden');
+      document.querySelector('dd.blacklight-terms_hide_truncate_link').classList.add('hidden');
+    } else {
+      // your element doesn't overflow (not truncated)
+      console.log('it is short')
+      document.querySelector('dt.blacklight-terms_show_truncate_link').classList.add('hidden');
+      document.querySelector('dd.blacklight-terms_show_truncate_link').classList.add('hidden');
+      document.querySelector('dt.blacklight-terms_hide_truncate_link').classList.add('hidden');
+      document.querySelector('dd.blacklight-terms_hide_truncate_link').classList.add('hidden');
+    };
+  </script>
+<% end %>

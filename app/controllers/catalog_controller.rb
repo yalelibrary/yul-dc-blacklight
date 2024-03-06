@@ -630,6 +630,7 @@ class CatalogController < ApplicationController
   def show
     super
     @search_params = session[:search_params]
+    @permission_set_terms = retrieve_permission_set_terms if @document["visibility_ssi"] == "Open with Permission"
     if @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present? && !request.original_url.include?("oai_dc_xml")
       redirect_to @document["redirect_to_tesi"]
     elsif @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present? && request.original_url.include?("oai_dc_xml")

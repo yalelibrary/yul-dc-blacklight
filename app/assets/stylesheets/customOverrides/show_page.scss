@@ -349,6 +349,23 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   width: 400px;
 }
 
+.blacklight-terms_hide_truncate_link, .blacklight-terms_show_truncate_link {
+  color: $dark_grey !important;
+}
+
+.blacklight-terms_hide_truncate_link:hover, .blacklight-terms_show_truncate_link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.line-clamp-five {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  /* truncate to 5 lines */
+  -webkit-line-clamp: 5;
+}
+
 .blacklight-ancestortitles_tesim a{
   color: $light_blue;
 }
