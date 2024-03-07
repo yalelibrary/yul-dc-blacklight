@@ -33,7 +33,7 @@ gem 'openseadragon'
 gem 'partridge', '~> 0.1.2'
 gem 'pg'
 gem 'puma', '~> 5.6'
-gem 'rails', '~> 7.0.1'
+gem 'rails', '~> 7.0.8'
 gem "rails_semantic_logger", ">=4.4.4"
 gem 'rsolr', '>= 1.0', '< 3'
 gem 'sass-rails', '>= 6'
