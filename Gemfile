@@ -36,7 +36,7 @@ gem 'pg'
 gem 'puma', '~> 5.6'
 # pinned to before 4 due to https://stackoverflow.com/questions/71191685/visit-psych-nodes-alias-unknown-alias-default-psychbadalias
 gem 'psych', '< 4'
-gem 'rails', '~> 7.0.1'
+gem 'rails', '~> 7.0.8'
 gem "rails_semantic_logger", ">=4.4.4"
 gem 'rsolr', '>= 1.0', '< 3'
 gem 'sass-rails', '>= 6'

@@ -39,7 +39,7 @@ class CatalogController < ApplicationController
     config.advanced_search[:form_solr_parameters] ||= {}
 
     ## Gallery View
-    config.view.gallery.partials = [:index_header]
+    config.view.gallery.document_component = Blacklight::Gallery::DocumentComponent
     config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
     config.show.partials.insert(1, :openseadragon)
     config.http_method = :post
