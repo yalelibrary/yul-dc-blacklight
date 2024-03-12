@@ -28,16 +28,13 @@
 
     if (terms.offsetHeight < terms.scrollHeight ||
     terms.offsetWidth < terms.scrollWidth) {
-      // your element has overflow and truncated
-      // show read more / read less button
-      console.log('it is shorter than really is')
+      // your element has overflow and is truncated
       document.querySelector('dt.blacklight-terms_show_truncate_link').classList.remove('hidden');
       document.querySelector('dd.blacklight-terms_show_truncate_link').classList.remove('hidden');
       document.querySelector('dt.blacklight-terms_hide_truncate_link').classList.add('hidden');
       document.querySelector('dd.blacklight-terms_hide_truncate_link').classList.add('hidden');
     } else {
       // your element doesn't overflow (not truncated)
-      console.log('it is short')
       document.querySelector('dt.blacklight-terms_show_truncate_link').classList.add('hidden');
       document.querySelector('dd.blacklight-terms_show_truncate_link').classList.add('hidden');
       document.querySelector('dt.blacklight-terms_hide_truncate_link').classList.add('hidden');
