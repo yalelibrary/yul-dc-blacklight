@@ -6,12 +6,21 @@ DEFAULT MOBILE STYLING
   width: 200px;
 }
 
-.document.col {
+.documents-gallery .document.col {
   display: flex;
   margin-bottom: 50px;
 }
+.documents-gallery .document-thumbnail {
+  padding-top: 2rem;
+}
 
-.document-title-heading {
+.documents-gallery .index-document-functions {
+  top: 0;
+  position: absolute;
+  left: -160px;
+}
+
+.documents-gallery .document-title-heading {
   font-size: 14px;
   font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
   padding-left: 0;
