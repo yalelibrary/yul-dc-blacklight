@@ -304,6 +304,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
 
   context 'with public works' do
     it 'Metadata og tags are in the header of html' do
+      visit '/catalog?search_field=all_fields&q='
+      click_on 'Amor Llama', match: :first
       expect(page.html).to include("og:title")
       expect(page.html).to include("Amor Llama")
       expect(page.html).to include("og:url")
