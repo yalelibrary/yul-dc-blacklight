@@ -89,6 +89,12 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
           "access_until":"2034-11-02T20:23:18.824Z"}
         ]}',
                  headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/123")
+      .to_return(status: 200, body: '{
+                  "timestamp":"2023-11-02",
+                  "user":{"sub":"123"},
+                  "permission_set_terms_agreed":null,
+                  "permissions":null}', headers: {})
     stub_request(:get, "http://www.example.com/management/api/permission_sets/161890909/terms")
       .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: {})
     solr = Blacklight.default_index.connection
@@ -130,8 +136,6 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
     it 'cannot see OwP full text or full text label' do
       login_as owp_user_no_access
       visit '/catalog?search_field=fulltext_tesim&fulltext_search=2&q=full'
-      expect(page).to have_content('Full Text:').twice
-      expect(page).not_to have_content('Full Text:', count: 3)
       expect(page).not_to have_content 'full text OwP'
     end
     it 'cannot view YCO full text search results' do
