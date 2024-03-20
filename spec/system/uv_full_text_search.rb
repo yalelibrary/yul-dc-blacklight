@@ -26,7 +26,7 @@ RSpec.describe 'Searching for full text and navigate to the UV', type: :system, 
 
   it 'adds the fulltext search parameter to the iframe src URL in simple search' do
     visit search_catalog_path
-    select('Full Text', from: 'search_field')
+    choose('fulltext_search_2')
     fill_in 'q', with: 'fulltext'
     within '.input-group-append' do
       click_button("Search")
