@@ -32,6 +32,16 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, 'http://www.example.com/management/api/permission_sets/123')
       .to_return(status: 200, body: '{"timestamp":"2023-11-02","user":{"sub":"123"},"permission_set_terms_agreed":[],"permissions":[{"oid":12345,"permission_set":1,"permission_set_terms":1,"request_status":true,"request_date":"2023-11-02T20:23:18.824Z","access_until":"2024-11-02T20:23:18.824Z"}]}', headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/#{user.uid}")
+      .to_return(status: 200, body: '{
+        "is_admin_or_approver?":"false"
+        }',
+                 headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/54321/#{user.uid}")
+      .to_return(status: 200, body: '{
+        "is_admin_or_approver?":"false"
+        }',
+                 headers: [])
     stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
