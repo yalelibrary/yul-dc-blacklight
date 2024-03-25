@@ -53,6 +53,15 @@ module AccessHelper
     allowance
   end
 
+  def admin_of_owp?(document)
+    return unless current_user
+    allowance = false
+    if retrieve_admin_credentials['is_admin_or_approver?'] == "true"
+      allowance = true
+    end
+    allowance
+  end
+
   def user_owp_permissions
     return nil if current_user.nil?
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
@@ -66,6 +75,15 @@ module AccessHelper
     # #{ENV['MANAGEMENT_HOST']}
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{@document[:id]}/terms")
+    response = Net::HTTP.get(url)
+    JSON.parse(response) unless response.nil?
+  end
+
+  def retrieve_admin_credentials
+    return nil if current_user.nil?
+    # #{ENV['MANAGEMENT_HOST']}
+    # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
+    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{@document[:id]}/#{current_user.uid}")
     response = Net::HTTP.get(url)
     JSON.parse(response) unless response.nil?
   end
