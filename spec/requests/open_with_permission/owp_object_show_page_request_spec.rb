@@ -55,7 +55,7 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"true"
         }',
-        headers: [])
+                 headers: [])
     stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6f')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",

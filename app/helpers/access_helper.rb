@@ -53,12 +53,10 @@ module AccessHelper
     allowance
   end
 
-  def admin_of_owp?(document)
+  def admin_of_owp?(_document)
     return unless current_user
     allowance = false
-    if retrieve_admin_credentials['is_admin_or_approver?'] == "true"
-      allowance = true
-    end
+    allowance = true if retrieve_admin_credentials['is_admin_or_approver?'] == "true"
     allowance
   end
 
