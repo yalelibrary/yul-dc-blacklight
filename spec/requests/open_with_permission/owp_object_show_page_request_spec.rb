@@ -51,17 +51,17 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
           }
         ]}',
                  headers: [])
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1618909/#{user.uid}")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/1618909/#{user.netid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"true"
         }',
                  headers: [])
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1618909/#{admin_approver_user.uid}")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/1618909/#{admin_approver_user.netid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"true"
         }',
                  headers: [])
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1718909/#{non_approved_user.uid}")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/1718909/#{non_approved_user.netid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"false"
         }',
