@@ -12,7 +12,7 @@ module AccessHelper
     when 'Yale Community Only'
       return true if (current_user && current_user.netid.present?) || User.on_campus?(request.remote_ip)
     when 'Open with Permission'
-      return true if client_can_view_owp?(document)
+      return true if client_can_view_owp?(document) || admin_of_owp?(document)
     end
     false
   end
@@ -53,6 +53,13 @@ module AccessHelper
     allowance
   end
 
+  def admin_of_owp?(_document)
+    return unless current_user
+    allowance = false
+    allowance = true if retrieve_admin_credentials['is_admin_or_approver?'] == "true"
+    allowance
+  end
+
   def user_owp_permissions
     return nil if current_user.nil?
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
@@ -66,6 +73,15 @@ module AccessHelper
     # #{ENV['MANAGEMENT_HOST']}
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{@document[:id]}/terms")
+    response = Net::HTTP.get(url)
+    JSON.parse(response) unless response.nil?
+  end
+
+  def retrieve_admin_credentials
+    return nil if current_user.nil?
+    # #{ENV['MANAGEMENT_HOST']}
+    # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
+    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{@document[:id]}/#{current_user.netid}")
     response = Net::HTTP.get(url)
     JSON.parse(response) unless response.nil?
   end
