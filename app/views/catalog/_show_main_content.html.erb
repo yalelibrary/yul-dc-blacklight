@@ -13,11 +13,6 @@
       <%= render_document_partials @document, [:archival_context] %>
       <%= render_document_partials @document, [:uv] %>
       <%= render "grouped_metadata" %>
-    <% elsif client_can_view_owp?(@document) && current_user %>
-      <%= render_document_partials @document, [:show_header] %>
-      <%= render_document_partials @document, [:archival_context] %>
-      <%= render_document_partials @document, [:uv] %>
-      <%= render "grouped_metadata" %>
     <% elsif object_owp?(@document) && pending_request?(@document) && current_user %>
       <%= render_document_partials @document, [:show_header] %>
       <div class='text-container'>
