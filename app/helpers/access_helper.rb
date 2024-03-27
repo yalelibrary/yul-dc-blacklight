@@ -12,7 +12,7 @@ module AccessHelper
     when 'Yale Community Only'
       return true if (current_user && current_user.netid.present?) || User.on_campus?(request.remote_ip)
     when 'Open with Permission'
-      return true if client_can_view_owp?(document)
+      return true if client_can_view_owp?(document) || admin_of_owp?(document)
     end
     false
   end
@@ -20,12 +20,6 @@ module AccessHelper
   def client_can_view_owp?(document)
     Rails.logger.warn("starting client can view digital check for #{request.env['HTTP_X_ORIGIN_URI']}")
     return true if object_owp?(document) && user_has_permission?(document)
-    false
-  end
-
-  def admin_or_approver_of_owp?(document)
-    Rails.logger.warn("starting client can view digital check for #{request.env['HTTP_X_ORIGIN_URI']}")
-    return true if object_owp?(document) && admin_of_owp?(document)
     false
   end
 
