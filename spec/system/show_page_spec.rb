@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   let(:user) { FactoryBot.create(:user) }
-  let(:management_approver) { FactoryBot.create(:user, netid: 'net_id2', sub: '1234')}
+  let(:management_approver) { FactoryBot.create(:user, netid: 'net_id2', sub: '1234') }
   let(:request_user) { FactoryBot.create(:user, netid: "net_id", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6e", uid: 'some_name', email: 'not_real@example.com') }
   let(:thumbnail_size_in_opengraph) { "!1200,630" }
   let(:thumbnail_size_in_solr) { "!200,200" }
@@ -75,7 +75,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
           "request_date":"2023-11-02T20:23:18.824Z",
           "access_until":"2034-11-02T20:23:18.824Z"}
         ]}',
-                headers: [])
+                 headers: [])
     stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/terms")
       .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: {})
     stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
