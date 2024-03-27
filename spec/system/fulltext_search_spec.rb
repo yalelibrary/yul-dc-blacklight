@@ -99,6 +99,11 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
         "is_admin_or_approver?":"false"
       }',
                  headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/161890909/#{owp_user_no_access.netid}")
+      .to_return(status: 200, body: '{
+        "is_admin_or_approver?":"false"
+      }',
+                 headers: [])
     stub_request(:get, "http://www.example.com/management/api/permission_sets/123")
       .to_return(status: 200, body: '{
                   "timestamp":"2023-11-02",
