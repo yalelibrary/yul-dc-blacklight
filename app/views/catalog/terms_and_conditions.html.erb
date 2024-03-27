@@ -1,0 +1,28 @@
+<div class="terms-subheader" role="heading" aria-level="1">
+  <div class="user-subheader-title">
+    <%= link_to "Digital Collections", root_path %> 
+  </div>
+</div>
+<div class="terms-container">
+  <div class="terms-heading">
+    <h1> You must accept the following terms and conditions in order to proceed. </h1>
+  </div>
+  <hr>
+
+  <%= form_with url: "terms_and_conditions", method: :post do |form| %>
+    <%= hidden_field_tag 'permission_set_terms_id', "#{@permission_set_terms['id']}"  %>
+    <%= hidden_field_tag 'oid', "#{params['oid']}"  %>
+    <div class="terms-title">
+      <%= @permission_set_terms['title'] %>
+    <div>
+    <br />
+    <div class="terms-body">
+      <%= @permission_set_terms['body'] %>
+    </div>
+    <br />
+    <div class="form_buttons">
+      <button type="button" class="terms-form-cancel btn btn-danger" onclick="javascript:history.back()">Cancel</button>
+      <%= submit_tag "Agree", class: "terms-form-submit" %>
+    </div>
+  <% end %>
+</div>

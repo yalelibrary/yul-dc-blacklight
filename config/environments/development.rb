@@ -71,6 +71,14 @@ Rails.application.configure do
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
 
+  # configure web console's allow list for developer's IP address
+  # replace with actual 'request.remote_ip' during debugging
+  config.web_console.permissions = '0.0.0.0'
+
+  # for open with permission testing
+  config.hosts << 'yul-dc_management_1'
+  config.hosts << '0.0.0.0'
+
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 end

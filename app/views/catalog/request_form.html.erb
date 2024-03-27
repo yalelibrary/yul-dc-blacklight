@@ -1,0 +1,91 @@
+<div class="terms-subheader" role="heading" aria-level="1">
+  <div class="user-subheader-title">
+    <%= link_to "Digital Collections", root_path %> 
+  </div>
+</div>
+<div class="request-form-metadata">
+  <div class="metadata-block single-item-show">
+    <dl class='metadata-block__group'>
+      <% if @document['title_tesim'] %>
+        <dt class='metadata-block__label-key'>
+          <%= "Title:" %>
+        </dt>
+        <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+          <%= @document['title_tesim'].first %>
+        </dd>
+      <% end %>
+      <% if @document['creator_ssim'] %>
+        <dt class='metadata-block__label-key'>
+          <%= "Creator:" %>
+        </dt>
+        <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+          <%= @document['creator_ssim'].first %>
+        </dd>
+      <% end %>
+      <% if @document['date_ssim'] %>
+        <dt class='metadata-block__label-key'>
+          <%= "Published/Created:" %>
+        </dt>
+        <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+          <%= @document['date_ssim'].first %>
+        </dd>
+      <% end %>
+      <% if @document['callNumber_tesim'] %>
+        <dt class='metadata-block__label-key'>
+          <%= "Call Number:" %>
+        </dt>
+        <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+          <%= @document['callNumber_tesim'].first %>
+        </dd>
+      <% end %>
+      <% if @document['containerGrouping_tesim'] %>
+        <dt class='metadata-block__label-key'>
+          <%= "Container/Volume:" %>
+        </dt>
+        <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+          <%= @document['containerGrouping_tesim'].first %>
+        </dd>
+      <% end %>
+      <% if @document['child_oids_ssim'] %>
+        <dt class='metadata-block__label-key'>
+          <%= "Image Count:" %>
+        </dt>
+        <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+          <%= @document['child_oids_ssim'].count %>
+        </dd>
+      <% end %>
+      <% if @document['ancestorTitles_tesim'] %>
+        <dt class='metadata-block__label-key'>
+          <%= "Found In:" %>
+        </dt>
+        <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+          <%= @document['ancestorTitles_tesim'].reverse.join(' > ') %>
+        </dd>
+      <% end %>
+    </dl>
+  </div>
+</div>
+<br />
+<div class="submit_form">
+  <h3>Request Information</h3>
+  <%= form_for :permission_request, remote: false do |f| %>
+    <div class="request-key">
+      <%= "<b>User ID:</b> #{current_user}".html_safe %><br />
+      <%= "<b>Email:</b> #{current_user.email}".html_safe %><br />
+    </div>
+    <div class="request-name">
+      <%= f.label 'Full Name:' %>
+      <%= f.text_field :user_full_name, :required => true %>
+    </div>
+    <div class="request-label">
+      <%= f.label 'Reason for request:' %>
+    </div>
+    <div class="request-user-note">
+      <%= f.text_area :user_note, :rows => 3, :required => true %>
+    </div>
+    <div class="form_buttons">
+      <button type="button" class="request-form-cancel btn btn-danger" onclick="javascript:history.back()">Cancel</button>
+      <%= submit_tag "Submit Request", class: "request-form-submit" %>
+    </div>
+  <% end %>
+</div>

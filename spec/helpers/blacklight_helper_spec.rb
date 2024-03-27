@@ -174,15 +174,23 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
         expect(helper.render_thumbnail(yale_only_document, {})).to include(alt_text, placeholder_image)
       end
 
-      it 'returns image when logged in' do
-        user = FactoryBot.create(:user)
+      it 'returns image when logged in with valid netid' do
+        user = FactoryBot.create(:user, netid: 'net_id')
         sign_in(user) # sign_in so user_signed_in? works in method
 
         expect(helper.render_thumbnail(yale_only_document, {})).to match("<img [^>]* src=\"http://localhost:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg\" />")
       end
 
+      # rubocop:disable Layout/LineLength
+      it 'user cannot access YCO without a netid' do
+        user = FactoryBot.create(:user, netid: nil)
+        sign_in(user)
+        expect(helper.render_thumbnail(yale_only_document, {})).to match("<img alt=\"Access Available on YALE network only due to copyright or other restrictions. OFF-SITE? Log in with NetID\" src=\"/assets/placeholder_restricted-4d0037c54ed3900f4feaf705e801f4c980164e45ee556f60065c39b4bd4af345.png\" />")
+      end
+      # rubocop:enable Layout/LineLength
+
       it 'has lazy loading for the thumbnail image' do
-        user = FactoryBot.create(:user)
+        user = FactoryBot.create(:user, netid: 'net_id')
         sign_in(user)
 
         expect(helper.render_thumbnail(yale_only_document, {})).to match("<img[^>]* loading=\"lazy\"")

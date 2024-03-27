@@ -1,0 +1,72 @@
+<div class="metadata-block single-item-show">
+  <dl class='metadata-block__group'>
+    <% if @document['title_tesim'] %>
+      <dt class='metadata-block__label-key'>
+        <%= "Title:" %>
+      </dt>
+      <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+        <%= @document['title_tesim'].first %>
+      </dd>
+    <% end %>
+    <% if @document['creator_ssim'] %>
+      <dt class='metadata-block__label-key'>
+        <%= "Creator:" %>
+      </dt>
+      <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+        <%= @document['creator_ssim'].first %>
+      </dd>
+    <% end %>
+    <% if @document['date_ssim'] %>
+      <dt class='metadata-block__label-key'>
+        <%= "Published/Created:" %>
+      </dt>
+      <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+        <%= @document['date_ssim'].first %>
+      </dd>
+    <% end %>
+    <% if @document['callNumber_tesim'] %>
+      <dt class='metadata-block__label-key'>
+        <%= "Call Number:" %>
+      </dt>
+      <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+        <%= @document['callNumber_tesim'].first %>
+      </dd>
+    <% end %>
+    <% if @document['containerGrouping_tesim'] %>
+      <dt class='metadata-block__label-key'>
+        <%= "Container/Volume:" %>
+      </dt>
+      <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+        <%= @document['containerGrouping_tesim'].first %>
+      </dd>
+    <% end %>
+    <% if @document['child_oids_ssim'] %>
+      <dt class='metadata-block__label-key'>
+        <%= "Image Count:" %>
+      </dt>
+      <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+        <%= @document['child_oids_ssim'].count %>
+      </dd>
+    <% end %>
+    <% if @document['ancestorTitles_tesim'] %>
+      <dt class='metadata-block__label-key'>
+        <%= "Found In:" %>
+      </dt>
+      <dd class='metadata-block__label-value metadata-block__label-value--yul'>
+        <%= @document['ancestorTitles_tesim'].reverse.join(' > ') %>
+      </dd>
+    <% end %>
+  </dl>
+</div>
+<br />
+<div>
+  <h3>Request Information</h3>
+  <div class="confirmation-key">
+    <%= "<b>Status:</b> #{@request_status}".html_safe %><br />
+    <%= "<b>User ID:</b> #{current_user}".html_safe %><br />
+    <%= "<b>Email:</b> #{current_user.email}".html_safe %><br />
+    <%= "<b>Full Name:</b> #{@user_full_name}".html_safe %><br />
+    <%= "<b>Reason for request:</b> #{@user_note}".html_safe %><br />
+    <%= link_to "Continue", "/catalog/#{@document[:id]}", class: "request-continue" %>
+  </div>
+</div>

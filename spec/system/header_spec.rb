@@ -18,6 +18,7 @@ RSpec.describe 'header', type: :system do
   end
 
   it 'has expected links on the main header' do
+    expect(page).to have_link('Bookmarks', href: '/bookmarks')
     expect(page).to have_link('Ask Yale Library', href: 'http://ask.library.yale.edu/')
     expect(page).to have_link('Reserve Rooms', href: 'https://schedule.yale.edu/')
     expect(page).to have_link('Places to Study', href: 'https://web.library.yale.edu/places/to-study')

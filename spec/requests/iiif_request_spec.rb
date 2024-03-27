@@ -4,7 +4,7 @@ require 'rails_helper'
 RSpec.describe "Iiifs", type: :request do
   let(:thumbnail_size) { "!1200,630" }
 
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user, netid: "net_id") }
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY.merge({ "child_oids_ssim": ["5555555"] }) }
   let(:yale_work) do
     {

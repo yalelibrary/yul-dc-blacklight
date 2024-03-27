@@ -305,3 +305,40 @@ DEFAULT MOBILE STYLING
     }
   }
 }
+/********************************************************
+BOOKMARK STYLING
+********************************************************/
+
+// This is to prevent the bookmark-toggle css below to not have an effect on the gallery view checkboxes.
+.gallery .bookmark-toggle {
+  padding-left: 0px;
+}
+
+// List item search results bookmark styling
+.index_title.document-title-heading.title_tesim {
+  display: flex;
+}
+
+.index-document-functions { 
+  padding-left: 175px;
+}
+
+.bookmark-toggle {
+  font-size: 17px;
+}
+
+@media screen and (max-width: 1650px) {
+  .index-document-functions {
+    padding-left: 90px;
+  }
+}
+@media screen and (max-width: 1530px) {
+  .index-document-functions {
+    padding-left: 0px;
+  }
+}
+@media screen and (max-width: 1380px) {
+  .index-document-functions {
+    margin-left: -105px;
+  }
+}

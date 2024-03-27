@@ -27,8 +27,10 @@
     <%= link_to t('blacklight.skip_links.main_content'), '#main-container', class: 'element-invisible element-focusable rounded-bottom py-2 px-3', data: { turbolinks: 'false' } %>
     <%= content_for(:skip_links) %>
   </nav>
-  <%= render partial: 'shared/header_navbar' %>
-  <%= render partial: 'shared/search_bar' %>
+  <header>
+    <%= render partial: 'shared/header_navbar' %>
+    <%= render partial: 'shared/search_bar' %>
+  </header>
 
   <main id="main-container" class="<%= container_classes %>" role="main" aria-label="<%= t('blacklight.main.aria.main_container') %>">
     <%= content_for(:container_header) %>

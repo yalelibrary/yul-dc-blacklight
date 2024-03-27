@@ -4,7 +4,7 @@ require 'rails_helper'
 
 # WebMock.allow_net_connect!
 RSpec.describe 'AnnotationsController', type: :request, clean: true, js: true do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user, netid: "net_id") }
   let(:public_work) do
     {
       "id": "2034600",

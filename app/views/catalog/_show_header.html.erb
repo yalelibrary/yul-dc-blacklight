@@ -1,1 +1,10 @@
-<h1 itemprop="name" class="show-header"><%= sep_title_show_page %></h1>
+<div class="show-header-container">
+  <h1 itemprop="name" class="show-header"><%= sep_title_show_page %></h1>
+  <%= render_show_doc_actions @document do |config, inner| %>
+      <% if config.key.to_s == 'bookmark' %>
+          <div class="show-<%= config.key %>">
+              <%= inner %>
+          </div>
+      <% end %>
+  <% end %>
+</div>

@@ -6,9 +6,11 @@
 
         <ul class="list-group list-group-flush">
             <%= render_show_doc_actions @document do |config, inner| %>
-                <li class="list-group-item <%= config.key %>">
-                    <%= inner %>
-                </li>
+                <% if config.key.to_s == 'citation' %>
+                    <li class="list-group-item <%= config.key %>">
+                        <%= inner %>
+                    </li>
+                <% end %>
             <% end %>
 
             <% oid = @document.id %>
