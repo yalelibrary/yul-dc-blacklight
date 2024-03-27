@@ -12,7 +12,7 @@ module AccessHelper
     when 'Yale Community Only'
       return true if (current_user && current_user.netid.present?) || User.on_campus?(request.remote_ip)
     when 'Open with Permission'
-      return true if client_can_view_owp?(document) || admin_of_owp?(document)
+      return true if client_can_view_owp?(document)
     end
     false
   end
