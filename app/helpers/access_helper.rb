@@ -23,6 +23,12 @@ module AccessHelper
     false
   end
 
+  def admin_or_approver_of_owp?(document)
+    Rails.logger.warn("starting client can view digital check for #{request.env['HTTP_X_ORIGIN_URI']}")
+    return true if object_owp?(document) && admin_of_owp?(document)
+    false
+  end
+
   def object_owp?(document)
     case document['visibility_ssi']
     when 'Open with Permission'
@@ -53,10 +59,11 @@ module AccessHelper
     allowance
   end
 
-  def admin_of_owp?(_document)
+  def admin_of_owp?(document)
     return unless current_user
+    @credentials = retrieve_admin_credentials(document)
     allowance = false
-    allowance = true if retrieve_admin_credentials['is_admin_or_approver?'] == "true"
+    allowance = true if @credentials['is_admin_or_approver?'] == "true"
     allowance
   end
 
@@ -77,13 +84,13 @@ module AccessHelper
     JSON.parse(response) unless response.nil?
   end
 
-  def retrieve_admin_credentials
+  def retrieve_admin_credentials(document)
     return nil if current_user.nil?
     # #{ENV['MANAGEMENT_HOST']}
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
-    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{@document[:id]}/#{current_user.netid}")
+    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document.id}/#{current_user.netid}")
     response = Net::HTTP.get(url)
-    JSON.parse(response) unless response.nil?
+    JSON.parse(response)
   end
 
   def client_can_view_metadata?(document)
