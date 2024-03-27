@@ -2,8 +2,9 @@
 require 'rails_helper'
 
 RSpec.describe "Open with Permission", type: :request, clean: true do
-  let(:user) { FactoryBot.create(:user, netid: "net_id", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6e", uid: 'some_name', email: 'not_real@example.com') }
-  let(:non_approved_user) { FactoryBot.create(:user, netid: "net_id", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6f", uid: 'some_name', email: 'not_real@example.com') }
+  let(:user) { FactoryBot.create(:user, netid: "net_id1", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6e", uid: 'user_uid', email: 'not_real@example.com') }
+  let(:admin_approver_user) { FactoryBot.create(:user, netid: "net_id2", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6d", uid: 'unique_uid', email: 'not_real@example.com') }
+  let(:non_approved_user) { FactoryBot.create(:user, netid: "net_id3", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6f", uid: 'some_name', email: 'not_real@example.com') }
   let(:owp_work_with_permission) do
     {
       "id": "1618909",
@@ -50,6 +51,37 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
           }
         ]}',
                  headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/1618909/#{user.netid}")
+      .to_return(status: 200, body: '{
+        "is_admin_or_approver?":"true"
+        }',
+                 headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/1618909/#{admin_approver_user.netid}")
+      .to_return(status: 200, body: '{
+        "is_admin_or_approver?":"true"
+        }',
+                 headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/1718909/#{non_approved_user.netid}")
+      .to_return(status: 200, body: '{
+        "is_admin_or_approver?":"false"
+        }',
+                 headers: [])
+    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6d')
+      .to_return(status: 200, body: '{
+        "timestamp":"2023-11-02",
+        "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6d"},
+        "permission_set_terms_agreed":[],
+        "permissions":[
+          {
+            "oid":1718909,
+            "permission_set":1,
+            "permission_set_terms":1,
+            "request_status":false,
+            "request_date":"2023-11-02T20:23:18.824Z",
+            "access_until":"2034-11-02T20:23:18.824Z"
+          }
+        ]}',
+                 headers: [])
     stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6f')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
@@ -80,6 +112,16 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
     context 'with correct permission' do
       it 'can display uv, metadata, and tools' do
         sign_in user
+        get "/catalog/1618909"
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include('universal-viewer-iframe')
+        expect(response.body).to include('Access And Usage Rights')
+        expect(response.body).to include('Manifest Link')
+      end
+    end
+    context 'with permission set admin/approver user' do
+      it 'can display uv, metadata, and tools' do
+        sign_in admin_approver_user
         get "/catalog/1618909"
         expect(response).to have_http_status(:success)
         expect(response.body).to include('universal-viewer-iframe')
