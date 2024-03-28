@@ -140,7 +140,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       visibility_ssi: 'Open with Permission',
       genre_ssim: 'Animation',
       resourceType_ssim: 'Archives or Manuscripts',
-      has_fulltext_ssi: 'Partial',
+      has_fulltext_ssi: 'Yes',
       creator_ssim: ['Paulo Coelho']
     }
   end
@@ -153,7 +153,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       language_ssim: 'fr',
       visibility_ssi: 'Open with Permission',
       genre_ssim: 'Animation',
-      has_fulltext_ssi: 'Partial',
+      has_fulltext_ssi: 'Yes',
       resourceType_ssim: 'Archives or Manuscripts',
       creator_ssim: ['Paulo Coelho']
     }
