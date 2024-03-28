@@ -89,6 +89,21 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
           "access_until":"2034-11-02T20:23:18.824Z"}
         ]}',
                  headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/161890909/#{user.netid}")
+      .to_return(status: 200, body: '{
+        "is_admin_or_approver?":"false"
+      }',
+                 headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/161890909/#{owp_user_with_access.netid}")
+      .to_return(status: 200, body: '{
+        "is_admin_or_approver?":"false"
+      }',
+                 headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/161890909/#{owp_user_no_access.netid}")
+      .to_return(status: 200, body: '{
+        "is_admin_or_approver?":"false"
+      }',
+                 headers: [])
     stub_request(:get, "http://www.example.com/management/api/permission_sets/123")
       .to_return(status: 200, body: '{
                   "timestamp":"2023-11-02",
