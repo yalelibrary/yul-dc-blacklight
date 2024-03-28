@@ -140,6 +140,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       visibility_ssi: 'Open with Permission',
       genre_ssim: 'Animation',
       resourceType_ssim: 'Archives or Manuscripts',
+      has_fulltext_ssi: 'Partial',
       creator_ssim: ['Paulo Coelho']
     }
   end
@@ -152,6 +153,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       language_ssim: 'fr',
       visibility_ssi: 'Open with Permission',
       genre_ssim: 'Animation',
+      has_fulltext_ssi: 'Partial',
       resourceType_ssim: 'Archives or Manuscripts',
       creator_ssim: ['Paulo Coelho']
     }
@@ -411,6 +413,12 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
       expect(page).not_to have_css('.uv-container')
     end
+    it 'cannot see the Show Full Text option if user does not have OwP access' do
+      visit 'catalog/54321'
+      expect(page).to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
+      expect(page).not_to have_css('.uv-container')
+      expect(page).not_to have_content "Show Full Text"
+    end
   end
 
   context "Open with Permission objects and signed in as a management approver/admin" do
@@ -422,6 +430,13 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
       expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
       expect(page).to have_css('.uv-container')
+    end
+    it 'can access the object and view UV and metadata normally and can see the Show Full Text option' do
+      visit 'catalog/12345'
+      expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
+      expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
+      expect(page).to have_css('.uv-container')
+      expect(page).to have_content "Show Full Text"
     end
   end
 
