@@ -26,6 +26,13 @@ RSpec.describe 'AnnotationsController', type: :request, clean: true, js: true do
       "visibility_ssi": "Yale Community Only"
     }
   end
+  let(:owp_work) do
+    {
+      "id": "16189090",
+      "title_tesim": ["[Map of China]. [yale-only copy]"],
+      "visibility_ssi": "Open with Permission"
+    }
+  end
   let(:child_work_yale_only) do
     {
       "id": "998834",
@@ -36,9 +43,8 @@ RSpec.describe 'AnnotationsController', type: :request, clean: true, js: true do
   let(:child_work_owp) do
     {
       "id": "9988344",
-      "parent_ssi": "1618909",
+      "parent_ssi": "16189090",
       "child_fulltext_wstsim": ["This is the full text Yale only"],
-      "visibility_ssi": "Open with Permission"
     }
   end
   let(:unknown_visibility_work) do
@@ -59,7 +65,7 @@ RSpec.describe 'AnnotationsController', type: :request, clean: true, js: true do
   describe 'Full Text' do
     before do
       solr = Blacklight.default_index.connection
-      solr.add([public_work, yale_work, unknown_visibility_work, child_work, child_work_yale_only, child_work_unknown, child_work_owp])
+      solr.add([public_work, yale_work, owp_work, unknown_visibility_work, child_work, child_work_yale_only, child_work_unknown, child_work_owp])
       solr.commit
       allow(User).to receive(:on_campus?).and_return(false)
     end
