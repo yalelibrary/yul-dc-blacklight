@@ -44,7 +44,7 @@ RSpec.describe 'AnnotationsController', type: :request, clean: true, js: true do
     {
       "id": "9988344",
       "parent_ssi": "16189090",
-      "child_fulltext_wstsim": ["This is the full text Yale only"],
+      "child_fulltext_wstsim": ["This is the full text Yale only"]
     }
   end
   let(:unknown_visibility_work) do
