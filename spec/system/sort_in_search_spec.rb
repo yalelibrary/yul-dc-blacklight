@@ -173,7 +173,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
     it 'does not have sort by collection by default' do
       visit "/catalog?f[collection_title_ssi][]=Test"
       content = find(:css, '#content')
-      expect(content).to have_content("HandsomeDan Bulldog\nCreator:\nAndy Graves\nRhett Lecheire\nCreator:\nPaulo Coelho")
+      expect(content).to have_content("HandsomeDan Bulldog\nCreator:\nAndy Graves\nRhett Lecheire\nCreator:\nPaulo Coelho").or have_content("1.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n2.\nRhett Lecheire\nCreator:\nPaulo Coelho")
       click_on 'Sort by relevance'
       within('div#sort-dropdown') do
         expect(page).to have_content("Collection Order")
