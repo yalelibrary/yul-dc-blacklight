@@ -12,7 +12,7 @@ RSpec.describe "Iiif Search", type: :request do
       "visibility_ssi": "Yale Community Only"
     }
   end
-    let(:owp_work) do
+  let(:owp_work) do
     {
       "id": "12345678",
       "title_tesim": ["Fake Work"],
