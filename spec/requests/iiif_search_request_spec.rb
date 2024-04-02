@@ -67,9 +67,7 @@ RSpec.describe "Iiif Search", type: :request do
     end
     it 'does not return any Open with Permission search results' do
       get solr_document_iiif_search_path(owp_work[:id], { q: 'OwP' })
-      expect(response).to have_http_status(:success)
-      hits = JSON.parse(response.body)["hits"]
-      expect(hits.count).to eq 0
+      expect(response).to have_http_status(:unauthorized)
     end
     it 'includes proper "on" property in resources' do
       get solr_document_iiif_search_path(yale_work[:id], { q: 'BaskeTball' })
