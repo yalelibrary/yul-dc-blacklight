@@ -12,6 +12,14 @@ RSpec.describe "Iiif Search", type: :request do
       "visibility_ssi": "Yale Community Only"
     }
   end
+    let(:owp_work) do
+    {
+      "id": "12345678",
+      "title_tesim": ["Fake Work"],
+      "child_oids_ssim": ["2222222"],
+      "visibility_ssi": "Open with Permission"
+    }
+  end
   let(:child_work1) do
     {
       "id": "3456",
@@ -28,10 +36,18 @@ RSpec.describe "Iiif Search", type: :request do
       "parent_ssi": "1234567"
     }
   end
+  let(:child_work3) do
+    {
+      "id": "345678",
+      "child_fulltext_wstsim": ["OwP Fulltext"],
+      "child_fulltext_tesim": ["OwP Fulltext"],
+      "parent_ssi": "12345678"
+    }
+  end
 
   before do
     solr = Blacklight.default_index.connection
-    solr.add([yale_work, child_work1, child_work2])
+    solr.add([yale_work, owp_work, child_work1, child_work2, child_work3])
     solr.commit
     allow(User).to receive(:on_campus?).and_return(true)
   end
@@ -48,6 +64,12 @@ RSpec.describe "Iiif Search", type: :request do
       expect(response).to have_http_status(:success)
       hits = JSON.parse(response.body)["hits"]
       expect(hits.count).to eq 1
+    end
+    it 'does not return any Open with Permission search results' do
+      get solr_document_iiif_search_path(owp_work[:id], { q: 'OwP' })
+      expect(response).to have_http_status(:success)
+      hits = JSON.parse(response.body)["hits"]
+      expect(hits.count).to eq 0
     end
     it 'includes proper "on" property in resources' do
       get solr_document_iiif_search_path(yale_work[:id], { q: 'BaskeTball' })
