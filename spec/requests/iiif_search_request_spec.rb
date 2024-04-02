@@ -16,7 +16,7 @@ RSpec.describe "Iiif Search", type: :request do
     {
       "id": "12345678",
       "title_tesim": ["Fake Work"],
-      "child_oids_ssim": ["2222222"],
+      "child_oids_ssim": ["1111111"],
       "visibility_ssi": "Open with Permission"
     }
   end
