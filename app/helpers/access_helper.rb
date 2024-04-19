@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# rubocop:disable Metrics/ModuleLength
 module AccessHelper
   def viewable_metadata_visibilities
     ["Public", "Yale Community Only", "Open with Permission"]
@@ -42,6 +43,7 @@ module AccessHelper
     pending
   end
 
+  # rubocop:disable Metrics/PerceivedComplexity
   def user_has_permission?(document)
     if params[:oid].present?
       retrieve_fulltext_credentials(params[:oid])
@@ -57,6 +59,7 @@ module AccessHelper
       allowance
     end
   end
+  # rubocop:enable Metrics/PerceivedComplexity
 
   def retrieve_fulltext_credentials(oid)
     parent_oid = oid
@@ -72,17 +75,14 @@ module AccessHelper
 
   def admin_of_owp?(document)
     return unless current_user
-    if params[:oid].present?
-      @credentials = retrieve_admin_fulltext_credentials(params[:oid])
-      allowance = false
-      allowance = true if @credentials['is_admin_or_approver?'] == "true"
-      allowance
-    else
-      @credentials = retrieve_admin_credentials(document)
-      allowance = false
-      allowance = true if @credentials['is_admin_or_approver?'] == "true"
-      allowance
-    end
+    @credentials = if params[:oid].present?
+                     retrieve_admin_fulltext_credentials(params[:oid])
+                   else
+                     retrieve_admin_credentials(document)
+                   end
+    allowance = false
+    allowance = true if @credentials['is_admin_or_approver?'] == "true"
+    allowance
   end
 
   def user_owp_permissions
@@ -146,3 +146,4 @@ module AccessHelper
     "You are not authorized to view this item."
   end
 end
+# rubocop:enable Metrics/ModuleLength
