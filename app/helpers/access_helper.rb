@@ -18,6 +18,7 @@ module AccessHelper
   end
 
   def client_can_view_owp?(document)
+    Rails.logger.info("Client_can_view_owp? document:: #{document}")
     Rails.logger.warn("starting client can view digital check for #{request.env['HTTP_X_ORIGIN_URI']}")
     return true if object_owp?(document) && user_has_permission?(document)
     false
@@ -42,7 +43,23 @@ module AccessHelper
   end
 
   def user_has_permission?(document)
-    parent_oid = document[:id]
+    if params[:oid].present?
+      retrieve_fulltext_credentials(params[:oid])
+    else
+      parent_oid = document[:id]
+      allowance = false
+      return unless current_user
+      user_owp_permissions['permissions']&.each do |permission|
+        if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today) && (permission['request_status'] == true)
+          allowance = true
+        end
+      end
+      allowance
+    end
+  end
+
+  def retrieve_fulltext_credentials(oid)
+    parent_oid = oid
     allowance = false
     return unless current_user
     user_owp_permissions['permissions']&.each do |permission|
@@ -55,10 +72,17 @@ module AccessHelper
 
   def admin_of_owp?(document)
     return unless current_user
-    @credentials = retrieve_admin_credentials(document)
-    allowance = false
-    allowance = true if @credentials['is_admin_or_approver?'] == "true"
-    allowance
+    if params[:oid].present?
+      @credentials = retrieve_admin_fulltext_credentials(params[:oid])
+      allowance = false
+      allowance = true if @credentials['is_admin_or_approver?'] == "true"
+      allowance
+    else
+      @credentials = retrieve_admin_credentials(document)
+      allowance = false
+      allowance = true if @credentials['is_admin_or_approver?'] == "true"
+      allowance
+    end
   end
 
   def user_owp_permissions
@@ -83,6 +107,15 @@ module AccessHelper
     # #{ENV['MANAGEMENT_HOST']}
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document.id}/#{current_user.netid}")
+    response = Net::HTTP.get(url)
+    JSON.parse(response)
+  end
+
+  def retrieve_admin_fulltext_credentials(document)
+    return nil if current_user.nil?
+    # #{ENV['MANAGEMENT_HOST']}
+    # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
+    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document}/#{current_user.netid}")
     response = Net::HTTP.get(url)
     JSON.parse(response)
   end
