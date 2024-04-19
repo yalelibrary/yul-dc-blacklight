@@ -152,12 +152,14 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
       login_as owp_user_no_access
       visit '/catalog?search_field=fulltext_tesim&fulltext_search=2&q=full'
       expect(page).not_to have_content 'full text OwP'
+      expect(page).to have_content('Available with permission')
     end
     it 'cannot view YCO full text search results' do
       allow(User).to receive(:on_campus?).and_return(false)
       visit '/catalog?search_field=fulltext_tesim&fulltext_search=2&q=full'
       expect(page).not_to have_content 'full text Yale only'
       expect(page).to have_content 'full text public'
+      expect(page).to have_content('Available with permission')
     end
   end
 end
