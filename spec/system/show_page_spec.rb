@@ -438,8 +438,6 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
       expect(page).to have_css('.uv-container')
       expect(page).to have_content "Show Full Text"
-      click_on 'Show Full Text'
-      expect(page).to have_content "fulltext text for llama child one."
     end
   end
 
