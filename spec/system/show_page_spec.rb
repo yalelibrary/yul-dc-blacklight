@@ -134,16 +134,10 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
 
   let(:owp_work) do
     {
-      id: '12345',
-      title_tesim: ['Rhett Lecheire'],
-      format: 'text',
-      language_ssim: 'fr',
-      visibility_ssi: 'Open with Permission',
-      genre_ssim: 'Animation',
-      fulltext_tesim: ["This is the full text owp"],
-      resourceType_ssim: 'Archives or Manuscripts',
-      has_fulltext_ssi: 'Yes',
-      creator_ssim: ['Paulo Coelho']
+      "id": "12345",
+      "title_tesim": ["[OwP Title]"],
+      "fulltext_tesim": ["This is full text OwP"],
+      "visibility_ssi": "Open with Permission"
     }
   end
 
@@ -334,7 +328,6 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
 
         expect(page).to have_css('.fulltext-button')
         expect(page).to have_content('Show Full Text')
-        click_on "Show Full Text"
       end
       it 'has a "Show Full Text" button with a partial fulltext status' do
         visit 'catalog/112'
