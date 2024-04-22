@@ -104,6 +104,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
               puppy,
               owp_work,
               owp_work_2,
+              owp_child_work,
               train,
               void])
     solr.commit
@@ -139,10 +140,18 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       language_ssim: 'fr',
       visibility_ssi: 'Open with Permission',
       genre_ssim: 'Animation',
-      child_oids_ssim: [112, 113],
+      fulltext_tesim: ["This is the full text owp"],
       resourceType_ssim: 'Archives or Manuscripts',
       has_fulltext_ssi: 'Yes',
       creator_ssim: ['Paulo Coelho']
+    }
+  end
+
+  let(:owp_child_work) do
+    {
+      "id": "998833",
+      "parent_ssi": "12345",
+      "child_fulltext_wstsim": ["This is the full text owp"]
     }
   end
 
@@ -325,6 +334,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
 
         expect(page).to have_css('.fulltext-button')
         expect(page).to have_content('Show Full Text')
+        click_on "Show Full Text"
       end
       it 'has a "Show Full Text" button with a partial fulltext status' do
         visit 'catalog/112'
@@ -438,6 +448,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
       expect(page).to have_css('.uv-container')
       expect(page).to have_content "Show Full Text"
+      click_on "Show Full Text"
+      expect(page).to have_content "This is the full text owp"
     end
   end
 
