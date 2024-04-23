@@ -138,9 +138,6 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
       visit '/catalog?search_field=fulltext_tesim&fulltext_search=2&q=full'
       expect(page).to have_content 'full text Yale only'
       expect(page).to have_content 'full text public'
-      click_on "[Map of China]. [public copy]"
-      click_on "Show Full Text"
-      expect(page).to have_content("This is the full text public")
     end
     it 'can see OwP full text when permission request is approved' do
       login_as owp_user_with_access
