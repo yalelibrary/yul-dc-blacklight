@@ -94,6 +94,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
                  headers: [])
     stub_request(:get, "http://www.example.com/management/api/permission_sets/54321/terms")
       .to_return(status: 200, body: "{\"id\":2,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: {})
+    # stub_request(:get, "http://www.example.com/annotation/oid/12345/canvas/99883409/fulltext")
+    #   .to_return(status: 200, body: "{\"This is full text OwP\"}", headers: {})
 
     solr = Blacklight.default_index.connection
     solr.add([llama,
@@ -103,8 +105,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
               eagle,
               puppy,
               owp_work,
+              child_work_owp,
               owp_work_2,
-              owp_child_work,
               train,
               void])
     solr.commit
@@ -140,18 +142,18 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       language_ssim: 'fr',
       visibility_ssi: 'Open with Permission',
       genre_ssim: 'Animation',
-      fulltext_tesim: ["This is the full text owp"],
+      fulltext_tesim: ["This is full text OwP"],
       resourceType_ssim: 'Archives or Manuscripts',
       has_fulltext_ssi: 'Yes',
       creator_ssim: ['Paulo Coelho']
     }
   end
 
-  let(:owp_child_work) do
+  let(:child_work_owp) do
     {
-      "id": "998833",
+      "id": "99883409",
       "parent_ssi": "12345",
-      "child_fulltext_wstsim": ["This is the full text owp"]
+      "fulltext_tesim": ["This is full text OwP"]
     }
   end
 
@@ -180,6 +182,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       resourceType_ssim: 'Maps, Atlases & Globes',
       creator_ssim: ['Anna Elizabeth Dewdney'],
       fulltext_tesim: ['fulltext text for llama child one.'],
+      child_fulltext_wstsim: ['fulltext text for llama child one.'],
       has_fulltext_ssi: 'Partial'
     }
   end
@@ -334,6 +337,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
 
         expect(page).to have_css('.fulltext-button')
         expect(page).to have_content('Show Full Text')
+        click_on "Show Full Text"
+        expect(page).to have_content('fulltext text for llama child one.')
       end
       it 'has a "Show Full Text" button with a partial fulltext status' do
         visit 'catalog/112'
@@ -447,8 +452,6 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
       expect(page).to have_css('.uv-container')
       expect(page).to have_content "Show Full Text"
-      # click_on "Show Full Text"
-      # expect(page).to have_content "This is the full text owp"
     end
   end
 
