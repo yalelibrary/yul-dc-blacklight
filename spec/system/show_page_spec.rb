@@ -183,6 +183,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       creator_ssim: ['Anna Elizabeth Dewdney'],
       fulltext_tesim: ['fulltext text for llama child one.'],
       child_fulltext_wstsim: ['fulltext text for llama child one.'],
+      parent_ssi: '111',
       has_fulltext_ssi: 'Partial'
     }
   end
