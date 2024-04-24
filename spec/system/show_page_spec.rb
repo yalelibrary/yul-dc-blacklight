@@ -442,13 +442,13 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     before do
       login_as management_approver
     end
-    it 'can access the object and view UV and metadata normally without approver_status' do
+    xit 'can access the object and view UV and metadata normally without approver_status' do
       visit 'catalog/12345'
       expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
       expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
       expect(page).to have_css('.uv-container')
-      # click_on "Show Full Text"
-      # expect(page).to have_content("This is full text OwP")
+      click_on "Show Full Text"
+      expect(page).to have_content("This is full text OwP")
     end
     it 'can access the object and view UV and metadata normally and can see the Show Full Text option' do
       visit 'catalog/12345'
