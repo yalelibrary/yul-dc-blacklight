@@ -157,7 +157,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       visibility_ssi: 'Public',
       parent_ssi: "12345",
       fulltext_tesim: ["This is full text OwP"],
-      # child_fulltext_wstsim: ["This is full text OwP"],
+      child_fulltext_wstsim: ["This is full text OwP"],
       has_fulltext_ssi: 'Partial'
     }
   end
