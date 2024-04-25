@@ -44,7 +44,7 @@ module AccessHelper
 
   # rubocop:disable Metrics/PerceivedComplexity
   def user_has_permission?(document)
-    params[:oid].present? ? parent_oid = params[:oid] : parent_oid = document[:id]
+    parent_oid = params[:oid].presence || document[:id]
     allowance = false
     return unless current_user
     user_owp_permissions['permissions']&.each do |permission|
