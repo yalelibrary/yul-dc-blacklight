@@ -422,7 +422,14 @@ module BlacklightHelper
   def render_thumbnail(document, _options)
     # return placeholder image if not logged in for yale only works
     unless client_can_view_digital?(document)
-      return image_tag('placeholder_restricted.png', alt: 'Access Available on YALE network only due to copyright or other restrictions. OFF-SITE? Log in with NetID')
+      if document['visibility_ssi'] == "Open with Permission"
+        return image_tag('OwP-access-image.png',
+alt: 'Access Available by request only due to collection restrictions. Place log in to request access')
+      end
+      if document['visibility_ssi'] != "Open with Permission"
+        return image_tag('placeholder_restricted.png',
+alt: 'Access Available on YALE network only due to copyright or other restrictions. OFF-SITE? Log in with NetID')
+      end
     end
     url = document[:thumbnail_path_ss]
     if url.present?
