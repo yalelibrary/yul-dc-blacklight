@@ -44,24 +44,7 @@ module AccessHelper
 
   # rubocop:disable Metrics/PerceivedComplexity
   def user_has_permission?(document)
-    if params[:oid].present?
-      retrieve_fulltext_credentials(params[:oid])
-    else
-      parent_oid = document[:id]
-      allowance = false
-      return unless current_user
-      user_owp_permissions['permissions']&.each do |permission|
-        if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today) && (permission['request_status'] == true)
-          allowance = true
-        end
-      end
-      allowance
-    end
-  end
-  # rubocop:enable Metrics/PerceivedComplexity
-
-  def retrieve_fulltext_credentials(oid)
-    parent_oid = oid
+    params[:oid].present? ? parent_oid = params[:oid] : parent_oid = document[:id]
     allowance = false
     return unless current_user
     user_owp_permissions['permissions']&.each do |permission|
@@ -71,6 +54,7 @@ module AccessHelper
     end
     allowance
   end
+  # rubocop:enable Metrics/PerceivedComplexity
 
   def admin_of_owp?(document)
     return unless current_user
