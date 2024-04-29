@@ -46,7 +46,7 @@ module AccessHelper
   def user_has_permission?(document)
     return unless current_user
     parent_oid = params[:oid].presence || document[:id]
-    return if parent_oid.nil?
+    return false if parent_oid.nil?
     allowance = false
     user_owp_permissions['permissions']&.each do |permission|
       if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today) && (permission['request_status'] == true)
