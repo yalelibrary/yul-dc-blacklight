@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# rubocop:disable Metrics/ModuleLength
 module AccessHelper
   def viewable_metadata_visibilities
     ["Public", "Yale Community Only", "Open with Permission"]
@@ -41,10 +42,12 @@ module AccessHelper
     pending
   end
 
+  # rubocop:disable Metrics/PerceivedComplexity
   def user_has_permission?(document)
-    parent_oid = document[:id]
-    allowance = false
     return unless current_user
+    parent_oid = params[:oid].presence || document[:id]
+    return false if parent_oid.nil?
+    allowance = false
     user_owp_permissions['permissions']&.each do |permission|
       if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today) && (permission['request_status'] == true)
         allowance = true
@@ -52,10 +55,15 @@ module AccessHelper
     end
     allowance
   end
+  # rubocop:enable Metrics/PerceivedComplexity
 
   def admin_of_owp?(document)
     return unless current_user
-    @credentials = retrieve_admin_credentials(document)
+    @credentials = if params[:oid].present?
+                     retrieve_admin_fulltext_credentials(params[:oid])
+                   else
+                     retrieve_admin_credentials(document)
+                   end
     allowance = false
     allowance = true if @credentials['is_admin_or_approver?'] == "true"
     allowance
@@ -87,6 +95,15 @@ module AccessHelper
     JSON.parse(response)
   end
 
+  def retrieve_admin_fulltext_credentials(document)
+    return nil if current_user.nil?
+    # #{ENV['MANAGEMENT_HOST']}
+    # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
+    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document}/#{current_user.netid}")
+    response = Net::HTTP.get(url)
+    JSON.parse(response)
+  end
+
   def client_can_view_metadata?(document)
     viewable_metadata_visibilities.include? document['visibility_ssi']
   end
@@ -113,3 +130,4 @@ module AccessHelper
     "You are not authorized to view this item."
   end
 end
+# rubocop:enable Metrics/ModuleLength
