@@ -83,7 +83,7 @@ RSpec.describe "Open with Permission", type: :system do
             "oid":1818909,
             "permission_set":1,
             "permission_set_terms":1,
-            "request_status":null,
+            "request_status":"Pending",
             "request_date":"2025-11-02T20:23:18.824Z",
             "access_until":null
           },

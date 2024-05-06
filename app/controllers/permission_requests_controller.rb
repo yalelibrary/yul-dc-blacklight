@@ -35,7 +35,7 @@ class PermissionRequestsController < ApplicationController
 
   def create_readable_access_until(permission_request)
     readable_access_until = 'N/A'
-    readable_access_until = DateTime.parse(permission_request['access_until']).strftime("%m/%d/%y") if permission_request['request_status']
+    readable_access_until = DateTime.parse(permission_request['access_until']).strftime("%m/%d/%y") if permission_request['request_status'] == "Approved"
     readable_access_until
   end
 
