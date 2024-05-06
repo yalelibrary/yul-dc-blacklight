@@ -18,17 +18,6 @@ class ApplicationController < ActionController::Base
     render layout: false
   end
 
-  # For open with permission works
-  def create_readable_status(status)
-    readable_status = "Pending"
-    if status == true
-      readable_status = "Approved"
-    elsif status == false
-      readable_status = "Denied"
-    end
-    readable_status
-  end
-
   def help_guide
     render "/help_guide"
   end

@@ -70,7 +70,7 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
           "oid":161890909,
           "permission_set":1,
           "permission_set_terms":1,
-          "request_status":false,
+          "request_status":"Denied",
           "request_date":"2023-11-02T20:23:18.824Z",
           "access_until":"2034-11-02T20:23:18.824Z"}
         ]}',
@@ -84,7 +84,7 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
           "oid":161890909,
           "permission_set":1,
           "permission_set_terms":1,
-          "request_status":true,
+          "request_status":"Approved",
           "request_date":"2023-11-02T20:23:18.824Z",
           "access_until":"2034-11-02T20:23:18.824Z"}
         ]}',

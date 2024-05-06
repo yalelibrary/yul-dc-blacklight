@@ -57,7 +57,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
           "oid":12345,
           "permission_set":1,
           "permission_set_terms":1,
-          "request_status":true,
+          "request_status":"Approved",
           "request_date":"2023-11-02T20:23:18.824Z",
           "access_until":"2034-11-02T20:23:18.824Z"}
         ]}',
@@ -71,7 +71,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
           "oid":12345,
           "permission_set":1,
           "permission_set_terms":1,
-          "request_status":false,
+          "request_status":"Denied",
           "request_date":"2023-11-02T20:23:18.824Z",
           "access_until":"2034-11-02T20:23:18.824Z"}
         ]}',
@@ -87,7 +87,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
           "oid":54321,
           "permission_set":1,
           "permission_set_terms":2,
-          "request_status":true,
+          "request_status":"Approved",
           "request_date":"2023-11-02T20:23:18.824Z",
           "access_until":"2034-11-02T20:23:18.824Z"}
         ]}',

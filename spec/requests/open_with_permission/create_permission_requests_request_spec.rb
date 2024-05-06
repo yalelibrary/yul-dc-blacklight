@@ -36,7 +36,7 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
           "oid":1618909,
           "permission_set":1,
           "permission_set_terms":1,
-          "request_status":true,
+          "request_status":"Approved",
           "request_date":"2023-11-02T20:23:18.824Z",
           "access_until":"2034-11-02T20:23:18.824Z",
           "user_note": "permission.user_note",

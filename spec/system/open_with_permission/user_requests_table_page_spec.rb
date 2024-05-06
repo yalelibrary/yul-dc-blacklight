@@ -68,14 +68,14 @@ RSpec.describe "Open with Permission", type: :system do
           "oid":1618909,
           "permission_set":1,
           "permission_set_terms":1,
-          "request_status":true,
+          "request_status":"Approved",
           "request_date":"2023-11-02T20:23:18.824Z",
           "access_until":"2034-11-02T20:23:18.824Z"},
           {
             "oid":1718909,
             "permission_set":1,
             "permission_set_terms":1,
-            "request_status":false,
+            "request_status":"Denied",
             "request_date":"2024-11-02T20:23:18.824Z",
             "access_until":null
           },
@@ -91,7 +91,7 @@ RSpec.describe "Open with Permission", type: :system do
             "oid":1918909,
             "permission_set":1,
             "permission_set_terms":1,
-            "request_status":true,
+            "request_status":"Approved",
             "request_date":"2026-11-02T20:23:18.824Z",
             "access_until":"2034-11-02T20:23:18.824Z"
           },
@@ -99,7 +99,7 @@ RSpec.describe "Open with Permission", type: :system do
             "oid":11018909,
             "permission_set":1,
             "permission_set_terms":1,
-            "request_status":false,
+            "request_status":"Denied",
             "request_date":"2027-11-02T20:23:18.824Z",
             "access_until":null
           }
