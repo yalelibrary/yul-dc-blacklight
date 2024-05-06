@@ -46,7 +46,7 @@ RSpec.describe "Permission Requests", type: :system do
             "oid":1718909,
             "permission_set":1,
             "permission_set_terms":1,
-            "request_status":null,
+            "request_status":"Pending",
             "request_date":"2023-11-02T20:23:18.824Z",
             "access_until":null,
             "user_note": "lorem ipsum",
