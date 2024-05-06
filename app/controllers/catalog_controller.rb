@@ -671,7 +671,7 @@ class CatalogController < ApplicationController
           @render_confirmation = true
           @user_full_name = permission['user_full_name']
           @user_note = permission['user_note']
-          @request_status = create_readable_status(permission['request_status'])
+          @request_status = permission['request_status']
         end
       end
       if @render_confirmation

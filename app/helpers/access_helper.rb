@@ -37,7 +37,7 @@ module AccessHelper
     pending = false
     return unless current_user
     user_owp_permissions['permissions']&.each do |permission|
-      pending = true if (permission['oid'].to_s == parent_oid) && !permission['request_date'].nil? && (permission['request_status'] == false || permission['request_status'].nil?)
+      pending = true if (permission['oid'].to_s == parent_oid) && !permission['request_date'].nil? && (permission['request_status'] == "Pending")
     end
     pending
   end
@@ -49,7 +49,7 @@ module AccessHelper
     return false if parent_oid.nil?
     allowance = false
     user_owp_permissions['permissions']&.each do |permission|
-      if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today) && (permission['request_status'] == true)
+      if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today) && (permission['request_status'] == "Approved")
         allowance = true
       end
     end

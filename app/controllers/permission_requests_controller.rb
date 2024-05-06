@@ -18,7 +18,7 @@ class PermissionRequestsController < ApplicationController
     user_owp_permissions['permissions']&.each do |permission|
       oid = permission['oid']
       request_date = DateTime.parse(permission['request_date']).strftime("%m/%d/%y")
-      request_status = create_readable_status(permission['request_status'])
+      request_status = permission['request_status']
       access_until = create_readable_access_until(permission)
       # oid, status, date requested, access until
       document = search_service.fetch(oid)
@@ -35,7 +35,7 @@ class PermissionRequestsController < ApplicationController
 
   def create_readable_access_until(permission_request)
     readable_access_until = 'N/A'
-    readable_access_until = DateTime.parse(permission_request['access_until']).strftime("%m/%d/%y") if permission_request['request_status']
+    readable_access_until = DateTime.parse(permission_request['access_until']).strftime("%m/%d/%y") if permission_request['request_status'] == "Approved"
     readable_access_until
   end
 
