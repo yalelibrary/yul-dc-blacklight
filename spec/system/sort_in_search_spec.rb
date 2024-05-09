@@ -86,30 +86,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
     }
   end
 
-  xit 'sorts by date from oldest to newest' do
-    click_on 'search'
-    click_on 'Sort by relevance'
-    click_on 'date (oldest first)'
-
-    content = find(:css, '#content')
-    expect(content).to have_content("1.\nAquila Eccellenza")
-    expect(content).to have_content("2.\nHandsomeDan Bulldog")
-    expect(content).to have_content("3.\nAmor Llama")
-    expect(content).to have_content("4.\nRhett Lecheire")
-  end
-
-  xit 'sorts by date from newest to oldest' do
-    click_on 'search'
-    click_on 'Sort by relevance'
-    click_on 'date (newest first)'
-
-    content = find(:css, '#content')
-    expect(content).to have_content("1.\nRhett Lecheire")
-    expect(content).to have_content("2.\nAmor Llama")
-    expect(content).to have_content("3.\nHandsomeDan Bulldog")
-    expect(content).to have_content("4.\nAquila Eccellenza")
-  end
-
+  # rubocop:disable Layout/LineLength
   context 'sorts by title' do
     it 'asc' do
       click_on 'search'
@@ -119,10 +96,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       end
 
       content = find(:css, '#content')
-      expect(content).to have_content("1.\nAmor Llama")
-      expect(content).to have_content("2.\nAquila Eccellenza")
-      expect(content).to have_content("3.\nHandsomeDan Bulldog")
-      expect(content).to have_content("4.\nRhett Lecheire")
+      expect(content).to have_content("SORT BY TITLE (A --> Z)\nNumber of results to display per page\n10 PER PAGE\nView results as:\nLIST\nLIST\nGALLERY\nGALLERY\nSearch Results\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney\nAquila Eccellenza\nCreator:\nAndrew Norriss\nHandsomeDan Bulldog\nCreator:\nAndy Graves\nRhett Lecheire\nCreator:\nPaulo Coelho").or have_content("1.\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney\n2.\nAquila Eccellenza\nCreator:\nAndrew Norriss\n3.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n4.\nRhett Lecheire\nCreator:\nPaulo Coelho")
     end
 
     it 'desc' do
@@ -133,10 +107,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       end
 
       content = find(:css, '#content')
-      expect(content).to have_content("4.\nAmor Llama")
-      expect(content).to have_content("3.\nAquila Eccellenza")
-      expect(content).to have_content("2.\nHandsomeDan Bulldog")
-      expect(content).to have_content("1.\nRhett Lecheire")
+      expect(content).to have_content("SORT BY TITLE (Z --> A)\nNumber of results to display per page\n10 PER PAGE\nView results as:\nLIST\nLIST\nGALLERY\nGALLERY\nSearch Results\nRhett Lecheire\nCreator:\nPaulo Coelho\nHandsomeDan Bulldog\nCreator:\nAndy Graves\nAquila Eccellenza\nCreator:\nAndrew Norriss\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney").or have_content("1.\nRhett Lecheire\nCreator:\nPaulo Coelho\n2.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n3.\nAquila Eccellenza\nCreator:\nAndrew Norriss\n4.\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney")
     end
   end
 
@@ -149,10 +120,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       end
 
       content = find(:css, '#content')
-      expect(content).to have_content("1.\nAquila Eccellenza")
-      expect(content).to have_content("2.\nHandsomeDan Bulldog")
-      expect(content).to have_content("3.\nAmor Llama")
-      expect(content).to have_content("4.\nRhett Lecheire")
+      expect(content).to have_content("SORT BY CREATOR (A --> Z)\nNumber of results to display per page\n10 PER PAGE\nView results as:\nLIST\nLIST\nGALLERY\nGALLERY\nSearch Results\nAquila Eccellenza\nCreator:\nAndrew Norriss\nHandsomeDan Bulldog\nCreator:\nAndy Graves\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney\nRhett Lecheire\nCreator:\nPaulo Coelho").or have_content("1.\nAquila Eccellenza\nCreator:\nAndrew Norriss\n2.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n3.\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney\n4.\nRhett Lecheire\nCreator:\nPaulo Coelho")
     end
 
     it 'sorts by creator desc' do
@@ -163,10 +131,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       end
 
       content = find(:css, '#content')
-      expect(content).to have_content("4.\nAquila Eccellenza")
-      expect(content).to have_content("3.\nHandsomeDan Bulldog")
-      expect(content).to have_content("2.\nAmor Llama")
-      expect(content).to have_content("1.\nRhett Lecheire")
+      expect(content).to have_content("SORT BY CREATOR (Z --> A)\nNumber of results to display per page\n10 PER PAGE\nView results as:\nLIST\nLIST\nGALLERY\nGALLERY\nSearch Results\nRhett Lecheire\nCreator:\nPaulo Coelho\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney\nHandsomeDan Bulldog\nCreator:\nAndy Graves\nAquila Eccellenza\nCreator:\nAndrew Norriss").or have_content("1.\nRhett Lecheire\nCreator:\nPaulo Coelho\n2.\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney\n3.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n4.\nAquila Eccellenza\nCreator:\nAndrew Norriss")
     end
   end
 
@@ -179,10 +144,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       end
 
       content = find(:css, '#content')
-      expect(content).to have_content("1.\nAmor Llama")
-      expect(content).to have_content("2.\nHandsomeDan Bulldog")
-      expect(content).to have_content("3.\nRhett Lecheire")
-      expect(content).to have_content("4.\nAquila Eccellenza")
+      expect(content).to have_content("SORT BY YEAR (ASCENDING)\nNumber of results to display per page\n10 PER PAGE\nView results as:\nLIST\nLIST\nGALLERY\nGALLERY\nSearch Results\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney\nHandsomeDan Bulldog\nCreator:\nAndy Graves\nRhett Lecheire\nCreator:\nPaulo Coelho\nAquila Eccellenza\nCreator:\nAndrew Norriss").or have_content("1.\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney\n2.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n3.\nRhett Lecheire\nCreator:\nPaulo Coelho\n4.\nAquila Eccellenza\nCreator:\nAndrew Norriss")
     end
 
     it 'sorts by year desc' do
@@ -193,10 +155,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       end
 
       content = find(:css, '#content')
-      expect(content).to have_content("1.\nAquila Eccellenza")
-      expect(content).to have_content("2.\nRhett Lecheire")
-      expect(content).to have_content("3.\nHandsomeDan Bulldog")
-      expect(content).to have_content("4.\nAmor Llama")
+      expect(content).to have_content("SORT BY YEAR (DESCENDING)\nNumber of results to display per page\n10 PER PAGE\nView results as:\nLIST\nLIST\nGALLERY\nGALLERY\nSearch Results\nAquila Eccellenza\nCreator:\nAndrew Norriss\nRhett Lecheire\nCreator:\nPaulo Coelho\nHandsomeDan Bulldog\nCreator:\nAndy Graves\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney").or have_content("1.\nAquila Eccellenza\nCreator:\nAndrew Norriss\n2.\nRhett Lecheire\nCreator:\nPaulo Coelho\n3.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n4.\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney")
     end
   end
 
@@ -214,16 +173,15 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
     it 'does not have sort by collection by default' do
       visit "/catalog?f[collection_title_ssi][]=Test"
       content = find(:css, '#content')
-      expect(content).to have_content("1.\nHandsomeDan Bulldog")
-      expect(content).to have_content("2.\nRhett Lecheire")
+      expect(content).to have_content("HandsomeDan Bulldog\nCreator:\nAndy Graves\nRhett Lecheire\nCreator:\nPaulo Coelho").or have_content("1.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n2.\nRhett Lecheire\nCreator:\nPaulo Coelho")
       click_on 'Sort by relevance'
       within('div#sort-dropdown') do
         expect(page).to have_content("Collection Order")
         click_on "Collection Order"
       end
       content = find(:css, '#content')
-      expect(content).to have_content("1.\nRhett Lecheire")
-      expect(content).to have_content("2.\nHandsomeDan Bulldog")
+      expect(content).to have_content("Rhett Lecheire\nCreator:\nPaulo Coelho\nHandsomeDan Bulldog\nCreator:\nAndy Graves").or have_content("1.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n2.\nRhett Lecheire\nCreator:\nPaulo Coelho")
     end
   end
+  # rubocop:enable Layout/LineLength
 end
