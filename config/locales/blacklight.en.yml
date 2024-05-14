@@ -8,8 +8,9 @@ en:
   blacklight:
     application_name: 'Yale University Library'
     bookmarks:
+      title: 'Saved Items'
       clear:
-        action_title: 'Clear All Bookmarks'
+        action_title: 'Clear All Saved Items'
         action_confirm: Are you sure you want to clear all bookmarks? You cannot undo this action.
     sidebar:
       links: Links
@@ -21,6 +22,9 @@ en:
       login: Log in
       logout: Log out
     search:
+      bookmarks:
+        present: "In Saved Items"
+        absent: "Save Item"
       search_constraints_header: You Searched For
       page_title:
         results: '%{count} results for %{q}'
