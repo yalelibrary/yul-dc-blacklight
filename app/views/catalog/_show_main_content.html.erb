@@ -16,7 +16,7 @@
     <% elsif object_owp?(@document) && pending_request?(@document) && current_user %>
       <%= render_document_partials @document, [:show_header] %>
       <div class='text-container'>
-        <p class='yale-owp-restricted-work-text'>Your request to access this item has been received. Thank you for your patience as we consider your request. You will be notified of the results of your request once a decision has been made.</p>
+        <p class='yale-owp-restricted-work-text'>Your request to access this item has been received. Thank you for your patience as we consider your request. You will be notified of the results of your request once a decision has been made. You can view all your requests on the <%= link_to 'Access Requests', permission_requests_url %> page.</p>
       </div>  
       <%= render "grouped_metadata" %>
     <% elsif object_owp?(@document) && !client_can_view_owp?(@document) && current_user %>
