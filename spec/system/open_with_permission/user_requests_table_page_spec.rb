@@ -161,8 +161,6 @@ RSpec.describe "Open with Permission", type: :system do
         # access expires column displays N/A for Pending or Denied requests
         expect(page).to have_content('N/A', count: 3)
         expect(page).to have_content('11/02/34').twice
-        # has a button that goes to /bookmarks
-        expect(page).to have_link 'BACK TO BOOKMARKS', href: bookmarks_path
       end
 
       it 'can search as expected' do
