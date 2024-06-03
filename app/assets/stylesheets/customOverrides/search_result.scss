@@ -228,6 +228,12 @@ DEFAULT MOBILE STYLING
     }
   }
 
+  @media screen and (min-width: $mini_device) {
+    .dl-invert dd {
+      margin-left: 100px;
+    }
+  }
+
   @media screen and (min-width: $xlarge_device) {
     margin-left: 0;
 
