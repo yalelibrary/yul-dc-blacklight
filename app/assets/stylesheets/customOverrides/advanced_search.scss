@@ -47,7 +47,7 @@ DEFAULT MOBILE STYLING
   display: inline-block;
   width: 20%;
   height: 50px !important;
-  padding: 0.65rem 0.65rem 0.5rem 1rem;
+  padding: 14px;
   vertical-align: baseline;
   background-repeat: no-repeat;
   background-image: image-url('light-blue-double-arrow.png');  border: 1px solid #ced4da;
@@ -188,6 +188,13 @@ span#advanced-fulltext-info {
     width: 154%;
     border-top: 1px solid $light_grey;
     padding-top: 20px;
+  }
+}
+
+@media screen and (min-width: $mini_device) {
+
+  .input-small {
+    width: 27%;
   }
 }
 
