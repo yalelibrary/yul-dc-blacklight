@@ -147,7 +147,7 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
         expect(response.body).not_to include('universal-viewer-iframe')
         expect(response.body).to include('Access And Usage Rights')
         # rubocop:disable Layout/LineLength
-        expect(response.body).to include('Your request to access this item has been received. Thank you for your patience as we consider your request. You will be notified of the results of your request once a decision has been made.')
+        expect(response.body).to include('Your request to access this item has been received. Thank you for your patience as your request is considered. You will be notified via email of the results of your request once a decision has been made.')
         # rubocop:enable Layout/LineLength
       end
     end
