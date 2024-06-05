@@ -109,7 +109,7 @@ class PermissionRequestsController < ApplicationController
     elsif http_status == 403
       redirect_to("/catalog/#{params[:oid]}/request_form", notice: 'Too many pending requests')
     elsif http_status == 201 || http_status == 200
-      redirect_to("/catalog/#{params[:oid]}/request_confirmation", notice: 'Your request has been submitted for review by Library staff')
+      redirect_to("/catalog/#{params[:oid]}/request_confirmation", notice: 'Your request has been submitted for review.')
     else
       redirect_to("/catalog/#{params[:oid]}/request_form", notice: "An error has occured.  Please try again later.")
     end
