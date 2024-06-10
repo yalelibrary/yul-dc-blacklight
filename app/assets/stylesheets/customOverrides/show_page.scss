@@ -652,3 +652,9 @@ p.yale-restricted-work-text{
     height: 50px;
   }
 }
+
+@media screen and (min-width: $mini_device) {
+  .aSpace_tree {
+    margin-top: 15%;
+  }
+}
