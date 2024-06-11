@@ -96,7 +96,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       end
 
       content = find(:css, '#content')
-      expect(content).to have_content("Amor Llama\nSave Item\nCreator:\nAnna Elizabeth Dewdney\nAquila Eccellenza\nSave Item\nCreator:\nAndrew Norriss\nHandsomeDan Bulldog\nSave Item\nCreator:\nAndy Graves\nRhett Lecheire\nSave Item\nCreator:\nPaulo Coelho").or have_content("1.\nAmor Llama\nSave Item\nCreator:\nAnna Elizabeth Dewdney\n2.\nAquila Eccellenza\nSave Item\nCreator:\nAndrew Norriss\n3.\nHandsomeDan Bulldog\nSave Item\nCreator:\nAndy Graves\n4.\nRhett Lecheire\nSave Item\nCreator:\nPaulo Coelho")
+      expect(content).to have_content("Amor Llama\nCreator:\nAnna Elizabeth Dewdney\nAquila Eccellenza\nCreator:\nAndrew Norriss\nHandsomeDan Bulldog\nCreator:\nAndy Graves\nRhett Lecheire\nCreator:\nPaulo Coelho").or have_content("1.\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney\n2.\nAquila Eccellenza\nCreator:\nAndrew Norriss\n3.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n4.\nRhett Lecheire\nCreator:\nPaulo Coelho")
     end
 
     it 'desc' do
@@ -107,7 +107,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       end
 
       content = find(:css, '#content')
-      expect(content).to have_content("Rhett Lecheire\nSave Item\nCreator:\nPaulo Coelho\nHandsomeDan Bulldog\nSave Item\nCreator:\nAndy Graves\nAquila Eccellenza\nSave Item\nCreator:\nAndrew Norriss\nAmor Llama\nSave Item\nCreator:\nAnna Elizabeth Dewdney").or have_content("1.\nRhett Lecheire\nSave Item\nCreator:\nPaulo Coelho\n2.\nHandsomeDan Bulldog\nSave Item\nCreator:\nAndy Graves\n3.\nAquila Eccellenza\nSave Item\nCreator:\nAndrew Norriss\n4.\nAmor Llama\nSave Item\nCreator:\nAnna Elizabeth Dewdney")
+      expect(content).to have_content("Rhett Lecheire\nCreator:\nPaulo Coelho\nHandsomeDan Bulldog\nCreator:\nAndy Graves\nAquila Eccellenza\nCreator:\nAndrew Norriss\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney").or have_content("1.\nRhett Lecheire\nCreator:\nPaulo Coelho\n2.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n3.\nAquila Eccellenza\nCreator:\nAndrew Norriss\n4.\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney")
     end
   end
 
@@ -120,7 +120,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       end
 
       content = find(:css, '#content')
-      expect(content).to have_content("Aquila Eccellenza\nSave Item\nCreator:\nAndrew Norriss\nHandsomeDan Bulldog\nSave Item\nCreator:\nAndy Graves\nAmor Llama\nSave Item\nCreator:\nAnna Elizabeth Dewdney\nRhett Lecheire\nSave Item\nCreator:\nPaulo Coelho").or have_content("1.\nAquila Eccellenza\nSave Item\nCreator:\nAndrew Norriss\n2.\nHandsomeDan Bulldog\nSave Item\nCreator:\nAndy Graves\n3.\nAmor Llama\nSave Item\nCreator:\nAnna Elizabeth Dewdney\n4.\nRhett Lecheire\nSave Item\nCreator:\nPaulo Coelho")
+      expect(content).to have_content("Aquila Eccellenza\nCreator:\nAndrew Norriss\nHandsomeDan Bulldog\nCreator:\nAndy Graves\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney\nRhett Lecheire\nCreator:\nPaulo Coelho").or have_content("1.\nAquila Eccellenza\nCreator:\nAndrew Norriss\n2.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n3.\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney\n4.\nRhett Lecheire\nCreator:\nPaulo Coelho")
     end
 
     it 'sorts by creator desc' do
@@ -131,7 +131,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       end
 
       content = find(:css, '#content')
-      expect(content).to have_content("Rhett Lecheire\nSave Item\nCreator:\nPaulo Coelho\nAmor Llama\nSave Item\nCreator:\nAnna Elizabeth Dewdney\nHandsomeDan Bulldog\nSave Item\nCreator:\nAndy Graves\nAquila Eccellenza\nSave Item\nCreator:\nAndrew Norriss").or have_content("1.\nRhett Lecheire\nSave Item\nCreator:\nPaulo Coelho\n2.\nAmor Llama\nSave Item\nCreator:\nAnna Elizabeth Dewdney\n3.\nHandsomeDan Bulldog\nSave Item\nCreator:\nAndy Graves\n4.\nAquila Eccellenza\nSave Item\nCreator:\nAndrew Norriss")
+      expect(content).to have_content("Rhett Lecheire\nCreator:\nPaulo Coelho\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney\nHandsomeDan Bulldog\nCreator:\nAndy Graves\nAquila Eccellenza\nCreator:\nAndrew Norriss").or have_content("1.\nRhett Lecheire\nCreator:\nPaulo Coelho\n2.\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney\n3.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n4.\nAquila Eccellenza\nCreator:\nAndrew Norriss")
     end
   end
 
@@ -144,7 +144,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       end
 
       content = find(:css, '#content')
-      expect(content).to have_content("Amor Llama\nSave Item\nCreator:\nAnna Elizabeth Dewdney\nHandsomeDan Bulldog\nSave Item\nCreator:\nAndy Graves\nRhett Lecheire\nSave Item\nCreator:\nPaulo Coelho\nAquila Eccellenza\nSave Item\nCreator:\nAndrew Norriss").or have_content("1.\nAmor Llama\nSave Item\nCreator:\nAnna Elizabeth Dewdney\n2.\nHandsomeDan Bulldog\nSave Item\nCreator:\nAndy Graves\n3.\nRhett Lecheire\nSave Item\nCreator:\nPaulo Coelho\n4.\nAquila Eccellenza\nSave Item\nCreator:\nAndrew Norriss")
+      expect(content).to have_content("Amor Llama\nCreator:\nAnna Elizabeth Dewdney\nHandsomeDan Bulldog\nCreator:\nAndy Graves\nRhett Lecheire\nCreator:\nPaulo Coelho\nAquila Eccellenza\nCreator:\nAndrew Norriss").or have_content("1.\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney\n2.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n3.\nRhett Lecheire\nCreator:\nPaulo Coelho\n4.\nAquila Eccellenza\nCreator:\nAndrew Norriss")
     end
 
     it 'sorts by year desc' do
@@ -155,7 +155,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       end
 
       content = find(:css, '#content')
-      expect(content).to have_content("Aquila Eccellenza\nSave Item\nCreator:\nAndrew Norriss\nRhett Lecheire\nSave Item\nCreator:\nPaulo Coelho\nHandsomeDan Bulldog\nSave Item\nCreator:\nAndy Graves\nAmor Llama\nSave Item\nCreator:\nAnna Elizabeth Dewdney").or have_content("1.\nAquila Eccellenza\nSave Item\nCreator:\nAndrew Norriss\n2.\nRhett Lecheire\nSave Item\nCreator:\nPaulo Coelho\n3.\nHandsomeDan Bulldog\nSave Item\nCreator:\nAndy Graves\n4.\nAmor Llama\nSave Item\nCreator:\nAnna Elizabeth Dewdney")
+      expect(content).to have_content("Aquila Eccellenza\nCreator:\nAndrew Norriss\nRhett Lecheire\nCreator:\nPaulo Coelho\nHandsomeDan Bulldog\nCreator:\nAndy Graves\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney").or have_content("1.\nAquila Eccellenza\nCreator:\nAndrew Norriss\n2.\nRhett Lecheire\nCreator:\nPaulo Coelho\n3.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n4.\nAmor Llama\nCreator:\nAnna Elizabeth Dewdney")
     end
   end
 
@@ -174,14 +174,14 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
     xit 'does not have sort by collection by default' do
       visit "/catalog?f[collection_title_ssi][]=Test"
       content = find(:css, '#content')
-      expect(content).to have_content("HandsomeDan Bulldog\nSave Item\nCreator:\nAndy Graves\nRhett Lecheire\nSave Item\nCreator:\nPaulo Coelho").or have_content("1.\nHandsomeDan Bulldog\nSave Item\nCreator:\nAndy Graves\n2.\nRhett Lecheire\nSave Item\nCreator:\nPaulo Coelho")
+      expect(content).to have_content("HandsomeDan Bulldog\nCreator:\nAndy Graves\nRhett Lecheire\nCreator:\nPaulo Coelho").or have_content("1.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n2.\nRhett Lecheire\nCreator:\nPaulo Coelho")
       click_on 'Sort by relevance'
       within('div#sort-dropdown') do
         expect(page).to have_content("Collection Order")
         click_on "Collection Order"
       end
       content = find(:css, '#content')
-      expect(content).to have_content("Rhett Lecheire\nSave Item\nCreator:\nPaulo Coelho\nHandsomeDan Bulldog\nSave Item\nCreator:\nAndy Graves").or have_content("1.\nHandsomeDan Bulldog\nSave Item\nCreator:\nAndy Graves\n2.\nRhett Lecheire\nSave Item\nCreator:\nPaulo Coelho")
+      expect(content).to have_content("Rhett Lecheire\nCreator:\nPaulo Coelho\nHandsomeDan Bulldog\nCreator:\nAndy Graves").or have_content("1.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n2.\nRhett Lecheire\nCreator:\nPaulo Coelho")
     end
   end
   # rubocop:enable Layout/LineLength
