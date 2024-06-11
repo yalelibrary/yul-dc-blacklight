@@ -115,7 +115,7 @@ module Blacklight::Bookmarks
 
     success = @bookmarks.all? do |bookmark|
       bookmark = current_or_guest_user.bookmarks.find_by(bookmark)
-      bookmark && bookmark.delete && bookmark.destroyed?
+      bookmark&.delete && bookmark.destroyed?
     end
 
     if success
@@ -143,12 +143,14 @@ module Blacklight::Bookmarks
 
   private
 
+  # rubocop:disable Style/GuardClause
   def verify_user
     unless current_or_guest_user || (action == "index" && token_or_current_or_guest_user)
       flash[:notice] = I18n.t('blacklight.bookmarks.need_login')
       raise Blacklight::Exceptions::AccessDenied
     end
   end
+  # rubocop:enable Style/GuardClause
 
   def start_new_search_session?
     action_name == "index"
