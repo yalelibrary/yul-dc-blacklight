@@ -22,25 +22,7 @@ RSpec.describe 'Saved Items', type: :system, clean: true do
       callNumber_tesim: 'Beinecke MS 801',
       containerGrouping_tesim: 'BRBL_091081',
       imageCount_isi: '23',
-      visibility_ssi: 'Public',
-      ancestorTitles_tesim: ['Beinecke Rare Book and Manuscript Library (BRBL)',
-                             'Osborn Manuscript Files (OSB MSS FILE)',
-                             'Numerical Sequence: 17975-19123',
-                             'BURNEY, SARAH HARRIET, 1772-1844',
-                             'Level3',
-                             'Level2',
-                             'Level1',
-                             'Level0'],
-      # rubocop:disable Layout/LineLength
-      ancestor_titles_hierarchy_ssim: ["Beinecke Rare Book and Manuscript Library (BRBL) > ",
-                                       "Beinecke Rare Book and Manuscript Library (BRBL) > Osborn Manuscript Files (OSB MSS FILE) > ",
-                                       "Beinecke Rare Book and Manuscript Library (BRBL) > Osborn Manuscript Files (OSB MSS FILE) > Numerical Sequence: 17975-19123 > ",
-                                       "Beinecke Rare Book and Manuscript Library (BRBL) > Osborn Manuscript Files (OSB MSS FILE) > Numerical Sequence: 17975-19123 > BURNEY, SARAH HARRIET, 1772-1844 > ",
-                                       "Beinecke Rare Book and Manuscript Library (BRBL) > Osborn Manuscript Files (OSB MSS FILE) > Numerical Sequence: 17975-19123 > BURNEY, SARAH HARRIET, 1772-1844 > Level3 > ",
-                                       "Beinecke Rare Book and Manuscript Library (BRBL) > Osborn Manuscript Files (OSB MSS FILE) > Numerical Sequence: 17975-19123 > BURNEY, SARAH HARRIET, 1772-1844 > Level3 > Level2 > ",
-                                       "Beinecke Rare Book and Manuscript Library (BRBL) > Osborn Manuscript Files (OSB MSS FILE) > Numerical Sequence: 17975-19123 > BURNEY, SARAH HARRIET, 1772-1844 > Level3 > Level2 > Level1 > ",
-                                       "Beinecke Rare Book and Manuscript Library (BRBL) > Osborn Manuscript Files (OSB MSS FILE) > Numerical Sequence: 17975-19123 > BURNEY, SARAH HARRIET, 1772-1844 > Level3 > Level2 > Level1 > Level0 > "]
-      # rubocop:enable Layout/LineLength
+      visibility_ssi: 'Public'
     }
   end
 
