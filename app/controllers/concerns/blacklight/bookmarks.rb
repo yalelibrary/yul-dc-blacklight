@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 # note that while this is mostly restful routing, the #update and #destroy actions
 # take the Solr document ID as the :id, NOT the id of the actual Bookmark action.
+# rubocop:disable Metrics/ModuleLength
 module Blacklight::Bookmarks
   extend ActiveSupport::Concern
 
@@ -34,7 +35,7 @@ module Blacklight::Bookmarks
 
   # Blacklight uses #search_action_url to figure out the right URL for
   # the global search box
-  def search_action_url *args
+  def search_action_url(*args)
     search_catalog_url(*args)
   end
 
@@ -72,6 +73,7 @@ module Blacklight::Bookmarks
   # It can also be used for creating a single bookmark by including keys
   # bookmark[title] and bookmark[document_id], but in that case #update
   # is simpler.
+  # rubocop:disable Metrics/PerceivedComplexity
   def create
     @bookmarks = if params[:bookmarks]
                    permit_bookmarks[:bookmarks]
@@ -123,11 +125,12 @@ module Blacklight::Bookmarks
         redirect_back fallback_location: bookmarks_path, notice: I18n.t('blacklight.bookmarks.remove.success')
       end
     elsif request.xhr?
-      head 500 # ajaxy request needs no redirect and should not have flash set
+      head :internal_server_error # ajaxy request needs no redirect and should not have flash set
     else
       redirect_back fallback_location: bookmarks_path, flash: { error: I18n.t('blacklight.bookmarks.remove.failure') }
     end
   end
+  # rubocop:enable Metrics/PerceivedComplexity
 
   def clear
     if current_or_guest_user.bookmarks.clear
@@ -155,3 +158,4 @@ module Blacklight::Bookmarks
     params.permit(bookmarks: [:document_id, :document_type])
   end
 end
+# rubocop:enable Metrics/ModuleLength

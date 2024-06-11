@@ -2,7 +2,7 @@
 require 'rails_helper'
 
 RSpec.describe "Open with Permission", type: :request, clean: true do
-  let(:user) { FactoryBot.create(:user)}
+  let(:user) { FactoryBot.create(:user) }
 
   around do |example|
     original_management_url = ENV['MANAGEMENT_HOST']

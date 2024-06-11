@@ -60,6 +60,4 @@ RSpec.describe 'Saved Items', type: :system, clean: true do
       expect(page).to have_content('Save Item')
     end
   end
-
-
 end
