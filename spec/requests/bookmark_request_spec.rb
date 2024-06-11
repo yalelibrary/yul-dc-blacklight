@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe "Open with Permission", type: :request, clean: true do
+RSpec.describe "Saved Items", type: :request, clean: true do
   let(:user) { FactoryBot.create(:user) }
 
   around do |example|
