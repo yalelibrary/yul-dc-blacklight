@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# Override from Blacklight 7.36.2
 
 module Blacklight
   module Document
