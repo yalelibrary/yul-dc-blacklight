@@ -18,7 +18,7 @@ class DownloadOriginalController < ApplicationController
   end
 
   def staged
-    render 'tiff_staged.html.erb'
+    render 'tiff_staged'
   end
 
   def available
