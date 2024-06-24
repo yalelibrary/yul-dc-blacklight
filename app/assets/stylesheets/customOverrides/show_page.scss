@@ -342,7 +342,6 @@ p.yale-restricted-work-text{
 
 .aSpace_tree li {
   right: 9%;
-  top: -4%;
   padding-bottom: 0;
   list-style: none;
   position: relative;
@@ -391,18 +390,6 @@ p.yale-restricted-work-text{
 
 .from-the-collection{
   font-style: italic;
-}
-
-@media screen and (min-width: $xmini_device) {
-  .aSpace_tree {
-    margin-top: 15%;
-  }
-}
-
-@media screen and (min-width: $mini_device) {
-  .aSpace_tree {
-    margin-top: 10%;
-  }
 }
 
 @media screen and (min-width: $medium_device) {
