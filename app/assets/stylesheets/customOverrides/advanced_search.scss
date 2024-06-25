@@ -45,9 +45,9 @@ DEFAULT MOBILE STYLING
   background-origin: content-box;
   background-color: transparent;
   display: inline-block;
-  width: 20%;
+  width: 30%;
   height: 50px !important;
-  padding: 0.65rem 0.65rem 0.5rem 1rem;
+  padding: 14px;
   vertical-align: baseline;
   background-repeat: no-repeat;
   background-image: image-url('light-blue-double-arrow.png');  border: 1px solid #ced4da;
@@ -191,117 +191,117 @@ span#advanced-fulltext-info {
   }
 }
 
-  @media screen and (min-width: $large_device) {
+@media screen and (min-width: $large_device) {
 
-    .adv-search-border-top{
-      width: 160%;
-    }
-
-    .adv-search-border-bottom {
-      width: 160%;
-    }
-
-    .advanced_page_header {
-      width:100%!important;
-      padding-bottom: 25px;
-      padding-top: 30px;
-    }
-    .advanced_search_form {
-      display: inline-flex;
-      flex-wrap: wrap;
-    }
-    .query_criteria_heading {
-      width: 330px;
-    }
-
-    //Sort text next to button
-    .sort-buttons {
-      width: 500px;
-      margin-left: -45px;
-      margin-top: 4px;
-      }
-
-    .adv-search-sort-submit-buttons.sort-submit-top {
-      margin-top: -3px;
-    }
-
-    //Sort button text
-    .sort-select {
-      background-origin: content-box;
-      display: inline-block;
-      width: 225px;
-      height: 50px !important;
-    }
-
-    .input-small {
-      width: 25%;
-    }
-
-    .input-match {
-      padding-bottom: 17px;
-      margin-bottom:13px;
-      display: inline-flex;
-      border: none;
-      position: absolute;
-      top: -81px;
-      left: 230px;
-      width: auto;
-    }
-
-    .advanced_search_clear_top {
-      float: right;
-      margin-top: -45px;
-      margin-right: 24px;
-    }
-
-    .adv-search-fields input {
-      margin-right: 10px;
-    }
+  .adv-search-border-top{
+    width: 160%;
   }
 
-  @media screen and (min-width: $xlarge_device) {
-    .input-match{
-      padding-bottom: 0;
-      margin-bottom: 0;
-      position: relative;
-      top: -81px;
-      left: 60%;
-      height: 0px
-    }
-
-    .adv-search-border-top {
-      margin-top: -40px;
-      margin-bottom: 20px;
-    }
-
-    .advanced_search_fields {
-      position: relative;
-      top: -14px;
-    }
-
-    .input-small {
-      width: 29%;
-    }
-
-    .sort-buttons {
-      margin-left: -35px;
-      margin-top: 3px;
-    }
-
-    .query_criteria_heading {
-      margin-left: -65px;
-    }
-
-    .adv-search-fields .advanced-search-field {
-      flex: 45%;
-      white-space: nowrap;
-      margin-bottom: 30px;
-    }
-
-    .adv-search-fields input {
-      margin-right: 10px;
-    }
-    .adv-search-help {
-      display: inline-block;
-    }
+  .adv-search-border-bottom {
+    width: 160%;
   }
+
+  .advanced_page_header {
+    width:100%!important;
+    padding-bottom: 25px;
+    padding-top: 30px;
+  }
+  .advanced_search_form {
+    display: inline-flex;
+    flex-wrap: wrap;
+  }
+  .query_criteria_heading {
+    width: 330px;
+  }
+
+  //Sort text next to button
+  .sort-buttons {
+    width: 500px;
+    margin-left: -45px;
+    margin-top: 4px;
+    }
+
+  .adv-search-sort-submit-buttons.sort-submit-top {
+    margin-top: -3px;
+  }
+
+  //Sort button text
+  .sort-select {
+    background-origin: content-box;
+    display: inline-block;
+    width: 225px;
+    height: 50px !important;
+  }
+
+  .input-small {
+    width: 25%;
+  }
+
+  .input-match {
+    padding-bottom: 17px;
+    margin-bottom:13px;
+    display: inline-flex;
+    border: none;
+    position: absolute;
+    top: -81px;
+    left: 230px;
+    width: auto;
+  }
+
+  .advanced_search_clear_top {
+    float: right;
+    margin-top: -45px;
+    margin-right: 24px;
+  }
+
+  .adv-search-fields input {
+    margin-right: 10px;
+  }
+}
+
+@media screen and (min-width: $xlarge_device) {
+  .input-match{
+    padding-bottom: 0;
+    margin-bottom: 0;
+    position: relative;
+    top: -81px;
+    left: 60%;
+    height: 0px
+  }
+
+  .adv-search-border-top {
+    margin-top: -40px;
+    margin-bottom: 20px;
+  }
+
+  .advanced_search_fields {
+    position: relative;
+    top: -14px;
+  }
+
+  .input-small {
+    width: 29%;
+  }
+
+  .sort-buttons {
+    margin-left: -35px;
+    margin-top: 3px;
+  }
+
+  .query_criteria_heading {
+    margin-left: -65px;
+  }
+
+  .adv-search-fields .advanced-search-field {
+    flex: 45%;
+    white-space: nowrap;
+    margin-bottom: 30px;
+  }
+
+  .adv-search-fields input {
+    margin-right: 10px;
+  }
+  .adv-search-help {
+    display: inline-block;
+  }
+}
