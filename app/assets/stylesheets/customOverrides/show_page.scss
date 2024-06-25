@@ -342,7 +342,6 @@ p.yale-restricted-work-text{
 
 .aSpace_tree li {
   right: 9%;
-  top: -4%;
   padding-bottom: 0;
   list-style: none;
   position: relative;
@@ -650,11 +649,5 @@ p.yale-restricted-work-text{
 
   .showpage_no_label_tag.blacklight-archivespaceuri_ssi {
     height: 50px;
-  }
-}
-
-@media screen and (min-width: $mini_device) {
-  .aSpace_tree {
-    margin-top: 15%;
   }
 }
