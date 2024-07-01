@@ -4,6 +4,7 @@
 // desktop - 1600px
 // when styling the app, the "mobile first" view begins at 375px
 // as media queries are added, use the descriptors below as the guide
+$xmini_device: '360px'; // mobile xmini
 $mini_device: '375px'; // mobile mini
 $small_device: '567px'; // mobile
 $medium_device: '768px'; // tablet
