@@ -23,12 +23,8 @@
   unless title_class == :none
   end
 
-  original_url = request.original_url
-  parsed_url = Addressable::URI.parse(original_url)
-  view = parsed_url.query_values['view']
 -%>
-
-<div class='documentHeader row'>
+<header class='documentHeader row'>
   <h3 class='index_title document-title-heading <%= title_class %>'>
     <% if !gallery_view? %>
       <span class='counter_no_show' ><%= counter %> </span>
@@ -36,5 +32,6 @@
     <div class='document-title'>
       <%= link_to_document document, document.highlight_field('title_tesim').try(:[],0) || document['title_tesim'], counter:document_counter %>
     </div>
+    <%= render_index_doc_actions document, wrapping_class: "index-document-functions col-sm-3 col-lg-2" %>
   </h3>
-</div>
+</header>

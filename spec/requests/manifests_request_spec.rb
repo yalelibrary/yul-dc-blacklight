@@ -3,7 +3,7 @@ require 'rails_helper'
 # WebMock.allow_net_connect!
 
 RSpec.describe 'Manifests', type: :request, clean: true do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user, netid: "net_id") }
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY }
   let(:redirected_work) { WORK_REDIRECTED }
   let(:yale_work) do

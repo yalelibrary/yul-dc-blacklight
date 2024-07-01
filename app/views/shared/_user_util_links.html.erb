@@ -1,4 +1,13 @@
 <ul class="navbar-nav">
+
+  <li class="nav-item">
+    <%= link_to 'Saved Items', '/bookmarks', class: 'nav-link' %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to 'Access Requests', '/permission_requests', class: 'nav-link' %>
+  </li>
+
   <% if has_user_authentication_provider? %>
     <% if current_user %>
       <li class="nav-item">
@@ -6,7 +15,7 @@
       </li>
     <% else %>
       <li class="nav-item">
-        <%= button_to t('blacklight.header_links.login'), user_cas_omniauth_authorize_path, class: 'nav-link login-button' %>
+        <%= button_to t('blacklight.header_links.login'), user_openid_connect_omniauth_authorize_path, class: 'nav-link login-button' %>
       </li>
     <% end %>
   <% end %>

@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+gem 'addressable'
 gem 'awesome_print'
 gem "aws-sdk-cloudwatch"
 gem 'aws-sdk-s3'
@@ -26,13 +27,15 @@ gem 'iso-639'
 gem 'jbuilder', '~> 2.7'
 gem 'jquery-rails'
 gem 'omniauth', '~> 1.9.2'
-gem 'omniauth-cas'
+gem 'omniauth_openid_connect'
 # This addresses CVE-2015-9284 https://github.com/advisories/GHSA-ww4x-rwq6-qpgf
 gem 'omniauth-rails_csrf_protection', '~> 0.1'
 gem 'openseadragon'
 gem 'partridge', '~> 0.1.2'
 gem 'pg'
 gem 'puma', '~> 5.6'
+# pinned to before 4 due to https://stackoverflow.com/questions/71191685/visit-psych-nodes-alias-unknown-alias-default-psychbadalias
+gem 'psych', '< 4'
 gem 'rails', '~> 7.0.8'
 gem "rails_semantic_logger", ">=4.4.4"
 gem 'rsolr', '>= 1.0', '< 3'
@@ -41,6 +44,7 @@ gem 'sprockets-rails'
 gem 'turbolinks', '~> 5'
 gem 'twitter-typeahead-rails', '0.11.1.pre.corejavascript'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'unicode-display_width', '~> 2.5'
 gem 'webpacker', '~> 4.0'
 gem 'yard'
 

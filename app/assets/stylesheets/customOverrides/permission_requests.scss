@@ -1,0 +1,74 @@
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
+
+#permission-requests-page {
+  font-family: $mallory_medium, Arial, Helvetica, sans-serif;
+}
+
+#permission-requests-page-heading {
+  font-size: 2.1rem;
+  font-family: $yale_display_roman, 'Times New Roman', Times, serif;
+  color: $yale_blue;
+}
+
+#back-to-bookmarks {
+  float: right;
+  color: $yale_blue;
+  background-color: $white;
+}
+
+#permission-requests-page .section-heading {
+  font-size: 1.5rem;
+}
+
+#permission-requests-page tbody {
+  border: 1px solid $medium_grey;
+}
+
+#permission-requests-page th {
+  font-size: 1.1rem;
+  color: $yale_blue;
+  border-top: none;
+}
+
+#permission-requests-page th > p {
+  display: flex;
+}
+
+#permission-requests-page .double-arrow {
+  background-position-y: center;
+  background-position-x: left;
+  display: block;
+  width: .5rem;
+  height: 1.7rem !important;
+  background-repeat: no-repeat;
+  background-size: .5rem;
+  background-image: image-url('light-blue-double-arrow.png');
+  margin-left: .5rem;
+}
+
+#permission-requests-page td {
+  font-size: .9rem;
+  color: $darkest_grey;
+  border: 1px solid $medium_grey;
+}
+
+@media screen and (min-width: $small_device) {
+  #permission-requests-table {
+  max-width: 93%;
+  }
+}
+
+@media screen and (min-width: $medium_device) {
+  #permission-requests-table {
+    max-width: 87%;
+  }
+}
+
+
+@media screen and (min-width: $xlarge_device) {
+  #permission-requests-table {
+    max-width: 85%;
+  }
+}

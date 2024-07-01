@@ -2,9 +2,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Show Page', type: :system, js: true, clean: true do
+  let(:user) { FactoryBot.create(:user) }
+  let(:management_approver) { FactoryBot.create(:user, netid: 'net_id2', sub: '1234') }
+  let(:request_user) { FactoryBot.create(:user, netid: "net_id", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6e", uid: 'some_name', email: 'not_real@example.com') }
   let(:thumbnail_size_in_opengraph) { "!1200,630" }
   let(:thumbnail_size_in_solr) { "!200,200" }
-
   let(:llama) do
     {
       id: '111',
@@ -23,6 +25,50 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       callNumber_ssim: "call number",
       has_fulltext_ssi: 'Yes',
       series_ssi: "Series 1: Oversize"
+    }
+  end
+
+  let(:owp_work) do
+    {
+      id: '12345',
+      title_tesim: ['Rhett Lecheire'],
+      format: 'text',
+      language_ssim: 'fr',
+      visibility_ssi: 'Open with Permission',
+      genre_ssim: 'Animation',
+      child_oids_ssim: [99_883_409],
+      oid_ssi: 12_345,
+      fulltext_tesim: ["This is full text OwP"],
+      resourceType_ssim: 'Archives or Manuscripts',
+      has_fulltext_ssi: 'Yes',
+      creator_ssim: ['Paulo Coelho']
+    }
+  end
+
+  let(:child_work_owp) do
+    {
+      id: "99883409",
+      title_tesim: ['Baby Llama'],
+      format: 'text',
+      visibility_ssi: 'Public',
+      parent_ssi: "12345",
+      fulltext_tesim: ["This is full text OwP"],
+      child_fulltext_wstsim: ["This is full text OwP"],
+      has_fulltext_ssi: 'Partial'
+    }
+  end
+
+  let(:owp_work_2) do
+    {
+      id: '54321',
+      title_tesim: ['Rhett Lecheire'],
+      format: 'text',
+      language_ssim: 'fr',
+      visibility_ssi: 'Open with Permission',
+      genre_ssim: 'Animation',
+      has_fulltext_ssi: 'Yes',
+      resourceType_ssim: 'Archives or Manuscripts',
+      creator_ssim: ['Paulo Coelho']
     }
   end
 
@@ -116,6 +162,16 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     }
   end
 
+  around do |example|
+    original_download_bucket = ENV['S3_DOWNLOAD_BUCKET_NAME']
+    original_management_url = ENV['MANAGEMENT_HOST']
+    ENV['S3_DOWNLOAD_BUCKET_NAME'] = 'yul-test-samples'
+    ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
+    example.run
+    ENV['S3_DOWNLOAD_BUCKET_NAME'] = original_download_bucket
+    ENV['MANAGEMENT_HOST'] = original_management_url
+  end
+  # rubocop:disable Layout/LineLength
   before do
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/111.json')
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
@@ -127,6 +183,71 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/12/11/112.json')
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/45/12/34/12345.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'http://www.example.com/management/api/permission_sets/123')
+      .to_return(status: 200, body: '{"timestamp":"2023-11-02","user":{"sub":"123"},"permission_set_terms_agreed":[],"permissions":[{"oid":12345,"permission_set":1,"permission_set_terms":1,"request_status":"Approved","request_date":"2023-11-02T20:23:18.824Z","access_until":"2024-11-02T20:23:18.824Z"}]}', headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/#{user.netid}")
+      .to_return(status: 200, body: '{
+        "is_admin_or_approver?":"false"
+        }',
+                 headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/54321/#{user.netid}")
+      .to_return(status: 200, body: '{
+        "is_admin_or_approver?":"false"
+        }',
+                 headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/#{management_approver.netid}")
+      .to_return(status: 200, body: '{
+        "is_admin_or_approver?":"true"
+        }',
+                 headers: [])
+    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+      .to_return(status: 200, body: '{
+        "timestamp":"2023-11-02",
+        "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
+        "permission_set_terms_agreed":[],
+        "permissions":[{
+          "oid":12345,
+          "permission_set":1,
+          "permission_set_terms":1,
+          "request_status":"Approved",
+          "request_date":"2023-11-02T20:23:18.824Z",
+          "access_until":"2034-11-02T20:23:18.824Z"}
+        ]}',
+                 headers: [])
+    stub_request(:get, 'http://www.example.com/management/api/permission_sets/1234')
+      .to_return(status: 200, body: '{
+        "timestamp":"2023-11-02",
+        "user":{"sub":"1234"},
+        "permission_set_terms_agreed":[],
+        "permissions":[{
+          "oid":12345,
+          "permission_set":1,
+          "permission_set_terms":1,
+          "request_status":"Denied",
+          "request_date":"2023-11-02T20:23:18.824Z",
+          "access_until":"2034-11-02T20:23:18.824Z"}
+        ]}',
+                 headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/terms")
+      .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: {})
+    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+      .to_return(status: 200, body: '{
+        "timestamp":"2023-11-02",
+        "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
+        "permission_set_terms_agreed":[2],
+        "permissions":[{
+          "oid":54321,
+          "permission_set":1,
+          "permission_set_terms":2,
+          "request_status":"Approved",
+          "request_date":"2023-11-02T20:23:18.824Z",
+          "access_until":"2034-11-02T20:23:18.824Z"}
+        ]}',
+                 headers: [])
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/54321/terms")
+      .to_return(status: 200, body: "{\"id\":2,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: {})
 
     solr = Blacklight.default_index.connection
     solr.add([llama,
@@ -135,10 +256,14 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
               dog,
               eagle,
               puppy,
+              owp_work,
+              child_work_owp,
+              owp_work_2,
               train,
               void])
     solr.commit
   end
+  # rubocop:enable Layout/LineLength
 
   context 'public work' do
     before do
@@ -166,12 +291,57 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).to have_xpath("//button[@href='/catalog']")
       expect(page.first('button.catalog_startOverLink').text).to eq('NEW SEARCH').or eq('New Search')
     end
-    it 'with full text available has a "Show Full Text" button' do
-      expect(page).to have_css('.fulltext-button')
-      expect(page).to have_content('Show Full Text')
+  end
+
+  context 'Universal Viewer' do
+    it 'does not have a .json extension in the src attribute' do
+      visit '/catalog?search_field=all_fields&q='
+      click_on 'Amor Llama', match: :first
+      src = find('.universal-viewer-iframe')['src']
+      expect(src).not_to include('.json')
     end
-    # flappy
-    xit 'Metadata og tags are in the header of html' do
+
+    context 'sending child oid as a parameter' do
+      it 'uses child\'s page when oid is valid' do
+        visit 'catalog/111?image_id=113'
+        src = find('.universal-viewer-iframe')['src']
+        expect(src).to include '&cv=1'
+      end
+      it 'uses first page when oid is invalid' do
+        visit 'catalog/111?image_id=11312321'
+        src = find('.universal-viewer-iframe')['src']
+        expect(src).to include '&cv=0'
+      end
+    end
+
+    context 'without full text available' do
+      it 'does not have a full text button' do
+        visit 'catalog/222'
+        expect(page).not_to have_content('Show Full Text')
+      end
+    end
+
+    context 'with full text available' do
+      it 'has a "Show Full Text" button' do
+        visit 'catalog/111'
+        expect(page).to have_css('.fulltext-button')
+        expect(page).to have_content('Show Full Text')
+      end
+      it 'has a "Show Full Text" button with a partial fulltext status' do
+        visit 'catalog/112'
+        expect(page).to have_css('.fulltext-button')
+        expect(page).to have_content('Show Full Text')
+      end
+    end
+  end
+
+  context 'with public works' do
+    before do
+      visit '/catalog?search_field=all_fields&q='
+      click_on 'Amor Llama', match: :first
+    end
+
+    it 'Metadata og tags are in the header of html' do
       expect(page.html).to include("og:title")
       expect(page.html).to include("Amor Llama")
       expect(page.html).to include("og:url")
@@ -203,8 +373,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       end
 
       context 'sending child oid as a parameter' do
-        # TODO: re-enable test when result is consistent
-        xit 'uses child\'s page when oid is valid' do
+        it 'uses child\'s page when oid is valid' do
           visit 'catalog/111?image_id=113'
           src = find('.universal-viewer-iframe')['src']
           expect(src).to include '&cv=1'
@@ -230,7 +399,6 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   context "Metadata block" do
     it 'is not displayed when it has no values', :use_other_vis do
       visit 'catalog/666'
-
       expect(page).not_to have_content "Description", count: 2
       expect(page).not_to have_content "Collection Information"
       expect(page).not_to have_content "Subjects, Formats, And Genres"
@@ -240,20 +408,95 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   end
 
   context 'Full text button' do
-    # flappy
-    xit 'does not have a full text button without full text available' do
+    it 'does not have a full text button without full text available' do
       visit '/catalog?search_field=all_fields&q='
       click_on 'HandsomeDan Bulldog', match: :first
-
       expect(page).to have_content('HandsomeDan Bulldog')
       expect(page).not_to have_content('Show Full Text')
     end
     it 'has a "Show Full Text" button with a partial fulltext status' do
       visit '/catalog?search_field=all_fields&q='
       click_on 'Baby Llama', match: :first
-
       expect(page).to have_css('.fulltext-button')
       expect(page).to have_content('Show Full Text')
+    end
+  end
+
+  # rubocop:disable Layout/LineLength
+  context "Open with Permission objects not signed in" do
+    it 'displays login message when accessing an OwP object and not logged in' do
+      visit 'catalog/12345'
+      expect(page).to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
+    end
+  end
+
+  context "Open with Permission objects and signed in" do
+    before do
+      login_as user
+    end
+    it 'can access the object and view UV and metadata normally' do
+      visit 'catalog/12345'
+      expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
+      expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
+      expect(page).to have_css('.uv-container')
+    end
+    it 'displays login message when accessing an OwP object without access' do
+      visit 'catalog/54321'
+      expect(page).to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
+      expect(page).not_to have_css('.uv-container')
+    end
+    it 'cannot see the Show Full Text option if user does not have OwP access' do
+      visit 'catalog/54321'
+      expect(page).to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
+      expect(page).not_to have_css('.uv-container')
+      expect(page).not_to have_content "Show Full Text"
+    end
+  end
+
+  context "Open with Permission objects and signed in as a management approver/admin" do
+    before do
+      login_as management_approver
+    end
+    # flappy - passes locally and sometimes in CI
+    xit 'can access the object and view UV and metadata normally without approver_status' do
+      visit 'catalog/12345'
+      expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
+      expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
+      expect(page).to have_css('.uv-container')
+      click_on "Show Full Text"
+      expect(page).to have_content("This is full text OwP")
+    end
+    it 'can access the object and view UV and metadata normally and can see the Show Full Text option' do
+      visit 'catalog/12345'
+      expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
+      expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
+      expect(page).to have_css('.uv-container')
+      expect(page).to have_content "Show Full Text"
+    end
+  end
+  # rubocop:enable Layout/LineLength
+
+  context "Open with Permission objects and signed in" do
+    before do
+      login_as request_user
+    end
+    it 'displays the terms and conditions if the user has not accepted them' do
+      visit 'catalog/12345/request_form'
+      expect(page).to have_content "You must accept the following terms and conditions in order to proceed."
+      expect(page).to have_content "Permission Set Terms"
+      expect(page).to have_content "These are some terms"
+    end
+  end
+
+  context "Open with Permission objects and signed in" do
+    before do
+      login_as request_user
+    end
+    it 'displays the request form if the user has accepted the terms and conditions' do
+      visit 'catalog/54321/request_form'
+      expect(page).to have_content "Request Information"
+      expect(page).to have_content "Full name:"
+      expect(page).to have_content "Reason for request:"
     end
   end
 end

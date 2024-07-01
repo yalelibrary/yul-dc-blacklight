@@ -18,6 +18,6 @@ module CheckAuthorization
 
   # Default implementation, to make it easy to override later
   def search_for_item
-    search_service.fetch(params[:id], { fl: ['visibility_ssi'] })
+    search_service.fetch(params[:id], { fl: ['visibility_ssi', 'id'] })
   end
 end
