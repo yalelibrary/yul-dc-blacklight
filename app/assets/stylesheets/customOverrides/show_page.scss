@@ -22,7 +22,6 @@ dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block
   flex: available;
   flex: -moz-available;
   position: relative;
-  left: -0.50%;
   min-width: 5%;
   max-width: 30%;
 }
@@ -96,11 +95,9 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   font-family: $mallory_bold;
   font-size: 14px;
   background-color: $lighter_grey;
-  margin: 0;
-  padding-left: 3%;
+  margin: 0px 0px 15px 0px;
+  padding: 2%;
   width: 100%;
-  height: 37px;
-  padding-top: 2%!important;
   #popup_window {
     padding-left: 1.5%;
     padding-bottom: 0.75%;
@@ -114,11 +111,10 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
 .showpage_no_label_tag.blacklight-findingaid_ssim {
   font-family: $mallory_bold;
   font-size: 14px;
-  padding-bottom: 2%;
-  padding-left: 3%;
+  padding: 2%;
   background-color: $lighter_grey;
+  margin: 0px 0px 15px 0px;
   width: 100%;
-  padding-top: 0;
   #popup_window{
     padding-left: 1.5%;
     padding-bottom: 0.75%
@@ -253,6 +249,7 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   color: $medium_grey;
   font-family: $mallory_medium, Arial, Helvetica, sans-serif !important;
   font-weight: 500;
+  padding-left: 25px;
 }
 
 .metadata-block__group {
@@ -471,13 +468,6 @@ p.yale-restricted-work-text{
   .aSpace_tree li {
     left: 0;
   }
-
-  .showpage_no_label_tag.blacklight-archivespaceuri_ssi {
-    height: 42px;
-  }
-  dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block__label-value--yul {
-    left: -0.85%;
-  }
 }
 
 
@@ -570,7 +560,6 @@ p.yale-restricted-work-text{
   }
 
   .showpage_no_label_tag,.blacklight-findingaid_ssim{
-    padding-bottom: 2%;
     padding-left: 2%;
   }
 
@@ -582,9 +571,6 @@ p.yale-restricted-work-text{
       padding-left: 1.5%;
       padding-bottom: 0.75%;
     }
-  }
-  dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block__label-value--yul {
-    left: -0.5%;
   }
 }
 
@@ -645,9 +631,5 @@ p.yale-restricted-work-text{
   .aSpace_tree {
     margin-top: 2%;
     margin-left: -3%;
-  }
-
-  .showpage_no_label_tag.blacklight-archivespaceuri_ssi {
-    height: 50px;
   }
 }
