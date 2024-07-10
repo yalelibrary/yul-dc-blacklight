@@ -34,6 +34,16 @@ RSpec.describe "Permission Requests", type: :system do
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
         "permission_set_terms_agreed":[],
         "permissions":[{
+          "oid":1718909,
+          "permission_set":1,
+          "permission_set_terms":1,
+          "request_status":"Pending",
+          "request_date":"2023-11-02T20:23:18.824Z",
+          "access_until":null,
+          "user_note": "lorem ipsum",
+          "user_full_name": "Request Full Name"
+        },
+        {
           "oid":1618909,
           "permission_set":1,
           "permission_set_terms":1,
@@ -41,17 +51,7 @@ RSpec.describe "Permission Requests", type: :system do
           "request_date":"2023-11-02T20:23:18.824Z",
           "access_until":"2034-11-02T20:23:18.824Z",
           "user_note": "permission.user_note",
-          "user_full_name": "request_user.name"},
-          {
-            "oid":1718909,
-            "permission_set":1,
-            "permission_set_terms":1,
-            "request_status":"Pending",
-            "request_date":"2023-11-02T20:23:18.824Z",
-            "access_until":null,
-            "user_note": "lorem ipsum",
-            "user_full_name": "Request Full Name"
-          }
+          "user_full_name": "request_user.name"}
         ]}',
                  headers: [])
     stub_request(:post, 'http://www.example.com/management/api/permission_requests')
