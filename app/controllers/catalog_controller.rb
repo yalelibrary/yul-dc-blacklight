@@ -667,9 +667,11 @@ class CatalogController < ApplicationController
     if current_user && @document['visibility_ssi'] == 'Open with Permission'
       @render_confirmation = false
       permissions = user_owp_permissions['permissions']
+      requests = []
       permissions&.each do |permission|
         if permission['oid'].to_s == params['oid']
-          active_request = permissions.first
+          requests << permission
+          active_request = requests.first
           @render_confirmation = true
           @user_full_name = active_request['user_full_name']
           @user_note = active_request['user_note']
