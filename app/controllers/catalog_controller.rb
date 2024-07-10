@@ -666,12 +666,14 @@ class CatalogController < ApplicationController
     @response, @document = search_service.fetch(params[:oid])
     if current_user && @document['visibility_ssi'] == 'Open with Permission'
       @render_confirmation = false
-      user_owp_permissions['permissions']&.each do |permission|
+      permissions = user_owp_permissions['permissions']
+      permissions&.each do |permission|
         if permission['oid'].to_s == params['oid']
+          active_request = permissions.first
           @render_confirmation = true
-          @user_full_name = permission['user_full_name']
-          @user_note = permission['user_note']
-          @request_status = permission['request_status']
+          @user_full_name = active_request['user_full_name']
+          @user_note = active_request['user_note']
+          @request_status = active_request['request_status']
         end
       end
       if @render_confirmation
