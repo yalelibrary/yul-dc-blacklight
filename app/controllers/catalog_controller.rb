@@ -249,7 +249,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'repository_ssi', label: 'Repository', metadata: 'collection_information'
     config.add_show_field 'callNumber_ssim', label: 'Call Number', metadata: 'collection_information', link_to_facet: true
     config.add_show_field 'sourceTitle_tesim', label: 'Collection Title', metadata: 'collection_information'
-    config.add_show_field 'sourceCreator_tesim', label: 'Collection/Other Creator', metadata: 'collection_information'
+    config.add_show_field 'sourceCreator_tesim', label: 'Collection / Other Creator', metadata: 'collection_information'
     config.add_show_field 'sourceCreated_tesim', label: 'Collection Created', metadata: 'collection_information'
     config.add_show_field 'sourceDate_tesim', label: 'Collection Date', metadata: 'collection_information'
     config.add_show_field 'sourceNote_tesim', label: 'Collection Note', metadata: 'collection_information'
