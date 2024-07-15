@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe "Download Original", type: :request, clean: true do
   let(:imgtiff) { 'image/tiff' }
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user, netid: "net_id") }
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY.merge({ "child_oids_ssim": ["5555555"] }) }
   let(:yale_work) do
     {

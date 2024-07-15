@@ -169,7 +169,7 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   text-transform: uppercase;
 }
 
-.link-card-header{
+.link-card-header {
   display: none;
 }
 
@@ -214,15 +214,26 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
 
 //Title on Single Items and Search Result pages
 //Replace Yale Roman with Yale Display when its available.
-.show-header {
-  font-family: $yale_new_roman, 'Times New Roman', Times, serif !important;
-  font-size: 1.5rem;
-  color: $yale_blue;
+.show-header-container {
   padding-bottom: 1.5%;
   padding-top: 1.5%;
   width: 82%;
   left: 8%;
   position: relative;
+}
+
+.show-header {
+  font-family: $yale_new_roman, 'Times New Roman', Times, serif !important;
+  font-size: 1.5rem;
+  color: $yale_blue;
+  width: 80%;
+}
+
+.show-bookmark {
+  width: 2%;
+  position: absolute;
+  right: 6.5%;
+  top: 18%;
 }
 
 .universal-viewer-iframe {
@@ -267,6 +278,91 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   width: 70%;
 }
 
+.terms-form-cancel {
+  color: white;
+  background-color: red;
+  border-radius: 8px;
+  height: 36px;
+  margin-right: 190px;
+}
+
+.terms-form-submit {
+  color: white;
+  background-color: $light_blue; 
+  border-radius: 8px;
+  height: 38px;
+  width: 80px;
+}
+
+.request-form-cancel {
+  color: white;
+  background-color: red;
+  border-radius: 8px;
+  height: 36px;
+  margin-right: 190px;
+}
+
+.request-form-submit {
+  color: white;
+  background-color: $light_blue; 
+  border-radius: 8px;
+  height: 38px;
+}
+
+.request-continue {
+  color: white;
+  background-color: $light_blue; 
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.request-continue:hover {
+  text-decoration: none !important;
+  color: white !important;
+}
+
+.terms-heading {
+  color: #ad1c2a;
+  font-family: 'YaleDisplay-Roman'
+}
+
+.request-form-metadata {
+  padding-top: 50px;
+}
+
+.terms-subheader {
+  width: 100%;
+}
+
+.terms-title {
+  font-family:'Mallory-Book', 'Mallory-Light', Arial, Helvetica, sans-serif !important
+}
+
+.terms-body {
+  font-family:'Mallory-Book', 'Mallory-Light', Arial, Helvetica, sans-serif !important
+}
+
+#permission_request_user_note {
+  width: 400px;
+}
+
+.blacklight-terms_hide_truncate_link, .blacklight-terms_show_truncate_link {
+  color: $dark_grey !important;
+}
+
+.blacklight-terms_hide_truncate_link:hover, .blacklight-terms_show_truncate_link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.line-clamp-five {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  /* truncate to 5 lines */
+  -webkit-line-clamp: 5;
+}
+
 .blacklight-ancestortitles_tesim a{
   color: $light_blue;
 }
@@ -299,6 +395,28 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   color: $medium_grey;
   font-family: $mallory_mp_black, $mallory_medium, Arial, Helvetica, sans-serif !important;
   font-weight: 300;
+}
+
+.yale-owp-restricted-work-text {
+  font-family: $mallory_medium, Arial, Helvetica, sans-serif;
+  font-size: .9rem;
+  color: $yale_blue;
+}
+
+.yale-owp-restricted-work-text a {
+  font-family: $mallory_bold, Arial, Helvetica, sans-serif;
+  text-decoration: underline;
+}
+
+.text-container {
+  background-color: $lightest_blue;
+  border: 1px solid $yale_blue;
+  border-radius: 5px;
+  padding: 2%;
+}
+
+.text-container p {
+  margin: 0;
 }
 
 h2.yale-restricted-work-text {
@@ -406,7 +524,7 @@ p.yale-restricted-work-text{
     align-content: center;
   }
 
-  .show-header,
+  .show-header-container,
   .yale-restricted-work-text {
     width: 92%;
   }
@@ -419,6 +537,11 @@ p.yale-restricted-work-text{
   .single-item-show {
     width: 625px;
   }
+
+  .text-container {
+    margin-left: 8%;
+
+margin-bottom: 2%;  }
 
   .item-page__metadata-wrapper {
     padding-left: 8%;
@@ -500,7 +623,7 @@ p.yale-restricted-work-text{
     align-content: center;
   }
 
-  .show-header,
+  .show-header-container,
   .yale-restricted-work-text {
     width: 97%;
     left: 19%;
@@ -513,6 +636,11 @@ p.yale-restricted-work-text{
 
   .single-item-show {
     width: 735px;
+  }
+
+  .text-container {
+    margin-left: 19%;
+    margin-bottom: 2%;
   }
 
   .item-page__metadata-wrapper {
@@ -603,13 +731,18 @@ p.yale-restricted-work-text{
     align-content: center;
   }
 
-  .show-header,
+  .show-header-container,
   .yale-restricted-work-text {
     width: 96%;
   }
 
   .single-item-show {
     width: 880px;
+  }
+
+  .text-container {
+    margin-left: 19%;
+    margin-bottom: 2%;
   }
 
   .item-page__metadata-wrapper {

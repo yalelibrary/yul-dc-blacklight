@@ -7,6 +7,13 @@ en:
       next: 'NEXT'
   blacklight:
     application_name: 'Yale University Library'
+    bookmarks:
+      title: 'Saved Items'
+      no_bookmarks: 'You have no saved items'
+      clear:
+        action_title: 'Clear All Saved Items'
+        success: 'Cleared your saved items.'
+        action_confirm: Are you sure you want to clear all saved items? You cannot undo this action.
     sidebar:
       links: Links
       manifest: Manifest Link
@@ -17,9 +24,18 @@ en:
       login: Log in
       logout: Log out
     search:
+      bookmarks:
+        present: "In Saved Items"
+        absent: "Save Item"
       search_constraints_header: You Searched For
       page_title:
         results: '%{count} results for %{q}'
         results_with_constraint: '%{count} results for %{label}: %{value}'
       start_over: 'New Search'
     back_to_search: 'Back to Search Results'
+    permission_requests:
+      bookmark_button: 'BACK TO BOOKMARKS'
+      need_login: 'Please log in to view your requests'
+      no_requests: 'No requests found'
+      title: 'Access Requests'
+      page_title: 'User Digital Access Requests'

@@ -12,8 +12,6 @@ RSpec.describe "access restrictions", type: :system, clean: true do
   # "[Map of China]. [yale-only copy]"
   let(:yale_work) { WORK_WITH_YALE_ONLY_VISIBILITY }
 
-  let(:cas) { WORK_WITH_YALE_ONLY_VISIBILITY }
-
   before do
     solr = Blacklight.default_index.connection
     solr.add(public_work)
@@ -119,8 +117,8 @@ RSpec.describe "access restrictions", type: :system, clean: true do
       expect(page.html).to match(/universal-viewer-iframe/)
     end
 
-    it 'manifest, mirador, and pdf links are disabled' do
-      visit '/catalog/2055095'
+    it 'manifest, mirador, and pdf links are NOT disabled' do
+      visit solr_document_path(public_work[:id])
       expect(page).to have_link 'Manifest Link'
       expect(page).to have_link 'View in Mirador'
       expect(page).to have_link 'Download as PDF'

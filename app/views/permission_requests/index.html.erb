@@ -1,0 +1,110 @@
+<% @page_title = t('blacklight.permission_requests.page_title', :application_name => application_name) %>
+
+<div id="permission-requests-page" class="col-md-12">
+  <h2 id='permission-requests-page-heading'><%= t('blacklight.permission_requests.title') %></h2>
+
+  <%- if current_or_guest_user.blank? -%>
+
+    <h3 class='section-heading'><%= t('blacklight.permission_requests.need_login') %></h3>
+
+  <%- elsif @table_data.blank? -%>
+
+    <h3 class='section-heading'><%= t('blacklight.permission_requests.no_requests') %></h3>
+  <% else %>
+    <table class='table table-striped sortable' id='permission-requests-table' aria-label='User Digital Access Requests Table'>
+      <thead>
+        <tr>
+          <th scope='col' onclick="sortTable(0)">
+            <p>Title <i class="double-arrow"></i></p>
+          </th>
+          <th scope='col' onclick="sortTable(1)">
+            <p>Call Number <i class="double-arrow"></i></p>
+          </th>
+          <th scope='col' onclick="sortTable(2)">
+            <p>Request Date <i class="double-arrow"></i></p>
+          </th>
+          <th scope='col' onclick="sortTable(3)">
+            <p>Status <i class="double-arrow"></i></p>
+          </th>
+          <th scope='col' onclick="sortTable(4)">
+            <p>Access Expires <i class="double-arrow"></i></p>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @table_data.each do |permission_request| %>
+          <tr>
+            <td class='permission-request-data'><%= link_to(permission_request[:document][:title_tesim].first, "/catalog/#{permission_request[:document][:id]}") %></td>
+            <td class='permission-request-data'><%= permission_request[:document][:callNumber_tesim].first %></td>
+            <td class='permission-request-data'><%= permission_request[:request_date] %></td>
+            <td class='permission-request-data'><%= permission_request[:status] %></td>
+            <td class='permission-request-data'><%= permission_request[:access_until] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
+
+<script>
+  function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("permission-requests-table");
+    switching = true;
+    // Set the sorting direction to ascending:
+    dir = "asc";
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+      // Start by saying: no switching is done:
+      switching = false;
+      rows = table.rows;
+      /* Loop through all table rows (except the
+      first, which contains table headers): */
+      for (i = 1; i < (rows.length - 1); i++) {
+        // Start by saying there should be no switching:
+        shouldSwitch = false;
+        /* Get the two elements you want to compare,
+        one from current row and one from the next: */
+        x = rows[i].getElementsByTagName("TD")[n];
+        y = rows[i + 1].getElementsByTagName("TD")[n];
+        /* Check if the two rows should switch place,
+        based on the direction, asc or desc: */
+        if (dir == "asc") {
+          if (x.innerText.toLowerCase() > y.innerText.toLowerCase()) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          } else if (Number(x.innerText) > Number(y.innerText)) {
+            shouldSwitch = true;
+            break;
+          }
+        } else if (dir == "desc") {
+          if (x.innerText.toLowerCase() < y.innerText.toLowerCase()) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          } else if (Number(x.innerText) < Number(y.innerText)) {
+            shouldSwitch = true;
+            break;
+          }
+        } 
+      }
+      if (shouldSwitch) {
+        /* If a switch has been marked, make the switch
+        and mark that a switch has been done: */
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+        // Each time a switch is done, increase this count by 1:
+        switchcount ++;
+      } else {
+        /* If no switching has been done AND the direction is "asc",
+        set the direction to "desc" and run the while loop again. */
+        if (switchcount == 0 && dir == "asc") {
+          dir = "desc";
+          switching = true;
+        }
+      }
+    }
+  }
+</script>

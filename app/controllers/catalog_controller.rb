@@ -73,15 +73,13 @@ class CatalogController < ApplicationController
     # config.index.display_type_field = 'format'
     config.index.thumbnail_method = :render_thumbnail
 
-    # Remove bookmark functionality from the research page
-    # config.add_results_document_tool(:bookmark, partial: 'bookmark_control', if: :render_bookmarks_control?)
+    config.add_results_document_tool(:bookmark, partial: 'bookmark_control', if: :render_bookmarks_control?)
 
     config.add_results_collection_tool(:sort_widget)
     config.add_results_collection_tool(:per_page_widget)
     config.add_results_collection_tool(:view_type_group)
 
-    # Remove bookmark functionality from the item page
-    # config.add_show_tools_partial(:bookmark, partial: 'bookmark_control', if: :render_bookmarks_control?)
+    config.add_show_tools_partial(:bookmark, partial: 'bookmark_control', if: :render_bookmarks_control?)
     # config.add_show_tools_partial(:email, callback: :email_action, validator: :validate_email_params)
     # config.add_show_tools_partial(:sms, if: :render_sms_action?, callback: :sms_action, validator: :validate_sms_params)
     config.add_show_tools_partial(:citation)
@@ -632,6 +630,7 @@ class CatalogController < ApplicationController
   def show
     super
     @search_params = session[:search_params]
+    @permission_set_terms = retrieve_permission_set_terms if @document["visibility_ssi"] == "Open with Permission"
     if @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present? && !request.original_url.include?("oai_dc_xml")
       redirect_to @document["redirect_to_tesi"]
     elsif @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present? && request.original_url.include?("oai_dc_xml")
@@ -641,6 +640,58 @@ class CatalogController < ApplicationController
     end
   end
   # rubocop:enable Metrics/PerceivedComplexity
+
+  # ~~~ OPEN WITH PERMISSION - BEGIN ~~~
+
+  # rubocop:disable Layout/LineLength
+  def request_form
+    @response, @document = search_service.fetch(params[:oid])
+    if current_user && @document['visibility_ssi'] == 'Open with Permission'
+      @permission_set_terms = retrieve_permission_set_terms
+      if @permission_set_terms.nil?
+        redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: "We are unable to complete your access request at this time. For more information about this object, click the ‘Feedback’ link located at the bottom of this page and fill out the form. We will get back to you as soon as possible.")
+      elsif user_owp_permissions['permission_set_terms_agreed']&.include?(@permission_set_terms['id'])
+        render 'catalog/request_form'
+      else
+        render 'catalog/terms_and_conditions'
+      end
+    else
+      redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: "Please log in to request access to these materials.")
+    end
+  end
+  # rubocop:enable Layout/LineLength
+
+  # rubocop:disable Metrics/PerceivedComplexity
+  def request_confirmation
+    @response, @document = search_service.fetch(params[:oid])
+    if current_user && @document['visibility_ssi'] == 'Open with Permission'
+      @render_confirmation = false
+      permissions = user_owp_permissions['permissions']
+      requests = []
+      permissions&.each do |permission|
+        if permission['oid'].to_s == params['oid']
+          requests << permission
+          active_request = requests.first
+          @render_confirmation = true
+          @user_full_name = active_request['user_full_name']
+          @user_note = active_request['user_note']
+          @request_status = active_request['request_status']
+        end
+      end
+      if @render_confirmation
+        render 'catalog/request_confirmation', user_full_name: @user_full_name, user_note: @user_note, request_status: @request_status
+      else
+        redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params['oid']}/request_form", notice: "Please submit a request for this item.  No request was found.")
+        false
+      end
+    else
+      redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params['oid']}", notice: "Please log in to request access to these materials.")
+      false
+    end
+  end
+  # rubocop:enable Metrics/PerceivedComplexity
+
+  # ~~~ OPEN WITH PERMISSION - END ~~~
 
   def iiif_suggest
     @query = params[:q] || ""
