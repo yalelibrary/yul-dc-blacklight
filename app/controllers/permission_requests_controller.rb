@@ -52,6 +52,7 @@ class PermissionRequestsController < ApplicationController
     end
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_requests")
     req = Net::HTTP::Post.new(url.path)
+    req.add_field('Authorization', "Bearer #{ENV['OWP_AUTH_TOKEN']}")
     req.set_form_data({
                         'oid': params['oid'],
                         'user_email': current_user.email,
@@ -73,6 +74,7 @@ class PermissionRequestsController < ApplicationController
     end
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/agreement_term")
     req = Net::HTTP::Post.new(url.path)
+    req.add_field('Authorization', "Bearer #{ENV['OWP_AUTH_TOKEN']}")
     req.set_form_data({
                         'oid': params['oid'],
                         'user_email': current_user.email,
