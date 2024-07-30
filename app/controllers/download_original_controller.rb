@@ -40,6 +40,7 @@ class DownloadOriginalController < ApplicationController
     client = Aws::S3::Client.new
     client.get_object(bucket: ENV['S3_DOWNLOAD_BUCKET_NAME'], key: tiff_pairtree_path) do |chunk|
       response.stream.write(chunk)
+      response.stream.flush
     end
   rescue StandardError => e
     Rails.logger.error("TIFF with id [#{child_oid}] - error: #{e.message}")
