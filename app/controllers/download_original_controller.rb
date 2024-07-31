@@ -2,7 +2,7 @@
 
 # Takes a request for an image and passes back the S3 url
 class DownloadOriginalController < ApplicationController
-  include ActionController::Streaming
+  include ActionController::Live
   include Blacklight::Catalog
   include CheckAuthorization
 
@@ -37,6 +37,8 @@ class DownloadOriginalController < ApplicationController
     response.set_header('X-Robots-Tag', 'noindex')
     response.set_header('Cache-Control', 'no-store')
     response.set_header('Content-Disposition', "attachment; filename=\"#{child_oid}.tif\"")
+    # etag is required for streaming with Rack ETag enabled: https://github.com/rack/rack/issues/1619
+    response.set_header('ETag', S3Service.etag(tiff_pairtree_path, ENV['S3_DOWNLOAD_BUCKET_NAME']))
     client = Aws::S3::Client.new
     client.get_object(bucket: ENV['S3_DOWNLOAD_BUCKET_NAME'], key: tiff_pairtree_path) do |chunk|
       response.stream.write(chunk)
