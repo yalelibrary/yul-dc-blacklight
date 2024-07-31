@@ -42,6 +42,7 @@ RSpec.describe 'PdfController', type: :request do
       solr = Blacklight.default_index.connection
       solr.add([public_work, yale_work, no_visibility_work, pubic_work_with_no_pdf, redirected_work])
       solr.commit
+      allow(S3Service).to receive(:etag).and_return("TEST")
       allow(User).to receive(:on_campus?).and_return(false)
     end
 
@@ -91,6 +92,9 @@ RSpec.describe 'PdfController', type: :request do
     before do
       stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/pdfs/02/20/202.pdf')
         .to_return(status: 404, body: 'not found')
+      stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/pdfs/02/20/202.pdf')
+        .to_return(status: 404, body: 'not found')
+      allow(S3Service).to receive(:etag).and_return("TEST")
     end
 
     around do |example|
