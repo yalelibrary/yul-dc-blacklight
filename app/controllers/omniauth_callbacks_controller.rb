@@ -6,6 +6,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     request.env['omniauth.auth']
   end
 
+  # rubocop:disable Metrics/PerceivedComplexity
   def openid_connect
     sub = auth.extra.raw_info.sub
     # Login for Yale users
@@ -24,7 +25,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
           )
       end
     else
-    # Login for non-yale users without a net_id
+      # Login for non-yale users without a net_id
       @user = User.where(provider: auth.provider, uid: auth.uid, sub: sub).first
       if @user.nil?
         @user = User.create(
@@ -44,6 +45,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to root_path
     end
   end
+  # rubocop:enable Metrics/PerceivedComplexity
 
   protected
 
