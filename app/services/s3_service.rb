@@ -16,4 +16,10 @@ class S3Service
     object = Aws::S3::Object.new(bucket_name: bucket, key: remote_path)
     object.exists?
   end
+
+  def self.etag(remote_path, bucket)
+    object = Aws::S3::Object.new(bucket_name: bucket, key: remote_path)
+    return nil unless object.exists?
+    object.etag
+  end
 end
