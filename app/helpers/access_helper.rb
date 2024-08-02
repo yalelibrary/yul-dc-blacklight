@@ -74,6 +74,7 @@ module AccessHelper
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{current_user.sub}")
     response = Net::HTTP.get(url)
+    # return nil unless response.headers.include?("#{ENV['OWP_AUTH_TOKEN']}")
     JSON.parse(response)
   end
 
@@ -83,6 +84,7 @@ module AccessHelper
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{@document[:id]}/terms")
     response = Net::HTTP.get(url)
+    # return nil unless response.headers.include?("#{ENV['OWP_AUTH_TOKEN']}")
     JSON.parse(response) unless response.nil?
   end
 
@@ -92,6 +94,7 @@ module AccessHelper
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document.id}/#{current_user.netid}")
     response = Net::HTTP.get(url)
+    # return nil unless response.headers.include?("#{ENV['OWP_AUTH_TOKEN']}")
     JSON.parse(response)
   end
 
