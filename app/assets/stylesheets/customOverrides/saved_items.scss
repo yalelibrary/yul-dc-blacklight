@@ -1,0 +1,19 @@
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
+
+.blacklight-bookmarks {
+  font-family: YaleDisplay-Roman, "Times New Roman", Times, serif;
+}
+
+.blacklight-bookmarks .page-heading {
+  color: $yale_blue;
+}
+
+.bookmark-toggle, .toggle-bookmark, .bookmarksTools {
+  font-family: $mallory_medium Arial, Helvetica, sans-serif
+}
+
+.bookmarksTools .btn {
+  padding: 0.5rem 0.75rem .375rem .75rem;
+}
