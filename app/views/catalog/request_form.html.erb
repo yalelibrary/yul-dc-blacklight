@@ -67,7 +67,7 @@
 </div>
 <br />
 <div class="submit_form">
-  <h3>Request Information</h3>
+  <h3 class="submit-form-header">Request Information</h3>
   <%= form_for :permission_request, remote: false do |f| %>
     <div class="request-key">
       <%= "<b>User ID:</b> #{current_user}".html_safe %><br />
@@ -75,6 +75,7 @@
     </div>
     <div class="request-name">
       <%= f.label 'Full Name:' %>
+      <br />
       <%= f.text_field :user_full_name, :required => true %>
     </div>
     <div class="request-label">
@@ -84,8 +85,8 @@
       <%= f.text_area :user_note, :rows => 3, :required => true %>
     </div>
     <div class="form_buttons">
-      <button type="button" class="request-form-cancel btn btn-danger" onclick="javascript:history.back()">Cancel</button>
-      <%= submit_tag "Submit Request", class: "request-form-submit" %>
+      <button type="button" class="request-form-cancel" onclick="javascript:history.back()">CANCEL</button>
+      <%= submit_tag "SUBMIT REQUEST", class: "request-form-submit" %>
     </div>
   <% end %>
 </div>
