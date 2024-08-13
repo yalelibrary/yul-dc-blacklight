@@ -85,6 +85,6 @@ RSpec.describe "Permission Requests", type: :system do
     expect(page.body).to include "Pending"
     expect(page.body).to include "Request Full Name"
     expect(page.body).to include "lorem ipsum"
-    expect(page.body).to include "Continue"
+    expect(page.body).to include "CONTINUE"
   end
 end
