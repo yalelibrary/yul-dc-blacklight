@@ -67,6 +67,6 @@
     <%= "<b>Email:</b> #{current_user.email}".html_safe %><br />
     <%= "<b>Full Name:</b> #{@user_full_name}".html_safe %><br />
     <%= "<b>Reason for request:</b> #{@user_note}".html_safe %><br />
-    <%= link_to "CONTINUE", "/catalog/#{@document[:id]}", class: "request-continue btn" %>
   </div>
+  <%= link_to "CONTINUE", "/catalog/#{@document[:id]}", class: "request-continue btn" %>
 </div>
