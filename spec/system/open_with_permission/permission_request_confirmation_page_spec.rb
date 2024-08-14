@@ -19,12 +19,24 @@ RSpec.describe "Permission Requests", type: :system do
       "child_oids_ssim": ["222222"]
     }
   end
+  let(:valid_header) do
+    {
+      'Accept' => '*/*',
+      'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+      'Authorization' => 'Bearer valid',
+      'Content-Type' => 'application/x-www-form-urlencoded',
+      'User-Agent' => 'Ruby'
+    }
+  end
 
   around do |example|
     original_management_url = ENV['MANAGEMENT_HOST']
+    original_token = ENV['OWP_AUTH_TOKEN']
     ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
+    ENV['OWP_AUTH_TOKEN'] = 'valid'
     example.run
     ENV['MANAGEMENT_HOST'] = original_management_url
+    ENV['OWP_AUTH_TOKEN'] = original_token
   end
 
   before do
@@ -53,7 +65,7 @@ RSpec.describe "Permission Requests", type: :system do
           "user_note": "permission.user_note",
           "user_full_name": "request_user.name"}
         ]}',
-                 headers: [])
+                 headers: valid_header)
     stub_request(:post, 'http://www.example.com/management/api/permission_requests')
       .with(body: {
               "oid" => "1718909",
@@ -63,12 +75,7 @@ RSpec.describe "Permission Requests", type: :system do
               "user_note" => "lorem ipsum",
               "user_sub" => "7bd425ee-1093-40cd-ba0c-5a2355e37d6e"
             },
-            headers: {
-              'Accept' => '*/*',
-              'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-              'Content-Type' => 'application/x-www-form-urlencoded',
-              'User-Agent' => 'Ruby'
-            })
+            headers: valid_header)
       .to_return(status: 201, body: '{ "title": "New request created"}')
     stub_request(:post, 'http://www.example.com/catalog/1718909/request_form')
       .to_return(status: 201, body: '{ "title": "New request created"}')

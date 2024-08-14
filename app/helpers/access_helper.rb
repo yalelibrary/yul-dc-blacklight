@@ -47,9 +47,8 @@ module AccessHelper
   def user_has_permission?(document)
     return unless current_user
     parent_oid = params[:oid].presence || document[:id]
-    return false if parent_oid.nil?
+    return false if parent_oid.nil? || user_owp_permissions == 'unauthorized'
     allowance = false
-    return false if user_owp_permissions == 'unauthorized'
     user_owp_permissions['permissions']&.each do |permission|
       if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today) && (permission['request_status'] == "Approved")
         allowance = true
@@ -79,7 +78,7 @@ module AccessHelper
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{current_user.sub}")
     response = Net::HTTP.get_response(url)
     return 'unauthorized' unless owp_auth_token_valid?(response)
-    JSON.parse(response.body) # unless owp_auth_token_valid?(response)
+    JSON.parse(response.body)
   end
 
   def retrieve_permission_set_terms
@@ -113,7 +112,11 @@ module AccessHelper
   end
 
   def owp_auth_token_valid?(response)
-    response.header.to_json.include?((ENV['OWP_AUTH_TOKEN']).to_s)
+    if ENV['OWP_AUTH_TOKEN'].blank? || ENV['OWP_AUTH_TOKEN'].nil?
+      false
+    else
+      response.header.to_json.include?((ENV['OWP_AUTH_TOKEN']).to_s)
+    end
   end
 
   def client_can_view_metadata?(document)

@@ -46,7 +46,6 @@ class PermissionRequestsController < ApplicationController
   end
 
   def prep_request
-    # byebug
     if current_user.nil?
       redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: 'Please log in to request access to these materials.')
       return false
@@ -64,12 +63,10 @@ class PermissionRequestsController < ApplicationController
     req.add_field('Authorization', "Bearer #{ENV['OWP_AUTH_TOKEN']}")
     con = Net::HTTP.new(url.host, url.port)
     con.start { |http| http.request(req) }
-    # byebug
     handle_request_response(response.status, response.body)
   end
 
   def agreement_term
-    # byebug
     if current_user.nil?
       redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: 'Please log in to request access to these materials.')
       return false
@@ -87,7 +84,6 @@ class PermissionRequestsController < ApplicationController
     req.add_field('Authorization', "Bearer #{ENV['OWP_AUTH_TOKEN']}")
     con = Net::HTTP.new(url.host, url.port)
     con.start { |http| http.request(req) }
-    # byebug
     handle_agreement_request_response(response.status, response.body)
   end
 
@@ -120,7 +116,7 @@ class PermissionRequestsController < ApplicationController
       redirect_to("/catalog/#{params[:oid]}/request_form", notice: body)
     elsif http_status == 403
       redirect_to("/catalog/#{params[:oid]}/request_form", notice: 'Too many pending requests')
-    elsif http_status == 401 && body == 'unauthorized'
+    elsif http_status == 401
       render json: { error: 'unauthorized' }.to_json, status: :unauthorized
     elsif http_status == 201 || http_status == 200
       redirect_to("/catalog/#{params[:oid]}/request_confirmation", notice: 'Your request has been submitted for review.')

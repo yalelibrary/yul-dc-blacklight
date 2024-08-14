@@ -25,7 +25,7 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
     {
       'Accept' => '*/*',
       'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-      'Authorization' => "Bearer valid",
+      'Authorization' => 'Bearer valid',
       'Content-Type' => 'application/x-www-form-urlencoded',
       'User-Agent' => 'Ruby'
     }
