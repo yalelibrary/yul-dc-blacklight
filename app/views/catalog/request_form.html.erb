@@ -74,7 +74,7 @@
       <%= "<b>Email:</b> #{current_user.email}".html_safe %><br />
     </div>
     <div class="request-name">
-      <%= f.label 'Full Name:' %>
+      <%= f.label 'Full Name:', class: 'request-full-name' %>
       <br />
       <%= f.text_field :user_full_name, :required => true %>
     </div>
