@@ -43,11 +43,13 @@ module AccessHelper
   end
 
   # rubocop:disable Metrics/PerceivedComplexity
+  # rubocop:disable Metrics/CyclomaticComplexity
   def user_has_permission?(document)
     return unless current_user
     parent_oid = params[:oid].presence || document[:id]
     return false if parent_oid.nil?
     allowance = false
+    return false if user_owp_permissions == 'unauthorized'
     user_owp_permissions['permissions']&.each do |permission|
       if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today) && (permission['request_status'] == "Approved")
         allowance = true
@@ -56,6 +58,7 @@ module AccessHelper
     allowance
   end
   # rubocop:enable Metrics/PerceivedComplexity
+  # rubocop:enable Metrics/CyclomaticComplexity
 
   def admin_of_owp?(document)
     return unless current_user
@@ -65,6 +68,7 @@ module AccessHelper
                      retrieve_admin_credentials(document)
                    end
     allowance = false
+    allowance = false if @credentials == 'unauthorized'
     allowance = true if @credentials['is_admin_or_approver?'] == "true"
     allowance
   end
@@ -73,9 +77,9 @@ module AccessHelper
     return nil if current_user.nil?
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{current_user.sub}")
-    response = Net::HTTP.get(url)
-    # return nil unless response.headers.include?("#{ENV['OWP_AUTH_TOKEN']}")
-    JSON.parse(response)
+    response = Net::HTTP.get_response(url)
+    return 'unauthorized' unless owp_auth_token_valid?(response)
+    JSON.parse(response.body) # unless owp_auth_token_valid?(response)
   end
 
   def retrieve_permission_set_terms
@@ -83,9 +87,9 @@ module AccessHelper
     # #{ENV['MANAGEMENT_HOST']}
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{@document[:id]}/terms")
-    response = Net::HTTP.get(url)
-    # return nil unless response.headers.include?("#{ENV['OWP_AUTH_TOKEN']}")
-    JSON.parse(response) unless response.nil?
+    response = Net::HTTP.get_response(url)
+    return 'unauthorized' unless owp_auth_token_valid?(response)
+    JSON.parse(response.body) unless response.nil?
   end
 
   def retrieve_admin_credentials(document)
@@ -93,9 +97,9 @@ module AccessHelper
     # #{ENV['MANAGEMENT_HOST']}
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document.id}/#{current_user.netid}")
-    response = Net::HTTP.get(url)
-    # return nil unless response.headers.include?("#{ENV['OWP_AUTH_TOKEN']}")
-    JSON.parse(response)
+    response = Net::HTTP.get_response(url)
+    return 'unauthorized' unless owp_auth_token_valid?(response)
+    JSON.parse(response.body)
   end
 
   def retrieve_admin_fulltext_credentials(document)
@@ -103,8 +107,13 @@ module AccessHelper
     # #{ENV['MANAGEMENT_HOST']}
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document}/#{current_user.netid}")
-    response = Net::HTTP.get(url)
-    JSON.parse(response)
+    response = Net::HTTP.get_response(url)
+    return 'unauthorized' unless owp_auth_token_valid?(response)
+    JSON.parse(response.body)
+  end
+
+  def owp_auth_token_valid?(response)
+    response.header.to_json.include?((ENV['OWP_AUTH_TOKEN']).to_s)
   end
 
   def client_can_view_metadata?(document)

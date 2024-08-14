@@ -19,15 +19,15 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
       "child_oids_ssim": ["222222"]
     }
   end
-  # let(:owp_work_without_auth_token) do
-  #   {
-  #     "id": "17189098",
-  #     "title_tesim": ["Map of Laos"],
-  #     "visibility_ssi": "Open with Permission",
-  #     "child_oids_ssim": ["333333"]
-  #   }
-  # end
-  let(:headers) { { 'CONTENT_TYPE' => 'application/json', 'AUTHORIZATION' => "Bearer valid" } }
+  let(:valid_header) do
+    {
+      'Accept' => '*/*',
+      'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+      'Content-Type' => 'application/x-www-form-urlencoded',
+      'User-Agent' => 'Ruby',
+      'Authorization' => "Bearer valid"
+    }
+  end
 
   around do |example|
     original_management_url = ENV['MANAGEMENT_HOST']
@@ -61,48 +61,9 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
             "request_date":"2023-11-02T20:23:18.824Z",
             "access_until":null,
             "user_note": "lorem ipsum",
-            "user_full_name": "Request Full Name"
-          }
+            "user_full_name": "Request Full Name"}
         ]}',
-                 headers: [])
-    stub_request(:post, 'http://www.example.com/management/api/permission_requests')
-      .with(body: {
-              "oid" => "1718909",
-              "user_email" => "not_real@example.com",
-              "user_full_name" => "Request Full Name",
-              "user_netid" => "net_id",
-              "user_note" => "lorem ipsum",
-              "user_sub" => "7bd425ee-1093-40cd-ba0c-5a2355e37d6e"
-            },
-            headers: {
-              'Accept' => '*/*',
-              'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-              'Content-Type' => 'application/x-www-form-urlencoded',
-              'User-Agent' => 'Ruby'#,
-              #'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}"
-            })
-      .to_return(status: 201, body: '{ "title": "New request created"}')
-    stub_request(:post, 'http://www.example.com/catalog/1718909/request_form')
-      .to_return(status: 201, body: '{ "title": "New request created"}')
-    # stub_request(:post, 'http://www.example.com/management/api/permission_requests')
-    #   .with(body: {
-    #           "oid" => "17189098",
-    #           "user_email" => "not_real@example.com",
-    #           "user_full_name" => "Request Full Name",
-    #           "user_netid" => "net_id",
-    #           "user_note" => "lorem ipsum",
-    #           "user_sub" => "7bd425ee-1093-40cd-ba0c-5a2355e37d6e"
-    #         },
-    #         headers: {
-    #           'Accept' => '*/*',
-    #           'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-    #           'Content-Type' => 'application/x-www-form-urlencoded',
-    #           'User-Agent' => 'Ruby',
-    #           'Authorization' => "Bearer invalid"
-    #         })
-    #   .to_return(status: 204, body: '')
-    # stub_request(:post, 'http://www.example.com/catalog/17189098/request_form')
-    #   .to_return(status: 204, body: '')
+                 headers: valid_header)
     solr = Blacklight.default_index.connection
     solr.add([owp_work_with_permission, owp_work_without_permission])
     solr.commit
@@ -111,6 +72,21 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
   end
 
   context 'with an authenticated user' do
+    before do
+      stub_request(:post, 'http://www.example.com/management/api/permission_requests')
+        .with(body: {
+                "oid" => "1718909",
+                "user_email" => "not_real@example.com",
+                "user_full_name" => "Request Full Name",
+                "user_netid" => "net_id",
+                "user_note" => "lorem ipsum",
+                "user_sub" => "7bd425ee-1093-40cd-ba0c-5a2355e37d6e"
+              },
+              headers: valid_header)
+        .to_return(status: 201, body: '{ "title": "New request created"}', headers: valid_header)
+      stub_request(:post, 'http://www.example.com/catalog/1718909/request_form')
+        .to_return(status: 201, body: '{ "title": "New request created"}', headers: valid_header)
+    end
     it 'will create a new permission request and redirect to the confirmation page' do
       post '/catalog/1718909/request_form', params: {
         'oid': '1718909',
@@ -118,26 +94,13 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
           'user_full_name': 'Request Full Name',
           'user_note': 'lorem ipsum'
         }
-      }
+      }, headers: valid_header
       expect(response).to have_http_status(:redirect)
       expect(response.redirect_url).to eq('http://www.example.com/catalog/1718909/request_confirmation')
     end
-    # it 'will throw error with invalid auth token' do
-    #   post '/catalog/17189098/request_form', params: {
-    #     'oid': '17189098',
-    #     'permission_request': {
-    #       'user_full_name': 'Request Full Name',
-    #       'user_note': 'lorem ipsum'
-    #     }
-    #   }, headers: invalid_headers
-    #   expect(response).to have_http_status(:no_content)
-    # end
   end
 
   context 'with a NOT authenticated user' do
-    # before do
-    #   sign_out user
-    # end
     it 'will redirect to the show page' do
       sign_out user
       post '/catalog/1718909/request_form', params: {
@@ -149,15 +112,5 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
       }
       expect(response.redirect_url).to eq('http://www.example.com/catalog/1718909')
     end
-    # it 'will throw error with invalid auth token' do
-    #   post '/catalog/17189098/request_form', params: {
-    #     'oid': '17189098',
-    #     'permission_request': {
-    #       'user_full_name': 'Request Full Name',
-    #       'user_note': 'lorem ipsum'
-    #     }
-    #   }, headers: invalid_headers
-    #   expect(response).to have_http_status(:no_content)
-    # end
   end
 end
