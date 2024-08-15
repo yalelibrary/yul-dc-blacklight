@@ -71,7 +71,6 @@
         /* Check if the two rows should switch place,
         based on the direction, asc or desc: */
         if (dir == "asc") {
-          console.log(x.innerText.toLowerCase().split("/").reverse().join("/"))
           if (x.innerText.toLowerCase() > y.innerText.toLowerCase()) {
             // If so, mark as a switch and break the loop:
             shouldSwitch = true;
