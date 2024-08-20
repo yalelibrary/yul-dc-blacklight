@@ -14,21 +14,26 @@ class PermissionRequestsController < ApplicationController
       redirect_to((ENV['BLACKLIGHT_HOST']).to_s, notice: 'Please log in to gain access to this page.')
       return false
     end
-    # retrive permission requests for user
-    user_owp_permissions['permissions']&.each do |permission|
-      oid = permission['oid']
-      request_date = DateTime.parse(permission['request_date']).strftime("%m/%d/%y")
-      request_status = permission['request_status']
-      access_until = create_readable_access_until(permission)
-      # oid, status, date requested, access until
-      document = search_service.fetch(oid)
-      request_details = {
-        document: document.first[:response][:docs].first,
-        status: request_status,
-        request_date: request_date,
-        access_until: access_until
-      }
-      @table_data << request_details
+    if user_owp_permissions == 'unauthorized'
+      redirect_to((ENV['BLACKLIGHT_HOST']).to_s, notice: 'Access Requests unavailable at this time.')
+      return false
+    else
+      # retrive permission requests for user
+      user_owp_permissions['permissions']&.each do |permission|
+        oid = permission['oid']
+        request_date = DateTime.parse(permission['request_date']).strftime("%m/%d/%y")
+        request_status = permission['request_status']
+        access_until = create_readable_access_until(permission)
+        # oid, status, date requested, access until
+        document = search_service.fetch(oid)
+        request_details = {
+          document: document.first[:response][:docs].first,
+          status: request_status,
+          request_date: request_date,
+          access_until: access_until
+        }
+        @table_data << request_details
+      end
     end
     @table_data
   end
