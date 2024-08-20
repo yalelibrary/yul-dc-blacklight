@@ -76,7 +76,7 @@ module AccessHelper
     return nil if current_user.nil?
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{current_user.sub}")
-    response = Net::HTTP.get_response(url)
+    response = Net::HTTP.get_response(url, { 'authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
     return 'unauthorized' unless owp_auth_token_valid?(response)
     JSON.parse(response.body)
   end
@@ -86,7 +86,7 @@ module AccessHelper
     # #{ENV['MANAGEMENT_HOST']}
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{@document[:id]}/terms")
-    response = Net::HTTP.get_response(url)
+    response = Net::HTTP.get_response(url, { 'authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
     return 'unauthorized' unless owp_auth_token_valid?(response)
     JSON.parse(response.body) unless response.nil?
   end
@@ -96,7 +96,7 @@ module AccessHelper
     # #{ENV['MANAGEMENT_HOST']}
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document.id}/#{current_user.netid}")
-    response = Net::HTTP.get_response(url)
+    response = Net::HTTP.get_response(url, { 'authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
     return 'unauthorized' unless owp_auth_token_valid?(response)
     JSON.parse(response.body)
   end
@@ -106,7 +106,7 @@ module AccessHelper
     # #{ENV['MANAGEMENT_HOST']}
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document}/#{current_user.netid}")
-    response = Net::HTTP.get_response(url)
+    response = Net::HTTP.get_response(url, { 'authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
     return 'unauthorized' unless owp_auth_token_valid?(response)
     JSON.parse(response.body)
   end

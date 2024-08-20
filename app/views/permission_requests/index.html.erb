@@ -35,7 +35,7 @@
         <% @table_data.each do |permission_request| %>
           <tr>
             <td class='permission-request-data'><%= link_to(permission_request[:document][:title_tesim].first, "/catalog/#{permission_request[:document][:id]}") %></td>
-            <td class='permission-request-data'><%= permission_request[:document][:callNumber_tesim].first %></td>
+            <td class='permission-request-data'><%= permission_request[:document][:callNumber_tesim]&.first %></td>
             <td class='permission-request-data'><%= permission_request[:request_date] %></td>
             <td class='permission-request-data'><%= permission_request[:status] %></td>
             <td class='permission-request-data'><%= permission_request[:access_until] %></td>
