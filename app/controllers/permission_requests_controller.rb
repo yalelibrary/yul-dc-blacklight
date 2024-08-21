@@ -14,9 +14,9 @@ class PermissionRequestsController < ApplicationController
       redirect_to((ENV['BLACKLIGHT_HOST']).to_s, notice: 'Please log in to gain access to this page.')
       return false
     end
-    if user_owp_permissions == 'unauthorized'
+    if user_owp_permissions.nil?
       redirect_to((ENV['BLACKLIGHT_HOST']).to_s, notice: 'Access Requests unavailable at this time.')
-      return false
+      false
     else
       # retrive permission requests for user
       user_owp_permissions['permissions']&.each do |permission|
@@ -34,8 +34,8 @@ class PermissionRequestsController < ApplicationController
         }
         @table_data << request_details
       end
+      @table_data
     end
-    @table_data
   end
 
   def create_readable_access_until(permission_request)

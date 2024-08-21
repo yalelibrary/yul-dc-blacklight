@@ -631,9 +631,7 @@ class CatalogController < ApplicationController
     super
     @search_params = session[:search_params]
     @permission_set_terms = retrieve_permission_set_terms if @document["visibility_ssi"] == "Open with Permission"
-    if @permission_set_terms == 'unauthorized'
-      render json: { error: 'unauthorized' }.to_json, status: :unauthorized
-    elsif @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present? && !request.original_url.include?("oai_dc_xml")
+    if @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present? && !request.original_url.include?("oai_dc_xml")
       redirect_to @document["redirect_to_tesi"]
     elsif @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present? && request.original_url.include?("oai_dc_xml")
       not_found
@@ -651,9 +649,7 @@ class CatalogController < ApplicationController
     @response, @document = search_service.fetch(params[:oid])
     if current_user && @document['visibility_ssi'] == 'Open with Permission'
       @permission_set_terms = retrieve_permission_set_terms
-      if @permission_set_terms == 'unauthorized'
-        render json: { error: 'unauthorized' }.to_json, status: :unauthorized
-      elsif @permission_set_terms.nil?
+      if @permission_set_terms.nil?
         redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: "We are unable to complete your access request at this time. For more information about this object, click the ‘Feedback’ link located at the bottom of this page and fill out the form. We will get back to you as soon as possible.")
       elsif user_owp_permissions['permission_set_terms_agreed']&.include?(@permission_set_terms['id'])
         render 'catalog/request_form'
@@ -670,7 +666,7 @@ class CatalogController < ApplicationController
   # rubocop:disable Metrics/PerceivedComplexity
   def request_confirmation
     @response, @document = search_service.fetch(params[:oid])
-    if current_user && @document['visibility_ssi'] == 'Open with Permission' && user_owp_permissions != 'unauthorized'
+    if current_user && @document['visibility_ssi'] == 'Open with Permission'
       @render_confirmation = false
       permissions = user_owp_permissions['permissions']
       requests = []
