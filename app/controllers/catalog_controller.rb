@@ -663,10 +663,12 @@ class CatalogController < ApplicationController
   # rubocop:enable Layout/LineLength
   # rubocop:enable Metrics/PerceivedComplexity
 
+  # rubocop:disable Layout/LineLength
+  # rubocop:disable Metrics/CyclomaticComplexity
   # rubocop:disable Metrics/PerceivedComplexity
   def request_confirmation
     @response, @document = search_service.fetch(params[:oid])
-    if current_user && @document['visibility_ssi'] == 'Open with Permission'
+    if current_user && @document['visibility_ssi'] == 'Open with Permission' && user_owp_permissions.present?
       @render_confirmation = false
       permissions = user_owp_permissions['permissions']
       requests = []
@@ -682,15 +684,23 @@ class CatalogController < ApplicationController
       end
       if @render_confirmation
         render 'catalog/request_confirmation', user_full_name: @user_full_name, user_note: @user_note, request_status: @request_status
+      elsif admin_of_owp?(@document)
+        redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params['oid']}")
+        false
       else
         redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params['oid']}/request_form", notice: "Please submit a request for this item.  No request was found.")
         false
       end
+    elsif user_owp_permissions.nil? && current_user
+      flash.now[:alert] = 'We are unable to complete your request for information at this time. Please try again later.'
+      render 'catalog/request_confirmation'
     else
       redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params['oid']}", notice: "Please log in to request access to these materials.")
       false
     end
   end
+  # rubocop:enable Layout/LineLength
+  # rubocop:disable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/PerceivedComplexity
 
   # ~~~ OPEN WITH PERMISSION - END ~~~

@@ -98,6 +98,16 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
       expect(response).to have_http_status(:redirect)
       expect(response.redirect_url).to eq('http://www.example.com/catalog/1718909/request_confirmation')
     end
+    #
+    # authenticated user
+    # who has agreed to terms
+    # who has not agreed to terms
+    # who has too many pending requests
+    # who has requested a private parent
+    # who has requested a public parent
+    # who has requested a parent that doesn't exist
+    # when management is has 300 or 500 status
+    #
   end
 
   context 'with a NOT authenticated user' do

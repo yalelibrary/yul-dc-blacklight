@@ -35,7 +35,7 @@ module AccessHelper
   def pending_request?(document)
     parent_oid = document[:id]
     pending = false
-    return unless current_user
+    return unless current_user && user_owp_permissions.present?
     user_owp_permissions['permissions']&.each do |permission|
       pending = true if (permission['oid'].to_s == parent_oid) && !permission['request_date'].nil? && (permission['request_status'] == "Pending")
     end
@@ -49,6 +49,7 @@ module AccessHelper
     parent_oid = params[:oid].presence || document[:id]
     return false if parent_oid.nil?
     allowance = false
+    return false if user_owp_permissions.nil?
     user_owp_permissions['permissions']&.each do |permission|
       if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today) && (permission['request_status'] == "Approved")
         allowance = true
@@ -76,6 +77,7 @@ module AccessHelper
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{current_user.sub}")
     response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
+    return nil unless response.is_a? Net::HTTPSuccess
     JSON.parse(response.body)
   end
 
@@ -85,7 +87,8 @@ module AccessHelper
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{@document[:id]}/terms")
     response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
-    JSON.parse(response.body) unless response.nil?
+    return nil unless response.is_a? Net::HTTPSuccess
+    JSON.parse(response.body)
   end
 
   def retrieve_admin_credentials(document)
@@ -94,6 +97,7 @@ module AccessHelper
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document.id}/#{current_user.netid}")
     response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
+    return nil unless response.is_a? Net::HTTPSuccess
     JSON.parse(response.body)
   end
 
@@ -103,6 +107,7 @@ module AccessHelper
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document}/#{current_user.netid}")
     response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
+    return nil unless response.is_a? Net::HTTPSuccess
     JSON.parse(response.body)
   end
 
