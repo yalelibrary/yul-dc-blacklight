@@ -663,7 +663,6 @@ class CatalogController < ApplicationController
   # rubocop:enable Layout/LineLength
   # rubocop:enable Metrics/PerceivedComplexity
 
-  # rubocop:disable Layout/LineLength
   # rubocop:disable Metrics/CyclomaticComplexity
   # rubocop:disable Metrics/PerceivedComplexity
   def request_confirmation
@@ -699,7 +698,6 @@ class CatalogController < ApplicationController
       false
     end
   end
-  # rubocop:enable Layout/LineLength
   # rubocop:disable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/PerceivedComplexity
 

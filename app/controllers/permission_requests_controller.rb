@@ -113,14 +113,19 @@ class PermissionRequestsController < ApplicationController
   # rubocop:disable Metrics/PerceivedComplexity
   # rubocop:disable Metrics/CyclomaticComplexity
   def handle_request_response(http_status, body)
+    byebug
     if http_status == 400 && body == 'Invalid Parent OID'
       redirect_to("/catalog/#{params[:oid]}/request_form", notice: 'Object not found')
     elsif http_status == 400 && body == 'Object is private'
       redirect_to("/catalog/#{params[:oid]}/request_form", notice: body)
     elsif http_status == 400 && body == 'Object is public, permission not required'
       redirect_to("/catalog/#{params[:oid]}/request_form", notice: body)
-    elsif http_status == 403
-      redirect_to("/catalog/#{params[:oid]}/request_form", notice: 'Too many pending requests')
+    elsif http_status == 400 && body == 'User is admin or approver'
+      redirect_to("/catalog/#{params[:oid]}/request_form", notice: 'You have permission to view this object as an administrator or approver')
+    elsif http_status == 403 && body == 'Too many pending requests for object'
+      redirect_to("/catalog/#{params[:oid]}", notice: 'Pending request already exists for this work')
+    elsif http_status == 403 && body == 'Too many pending requests for set'
+      redirect_to("/catalog/#{params[:oid]}", notice: 'Too many pending requests for the collection this work is from')
     elsif http_status == 401
       render json: { error: 'unauthorized' }.to_json, status: :unauthorized
     elsif http_status == 201 || http_status == 200
