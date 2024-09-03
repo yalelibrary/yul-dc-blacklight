@@ -3,7 +3,8 @@ require 'rails_helper'
 
 RSpec.describe "Download Original", type: :request, clean: true do
   let(:imgtiff) { 'image/tiff' }
-  let(:user) { FactoryBot.create(:user, netid: "net_id") }
+  let(:yale_user) { FactoryBot.create(:user, netid: "net_id") }
+  let(:non_yale_user) { FactoryBot.create(:user) }
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY.merge({ "child_oids_ssim": ["5555555"] }) }
   let(:yale_work) do
     {
@@ -86,9 +87,9 @@ RSpec.describe "Download Original", type: :request, clean: true do
     end
   end
 
-  context 'as an authenticated user' do
+  context 'as an authenticated yale user' do
     before do
-      sign_in user
+      sign_in yale_user
     end
     context 'when file is present on S3' do
       it 'display if set to public' do
@@ -116,6 +117,27 @@ RSpec.describe "Download Original", type: :request, clean: true do
     context 'when child object does not exist' do
       it 'presents user with not found message' do
         get '/download/tiff/89'
+        expect(response).to have_http_status(:not_found) # 404
+      end
+    end
+  end
+
+  context 'as an authenticated non yale user' do
+    before do
+      sign_in non_yale_user
+    end
+    context 'when file is present on S3' do
+      it 'display if set to public' do
+        get "/download/tiff/#{public_work[:child_oids_ssim].first}"
+        expect(response).to have_http_status(:success) # 200
+        expect(response.content_type).to eq imgtiff
+      end
+      it 'does not display if set to YCO' do
+        get "/download/tiff/#{yale_work[:child_oids_ssim].first}"
+        expect(response).to have_http_status(:unauthorized) # 401
+      end
+      it 'does not display if set to private' do
+        get "/download/tiff/#{private_work[:child_oids_ssim].first}"
         expect(response).to have_http_status(:not_found) # 404
       end
     end
