@@ -71,52 +71,6 @@ RSpec.describe "Open with Permission", type: :system do
     ENV['OWP_AUTH_TOKEN'] = original_token
   end
   before do
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
-      .to_return(status: 200, body: '{
-        "timestamp":"2023-11-02",
-        "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
-        "permission_set_terms_agreed":[1],
-        "permissions":[{
-          "oid":1618909,
-          "permission_set":1,
-          "permission_set_terms":1,
-          "request_status":"Approved",
-          "request_date":"2023-11-02T20:23:18.824Z",
-          "access_until":"2034-11-02T20:23:18.824Z"},
-          {
-            "oid":1718909,
-            "permission_set":1,
-            "permission_set_terms":1,
-            "request_status":"Denied",
-            "request_date":"2024-11-02T20:23:18.824Z",
-            "access_until":null
-          },
-          {
-            "oid":1818909,
-            "permission_set":1,
-            "permission_set_terms":1,
-            "request_status":"Pending",
-            "request_date":"2025-11-02T20:23:18.824Z",
-            "access_until":null
-          },
-          {
-            "oid":1918909,
-            "permission_set":1,
-            "permission_set_terms":1,
-            "request_status":"Approved",
-            "request_date":"2026-11-02T20:23:18.824Z",
-            "access_until":"2034-11-02T20:23:18.824Z"
-          },
-          {
-            "oid":11018909,
-            "permission_set":1,
-            "permission_set_terms":1,
-            "request_status":"Denied",
-            "request_date":"2027-11-02T20:23:18.824Z",
-            "access_until":null
-          }
-        ]}',
-                 headers: valid_header)
     stub_request(:get, "http://www.example.com/management/api/permission_sets/1618909/terms")
       .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: valid_header)
     stub_request(:get, "http://www.example.com/management/api/permission_sets/1718909/terms")
@@ -140,8 +94,86 @@ RSpec.describe "Open with Permission", type: :system do
   end
 
   context 'as an authenticated user on the requests page' do
-    context 'with correct permission' do
+    context 'with unsuccessful response from management' do
       before do
+        stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+          .to_return(status: 500, body: '{"title":"internal server error"}', headers: valid_header)
+        login_as user
+        visit '/permission_requests'
+      end
+
+      it 'can redirect as expected' do
+        expect(page).to have_http_status(:success)
+        expect(page.current_url).to eq 'http://www.example.com/'
+      end
+    end
+
+    context 'when there are no requests for the user' do
+      before do
+        stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+          .to_return(status: 200, body: '{
+          "timestamp":"2023-11-02",
+          "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
+          "permission_set_terms_agreed":[1],
+          "permissions":[]}', headers: valid_header)
+        login_as user
+        visit '/permission_requests'
+      end
+      it 'can display not found message' do
+        expect(page).to have_http_status(:success)
+        expect(page.current_url).to include 'permission_requests'
+        expect(page.body).to have_content 'No requests found'
+      end
+    end
+
+    context 'with successful response from management' do
+      before do
+        stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+          .to_return(status: 200, body: '{
+          "timestamp":"2023-11-02",
+          "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
+          "permission_set_terms_agreed":[1],
+          "permissions":[{
+            "oid":1618909,
+            "permission_set":1,
+            "permission_set_terms":1,
+            "request_status":"Approved",
+            "request_date":"2023-11-02T20:23:18.824Z",
+            "access_until":"2034-11-02T20:23:18.824Z"},
+            {
+              "oid":1718909,
+              "permission_set":1,
+              "permission_set_terms":1,
+              "request_status":"Denied",
+              "request_date":"2024-11-02T20:23:18.824Z",
+              "access_until":null
+            },
+            {
+              "oid":1818909,
+              "permission_set":1,
+              "permission_set_terms":1,
+              "request_status":"Pending",
+              "request_date":"2025-11-02T20:23:18.824Z",
+              "access_until":null
+            },
+            {
+              "oid":1918909,
+              "permission_set":1,
+              "permission_set_terms":1,
+              "request_status":"Approved",
+              "request_date":"2026-11-02T20:23:18.824Z",
+              "access_until":"2034-11-02T20:23:18.824Z"
+            },
+            {
+              "oid":11018909,
+              "permission_set":1,
+              "permission_set_terms":1,
+              "request_status":"Denied",
+              "request_date":"2027-11-02T20:23:18.824Z",
+              "access_until":null
+            }
+          ]}',
+                     headers: valid_header)
         login_as user
         visit '/permission_requests'
       end
