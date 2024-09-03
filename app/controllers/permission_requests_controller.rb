@@ -113,7 +113,6 @@ class PermissionRequestsController < ApplicationController
   # rubocop:disable Metrics/PerceivedComplexity
   # rubocop:disable Metrics/CyclomaticComplexity
   def handle_request_response(http_status, body)
-    byebug
     if http_status == 400 && body == 'Invalid Parent OID'
       redirect_to("/catalog/#{params[:oid]}/request_form", notice: 'Object not found')
     elsif http_status == 400 && body == 'Object is private'
