@@ -4,7 +4,8 @@ require 'rails_helper'
 
 # WebMock.allow_net_connect!
 RSpec.describe 'AnnotationsController', type: :request, clean: true, js: true do
-  let(:user) { FactoryBot.create(:user, netid: "net_id") }
+  let(:yale_user) { FactoryBot.create(:user, netid: "net_id") }
+  let(:non_yale_user) { FactoryBot.create(:user) }
   let(:public_work) do
     {
       "id": "2034600",
@@ -94,59 +95,177 @@ RSpec.describe 'AnnotationsController', type: :request, clean: true, js: true do
       end
     end
 
-    describe 'GET /annotation/ .. /fulltext while on campus' do
-      before do
-        allow(User).to receive(:on_campus?).and_return(true)
+    describe 'GET /annotation/ .. /fulltext not logged in' do
+      context 'while on campus' do
+        before do
+          allow(User).to receive(:on_campus?).and_return(true)
+        end
+        it 'returns a full text annotation' do
+          get '/annotation/oid/2034600/canvas/998833/fulltext'
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include("This is the full text public")
+        end
+        it 'returns a full text annotation on yale only' do
+          get '/annotation/oid/1618909/canvas/998834/fulltext'
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include("This is the full text Yale only")
+        end
+        it 'returns 401 for a full text annotation on Open with Permission parent' do
+          get '/annotation/oid/1618909/canvas/9988344/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
+        it 'returns 401 for a full text annotation because of mismatch parent' do
+          get '/annotation/oid/2034600/canvas/998834/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
+        it 'returns 401 for a full text annotation unknown visibility' do
+          get '/annotation/oid/1618904/canvas/998835/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
       end
-      it 'returns a full text annotation' do
-        get '/annotation/oid/2034600/canvas/998833/fulltext'
-        expect(response).to have_http_status(:success)
-        expect(response.body).to include("This is the full text public")
-      end
-      it 'returns a full text annotation on yale only' do
-        get '/annotation/oid/1618909/canvas/998834/fulltext'
-        expect(response).to have_http_status(:success)
-        expect(response.body).to include("This is the full text Yale only")
-      end
-      it 'returns 401 for a full text annotation on Open with Permission parent' do
-        get '/annotation/oid/1618909/canvas/9988344/fulltext'
-        expect(response).to have_http_status(:unauthorized)
-      end
-      it 'returns 401 for a full text annotation because of mismatch parent' do
-        get '/annotation/oid/2034600/canvas/998834/fulltext'
-        expect(response).to have_http_status(:unauthorized)
-      end
-      it 'returns 401 for a full text annotation unknown visibility' do
-        get '/annotation/oid/1618904/canvas/998835/fulltext'
-        expect(response).to have_http_status(:unauthorized)
+      context 'while not on campus' do
+        before do
+          allow(User).to receive(:on_campus?).and_return(false)
+        end
+        it 'returns a full text annotation' do
+          get '/annotation/oid/2034600/canvas/998833/fulltext'
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include("This is the full text public")
+        end
+        it 'returns a full text annotation on yale only' do
+          get '/annotation/oid/1618909/canvas/998834/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
+        it 'returns 401 for a full text annotation on Open with Permission parent' do
+          get '/annotation/oid/1618909/canvas/9988344/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
+        it 'returns 401 for a full text annotation because of mismatch parent' do
+          get '/annotation/oid/2034600/canvas/998834/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
+        it 'returns 401 for a full text annotation unknown visibility' do
+          get '/annotation/oid/1618904/canvas/998835/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
       end
     end
 
-    describe 'GET /annotation/ .. /fulltext while logged in' do
+    describe 'GET /annotation/ .. /fulltext while logged in as yale user' do
       before do
-        sign_in user
+        sign_in yale_user
       end
-      it 'returns a full text annotation' do
-        get '/annotation/oid/2034600/canvas/998833/fulltext'
-        expect(response).to have_http_status(:success)
-        expect(response.body).to include("This is the full text public")
+      context 'while on campus' do
+        before do
+          allow(User).to receive(:on_campus?).and_return(true)
+        end
+        it 'returns a full text annotation' do
+          get '/annotation/oid/2034600/canvas/998833/fulltext'
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include("This is the full text public")
+        end
+        it 'returns a full text annotation on yale only' do
+          get '/annotation/oid/1618909/canvas/998834/fulltext'
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include("This is the full text Yale only")
+        end
+        it 'returns 401 for a full text annotation on Open with Permission parent' do
+          get '/annotation/oid/1618909/canvas/9988344/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
+        it 'returns 401 for a full text annotation because of mismatch parent' do
+          get '/annotation/oid/2034600/canvas/998834/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
+        it 'returns 401 for a full text annotation unknown visibility' do
+          get '/annotation/oid/1618904/canvas/998835/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
       end
-      it 'returns a full text annotation on yale only' do
-        get '/annotation/oid/1618909/canvas/998834/fulltext'
-        expect(response).to have_http_status(:success)
-        expect(response.body).to include("This is the full text Yale only")
+      context 'while not on campus' do
+        before do
+          allow(User).to receive(:on_campus?).and_return(false)
+        end
+        it 'returns a full text annotation' do
+          get '/annotation/oid/2034600/canvas/998833/fulltext'
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include("This is the full text public")
+        end
+        it 'returns a full text annotation on yale only' do
+          get '/annotation/oid/1618909/canvas/998834/fulltext'
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include("This is the full text Yale only")
+        end
+        it 'returns 401 for a full text annotation on Open with Permission parent' do
+          get '/annotation/oid/1618909/canvas/9988344/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
+        it 'returns 401 for a full text annotation because of mismatch parent' do
+          get '/annotation/oid/2034600/canvas/998834/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
+        it 'returns 401 for a full text annotation unknown visibility' do
+          get '/annotation/oid/1618904/canvas/998835/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
       end
-      it 'returns 401 for a full text annotation on Open with Permission parent' do
-        get '/annotation/oid/1618909/canvas/9988344/fulltext'
-        expect(response).to have_http_status(:unauthorized)
+    end
+    describe 'GET /annotation/ .. /fulltext while logged in as non yale user' do
+      before do
+        sign_in non_yale_user
       end
-      it 'returns 401 for a full text annotation because of mismatch parent' do
-        get '/annotation/oid/2034600/canvas/998834/fulltext'
-        expect(response).to have_http_status(:unauthorized)
+      context 'while on campus' do
+        before do
+          allow(User).to receive(:on_campus?).and_return(true)
+        end
+        it 'returns a full text annotation' do
+          get '/annotation/oid/2034600/canvas/998833/fulltext'
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include("This is the full text public")
+        end
+        it 'returns a full text annotation on yale only' do
+          get '/annotation/oid/1618909/canvas/998834/fulltext'
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include("This is the full text Yale only")
+        end
+        it 'returns 401 for a full text annotation on Open with Permission parent' do
+          get '/annotation/oid/1618909/canvas/9988344/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
+        it 'returns 401 for a full text annotation because of mismatch parent' do
+          get '/annotation/oid/2034600/canvas/998834/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
+        it 'returns 401 for a full text annotation unknown visibility' do
+          get '/annotation/oid/1618904/canvas/998835/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
       end
-      it 'returns 401 for a full text annotation unknown visibility' do
-        get '/annotation/oid/1618904/canvas/998835/fulltext'
-        expect(response).to have_http_status(:unauthorized)
+      context 'while not on campus' do
+        before do
+          allow(User).to receive(:on_campus?).and_return(false)
+        end
+        it 'returns a full text annotation' do
+          get '/annotation/oid/2034600/canvas/998833/fulltext'
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include("This is the full text public")
+        end
+        it 'returns 401 for a full text annotation on yale only' do
+          get '/annotation/oid/1618909/canvas/998834/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
+        it 'returns 401 for a full text annotation on Open with Permission parent' do
+          get '/annotation/oid/1618909/canvas/9988344/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
+        it 'returns 401 for a full text annotation because of mismatch parent' do
+          get '/annotation/oid/2034600/canvas/998834/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
+        it 'returns 401 for a full text annotation unknown visibility' do
+          get '/annotation/oid/1618904/canvas/998835/fulltext'
+          expect(response).to have_http_status(:unauthorized)
+        end
       end
     end
   end
