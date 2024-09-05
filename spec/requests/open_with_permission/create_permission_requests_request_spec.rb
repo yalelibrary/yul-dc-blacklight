@@ -99,6 +99,10 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
   context 'with an authenticated yale user' do
     before do
       sign_in yale_user
+      stub_request(:post, 'http://www.example.com/management/agreement_term')
+        .with(body: { "oid" => "1718909", "permission_set_terms_id" => "1", "user_email" => "not_real@example.com", "user_full_name" => "new", "user_netid" => "net_id",
+                      "user_sub" => "7bd425ee-1093-40cd-ba0c-5a2355e37d6e" }, headers: valid_header)
+        .to_return(status: 200)
       stub_request(:post, 'http://www.example.com/management/api/permission_requests')
         .with(body: {
                 "oid" => "1718909",
@@ -110,6 +114,18 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
               },
               headers: valid_header)
         .to_return(status: 201, body: '{ "title": "New request created"}', headers: valid_header)
+    end
+    it 'can accept terms and redirect to request form' do
+      post '/catalog/1718909/terms_and_conditions', params: {
+        'oid': '1718909',
+        'user_email': yale_user.email,
+        'user_netid': yale_user.netid,
+        'user_sub': yale_user.sub,
+        'user_full_name': "new",
+        'permission_set_terms_id': 1
+      }, headers: valid_header
+      expect(response).to have_http_status(:redirect)
+      expect(response.redirect_url).to eq('http://www.example.com/catalog/1718909/request_form')
     end
     it 'will create a new permission request and redirect to the confirmation page' do
       post '/catalog/1718909/request_form', params: {
@@ -127,6 +143,10 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
   context 'with an authenticated non yale user' do
     before do
       sign_in non_yale_user
+      stub_request(:post, 'http://www.example.com/management/agreement_term')
+        .with(body: { "oid" => "1718909", "permission_set_terms_id" => "1", "user_email" => "not_real_either@example.com", "user_full_name" => "new", "user_netid" => nil,
+                      "user_sub" => "7bd425ee-1093-40cd-ba0c-5a2355e37d6f" }, headers: valid_header)
+        .to_return(status: 200)
       stub_request(:post, 'http://www.example.com/management/api/permission_requests')
         .with(body: {
                 "oid" => "1718909",
@@ -138,6 +158,18 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
               },
               headers: valid_header)
         .to_return(status: 201, body: '{ "title": "New request created"}', headers: valid_header)
+    end
+    it 'can accept terms and redirect to request form' do
+      post '/catalog/1718909/terms_and_conditions', params: {
+        'oid': '1718909',
+        'user_email': non_yale_user.email,
+        'user_netid': non_yale_user.netid,
+        'user_sub': non_yale_user.sub,
+        'user_full_name': "new",
+        'permission_set_terms_id': 1
+      }, headers: valid_header
+      expect(response).to have_http_status(:redirect)
+      expect(response.redirect_url).to eq('http://www.example.com/catalog/1718909/request_form')
     end
     it 'will create a new permission request and redirect to the confirmation page' do
       post '/catalog/1718909/request_form', params: {
@@ -153,7 +185,12 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
   end
 
   context 'with a NOT authenticated user' do
-    it 'will redirect to the show page' do
+    it 'will not accept terms and will redirect to show page' do
+      post '/catalog/1718909/terms_and_conditions'
+      expect(response).to have_http_status(:redirect)
+      expect(response.redirect_url).to eq('http://www.example.com/catalog/1718909')
+    end
+    it 'sending request form will redirect to the show page not confirmation page' do
       post '/catalog/1718909/request_form', params: {
         'oid': '1718909',
         'permission_request': {
