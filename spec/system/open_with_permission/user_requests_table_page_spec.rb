@@ -272,7 +272,6 @@ RSpec.describe "Open with Permission", type: :system do
 
   context 'as a NOT authenticated user on the requests page' do
     it 'will redirect to homepage' do
-      # logout user
       visit '/permission_requests'
       expect(page.current_url).to eq ENV['BLACKLIGHT_HOST']
     end
