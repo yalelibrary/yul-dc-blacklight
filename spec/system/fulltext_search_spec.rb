@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user, netid: "netid") }
   let(:owp_user_no_access) { FactoryBot.create(:user, netid: "net_id", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6e", uid: 'some_name', email: 'not_real@example.com') }
   let(:owp_user_with_access) { FactoryBot.create(:user, netid: "net_id_2", sub: "27bd425ee-1093-40cd-ba0c-5a2355e37d6e2", uid: 'some_other_name', email: 'not_really@example.com') }
   let(:valid_header) do
@@ -101,17 +101,17 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
           "access_until":"2034-11-02T20:23:18.824Z"}
         ]}',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/161890909/#{user.netid}")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/161890909/#{user.uid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"false"
       }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/161890909/#{owp_user_with_access.netid}")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/161890909/#{owp_user_with_access.uid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"false"
       }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/161890909/#{owp_user_no_access.netid}")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/161890909/#{owp_user_no_access.uid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"false"
       }',
