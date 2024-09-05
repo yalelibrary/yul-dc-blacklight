@@ -3,6 +3,7 @@ require 'rails_helper'
 
 RSpec.describe "Open with Permission", type: :request, clean: true do
   let(:user) { FactoryBot.create(:user, netid: "net_id1", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6e", uid: 'user_uid', email: 'not_real@example.com') }
+  let(:non_yale_user) { FactoryBot.create(:user, sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6g", uid: 'uid456', email: 'not_real_either@example.com') }
   let(:admin_approver_user) { FactoryBot.create(:user, netid: "net_id2", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6d", uid: 'unique_uid', email: 'not_real@example.com') }
   let(:non_approved_user) { FactoryBot.create(:user, netid: "net_id3", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6f", uid: 'some_name', email: 'not_real@example.com') }
   let(:owp_work_with_permission) do
@@ -63,17 +64,39 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
           }
         ]}',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1618909/#{user.netid}")
+    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6g')
+      .to_return(status: 200, body: '{
+        "timestamp":"2023-11-02",
+        "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6g"},
+        "permission_set_terms_agreed":[1],
+        "permissions":[{
+          "oid":1618909,
+          "permission_set":1,
+          "permission_set_terms":1,
+          "request_status":"Approved",
+          "request_date":"2023-11-02T20:23:18.824Z",
+          "access_until":"2034-11-02T20:23:18.824Z"},
+          {
+            "oid":1718909,
+            "permission_set":1,
+            "permission_set_terms":1,
+            "request_status":null,
+            "request_date":"2023-11-02T20:23:18.824Z",
+            "access_until":null
+          }
+        ]}',
+                 headers: valid_header)
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/1618909/#{user.uid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"true"
         }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1618909/#{admin_approver_user.netid}")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/1618909/#{admin_approver_user.uid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"true"
         }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1718909/#{non_approved_user.netid}")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/1718909/#{non_approved_user.uid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"false"
         }',
@@ -173,6 +196,21 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
       expect(response.body).to include('Map of India')
       expect(response.body).to include(user.uid.to_s)
       expect(response.body).to include(user.email.to_s)
+      expect(response.body).to include('input required="required" type="text" name="permission_request[user_full_name]" id="permission_request_user_full_name"')
+      expect(response.body).to include('textarea rows="3" required="required" name="permission_request[user_note]" id="permission_request_user_note"')
+      expect(response.body).to include('CANCEL')
+      expect(response.body).to include('SUBMIT REQUEST')
+    end
+  end
+
+  context 'as an authenticated non yale user on the request form page' do
+    it 'displays metadata, username, email, input fields, and buttons if user has accepted the terms and conditions' do
+      sign_in non_yale_user
+      get "/catalog/1718909/request_form"
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include('Map of India')
+      expect(response.body).to include(non_yale_user.uid.to_s)
+      expect(response.body).to include(non_yale_user.email.to_s)
       expect(response.body).to include('input required="required" type="text" name="permission_request[user_full_name]" id="permission_request_user_full_name"')
       expect(response.body).to include('textarea rows="3" required="required" name="permission_request[user_note]" id="permission_request_user_note"')
       expect(response.body).to include('CANCEL')

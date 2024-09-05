@@ -4,7 +4,8 @@ require 'rails_helper'
 RSpec.describe "Iiifs", type: :request do
   let(:thumbnail_size) { "!1200,630" }
 
-  let(:user) { FactoryBot.create(:user, netid: "net_id") }
+  let(:yale_user) { FactoryBot.create(:user, netid: "net_id") }
+  let(:non_yale_user) { FactoryBot.create(:user) }
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY.merge({ "child_oids_ssim": ["5555555"] }) }
   let(:yale_work) do
     {
@@ -68,9 +69,32 @@ RSpec.describe "Iiifs", type: :request do
     end
   end
 
-  context 'as an authenticated user' do
+  context 'as an authenticated yale user' do
     before do
-      sign_in user
+      sign_in yale_user
+    end
+    it 'display if set to public' do
+      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/5555555/full/#{thumbnail_size}/0/default.jpg" }
+
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'display if set to yale only' do
+      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/1111111/full/#{thumbnail_size}/0/default.jpg" }
+
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'returns an unauthorized response if there is no visibility key' do
+      get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/2222222/full/#{thumbnail_size}/0/default.jpg" }
+
+      expect(response).to have_http_status(:unauthorized)
+    end
+  end
+
+  context 'as an authenticated non yale user' do
+    before do
+      sign_in non_yale_user
     end
     it 'display if set to public' do
       get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/5555555/full/#{thumbnail_size}/0/default.jpg" }
@@ -81,7 +105,7 @@ RSpec.describe "Iiifs", type: :request do
     it 'do not display if set to yale only' do
       get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/1111111/full/#{thumbnail_size}/0/default.jpg" }
 
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:unauthorized)
     end
 
     it 'returns an unauthorized response if there is no visibility key' do

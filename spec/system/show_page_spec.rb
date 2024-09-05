@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   let(:user) { FactoryBot.create(:user) }
-  let(:management_approver) { FactoryBot.create(:user, netid: 'net_id2', sub: '1234') }
+  let(:management_approver) { FactoryBot.create(:user, netid: 'net_id2', sub: '1234', uid: 'sun345') }
   let(:request_user) { FactoryBot.create(:user, netid: "net_id", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6e", uid: 'some_name', email: 'not_real@example.com') }
   let(:thumbnail_size_in_opengraph) { "!1200,630" }
   let(:thumbnail_size_in_solr) { "!200,200" }
@@ -200,17 +200,17 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, 'http://www.example.com/management/api/permission_sets/123')
       .to_return(status: 200, body: '{"timestamp":"2023-11-02","user":{"sub":"123"},"permission_set_terms_agreed":[],"permissions":[{"oid":12345,"permission_set":1,"permission_set_terms":1,"request_status":"Approved","request_date":"2023-11-02T20:23:18.824Z","access_until":"2024-11-02T20:23:18.824Z"}]}', headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/#{user.netid}")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/#{user.uid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"false"
         }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/54321/#{user.netid}")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/54321/#{user.uid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"false"
         }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/#{management_approver.netid}")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/#{management_approver.uid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"true"
         }',
@@ -471,7 +471,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       login_as management_approver
     end
     # flappy - passes locally and sometimes in CI
-    xit 'can access the object and view UV and metadata normally without approver_status' do
+    xit 'can access the object and view UV and metadata normally without approved status' do
       visit 'catalog/12345'
       expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
       expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."

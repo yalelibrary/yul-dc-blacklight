@@ -3,7 +3,8 @@ require 'rails_helper'
 # WebMock.allow_net_connect!
 
 RSpec.describe 'Manifests', type: :request, clean: true do
-  let(:user) { FactoryBot.create(:user, netid: "net_id") }
+  let(:yale_user) { FactoryBot.create(:user, netid: "net_id") }
+  let(:non_yale_user) { FactoryBot.create(:user) }
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY }
   let(:redirected_work) { WORK_REDIRECTED }
   let(:yale_work) do
@@ -81,9 +82,42 @@ RSpec.describe 'Manifests', type: :request, clean: true do
     end
   end
 
-  context 'as an authenticated user' do
+  context 'as an authenticated non yale user' do
     before do
-      sign_in user
+      sign_in non_yale_user
+    end
+
+    it 'display if set to public' do
+      get '/manifests/2055095'
+      manifest = JSON.parse(response.body)
+
+      expect(manifest['visibility_ssi']).to eq('Public')
+      expect(manifest['title_tesim'][0]).to eq('A General dictionary of the English language')
+    end
+
+    it 'returns a 401 if set to yale only' do
+      get '/manifests/1618909'
+      manifest = JSON.parse(response.body)
+
+      expect(manifest['error']).to eq('unauthorized')
+    end
+
+    it 'returns a 401 if there is no visibility key' do
+      get '/manifests/1234567'
+      manifest = JSON.parse(response.body)
+
+      expect(manifest['error']).to eq('unauthorized')
+    end
+
+    it 'returns a 404 if redirected' do
+      get '/manifests/16685691'
+      expect(response.body).to include "the item you've requested does not appear to exist"
+    end
+  end
+
+  context 'as an authenticated yale user' do
+    before do
+      sign_in yale_user
     end
 
     it 'display if set to public' do
