@@ -67,7 +67,7 @@ module AccessHelper
                      retrieve_admin_credentials(document)
                    end
     allowance = false
-    allowance = true if @credentials['is_admin_or_approver?'] == "true"
+    allowance = true if @credentials&['is_admin_or_approver?'] == "true"
     allowance
   end
 
