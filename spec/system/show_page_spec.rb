@@ -120,6 +120,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       genre_ssim: 'Artifacts',
       resourceType_ssim: 'Books, Journals & Pamphlets',
       has_fulltext_ssi: 'No',
+      child_oids_ssim: [444],
       creator_ssim: ['Andy Graves']
     }
   end
@@ -143,10 +144,12 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       title_tesim: ['Rhett Lecheire'],
       format: 'text',
       language_ssim: 'fr',
+      parent_ssi: "222",
       visibility_ssi: 'Public',
       genre_ssim: 'Animation',
       resourceType_ssim: 'Archives or Manuscripts',
-      creator_ssim: ['Paulo Coelho']
+      creator_ssim: ['Paulo Coelho'],
+      has_fulltext_ssi: 'No'
     }
   end
 
