@@ -120,6 +120,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       genre_ssim: 'Artifacts',
       resourceType_ssim: 'Books, Journals & Pamphlets',
       has_fulltext_ssi: 'No',
+      child_oids_ssim: [444],
       creator_ssim: ['Andy Graves']
     }
   end
@@ -143,10 +144,12 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       title_tesim: ['Rhett Lecheire'],
       format: 'text',
       language_ssim: 'fr',
+      parent_ssi: "222",
       visibility_ssi: 'Public',
       genre_ssim: 'Animation',
       resourceType_ssim: 'Archives or Manuscripts',
-      creator_ssim: ['Paulo Coelho']
+      creator_ssim: ['Paulo Coelho'],
+      has_fulltext_ssi: 'No'
     }
   end
 
@@ -200,17 +203,17 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, 'http://www.example.com/management/api/permission_sets/123')
       .to_return(status: 200, body: '{"timestamp":"2023-11-02","user":{"sub":"123"},"permission_set_terms_agreed":[],"permissions":[{"oid":12345,"permission_set":1,"permission_set_terms":1,"request_status":"Approved","request_date":"2023-11-02T20:23:18.824Z","access_until":"2024-11-02T20:23:18.824Z"}]}', headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/#{user.uid}")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/#{user.netid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"false"
         }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/54321/#{user.uid}")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/54321/#{user.netid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"false"
         }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/#{management_approver.uid}")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/#{management_approver.netid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"true"
         }',

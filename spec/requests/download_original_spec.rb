@@ -122,11 +122,11 @@ RSpec.describe "Download Original", type: :request, clean: true do
           "access_until":"2034-11-02T20:23:18.824Z",
           "user_note": "permission.user_note",
           "user_full_name": "request_user.name"}]}')
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1818909/sun345")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/1818909/net_id")
       .to_return(status: 200, body: '{ "is_admin_or_approver?": "false" }')
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1918909/sun345")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/1918909/net_id")
       .to_return(status: 200, body: '{ "is_admin_or_approver?": "false" }')
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/2345678999/sun345")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/2345678999/net_id")
       .to_return(status: 200, body: '{ "is_admin_or_approver?": "false" }')
     stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6f')
       .to_return(status: 200, body: '{
@@ -152,12 +152,6 @@ RSpec.describe "Download Original", type: :request, clean: true do
           "user_note": "permission.user_note",
           "user_full_name": "request_user.name"}
           ]}')
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1818909/moon678")
-      .to_return(status: 200, body: '{ "is_admin_or_approver?": "false" }')
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1918909/moon678")
-      .to_return(status: 200, body: '{ "is_admin_or_approver?": "false" }')
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/2345678999/moon678")
-      .to_return(status: 200, body: '{ "is_admin_or_approver?": "false" }')
     solr = Blacklight.default_index.connection
     solr.add([public_work, yale_work, owp_work_with_permission, owp_work_without_permission, private_work, not_available_yet, not_available_yet_owp])
     solr.commit

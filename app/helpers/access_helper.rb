@@ -67,7 +67,9 @@ module AccessHelper
                      retrieve_admin_credentials(document)
                    end
     allowance = false
-    allowance = true if @credentials['is_admin_or_approver?'] == "true"
+    if @credentials
+      allowance = true if @credentials['is_admin_or_approver?'] == "true"
+    end
     allowance
   end
 
@@ -89,19 +91,19 @@ module AccessHelper
   end
 
   def retrieve_admin_credentials(document)
-    return nil if current_user.nil?
+    return nil if current_user.nil? || current_user&.netid.nil?
     # #{ENV['MANAGEMENT_HOST']}
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
-    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document.id}/#{current_user.uid}")
+    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document.id}/#{current_user.netid}")
     response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
     JSON.parse(response.body)
   end
 
   def retrieve_admin_fulltext_credentials(document)
-    return nil if current_user.nil?
+    return nil if current_user.nil? || current_user&.netid.nil?
     # #{ENV['MANAGEMENT_HOST']}
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
-    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document}/#{current_user.uid}")
+    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document}/#{current_user.netid}")
     response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
     JSON.parse(response.body)
   end
