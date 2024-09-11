@@ -1,0 +1,10 @@
+<% if session[:show_ai_option] && !object_owp?(@document) %>
+  <div class="archival-context alert alert-secondary" role="alert"
+    style="margin-bottom: 1rem;"
+  >
+    ChatGPT and Claude can help you find out more about the text in this object. &nbsp;
+    <a href="https://collections-ai.library.yale.edu/?iiif-content=https://collections.library.yale.edu/manifests/<%= @document.id %>"
+       style="color: #006EF5;"
+    target="_blank">Open the Collections AI tool in a new window.</a>
+  </div>
+<% end %>

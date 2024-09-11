@@ -24,6 +24,14 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
             email: auth.info.email
           )
       end
+      # set flag in session for AI-authorized users
+      groups = auth.extra.raw_info['cognito:groups']
+      if groups
+        ai_group = groups.find { |g| 'ai-user' == g }
+        if ai_group
+          session[:show_ai_option] = true
+        end
+      end
     else
       # Login for non-yale users without a net_id
       @user = User.where(provider: auth.provider, uid: auth.uid, sub: sub).first
