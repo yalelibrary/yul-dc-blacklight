@@ -291,6 +291,9 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).to have_xpath("//button[@href='/catalog']")
       expect(page.first('button.catalog_startOverLink').text).to eq('NEW SEARCH').or eq('New Search')
     end
+    it 'Does not have Collections AI link' do
+      expect(page).not_to have_xpath("//div[@id='collections-ai-link']")
+    end
   end
 
   context 'Universal Viewer' do
