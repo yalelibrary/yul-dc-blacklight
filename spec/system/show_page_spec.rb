@@ -443,6 +443,9 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
       expect(page).to have_css('.uv-container')
     end
+    it 'Does not have Collections AI link' do
+      expect(page).not_to have_xpath("//div[@id='collections-ai-link']")
+    end
     it 'displays login message when accessing an OwP object without access' do
       visit 'catalog/54321'
       expect(page).to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
