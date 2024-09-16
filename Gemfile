@@ -16,7 +16,7 @@ gem 'blacklight-marc', '>= 7.0.0.rc1', '< 8'
 gem 'blacklight_oai_provider', git: 'https://github.com/projectblacklight/blacklight_oai_provider.git'
 gem 'blacklight_range_limit'
 gem 'bootsnap', '>= 1.4.2', require: false
-gem 'bootstrap', '~> 4.0'
+gem 'bootstrap', '~> 4.6'
 gem 'citeproc-ruby'
 gem 'csl-styles'
 gem 'devise'
