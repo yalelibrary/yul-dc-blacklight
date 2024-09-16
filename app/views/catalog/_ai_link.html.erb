@@ -1,5 +1,5 @@
-<% if session[:show_ai_option] && !object_owp?(@document) %>
-  <div class="archival-context alert alert-secondary" role="alert"
+<% if session[:show_ai_option] && client_can_view_digital?(@document) && !object_owp?(@document) %>
+  <div class="alert alert-secondary metadata-block single-item-show" role="alert"
        id="collections-ai-link"
     style="margin-bottom: 1rem;"
   >
