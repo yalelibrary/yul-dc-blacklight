@@ -24,6 +24,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
             email: auth.info.email
           )
       end
+      set_ai_session
     else
       # Login for non-yale users without a net_id
       @user = User.where(provider: auth.provider, uid: auth.uid, sub: sub).first
@@ -48,6 +49,13 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # rubocop:enable Metrics/PerceivedComplexity
 
   protected
+
+  def set_ai_session
+    # set flag in session for AI-authorized users
+    groups = auth.extra.raw_info['cognito:groups']
+    ai_group = groups.find { |g| 'ai-user' == g } if groups
+    session[:show_ai_option] = true if ai_group
+  end
 
   def after_omniauth_failure_path_for(_resource)
     root_path
