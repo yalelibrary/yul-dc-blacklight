@@ -539,8 +539,8 @@ class CatalogController < ApplicationController
     config.add_sort_field 'creator_ssim desc, title_ssim asc, archivalSort_ssi asc', label: 'Creator (Z --> A)'
     config.add_sort_field 'title_ssim asc, oid_ssi desc, archivalSort_ssi asc', label: 'Title (A --> Z)'
     config.add_sort_field 'title_ssim desc, oid_ssi desc, archivalSort_ssi asc', label: 'Title (Z --> A)'
-    config.add_sort_field 'year_isim asc, id desc, archivalSort_ssi asc', label: 'Year (ascending)'
-    config.add_sort_field 'year_isim desc, id desc, archivalSort_ssi asc', label: 'Year (descending)'
+    config.add_sort_field 'year_isim asc, date_isim asc, id asc, archivalSort_ssi asc', label: 'Year (ascending)'
+    config.add_sort_field 'year_isim desc, date_isim desc, id desc, archivalSort_ssi asc', label: 'Year (descending)'
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
@@ -649,6 +649,8 @@ class CatalogController < ApplicationController
     @response, @document = search_service.fetch(params[:oid])
     if current_user && @document['visibility_ssi'] == 'Open with Permission'
       @permission_set_terms = retrieve_permission_set_terms
+      # byebug
+      Rails.logger.info("HERE:: #{@permission_set_terms}")
       if @permission_set_terms.nil?
         redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: "We are unable to complete your access request at this time. For more information about this object, click the ‘Feedback’ link located at the bottom of this page and fill out the form. We will get back to you as soon as possible.")
       elsif user_owp_permissions['permission_set_terms_agreed']&.include?(@permission_set_terms['id'])
