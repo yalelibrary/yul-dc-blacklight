@@ -265,7 +265,7 @@ RSpec.describe 'Search the catalog using advanced search', type: :system, js: tr
 
     it 'can sort by date asc' do
       within '#sort' do
-        find("option[value='year_isim asc, id desc, archivalSort_ssi asc']").click
+        find("option[value='year_isim asc, id asc, archivalSort_ssi asc']").click
       end
       click_on 'SEARCH'
       within '#documents' do
