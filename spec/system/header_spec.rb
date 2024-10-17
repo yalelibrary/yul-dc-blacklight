@@ -37,7 +37,7 @@ RSpec.describe 'header', type: :system do
     expect(page).to have_link('Research Guides', href: 'http://guides.library.yale.edu/')
     expect(page).to have_link('Find Databases by Title', href: 'http://search.library.yale.edu/databases')
     expect(page).to have_link('Find eJournals by Title', href: 'http://wa4py6yj8t.search.serialssolutions.com')
-    expect(page).to have_link('Guide to Using Special Collections', href: 'http://guides.library.yale.edu/specialcollections')
+    expect(page).to have_link('Guide to Using Special Collections', href: 'https://library.yale.edu/find-request-and-use/use/using-special-collections')
     expect(page).to have_link('Your Personal Librarian', href: 'https://library.yale.edu/pl')
     expect(page).to have_link('Subject Specialists', href: 'https://library.yale.edu/subject-specialists')
     expect(page).to have_link('Research Support and Workshops', href: 'http://guides.library.yale.edu/research-help')
