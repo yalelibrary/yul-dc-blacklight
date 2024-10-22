@@ -6,7 +6,7 @@ class DownloadOriginalController < ApplicationController
   include Blacklight::Catalog
   include CheckAuthorization
 
-  before_action :check_authorization, except: [:staged]
+  before_action :check_authorization
 
   def tiff
     if S3Service.exists_in_s3(tiff_pairtree_path)

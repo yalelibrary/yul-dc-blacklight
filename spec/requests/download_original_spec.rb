@@ -168,12 +168,24 @@ RSpec.describe "Download Original", type: :request, clean: true do
       get "/download/tiff/#{yale_work[:child_oids_ssim].first}"
       expect(response).to have_http_status(:unauthorized) # 401
     end
+    it 'does not stage the download if set to YCO' do
+      get "/download/tiff/#{yale_work[:child_oids_ssim].first}/staged"
+      expect(response).to have_http_status(:unauthorized) # 401
+    end
     it 'does not display if set to OWP' do
       get "/download/tiff/#{owp_work_without_permission[:child_oids_ssim].first}"
       expect(response).to have_http_status(:unauthorized) # 401
     end
+    it 'does not stage the download if set to OWP' do
+      get "/download/tiff/#{owp_work_without_permission[:child_oids_ssim].first}/staged"
+      expect(response).to have_http_status(:unauthorized) # 401
+    end
     it 'does not display if set to private' do
       get "/download/tiff/#{private_work[:child_oids_ssim].first}"
+      expect(response).to have_http_status(:not_found) # 404
+    end
+    it 'does not stage the download if set to private' do
+      get "/download/tiff/#{private_work[:child_oids_ssim].first}/staged"
       expect(response).to have_http_status(:not_found) # 404
     end
   end
