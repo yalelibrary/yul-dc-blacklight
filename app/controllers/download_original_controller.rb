@@ -6,7 +6,7 @@ class DownloadOriginalController < ApplicationController
   include Blacklight::Catalog
   include CheckAuthorization
 
-  before_action :check_authorization, except: [:staged]
+  before_action :check_authorization
 
   def tiff
     if S3Service.exists_in_s3(tiff_pairtree_path)
@@ -58,7 +58,7 @@ class DownloadOriginalController < ApplicationController
 
   def stage_download
     Rails.logger.info("TIFF with id [#{child_oid}] not found - staging for download.")
-    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/download/stage/child/#{child_oid}")
+    url = URI.parse("http://yul-dc-management-1:3001/management/api/download/stage/child/#{child_oid}")
     req = Net::HTTP::Get.new(url.path)
     con = Net::HTTP.new(url.host, url.port)
     con.start { |http| http.request(req) }
