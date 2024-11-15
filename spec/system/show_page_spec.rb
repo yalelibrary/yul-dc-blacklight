@@ -449,29 +449,17 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     end
   end
 
-  context "Open with Permission objects and signed in" do
+  context "Open with Permission objects and signed in as a user without access" do
     before do
       login_as user
     end
-    it 'can access the object and view UV and metadata normally' do
+    it 'can access the object but not all data' do
       visit 'catalog/12345'
       expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
       expect(page).to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
-      expect(page).not_to have_css('.uv-container')
-    end
-    it 'Does not have Collections AI link' do
-      expect(page).not_to have_xpath("//div[@id='collections-ai-link']")
-    end
-    it 'displays login message when accessing an OwP object without access' do
-      visit 'catalog/54321'
-      expect(page).to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
-      expect(page).not_to have_css('.uv-container')
-    end
-    it 'cannot see the Show Full Text option if user does not have OwP access' do
-      visit 'catalog/54321'
-      expect(page).to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
-      expect(page).not_to have_css('.uv-container')
-      expect(page).not_to have_content "Show Full Text"
+      expect(page).not_to have_css('.uv-container'), 'cannot access UV'
+      expect(page).not_to have_xpath("//div[@id='collections-ai-link']"), 'does not have Collections AI link'
+      expect(page).not_to have_content("Show Full Text"), 'cannot access full text'
     end
   end
 
@@ -479,8 +467,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     before do
       login_as management_approver
     end
-    # flappy - passes locally and sometimes in CI
-    xit 'can access the object and view UV and metadata normally without approved status' do
+    # flappy - passes locally but flaps sometimes in CI
+    it 'can access the object and view UV and metadata normally without approved status' do
       visit 'catalog/12345'
       expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
       expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
