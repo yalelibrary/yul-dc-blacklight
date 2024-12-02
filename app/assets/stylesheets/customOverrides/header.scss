@@ -46,6 +46,7 @@ DEFAULT MOBILE STYLING
 }
 
 .nav-link-caret {
+  cursor: pointer;
   transform: rotate(180deg);
   -ms-transform: rotate(180deg); /* for IE */
   -webkit-transform: rotate(180deg); /* for browsers supporting webkit (such as chrome, firefox, safari etc.). */

@@ -18,7 +18,7 @@
         <div class="dropdown">
           <h2 class="nav-link-title" data-toggle="dropdown">
             <a href="#" role="button" aria-expanded="true">Research</a>
-            <p class="nav-link-caret" style="cursor: pointer">
+            <p class="nav-link-caret">
               <%= image_tag("header/2x-angle-up-solid.png", {id: 'research-collapse-nav-bar', alt: 'collapse nav bar'})%>
             </p>
           </h2>
@@ -95,7 +95,7 @@
         <div class="dropdown">
           <h2 class="nav-link-title" data-toggle="dropdown">
             <a href="#" role="button" aria-expanded="false">Services</a>
-            <p class="nav-link-caret" style="cursor: pointer">
+            <p class="nav-link-caret">
               <%= image_tag("header/2x-angle-up-solid.png", {id: 'services-collapse-nav-bar', alt: 'collapse nav bar'})%>
             </p>
           </h2>
@@ -167,7 +167,7 @@
         <div class="dropdown">
           <h2 class="nav-link-title" data-toggle="dropdown">
             <a href="#" role="button" aria-expanded="false">Libraries & Collections</a>
-            <p class="nav-link-caret" style="cursor: pointer">
+            <p class="nav-link-caret">
               <%= image_tag("header/2x-angle-up-solid.png", {id: 'libraries-collapse-nav-bar', alt: 'collapse nav bar'})%>
             </p>
           </h2>
@@ -279,7 +279,7 @@
         <div class="dropdown">
           <h2 class="nav-link-title" data-toggle="dropdown">
             <a href="#" role="button" aria-expanded="false">Information & Policies</a>
-            <p class="nav-link-caret" style="cursor: pointer">
+            <p class="nav-link-caret">
               <%= image_tag("header/2x-angle-up-solid.png", {id: 'info-collapse-nav-bar', alt: 'collapse nav bar'})%>
             </p>
           </h2>
@@ -360,57 +360,3 @@
     </div>
   </div>
 </div>
-
-<script>
-    // override the addClass method so that a callback can be used
-    (function($) {
-        let oldAddClass = $.fn.addClass;
-        $.fn.addClass = function() {
-            for (let i in arguments) {
-                let arg = arguments[i]
-                if (!!(arg && arg.constructor && arg.call && arg.apply)) {
-                    setTimeout(arg.bind(this))
-                    delete arguments[i]
-                }
-            }
-            return oldAddClass.apply(this, arguments)
-        }
-
-    })(jQuery)
-
-    // show and hide the dropdown links properly
-    $(document).ready(function() {
-        $('.secondary-nav .nav-link-title').click(function(e) {
-            const width = window.innerWidth
-                || document.documentElement.clientWidth
-                || document.body.clientWidth
-
-            $('.secondary-nav .content-yul').addClass('content-show', function() {
-                const contentBlock = $('.secondary-nav .dropdown.show .menu-block-wrapper')[0]
-
-                if (contentBlock) {
-                    if (width >= 1200) {
-                        $('.content-yul').height(contentBlock.offsetHeight + 20)
-                    } else {
-                        // on devices smaller than 1200px wide, only show the item that was clicked on
-                        $('.secondary-nav .dropdown.show .content-yul').height(contentBlock.offsetHeight + 20)
-                        $('.secondary-nav .dropdown:not(.show) .content-yul').height(0)
-                    }
-                } else {
-                    $('.content-yul').height(0)
-                }
-            })
-        })
-
-        $('body').on('click', function(e) {
-            if (
-                !$(e.target).is('.secondary-nav .nav-link-title') && !$(e.target).is('.secondary-nav .nav-link-title li a')||
-                $(e.target).is('.sort-dropdown') ||
-                $(e.target).is('.per-page-dropdown')
-            ) {
-                $('.secondary-nav .content-yul').removeClass('content-show')
-                $('.content-yul').height(0)
-            }
-        })
-    })
-</script>
