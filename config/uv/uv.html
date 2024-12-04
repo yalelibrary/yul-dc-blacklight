@@ -12,7 +12,7 @@
     <meta http-equiv="Expires" content="0" />
     <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" type="text/css" href="uv.css">
-    <style>
+    <style nonce="true">
         body {
             margin: 0;
             padding: 0;
@@ -103,8 +103,8 @@
 
     </style>
 
-    <script type="text/javascript" src="umd/UV.js"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" src="umd/UV.js" nonce="true"></script>
+    <script type="text/javascript" nonce="true">
         document.addEventListener("DOMContentLoaded", function () {
             var uv;
             let urlAdapter = new UV.IIIFURLAdapter();
@@ -136,7 +136,7 @@
 
     <div id="uv" class="uv"></div>
 
-    <script>
+    <script nonce="true">
         window.addEventListener("DOMContentLoaded", function () {
             var $UV = document.getElementById("uv");
             var $UV_Iframe = document.getElementById("uv-iframe");
