@@ -15,7 +15,6 @@
 //= require download_original
 //= require ga_tag_manager
 //= require header_navbar
-//= require landing
 //= require show_more
 
 
