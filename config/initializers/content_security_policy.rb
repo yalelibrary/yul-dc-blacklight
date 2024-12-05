@@ -12,6 +12,7 @@
       policy.img_src     :self, :https, :data
       policy.object_src  :none
       policy.script_src  :self, 'siteimproveanalytics.com www.googletagmanager.com'
+      policy.script_src_attr  :self, 'www.googletagmanager.com'
       policy.script_src_elem  :self, 'siteimproveanalytics.com www.googletagmanager.com'
       policy.style_src   :self
       policy.style_src_elem   :self, "#{ENV['IIIF_IMAGE_BASE_URL']}"
@@ -27,7 +28,7 @@
 
     config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
 
-    config.content_security_policy_nonce_directives = %w[script-src script-src-elem style-src]
+    config.content_security_policy_nonce_directives = %w[script-src script-src-elem script-src-attr style-src]
 
     # Report violations without enforcing the policy.
     # config.content_security_policy_report_only = true

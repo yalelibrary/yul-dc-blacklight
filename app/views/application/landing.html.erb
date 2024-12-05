@@ -20,6 +20,7 @@
     <%= content_for(:head) %>
   </head>
   <body class="<%= render_body_class %>">
+  <%= render partial: 'shared/ga_header' %>
   <%= render partial: 'shared/ga_body' %>
   <nav>
     <div id="banner" class="alert alert-warning hidden"></div>
