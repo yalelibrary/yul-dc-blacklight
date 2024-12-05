@@ -201,6 +201,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/45/12/34/12345.json')
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, "https://yul-dc-development-samples.s3.amazonaws.com/manifests/55/55/555.json")
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, 'http://www.example.com/management/api/permission_sets/123')
       .to_return(status: 200, body: '{"timestamp":"2023-11-02","user":{"sub":"123"},"permission_set_terms_agreed":[],"permissions":[{"oid":12345,"permission_set":1,"permission_set_terms":1,"request_status":"Approved","request_date":"2023-11-02T20:23:18.824Z","access_until":"2024-11-02T20:23:18.824Z"}]}', headers: valid_header)
     stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/#{user.netid}")
