@@ -23,7 +23,7 @@
 <div id='uv-pages'></div>
 <div id='parent-oid'><%= @document.id %></div>
 
-<script nonce="true">
+<script nonce="<%= content_security_policy_nonce %>">
   $(document).ready(function(){
     window.addEventListener('message', (event) => {
       if (event.origin.match('<%= request.protocol %><%= request.host %>')) {

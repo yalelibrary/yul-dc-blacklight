@@ -3,7 +3,7 @@
 </div>
 
 <% if @permission_set_terms.present? %>
-  <script nonce="true">
+  <script nonce="<%= content_security_policy_nonce %>">
     let rights = document.querySelector('dd.blacklight-rights_ssim');
 
     function expandText() {
