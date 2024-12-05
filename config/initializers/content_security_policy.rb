@@ -14,7 +14,9 @@
       policy.script_src  :self, 'siteimproveanalytics.com www.googletagmanager.com'
       policy.script_src_elem  :self, 'siteimproveanalytics.com www.googletagmanager.com'
       policy.style_src   :self
-      policy.connect_src :self, 'banner.library.yale.edu www.google-analytics.com'
+      policy.style_src_elem   :self, "#{ENV['IIIF_IMAGE_BASE_URL']}"
+      policy.connect_src :self, "banner.library.yale.edu www.google-analytics.com #{ENV['IIIF_IMAGE_BASE_URL']}"
+
       # Specify URI for violation reports
       unless ENV['CLUSTER_NAME'] == 'local'
         policy.report_uri lambda {
@@ -31,3 +33,8 @@
     # config.content_security_policy_report_only = true
   end
 # end
+
+
+
+# Questions for Steven
+# * how is the iiif image url not included in 'self'?
