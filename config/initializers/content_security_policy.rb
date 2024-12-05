@@ -4,7 +4,7 @@
 # Define an application-wide content security policy.
 # See the Securing Rails Applications Guide for more information:
 # https://guides.rubyonrails.org/security.html#content-security-policy-header
-# if ENV["RAILS_ENV"] == 'production' || ENV["RAILS_ENV"] == 'staging'
+if ENV["RAILS_ENV"] == 'production' || ENV["RAILS_ENV"] == 'staging'
   Rails.application.configure do
     config.content_security_policy do |policy|
       policy.default_src :self, :https
@@ -14,8 +14,8 @@
       policy.script_src  :self, 'siteimproveanalytics.com www.googletagmanager.com'
       policy.script_src_attr  :self, 'www.googletagmanager.com'
       policy.script_src_elem  :self, 'siteimproveanalytics.com www.googletagmanager.com'
-      policy.style_src   :self
-      policy.style_src_elem   :self, "#{ENV['IIIF_IMAGE_BASE_URL']}"
+      policy.style_src :self
+      policy.style_src_elem :self, (ENV['IIIF_IMAGE_BASE_URL']).to_s
       policy.connect_src :self, "banner.library.yale.edu www.google-analytics.com #{ENV['IIIF_IMAGE_BASE_URL']}"
 
       # Specify URI for violation reports
@@ -33,9 +33,4 @@
     # Report violations without enforcing the policy.
     # config.content_security_policy_report_only = true
   end
-# end
-
-
-
-# Questions for Steven
-# * how is the iiif image url not included in 'self'?
+end
