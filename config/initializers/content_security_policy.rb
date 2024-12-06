@@ -15,6 +15,7 @@ if ENV["RAILS_ENV"] == 'production' || ENV["RAILS_ENV"] == 'staging'
       policy.script_src_attr  :self, :unsafe_inline, 'www.googletagmanager.com'
       policy.script_src_elem  :self, :unsafe_inline, 'siteimproveanalytics.com www.googletagmanager.com'
       policy.style_src :self, :unsafe_inline
+      policy.style_src_attr :self, :unsafe_inline
       policy.style_src_elem :self, :unsafe_inline, "#{ENV['IIIF_IMAGE_BASE_URL']}/"
       policy.connect_src :self, "banner.library.yale.edu www.google-analytics.com #{ENV['IIIF_IMAGE_BASE_URL']}/"
 
