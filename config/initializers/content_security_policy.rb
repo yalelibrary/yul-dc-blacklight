@@ -9,11 +9,15 @@ if ENV["RAILS_ENV"] == 'production' || ENV["RAILS_ENV"] == 'staging'
     config.content_security_policy do |policy|
       policy.default_src :self, :https
       policy.font_src    :self, 'static.library.yale.edu'
-      policy.img_src     :self, :https, :data
+      policy.img_src     :self, :https, :data, "#{ENV['IIIF_IMAGE_BASE_URL']}/"
       policy.object_src  :none
-      policy.script_src  :self, 'siteimproveanalytics.com'
-      policy.style_src   :self
-      policy.connect_src :self
+      policy.script_src  :self, :unsafe_inline, 'siteimproveanalytics.com www.googletagmanager.com'
+      policy.script_src_attr  :self, :unsafe_inline, 'www.googletagmanager.com'
+      policy.script_src_elem  :self, :unsafe_inline, 'siteimproveanalytics.com www.googletagmanager.com'
+      policy.style_src :self, :unsafe_inline
+      policy.style_src_elem :self, :unsafe_inline, "#{ENV['IIIF_IMAGE_BASE_URL']}/"
+      policy.connect_src :self, "banner.library.yale.edu www.google-analytics.com #{ENV['IIIF_IMAGE_BASE_URL']}/"
+
       # Specify URI for violation reports
       unless ENV['CLUSTER_NAME'] == 'local'
         policy.report_uri lambda {
@@ -24,7 +28,7 @@ if ENV["RAILS_ENV"] == 'production' || ENV["RAILS_ENV"] == 'staging'
 
     config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
 
-    config.content_security_policy_nonce_directives = %w[script-src style-src]
+    # config.content_security_policy_nonce_directives = %w[script-src script-src-attr script-src-elem style-src]
 
     # Report violations without enforcing the policy.
     # config.content_security_policy_report_only = true

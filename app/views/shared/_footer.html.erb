@@ -53,7 +53,7 @@
     </div>
   </div>
 </div>
-<aside>
+<aside nonce="<%= content_security_policy_nonce %>">
   <div class="branch-name">
     Branch:<span title="SHA:<%=GIT_SHA%>"><%=ENV['BLACKLIGHT_VERSION']||GIT_BRANCH%></span>,Deployed:<%=DEPLOYED_AT%>
   </div>

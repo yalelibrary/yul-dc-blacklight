@@ -129,8 +129,9 @@
   </body>
 <% end %>
 
-<script>
-  $(document).ready(function() {
+<script nonce="<%= content_security_policy_nonce %>">
+
+$(document).ready(function() {
     const images = [
       {
         alt: 'Conference attendees at "Camp Spingarn," Amenia, N.Y., August 24-26, 1916',
@@ -163,5 +164,5 @@
 
     $('#hero-image').attr({ 'src': src, 'alt': alt });
     $('#hero-image-caption').text(caption);
-  })
+})
 </script>

@@ -4,35 +4,36 @@
   <%= render partial: 'shared/ga_header' %>
   <title>Yale Digital Collections Mirador Viewer</title>
   <meta name="robots" content="noindex"/>
-  <script src="/mirador.js"></script>
+  <script src="/mirador.js" nonce="<%= content_security_policy_nonce %>"></script>
 </head>
 <body>
   <%= render partial: 'shared/ga_body' %>
 <div id="my-mirador"/>
-<script type="text/javascript">
+
+<script type="text/javascript" nonce="<%= content_security_policy_nonce %>">
   let dc_mirador_config = {
       "id": "my-mirador"
   }
 
-<% if @manifest %>
-  const manifest = "<%= @manifest %>";
-  dc_mirador_config = {
-      ...dc_mirador_config,
-      "manifests": {
-          manifest: {
-              "provider": "Yale University"
-          }
-      },
-      "windows": [
-          {
-              "loadedManifest": manifest,
-              "thumbnailNavigationPosition": 'far-bottom'
-          }
-      ]
-  }
-<% end %>
+  <% if @manifest %>
+    const manifest = "<%= @manifest %>";
+    dc_mirador_config = {
+        ...dc_mirador_config,
+        "manifests": {
+            manifest: {
+                "provider": "Yale University"
+            }
+        },
+        "windows": [
+            {
+                "loadedManifest": manifest,
+                "thumbnailNavigationPosition": 'far-bottom'
+            }
+        ]
+    }
+  <% end %>
 
-var mirador = Mirador.viewer(dc_mirador_config);
+  var mirador = Mirador.viewer(dc_mirador_config);
 </script>
 </body>
 </html>
