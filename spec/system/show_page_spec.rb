@@ -41,7 +41,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   let(:owp_work) do
     {
       id: '12345',
-      title_tesim: ['Rhett Lecheire'],
+      title_tesim: ['The Alchemist'],
       format: 'text',
       language_ssim: 'fr',
       visibility_ssi: 'Open with Permission',
@@ -50,7 +50,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       oid_ssi: 12_345,
       fulltext_tesim: ["This is full text OwP"],
       resourceType_ssim: 'Archives or Manuscripts',
-      has_fulltext_ssi: 'Yes',
+      has_fulltext_ssi: 'Partial',
       creator_ssim: ['Paulo Coelho']
     }
   end
@@ -58,25 +58,25 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   let(:child_work_owp) do
     {
       id: "99883409",
-      title_tesim: ['Baby Llama'],
+      title_tesim: ['Baby Llama OwP'],
       format: 'text',
-      visibility_ssi: 'Public',
+      visibility_ssi: 'Open with Permission',
       parent_ssi: "12345",
       fulltext_tesim: ["This is full text OwP"],
       child_fulltext_wstsim: ["This is full text OwP"],
-      has_fulltext_ssi: 'Partial'
+      has_fulltext_ssi: 'Yes'
     }
   end
 
   let(:owp_work_2) do
     {
       id: '54321',
-      title_tesim: ['Rhett Lecheire'],
+      title_tesim: ['Zoo Illustrations'],
       format: 'text',
       language_ssim: 'fr',
       visibility_ssi: 'Open with Permission',
       genre_ssim: 'Animation',
-      has_fulltext_ssi: 'Yes',
+      has_fulltext_ssi: 'No',
       resourceType_ssim: 'Archives or Manuscripts',
       creator_ssim: ['Paulo Coelho']
     }
@@ -201,6 +201,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/45/12/34/12345.json')
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+    stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/21/54/32/54321.json')
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, "https://yul-dc-development-samples.s3.amazonaws.com/manifests/55/55/555.json")
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, 'http://www.example.com/management/api/permission_sets/123')
@@ -216,6 +218,11 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
         }',
                  headers: valid_header)
     stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/#{management_approver.netid}")
+      .to_return(status: 200, body: '{
+        "is_admin_or_approver?":"true"
+        }',
+                 headers: valid_header)
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/54321/#{management_approver.netid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"true"
         }',
@@ -312,6 +319,26 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     it 'Does not have Collections AI link' do
       expect(page).not_to have_xpath("//div[@id='collections-ai-link']")
     end
+    context 'full text' do
+      context 'without full text available' do
+        it 'does not have a full text button' do
+          visit 'catalog/222'
+          expect(page).not_to have_content('Show Full Text')
+        end
+      end
+      context 'with full text available' do
+        it 'has a "Show Full Text" button' do
+          visit 'catalog/111'
+          expect(page).to have_css('.fulltext-button')
+          expect(page).to have_content('Show Full Text')
+        end
+        it 'has a "Show Full Text" button with a partial fulltext status' do
+          visit 'catalog/112'
+          expect(page).to have_css('.fulltext-button')
+          expect(page).to have_content('Show Full Text')
+        end
+      end
+    end
   end
 
   context 'Universal Viewer' do
@@ -332,26 +359,6 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
         visit 'catalog/111?image_id=11312321'
         src = find('.universal-viewer-iframe')['src']
         expect(src).to include '&cv=0'
-      end
-    end
-
-    context 'without full text available' do
-      it 'does not have a full text button' do
-        visit 'catalog/222'
-        expect(page).not_to have_content('Show Full Text')
-      end
-    end
-
-    context 'with full text available' do
-      it 'has a "Show Full Text" button' do
-        visit 'catalog/111'
-        expect(page).to have_css('.fulltext-button')
-        expect(page).to have_content('Show Full Text')
-      end
-      it 'has a "Show Full Text" button with a partial fulltext status' do
-        visit 'catalog/112'
-        expect(page).to have_css('.fulltext-button')
-        expect(page).to have_content('Show Full Text')
       end
     end
   end
@@ -428,21 +435,6 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     end
   end
 
-  context 'Full text button' do
-    it 'does not have a full text button without full text available' do
-      visit '/catalog?search_field=all_fields&q='
-      click_on 'HandsomeDan Bulldog', match: :first
-      expect(page).to have_content('HandsomeDan Bulldog')
-      expect(page).not_to have_content('Show Full Text')
-    end
-    it 'has a "Show Full Text" button with a partial fulltext status' do
-      visit '/catalog?search_field=all_fields&q='
-      click_on 'Baby Llama', match: :first
-      expect(page).to have_css('.fulltext-button')
-      expect(page).to have_content('Show Full Text')
-    end
-  end
-
   # rubocop:disable Layout/LineLength
   context "Open with Permission objects not signed in" do
     it 'displays login message when accessing an OwP object and not logged in' do
@@ -469,21 +461,25 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     before do
       login_as management_approver
     end
-    # flappy - passes locally but flaps sometimes in CI
-    xit 'can access the object and view UV and metadata normally without approved status' do
+    it 'can access the object and view UV and metadata normally without approved status' do
       visit 'catalog/12345'
       expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
       expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
       expect(page).to have_css('.uv-container')
-      click_on "Show Full Text"
-      expect(page).to have_content("This is full text OwP")
     end
-    it 'can access the object and view UV and metadata normally and can see the Show Full Text option' do
-      visit 'catalog/12345'
-      expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
-      expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
-      expect(page).to have_css('.uv-container')
-      expect(page).to have_content "Show Full Text"
+    context 'Full text button' do
+      it 'does not have a full text button without full text available' do
+        visit '/catalog/54321'
+        expect(page).to have_content('Zoo Illustrations')
+        expect(page).not_to have_css('.fulltext-button')
+        expect(page).not_to have_content('Show Full Text')
+      end
+      it 'has a "Show Full Text" button with a partial fulltext status' do
+        visit '/catalog/12345'
+        expect(page).to have_content('The Alchemist')
+        expect(page).to have_css('.fulltext-button')
+        expect(page).to have_content('Show Full Text')
+      end
     end
   end
   # rubocop:enable Layout/LineLength
