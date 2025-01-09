@@ -10,7 +10,6 @@ class MiradorController < ApplicationController
     policy.style_src_elem :self, :unsafe_inline
   end
 
-
   def show
     @oid = number_or_nil params[:oid]
     @manifest = @oid ? manifest_url(@oid) : nil
