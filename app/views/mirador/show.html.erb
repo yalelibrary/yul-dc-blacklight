@@ -4,13 +4,13 @@
   <%= render partial: 'shared/ga_header' %>
   <title>Yale Digital Collections Mirador Viewer</title>
   <meta name="robots" content="noindex"/>
-  <script src="/mirador.js" nonce="<%= content_security_policy_nonce %>"></script>
+  <script src="/mirador.js"></script>
 </head>
 <body>
   <%= render partial: 'shared/ga_body' %>
 <div id="my-mirador"/>
 
-<script type="text/javascript" nonce="<%= content_security_policy_nonce %>">
+<script type="text/javascript">
   let dc_mirador_config = {
       "id": "my-mirador"
   }
