@@ -53,7 +53,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def set_ai_session
     # set flag in session for AI-authorized users
     groups = auth.extra.raw_info['cognito:groups']
-    ai_group = groups.find { |g| 'ai-user' == g } if groups
+    ai_group = groups.find { |g| 'ai-user' == g || 'org:LibIT:Cognito:collections-ai-users' == g } if groups
     session[:show_ai_option] = true if ai_group
   end
 
