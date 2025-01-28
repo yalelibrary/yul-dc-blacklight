@@ -319,7 +319,7 @@ module BlacklightHelper
 
   def generate_creators_links(args)
     generate_creators(args) do |creator|
-      link = "/catalog?f%5Bcreator_ssim%5D%5B%5D=#{creator}"
+      link = "/catalog?f%5Bcreator_ssim%5D%5B%5D=#{Rack::Utils.escape(creator)}"
       link_to(creator, link)
     end
   end
