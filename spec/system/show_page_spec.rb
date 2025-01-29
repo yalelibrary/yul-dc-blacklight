@@ -27,8 +27,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       genre_ssim: 'Maps',
       ancestorTitles_tesim: ['Level0', 'Level1', 'Level2', 'Level3', 'Oversize', 'Abraham Lincoln collection (GEN MSS 257)', 'Beinecke Rare Book and Manuscript Library (BRBL)'],
       resourceType_ssim: 'Maps, Atlases & Globes',
-      creator_ssim: ['Anna Elizabeth Dewdney'],
-      creator_tesim: ['Anna Elizabeth Dewdney'],
+      creator_ssim: ['Anna Elizabeth Dewdney + Another Creator'],
+      creator_tesim: ['Anna Elizabeth Dewdney + Another Creator'],
       child_oids_ssim: [112, 113],
       oid_ssi: 111,
       thumbnail_path_ss: "https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_solr}/0/default.jpg",
@@ -377,7 +377,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page.html).to include("og:type")
       expect(page.html).to include("website")
       expect(page.html).to include("og:description")
-      expect(page.html).to include("Anna Elizabeth Dewdney")
+      expect(page.html).to include("Anna Elizabeth Dewdney + Another Creator")
       expect(page.html).to include("og:image")
       expect(page.html).to include("https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_opengraph}/0/default.jpg")
       expect(page.html).to include("og:image:type")
@@ -392,6 +392,10 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).to have_content "Subjects, Formats, And Genres"
       expect(page).to have_content "Access And Usage Rights"
       expect(page).to have_content "Identifiers"
+    end
+    it "can click on a Creator link with special characters and return correct search results" do
+      click_on("Anna Elizabeth Dewdney + Another Creator")
+      expect(page).to have_content "Amor Llama"
     end
 
     context 'Universal Viewer' do
