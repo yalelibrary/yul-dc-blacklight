@@ -18,6 +18,8 @@ gem 'blacklight_range_limit'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap', '~> 4.6'
 gem 'citeproc-ruby'
+# pinned due to https://github.com/rails/rails/pull/54264
+gem 'concurrent-ruby', '< 1.3.5'
 gem 'csl-styles'
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
@@ -26,6 +28,7 @@ gem 'honeybadger', '~> 4.0'
 gem 'iso-639'
 gem 'jbuilder', '~> 2.7'
 gem 'jquery-rails'
+gem 'logger'
 gem 'omniauth', '~> 2.1.0'
 gem 'omniauth_openid_connect'
 # This addresses CVE-2015-9284 https://github.com/advisories/GHSA-ww4x-rwq6-qpgf
