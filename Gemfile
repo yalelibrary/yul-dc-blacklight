@@ -72,7 +72,6 @@ group :test do
   gem 'axe-matchers'
   gem 'capybara', '>= 2.15'
   gem 'coveralls_reborn', require: false
-  gem 'database_cleaner-active_record', '~> 2.2.0'
   gem 'factory_bot_rails'
   gem 'ffaker', '2.20.0'
   gem 'rails-controller-testing'
