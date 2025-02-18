@@ -288,7 +288,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
               void])
     solr.commit
   end
-  # rubocop:enable Layout/LineLength
+  # rubocop:disable Layout/LineLength
 
   # context 'public work' do
   #   before do
