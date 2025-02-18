@@ -48,7 +48,7 @@ If you get a bundle gem issue, open a new terminal window or tab and with the ru
 
 - To bash into containers and run specs: 
 
-With the application already started: 
+With the application started: 
 ```
 cam sh blacklight
 bundle exec rspec spec/file/path
