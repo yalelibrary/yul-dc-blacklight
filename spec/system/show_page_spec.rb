@@ -217,12 +217,12 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
         "is_admin_or_approver?":"false"
         }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/#{management_approver.netid}")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/net_id2")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"true"
         }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/54321/#{management_approver.netid}")
+    stub_request(:get, "http://www.example.com/management/api/permission_sets/54321/net_id2")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"true"
         }',
