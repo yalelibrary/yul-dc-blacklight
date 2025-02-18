@@ -2,7 +2,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Show Page', type: :system, js: true, clean: true do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user, sub: "123454321") }
   let(:management_approver) { FactoryBot.create(:user, netid: 'net_id2', sub: '1234', uid: 'sun345') }
   let(:request_user) { FactoryBot.create(:user, netid: "net_id", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6e", uid: 'some_name', email: 'not_real@example.com') }
   let(:thumbnail_size_in_opengraph) { "!1200,630" }
@@ -205,8 +205,8 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, "https://yul-dc-development-samples.s3.amazonaws.com/manifests/55/55/555.json")
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/123')
-      .to_return(status: 200, body: '{"timestamp":"2023-11-02","user":{"sub":"123"},"permission_set_terms_agreed":[],"permissions":[{"oid":12345,"permission_set":1,"permission_set_terms":1,"request_status":"Approved","request_date":"2023-11-02T20:23:18.824Z","access_until":"2024-11-02T20:23:18.824Z"}]}', headers: valid_header)
+    stub_request(:get, 'http://www.example.com/management/api/permission_sets/123454321')
+      .to_return(status: 200, body: '{"timestamp":"2023-11-02","user":{"sub":"123454321"},"permission_set_terms_agreed":[],"permissions":[{"oid":12345,"permission_set":1,"permission_set_terms":1,"request_status":"Approved","request_date":"2023-11-02T20:23:18.824Z","access_until":"2024-11-02T20:23:18.824Z"}]}', headers: valid_header)
     stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/#{user.netid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"false"
