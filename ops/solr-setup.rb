@@ -23,7 +23,7 @@ class CreateSolrCollection
   private
 
   def collections_url
-    "#{ENV.fetch('SOLR_URL')}/admin/collections"
+    "#{ENV.fetch('SOLR_BASE_URL')}/admin/collections"
   end
 
   def collection_options
