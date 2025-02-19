@@ -16,7 +16,7 @@ gem 'blacklight-marc', '>= 7.0.0.rc1', '< 8'
 gem 'blacklight_oai_provider', git: 'https://github.com/projectblacklight/blacklight_oai_provider.git'
 gem 'blacklight_range_limit'
 gem 'bootsnap', '>= 1.4.2', require: false
-gem 'bootstrap', '~> 4.6'
+gem 'bootstrap', '~> 5.3'
 gem 'citeproc-ruby'
 # pinned due to https://github.com/rails/rails/pull/54264
 gem 'concurrent-ruby', '< 1.3.5'
