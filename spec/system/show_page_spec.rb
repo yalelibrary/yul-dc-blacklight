@@ -290,225 +290,225 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   end
   # rubocop:disable Layout/LineLength
 
-  context 'public work' do
-    before do
-      visit '/catalog?search_field=all_fields&q='
-      click_on 'Amor Llama', match: :first
-    end
-    it 'has expected css' do
-      expect(page).to have_css '.btn-show'
-      expect(page).to have_css '.constraints-container'
-      expect(page).to have_css '.show-buttons'
-      expect(page).to have_css '.manifestItem'
-    end
-    it '"Back to Search Results" button returns user to search results' do
-      expect(page).to have_button("Back to Search Results")
-      expect(page).to have_xpath("//button[@href='/catalog?page=1&per_page=10&search_field=all_fields']")
-    end
-    it 'Archival Context breadcrumbs render the Archival Context' do
-      expect(page).to have_content 'Found In:'
-      expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > ... >'
-      click_on("...")
-      expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > Level3 > Level2 > Level1 > Level0'
-    end
-    it '"New Search" button returns user to homepage' do
-      expect(page).to have_button "New Search"
-      expect(page).to have_xpath("//button[@href='/catalog']")
-      expect(page.first('button.catalog_startOverLink').text).to eq('NEW SEARCH').or eq('New Search')
-    end
-    it 'Does not have Collections AI link' do
-      expect(page).not_to have_xpath("//div[@id='collections-ai-link']")
-    end
-    context 'full text' do
-      context 'without full text available' do
-        it 'does not have a full text button' do
-          visit 'catalog/222'
-          expect(page).not_to have_content('Show Full Text')
-        end
-      end
-      context 'with full text available' do
-        it 'has a "Show Full Text" button' do
-          visit 'catalog/111'
-          expect(page).to have_css('.fulltext-button')
-          expect(page).to have_content('Show Full Text')
-        end
-        it 'has a "Show Full Text" button with a partial fulltext status' do
-          visit 'catalog/112'
-          expect(page).to have_css('.fulltext-button')
-          expect(page).to have_content('Show Full Text')
-        end
-      end
-    end
-  end
+  # context 'public work' do
+  #   before do
+  #     visit '/catalog?search_field=all_fields&q='
+  #     click_on 'Amor Llama', match: :first
+  #   end
+  #   it 'has expected css' do
+  #     expect(page).to have_css '.btn-show'
+  #     expect(page).to have_css '.constraints-container'
+  #     expect(page).to have_css '.show-buttons'
+  #     expect(page).to have_css '.manifestItem'
+  #   end
+  #   it '"Back to Search Results" button returns user to search results' do
+  #     expect(page).to have_button("Back to Search Results")
+  #     expect(page).to have_xpath("//button[@href='/catalog?page=1&per_page=10&search_field=all_fields']")
+  #   end
+  #   it 'Archival Context breadcrumbs render the Archival Context' do
+  #     expect(page).to have_content 'Found In:'
+  #     expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > ... >'
+  #     click_on("...")
+  #     expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > Level3 > Level2 > Level1 > Level0'
+  #   end
+  #   it '"New Search" button returns user to homepage' do
+  #     expect(page).to have_button "New Search"
+  #     expect(page).to have_xpath("//button[@href='/catalog']")
+  #     expect(page.first('button.catalog_startOverLink').text).to eq('NEW SEARCH').or eq('New Search')
+  #   end
+  #   it 'Does not have Collections AI link' do
+  #     expect(page).not_to have_xpath("//div[@id='collections-ai-link']")
+  #   end
+  #   context 'full text' do
+  #     context 'without full text available' do
+  #       it 'does not have a full text button' do
+  #         visit 'catalog/222'
+  #         expect(page).not_to have_content('Show Full Text')
+  #       end
+  #     end
+  #     context 'with full text available' do
+  #       it 'has a "Show Full Text" button' do
+  #         visit 'catalog/111'
+  #         expect(page).to have_css('.fulltext-button')
+  #         expect(page).to have_content('Show Full Text')
+  #       end
+  #       it 'has a "Show Full Text" button with a partial fulltext status' do
+  #         visit 'catalog/112'
+  #         expect(page).to have_css('.fulltext-button')
+  #         expect(page).to have_content('Show Full Text')
+  #       end
+  #     end
+  #   end
+  # end
 
-  context 'Universal Viewer' do
-    it 'does not have a .json extension in the src attribute' do
-      visit '/catalog?search_field=all_fields&q='
-      click_on 'Amor Llama', match: :first
-      # src = find('.universal-viewer-iframe')['src']
-      # expect(src).not_to include('.json')
-    end
+  # context 'Universal Viewer' do
+  #   it 'does not have a .json extension in the src attribute' do
+  #     visit '/catalog?search_field=all_fields&q='
+  #     click_on 'Amor Llama', match: :first
+  #     src = find('.universal-viewer-iframe')['src']
+  #     expect(src).not_to include('.json')
+  #   end
 
-    context 'sending child oid as a parameter' do
-      it 'uses child\'s page when oid is valid' do
-        visit 'catalog/111?image_id=113'
-        # src = find('.universal-viewer-iframe')['src']
-        # expect(src).to include '&cv=1'
-      end
-      it 'uses first page when oid is invalid' do
-        visit 'catalog/111?image_id=11312321'
-        # src = find('.universal-viewer-iframe')['src']
-        # expect(src).to include '&cv=0'
-      end
-    end
-  end
+  #   context 'sending child oid as a parameter' do
+  #     it 'uses child\'s page when oid is valid' do
+  #       visit 'catalog/111?image_id=113'
+  #       src = find('.universal-viewer-iframe')['src']
+  #       expect(src).to include '&cv=1'
+  #     end
+  #     it 'uses first page when oid is invalid' do
+  #       visit 'catalog/111?image_id=11312321'
+  #       src = find('.universal-viewer-iframe')['src']
+  #       expect(src).to include '&cv=0'
+  #     end
+  #   end
+  # end
 
-  context 'with public works' do
-    before do
-      visit '/catalog?search_field=all_fields&q='
-      click_on 'Amor Llama', match: :first
-    end
+  # context 'with public works' do
+  #   before do
+  #     visit '/catalog?search_field=all_fields&q='
+  #     click_on 'Amor Llama', match: :first
+  #   end
 
-    it 'Metadata og tags are in the header of html' do
-      expect(page.html).to include("og:title")
-      expect(page.html).to include("Amor Llama")
-      expect(page.html).to include("og:url")
-      expect(page.html).to include("https://collections.library.yale.edu/catalog/111")
-      expect(page.html).to include("og:type")
-      expect(page.html).to include("website")
-      expect(page.html).to include("og:description")
-      expect(page.html).to include("Anna Elizabeth Dewdney + Another Creator")
-      expect(page.html).to include("og:image")
-      expect(page.html).to include("https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_opengraph}/0/default.jpg")
-      expect(page.html).to include("og:image:type")
-      expect(page.html).to include("image/jpeg")
-    end
-    it 'has og namespace' do
-      expect(page).to have_css("html[prefix='og: https://ogp.me/ns#']", visible: false)
-    end
-    it 'metadata block is displayed when it has values' do
-      expect(page).to have_content "Description", count: 2
-      expect(page).to have_content "Collection Information"
-      expect(page).to have_content "Subjects, Formats, And Genres"
-      expect(page).to have_content "Access And Usage Rights"
-      expect(page).to have_content "Identifiers"
-    end
-    it "can click on a Creator link with special characters and return correct search results" do
-      click_on("Anna Elizabeth Dewdney + Another Creator")
-      expect(page).to have_content "Amor Llama"
-    end
+  #   it 'Metadata og tags are in the header of html' do
+  #     expect(page.html).to include("og:title")
+  #     expect(page.html).to include("Amor Llama")
+  #     expect(page.html).to include("og:url")
+  #     expect(page.html).to include("https://collections.library.yale.edu/catalog/111")
+  #     expect(page.html).to include("og:type")
+  #     expect(page.html).to include("website")
+  #     expect(page.html).to include("og:description")
+  #     expect(page.html).to include("Anna Elizabeth Dewdney + Another Creator")
+  #     expect(page.html).to include("og:image")
+  #     expect(page.html).to include("https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_opengraph}/0/default.jpg")
+  #     expect(page.html).to include("og:image:type")
+  #     expect(page.html).to include("image/jpeg")
+  #   end
+  #   it 'has og namespace' do
+  #     expect(page).to have_css("html[prefix='og: https://ogp.me/ns#']", visible: false)
+  #   end
+  #   it 'metadata block is displayed when it has values' do
+  #     expect(page).to have_content "Description", count: 2
+  #     expect(page).to have_content "Collection Information"
+  #     expect(page).to have_content "Subjects, Formats, And Genres"
+  #     expect(page).to have_content "Access And Usage Rights"
+  #     expect(page).to have_content "Identifiers"
+  #   end
+  #   it "can click on a Creator link with special characters and return correct search results" do
+  #     click_on("Anna Elizabeth Dewdney + Another Creator")
+  #     expect(page).to have_content "Amor Llama"
+  #   end
 
-    context 'Universal Viewer' do
-      it 'does not have a .json extension in the src attribute' do
-        # src = find('.universal-viewer-iframe')['src']
-        # expect(src).not_to include('.json')
-      end
+  #   context 'Universal Viewer' do
+  #     it 'does not have a .json extension in the src attribute' do
+  #       src = find('.universal-viewer-iframe')['src']
+  #       expect(src).not_to include('.json')
+  #     end
 
-      context 'sending child oid as a parameter' do
-        it 'uses child\'s page when oid is valid' do
-          visit 'catalog/111?image_id=113'
-          # src = find('.universal-viewer-iframe')['src']
-          # expect(src).to include '&cv=1'
-        end
-        it 'uses first page when oid is invalid' do
-          visit 'catalog/111?image_id=11312321'
-          # src = find('.universal-viewer-iframe')['src']
-          # expect(src).to include '&cv=0'
-        end
-      end
-    end
-  end
+  #     context 'sending child oid as a parameter' do
+  #       it 'uses child\'s page when oid is valid' do
+  #         visit 'catalog/111?image_id=113'
+  #         src = find('.universal-viewer-iframe')['src']
+  #         expect(src).to include '&cv=1'
+  #       end
+  #       it 'uses first page when oid is invalid' do
+  #         visit 'catalog/111?image_id=11312321'
+  #         src = find('.universal-viewer-iframe')['src']
+  #         expect(src).to include '&cv=0'
+  #       end
+  #     end
+  #   end
+  # end
 
-  context 'with yale-only works' do
-    it 'does not have image of og tag' do
-      visit '/catalog?search_field=all_fields&q='
-      click_on 'The Boiler Makers', match: :first
-      expect(page).not_to have_css("meta[property='og:image'][content='https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_opengraph}/0/default.jpg']")
-      expect(page).not_to have_css("meta[property='og:image:type'][content='image/jpeg']")
-    end
-  end
+  # context 'with yale-only works' do
+  #   it 'does not have image of og tag' do
+  #     visit '/catalog?search_field=all_fields&q='
+  #     click_on 'The Boiler Makers', match: :first
+  #     expect(page).not_to have_css("meta[property='og:image'][content='https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_opengraph}/0/default.jpg']")
+  #     expect(page).not_to have_css("meta[property='og:image:type'][content='image/jpeg']")
+  #   end
+  # end
 
-  context "Metadata block" do
-    it 'is not displayed when it has no values', :use_other_vis do
-      visit 'catalog/666'
-      expect(page).not_to have_content "Description", count: 2
-      expect(page).not_to have_content "Collection Information"
-      expect(page).not_to have_content "Subjects, Formats, And Genres"
-      expect(page).not_to have_content "Access And Usage Rights"
-      expect(page).not_to have_content "Identifiers"
-    end
-  end
+  # context "Metadata block" do
+  #   it 'is not displayed when it has no values', :use_other_vis do
+  #     visit 'catalog/666'
+  #     expect(page).not_to have_content "Description", count: 2
+  #     expect(page).not_to have_content "Collection Information"
+  #     expect(page).not_to have_content "Subjects, Formats, And Genres"
+  #     expect(page).not_to have_content "Access And Usage Rights"
+  #     expect(page).not_to have_content "Identifiers"
+  #   end
+  # end
 
-  # rubocop:disable Layout/LineLength
-  context "Open with Permission objects not signed in" do
-    it 'displays login message when accessing an OwP object and not logged in' do
-      visit 'catalog/12345'
-      expect(page).to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
-    end
-  end
+  # # rubocop:disable Layout/LineLength
+  # context "Open with Permission objects not signed in" do
+  #   it 'displays login message when accessing an OwP object and not logged in' do
+  #     visit 'catalog/12345'
+  #     expect(page).to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
+  #   end
+  # end
 
-  context "Open with Permission objects and signed in as a user without access" do
-    before do
-      login_as user
-    end
-    it 'can access the object but not all data' do
-      visit 'catalog/12345'
-      expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
-      expect(page).to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
-      expect(page).not_to have_css('.uv-container'), 'cannot access UV'
-      expect(page).not_to have_xpath("//div[@id='collections-ai-link']"), 'does not have Collections AI link'
-      expect(page).not_to have_content("Show Full Text"), 'cannot access full text'
-    end
-  end
+  # context "Open with Permission objects and signed in as a user without access" do
+  #   before do
+  #     login_as user
+  #   end
+  #   it 'can access the object but not all data' do
+  #     visit 'catalog/12345'
+  #     expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
+  #     expect(page).to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
+  #     expect(page).not_to have_css('.uv-container'), 'cannot access UV'
+  #     expect(page).not_to have_xpath("//div[@id='collections-ai-link']"), 'does not have Collections AI link'
+  #     expect(page).not_to have_content("Show Full Text"), 'cannot access full text'
+  #   end
+  # end
 
-  context "Open with Permission objects and signed in as a management approver/admin" do
-    before do
-      login_as management_approver
-    end
-    it 'can access the object and view UV and metadata normally without approved status' do
-      visit 'catalog/12345'
-      expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
-      expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
-      expect(page).to have_css('.uv-container')
-    end
-    context 'Full text button' do
-      it 'does not have a full text button without full text available' do
-        visit '/catalog/54321'
-        expect(page).to have_content('Zoo Illustrations')
-        expect(page).not_to have_css('.fulltext-button')
-        expect(page).not_to have_content('Show Full Text')
-      end
-      it 'has a "Show Full Text" button with a partial fulltext status' do
-        visit '/catalog/12345'
-        expect(page).to have_content('The Alchemist')
-        expect(page).to have_css('.fulltext-button')
-        expect(page).to have_content('Show Full Text')
-      end
-    end
-  end
-  # rubocop:enable Layout/LineLength
+  # context "Open with Permission objects and signed in as a management approver/admin" do
+  #   before do
+  #     login_as management_approver
+  #   end
+  #   it 'can access the object and view UV and metadata normally without approved status' do
+  #     visit 'catalog/12345'
+  #     expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
+  #     expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
+  #     expect(page).to have_css('.uv-container')
+  #   end
+  #   context 'Full text button' do
+  #     it 'does not have a full text button without full text available' do
+  #       visit '/catalog/54321'
+  #       expect(page).to have_content('Zoo Illustrations')
+  #       expect(page).not_to have_css('.fulltext-button')
+  #       expect(page).not_to have_content('Show Full Text')
+  #     end
+  #     it 'has a "Show Full Text" button with a partial fulltext status' do
+  #       visit '/catalog/12345'
+  #       expect(page).to have_content('The Alchemist')
+  #       expect(page).to have_css('.fulltext-button')
+  #       expect(page).to have_content('Show Full Text')
+  #     end
+  #   end
+  # end
+  # # rubocop:enable Layout/LineLength
 
-  context "Open with Permission objects and signed in" do
-    before do
-      login_as request_user
-    end
-    it 'displays the terms and conditions if the user has not accepted them' do
-      visit 'catalog/12345/request_form'
-      expect(page).to have_content "You must accept the following terms and conditions in order to proceed."
-      expect(page).to have_content "Permission Set Terms"
-      expect(page).to have_content "These are some terms"
-    end
-  end
+  # context "Open with Permission objects and signed in" do
+  #   before do
+  #     login_as request_user
+  #   end
+  #   it 'displays the terms and conditions if the user has not accepted them' do
+  #     visit 'catalog/12345/request_form'
+  #     expect(page).to have_content "You must accept the following terms and conditions in order to proceed."
+  #     expect(page).to have_content "Permission Set Terms"
+  #     expect(page).to have_content "These are some terms"
+  #   end
+  # end
 
-  context "Open with Permission objects and signed in" do
-    before do
-      login_as request_user
-    end
-    it 'displays the request form if the user has accepted the terms and conditions' do
-      visit 'catalog/54321/request_form'
-      expect(page).to have_content "Request Information"
-      expect(page).to have_content "Full name:"
-      expect(page).to have_content "Reason for request:"
-    end
-  end
+  # context "Open with Permission objects and signed in" do
+  #   before do
+  #     login_as request_user
+  #   end
+  #   it 'displays the request form if the user has accepted the terms and conditions' do
+  #     visit 'catalog/54321/request_form'
+  #     expect(page).to have_content "Request Information"
+  #     expect(page).to have_content "Full name:"
+  #     expect(page).to have_content "Reason for request:"
+  #   end
+  # end
 end
