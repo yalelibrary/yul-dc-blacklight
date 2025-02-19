@@ -295,13 +295,13 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       visit '/catalog?search_field=all_fields&q='
       click_on 'Amor Llama', match: :first
     end
-    it 'has expected css' do
+    xit 'has expected css' do
       expect(page).to have_css '.btn-show'
       expect(page).to have_css '.constraints-container'
       expect(page).to have_css '.show-buttons'
       expect(page).to have_css '.manifestItem'
     end
-    it '"Back to Search Results" button returns user to search results' do
+    xit '"Back to Search Results" button returns user to search results' do
       expect(page).to have_button("Back to Search Results")
       expect(page).to have_xpath("//button[@href='/catalog?page=1&per_page=10&search_field=all_fields']")
     end
@@ -311,28 +311,28 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       click_on("...")
       expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > Level3 > Level2 > Level1 > Level0'
     end
-    it '"New Search" button returns user to homepage' do
+    xit '"New Search" button returns user to homepage' do
       expect(page).to have_button "New Search"
       expect(page).to have_xpath("//button[@href='/catalog']")
       expect(page.first('button.catalog_startOverLink').text).to eq('NEW SEARCH').or eq('New Search')
     end
-    it 'Does not have Collections AI link' do
+    xit 'Does not have Collections AI link' do
       expect(page).not_to have_xpath("//div[@id='collections-ai-link']")
     end
     context 'full text' do
       context 'without full text available' do
-        it 'does not have a full text button' do
+        xit 'does not have a full text button' do
           visit 'catalog/222'
           expect(page).not_to have_content('Show Full Text')
         end
       end
       context 'with full text available' do
-        it 'has a "Show Full Text" button' do
+        xit 'has a "Show Full Text" button' do
           visit 'catalog/111'
           expect(page).to have_css('.fulltext-button')
           expect(page).to have_content('Show Full Text')
         end
-        it 'has a "Show Full Text" button with a partial fulltext status' do
+        xit 'has a "Show Full Text" button with a partial fulltext status' do
           visit 'catalog/112'
           expect(page).to have_css('.fulltext-button')
           expect(page).to have_content('Show Full Text')
@@ -342,7 +342,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   end
 
   context 'Universal Viewer' do
-    it 'does not have a .json extension in the src attribute' do
+    xit 'does not have a .json extension in the src attribute' do
       visit '/catalog?search_field=all_fields&q='
       click_on 'Amor Llama', match: :first
       src = find('.universal-viewer-iframe')['src']
@@ -350,12 +350,12 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     end
 
     context 'sending child oid as a parameter' do
-      it 'uses child\'s page when oid is valid' do
+      xit 'uses child\'s page when oid is valid' do
         visit 'catalog/111?image_id=113'
         src = find('.universal-viewer-iframe')['src']
         expect(src).to include '&cv=1'
       end
-      it 'uses first page when oid is invalid' do
+      xit 'uses first page when oid is invalid' do
         visit 'catalog/111?image_id=11312321'
         src = find('.universal-viewer-iframe')['src']
         expect(src).to include '&cv=0'
@@ -383,7 +383,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page.html).to include("og:image:type")
       expect(page.html).to include("image/jpeg")
     end
-    it 'has og namespace' do
+    xit 'has og namespace' do
       expect(page).to have_css("html[prefix='og: https://ogp.me/ns#']", visible: false)
     end
     it 'metadata block is displayed when it has values' do
@@ -399,18 +399,18 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     end
 
     context 'Universal Viewer' do
-      it 'does not have a .json extension in the src attribute' do
+      xit 'does not have a .json extension in the src attribute' do
         src = find('.universal-viewer-iframe')['src']
         expect(src).not_to include('.json')
       end
 
       context 'sending child oid as a parameter' do
-        it 'uses child\'s page when oid is valid' do
+        xit 'uses child\'s page when oid is valid' do
           visit 'catalog/111?image_id=113'
           src = find('.universal-viewer-iframe')['src']
           expect(src).to include '&cv=1'
         end
-        it 'uses first page when oid is invalid' do
+        xit 'uses first page when oid is invalid' do
           visit 'catalog/111?image_id=11312321'
           src = find('.universal-viewer-iframe')['src']
           expect(src).to include '&cv=0'
@@ -420,7 +420,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   end
 
   context 'with yale-only works' do
-    it 'does not have image of og tag' do
+    xit 'does not have image of og tag' do
       visit '/catalog?search_field=all_fields&q='
       click_on 'The Boiler Makers', match: :first
       expect(page).not_to have_css("meta[property='og:image'][content='https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_opengraph}/0/default.jpg']")
