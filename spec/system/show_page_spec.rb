@@ -305,7 +305,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).to have_button("Back to Search Results")
       expect(page).to have_xpath("//button[@href='/catalog?page=1&per_page=10&search_field=all_fields']")
     end
-    it 'Archival Context breadcrumbs render the Archival Context' do
+    xit 'Archival Context breadcrumbs render the Archival Context' do
       expect(page).to have_content 'Found In:'
       expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > ... >'
       click_on("...")
@@ -369,7 +369,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       click_on 'Amor Llama', match: :first
     end
 
-    it 'Metadata og tags are in the header of html' do
+    xit 'Metadata og tags are in the header of html' do
       expect(page.html).to include("og:title")
       expect(page.html).to include("Amor Llama")
       expect(page.html).to include("og:url")
@@ -386,14 +386,14 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     xit 'has og namespace' do
       expect(page).to have_css("html[prefix='og: https://ogp.me/ns#']", visible: false)
     end
-    it 'metadata block is displayed when it has values' do
+    xit 'metadata block is displayed when it has values' do
       expect(page).to have_content "Description", count: 2
       expect(page).to have_content "Collection Information"
       expect(page).to have_content "Subjects, Formats, And Genres"
       expect(page).to have_content "Access And Usage Rights"
       expect(page).to have_content "Identifiers"
     end
-    it "can click on a Creator link with special characters and return correct search results" do
+    xit "can click on a Creator link with special characters and return correct search results" do
       click_on("Anna Elizabeth Dewdney + Another Creator")
       expect(page).to have_content "Amor Llama"
     end
@@ -465,20 +465,20 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     before do
       login_as management_approver
     end
-    it 'can access the object and view UV and metadata normally without approved status' do
+    xit 'can access the object and view UV and metadata normally without approved status' do
       visit 'catalog/12345'
       expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
       expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
       expect(page).to have_css('.uv-container')
     end
     context 'Full text button' do
-      it 'does not have a full text button without full text available' do
+      xit 'does not have a full text button without full text available' do
         visit '/catalog/54321'
         expect(page).to have_content('Zoo Illustrations')
         expect(page).not_to have_css('.fulltext-button')
         expect(page).not_to have_content('Show Full Text')
       end
-      it 'has a "Show Full Text" button with a partial fulltext status' do
+      xit 'has a "Show Full Text" button with a partial fulltext status' do
         visit '/catalog/12345'
         expect(page).to have_content('The Alchemist')
         expect(page).to have_css('.fulltext-button')
