@@ -2,15 +2,17 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 
+#appliedParams {
+  padding: 16px;
+  width: 100%;
+}
+
 .btn-group.applied-filter.constraint {
   display: inline-block;
-  margin: 5px 0 0 0;
-  padding: 0 0 5.5px 0;
   text-justify: auto;
-  float: left;
   word-wrap: break-word;
   min-width: max-content;
-
+  max-width: fit-content;
 }
 
 // hides duplicate range constraint
@@ -18,46 +20,40 @@ DEFAULT MOBILE STYLING
   display: none;
 }
 
+.catalog_startOverLink {
+  width: fit-content;
+}
+
+.catalog_startOverLink:active a {
+  color: white;
+}
+
 .constraints-container-index.constraints-container {
   background-color: $lighter_grey;
-  padding: 5px 0;
-  display: inline-flex;
-  justify-content: normal;
   margin-left: 0;
   overflow-wrap: break-word;
 }
 
 
 .constraints-container-index > .catalog_startOverLink {
-  position: relative;
   font-family: $mallory_medium;
   color: $light_blue;
   background-color: $lighter_grey;
   border-color: $lighter_grey;
   text-align: center;
-  top: -5px;
-  right: 0;
 }
-.constraints-container-index > .catalog_startOverLink:last-child {
-  margin-left: auto !important;
 
-}
 .constraints-group {
   display: inline-block;
   width: 62%;
   flex-wrap: wrap;
 }
 
-
 .constraint-value.btn.btn-outline-secondary {
-  display:inline;
-  margin-top: -1px;
-  margin-left: 10px;
-  height: calc(100% + 5px);
-  width: content-box;
-  padding: 7px 0 17px 5.5px;
+  display: inline;
+  height: 100%;
+  width: fit-content;
   background-color: $white;
-  margin-right: 10px;
   font-size: 16px;
 }
 
@@ -67,10 +63,6 @@ DEFAULT MOBILE STYLING
 
 .constraints-container-index > .catalog_startOverLink.btn.btn-primary.btn-show:focus .start-over-image {
   filter: invert(54%) sepia(54%) saturate(3969%) hue-rotate(192deg) brightness(103%) contrast(108%);
-}
-
-.catalog_startOverLink:active a {
-  color: white;
 }
 
 .constraints-container {
@@ -115,52 +107,36 @@ DEFAULT MOBILE STYLING
   text-align: left;
   color: $medium_grey;
   text-transform: uppercase;
-  margin-top:19px;
-  margin-bottom: 0;
-  margin-left: 16px;
+  margin: 16px 0px 0px 16px; 
   position: relative;
-  top: -2px;
-}
-#appliedParams {
-  display: inline-flex;
-  flex-wrap: wrap;
-  padding-bottom: 0;
+  width: fit-content;
 }
 
 @media screen and (min-width: $small_device) {
-  #appliedParams {
-    width: inherit;
-    height: auto;
-
-  }
   .constraints-group{
     width: 62%;
   }
 
+  .catalog_startOverLink {
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+  }
 }
 
 @media screen and (min-width: $medium_device) {
-  #appliedParams {
-    width: inherit;
-  }
   .constraints-group{
     width: 57%;
   }
 }
 
-
 @media screen and (min-width: $large_device) {
-  #appliedParams {
-    width: inherit;
-  }
   .constraints-group{
     width: 55%;
   }
 }
+
 @media screen and (min-width: $xlarge_device) {
-  #appliedParams {
-    width: inherit;
-  }
   .constraints-group{
     width: 62%;
   }
