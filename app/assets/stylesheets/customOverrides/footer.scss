@@ -63,8 +63,13 @@ DEFAULT MOBILE STYLING
   grid-template-columns: 1.25rem 1.25rem 1.25rem 1.25rem;
 }
 
+.footer-socmedia a {
+  max-height: 2rem;
+}
+
 .footer-socmedia img {
   width: 1rem;
+  height: 1rem;
   margin-right: 3px;
 }
 
