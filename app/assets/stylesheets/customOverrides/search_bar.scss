@@ -39,8 +39,9 @@ DEFAULT MOBILE STYLING
 }
 
 .custom-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  -webkit-appearance: none; // Chrome
+  -moz-appearance: none; // Firefox
+  -ms-appearance: none; // IE
   background-image: image-url('light-blue-double-arrow.png');
   background-size: 11px;
   background-position-x: right;
