@@ -2,8 +2,19 @@
 DEFAULT MOBILE STYLING
 ********************************************************/
 
+#banner {
+  margin-bottom: 0;
+  display: none;
+  border: none;
+  border-radius: 0;
+}
+
 .bg-dark {
   background-color: $yale_blue !important;
+}
+
+.content-yul {
+  height: 100%;
 }
 
 .login-button {
@@ -76,7 +87,7 @@ DEFAULT MOBILE STYLING
   color: $white !important;
   font-size: small;
   border-top: $white thin solid;
-  align-items: center;
+  align-items: start;
 }
 
 .secondary-nav .dropdown.show .nav-link-caret {
@@ -103,6 +114,7 @@ DEFAULT MOBILE STYLING
   .info-header {
     margin-left: -26%;
     padding-left: 21%;
+    max-width: fit-content;
   }
 
   .navbar > div.container {
@@ -210,11 +222,4 @@ DEFAULT MOBILE STYLING
     flex-direction: initial;
     padding-bottom: 0.15rem;
   }
-}
-
-#banner {
-  margin-bottom: 0;
-  display: none;
-  border: none;
-  border-radius: 0;
 }
