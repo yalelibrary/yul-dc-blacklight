@@ -77,6 +77,12 @@ a {
   margin-right: 5px;
 }
 
+.sr-only {
+  visibility: hidden;
+  max-width: 0;
+  max-height: 0;
+}
+
 .start-over-icon {
   margin-left: 5px;
 }

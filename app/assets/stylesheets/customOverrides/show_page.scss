@@ -481,7 +481,7 @@ p.yale-restricted-work-text{
     margin-left: -.5%;
     width: 118%;
     justify-self: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     display: flex;
     z-index: 1;
     position: relative;
@@ -568,7 +568,7 @@ margin-bottom: 2%;  }
     margin-left: 0.5%;
     width: 140%;
     justify-self: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     display: flex;
     z-index: 1;
     position: relative;
@@ -676,7 +676,7 @@ margin-bottom: 2%;  }
   .constraints-container {
     width: 144%;
     justify-self: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     display: flex;
     z-index: 1;
     position: relative;
