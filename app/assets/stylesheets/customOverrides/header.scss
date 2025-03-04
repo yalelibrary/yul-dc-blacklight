@@ -13,18 +13,9 @@ DEFAULT MOBILE STYLING
   background-color: $yale_blue !important;
 }
 
-.content-yul {
-  height: 100%;
-}
-
 .login-button {
   border: none;
   background-color: $yale_blue !important;
-}
-
-.dropdown-menu {
-  color: $white !important;
-  text-transform: capitalize !important;
 }
 
 .iiif-logo img {
@@ -36,10 +27,6 @@ DEFAULT MOBILE STYLING
   border-bottom: $white thin solid;
   margin-left: -15%;
   padding-left: 15.5%;
-}
-
-.menu-block-wrapper > .dropdown-menu.show {
-  display: contents;
 }
 
 .nav-link {
@@ -90,6 +77,12 @@ DEFAULT MOBILE STYLING
   align-items: start;
 }
 
+.secondary-nav .dropdown-menu {
+  color: $white !important;
+  background-color: $yale_blue;
+  text-transform: capitalize !important;
+}
+
 .secondary-nav .dropdown.show .nav-link-caret {
   transform: rotate(0deg);
   -ms-transform: rotate(0deg); /* for IE */
@@ -104,12 +97,16 @@ DEFAULT MOBILE STYLING
 }
 
 .secondary-nav a {
-  color: $white !important;
+  color: $white;
   font-size: 16px;
   font-family: $yale_new_roman, 'Times New Roman', Times, serif !important;
   text-decoration: none;
 }
 
+.secondary-nav a:hover {
+  color: $yale_blue;
+  background-color: $white;
+}
 
 @media screen and (min-width: $small_device) {
   .info-header {
