@@ -13,7 +13,6 @@
 //= require bootstrap
 //= require blacklight/blacklight
 //= require download_original
-//= require header_navbar
 //= require show_more
 
 

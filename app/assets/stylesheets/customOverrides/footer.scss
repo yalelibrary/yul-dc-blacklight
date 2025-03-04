@@ -58,11 +58,20 @@ DEFAULT MOBILE STYLING
   margin-left: 1rem;
 }
 
-.footer-socmedia img {
-  width: 1rem;
-  margin-right: 3px;
+.footer-socmedia {
+  display: grid;
+  grid-template-columns: 1.40rem 1.40rem 1.40rem 1.40rem;
 }
 
+.footer-socmedia a {
+  max-height: 2rem;
+}
+
+.footer-socmedia img {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 3px;
+}
 
 @media screen and (min-width: $medium_device) {
   .footer-links > ul {
