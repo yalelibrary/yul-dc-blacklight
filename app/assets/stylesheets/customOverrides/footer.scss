@@ -60,7 +60,7 @@ DEFAULT MOBILE STYLING
 
 .footer-socmedia {
   display: grid;
-  grid-template-columns: 1.25rem 1.25rem 1.25rem 1.25rem;
+  grid-template-columns: 1.40rem 1.40rem 1.40rem 1.40rem;
 }
 
 .footer-socmedia a {
@@ -72,7 +72,6 @@ DEFAULT MOBILE STYLING
   height: 1rem;
   margin-right: 3px;
 }
-
 
 @media screen and (min-width: $medium_device) {
   .footer-links > ul {
