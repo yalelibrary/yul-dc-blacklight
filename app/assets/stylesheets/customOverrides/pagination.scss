@@ -92,45 +92,22 @@ DEFAULT MOBILE STYLING
   color: $medium_grey;
 }
 
+.page-link[aria-current="true"] {
+  color: $white;
+}
+
 @media screen and (min-width: $small_device) {
+  .record-padding {
+    position: relative;
+  }
+  
   .page-item .page-link[aria-label="Go to previous page"] {
     position: absolute;
     left: 0;
-    top: 40px;
   }
 
   .page-item .page-link[aria-label="Go to next page"] {
     position: absolute;
     right: 0;
-    top: 40px;
-  }
-}
-
-@media screen and (min-width: $medium_device) {
-  .page-item .page-link[aria-label="Go to previous page"] {
-    position: absolute;
-    left: 0;
-    top: 18px;
-  }
-
-  .page-item .page-link[aria-label="Go to next page"] {
-    position: absolute;
-    right: 0;
-    top: 18px;
-  }
-}
-
-
-@media screen and (min-width: $xlarge_device) {
-  .page-item .page-link[aria-label="Go to previous page"] {
-    position: absolute;
-    left: 0;
-    top: 18px;
-  }
-
-  .page-item .page-link[aria-label="Go to next page"] {
-    position: absolute;
-    right: 0;
-    top: 18px;
   }
 }
