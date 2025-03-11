@@ -103,9 +103,20 @@ DEFAULT MOBILE STYLING
   text-decoration: none;
 }
 
-.secondary-nav a:hover {
-  color: $yale_blue;
-  background-color: $white;
+.secondary-nav .information-title:hover {
+  text-decoration: underline;
+}
+
+.secondary-nav .libraries-title:hover {
+  text-decoration: underline;
+}
+
+.secondary-nav .research-title:hover {
+  text-decoration: underline;
+}
+
+.secondary-nav .services-title:hover {
+  text-decoration: underline;
 }
 
 @media screen and (min-width: $small_device) {
@@ -208,6 +219,7 @@ DEFAULT MOBILE STYLING
 
   .nav-link-title > a {
     display: inline-block;
+    text-decoration: none;
   }
 
   .secondary-nav .dropdown-menu > li {
