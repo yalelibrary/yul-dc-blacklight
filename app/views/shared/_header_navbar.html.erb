@@ -15,14 +15,14 @@
   <div class="secondary-nav">
     <div class="row">
       <section class="info-header">
-        <div class="dropdown" data-bs-toggle="dropdown" id="dropdownMenuLinkResearch" aria-expanded="false">
-          <h2 class="nav-link-title">
-            <a href="#" role="button">Research</a>
+        <div class="dropdown">
+          <h2 class="nav-link-title" data-bs-toggle="dropdown">
+            <a href="#" role="button" aria-expanded="true" class="research-title">Research</a>
             <p class="nav-link-caret">
               <%= image_tag("header/2x-angle-up-solid.png", {id: 'research-collapse-nav-bar', alt: 'collapse nav bar'})%>
             </p>
           </h2>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLinkResearch">
+          <ul class="dropdown-menu">
             <li>
               <a href="<%= t('submenu.research.quicksearch.url')%>" title="<%= t('submenu.research.quicksearch.description')%>" class="dropdown-item">
                 <%= t('submenu.research.quicksearch.title')%>
@@ -88,14 +88,14 @@
       </section>
 
       <section class="info-header">
-        <div class="dropdown"  data-bs-toggle="dropdown" id="dropdownMenuLinkServices" aria-expanded="false">
-          <h2 class="nav-link-title">
-            <a href="#" role="button">Services</a>
+        <div class="dropdown">
+          <h2 class="nav-link-title" data-bs-toggle="dropdown">
+            <a href="#" role="button" aria-expanded="true" class="services-title">Services</a>
             <p class="nav-link-caret">
               <%= image_tag("header/2x-angle-up-solid.png", {id: 'services-collapse-nav-bar', alt: 'collapse nav bar'})%>
             </p>
           </h2>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLinkServices">
+          <ul class="dropdown-menu">
             <li>
               <a href="<%= t('submenu.services.yourPersonalLibrarian.url')%>" title="<%= t('submenu.services.yourPersonalLibrarian.description')%>"  class="dropdown-item">
                 <%= t('submenu.services.yourPersonalLibrarian.title')%>
@@ -156,14 +156,14 @@
       </section>
 
       <section class="info-header">
-        <div class="dropdown" data-bs-toggle="dropdown" id="dropdownMenuLinkLibraries" aria-expanded="false">
-          <h2 class="nav-link-title">
-            <a href="#" role="button">Libraries & Collections</a>
+        <div class="dropdown">
+          <h2 class="nav-link-title" data-bs-toggle="dropdown">
+            <a href="#" role="button" aria-expanded="true" class="libraries-title">Libraries & Collections</a>
             <p class="nav-link-caret">
               <%= image_tag("header/2x-angle-up-solid.png", {id: 'libraries-collapse-nav-bar', alt: 'collapse nav bar'})%>
             </p>
           </h2>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLinkLibraries">
+          <ul class="dropdown-menu">
             <li>
               <a href="<%= t('submenu.librariesCollections.artsLibrary.url')%>" title="<%= t('submenu.librariesCollections.artsLibrary.description')%>" class="dropdown-item">
                 <%= t('submenu.librariesCollections.artsLibrary.title')%>
@@ -264,14 +264,14 @@
       </section>
 
       <section class="info-header">
-        <div class="dropdown"  data-bs-toggle="dropdown" id="dropdownMenuLinkInformation">
-          <h2 class="nav-link-title">
-            <a href="#" role="button" aria-expanded="false">Information & Policies</a>
+        <div class="dropdown">
+          <h2 class="nav-link-title" data-bs-toggle="dropdown">
+            <a href="#" role="button" aria-expanded="false" class="information-title">Information & Policies</a>
             <p class="nav-link-caret">
               <%= image_tag("header/2x-angle-up-solid.png", {id: 'info-collapse-nav-bar', alt: 'collapse nav bar'})%>
             </p>
           </h2>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLinkInformation">
+          <ul class="dropdown-menu">
             <li>
               <a href="<%= t('submenu.informationPolicies.libraryHours.url')%>" title="<%= t('submenu.informationPolicies.libraryHours.description')%>" class="dropdown-item">
                 <%= t('submenu.informationPolicies.libraryHours.title')%>
