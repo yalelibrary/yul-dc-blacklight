@@ -90,7 +90,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
   context 'sorts by title' do
     it 'asc' do
       click_on 'search'
-      click_on 'Sort by relevance'
+      click_on 'Sort by Relevance'
       within('div#sort-dropdown') do
         click_on 'Title (A --> Z)'
       end
@@ -101,7 +101,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
 
     it 'desc' do
       click_on 'search'
-      click_on 'Sort by relevance'
+      click_on 'Sort by Relevance'
       within('div#sort-dropdown') do
         click_on 'Title (Z --> A)'
       end
@@ -114,7 +114,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
   context 'sorts by creator' do
     it 'sorts by creator asc' do
       click_on 'search'
-      click_on 'Sort by relevance'
+      click_on 'Sort by Relevance'
       within('div#sort-dropdown') do
         click_on 'Creator (A --> Z)'
       end
@@ -125,7 +125,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
 
     it 'sorts by creator desc' do
       click_on 'search'
-      click_on 'Sort by relevance'
+      click_on 'Sort by Relevance'
       within('div#sort-dropdown') do
         click_on 'Creator (Z --> A)'
       end
@@ -138,7 +138,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
   context 'sorts by year' do
     it 'sorts by year asc' do
       click_on 'search'
-      click_on 'Sort by relevance'
+      click_on 'Sort by Relevance'
       within('div#sort-dropdown') do
         click_on 'Year (ascending)'
       end
@@ -149,7 +149,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
 
     it 'sorts by year desc' do
       click_on 'search'
-      click_on 'Sort by relevance'
+      click_on 'Sort by Relevance'
       within('div#sort-dropdown') do
         click_on 'Year (descending)'
       end
@@ -162,7 +162,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
   context 'sorts by collection with correct facets' do
     it 'does not have sort by collection by default' do
       click_on 'search'
-      click_on 'Sort by relevance'
+      click_on 'Sort by Relevance'
       within('div#sort-dropdown') do
         expect(page).not_to have_content("Collection Order")
       end
@@ -175,7 +175,7 @@ RSpec.describe 'Search results should be sorted', type: :system, js: :true, clea
       visit "/catalog?f[collection_title_ssi][]=Test"
       content = find(:css, '#content')
       expect(content).to have_content("HandsomeDan Bulldog\nCreator:\nAndy Graves\nRhett Lecheire\nCreator:\nPaulo Coelho").or have_content("1.\nHandsomeDan Bulldog\nCreator:\nAndy Graves\n2.\nRhett Lecheire\nCreator:\nPaulo Coelho")
-      click_on 'Sort by relevance'
+      click_on 'Sort by Relevance'
       within('div#sort-dropdown') do
         expect(page).to have_content("Collection Order")
         click_on "Collection Order"
