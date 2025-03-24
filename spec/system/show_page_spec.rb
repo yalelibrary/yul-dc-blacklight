@@ -2,6 +2,22 @@
 require 'rails_helper'
 
 RSpec.describe 'Show Page', type: :system, js: true, clean: true do
+
+  before do
+    page.driver.browser.switch_to.alert.accept rescue Selenium::WebDriver::Error::NoSuchAlertError
+  end
+
+  # Or use this alternative approach to configure Capybara to auto-accept alerts
+  around do |example|
+    begin
+      Capybara.current_session.driver.browser.switch_to.alert.accept rescue Selenium::WebDriver::Error::NoSuchAlertError
+      example.run
+    rescue Selenium::WebDriver::Error::UnexpectedAlertOpenError
+      Capybara.current_session.driver.browser.switch_to.alert.accept
+      example.run
+    end
+  end
+  
   let(:user) { FactoryBot.create(:user, sub: "123454321", netid: "new_netid") }
   let(:management_approver) { FactoryBot.create(:user, netid: 'net_id2', sub: '1234', uid: 'sun345') }
   let(:request_user) { FactoryBot.create(:user, netid: "net_id", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6e", uid: 'some_name', email: 'not_real@example.com') }
