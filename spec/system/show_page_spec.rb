@@ -302,14 +302,14 @@ RSpec.describe 'Show Page', type: :system, clean: true do
       expect(page).to have_css '.manifestItem'
     end
     it '"Back to Search Results" button returns user to search results' do
-      expect(page).to have_button("Back to Search Results")
+      expect(page).to have_content "Back to Search Results"
       expect(page).to have_xpath("//button[@href='/catalog?page=1&per_page=10&search_field=all_fields']")
     end
     it 'Archival Context breadcrumbs render the Archival Context' do
       expect(page).to have_content 'Found In:'
       expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > ... >'
       click_on("...")
-      expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > Level3 > Level2 > Level1 > Level0'
+      expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > Level3 > Level2 > Level1 > Level0 > Amor Llama'
     end
     it '"New Search" button returns user to homepage' do
       expect(page).to have_button "New Search"
