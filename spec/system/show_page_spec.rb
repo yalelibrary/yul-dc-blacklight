@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe 'Show Page', type: :system, js: true, clean: true do
+RSpec.describe 'Show Page', type: :system, clean: true do
   let(:user) { FactoryBot.create(:user, sub: "123454321", netid: "new_netid") }
   let(:management_approver) { FactoryBot.create(:user, netid: 'net_id2', sub: '1234', uid: 'sun345') }
   let(:request_user) { FactoryBot.create(:user, netid: "net_id", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d6e", uid: 'some_name', email: 'not_real@example.com') }
