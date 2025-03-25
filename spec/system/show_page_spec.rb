@@ -295,7 +295,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       visit '/catalog?search_field=all_fields&q='
       click_on 'Amor Llama', match: :first
     end
-    xit 'has expected css' do
+    it 'has expected css' do
       expect(page).to have_css '.btn-show'
       expect(page).to have_css '.constraints-container'
       expect(page).to have_css '.show-buttons'
