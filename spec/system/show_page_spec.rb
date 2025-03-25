@@ -292,13 +292,9 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
 
   context 'public work' do
     before do
-      begin
-        page.driver.browser.switch_to.alert.accept
-      rescue
-        Selenium::WebDriver::Error::NoSuchAlertError
-      end
       visit '/catalog?search_field=all_fields&q='
       click_on 'Amor Llama', match: :first
+      page.driver.browser.switch_to.alert.dismiss
     end
     it 'has expected css' do
       expect(page).to have_css '.btn-show'
