@@ -294,7 +294,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     before do
       visit '/catalog?search_field=all_fields&q='
       click_on 'Amor Llama', match: :first
-      page.driver.browser.switch_to.alert.dismiss
+      page.driver.browser.switch_to.alert.accept
     end
     it 'has expected css' do
       expect(page).to have_css '.btn-show'
