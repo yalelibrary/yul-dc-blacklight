@@ -2,11 +2,11 @@
 RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
   before do
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/111.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+      .to_return(status: 200)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/22/22/222.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+      .to_return(status: 200)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/33/33/333.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+      .to_return(status: 200)
 
     solr = Blacklight.default_index.connection
     solr.add([test_record,
