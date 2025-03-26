@@ -41,7 +41,7 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
     }
   end
 
-  xit 'has expected css' do
+  it 'has expected css' do
     click_link '111'
 
     expect(page).to have_css '.page-links-show'
