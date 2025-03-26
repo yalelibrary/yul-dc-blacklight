@@ -334,17 +334,17 @@ BOOKMARK STYLING
   .index_title.document-title-heading.title_tesim {
     display: flex;
   }
-  .documents-list .index-document-functions {
+  .index-document-functions {
     padding-left: 10px;
   }
 }
 @media screen and (min-width: $medium_device) {
-  .documents-list .index-document-functions {
+  .index-document-functions {
     padding-left: 45px;
   }
 }
 @media screen and (min-width: $large_device) {
-  .documents-list .index-document-functions {
+  .index-document-functions {
     padding-left: 90px;
   }
 }
