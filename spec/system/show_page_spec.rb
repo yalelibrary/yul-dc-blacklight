@@ -189,9 +189,13 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   end
   # rubocop:disable Layout/LineLength
   before do
+    fixture_path = File.join('spec', 'fixtures', '2041002.json')
+    puts "CircleCI Debug - File exists: #{File.exist?(fixture_path)}"
+    puts "CircleCI Debug - Current directory: #{Dir.pwd}"
+
     manifest_content = File.read(File.join('spec', 'fixtures', '2041002.json'))
-    stub_request(:any, /.*manifests\/.*\.json/).
-      to_return(status: 200, body: manifest_content, headers: {'Content-Type' => 'application/json'})
+    stub_request(:any, /.*manifests\/.*\.json/)
+      .to_return(status: 200, body: manifest_content, headers: { 'Content-Type' => 'application/json' })
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/111.json')
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/112.json')
