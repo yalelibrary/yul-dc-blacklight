@@ -277,16 +277,15 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     solr = Blacklight.default_index.connection
     solr.add([llama,
               llama_child_1,
-              llama_child_2,
-              # dog,
-              # eagle,
-              # puppy,
-              # owp_work,
-              # child_work_owp,
-              # owp_work_2,
-              # train,
-              # void])
-    ])
+              llama_child_2]
+      # dog,
+      # eagle,
+      # puppy,
+      # owp_work,
+      # child_work_owp,
+      # owp_work_2,
+      # train,
+      # void]))
     solr.commit
   end
   # rubocop:disable Layout/LineLength
