@@ -15,9 +15,11 @@ DEFAULT MOBILE STYLING
 }
 
 .documents-gallery .index-document-functions {
+  position: relative;
   top: 0;
-  position: absolute;
-  left: -160px;
+  flex: auto;
+  width: 100%;
+  padding-left: 0px;
 }
 
 .documents-gallery .document-title-heading {
@@ -26,7 +28,7 @@ DEFAULT MOBILE STYLING
   padding-left: 0;
   padding-bottom: 0;
   width: 200px;
-  margin-top: 14px;
+  margin-top: 22px;
 }
 
 .document-title-heading > a {
@@ -38,13 +40,13 @@ DEFAULT MOBILE STYLING
   display: block;
 }
 
+.documents-gallery .document-metadata, .document-counter {
+  display: none;
+}
+
 .row-cols-2 > * {
   max-width: 100%;
   flex: 0 0 100%;
-}
-
-.documents-gallery .document-metadata, .document-counter {
-  display: none;
 }
 
 @media screen and (min-width: $small_device) {
@@ -57,7 +59,6 @@ DEFAULT MOBILE STYLING
     flex: 0 0 50%;
   }
 }
-
 
 @media screen and (min-width: $xlarge_device) {
   .row-cols-2 > * {
