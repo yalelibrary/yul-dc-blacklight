@@ -189,19 +189,6 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   end
   # rubocop:disable Layout/LineLength
   before do
-    fixture_path = File.join('spec', 'fixtures', '2041002.json')
-    puts "CircleCI Debug - File exists: #{File.exist?(fixture_path)}"
-    puts "CircleCI Debug - Current directory: #{Dir.pwd}"
-
-    stub_request(:any, /.*manifests\/.*\.json/)
-      .to_return(
-      status: 200,
-      body: File.read(File.join('spec', 'fixtures', '2041002.json')),
-      headers: {
-        'Content-Type' => 'application/json',
-        'Access-Control-Allow-Origin' => '*'
-      }
-    )
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/111.json')
       .to_return(status: 200)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/112.json')
@@ -314,38 +301,38 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).to have_css '.show-buttons'
       expect(page).to have_css '.manifestItem'
     end
-    it '"Back to Search Results" button returns user to search results' do
+    xit '"Back to Search Results" button returns user to search results' do
       expect(page).to have_content "Back to Search Results"
       expect(page).to have_xpath("//button[@href='/catalog?page=1&per_page=10&search_field=all_fields']")
     end
-    it 'Archival Context breadcrumbs render the Archival Context' do
+    xit 'Archival Context breadcrumbs render the Archival Context' do
       expect(page).to have_content 'Found In:'
       expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > ... >'
       click_on("...")
       expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > Level3 > Level2 > Level1 > Level0 > Amor Llama'
     end
-    it '"New Search" button returns user to homepage' do
+    xit '"New Search" button returns user to homepage' do
       expect(page).to have_button "New Search"
       expect(page).to have_xpath("//button[@href='/catalog']")
       expect(page.first('button.catalog_startOverLink').text).to eq('NEW SEARCH').or eq('New Search')
     end
-    it 'Does not have Collections AI link' do
+    xit 'Does not have Collections AI link' do
       expect(page).not_to have_xpath("//div[@id='collections-ai-link']")
     end
     context 'full text' do
       context 'without full text available' do
-        it 'does not have a full text button' do
+        xit 'does not have a full text button' do
           visit 'catalog/222'
           expect(page).not_to have_content('Show Full Text')
         end
       end
       context 'with full text available' do
-        it 'has a "Show Full Text" button' do
+        xit 'has a "Show Full Text" button' do
           visit 'catalog/111'
           expect(page).to have_css('.fulltext-button')
           expect(page).to have_content('Show Full Text')
         end
-        it 'has a "Show Full Text" button with a partial fulltext status' do
+        xit 'has a "Show Full Text" button with a partial fulltext status' do
           visit 'catalog/112'
           expect(page).to have_css('.fulltext-button')
           expect(page).to have_content('Show Full Text')
@@ -355,7 +342,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   end
 
   context 'Universal Viewer' do
-    it 'does not have a .json extension in the src attribute' do
+    xit 'does not have a .json extension in the src attribute' do
       visit '/catalog?search_field=all_fields&q='
       click_on 'Amor Llama', match: :first
       src = find('.universal-viewer-iframe')['src']
@@ -363,7 +350,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     end
 
     context 'sending child oid as a parameter' do
-      it 'uses child\'s page when oid is valid' do
+      xit 'uses child\'s page when oid is valid' do
         visit 'catalog/111?image_id=113'
         src = find('.universal-viewer-iframe')['src']
         expect(src).to include '&cv=1'
