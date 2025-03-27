@@ -176,16 +176,19 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   end
 
   around do |example|
+    original_sample_bucket = ENV['SAMPLE_BUCKET']
+    ENV['SAMPLE_BUCKET'] = 'yul-dc-development-samples'
     original_token = ENV['OWP_AUTH_TOKEN']
     original_download_bucket = ENV['S3_DOWNLOAD_BUCKET_NAME']
     original_management_url = ENV['MANAGEMENT_HOST']
-    ENV['S3_DOWNLOAD_BUCKET_NAME'] = 'yul-test-samples'
+    ENV['S3_DOWNLOAD_BUCKET_NAME'] = 'yul-dc-development-samples'
     ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
     ENV['OWP_AUTH_TOKEN'] = 'valid'
     example.run
     ENV['S3_DOWNLOAD_BUCKET_NAME'] = original_download_bucket
     ENV['MANAGEMENT_HOST'] = original_management_url
     ENV['OWP_AUTH_TOKEN'] = original_token
+    ENV['SAMPLE_BUCKET'] = original_sample_bucket
   end
   # rubocop:disable Layout/LineLength
   before do
