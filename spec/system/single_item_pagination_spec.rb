@@ -2,11 +2,20 @@
 RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
   before do
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/111.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read, headers: {
+        'Content-Type' => 'application/json',
+        'Access-Control-Allow-Origin' => '*'
+      })
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/22/22/222.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read, headers: {
+        'Content-Type' => 'application/json',
+        'Access-Control-Allow-Origin' => '*'
+      })
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/33/33/333.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read, headers: {
+        'Content-Type' => 'application/json',
+        'Access-Control-Allow-Origin' => '*'
+      })
 
     solr = Blacklight.default_index.connection
     solr.add([test_record,
@@ -18,10 +27,15 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
   end
 
   before(:each) do
-    WebMock.after_request do |req, res|
-      puts "WebMock: #{req.method} #{req.uri}"
-      puts "Response: #{res.status.first}"
-    end
+    # More explicit stubbing with absolute URLs
+    stub_request(:any, /.*manifests\/.*\.json/)
+      .to_return(status: 200, body: File.read(File.join('spec', 'fixtures', '2041002.json')), 
+                 headers: {'Content-Type' => 'application/json'})
+    
+    # You might need to stub with a more specific URL pattern
+    stub_request(:get, %r{https?://.*?/manifests/2041002.json})
+      .to_return(status: 200, body: File.read(File.join('spec', 'fixtures', '2041002.json')),
+                 headers: {'Content-Type' => 'application/json'})
   end
 
   let(:same_call_record) do
