@@ -57,7 +57,7 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
   end
 
   context "in the first item" do
-    xit 'does not have "Previous" and should have "Next"' do
+    it 'does not have "Previous" and should have "Next"' do
       click_link '111'
 
       expect(page).not_to have_link("< Previous")
@@ -67,7 +67,7 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
   end
 
   context "in the second item" do
-    xit 'has "Previous" and "Next"' do
+    it 'has "Previous" and "Next"' do
       click_link '222'
 
       expect(page).to have_link("< Previous", href: '/catalog/111')
@@ -77,7 +77,7 @@ RSpec.feature "Single Item Pagination", type: :system, clean: true, js: true do
   end
 
   context "in the third item" do
-    xit 'has "Previous", but not "Next"' do
+    it 'has "Previous", but not "Next"' do
       click_link '333'
 
       expect(page).to have_link("< Previous", href: '/catalog/222')
