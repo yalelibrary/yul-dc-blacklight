@@ -203,21 +203,21 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       }
     )
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/111.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+      .to_return(status: 200)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/112.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+      .to_return(status: 200)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/11/11/113.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+      .to_return(status: 200)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/22/22/222.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+      .to_return(status: 200)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/12/11/112.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+      .to_return(status: 200)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/45/12/34/12345.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+      .to_return(status: 200)
     stub_request(:get, 'https://yul-dc-development-samples.s3.amazonaws.com/manifests/21/54/32/54321.json')
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+      .to_return(status: 200)
     stub_request(:get, "https://yul-dc-development-samples.s3.amazonaws.com/manifests/55/55/555.json")
-      .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
+      .to_return(status: 200)
     stub_request(:get, 'http://www.example.com/management/api/permission_sets/123454321')
       .to_return(status: 200, body: '{"timestamp":"2023-11-02","user":{"sub":"123454321"},"permission_set_terms_agreed":[],"permissions":[{"oid":12345,"permission_set":1,"permission_set_terms":1,"request_status":"Approved","request_date":"2023-11-02T20:23:18.824Z","access_until":"2024-11-02T20:23:18.824Z"}]}', headers: valid_header)
     stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/new_netid")
@@ -308,44 +308,44 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       visit '/catalog?search_field=all_fields&q='
       click_on 'Amor Llama', match: :first
     end
-    xit 'has expected css' do
+    it 'has expected css' do
       expect(page).to have_css '.btn-show'
       expect(page).to have_css '.constraints-container'
       expect(page).to have_css '.show-buttons'
       expect(page).to have_css '.manifestItem'
     end
-    xit '"Back to Search Results" button returns user to search results' do
+    it '"Back to Search Results" button returns user to search results' do
       expect(page).to have_content "Back to Search Results"
       expect(page).to have_xpath("//button[@href='/catalog?page=1&per_page=10&search_field=all_fields']")
     end
-    xit 'Archival Context breadcrumbs render the Archival Context' do
+    it 'Archival Context breadcrumbs render the Archival Context' do
       expect(page).to have_content 'Found In:'
       expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > ... >'
       click_on("...")
       expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > Level3 > Level2 > Level1 > Level0 > Amor Llama'
     end
-    xit '"New Search" button returns user to homepage' do
+    it '"New Search" button returns user to homepage' do
       expect(page).to have_button "New Search"
       expect(page).to have_xpath("//button[@href='/catalog']")
       expect(page.first('button.catalog_startOverLink').text).to eq('NEW SEARCH').or eq('New Search')
     end
-    xit 'Does not have Collections AI link' do
+    it 'Does not have Collections AI link' do
       expect(page).not_to have_xpath("//div[@id='collections-ai-link']")
     end
     context 'full text' do
       context 'without full text available' do
-        xit 'does not have a full text button' do
+        it 'does not have a full text button' do
           visit 'catalog/222'
           expect(page).not_to have_content('Show Full Text')
         end
       end
       context 'with full text available' do
-        xit 'has a "Show Full Text" button' do
+        it 'has a "Show Full Text" button' do
           visit 'catalog/111'
           expect(page).to have_css('.fulltext-button')
           expect(page).to have_content('Show Full Text')
         end
-        xit 'has a "Show Full Text" button with a partial fulltext status' do
+        it 'has a "Show Full Text" button with a partial fulltext status' do
           visit 'catalog/112'
           expect(page).to have_css('.fulltext-button')
           expect(page).to have_content('Show Full Text')
@@ -355,7 +355,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   end
 
   context 'Universal Viewer' do
-    xit 'does not have a .json extension in the src attribute' do
+    it 'does not have a .json extension in the src attribute' do
       visit '/catalog?search_field=all_fields&q='
       click_on 'Amor Llama', match: :first
       src = find('.universal-viewer-iframe')['src']
@@ -363,7 +363,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     end
 
     context 'sending child oid as a parameter' do
-      xit 'uses child\'s page when oid is valid' do
+      it 'uses child\'s page when oid is valid' do
         visit 'catalog/111?image_id=113'
         src = find('.universal-viewer-iframe')['src']
         expect(src).to include '&cv=1'
