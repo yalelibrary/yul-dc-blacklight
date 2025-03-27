@@ -373,18 +373,18 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     end
 
     it 'Metadata og tags are in the header of html' do
-      expect(page).to have_content("og:title")
-      expect(page).to have_content("Amor Llama")
-      expect(page).to have_content("og:url")
-      expect(page).to have_content("https://collections.library.yale.edu/catalog/111")
-      expect(page).to have_content("og:type")
-      expect(page).to have_content("website")
-      expect(page).to have_content("og:description")
-      expect(page).to have_content("Anna Elizabeth Dewdney + Another Creator")
-      expect(page).to have_content("og:image")
-      expect(page).to have_content("https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_opengraph}/0/default.jpg")
-      expect(page).to have_content("og:image:type")
-      expect(page).to have_content("image/jpeg")
+      expect(page.html).to include("og:title")
+      expect(page.html).to include("Amor Llama")
+      expect(page.html).to include("og:url")
+      expect(page.html).to include("https://collections.library.yale.edu/catalog/111")
+      expect(page.html).to include("og:type")
+      expect(page.html).to include("website")
+      expect(page.html).to include("og:description")
+      expect(page.html).to include("Anna Elizabeth Dewdney + Another Creator")
+      expect(page.html).to include("og:image")
+      expect(page.html).to include("https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_opengraph}/0/default.jpg")
+      expect(page.html).to include("og:image:type")
+      expect(page.html).to include("image/jpeg")
     end
     it 'has og namespace' do
       expect(page).to have_css("html[prefix='og: https://ogp.me/ns#']", visible: false)
