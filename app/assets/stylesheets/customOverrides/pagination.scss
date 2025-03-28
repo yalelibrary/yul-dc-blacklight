@@ -100,7 +100,7 @@ DEFAULT MOBILE STYLING
   .record-padding {
     position: relative;
   }
-  
+
   .page-item .page-link[aria-label="Go to previous page"] {
     position: absolute;
     left: 0;
@@ -109,5 +109,29 @@ DEFAULT MOBILE STYLING
   .page-item .page-link[aria-label="Go to next page"] {
     position: absolute;
     right: 0;
+  }
+}
+
+@media screen and (min-width: $medium_device) {
+  .page-links-show {
+    position: absolute;
+    right: 0;
+    width: 30%;
+  }
+}
+
+@media screen and (min-width: $large_device) {
+  .page-links-show {
+    position: absolute;
+    right: 0;
+    width: 20%;
+  }
+}
+
+@media screen and (min-width: $xlarge_device) {
+  .page-links-show {
+    position: absolute;
+    right: 0;
+    width: 15%;
   }
 }
