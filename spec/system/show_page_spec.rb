@@ -176,16 +176,19 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   end
 
   around do |example|
+    original_sample_bucket = ENV['SAMPLE_BUCKET']
+    ENV['SAMPLE_BUCKET'] = 'yul-dc-development-samples'
     original_token = ENV['OWP_AUTH_TOKEN']
     original_download_bucket = ENV['S3_DOWNLOAD_BUCKET_NAME']
     original_management_url = ENV['MANAGEMENT_HOST']
-    ENV['S3_DOWNLOAD_BUCKET_NAME'] = 'yul-test-samples'
+    ENV['S3_DOWNLOAD_BUCKET_NAME'] = 'yul-dc-development-samples'
     ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
     ENV['OWP_AUTH_TOKEN'] = 'valid'
     example.run
     ENV['S3_DOWNLOAD_BUCKET_NAME'] = original_download_bucket
     ENV['MANAGEMENT_HOST'] = original_management_url
     ENV['OWP_AUTH_TOKEN'] = original_token
+    ENV['SAMPLE_BUCKET'] = original_sample_bucket
   end
   # rubocop:disable Layout/LineLength
   before do
@@ -295,44 +298,44 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       visit '/catalog?search_field=all_fields&q='
       click_on 'Amor Llama', match: :first
     end
-    xit 'has expected css' do
+    it 'has expected css' do
       expect(page).to have_css '.btn-show'
       expect(page).to have_css '.constraints-container'
       expect(page).to have_css '.show-buttons'
       expect(page).to have_css '.manifestItem'
     end
-    xit '"Back to Search Results" button returns user to search results' do
-      expect(page).to have_button("Back to Search Results")
+    it '"Back to Search Results" button returns user to search results' do
+      expect(page).to have_content "Back to Search Results"
       expect(page).to have_xpath("//button[@href='/catalog?page=1&per_page=10&search_field=all_fields']")
     end
-    xit 'Archival Context breadcrumbs render the Archival Context' do
+    it 'Archival Context breadcrumbs render the Archival Context' do
       expect(page).to have_content 'Found In:'
       expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > ... >'
       click_on("...")
-      expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > Level3 > Level2 > Level1 > Level0'
+      expect(page).to have_content 'Beinecke Rare Book and Manuscript Library (BRBL) > Abraham Lincoln collection (GEN MSS 257) > Series 1: Oversize > Level3 > Level2 > Level1 > Level0 > Amor Llama'
     end
-    xit '"New Search" button returns user to homepage' do
+    it '"New Search" button returns user to homepage' do
       expect(page).to have_button "New Search"
       expect(page).to have_xpath("//button[@href='/catalog']")
       expect(page.first('button.catalog_startOverLink').text).to eq('NEW SEARCH').or eq('New Search')
     end
-    xit 'Does not have Collections AI link' do
+    it 'Does not have Collections AI link' do
       expect(page).not_to have_xpath("//div[@id='collections-ai-link']")
     end
     context 'full text' do
       context 'without full text available' do
-        xit 'does not have a full text button' do
+        it 'does not have a full text button' do
           visit 'catalog/222'
           expect(page).not_to have_content('Show Full Text')
         end
       end
       context 'with full text available' do
-        xit 'has a "Show Full Text" button' do
+        it 'has a "Show Full Text" button' do
           visit 'catalog/111'
           expect(page).to have_css('.fulltext-button')
           expect(page).to have_content('Show Full Text')
         end
-        xit 'has a "Show Full Text" button with a partial fulltext status' do
+        it 'has a "Show Full Text" button with a partial fulltext status' do
           visit 'catalog/112'
           expect(page).to have_css('.fulltext-button')
           expect(page).to have_content('Show Full Text')
@@ -342,7 +345,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   end
 
   context 'Universal Viewer' do
-    xit 'does not have a .json extension in the src attribute' do
+    it 'does not have a .json extension in the src attribute' do
       visit '/catalog?search_field=all_fields&q='
       click_on 'Amor Llama', match: :first
       src = find('.universal-viewer-iframe')['src']
@@ -350,12 +353,12 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     end
 
     context 'sending child oid as a parameter' do
-      xit 'uses child\'s page when oid is valid' do
+      it 'uses child\'s page when oid is valid' do
         visit 'catalog/111?image_id=113'
         src = find('.universal-viewer-iframe')['src']
         expect(src).to include '&cv=1'
       end
-      xit 'uses first page when oid is invalid' do
+      it 'uses first page when oid is invalid' do
         visit 'catalog/111?image_id=11312321'
         src = find('.universal-viewer-iframe')['src']
         expect(src).to include '&cv=0'
@@ -369,7 +372,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       click_on 'Amor Llama', match: :first
     end
 
-    xit 'Metadata og tags are in the header of html' do
+    it 'Metadata og tags are in the header of html' do
       expect(page.html).to include("og:title")
       expect(page.html).to include("Amor Llama")
       expect(page.html).to include("og:url")
@@ -383,34 +386,34 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page.html).to include("og:image:type")
       expect(page.html).to include("image/jpeg")
     end
-    xit 'has og namespace' do
+    it 'has og namespace' do
       expect(page).to have_css("html[prefix='og: https://ogp.me/ns#']", visible: false)
     end
-    xit 'metadata block is displayed when it has values' do
+    it 'metadata block is displayed when it has values' do
       expect(page).to have_content "Description", count: 2
       expect(page).to have_content "Collection Information"
       expect(page).to have_content "Subjects, Formats, And Genres"
       expect(page).to have_content "Access And Usage Rights"
       expect(page).to have_content "Identifiers"
     end
-    xit "can click on a Creator link with special characters and return correct search results" do
+    it "can click on a Creator link with special characters and return correct search results" do
       click_on("Anna Elizabeth Dewdney + Another Creator")
       expect(page).to have_content "Amor Llama"
     end
 
     context 'Universal Viewer' do
-      xit 'does not have a .json extension in the src attribute' do
+      it 'does not have a .json extension in the src attribute' do
         src = find('.universal-viewer-iframe')['src']
         expect(src).not_to include('.json')
       end
 
       context 'sending child oid as a parameter' do
-        xit 'uses child\'s page when oid is valid' do
+        it 'uses child\'s page when oid is valid' do
           visit 'catalog/111?image_id=113'
           src = find('.universal-viewer-iframe')['src']
           expect(src).to include '&cv=1'
         end
-        xit 'uses first page when oid is invalid' do
+        it 'uses first page when oid is invalid' do
           visit 'catalog/111?image_id=11312321'
           src = find('.universal-viewer-iframe')['src']
           expect(src).to include '&cv=0'
@@ -420,7 +423,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
   end
 
   context 'with yale-only works' do
-    xit 'does not have image of og tag' do
+    it 'does not have image of og tag' do
       visit '/catalog?search_field=all_fields&q='
       click_on 'The Boiler Makers', match: :first
       expect(page).not_to have_css("meta[property='og:image'][content='https://this_is_a_iiif_image/iiif/2/17120080/full/#{thumbnail_size_in_opengraph}/0/default.jpg']")
@@ -465,20 +468,20 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     before do
       login_as management_approver
     end
-    xit 'can access the object and view UV and metadata normally without approved status' do
+    it 'can access the object and view UV and metadata normally without approved status' do
       visit 'catalog/12345'
       expect(page).not_to have_content "The material in this folder is open for research use only with permission. Researchers who wish to gain access or who have received permission to view this item, please log in to your account to request permission or to view the materials in this folder."
       expect(page).not_to have_content "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this form."
       expect(page).to have_css('.uv-container')
     end
     context 'Full text button' do
-      xit 'does not have a full text button without full text available' do
+      it 'does not have a full text button without full text available' do
         visit '/catalog/54321'
         expect(page).to have_content('Zoo Illustrations')
         expect(page).not_to have_css('.fulltext-button')
         expect(page).not_to have_content('Show Full Text')
       end
-      xit 'has a "Show Full Text" button with a partial fulltext status' do
+      it 'has a "Show Full Text" button with a partial fulltext status' do
         visit '/catalog/12345'
         expect(page).to have_content('The Alchemist')
         expect(page).to have_css('.fulltext-button')
