@@ -32,6 +32,8 @@ DEFAULT MOBILE STYLING
   background-color: $lighter_grey;
   margin-left: 0;
   overflow-wrap: break-word;
+  justify-content: space-between;
+  align-items: center;
 }
 
 
@@ -115,12 +117,6 @@ DEFAULT MOBILE STYLING
 @media screen and (min-width: $small_device) {
   .constraints-group{
     width: 62%;
-  }
-
-  .catalog_startOverLink {
-    position: absolute;
-    right: 0;
-    bottom: 1px;
   }
 }
 

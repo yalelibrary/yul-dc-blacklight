@@ -143,16 +143,16 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   padding: 0 0 0 0;
 }
 
-.constraints-container {
+.show-document .constraints-container {
   margin-left: 1%;
-  justify-self: center;
+  align-items: center;
   display: flex;
   z-index: 1;
   position: relative;
 }
 
 .show-buttons {
-  justify-self: center;
+  align-items: center;
 }
 
 .show-links {
@@ -477,10 +477,10 @@ p.yale-restricted-work-text{
 }
 
 @media screen and (min-width: $medium_device) {
-  .constraints-container {
+  .show-document .constraints-container {
     margin-left: -.5%;
     width: 118%;
-    justify-self: center;
+    align-items: center;
     justify-content: flex-start;
     display: flex;
     z-index: 1;
@@ -564,10 +564,10 @@ margin-bottom: 2%;  }
 
 
 @media screen and (min-width: $large_device) {
-  .constraints-container {
+  .show-document .constraints-container {
     margin-left: 0.5%;
     width: 140%;
-    justify-self: center;
+    align-items: center;
     justify-content: flex-start;
     display: flex;
     z-index: 1;
@@ -673,9 +673,9 @@ margin-bottom: 2%;  }
 
 
 @media screen and (min-width: $xlarge_device) {
-  .constraints-container {
+  .show-document .constraints-container {
     width: 144%;
-    justify-self: center;
+    align-items: center;
     justify-content: flex-start;
     display: flex;
     z-index: 1;
