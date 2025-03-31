@@ -6,6 +6,14 @@ DEFAULT MOBILE STYLING
    display: none;
   }
 
+  a {
+    text-decoration: none;
+  }
+
+  a:hover, a:focus, a:active {
+    text-decoration: underline;
+  }
+
   .document-title > a {
     color: $light_blue;
     max-width: 420px;
