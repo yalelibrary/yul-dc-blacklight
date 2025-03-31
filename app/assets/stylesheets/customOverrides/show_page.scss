@@ -203,6 +203,14 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   padding: 0.5rem 0.25rem 1rem;
 }
 
+.nav-link a {
+  text-decoration: none;
+}
+
+.nav-link a:hover, .nav-link a:focus, .nav-link a:active {
+  text-decoration:  underline;
+}
+
 #citationLink:after, #manifestLink:after, #miradorLink:after, #pdfLink:after {
   content: ' >';
 }
@@ -350,6 +358,12 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
 
 .single-item-show.metadata-block a {
   color: $light_blue;
+  text-decoration: none;
+}
+
+.single-item-show.metadata-block a:hover, .single-item-show.metadata-block a:focus, .single-item-show.metadata-block a:active {
+  color: $light_blue;
+  text-decoration: underline;
 }
 
 .single-item-show .metadata-block dt {
