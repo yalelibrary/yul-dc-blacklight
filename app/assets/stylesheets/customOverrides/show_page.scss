@@ -143,16 +143,16 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   padding: 0 0 0 0;
 }
 
-.constraints-container {
+.show-document .constraints-container {
   margin-left: 1%;
-  justify-self: center;
+  align-items: center;
   display: flex;
   z-index: 1;
   position: relative;
 }
 
 .show-buttons {
-  justify-self: center;
+  align-items: center;
 }
 
 .show-links {
@@ -201,6 +201,14 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
 
 .show-tools a.nav-link, .show-tools span.nav-link {
   padding: 0.5rem 0.25rem 1rem;
+}
+
+.nav-link a {
+  text-decoration: none;
+}
+
+.nav-link a:hover, .nav-link a:focus, .nav-link a:active {
+  text-decoration:  underline;
 }
 
 #citationLink:after, #manifestLink:after, #miradorLink:after, #pdfLink:after {
@@ -350,6 +358,12 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
 
 .single-item-show.metadata-block a {
   color: $light_blue;
+  text-decoration: none;
+}
+
+.single-item-show.metadata-block a:hover, .single-item-show.metadata-block a:focus, .single-item-show.metadata-block a:active {
+  color: $light_blue;
+  text-decoration: underline;
 }
 
 .single-item-show .metadata-block dt {
@@ -477,10 +491,10 @@ p.yale-restricted-work-text{
 }
 
 @media screen and (min-width: $medium_device) {
-  .constraints-container {
+  .show-document .constraints-container {
     margin-left: -.5%;
     width: 118%;
-    justify-self: center;
+    align-items: center;
     justify-content: flex-start;
     display: flex;
     z-index: 1;
@@ -564,10 +578,10 @@ margin-bottom: 2%;  }
 
 
 @media screen and (min-width: $large_device) {
-  .constraints-container {
+  .show-document .constraints-container {
     margin-left: 0.5%;
     width: 140%;
-    justify-self: center;
+    align-items: center;
     justify-content: flex-start;
     display: flex;
     z-index: 1;
@@ -673,9 +687,9 @@ margin-bottom: 2%;  }
 
 
 @media screen and (min-width: $xlarge_device) {
-  .constraints-container {
+  .show-document .constraints-container {
     width: 144%;
-    justify-self: center;
+    align-items: center;
     justify-content: flex-start;
     display: flex;
     z-index: 1;
