@@ -108,6 +108,14 @@ div.card {
   border-top: 1px solid $light_grey !important;
 }
 
+#facets a {
+  text-decoration: none;
+}
+
+#facets a:active, #facets a:focus, #facets a:hover {
+  text-decoration: underline;
+}
+
 h2.facets-heading {
   font-family: $mallory_mp_black, $mallory_medium, Arial, Helvetica, sans-serif;
   font-size: 0.9rem;
