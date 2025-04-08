@@ -65,6 +65,11 @@ DEFAULT MOBILE STYLING
 
 .footer-socmedia a {
   max-height: 2rem;
+  text-decoration: none;
+}
+
+.footer-socmedia a:active, .footer-socmedia a:focus, .footer-socmedia a:hover {
+  text-decoration: underline;
 }
 
 .footer-socmedia img {
