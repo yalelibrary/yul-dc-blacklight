@@ -73,6 +73,14 @@ DEFAULT MOBILE STYLING
   margin-right: 3px;
 }
 
+.footer-container a {
+  text-decoration: none;
+}
+
+.footer-container a:active, .footer-container a:focus, .footer-container a:hover {
+  text-decoration: underline;
+}
+
 @media screen and (min-width: $medium_device) {
   .footer-links > ul {
     display: flex;

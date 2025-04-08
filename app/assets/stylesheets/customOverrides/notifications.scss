@@ -1,0 +1,16 @@
+/********************************************************
+DEFAULT MOBILE STYLING
+********************************************************/
+
+#main-flashes .close {
+  float: right;
+}
+
+#main-flashes a {
+  text-decoration: none;
+}
+
+#main-flashes a:active, #main-flashes a:focus, #main-flashes a:hover {
+  text-decoration: underline;
+}
+

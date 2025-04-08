@@ -19,6 +19,14 @@ DEFAULT MOBILE STYLING
   padding-top: 10%;
 }
 
+.user-subheader-title a {
+  text-decoration: none;
+}
+
+.user-subheader-title a:hover, .user-subheader-title a:focus, .user-subheader-title a:active {
+  text-decoration: underline;
+}
+
 .user-subheader-options {
   font-family: $mallory_medium;
   color: $medium_grey;
