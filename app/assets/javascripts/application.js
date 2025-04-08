@@ -14,6 +14,7 @@
 //= require blacklight/blacklight
 //= require blacklight_date_range
 //= require download_original
+//= require notifications
 //= require show_more
 // For blacklight_range_limit built-in JS
 //= require blacklight_range_limit
