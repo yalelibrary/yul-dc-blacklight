@@ -12,20 +12,11 @@
 //= require twitter/typeahead
 //= require bootstrap
 //= require blacklight/blacklight
+//= require blacklight_date_range
 //= require download_original
 //= require show_more
-
-
-
-// For blacklight_range_limit built-in JS, if you don't want it you don't need
-// this:
+// For blacklight_range_limit built-in JS
 //= require blacklight_range_limit
-$('.blacklight-year_i').data('plot-config', {
-    selection: { color: '#C0FF83' },
-    colors: ['#ffffff'],
-    series: { lines: { fillColor: 'rgba(255,255,255, 0.5)' }},
-    grid: { color: '#aaaaaa', tickColor: '#aaaaaa', borderWidth: 0 }
-});
 
 /**
  * Setup button functionality.
