@@ -108,11 +108,13 @@ div.card {
   border-top: 1px solid $light_grey !important;
 }
 
-#facets a {
+#facets a, .facet-values a, .prev_next_links a {
   text-decoration: none;
 }
 
-#facets a:active, #facets a:focus, #facets a:hover {
+#facets a:active, #facets a:focus, #facets a:hover, 
+.facet-values a:active, .facet-values a:focus, .facet-values a:hover, 
+.prev_next_links a:active, .prev_next_links a:focus, .prev_next_links a:hover {
   text-decoration: underline;
 }
 
@@ -138,6 +140,15 @@ h2.facets-heading {
   margin-left: -5px;
   color: $light_blue;
   text-transform: capitalize;
+}
+
+
+.facet-pagination .prev_next_links, .facet-pagination .sort-options {
+  width: fit-content;
+}
+
+.facet-pagination .prev_next_links > * {
+  border: none;
 }
 
 @media screen and (min-width: $small_device) {
