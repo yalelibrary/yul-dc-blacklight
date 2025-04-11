@@ -104,12 +104,24 @@ div.card {
   margin-left: 10px;
 }
 
+#facets .range-limit-input-group input {
+  padding: 5px;
+}
+
+#facets .range-limit-input-group .submit {
+  border-radius: 0px;
+}
+
 #facets .facet-field-heading .btn {
   border-top: 1px solid $light_grey !important;
 }
 
 #facets a, .facet-values a, .prev_next_links a {
   text-decoration: none;
+}
+
+#facets .blacklight-year_isim .profile {
+  height: 100px;
 }
 
 #facets a:active, #facets a:focus, #facets a:hover, 
@@ -129,10 +141,6 @@ h2.facets-heading {
   position: absolute;
   right: 6px;
   z-index: 10;
-}
-
-#facets .range-limit-input-group input {
-  padding: 0 0.25px 0 0.25px;
 }
 
 .more_facets a {
