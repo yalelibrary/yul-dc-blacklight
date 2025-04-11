@@ -32,7 +32,7 @@ DEFAULT MOBILE STYLING
   background-color: $lighter_grey;
   margin-left: 0;
   overflow-wrap: break-word;
-  display: block;
+  align-items: center;
 }
 
 
@@ -43,7 +43,13 @@ DEFAULT MOBILE STYLING
   border-color: $lighter_grey;
   text-align: center;
   float: right;
-  margin-top: -35px;
+}
+
+#startOverButtonContainer {
+  width: fit-content;
+  display: block;
+  position: absolute;
+  right: 1%;
 }
 
 .constraints-group {
@@ -120,6 +126,10 @@ DEFAULT MOBILE STYLING
   .constraints-group{
     width: 62%;
   }
+
+  #startOverButtonContainer {
+    right: 6%;
+  }
 }
 
 @media screen and (min-width: $medium_device) {
@@ -132,10 +142,18 @@ DEFAULT MOBILE STYLING
   .constraints-group{
     width: 55%;
   }
+
+  #startOverButtonContainer {
+    right: 5%;
+  }
 }
 
 @media screen and (min-width: $xlarge_device) {
   .constraints-group{
     width: 62%;
+  }
+
+  #startOverButtonContainer {
+    right: 7%;
   }
 }
