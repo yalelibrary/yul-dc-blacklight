@@ -85,6 +85,14 @@ DEFAULT MOBILE STYLING
   padding-top: 10px;
 }
 
+.page-links-show a {
+  text-decoration: none;
+}
+
+.page-links-show a:active, .page-links-show a:focus, .page-links-show a:hover {
+  text-decoration: underline;
+}
+
 .page-items-show {
   font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
   font-size: 12px;

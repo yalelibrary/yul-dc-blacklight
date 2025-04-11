@@ -39,6 +39,14 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   position: relative;
 }
 
+.archival-context a {
+  text-decoration: none;
+}
+
+.archival-context a:active, .archival-context a:focus, .archival-context a:hover {
+  text-decoration: underline;
+}
+
 .archival-context-key {
   width: 75px;
   height: 20px;
