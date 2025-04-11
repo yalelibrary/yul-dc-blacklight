@@ -108,8 +108,20 @@ div.card {
   padding: 5px;
 }
 
-#facets .range-limit-input-group .submit {
-  border-radius: 0px;
+#facets .range-limit-input-group .submit, #range_year_isim_begin {
+  border-radius: 0;
+}
+
+#facets .blacklight-year_isim .profile {
+  height: 100px;
+}
+
+#blacklight-modal .range-limit-input-group {
+  width: 70%;
+}
+
+#blacklight-modal .range-limit-input-group .submit {
+  border-radius: 0;
 }
 
 #facets .facet-field-heading .btn {
@@ -118,10 +130,6 @@ div.card {
 
 #facets a, .facet-values a, .prev_next_links a {
   text-decoration: none;
-}
-
-#facets .blacklight-year_isim .profile {
-  height: 100px;
 }
 
 #facets a:active, #facets a:focus, #facets a:hover, 
