@@ -58,6 +58,7 @@ DEFAULT MOBILE STYLING
 
 .page-item.disabled .page-link {
   color: $medium_grey;
+  background-color: transparent;
 }
 
 .page-item:last-child .page-link {
@@ -76,12 +77,20 @@ DEFAULT MOBILE STYLING
 
 // add a right border to all page numbers except the last page double arrows and Next button
 .page-item:nth-child(n+3):not(:nth-last-child(1)):not(:nth-last-child(2)):not(:nth-last-child(3)) {
-  border-right: 1px solid $medium_grey;
+  border-right: 2px solid $medium_grey;
 }
 
 //single item page pagination
 .page-links-show {
   padding-top: 10px;
+}
+
+.page-links-show a {
+  text-decoration: none;
+}
+
+.page-links-show a:active, .page-links-show a:focus, .page-links-show a:hover {
+  text-decoration: underline;
 }
 
 .page-items-show {

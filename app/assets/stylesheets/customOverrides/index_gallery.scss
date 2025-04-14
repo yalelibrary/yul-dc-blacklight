@@ -31,8 +31,13 @@ DEFAULT MOBILE STYLING
   margin-top: 22px;
 }
 
-.document-title-heading > a {
+.document-title-heading a {
   color: $light_blue;
+  text-decoration: none;
+}
+
+.document-title-heading a:hover, a:focus, a:active {
+  text-decoration: underline;
 }
 
 .documents-gallery .thumbnail-container > a {
