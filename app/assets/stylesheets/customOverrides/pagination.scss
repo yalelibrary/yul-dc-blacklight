@@ -77,7 +77,12 @@ DEFAULT MOBILE STYLING
 
 // add a right border to all page numbers except the last page double arrows and Next button
 .page-item:nth-child(n+3):not(:nth-last-child(1)):not(:nth-last-child(2)):not(:nth-last-child(3)) {
-  border-right: 2px solid $medium_grey;
+  border-right: 1px solid $medium_grey;
+}
+
+// make sure bootstrap 5 styles do not hide pagination borders with negative gutter
+.page-item:not(:first-child) .page-link {
+  margin-left: 0;
 }
 
 //single item page pagination
