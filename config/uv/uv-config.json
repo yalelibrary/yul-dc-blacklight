@@ -119,6 +119,9 @@
             "options": {
                 "confinedImageSize": 1000,
                 "currentViewDisabledPercentage": 90,
+                "downloadCurrentViewEnabled": true,
+                "downloadWholeImageHighResEnabled": true,
+                "downloadWholeImageLowResEnabled": true,
                 "maxImageWidth": 5000,
                 "optionsExplanatoryTextEnabled": false,
                 "selectionEnabled": false
@@ -132,6 +135,7 @@
                 "editSettings": "Edit Settings",
                 "entireDocument": "Entire document ({0})",
                 "entireFileAsOriginal": "Entire file",
+                "individualPages": "",
                 "noneAvailable": "No download options are available.",
                 "pagingNote": "Please turn off Two Page View for additional options.",
                 "preview": "Preview",
@@ -252,7 +256,8 @@
                 "galleryButtonEnabled": true,
                 "imageSelectionBoxEnabled": false,
                 "pageModeEnabled": false,
-                "pagingToggleEnabled": true
+                "pagingToggleEnabled": true,
+                "centerOptionsEnabled": true
             },
             "content": {
                 "close": "Close",
@@ -282,7 +287,7 @@
                 "twoUp": "Two page view"
             }
         },
-        "seadragonCenterPanel": {
+        "openSeadragonCenterPanel": {
             "options": {
                 "animationTime": 0.15,
                 "autoHideControls": true,
