@@ -175,7 +175,31 @@ $(document).on('turbolinks:load', function() {
 });
 
 function renderBanner() {
-    fetch("https://banner.library.yale.edu/banner.json")
+    if (document.URL.indexOf('https://collections.library') !== -1) {
+        fetch("https://banner.library.yale.edu/banner.json")
+            .then(response => response.json())
+            .then(data => {
+                let allBanners = data.banners;
+                if ("global" in allBanners) {
+                    let banners = allBanners.global;
+                    if (banners.length > 0) {
+                        let banner = banners[0];
+                        let container = document.getElementById("banner");
+                        // Code to apply text and background color directly
+                        container.style.backgroundColor = banner.backgroundColor;
+                        container.style.color = banner.textColor;
+                        container.innerHTML = "<p>" + banner.message + "</p>";
+                        container.style.display = "block";
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                $("#banner").remove();
+            });
+    } else {
+        // Use test banner for all non prod environments
+        fetch("https://banner.library.yale.edu/test/banner.json")
         .then(response => response.json())
         .then(data => {
             let allBanners = data.banners;
@@ -196,4 +220,5 @@ function renderBanner() {
             console.error('Error:', error);
             $("#banner").remove();
         });
+    }
 }
