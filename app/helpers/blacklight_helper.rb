@@ -66,7 +66,7 @@ module BlacklightHelper
 
   def link_to_catalog_id(arg)
     # prevent duplicate display of QS link if bib id is present
-    return nil if arg[:document][arg[:field]] == "quicksearchId_ssi" && !arg[:document][:orbisBibId_ssi].nil?
+    return nil if arg[:document][arg[:field]] == "quicksearchId_ssi" && !arg[:document][:orbisBibId_ssi].nil? && !arg[:document][:mmsId_ssi].nil?
     # set value to param if object source is not alma
     catalog_id = arg[:document][arg[:field]] if arg[:document][:source_ssim].first != "alma"
     # use mmsId not bibId if object is from alma
