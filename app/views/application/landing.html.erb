@@ -93,28 +93,28 @@
           <div class='highlight-link'>Langston Hughes Papers, Beinecke Library</div>
           <% end %>
         </li>
-        <li><%= link_to File.join(root_path, "/catalog?f%5Bcollection_title_ssi%5D%5B%5D=Lindbergh+picture+collection+%28MS+325B%29&f%5Brepository_ssi%5D%5B%5D=Manuscripts+and+Archives"), id: 'lindbergh', class: 'btn float-start', alt: "Photograph of a plane flying over fields, with mountains in the background, inscribed “To our ambassador, Anne and Charles Lindbergh” in the upper left" do %>
-          <div class='highlight-link'>Lindbergh Picture Collection, Manuscripts and Archives</div>
+        <li><%= link_to File.join(root_path, "/catalog?all_fields_advanced=&callNumber_tesim=%22MS+1981%22+OR+%22MS+2004%22&child_oids_ssim=&creator_tesim=&date_fields=&digitization_note_tesi=&fulltext_tsim_advanced=&genre_fields=&oid_ssi=&op=AND&search_field=advanced&sort=title_ssim+asc%2C+oid_ssi+desc%2C+archivalSort_ssi+asc&subject_fields=&title_tesim="), id: 'kissinger', class: 'btn float-start', alt: "Photograph of a plane flying over fields, with mountains in the background, inscribed “To our ambassador, Anne and Charles Lindbergh” in the upper left" do %>
+          <div class='highlight-link'>Henry A. Kissinger papers, Parts II & III, Manuscripts and Archives</div>
           <% end %>
         </li>
-        <li><%= link_to File.join(root_path, "/catalog?fulltext_search=1&q=%22China+Records+Project+Miscellaneous+Personal+Papers+Collection%22&search_field=all_fields&sort=creator_ssim+asc%2C+title_ssim+asc%2C+archivalSort_ssi+asc"), id: 'china-papers', class: 'btn float-start', alt: "Missionary children playing with a goat-drawn cart in China, with two Chinese men in the background, 1895" do %>
-          <div class='highlight-link'>China Records Project Miscellaneous Personal Papers Collection, Divinity Library</div>
+        <li><%= link_to File.join(root_path, "/catalog?f%5BcallNumber_ssim%5D%5B%5D=RG+221"), id: 'ephemera', class: 'btn float-start', alt: "Missionary children playing with a goat-drawn cart in China, with two Chinese men in the background, 1895" do %>
+          <div class='highlight-link'>Missionary Ephemera Collection, Divinity Library</div>
           <% end %>
         </li>
-        <li><%= link_to File.join(root_path, "/catalog?f%5Bproject_identifier_tesi%5D%5B%5D=71"), id: 'litchfield-law', class: 'btn float-start', alt: "Lectures on Law by Hon. Tapping Reeve and James Gould Esq., Litchfield, 1812-1813" do %>
-          <div class='highlight-link'>Litchfield Law School, Student Notebooks, Law Library</div>
+        <li><%= link_to File.join(root_path, "/catalog?f%5Bproject_identifier_tesi%5D%5B0%5D=legalpostcard"), id: 'postcard', class: 'btn float-start', alt: "Lectures on Law by Hon. Tapping Reeve and James Gould Esq., Litchfield, 1812-1813" do %>
+          <div class='highlight-link'>Legal Postcard Collection, Law Library</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'repository', q: '"Lewis Walpole Library"'), id: 'weather', class: 'btn float-start', alt: "Satirical 19th century print of a man sitting on the pavement, having fallen backwards, with his wig falling off and coins spilling from his pockets; four men observing prints posted in a shop window are behind him.") do %>
-          <div class='highlight-link'>Very slippy-weather, Satirical Print, Lewis Walpole Library</div>
+        <li><%= link_to File.join(root_path, "/catalog/16945082"), id: 'hogarth', class: 'btn float-start', alt: "Satirical 19th century print of a man sitting on the pavement, having fallen backwards, with his wig falling off and coins spilling from his pockets; four men observing prints posted in a shop window are behind him." do %>
+          <div class='highlight-link'>Hogarth Painting the Comic Muse, Lewis Walpole Library</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'repository', q: '"Medical Historical Library, Cushing/Whitney Medical Library"'), id: 'muscles', class: 'btn', alt: "Black and white seventeenth century print of the muscles in the human body in perspective, with three views of an individual and a smaller skeleton") do %>
-          <div class='highlight-link'>Plate of the Muscles, Graphic, Medical Historical Library</div>
+        <li><%= link_to File.join(root_path, "/catalog/16986907?child_oid=16987505"), id: 'medical', class: 'btn', alt: "Black and white seventeenth century print of the muscles in the human body in perspective, with three views of an individual and a smaller skeleton" do %>
+          <div class='highlight-link'>Fasciculus Medicinae, with Consilium Pro Peste Evitanda, Medical Historical Library</div>
           <% end %>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'repository', q: '"Gilmore Music Library"'), id: 'wickhambrook', class: 'btn', alt: "Handwritten music noted in tablature from the Wickhambrook lute manuscript, with “finis si vou voules” written at the end") do %>
-          <div class='highlight-link'>Wickhambrook Lute Manuscript, Music Library</div>
+        <li><%= link_to File.join(root_path, "/catalog/32307332?child_oid=32307367"), id: 'music', class: 'btn', alt: "Handwritten music noted in tablature from the Wickhambrook lute manuscript, with “finis si vou voules” written at the end" do %>
+          <div class='highlight-link'>Divertimenti a Mandolino, Music Library</div>
           <% end %>
         </li>
       </ul>
