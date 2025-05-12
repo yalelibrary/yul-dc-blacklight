@@ -70,6 +70,10 @@ module BlacklightHelper
     # prevent duplicate display of link if both bib id and mms id are present
     return nil if arg[:field] == "orbisBibId_ssi" && !arg[:document][:mmsId_ssi].nil?
 
+    #     return nil if arg[:field] == "quicksearchId_ssi" && arg[:document][:orbisBibId_ssi].present? && arg[:document][:mmsId_ssi].present?
+    # # prevent duplicate display of link if both bib id and mms id are present
+    # return nil if arg[:field] == "orbisBibId_ssi" && arg[:document][:mmsId_ssi].present?
+
     catalog_id = arg[:document][arg[:field]]
     link = "https://search.library.yale.edu/catalog/#{catalog_id}"
 
