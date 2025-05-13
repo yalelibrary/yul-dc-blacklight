@@ -337,10 +337,11 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       end
       it 'displays the Orbis Bib ID in results' do
         expect(document).to have_content("1234567")
+        expect(document).to have_link("1234567", href: "https://search.library.yale.edu/catalog/1234567").once
       end
       it 'displays the Quicksearch ID in results' do
         expect(document).to have_content("b1234567")
-        expect(document).to have_link("b1234567", href: "https://search.library.yale.edu/catalog/b1234567")
+        expect(document).to have_link("b1234567", href: "https://search.library.yale.edu/catalog/b1234567").once
       end
       it 'displays the Edition in results' do
         expect(document).to have_content("this is the edition")
@@ -413,7 +414,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       end
       it 'contains a link on the MMS ID (not Bib) to the catalog record' do
         expect(page).to have_content('Catalog Record')
-        expect(page).to have_link('777777777777', href: 'https://search.library.yale.edu/catalog/777777777777')
+        expect(page).to have_link('777777777777', href: 'https://search.library.yale.edu/catalog/777777777777').once
         expect(page).not_to have_link('12345677', href: 'https://search.library.yale.edu/catalog/12345677')
       end
     end
