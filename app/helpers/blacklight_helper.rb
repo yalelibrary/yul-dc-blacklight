@@ -64,27 +64,16 @@ module BlacklightHelper
     safe_join(out)
   end
 
-  def link_to_orbis_bib_id(arg)
-    return nil if arg[:document][:source_ssim].first == "sierra"
-    bib_id = arg[:document][arg[:field]]
-    link = "http://hdl.handle.net/10079/bibid/#{bib_id}"
+  def link_to_catalog_id(arg)
+    # prevent duplicate display of link if bib id or mms id is present
+    return nil if arg[:field] == "quicksearchId_ssi" && arg[:document][:orbisBibId_ssi].present? && arg[:document][:mmsId_ssi].present?
+    # prevent duplicate display of link if both bib id and mms id are present
+    return nil if arg[:field] == "orbisBibId_ssi" && arg[:document][:mmsId_ssi].present?
 
-    link_to(bib_id, link)
-  end
+    catalog_id = arg[:document][arg[:field]]
+    link = "https://search.library.yale.edu/catalog/#{catalog_id}"
 
-  def link_to_morris_bib_id(arg)
-    return nil if arg[:document][:source_ssim].first != "sierra"
-    bib_id = arg[:document][arg[:field]]
-    link = "https://morris.law.yale.edu/record=b#{bib_id}"
-
-    link_to(bib_id, link)
-  end
-
-  def link_to_quicksearch_id(arg)
-    qs_id = arg[:document][arg[:field]]
-    link = "https://search.library.yale.edu/catalog/#{qs_id}"
-
-    link_to(qs_id, link)
+    link_to(catalog_id, link)
   end
 
   def join_with_br(arg)

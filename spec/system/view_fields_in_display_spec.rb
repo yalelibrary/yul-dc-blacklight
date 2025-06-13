@@ -4,12 +4,13 @@ require 'rails_helper'
 RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   before do
     solr = Blacklight.default_index.connection
-    solr.add([test_record,
+    solr.add([test_alma_record,
+              test_aspace_record,
+              test_sierra_record,
               same_call_record,
               diff_call_record,
               no_collection_record])
     solr.commit
-    visit '/catalog/111'
   end
 
   let(:same_call_record) do
@@ -38,7 +39,62 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     }
   end
 
-  let(:test_record) do
+  let(:test_alma_record) do
+    {
+      id: '777',
+      title_tesim: ["Inclusion Bull Dogs", "this is the second title"],
+      creator_ssim: ['Frederick', 'Martin', 'Eric', 'Maggie'],
+      collectionCreators_ssim: ['Martin', 'Maggie'],
+      format: 'three dimensional object',
+      url_suppl_ssim: 'http://0.0.0.0:3000/catalog/777',
+      language_ssim: ['en', 'eng', 'zz'],
+      description_tesim: ["<a href='https://news.yale.edu/2021/03/18/meet-handsome-dan-xix' class='dontallow'>Handsome Dan</a> is a bulldog who serves as Yale Univeristy's mascot.", "here is more"],
+      visibility_ssi: 'Public',
+      digitization_note_tesi: "Digitization note",
+      digitization_funding_source_tesi: "Digitization Funding Source",
+      abstract_tesim: ["this is an abstract", "abstract2"],
+      alternativeTitle_tesim: ["this is an alternative title", "this is the second alternative title"],
+      genre_ssim: ["this is the genre", "this is the second genre"],
+      subjectGeographic_ssim: ['this is the geo subject', 'these are the geo subjects'],
+      resourceType_ssim: "this is the resource type",
+      subjectName_ssim: ['this is the subject name', 'these are the subject names'],
+      subjectTopic_ssim: ['this is the subject topic', 'these are the subject topics'],
+      extentOfDigitization_ssim: 'this is the extent of digitization',
+      rights_ssim: "these are <a href='test' class='remove_me'>the</a> rights.\nThese are additional rights.",
+      creationPlace_ssim: "this is the publication place",
+      sourceCreated_tesim: "this is the source created",
+      publisher_ssim: "this is the publisher",
+      copyrightDate_ssim: "this is the copyright date",
+      source_ssim: "alma",
+      repository_ssi: "this is the repository name",
+      recordType_ssi: "this is the record type",
+      sourceTitle_tesim: "this is the source title",
+      sourceCreator_tesim: "this is the source creator",
+      sourceDate_tesim: "this is the source date",
+      sourceNote_tesim: "this is the source note",
+      subjectHeading_ssim: ["Dog > Horse", "Fish"],
+      subjectHeadingFacet_ssim: ["Dog", "Dog > Horse", "Fish"],
+      preferredCitation_tesim: ["these are the references", "this is the second reference"],
+      date_ssim: "this is the date",
+      oid_ssi: '23456787',
+      callNumber_ssim: 'this is the call number',
+      containerGrouping_tesim: 'this is the container information',
+      orbisBibId_ssi: '12345677',
+      quicksearchId_ssi: 'b12345677',
+      mmsId_ssi: '777777777777',
+      findingAid_ssim: 'this is the finding aid',
+      collection_title_ssi: 'this is the collection title',
+      edition_ssim: 'this is the edition',
+      material_tesim: "this is the material, using ssim",
+      scale_tesim: "this is the scale, using ssim",
+      digital_ssim: "this is the digital, using ssim",
+      coordinateDisplay_ssim: "this is the coordinates, using ssim",
+      projection_tesim: "this is the projection, using ssim",
+      extent_ssim: ["this is the extent, using ssim", "here is another extent"],
+      resourceVersionOnline_ssim: ["this is the online resource|http://this/is/the/link"]
+    }
+  end
+  let(:test_aspace_record) do
     {
       id: '111',
       title_tesim: ["Diversity Bull Dogs", "this is the second title"],
@@ -99,199 +155,282 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     }
   end
 
-  context 'Within main document' do
-    subject(:document) { find(:css, '#document') }
-    it 'displays Title in results' do
-      expect(page.html).to match("Diversity Bull Dogs<br/>")
-      expect(document).to have_content("this is the second title")
-    end
-    it 'displays format in results' do
-      expect(document).to have_content("three dimensional object")
-    end
-    it 'displays extent in results' do
-      expect(document).to have_content("this is the extent, using ssim")
-      # extent should be separated by new line
-      expect(page).to have_text("this is the extent, using ssimhere is another extent")
-    end
-    it 'displays material in results' do
-      expect(document).to have_content("this is the material, using ssim")
-    end
-    it 'displays scale in results' do
-      expect(document).to have_content("this is the scale, using ssim")
-    end
-    it 'displays digital in results' do
-      expect(document).to have_content("this is the digital, using ssim")
-    end
-    it 'displays coordinates in results' do
-      expect(document).to have_content("this is the coordinates, using ssim")
-    end
-    it 'displays projection in results' do
-      expect(document).to have_content("this is the projection, using ssim")
-    end
-    it 'displays language in results' do
-      expect(document).to have_content("English (en)")
-      expect(document).to have_content("English (eng)")
-      expect(document).to have_content("zz")
-    end
-    it 'displays description in results' do
-      expect(document).to have_content("Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.")
-      expect(page.html).to include('<a href="https://news.yale.edu/2021/03/18/meet-handsome-dan-xix">Handsome Dan</a> is a bulldog who serves as Yale Univeristy\'s mascot.<br/>here is more')
-    end
-    it 'displays the Abstract in results' do
-      expect(page.html).to match("<p>this is an abstract</p><p>abstract2</p>")
-    end
-    it 'displays the Alternative Title in results' do
-      expect(page.html).to match("this is an alternative title<br/>")
-      expect(document).to have_content("this is the second alternative title")
-    end
-    it 'displays the Genre in results' do
-      expect(document).to have_content("this is the genre")
-    end
-    it 'displays the Subject (Geographic) in results' do
-      expect(document).to have_content("this is the geo subject")
-      expect(document).to have_content("these are the geo subjects")
-    end
-    it 'displays the Subject (Topic) in results' do
-      expect(document).to have_content("this is the subject topic")
-      expect(document).to have_content("these are the subject topics")
-    end
-    it 'displays the Resource Type in results' do
-      expect(document).to have_content("this is the resource type")
-    end
-    it 'displays the Subject (Name) in results' do
-      expect(document).to have_content("this is the subject name")
-      expect(document).to have_content("these are the subject names")
-    end
-    it 'displays the Extent of Digitization in results' do
-      expect(document).to have_content("this is the extent of digitization")
-    end
-    it 'displays the digitization note' do
-      expect(document).to have_content("Digitization note")
-    end
-    it 'displays the digitization funding source' do
-      expect(document).to have_content("Digitization Funding Source")
-    end
-    it 'displays the Access in results' do
-      expect(document).to have_content("Public")
-    end
-    it 'displays the Rights in results with link intact, but class removed' do
-      expect(page.html).to include('these are <a href="test">the</a> rights.<br/>These are additional rights.')
-    end
-    it 'displays the Publication Place in results' do
-      expect(document).to have_content("this is the publication place")
-    end
-    it 'displays the Source Created in results' do
-      expect(document).to have_content("this is the source created")
-    end
-    it 'displays the Publisher in results' do
-      expect(document).to have_content("this is the publisher")
-    end
-    it 'displays the Copyright Date in results' do
-      expect(document).to have_content("this is the copyright date")
-    end
-    it 'displays the Source in results' do
-      expect(document).to have_content("this is the source")
-    end
-    it 'does not display the Record Type in results' do
-      expect(document).not_to have_content("this is the record type")
-    end
-    it 'displays the Source Title in results' do
-      expect(document).to have_content("this is the source title")
-    end
-    it 'displays the Source Date in results' do
-      expect(document).to have_content("this is the source date")
-    end
-    it 'displays the Source Creator in results' do
-      expect(document).to have_content("this is the source creator")
-    end
-    it 'displays the Source Note in results' do
-      expect(document).to have_content("this is the source note")
-    end
-    it 'displays the References in results' do
-      expect(page.html).to match("these are the references<br/>")
-      expect(document).to have_content("this is the second reference")
-    end
-    it 'displays the Date in results' do
-      expect(document).to have_content("this is the date")
-    end
-    it 'displays the OID in results' do
-      expect(document).to have_content("2345678")
-    end
-    it 'displays the Container/Volume in results' do
-      expect(document).to have_content("this is the container information")
-    end
-    it 'displays the Orbis Bib ID in results' do
-      expect(document).to have_content("1234567")
-    end
-    it 'displays the Quicksearch ID in results' do
-      expect(document).to have_content("b1234567")
-      expect(document).to have_link("b1234567", href: "https://search.library.yale.edu/catalog/b1234567")
-    end
-    it 'displays the Edition in results' do
-      expect(document).to have_content("this is the edition")
-    end
-    it 'displays the repository name in results' do
-      expect(document).to have_content("this is the repository name")
-    end
-    it 'displays the item location header correctly' do
-      expect(document).to have_content("Item Location")
-    end
-    it 'displays the resource version online' do
-      expect(page).to have_link("this is the online resource", href: 'http://this/is/the/link')
-    end
-    it 'displays the call number in results as link' do
-      expect(page).to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number')
-      expect(page).not_to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number+but+different')
-    end
-    it 'contains a link on genre to its facet' do
-      expect(page).to have_link('this is the genre', href: '/catalog?f%5Bgenre_ssim%5D%5B%5D=this is the genre')
-      expect(page).to have_link('this is the second genre', href: '/catalog?f%5Bgenre_ssim%5D%5B%5D=this is the second genre')
+  let(:test_sierra_record) do
+    {
+      id: '555',
+      title_tesim: ["Equity Bull Dogs", "this is the second title"],
+      creator_ssim: ['Frederick', 'Martin', 'Eric', 'Maggie'],
+      collectionCreators_ssim: ['Martin', 'Maggie'],
+      format: 'three dimensional object',
+      url_suppl_ssim: 'http://0.0.0.0:3000/catalog/555',
+      language_ssim: ['en', 'eng', 'zz'],
+      description_tesim: ["<a href='https://news.yale.edu/2021/03/18/meet-handsome-dan-xix' class='dontallow'>Handsome Dan</a> is a bulldog who serves as Yale Univeristy's mascot.", "here is more"],
+      visibility_ssi: 'Public',
+      digitization_note_tesi: "Digitization note",
+      digitization_funding_source_tesi: "Digitization Funding Source",
+      abstract_tesim: ["this is an abstract", "abstract2"],
+      alternativeTitle_tesim: ["this is an alternative title", "this is the second alternative title"],
+      genre_ssim: ["this is the genre", "this is the second genre"],
+      subjectGeographic_ssim: ['this is the geo subject', 'these are the geo subjects'],
+      resourceType_ssim: "this is the resource type",
+      subjectName_ssim: ['this is the subject name', 'these are the subject names'],
+      subjectTopic_ssim: ['this is the subject topic', 'these are the subject topics'],
+      extentOfDigitization_ssim: 'this is the extent of digitization',
+      rights_ssim: "these are <a href='test' class='remove_me'>the</a> rights.\nThese are additional rights.",
+      creationPlace_ssim: "this is the publication place",
+      sourceCreated_tesim: "this is the source created",
+      publisher_ssim: "this is the publisher",
+      copyrightDate_ssim: "this is the copyright date",
+      source_ssim: "sierra",
+      repository_ssi: "this is the repository name",
+      recordType_ssi: "this is the record type",
+      sourceTitle_tesim: "this is the source title",
+      sourceCreator_tesim: "this is the source creator",
+      sourceDate_tesim: "this is the source date",
+      sourceNote_tesim: "this is the source note",
+      subjectHeading_ssim: ["Dog > Horse", "Fish"],
+      subjectHeadingFacet_ssim: ["Dog", "Dog > Horse", "Fish"],
+      preferredCitation_tesim: ["these are the references", "this is the second reference"],
+      date_ssim: "this is the date",
+      oid_ssi: '23456785',
+      callNumber_ssim: 'this is the call number',
+      containerGrouping_tesim: 'this is the container information',
+      orbisBibId_ssi: '12345675',
+      quicksearchId_ssi: 'b12345675',
+      findingAid_ssim: 'this is the finding aid',
+      collection_title_ssi: 'this is the collection title',
+      edition_ssim: 'this is the edition',
+      material_tesim: "this is the material, using ssim",
+      scale_tesim: "this is the scale, using ssim",
+      digital_ssim: "this is the digital, using ssim",
+      coordinateDisplay_ssim: "this is the coordinates, using ssim",
+      projection_tesim: "this is the projection, using ssim",
+      extent_ssim: ["this is the extent, using ssim", "here is another extent"],
+      resourceVersionOnline_ssim: ["this is the online resource|http://this/is/the/link"]
+    }
+  end
 
-      # ensures that genre is separated with new line rather than concatenated with commas and 'and'
-      expect(page).to have_text("this is the genrethis is the second genre")
+  context 'Within main document' do
+    context 'with aspace record' do
+      before do
+        visit '/catalog/111'
+      end
+      subject(:document) { find(:css, '#document') }
+      it 'displays Title in results' do
+        expect(page.html).to match("Diversity Bull Dogs<br/>")
+        expect(document).to have_content("this is the second title")
+      end
+      it 'displays format in results' do
+        expect(document).to have_content("three dimensional object")
+      end
+      it 'displays extent in results' do
+        expect(document).to have_content("this is the extent, using ssim")
+        # extent should be separated by new line
+        expect(page).to have_text("this is the extent, using ssimhere is another extent")
+      end
+      it 'displays material in results' do
+        expect(document).to have_content("this is the material, using ssim")
+      end
+      it 'displays scale in results' do
+        expect(document).to have_content("this is the scale, using ssim")
+      end
+      it 'displays digital in results' do
+        expect(document).to have_content("this is the digital, using ssim")
+      end
+      it 'displays coordinates in results' do
+        expect(document).to have_content("this is the coordinates, using ssim")
+      end
+      it 'displays projection in results' do
+        expect(document).to have_content("this is the projection, using ssim")
+      end
+      it 'displays language in results' do
+        expect(document).to have_content("English (en)")
+        expect(document).to have_content("English (eng)")
+        expect(document).to have_content("zz")
+      end
+      it 'displays description in results' do
+        expect(document).to have_content("Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.")
+        expect(page.html).to include('<a href="https://news.yale.edu/2021/03/18/meet-handsome-dan-xix">Handsome Dan</a> is a bulldog who serves as Yale Univeristy\'s mascot.<br/>here is more')
+      end
+      it 'displays the Abstract in results' do
+        expect(page.html).to match("<p>this is an abstract</p><p>abstract2</p>")
+      end
+      it 'displays the Alternative Title in results' do
+        expect(page.html).to match("this is an alternative title<br/>")
+        expect(document).to have_content("this is the second alternative title")
+      end
+      it 'displays the Genre in results' do
+        expect(document).to have_content("this is the genre")
+      end
+      it 'displays the Subject (Geographic) in results' do
+        expect(document).to have_content("this is the geo subject")
+        expect(document).to have_content("these are the geo subjects")
+      end
+      it 'displays the Subject (Topic) in results' do
+        expect(document).to have_content("this is the subject topic")
+        expect(document).to have_content("these are the subject topics")
+      end
+      it 'displays the Resource Type in results' do
+        expect(document).to have_content("this is the resource type")
+      end
+      it 'displays the Subject (Name) in results' do
+        expect(document).to have_content("this is the subject name")
+        expect(document).to have_content("these are the subject names")
+      end
+      it 'displays the Extent of Digitization in results' do
+        expect(document).to have_content("this is the extent of digitization")
+      end
+      it 'displays the digitization note' do
+        expect(document).to have_content("Digitization note")
+      end
+      it 'displays the digitization funding source' do
+        expect(document).to have_content("Digitization Funding Source")
+      end
+      it 'displays the Access in results' do
+        expect(document).to have_content("Public")
+      end
+      it 'displays the Rights in results with link intact, but class removed' do
+        expect(page.html).to include('these are <a href="test">the</a> rights.<br/>These are additional rights.')
+      end
+      it 'displays the Publication Place in results' do
+        expect(document).to have_content("this is the publication place")
+      end
+      it 'displays the Source Created in results' do
+        expect(document).to have_content("this is the source created")
+      end
+      it 'displays the Publisher in results' do
+        expect(document).to have_content("this is the publisher")
+      end
+      it 'displays the Copyright Date in results' do
+        expect(document).to have_content("this is the copyright date")
+      end
+      it 'displays the Source in results' do
+        expect(document).to have_content("this is the source")
+      end
+      it 'does not display the Record Type in results' do
+        expect(document).not_to have_content("this is the record type")
+      end
+      it 'displays the Source Title in results' do
+        expect(document).to have_content("this is the source title")
+      end
+      it 'displays the Source Date in results' do
+        expect(document).to have_content("this is the source date")
+      end
+      it 'displays the Source Creator in results' do
+        expect(document).to have_content("this is the source creator")
+      end
+      it 'displays the Source Note in results' do
+        expect(document).to have_content("this is the source note")
+      end
+      it 'displays the References in results' do
+        expect(page.html).to match("these are the references<br/>")
+        expect(document).to have_content("this is the second reference")
+      end
+      it 'displays the Date in results' do
+        expect(document).to have_content("this is the date")
+      end
+      it 'displays the OID in results' do
+        expect(document).to have_content("2345678")
+      end
+      it 'displays the Container/Volume in results' do
+        expect(document).to have_content("this is the container information")
+      end
+      it 'displays the Orbis Bib ID in results' do
+        expect(document).to have_content("1234567")
+        expect(document).to have_link("1234567", href: "https://search.library.yale.edu/catalog/1234567").once
+      end
+      it 'displays the Quicksearch ID in results' do
+        expect(document).to have_content("b1234567")
+        expect(document).to have_link("b1234567", href: "https://search.library.yale.edu/catalog/b1234567").once
+      end
+      it 'displays the Edition in results' do
+        expect(document).to have_content("this is the edition")
+      end
+      it 'displays the repository name in results' do
+        expect(document).to have_content("this is the repository name")
+      end
+      it 'displays the item location header correctly' do
+        expect(document).to have_content("Item Location")
+      end
+      it 'displays the resource version online' do
+        expect(page).to have_link("this is the online resource", href: 'http://this/is/the/link')
+      end
+      it 'displays the call number in results as link' do
+        expect(page).to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number')
+        expect(page).not_to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number+but+different')
+      end
+      it 'contains a link on genre to its facet' do
+        expect(page).to have_link('this is the genre', href: '/catalog?f%5Bgenre_ssim%5D%5B%5D=this is the genre')
+        expect(page).to have_link('this is the second genre', href: '/catalog?f%5Bgenre_ssim%5D%5B%5D=this is the second genre')
+
+        # ensures that genre is separated with new line rather than concatenated with commas and 'and'
+        expect(page).to have_text("this is the genrethis is the second genre")
+      end
+      it 'contains a link on format to its facet' do
+        expect(page).to have_link('three dimensional object', href: '/catalog?f%5Bformat%5D%5B%5D=three+dimensional+object')
+      end
+      it 'contains a link on resource type to its facet' do
+        expect(page).to have_link('this is the resource type', href: '/catalog?f%5BresourceType_ssim%5D%5B%5D=this+is+the+resource+type')
+      end
+      it 'contains a link on language to its facet' do
+        expect(page).to have_link('English (en)', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=English (en)')
+        expect(page).to have_link('English (eng)', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=English (eng)')
+        expect(page).to have_link('zz', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=zz')
+      end
+      it 'contains a link on the Orbis Bib ID to the catalog record' do
+        expect(page).to have_link('1234567', href: 'https://search.library.yale.edu/catalog/1234567')
+      end
+      it 'contains a link for the Creator field to the facet and displays' do
+        expect(page).to have_link('Frederick', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Frederick')
+        expect(page).to have_link('Eric', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Eric')
+        expect(page).to have_link('Martin', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Martin')
+        expect(page).to have_link('Maggie', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Maggie')
+      end
+      it 'contains a link for the From Collection Creator field to the facet and displays' do
+        expect(page).to have_content("From the Collection: Maggie")
+        expect(page).to have_content("From the Collection: Martin")
+        expect(page).not_to have_content("From the Collection: Frederick")
+        expect(page).not_to have_content("From the Collection: Eric")
+      end
+      it 'contains a link on the more info to the more info record' do
+        expect(page).to have_link('http://0.0.0.0:3000/catalog/111', href: 'http://0.0.0.0:3000/catalog/111')
+      end
+      it 'contains a link on subject (topic) to its facet' do
+        expect(page).to have_link('this is the subject topic', href: '/catalog?f%5BsubjectTopic_ssim%5D%5B%5D=this is the subject topic')
+        expect(page).to have_link('these are the subject topics', href: '/catalog?f%5BsubjectTopic_ssim%5D%5B%5D=these are the subject topics')
+      end
+      it 'contains a link on subject (name) to its facet' do
+        expect(page).to have_link('this is the subject name', href: '/catalog?f%5BsubjectName_ssim%5D%5B%5D=this is the subject name')
+        expect(page).to have_link('these are the subject names', href: '/catalog?f%5BsubjectName_ssim%5D%5B%5D=these are the subject names')
+      end
+      it 'contains a link on subject (geographic) to its facet' do
+        expect(page).to have_link('this is the geo subject', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=this is the geo subject')
+        expect(page).to have_link('these are the geo subjects', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=these are the geo subjects')
+      end
     end
-    it 'contains a link on format to its facet' do
-      expect(page).to have_link('three dimensional object', href: '/catalog?f%5Bformat%5D%5B%5D=three+dimensional+object')
+    context 'with alma record' do
+      before do
+        visit '/catalog/777'
+      end
+      it 'contains a link on the MMS ID (not Bib) to the catalog record' do
+        expect(page).to have_content('Catalog Record')
+        expect(page).to have_link('777777777777', href: 'https://search.library.yale.edu/catalog/777777777777').once
+        expect(page).not_to have_link('12345677', href: 'https://search.library.yale.edu/catalog/12345677')
+      end
     end
-    it 'contains a link on resource type to its facet' do
-      expect(page).to have_link('this is the resource type', href: '/catalog?f%5BresourceType_ssim%5D%5B%5D=this+is+the+resource+type')
-    end
-    it 'contains a link on language to its facet' do
-      expect(page).to have_link('English (en)', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=English (en)')
-      expect(page).to have_link('English (eng)', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=English (eng)')
-      expect(page).to have_link('zz', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=zz')
-    end
-    it 'contains a link on the Orbis Bib ID to the Orbis catalog record' do
-      expect(page).to have_link('1234567', href: 'http://hdl.handle.net/10079/bibid/1234567')
-    end
-    it 'contains a link for the Creator field to the facet and displays' do
-      expect(page).to have_link('Frederick', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Frederick')
-      expect(page).to have_link('Eric', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Eric')
-      expect(page).to have_link('Martin', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Martin')
-      expect(page).to have_link('Maggie', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Maggie')
-    end
-    it 'contains a link for the From Collection Creator field to the facet and displays' do
-      expect(page).to have_content("From the Collection: Maggie")
-      expect(page).to have_content("From the Collection: Martin")
-      expect(page).not_to have_content("From the Collection: Frederick")
-      expect(page).not_to have_content("From the Collection: Eric")
-    end
-    it 'contains a link on the more info to the more info record' do
-      expect(page).to have_link('http://0.0.0.0:3000/catalog/111', href: 'http://0.0.0.0:3000/catalog/111')
-    end
-    it 'contains a link on subject (topic) to its facet' do
-      expect(page).to have_link('this is the subject topic', href: '/catalog?f%5BsubjectTopic_ssim%5D%5B%5D=this is the subject topic')
-      expect(page).to have_link('these are the subject topics', href: '/catalog?f%5BsubjectTopic_ssim%5D%5B%5D=these are the subject topics')
-    end
-    it 'contains a link on subject (name) to its facet' do
-      expect(page).to have_link('this is the subject name', href: '/catalog?f%5BsubjectName_ssim%5D%5B%5D=this is the subject name')
-      expect(page).to have_link('these are the subject names', href: '/catalog?f%5BsubjectName_ssim%5D%5B%5D=these are the subject names')
-    end
-    it 'contains a link on subject (geographic) to its facet' do
-      expect(page).to have_link('this is the geo subject', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=this is the geo subject')
-      expect(page).to have_link('these are the geo subjects', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=these are the geo subjects')
+    context 'with sierra record' do
+      before do
+        visit '/catalog/555'
+      end
+      it 'contains a link on the Bib ID to the catalog record' do
+        expect(page).to have_content('Catalog Record')
+        expect(page).to have_link('12345675', href: 'https://search.library.yale.edu/catalog/12345675')
+      end
     end
     context 'ASpace hierarchy graphical display' do
+      before do
+        visit '/catalog/111'
+      end
       around do |example|
         original_value = ENV["ARCHIVES_SPACE_BASE_URL"]
         ENV["ARCHIVES_SPACE_BASE_URL"] = "http://testaspace.base.url/"
@@ -370,6 +509,9 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       end
     end
     context 'ASpace hierarchy breadcrumb' do
+      before do
+        visit '/catalog/111'
+      end
       it 'has links for each item' do
         within '.archival-context' do
           expect(page).to have_link "first"
@@ -404,6 +546,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
 
     it 'contains a link to Finding Aid' do
+      visit '/catalog/111'
       finding_aid_link = page.find("a[href = 'this is the finding aid']")
 
       expect(finding_aid_link).to be_truthy
@@ -412,6 +555,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
 
     it 'contains subject heading links' do
+      visit '/catalog/111'
       subject_heading_link = page.find("a[title = 'Dog > Horse']")
       expect(subject_heading_link).to be_truthy
       expect(subject_heading_link).to have_content("Horse")
@@ -422,6 +566,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     end
   end
   it 'has expected css' do
+    visit '/catalog/111'
     expect(page).to have_css '.card'
     expect(page).to have_css '.iiif-logo'
     expect(page).to have_css '.list-group'
