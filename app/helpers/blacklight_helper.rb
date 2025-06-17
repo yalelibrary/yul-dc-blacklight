@@ -51,14 +51,14 @@ module BlacklightHelper
     end.join(', ')
   end
 
-  def set_max_abstract_characters(args)
+  def display_max_abstract_characters(args)
     highlights = args[:document].highlight_field('abstract_tesim')
     return highlights.first if highlights.present?
 
     args[:document][:abstract_tesim].first.length > 250 ? args[:document][:abstract_tesim].first[0..250].concat("...") : args[:document][:abstract_tesim].first
   end
 
-  def set_max_description_characters(args)
+  def display_max_description_characters(args)
     highlights = args[:document].highlight_field('description_tesim')
     return highlights.first if highlights.present?
 
