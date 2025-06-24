@@ -629,6 +629,7 @@ class CatalogController < ApplicationController
   # rubocop:disable Metrics/PerceivedComplexity
   def show
     super
+    @show_sensitive_overlay = true if @document["sensitive_materials_ssi"] == "Yes"
     @search_params = session[:search_params]
     @permission_set_terms = retrieve_permission_set_terms if @document["visibility_ssi"] == "Open with Permission"
     if @document["visibility_ssi"] == "Redirect" && @document["redirect_to_tesi"].present? && !request.original_url.include?("oai_dc_xml")

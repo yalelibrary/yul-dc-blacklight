@@ -6,7 +6,18 @@
     order_param="&cv=#{@document[:child_oids_ssim].index(child_oid)|| 0}"
   end
 %>
-<div class='uv-container'>
+<div class='uv-container' style="position: relative;">
+  <% if @show_sensitive_overlay %>
+    <div id="sensitive-overlay">
+      <h3 class= "overlay-first">This object may contain one or more of the following:</h3>
+      <h3 class= "overlay-middle">* Images and/or language that is racist, sexist, euphemistic, oppressive, outdated, and/or harmful;</h3>
+      <h3 class= "overlay-middle">* Graphic depictions of blood, gore, bodily fluids, disease, torture, rape, mutilation, grievous acts of violence, or human remains</h3>
+      <h3 class= "overlay-middle">* Sexual or pornographic content;</h3>
+      <h3 class= "overlay-last">* Graphic drug use</h3>
+      <h3 class= "overlay-bottom">Please refer to Yale Library's <a href="https://guides.library.yale.edu/statementharmfulcontent" target="_blank" rel="noopener noreferrer" style="color: #63aaff; text-decoration: underline;">Statement on Potentially Harmful Content</a> for information about the inclusion of these materials in our collections.</h3>
+      <button onclick="document.getElementById('sensitive-overlay').style.display='none';" class="overlay-button">View Object</button>
+    </div>
+  <% end %>
 <iframe
     class='universal-viewer-iframe'
     id='uv-iframe'
