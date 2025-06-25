@@ -291,6 +291,10 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   align-content: center;
 }
 
+.uv-container {
+  position: relative;
+}
+
 #sensitive-overlay {
   width: 82%;
   height: 100%;
@@ -308,17 +312,7 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   font-family: 'YaleNew-Roman';
 }
 
-.overlay-first {
-  font-size: 18px;
-  margin-right: 1em;
-}
-
-.overlay-middle {
-  font-size: 18px;
-  margin-right: 1em;
-}
-
-.overlay-last {
+.overlay-first, .overlay-middle, .overlay-last {
   font-size: 18px;
   margin-right: 1em;
 }
@@ -587,6 +581,10 @@ p.yale-restricted-work-text{
     align-content: center;
   }
 
+  .uv-container {
+    position: relative;
+  }
+
   #sensitive-overlay {
     width: 92%!important;
     height: 100%;
@@ -604,15 +602,7 @@ p.yale-restricted-work-text{
     font-family: 'YaleNew-Roman';
   }
   
-  .overlay-first {
-    font-size: 1.6rem;
-  }
-  
-  .overlay-middle {
-    font-size: 1.6rem;
-  }
-  
-  .overlay-last {
+  .overlay-first, .overlay-middle, .overlay-last  {
     font-size: 1.6rem;
   }
 
@@ -722,6 +712,10 @@ margin-bottom: 2%;  }
     align-content: center;
   }
 
+  .uv-container {
+    position: relative;
+  }
+
   #sensitive-overlay {
     width: 96%!important;
     height: 100%;
@@ -738,15 +732,7 @@ margin-bottom: 2%;  }
     font-family: 'YaleNew-Roman';
   }
 
-  .overlay-first {
-    font-size: 1.60rem;
-  }
-  
-  .overlay-middle {
-    font-size: 1.60rem;
-  }
-  
-  .overlay-last {
+  .overlay-first, .overlay-middle, .overlay-last {
     font-size: 1.60rem;
   }
 
@@ -863,6 +849,10 @@ margin-bottom: 2%;  }
     width: 115%!important;
     padding-left: 19%;
     align-content: center;
+  }
+
+  .uv-container {
+    position: relative;
   }
 
   #sensitive-overlay {
