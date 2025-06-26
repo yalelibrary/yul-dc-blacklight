@@ -68,6 +68,34 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   border: none;
 }
 
+.overlay-button {
+  border: none;
+  padding: 0.5em 1em;
+  width: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'YaleNew-Roman';
+  background-color: #286dc0;
+  color: white;
+  font-size: 28px;
+}
+
+.overlay-first {
+  margin-top: 1.5em; 
+  margin-bottom: 1.5em; 
+  margin-left: 1em;
+}
+
+.overlay-middle {
+  margin-left: 1em;
+}
+
+.overlay-last {
+  margin-left: 1em; 
+  margin-bottom: 1.5em;
+}
+
 //Control the appearance of hierarchy icons and space
 .aSpaceBranch {
   position: absolute;
@@ -261,6 +289,44 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   width: 90%;
   padding-left: 8%;
   align-content: center;
+}
+
+.uv-container {
+  position: relative;
+}
+
+#sensitive-overlay {
+  width: 82%;
+  height: 100%;
+  align-content: center;
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  left: 8%;
+  padding-left: 0%;
+  align-content: center;
+  background: #00356b;
+  color: #fffffe;
+  display: flex;
+  flex-direction: column;
+  font-family: 'YaleNew-Roman';
+}
+
+.overlay-first, .overlay-middle, .overlay-last {
+  font-size: 18px;
+  margin-right: 1em;
+}
+
+.overlay-bottom {
+  font-size: 18px;
+  margin-left: 1em; 
+  margin-right: 1em;
+  margin-bottom: 2em;
+}
+
+.overlay-link {
+  color: #63aaff; 
+  text-decoration: underline;
 }
 
 #uv-pages,
@@ -520,6 +586,38 @@ p.yale-restricted-work-text{
     align-content: center;
   }
 
+  .uv-container {
+    position: relative;
+  }
+
+  #sensitive-overlay {
+    width: 92%!important;
+    height: 100%;
+    align-content: center;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 8%;
+    padding-left: 0%;
+    align-content: center;
+    background: #00356b;
+    color: #fffffe;
+    display: flex;
+    flex-direction: column;
+    font-family: 'YaleNew-Roman';
+  }
+  
+  .overlay-first, .overlay-middle, .overlay-last  {
+    font-size: 1.6rem;
+  }
+
+  .overlay-bottom {
+    margin-left: 1em; 
+    margin-bottom: 1.5em; 
+    margin-right: 1em;
+    font-size: 1.6rem;
+  }
+
   .show-header-container,
   .yale-restricted-work-text {
     width: 92%;
@@ -617,6 +715,37 @@ margin-bottom: 2%;  }
     width: 115%!important;
     padding-left: 19%;
     align-content: center;
+  }
+
+  .uv-container {
+    position: relative;
+  }
+
+  #sensitive-overlay {
+    width: 96%!important;
+    height: 100%;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 19%;
+    padding-left: 0%;
+    align-content: center;
+    background: #00356b;
+    color: #fffffe;
+    display: flex;
+    flex-direction: column;
+    font-family: 'YaleNew-Roman';
+  }
+
+  .overlay-first, .overlay-middle, .overlay-last {
+    font-size: 1.60rem;
+  }
+
+  .overlay-bottom {
+    margin-left: 1em; 
+    margin-bottom: 1.5em; 
+    margin-right: 1em;
+    font-size: 1.60rem;
   }
 
   .show-header-container,
@@ -725,6 +854,36 @@ margin-bottom: 2%;  }
     width: 115%!important;
     padding-left: 19%;
     align-content: center;
+  }
+
+  .uv-container {
+    position: relative;
+  }
+
+  #sensitive-overlay {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 19%;
+    padding-left: 0%;
+    width: 96%!important;
+    height: 668px;;
+    background: #00356b;
+    color: #fffffe;
+    display: flex;
+    flex-direction: column;
+    font-family: 'YaleNew-Roman';
+  }
+
+  .overlay-first, .overlay-middle, .overlay-last {
+    font-size: 1.75rem;
+  }
+
+  .overlay-bottom {
+    margin-left: 1em; 
+    margin-bottom: 2em;
+    margin-right: 1em;
+    font-size: 1.75rem;
   }
 
   .show-header-container,
