@@ -434,6 +434,10 @@ alt: 'Access Available by request only due to collection restrictions. Place log
 alt: 'Access Available on YALE network only due to copyright or other restrictions. OFF-SITE? Log in with NetID')
       end
     end
+    if document['sensitive_materials_ssi'] == "Yes"
+      return image_tag('access-image-v2.png',
+        alt: 'Access Available within Digital Collections')
+    end
     url = document[:thumbnail_path_ss]
     if url.present?
       error_image_url = image_url('image_not_found.png')
