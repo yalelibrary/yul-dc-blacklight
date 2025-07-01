@@ -134,6 +134,27 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
   end
 
   describe '#render_thumbnail' do
+    context 'with a sensitive materials record' do
+      let(:sensitive_materials_document) do
+        SolrDocument.new(id: 'test',
+                         visibility_ssi: 'Public',
+                         sensitive_materials_ssi: 'Yes',
+                         oid_ssi: ['2055095'],
+                         thumbnail_path_ss: "http://localhost:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg")
+      end
+      before do
+        stub_request(:get, "http://iiif_image:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg")
+          .to_return(status: 200, body: File.open("spec/fixtures/images/Sun.png").read, headers: { "Content-Type" => /image\/.+/ })
+      end
+
+      it 'returns placeholder with alt text for sensitive materials object' do
+        placeholder_image = "/assets/access-image-v2-"
+        alt_text = "Access Available within Digital Collections"
+        expect(helper.render_thumbnail(sensitive_materials_document, {})).to include(alt_text, placeholder_image)
+        expect(helper.render_thumbnail(sensitive_materials_document, {})).to match("<img alt=\"Access Available within Digital Collections\" src=\"/assets/access-image-v2-f946f99ee0c358bbe16cf8223372b6091680dc48b5082b591eabafdbd7eeb8bd.png\" />")
+      end
+
+    end
     context 'with public record and oid with images' do
       let(:valid_document) do
         SolrDocument.new(id: 'test',
