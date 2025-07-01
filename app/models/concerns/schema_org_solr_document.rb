@@ -22,7 +22,7 @@ module SchemaOrgSolrDocument
       "genre": self[:genre_ssim],
       "materialExtent": self[:extent_ssim],
       "temporal": self[:date_ssim],
-      "thumbnailUrl": self[:visibility_ssi] == "Public" && self["thumbnail_path_ss"] || nil
+      "thumbnailUrl": self[:visibility_ssi] == "Public" && self[:sensitive_materials_ssi] != "Yes" && self["thumbnail_path_ss"] || nil
     }.compact
   end
 end
