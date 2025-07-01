@@ -15,8 +15,8 @@ module OgpSolrDocument
         'og:type': 'website',
         'og:description': description,
         'og:image': self[:visibility_ssi] == "Public" && !self[:sensitive_materials_ssi] == "Yes" && change_iiif_image_size(self["thumbnail_path_ss"], '!1200,630') || nil,
-        'og:image:type': self[:visibility_ssi] == "Public" && !self[:sensitive_materials_ssi] == "Yes" && 'image/jpeg' || nil,
-        'og:image:secure_url': self[:visibility_ssi] == "Public" && !self[:sensitive_materials_ssi] == "Yes" && change_iiif_image_size(self["thumbnail_path_ss"], '!1200,630') || nil }.compact
+        'og:image:type': self[:visibility_ssi] == "Public" && self[:sensitive_materials_ssi] != "Yes" && 'image/jpeg' || nil,
+        'og:image:secure_url': self[:visibility_ssi] == "Public" && self[:sensitive_materials_ssi] != "Yes" && change_iiif_image_size(self["thumbnail_path_ss"], '!1200,630') || nil }.compact
 
     meta_tag = []
     ogp_metadata.each do |key, value|
