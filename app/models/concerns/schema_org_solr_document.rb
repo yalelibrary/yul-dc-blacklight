@@ -4,6 +4,7 @@
 module SchemaOrgSolrDocument
   extend ActiveSupport::Concern
 
+  # rubocop:disable Metrics/PerceivedComplexity
   def to_schema_json_ld
     about_names = []
     about_names += self[:subjectName_ssim] if self[:subjectName_ssim]
@@ -25,4 +26,5 @@ module SchemaOrgSolrDocument
       "thumbnailUrl": self[:visibility_ssi] == "Public" && self[:sensitive_materials_ssi] != "Yes" && self["thumbnail_path_ss"] || nil
     }.compact
   end
+  # rubocop:enable Metrics/PerceivedComplexity
 end
