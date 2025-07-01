@@ -151,9 +151,9 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
         placeholder_image = "/assets/access-image-v2-"
         alt_text = "Access Available within Digital Collections"
         expect(helper.render_thumbnail(sensitive_materials_document, {})).to include(alt_text, placeholder_image)
-        expect(helper.render_thumbnail(sensitive_materials_document, {})).to match("<img alt=\"Access Available within Digital Collections\" src=\"/assets/access-image-v2-f946f99ee0c358bbe16cf8223372b6091680dc48b5082b591eabafdbd7eeb8bd.png\" />")
+        expect(helper.render_thumbnail(sensitive_materials_document,
+{})).to match("<img alt=\"Access Available within Digital Collections\" src=\"/assets/access-image-v2-f946f99ee0c358bbe16cf8223372b6091680dc48b5082b591eabafdbd7eeb8bd.png\" />")
       end
-
     end
     context 'with public record and oid with images' do
       let(:valid_document) do
