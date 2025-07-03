@@ -29,6 +29,9 @@
     frameborder='0'>
 </iframe>
 </div>
+<div class="hide-object">
+  <button id="hide-object-btn" class="overlay-button" style="display: none;">Hide Object</button>
+</div>
 </br>
 
 <div id='uv-pages'></div>
@@ -55,5 +58,21 @@
         $('#uv-pages').html(uv_thumbnail)
       }
     }, false)
+
+    // Overlay toggle
+    const overlay = document.getElementById('sensitive-overlay');
+    const hideBtn = document.getElementById('hide-object-btn');
+    if (overlay && hideBtn) {
+      // When overlay is hidden, show the Hide Object button
+      overlay.querySelector('.overlay-button').addEventListener('click', function() {
+        overlay.style.display = 'none';
+        hideBtn.style.display = 'inline-block';
+      });
+      // When Hide Object is clicked, show the overlay again
+      hideBtn.addEventListener('click', function() {
+        overlay.style.display = 'block';
+        hideBtn.style.display = 'none';
+      });
+    }
   })
 </script>
