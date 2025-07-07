@@ -96,6 +96,11 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   margin-bottom: 1.5em;
 }
 
+.hide-object {
+  text-align: center;
+  margin-top: 10px;
+}
+
 //Control the appearance of hierarchy icons and space
 .aSpaceBranch {
   position: absolute;
@@ -618,6 +623,12 @@ p.yale-restricted-work-text{
     font-size: 1.6rem;
   }
 
+  .hide-object {
+    text-align: center;
+    margin-top: 10px;
+    padding-left: 10%;
+  }
+
   .show-header-container,
   .yale-restricted-work-text {
     width: 92%;
@@ -746,6 +757,12 @@ margin-bottom: 2%;  }
     margin-bottom: 1.5em; 
     margin-right: 1em;
     font-size: 1.60rem;
+  }
+
+  .hide-object {
+    text-align: center;
+    margin-top: 10px;
+    padding-left: 35%;
   }
 
   .show-header-container,
@@ -884,6 +901,12 @@ margin-bottom: 2%;  }
     margin-bottom: 2em;
     margin-right: 1em;
     font-size: 1.75rem;
+  }
+
+  .hide-object {
+    text-align: center;
+    margin-top: 10px;
+    padding-left: 35%;
   }
 
   .show-header-container,
