@@ -192,9 +192,9 @@ class CatalogController < ApplicationController
     config.add_index_field 'imageCount_isi', label: 'Image Count'
     config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true, solr_params: disp_req_fieldmatch_on_search_params
     config.add_index_field 'fulltext_tesim', label: 'Full Text', highlight: true, solr_params: disp_highlight_on_search_params.merge({ 'hl.snippets': 4 }), helper_method: :fulltext_snippet_separation
-    config.add_index_field 'abstract_tesim', label: 'Abstract', highlight: true, solr_params: disp_highlight_on_search_params
+    config.add_index_field 'abstract_tesim', label: 'Abstract', highlight: true, solr_params: disp_highlight_on_search_params, helper_method: :display_max_abstract_characters
     config.add_index_field 'alternativeTitle_tesim', label: 'Alternative Title', highlight: true, solr_params: disp_highlight_on_search_params
-    config.add_index_field 'description_tesim', label: 'Description', highlight: true, solr_params: disp_highlight_on_search_params
+    config.add_index_field 'description_tesim', label: 'Description', highlight: true, solr_params: disp_highlight_on_search_params, helper_method: :display_max_description_characters
     config.add_index_field 'orbisBidId_ssi', label: 'Orbis Record', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'publicatonPlace_tesim', label: 'Publication Place', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'publisher_tesim', label: 'Publisher', highlight: true, solr_params: disp_highlight_on_search_params
@@ -276,9 +276,9 @@ class CatalogController < ApplicationController
     config.add_show_field 'preferredCitation_tesim', label: 'Citation', metadata: 'access_and_usage_rights', helper_method: :join_with_br
 
     # Identifiers Group
-    config.add_show_field 'orbisBibId_ssi', label: 'Orbis Record', metadata: 'identifiers', helper_method: :link_to_orbis_bib_id
-    config.add_show_field 'morris_link', field: 'orbisBibId_ssi', label: 'Morris Record', metadata: 'identifiers', helper_method: :link_to_morris_bib_id
-    config.add_show_field 'quicksearchId_ssi', label: 'Quicksearch ID', metadata: 'identifiers', helper_method: :link_to_quicksearch_id
+    config.add_show_field 'orbisBibId_ssi', label: 'Catalog Record', metadata: 'identifiers', helper_method: :link_to_catalog_id
+    config.add_show_field 'mmsId_ssi', label: 'Catalog Record', metadata: 'identifiers', helper_method: :link_to_catalog_id
+    config.add_show_field 'quicksearchId_ssi', label: 'Catalog Record', metadata: 'identifiers', helper_method: :link_to_catalog_id
     config.add_show_field 'oid_ssi', label: 'Object ID (OID)', metadata: 'identifiers'
     config.add_show_field 'url_suppl_ssim', label: 'More Information', metadata: 'identifiers', helper_method: :link_to_url
 
