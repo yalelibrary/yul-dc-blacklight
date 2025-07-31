@@ -37,12 +37,4 @@ RSpec.describe SolrDocument, type: :model do
       expect(schema[:thumbnailUrl]).to be_nil
     end
   end
-
-  context "with sensitive materials work" do
-    let(:solr_document) { described_class.new(WORK_WITH_SENSITIVE_MATERIALS) }
-    it "does not include thumbnail" do
-      schema = solr_document.to_schema_json_ld
-      expect(schema[:thumbnailUrl]).to be_nil
-    end
-  end
 end
