@@ -18,6 +18,7 @@ dt.blacklight-containergrouping_tesim.metadata-block__label-key {
   margin-bottom: 2%;
 }
 
+
 dd.blacklight-containergrouping_tesim.metadata-block__label-value.metadata-block__label-value--yul {
   flex: available;
   flex: -moz-available;
@@ -30,6 +31,10 @@ dt.blacklight-ancestordisplaystrings_tesim.metadata-block__label-key {
   width: fit-content;
   width: -moz-fit-content;
   margin-top: 2%;
+}
+
+dd.blacklight-ancestordisplaystrings_tesim.metadata-block__label-value {
+  width: 80%;
 }
 
 .archival-context {
