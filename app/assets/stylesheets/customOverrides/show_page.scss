@@ -736,6 +736,7 @@ margin-bottom: 2%;  }
     width: 96%!important;
     left: 19%;
     padding-left: 0%;
+    height: 705px;
   }
 
   .overlay-first, .overlay-middle, .overlay-second-to-last {
@@ -871,7 +872,6 @@ margin-bottom: 2%;  }
     left: 19%;
     padding-left: 0%;
     width: 96%!important;
-    height: 705px;
   }
 
   .overlay-first, .overlay-middle, .overlay-second-to-last {
@@ -925,5 +925,11 @@ margin-bottom: 2%;  }
   .aSpace_tree {
     margin-top: 2%;
     margin-left: -3%;
+  }
+}
+
+@media screen and (min-width: $xxlarge_device) {
+  #sensitive-overlay {
+    height: 100%
   }
 }
