@@ -72,32 +72,73 @@ dd.blacklight-ancestordisplaystrings_tesim.metadata-block__label-value {
   border: none;
 }
 
+#sensitive-overlay {
+  width: 82%;
+  height: 100%;
+  align-content: center;
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  left: 8%;
+  padding-left: 0%;
+  align-content: center;
+  background: $overlay_background_blue;
+  color: $overlay_text_white;
+  display: flex;
+  flex-direction: column;
+  font-family: 'YaleNew-Roman';
+}
+
+.overlay-title {
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin-left: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: .1rem;
+}
+
 .overlay-button {
   border: none;
-  padding: 0.5em 1em;
+  padding: 0.5rem 1rem;
   width: 200px;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  font-family: 'YaleNew-Roman';
-  background-color: #286dc0;
-  color: white;
-  font-size: 28px;
+  background-color: $overlay_button_background_blue;
+  color: $white;
+  font-size: 1.75rem;
+}
+
+.overlay-first, .overlay-middle, .overlay-second-to-last {
+  font-size: 1rem;
+  margin-right: 1rem;
 }
 
 .overlay-first {
-  margin-top: 1.5em; 
-  margin-bottom: 1.5em; 
-  margin-left: 1em;
+  margin-bottom: 2rem; 
+  margin-left: 1rem;
 }
 
 .overlay-middle {
-  margin-left: 1em;
+  margin-left: 1rem;
+  margin-bottom: .1rem;
 }
 
-.overlay-last {
-  margin-left: 1em; 
-  margin-bottom: 1.5em;
+.overlay-second-to-last {
+  margin-left: 1rem; 
+  margin-bottom: 2rem;
+}
+
+.overlay-bottom {
+  font-size: 1rem;
+  margin-left: 1rem; 
+  margin-right: 1rem;
+  margin-bottom: 2rem;
+}
+
+.overlay-link {
+  color: $overlay_link_blue; 
+  text-decoration: underline;
 }
 
 .hide-object {
@@ -302,40 +343,6 @@ dd.blacklight-ancestordisplaystrings_tesim.metadata-block__label-value {
 
 .uv-container {
   position: relative;
-}
-
-#sensitive-overlay {
-  width: 82%;
-  height: 100%;
-  align-content: center;
-  position: absolute;
-  z-index: 1000;
-  top: 0;
-  left: 8%;
-  padding-left: 0%;
-  align-content: center;
-  background: #00356b;
-  color: #fffffe;
-  display: flex;
-  flex-direction: column;
-  font-family: 'YaleNew-Roman';
-}
-
-.overlay-first, .overlay-middle, .overlay-last {
-  font-size: 18px;
-  margin-right: 1em;
-}
-
-.overlay-bottom {
-  font-size: 18px;
-  margin-left: 1em; 
-  margin-right: 1em;
-  margin-bottom: 2em;
-}
-
-.overlay-link {
-  color: #63aaff; 
-  text-decoration: underline;
 }
 
 #uv-pages,
@@ -601,22 +608,11 @@ p.yale-restricted-work-text{
 
   #sensitive-overlay {
     width: 92%!important;
-    height: 100%;
-    align-content: center;
-    position: absolute;
-    z-index: 1000;
-    top: 0;
-    left: 8%;
-    padding-left: 0%;
-    align-content: center;
-    background: #00356b;
-    color: #fffffe;
     display: flex;
     flex-direction: column;
-    font-family: 'YaleNew-Roman';
   }
   
-  .overlay-first, .overlay-middle, .overlay-last  {
+  .overlay-first, .overlay-middle, .overlay-second-to-last  {
     font-size: 1.6rem;
   }
 
@@ -738,21 +734,11 @@ margin-bottom: 2%;  }
 
   #sensitive-overlay {
     width: 96%!important;
-    height: 100%;
-    position: absolute;
-    z-index: 1000;
-    top: 0;
     left: 19%;
     padding-left: 0%;
-    align-content: center;
-    background: #00356b;
-    color: #fffffe;
-    display: flex;
-    flex-direction: column;
-    font-family: 'YaleNew-Roman';
   }
 
-  .overlay-first, .overlay-middle, .overlay-last {
+  .overlay-first, .overlay-middle, .overlay-second-to-last {
     font-size: 1.60rem;
   }
 
@@ -882,21 +868,13 @@ margin-bottom: 2%;  }
   }
 
   #sensitive-overlay {
-    position: absolute;
-    z-index: 1000;
-    top: 0;
     left: 19%;
     padding-left: 0%;
     width: 96%!important;
-    height: 668px;;
-    background: #00356b;
-    color: #fffffe;
-    display: flex;
-    flex-direction: column;
-    font-family: 'YaleNew-Roman';
+    height: 705px;
   }
 
-  .overlay-first, .overlay-middle, .overlay-last {
+  .overlay-first, .overlay-middle, .overlay-second-to-last {
     font-size: 1.75rem;
   }
 
