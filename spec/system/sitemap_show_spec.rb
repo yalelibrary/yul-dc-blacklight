@@ -6,7 +6,7 @@ RSpec.describe 'Sitemap Show', type: :feature do
 
   before do
     solr = Blacklight.default_index.connection
-    solr.add([test_record_0, test_record_1, test_record_2, test_record_3, test_record_4])
+    solr.add([test_record_0, test_record_1, test_record_2, test_record_3, test_record_4, test_record_5])
     solr.commit
   end
 
@@ -25,6 +25,7 @@ RSpec.describe 'Sitemap Show', type: :feature do
       timestamp: "2021-04-05T17:43:23.382Z",
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       thumbnail_path_ss: "http://localhost:8182/iiif/2/10962176/full/#{thumbnail_size_in_solr}/0/default.jpg",
+      type_ssi: 'parent',
       visibility_ssi: 'Public',
       year_isim: (600..1050).to_a
     }
@@ -46,6 +47,7 @@ RSpec.describe 'Sitemap Show', type: :feature do
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       visibility_ssi: 'Public',
       thumbnail_path_ss: "http://localhost:8182/iiif/2/10962124/full/#{thumbnail_size_in_solr}/0/default.jpg",
+      type_ssi: 'parent',
       year_isim: (1920..2000).to_a
     }
   end
@@ -66,6 +68,7 @@ RSpec.describe 'Sitemap Show', type: :feature do
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       visibility_ssi: 'Public',
       thumbnail_path_ss: "http://localhost:8182/iiif/2/10962124/full/#{thumbnail_size_in_solr}/0/default.jpg",
+      type_ssi: 'parent',
       year_isim: [1900]
     }
   end
@@ -86,6 +89,7 @@ RSpec.describe 'Sitemap Show', type: :feature do
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       visibility_ssi: 'Yale Community Only',
       thumbnail_path_ss: "http://localhost:8182/iiif/2/10962334/full/#{thumbnail_size_in_solr}/0/default.jpg",
+      type_ssi: 'parent',
       year_isim: [2020, 2021]
     }
   end
@@ -106,9 +110,24 @@ RSpec.describe 'Sitemap Show', type: :feature do
       description_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.",
       visibility_ssi: 'Private',
       thumbnail_path_ss: "http://localhost:8182/iiif/2/10962664/full/#{thumbnail_size_in_solr}/0/default.jpg",
+      type_ssi: 'parent',
       year_isim: [2020, 2021]
     }
   end
+
+  let(:test_record_5) do
+    {
+      id: '611',
+      caption_tesim: "Handsome Dan's Sweater",
+      parent_ssi: '511',
+      child_fulltext_tesim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot. He sometimes wears this sweater.",
+      child_fulltext_wstsim: "Handsome Dan is a bulldog who serves as Yale Univeristy's mascot. He sometimes wears this sweater.",
+      hashed_id_ssi: '082c8d1619ad8176d665453cfb2e55f0',
+      timestamp: "2025-04-05T17:43:23.382Z",
+      type_ssi: 'child'
+    }
+  end
+
   it 'renders XML with a root element that leads with a hash of 2' do
     visit blacklight_dynamic_sitemap.sitemap_path('1')
     expect(page).to have_xpath('//urlset')
@@ -136,5 +155,9 @@ RSpec.describe 'Sitemap Show', type: :feature do
   it 'does not display a private record' do
     visit blacklight_dynamic_sitemap.sitemap_path('0')
     expect(page).not_to have_content '511'
+  end
+  it 'does not display a child record' do
+    visit blacklight_dynamic_sitemap.sitemap_path('0')
+    expect(page).not_to have_content '611'
   end
 end

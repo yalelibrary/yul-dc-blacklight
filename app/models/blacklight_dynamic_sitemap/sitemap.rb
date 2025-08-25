@@ -15,7 +15,7 @@ module BlacklightDynamicSitemap
       index_connection.select(
         params: show_params(id, {
                               q: '*:*',
-                              fq: ["{!prefix f=#{hashed_id_field} v=#{id}}", fq],
+                              fq: ["{!prefix f=#{hashed_id_field} v=#{id}}", fq, "type_ssi:\"parent\""],
                               fl: [unique_id_field, last_modified_field, 'visibility_ssi', 'thumbnail_path_ss'].join(','),
                               rows: 2_000_000, # Ensure that we do not page this result
                               facet: false,
