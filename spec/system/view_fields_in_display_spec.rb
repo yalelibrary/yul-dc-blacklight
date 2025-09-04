@@ -48,7 +48,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       format: 'three dimensional object',
       url_suppl_ssim: 'http://0.0.0.0:3000/catalog/777',
       language_ssim: ['en', 'eng', 'zz'],
-      description_tesim: ["<a href='https://news.yale.edu/2021/03/18/meet-handsome-dan-xix' class='dontallow'>Handsome Dan</a> is a bulldog who serves as Yale Univeristy's mascot.", "here is more"],
+      description_tesim: ["<a href='https://news.yale.edu/2021/03/18/meet-handsome-dan-xix' class='dontallow'>Handsome Dan</a> is a bulldog who serves as Yale University's mascot.", "here is more"],
       visibility_ssi: 'Public',
       digitization_note_tesi: "Digitization note",
       digitization_funding_source_tesi: "Digitization Funding Source",
@@ -103,7 +103,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       format: 'three dimensional object',
       url_suppl_ssim: 'http://0.0.0.0:3000/catalog/111',
       language_ssim: ['en', 'eng', 'zz'],
-      description_tesim: ["<a href='https://news.yale.edu/2021/03/18/meet-handsome-dan-xix' class='dontallow'>Handsome Dan</a> is a bulldog who serves as Yale Univeristy's mascot.", "here is more"],
+      description_tesim: ["<a href='https://news.yale.edu/2021/03/18/meet-handsome-dan-xix' class='dontallow'>Handsome Dan</a> is a bulldog who serves as Yale University's mascot.", "here is more"],
       visibility_ssi: 'Public',
       digitization_note_tesi: "Digitization note",
       digitization_funding_source_tesi: "Digitization Funding Source",
@@ -164,7 +164,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       format: 'three dimensional object',
       url_suppl_ssim: 'http://0.0.0.0:3000/catalog/555',
       language_ssim: ['en', 'eng', 'zz'],
-      description_tesim: ["<a href='https://news.yale.edu/2021/03/18/meet-handsome-dan-xix' class='dontallow'>Handsome Dan</a> is a bulldog who serves as Yale Univeristy's mascot.", "here is more"],
+      description_tesim: ["<a href='https://news.yale.edu/2021/03/18/meet-handsome-dan-xix' class='dontallow'>Handsome Dan</a> is a bulldog who serves as Yale University's mascot.", "here is more"],
       visibility_ssi: 'Public',
       digitization_note_tesi: "Digitization note",
       digitization_funding_source_tesi: "Digitization Funding Source",
@@ -249,8 +249,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         expect(document).to have_content("zz")
       end
       it 'displays description in results' do
-        expect(document).to have_content("Handsome Dan is a bulldog who serves as Yale Univeristy's mascot.")
-        expect(page.html).to include('<a href="https://news.yale.edu/2021/03/18/meet-handsome-dan-xix">Handsome Dan</a> is a bulldog who serves as Yale Univeristy\'s mascot.<br/>here is more')
+        expect(document).to have_content("Handsome Dan is a bulldog who serves as Yale University's mascot.")
+        expect(page.html).to include('<a href="https://news.yale.edu/2021/03/18/meet-handsome-dan-xix">Handsome Dan</a> is a bulldog who serves as Yale University\'s mascot.<br/>here is more')
       end
       it 'displays the Abstract in results' do
         expect(page.html).to match("<p>this is an abstract</p><p>abstract2</p>")
@@ -356,7 +356,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         expect(page).to have_link("this is the online resource", href: 'http://this/is/the/link')
       end
       it 'displays the call number in results as link' do
-        expect(page).to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number')
+        expect(page).to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this is the call number')
         expect(page).not_to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number+but+different')
       end
       it 'contains a link on genre to its facet' do
@@ -367,10 +367,10 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         expect(page).to have_text("this is the genrethis is the second genre")
       end
       it 'contains a link on format to its facet' do
-        expect(page).to have_link('three dimensional object', href: '/catalog?f%5Bformat%5D%5B%5D=three+dimensional+object')
+        expect(page).to have_link('three dimensional object', href: '/catalog?f%5Bformat%5D%5B%5D=three dimensional object')
       end
       it 'contains a link on resource type to its facet' do
-        expect(page).to have_link('this is the resource type', href: '/catalog?f%5BresourceType_ssim%5D%5B%5D=this+is+the+resource+type')
+        expect(page).to have_link('this is the resource type', href: '/catalog?f%5BresourceType_ssim%5D%5B%5D=this is the resource type')
       end
       it 'contains a link on language to its facet' do
         expect(page).to have_link('English (en)', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=English (en)')

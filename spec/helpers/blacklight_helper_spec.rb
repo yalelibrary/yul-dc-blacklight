@@ -127,7 +127,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
 
       it 'returns a list of links with labels' do
         # rubocop:disable Layout/LineLength
-        expect(helper.link_to_url_with_label(args)).to eq "<a href=\"http://library.somewhere.com/special_page\">View Related Resource</a><br/><a href=\"http://library.somewhereelse.com/special_page\">http://library.somewhereelse.com/special_page</a>"
+        expect(helper.link_to_url_with_label(args)).to eq "<a rel=\"nofollow\" href=\"http://library.somewhere.com/special_page\">View Related Resource</a><br/><a rel=\"nofollow\" href=\"http://library.somewhereelse.com/special_page\">http://library.somewhereelse.com/special_page</a>"
         # rubocop:enable Layout/LineLength
       end
     end
