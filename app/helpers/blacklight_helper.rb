@@ -114,7 +114,7 @@ module BlacklightHelper
         subject_heading_fields << subject_heading
         path = subject_heading_fields.join(" > ")
         subject_heading_links << link_to(subject_heading.to_s, search_catalog_path({ "f[subjectHeadingFacet_ssim][]" => path }),
-                                         { "title" => path }, rel: 'nofollow')
+                                         title: path , rel: 'nofollow')
       end
       safe_join(subject_heading_links, " > ")
     end
