@@ -245,7 +245,7 @@ class CatalogController < ApplicationController
     # archiveSpaceUri and findingAid must be last
     #
     config.add_show_field 'repository_ssi', label: 'Repository', metadata: 'collection_information'
-    config.add_show_field 'callNumber_ssim', label: 'Call Number', metadata: 'collection_information', link_to_facet: true
+    config.add_show_field 'callNumber_ssim', label: 'Call Number', metadata: 'collection_information', link_to_facet: true, helper_method: :faceted_join_with_br
     config.add_show_field 'sourceTitle_tesim', label: 'Collection Title', metadata: 'collection_information'
     config.add_show_field 'sourceCreator_tesim', label: 'Collection / Other Creator', metadata: 'collection_information'
     config.add_show_field 'sourceCreated_tesim', label: 'Collection Created', metadata: 'collection_information'
@@ -260,10 +260,10 @@ class CatalogController < ApplicationController
     config.add_show_field 'findingAid_ssim', label: ' ', no_label: true, metadata: 'collection_information', helper_method: :finding_aid_link
 
     # Subjects, Formats, and Genres Group
-    config.add_show_field 'format', label: 'Format', metadata: 'subjects,_formats,_and_genres', link_to_facet: true
+    config.add_show_field 'format', label: 'Format', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
     config.add_show_field 'genre_ssim', label: 'Genre', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
     config.add_show_field 'material_tesim', label: 'Material', metadata: 'subjects,_formats,_and_genres'
-    config.add_show_field 'resourceType_ssim', label: 'Resource Type', metadata: 'subjects,_formats,_and_genres', link_to_facet: true
+    config.add_show_field 'resourceType_ssim', label: 'Resource Type', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
     config.add_show_field 'subjectGeographic_ssim', label: 'Subject (Geographic)', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
     config.add_show_field 'subjectName_ssim', label: 'Subject (Name)', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br
     config.add_show_field 'subjectTopic_ssim', label: 'Subject (Topic)', metadata: 'subjects,_formats,_and_genres', link_to_facet: true, helper_method: :faceted_join_with_br

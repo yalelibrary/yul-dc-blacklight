@@ -72,7 +72,7 @@ module BlacklightHelper
     language_values.map do |language_code|
       converted_code = language_code_to_english(language_code)
       link = "/catalog?f%5Blanguage_ssim%5D%5B%5D=#{converted_code}"
-      out << link_to(converted_code, link)
+      out << link_to(converted_code, link, rel: 'nofollow')
       out << tag.br
     end
     safe_join(out)
@@ -87,7 +87,7 @@ module BlacklightHelper
     catalog_id = arg[:document][arg[:field]]
     link = "https://search.library.yale.edu/catalog/#{catalog_id}"
 
-    link_to(catalog_id, link)
+    link_to(catalog_id, link, rel: 'nofollow')
   end
 
   def join_with_br(arg)
@@ -114,7 +114,7 @@ module BlacklightHelper
         subject_heading_fields << subject_heading
         path = subject_heading_fields.join(" > ")
         subject_heading_links << link_to(subject_heading.to_s, search_catalog_path({ "f[subjectHeadingFacet_ssim][]" => path }),
-                                         { "title" => path })
+                                         { "title" => path, rel: 'nofollow' })
       end
       safe_join(subject_heading_links, " > ")
     end
@@ -137,14 +137,14 @@ module BlacklightHelper
   def archival_display(arg)
     values = arg[:document][arg[:field]].reverse
     swap_out_series_title(values, arg[:document][:series_ssi])
-    title = link_to arg[:document][:title_tesim] ? arg[:document][:title_tesim].join(", ") : arg[:document][:id], solr_document_path(arg[:document][:id])
+    title = link_to arg[:document][:title_tesim] ? arg[:document][:title_tesim].join(", ") : arg[:document][:id], solr_document_path(arg[:document][:id]), rel: 'nofollow'
     hierarchy = arg[:document][:ancestor_titles_hierarchy_ssim]
 
     hierarchy_params = (hierarchy_builder arg[:document]).reverse
 
     if hierarchy.present?
       (0..values.size - 1).each do |i|
-        values[i] = link_to values[i], search_catalog_path(hierarchy_params.pop) if hierarchy_params.present?
+        values[i] = link_to values[i], search_catalog_path(hierarchy_params.pop), rel: 'nofollow' if hierarchy_params.present?
       end
     end
     if values.count > 5
@@ -164,7 +164,7 @@ module BlacklightHelper
 
     if hierarchy.present?
       (0..values.size - 1).each do |i|
-        values[i] = link_to values[i], search_catalog_path(hierarchy_params.pop) if hierarchy_params.present?
+        values[i] = link_to values[i], search_catalog_path(hierarchy_params.pop), rel: 'nofollow' if hierarchy_params.present?
       end
     end
     values << arg[:document][:title_tesim].join(", ") if arg[:document][:title_tesim]
@@ -235,7 +235,7 @@ module BlacklightHelper
       current = if current == arg[:document][:title_tesim].first
                   tag.span(current, class: 'yaleASpaceItemTitle')
                 elsif hierarchy_params.present?
-                  link_to current, search_catalog_path(hierarchy_params.pop)
+                  link_to current, search_catalog_path(hierarchy_params.pop), rel: 'nofollow'
                 else
                   tag.p(current, class: 'yaleASpaceItem')
                 end
@@ -290,7 +290,7 @@ module BlacklightHelper
     values = arg[:document][arg[:field]]
     links = []
     values.each do |value|
-      links << link_to(value, build_escaped_facet(arg[:field], value))
+      links << link_to(value, build_escaped_facet(arg[:field], value), rel: 'nofollow')
     end
     safe_join(links, '<br/>'.html_safe)
   end
@@ -323,7 +323,7 @@ module BlacklightHelper
   def generate_creators_links(args)
     generate_creators(args) do |creator|
       link = "/catalog?f%5Bcreator_ssim%5D%5B%5D=#{Rack::Utils.escape(creator)}"
-      link_to(creator, link)
+      link_to(creator, link, rel: 'nofollow')
     end
   end
 
@@ -371,7 +371,7 @@ module BlacklightHelper
       end
       return nil if ils_filters
       label = labels[0] || urls[0]
-      link_to(label, urls[0])
+      link_to(label, urls[0], rel: "nofollow")
     end.compact
     return nil if links.empty?
     safe_join(links, '<br/>'.html_safe)
@@ -389,7 +389,7 @@ module BlacklightHelper
   # rubocop:enable Layout/DefEndAlignment
 
   def link_to_url(arg)
-    link_to(arg[:value][0], arg[:value][0])
+    link_to(arg[:value][0], arg[:value][0], rel: "nofollow")
   end
 
   def sanitize_first_value(arg)
@@ -409,7 +409,7 @@ module BlacklightHelper
   def search_field_value_link(args)
     field_value = args[:document][args[:field]]
     link_text = "/?q=#{field_value}&search_field=#{args[:field]}"
-    link_to(field_value.join, link_text)
+    link_to(field_value.join, link_text, rel: "nofollow")
   end
 
   def sep_title_show_page
