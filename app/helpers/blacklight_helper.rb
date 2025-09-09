@@ -30,6 +30,89 @@ module BlacklightHelper
     [value, label, options]
   end
 
+    # Helper method for caption_tesim index field
+  # Returns nil if search results do not contain a caption
+  # This ensures the "Caption" label is not displayed when there's no caption content
+  def display_caption_or_nil(args)
+    document = args[:document]
+    field = args[:field]
+    
+    # Access to search context if needed:
+    # search_session = current_search_session  # Current search session
+    # search_params = params                   # Current request parameters
+    # search_state = search_state             # Blacklight search state
+    
+    # Example: Log search context
+    Rails.logger.info("Processing caption for document #{document.id}")
+    Rails.logger.info("Current search query: #{params[:q]}")
+    Rails.logger.info("Search field: #{params[:search_field]}")
+    
+    # Check if the document has the caption field and it's not empty
+    caption_values = document[field]
+    Rails.logger.info("Caption values found: #{caption_values}")
+    Rails.logger.info("Caption values blank?: #{caption_values.blank?}")
+    Rails.logger.info("all Caption values blank?: #{caption_values.all?(&:blank?)}")
+    
+    # Return nil if caption_values is nil, empty, or contains only blank strings
+    return nil if caption_values.blank? || caption_values.all?(&:blank?)
+    return nil unless caption_values.any? { |value| params[:q]&.include?(value) }
+  end
+
+  # Helper method for caption_tesim index field with additional note for multiple matches
+  def display_caption_with_note(args)
+    document = args[:document]
+    field = args[:field]
+    
+    caption_values = document[field]
+    return nil if caption_values.blank? || caption_values.all?(&:blank?)
+    
+    # Filter out empty/blank caption values using the same logic as should_display_caption?
+    non_blank_captions = caption_values.select(&:present?)
+    
+    # Split search query into words and check if any caption contains any of those words (same as line 617)
+    # For determining if matching_captions is more than 1 for displaying note
+    search_words = params[:q]&.split(/\s+/)&.map(&:downcase) || []
+    matching_captions = non_blank_captions.select do |caption|
+      caption_words = caption.downcase.split(/\s+/)
+      search_words.any? { |search_word| caption_words.any? { |caption_word| caption_word.include?(search_word) } }
+    end
+    
+    return nil if matching_captions.empty?
+    
+    # Get the first matching caption
+    first_match = matching_captions.first
+    
+    # Find the index of the first match in the original caption array to determine canvas
+    caption_index = caption_values.index(first_match) || 0
+    
+    # Create a link to the object page with child_oid parameter
+    object_url = solr_document_path(document[:id])
+    if document[:child_oids_ssim] && caption_index < document[:child_oids_ssim].length
+      child_oid = document[:child_oids_ssim][caption_index]
+      object_url += "?child_oid=#{child_oid}"
+    end
+    content = link_to(first_match, object_url)
+    
+    # Use Blacklight's highlighting if available
+    highlight_field = document.highlight_field(field)
+    if highlight_field && highlight_field.any?
+      # Find the highlighted version that corresponds to the first match
+      highlighted_caption = highlight_field.find { |hl| hl.include?(first_match) } || highlight_field.first
+      content = link_to(highlighted_caption.html_safe, object_url)
+    else
+      content = link_to(first_match, object_url)
+    end
+    
+    # Add note if there are multiple matches
+    if matching_captions.length > 1
+      note = '<br/><em>More caption search results available on object page</em>'.html_safe
+      content = safe_join([content, note], '')
+    end
+    
+    content.html_safe
+  end
+
+
   # removes date range params from link with unknown date
   def range_unknown_remove_url(url_in)
     url = url_in.gsub(/[?&]range%5B-year_isim%5D%5B%5D=%5B*+TO+*%5D/, '')
