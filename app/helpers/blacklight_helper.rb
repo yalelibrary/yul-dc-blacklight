@@ -79,8 +79,8 @@ module BlacklightHelper
   end
 
   def link_to_catalog_id(arg)
-    # prevent duplicate display of link if bib id or mms id is present
-    return nil if arg[:field] == "quicksearchId_ssi" && arg[:document][:orbisBibId_ssi].present? && arg[:document][:mmsId_ssi].present?
+    # prevent duplicate display of link if bib id or mms id is present, or dont display catalog link if source is aspace
+    return nil if (arg[:field] == "quicksearchId_ssi" && arg[:document][:orbisBibId_ssi].present? && arg[:document][:mmsId_ssi].present?) || arg[:document][:source_ssim].first == "aspace"
     # prevent duplicate display of link if both bib id and mms id are present
     return nil if arg[:field] == "orbisBibId_ssi" && arg[:document][:mmsId_ssi].present?
 
