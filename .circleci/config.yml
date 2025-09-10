@@ -134,7 +134,7 @@ jobs:
           tag: $CIRCLE_TAG
 
 orbs:
-  docker: circleci/docker@1.0.1
+  docker: circleci/docker@3.0.1
 version: 2.1
 workflows:
   commit:
