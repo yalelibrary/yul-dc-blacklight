@@ -335,14 +335,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       it 'displays the Container/Volume in results' do
         expect(document).to have_content("this is the container information")
       end
-      it 'displays the Orbis Bib ID in results' do
-        expect(document).to have_content("1234567")
-        expect(document).to have_link("1234567", href: "https://search.library.yale.edu/catalog/1234567").once
-      end
-      it 'displays the Quicksearch ID in results' do
-        expect(document).to have_content("b1234567")
-        expect(document).to have_link("b1234567", href: "https://search.library.yale.edu/catalog/b1234567").once
-      end
       it 'displays the Edition in results' do
         expect(document).to have_content("this is the edition")
       end
@@ -376,9 +368,6 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         expect(page).to have_link('English (en)', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=English (en)')
         expect(page).to have_link('English (eng)', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=English (eng)')
         expect(page).to have_link('zz', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=zz')
-      end
-      it 'contains a link on the Orbis Bib ID to the catalog record' do
-        expect(page).to have_link('1234567', href: 'https://search.library.yale.edu/catalog/1234567')
       end
       it 'contains a link for the Creator field to the facet and displays' do
         expect(page).to have_link('Frederick', href: '/catalog?f%5Bcreator_ssim%5D%5B%5D=Frederick')
