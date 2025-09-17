@@ -182,3 +182,7 @@ We use [simplecov](https://app.circleci.com/pipelines/github/yalelibrary/yul-dc-
 By default, when running locally, your IP will not be considered "On Campus," so you will not be able to view Yale Community Only items unless you log in.
 
 To test having an IP which is considered "On Campus" so that you can view Yale Community Only items without logging in, start with `YALE_NETWORK_IPS=10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1 cam up`.
+
+
+## Sitemap Generation
+We use Blacklight Dynamic Sitemap gem to create our sitemap.  Details can be found in this wiki for [Sitemap Generation](https://github.com/yalelibrary/yul-dc-documentation/wiki/Sitemap-Generation).
