@@ -25,8 +25,6 @@ DEFAULT MOBILE STYLING
 .info-header {
   text-transform: uppercase;
   border-bottom: $white thin solid;
-  margin-left: -15%;
-  padding-left: 15.5%;
 }
 
 .nav-link {
@@ -93,7 +91,6 @@ DEFAULT MOBILE STYLING
   flex-direction: column;
   margin-right: auto;
   margin-left: auto;
-  padding-left: 15px;
 }
 
 .secondary-nav a {
@@ -120,29 +117,15 @@ DEFAULT MOBILE STYLING
 }
 
 @media screen and (min-width: $small_device) {
-  .info-header {
-    margin-left: -26%;
-    padding-left: 21%;
-    max-width: fit-content;
-  }
-
-  .navbar > div.container {
+  .navbar > div.container, .secondary-nav > .row {
     margin-right: auto;
     margin-left: auto;
     max-width: 95%;
-  }
-
-  .secondary-nav > .row {
-    padding-left: 9.5%;
   }
 }
 
 
 @media screen and (min-width: $medium_device) {
-  .info-header {
-    padding-left: 26%;
-  }
-
   .navbar > .container {
     flex-direction: column;
     align-items: start;
@@ -158,20 +141,12 @@ DEFAULT MOBILE STYLING
     flex: 0 1 50%;
     width: 215px;
   }
-
-  .secondary-nav > .row {
-    padding-left: 6.5%;
-  }
 }
 
 
 @media screen and (min-width: $large_device) {
-  .info-header {
-    padding-left: 26%;
-  }
-
   .navbar > div.container,
-  #main-container {
+  #main-container, .secondary-nav > .row {
     max-width: 85%;
   }
 
@@ -185,10 +160,6 @@ DEFAULT MOBILE STYLING
     padding-left: 0px;
     padding-right: 0px;
   }
-
-  .secondary-nav > .row {
-    padding-left: 7.5%;
-  }
 }
 
 
@@ -196,6 +167,7 @@ DEFAULT MOBILE STYLING
   .info-header {
     margin-right: .25rem;
     border-bottom: none;
+    max-width: fit-content;
   }
 
   .menu-block-wrapper {
