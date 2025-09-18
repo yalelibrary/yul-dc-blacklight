@@ -109,7 +109,7 @@ DEFAULT MOBILE STYLING
 		font-size: 36px;
 		line-height: normal;
 		text-align: center;
-		color: #ffffff;
+		color: $white;
 	}
 
 	.hero-info {
@@ -129,6 +129,13 @@ DEFAULT MOBILE STYLING
 		min-height: 44px;
 		height: 50px;
 		font-size: 20px;
+		font-family: $mallory_mp_medium;
+	}
+
+	.adv-search-link a {
+		color: $white;
+		font-size: 14px;
+		font-weight: 500;
 		font-family: $mallory_mp_medium;
 	}
 }
@@ -560,14 +567,6 @@ DEFAULT MOBILE STYLING
 		.adv-search-link {
 			background-color: rgba(0, 0, 0, 0.5);
 			text-align: center;
-		}
-
-		.adv-search-link a {
-			color: #ffffff;
-			font-size: 14px;
-			font-weight: 500;
-			font-family: $mallory_mp_medium;
-			text-decoration: underline;
 		}
 	}
 
