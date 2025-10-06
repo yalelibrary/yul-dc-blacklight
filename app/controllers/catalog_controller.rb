@@ -192,9 +192,9 @@ class CatalogController < ApplicationController
     config.add_index_field 'imageCount_isi', label: 'Image Count'
     config.add_index_field 'resourceType_tesim', label: 'Resource Type', highlight: true, solr_params: disp_req_fieldmatch_on_search_params
     config.add_index_field 'fulltext_tesim', label: 'Full Text', highlight: true, solr_params: disp_highlight_on_search_params.merge({ 'hl.snippets': 4 }), helper_method: :fulltext_snippet_separation
-    config.add_index_field 'abstract_tesim', label: 'Abstract', highlight: true, solr_params: disp_highlight_on_search_params, helper_method: :display_max_abstract_characters
+    config.add_index_field 'abstract_tesim', label: 'Abstract', highlight: true, solr_params: disp_highlight_on_search_params, helper_method: :display_max_250_characters
     config.add_index_field 'alternativeTitle_tesim', label: 'Alternative Title', highlight: true, solr_params: disp_highlight_on_search_params
-    config.add_index_field 'description_tesim', label: 'Description', highlight: true, solr_params: disp_highlight_on_search_params, helper_method: :display_max_description_characters
+    config.add_index_field 'description_tesim', label: 'Description', highlight: true, solr_params: disp_highlight_on_search_params, helper_method: :display_max_250_characters
     config.add_index_field 'orbisBidId_ssi', label: 'Orbis Record', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'publicatonPlace_tesim', label: 'Publication Place', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'publisher_tesim', label: 'Publisher', highlight: true, solr_params: disp_highlight_on_search_params
@@ -203,6 +203,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'subjectTopic_tesim', label: 'Subject (Topic)', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'sourceCreated_tesim', label: 'Collection Created', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'ancestorTitles_tesim', label: 'Found in', helper_method: :archival_display
+    config.add_index_field 'caption_tesim', label: 'Caption', highlight: true, solr_params: disp_highlight_on_search_params, if: :should_display_caption?, helper_method: :display_max_caption_characters
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     #
@@ -717,6 +718,32 @@ class CatalogController < ApplicationController
     response = term_list(terms_for_list)
     response['terms'] = [] unless response['terms']
     render json: response.to_json
+  end
+
+  # Conditional method to determine if caption field should be displayed
+  # Needed because it is an array that is never nil and doesn't behave like other fields
+  # Used with the 'if' option in field configuration
+  def should_display_caption?(field_config, document)
+    caption_values = document[:caption_tesim]
+    Rails.logger.info("Caption values: #{caption_values}")
+
+    # Return false if caption_values is blank or contains only empty/blank strings
+    return false if caption_values.blank? || caption_values.all?(&:blank?)
+
+    # Filter out empty/blank caption values and check for word-level matches
+    non_blank_captions = caption_values.select(&:present?)
+
+    # Split search query into words and check if any caption contains any of those words
+    search_words = params[:q]&.split(/\s+/)&.map(&:downcase) || []
+    has_matching_caption = non_blank_captions.any? do |caption|
+      caption_words = caption.downcase.split(/\s+/)
+      search_words.any? { |search_word| caption_words.any? { |caption_word| caption_word.include?(search_word) } }
+    end
+    Rails.logger.info("Params: #{params[:q]}")
+    Rails.logger.info("Non-blank captions: #{non_blank_captions}")
+    Rails.logger.info("Caption value conditional: #{has_matching_caption}")
+
+    return has_matching_caption
   end
 
   ##
