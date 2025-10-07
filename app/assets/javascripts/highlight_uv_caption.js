@@ -34,7 +34,7 @@ $(document).ready(function() {
       clearInterval(window.highlightInterval);
     }
     
-    window.highlightInterval = setInterval(applyHighlight, 500);
+    window.highlightInterval = setInterval(applyHighlight);
   });
 });
 
