@@ -100,7 +100,7 @@ module BlacklightHelper
       highlighted_caption = highlight_field.find { |hl| hl.include?(first_match) } || highlight_field.first
       content = link_to(highlighted_caption.html_safe, object_url)
     else
-      content = link_to(first_match, object_url)
+      content = link_to(first_match, object_url, class: 'highlight-uv-caption')
     end
     
     # Add note if there are multiple matches

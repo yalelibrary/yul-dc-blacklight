@@ -16,6 +16,7 @@
 //= require download_original
 //= require notifications
 //= require show_more
+//= require highlight_uv_caption
 // For blacklight_range_limit built-in JS
 //= require blacklight_range_limit
 
