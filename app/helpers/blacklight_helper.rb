@@ -98,9 +98,9 @@ module BlacklightHelper
     if highlight_field && highlight_field.any?
       # Find the highlighted version that corresponds to the first match
       highlighted_caption = highlight_field.find { |hl| hl.include?(first_match) } || highlight_field.first
-      content = link_to(highlighted_caption.html_safe, object_url)
+      content = link_to(highlighted_caption.html_safe, object_url, class: 'highlight-uv-caption')
     else
-      content = link_to(first_match, object_url, class: 'highlight-uv-caption')
+      content = link_to(first_match, object_url)
     end
     
     # Add note if there are multiple matches
