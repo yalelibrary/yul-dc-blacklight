@@ -36,7 +36,6 @@ module CatalogHelper
   # Extract fulltext param from search
   # Simple: ...search_field=fulltext_tsim&q=XXX
   # Advanced: fulltext_tsim_advanced=XXX
-  # Caption search: ...uv_search=XXX (from caption links)
   def uv_fulltext_search_param
     search_params = current_search_session.try(:query_params) || {}
     q = nil
@@ -44,8 +43,6 @@ module CatalogHelper
       q = search_params['q']
     elsif search_params['fulltext_tsim_advanced']
       q = search_params['fulltext_tsim_advanced']
-    elsif params[:uv_search]
-      q = params[:uv_search]
     end
     "&q=#{url_encode(q)}" if q
   end
