@@ -51,11 +51,8 @@ module BlacklightHelper
     caption_values = document[field]
     return nil if caption_values.blank? || caption_values.all?(&:blank?)
     
-    # Filter out empty/blank caption values using the same logic as should_display_caption?
+    # Filter out empty/blank caption values and find matching captions
     non_blank_captions = caption_values.select(&:present?)
-    
-    # Split search query into words and check if any caption contains any of those words (same as line 617)
-    # For determining if matching_captions is more than 1 for displaying note
     search_words = params[:q]&.split(/\s+/)&.map(&:downcase) || []
     matching_captions = non_blank_captions.select do |caption|
       caption_words = caption.downcase.split(/\s+/)
@@ -64,44 +61,10 @@ module BlacklightHelper
     
     return nil if matching_captions.empty?
     
-    # Get the first matching caption
+    # Build link for the first matching caption
     first_match = matching_captions.first
-    
-    # Find the index of the first match in the original caption array to determine canvas
     caption_index = caption_values.index(first_match) || 0
-    
-    # Create a link to the object page with child_oid, show_captions, and search query parameters
-    object_url = solr_document_path(document[:id])
-    url_params = { show_captions: 'true' }
-    # Pass the search query so it's available on the show page
-    url_params[:q] = params[:q] if params[:q].present?
-    if document[:child_oids_ssim] && caption_index < document[:child_oids_ssim].length
-      child_oid = document[:child_oids_ssim][caption_index]
-      url_params[:child_oid] = child_oid
-    end
-    object_url += "?#{url_params.to_query}"
-    content = link_to(first_match, object_url)
-    
-    # Use Blacklight's highlighting if available
-    highlight_field = document.highlight_field(field)
-    if highlight_field && highlight_field.any?
-      # Find the highlighted version that corresponds to the first match
-      highlighted_caption = highlight_field.find { |hl| hl.include?(first_match) } || highlight_field.first
-      
-      # Add ellipsis if the caption is truncated (highlighted snippet is shorter than original)
-      # Remove HTML tags for length comparison
-      plain_highlight = highlighted_caption.gsub(/<[^>]*>/, '')
-      plain_original = first_match.gsub(/<[^>]*>/, '')
-      
-      if plain_highlight.length < plain_original.length
-        # Check if it doesn't already end with ellipsis or punctuation before adding
-        unless highlighted_caption.strip.end_with?('...', '…')
-          highlighted_caption = "#{highlighted_caption}..."
-        end
-      end
-      
-      content = link_to(highlighted_caption.html_safe, object_url, class: 'highlight-uv-caption')
-    end
+    content = build_caption_link(document, field, first_match, caption_index)
     
     # Add note if there are multiple matches
     if matching_captions.length > 1
@@ -110,6 +73,40 @@ module BlacklightHelper
     end
     
     content.html_safe
+  end
+
+  # Helper method to build a caption link with highlighting and URL parameters
+  def build_caption_link(document, field, caption_text, caption_index)
+    # Build URL with necessary parameters
+    object_url = solr_document_path(document[:id])
+    url_params = { show_captions: 'true' }
+    url_params[:q] = params[:q] if params[:q].present?
+    
+    if document[:child_oids_ssim] && caption_index < document[:child_oids_ssim].length
+      child_oid = document[:child_oids_ssim][caption_index]
+      url_params[:child_oid] = child_oid
+    end
+    object_url += "?#{url_params.to_query}"
+    
+    # Use Blacklight's highlighting if available
+    highlight_field = document.highlight_field(field)
+    if highlight_field && highlight_field.any?
+      highlighted_caption = highlight_field.find { |hl| hl.include?(caption_text) } || highlight_field.first
+      
+      # Add ellipsis if the caption is truncated
+      plain_highlight = highlighted_caption.gsub(/<[^>]*>/, '')
+      plain_original = caption_text.gsub(/<[^>]*>/, '')
+      
+      if plain_highlight.length < plain_original.length
+        unless highlighted_caption.strip.end_with?('...', '…')
+          highlighted_caption = "#{highlighted_caption}..."
+        end
+      end
+      
+      link_to(highlighted_caption.html_safe, object_url, class: 'highlight-uv-caption')
+    else
+      link_to(caption_text, object_url)
+    end
   end
 
   # Helper method to display all captions for the show page
