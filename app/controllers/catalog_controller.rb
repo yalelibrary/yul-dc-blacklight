@@ -203,7 +203,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'subjectTopic_tesim', label: 'Subject (Topic)', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'sourceCreated_tesim', label: 'Collection Created', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'ancestorTitles_tesim', label: 'Found in', helper_method: :archival_display
-    config.add_index_field 'caption_tesim', label: 'Caption', highlight: true, solr_params: disp_highlight_on_search_params, if: :should_display_caption?, helper_method: :display_caption_with_note
+    config.add_index_field 'caption_tesim', label: 'Caption', highlight: true, solr_params: disp_highlight_on_search_params, if: :should_display_caption?, helper_method: :display_index_caption_with_note
     # , if: :should_display_caption?, helper_method: :display_caption_with_note
     # , helper_method: :display_caption_with_note
     # helper_method: :display_caption_or_nil
@@ -232,6 +232,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'publisher_ssim', label: 'Publisher', metadata: 'description'
     config.add_show_field 'abstract_tesim', label: 'Abstract', metadata: 'description', helper_method: :join_as_paragraphs
     config.add_show_field 'description_tesim', label: 'Description', metadata: 'description', helper_method: :sanitize_join_with_br
+    config.add_show_field 'caption_tesim', label: 'Matching Captions', metadata: 'description', helper_method: :display_show_page_captions, if: :should_display_all_captions?
     config.add_show_field 'provenanceUncontrolled_tesi', label: 'Provenance', metadata: 'description'
     config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', metadata: 'description', helper_method: :format_digitization
@@ -622,6 +623,16 @@ class CatalogController < ApplicationController
     Rails.logger.info("Caption value conditional: #{has_matching_caption}")
     
     return has_matching_caption
+  end
+
+  # Conditional method to determine if all captions should be displayed on show page
+  # Only show when user clicked on a caption link from search results
+  def should_display_all_captions?(field_config, document)
+    result = params[:show_captions] == 'true'
+    Rails.logger.info("=== should_display_all_captions? ===")
+    Rails.logger.info("params[:show_captions]: #{params[:show_captions]}")
+    Rails.logger.info("Result: #{result}")
+    result
   end
 
   # This is for iiif_search

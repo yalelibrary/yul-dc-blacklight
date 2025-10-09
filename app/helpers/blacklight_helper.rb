@@ -36,22 +36,7 @@ module BlacklightHelper
   def display_caption_or_nil(args)
     document = args[:document]
     field = args[:field]
-    
-    # Access to search context if needed:
-    # search_session = current_search_session  # Current search session
-    # search_params = params                   # Current request parameters
-    # search_state = search_state             # Blacklight search state
-    
-    # Example: Log search context
-    Rails.logger.info("Processing caption for document #{document.id}")
-    Rails.logger.info("Current search query: #{params[:q]}")
-    Rails.logger.info("Search field: #{params[:search_field]}")
-    
-    # Check if the document has the caption field and it's not empty
     caption_values = document[field]
-    Rails.logger.info("Caption values found: #{caption_values}")
-    Rails.logger.info("Caption values blank?: #{caption_values.blank?}")
-    Rails.logger.info("all Caption values blank?: #{caption_values.all?(&:blank?)}")
     
     # Return nil if caption_values is nil, empty, or contains only blank strings
     return nil if caption_values.blank? || caption_values.all?(&:blank?)
@@ -59,7 +44,7 @@ module BlacklightHelper
   end
 
   # Helper method for caption_tesim index field with additional note for multiple matches
-  def display_caption_with_note(args)
+  def display_index_caption_with_note(args)
     document = args[:document]
     field = args[:field]
     
@@ -85,12 +70,16 @@ module BlacklightHelper
     # Find the index of the first match in the original caption array to determine canvas
     caption_index = caption_values.index(first_match) || 0
     
-    # Create a link to the object page with child_oid parameter
+    # Create a link to the object page with child_oid, show_captions, and search query parameters
     object_url = solr_document_path(document[:id])
+    url_params = { show_captions: 'true' }
+    # Pass the search query so it's available on the show page
+    url_params[:q] = params[:q] if params[:q].present?
     if document[:child_oids_ssim] && caption_index < document[:child_oids_ssim].length
       child_oid = document[:child_oids_ssim][caption_index]
-      object_url += "?child_oid=#{child_oid}"
+      url_params[:child_oid] = child_oid
     end
+    object_url += "?#{url_params.to_query}"
     content = link_to(first_match, object_url)
     
     # Use Blacklight's highlighting if available
@@ -98,9 +87,20 @@ module BlacklightHelper
     if highlight_field && highlight_field.any?
       # Find the highlighted version that corresponds to the first match
       highlighted_caption = highlight_field.find { |hl| hl.include?(first_match) } || highlight_field.first
+      
+      # Add ellipsis if the caption is truncated (highlighted snippet is shorter than original)
+      # Remove HTML tags for length comparison
+      plain_highlight = highlighted_caption.gsub(/<[^>]*>/, '')
+      plain_original = first_match.gsub(/<[^>]*>/, '')
+      
+      if plain_highlight.length < plain_original.length
+        # Check if it doesn't already end with ellipsis or punctuation before adding
+        unless highlighted_caption.strip.end_with?('...', '…')
+          highlighted_caption = "#{highlighted_caption}..."
+        end
+      end
+      
       content = link_to(highlighted_caption.html_safe, object_url, class: 'highlight-uv-caption')
-    else
-      content = link_to(first_match, object_url)
     end
     
     # Add note if there are multiple matches
@@ -110,6 +110,90 @@ module BlacklightHelper
     end
     
     content.html_safe
+  end
+
+  # Helper method to display all captions for the show page
+  def display_show_page_captions(args)
+    document = args[:document]
+    field = args[:field]
+    
+    caption_values = document[field]
+    return nil if caption_values.blank? || caption_values.all?(&:blank?)
+    
+    # Filter out empty/blank caption values
+    non_blank_captions = caption_values.select(&:present?)
+    
+    # Split search query into words and filter for matching captions only
+    search_words = params[:q]&.split(/\s+/)&.map(&:downcase) || []
+    matching_captions = non_blank_captions.select do |caption|
+      caption_words = caption.downcase.split(/\s+/)
+      search_words.any? { |search_word| caption_words.any? { |caption_word| caption_word.include?(search_word) } }
+    end
+    return nil if matching_captions.empty?
+    
+    # Create links for each matching caption to its associated child object
+    caption_links = matching_captions.map do |caption|
+      # Find the index of this caption in the original caption array
+      caption_index = caption_values.index(caption) || 0
+      
+      # Create snippet: find matching word and extract 3 words before and after
+      snippet = create_caption_snippet(caption, search_words)
+      
+      # Create a link to the object page with child_oid, show_captions, and search query parameters
+      object_url = solr_document_path(document[:id])
+      url_params = { show_captions: 'true' }
+      # Preserve the search query so captions remain visible
+      url_params[:q] = params[:q] if params[:q].present?
+      if document[:child_oids_ssim] && caption_index < document[:child_oids_ssim].length
+        child_oid = document[:child_oids_ssim][caption_index]
+        url_params[:child_oid] = child_oid
+      end
+      object_url += "?#{url_params.to_query}"
+      
+      link_to(snippet.html_safe, object_url)
+    end
+    
+    # Display all matching caption links separated by line breaks
+    safe_join(caption_links, '<br/>'.html_safe)
+  end
+
+  # Helper method to create a snippet showing 3 words before and after the matching search term
+  def create_caption_snippet(caption, search_words)
+    words = caption.split(/\s+/)
+    words_lower = words.map(&:downcase)
+    
+    # Find the first matching word position
+    match_index = nil
+    matched_word = nil
+    
+    search_words.each do |search_word|
+      words_lower.each_with_index do |word, idx|
+        if word.include?(search_word)
+          match_index = idx
+          matched_word = words[idx]
+          break
+        end
+      end
+      break if match_index
+    end
+    
+    return caption if match_index.nil?
+    
+    # Extract 3 words before and after
+    context_size = 3
+    start_index = [0, match_index - context_size].max
+    end_index = [words.length - 1, match_index + context_size].min
+    
+    # Build the snippet
+    snippet_words = words[start_index..end_index]
+    snippet = snippet_words.join(' ')
+    
+    # Add ellipsis if needed
+    snippet = "...#{snippet}" if start_index > 0
+    snippet = "#{snippet}..." if end_index < words.length - 1
+    
+    # Highlight the matched word (wrap in span with class for styling)
+    snippet.gsub(/\b#{Regexp.escape(matched_word)}\b/i, '<span class="search-highlight">\0</span>')
   end
 
 
