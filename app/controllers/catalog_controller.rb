@@ -204,9 +204,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'sourceCreated_tesim', label: 'Collection Created', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'ancestorTitles_tesim', label: 'Found in', helper_method: :archival_display
     config.add_index_field 'caption_tesim', label: 'Caption', highlight: true, solr_params: disp_highlight_on_search_params, if: :should_display_caption?, helper_method: :display_index_caption_with_note
-    # , if: :should_display_caption?, helper_method: :display_caption_with_note
-    # , helper_method: :display_caption_with_note
-    # helper_method: :display_caption_or_nil
+    
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     #
