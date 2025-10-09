@@ -623,9 +623,6 @@ class CatalogController < ApplicationController
   # Only show when user clicked on a caption link from search results
   def should_display_all_captions?(field_config, document)
     result = params[:show_captions] == 'true'
-    Rails.logger.info("=== should_display_all_captions? ===")
-    Rails.logger.info("params[:show_captions]: #{params[:show_captions]}")
-    Rails.logger.info("Result: #{result}")
     result
   end
 
