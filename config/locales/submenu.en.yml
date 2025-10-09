@@ -2,41 +2,17 @@ en:
   submenu:
     research:
       quicksearch:
-        title: Quicksearch
+        title: Search Quicksearch
         url: http://search.library.yale.edu
         description: ''
       searchLibraryCatalogOrbis:
-        title: Search Library Catalog (Orbis)
-        url: http://orbis.library.yale.edu/vwebv/
+        title: Search Library Catalog
+        url: https://search.library.yale.edu/catalog
         description: Records for approximately 13 million volumes located across the University
           Library system.
-      searchLawLibraryCatalog:
-        title: Search Law Library Catalog (MORRIS)
-        url: http://morris.law.yale.edu/
-        description: Records for items located in Yale's Lillian Goldman Law Library. The
-          extensive law collection is not represented in Orbis.
-      searchBorrowDirect:
-        title: Search Borrow Direct
-        url: https://resources.library.yale.edu/cas/borrowdirect.aspx
-        description: Borrow Direct is a service that allows Yale patrons to check the availability
-          of and request books from the combined catalogs of Harvard, Princeton, Dartmouth,
-          Cornell, Columbia, Penn, Brown, University of Chicago, and MIT within four
-          business days. It can be used to obtain items that are currently unavailable
-          for checkout at Yale, not held by the Yale library, or on course reserve.
-      searchWorldCat:
-        title: Search WorldCat
-        url: http://firstsearch.oclc.org/dbname=WorldCat;autho=100157622;FSIP
-        description: Includes more than 50 million records of books and other materials held
-          in thousands of academic, public, special and national libraries around the
-          world.
-      searchArticlesPlus:
-        title: Search Articles+
-        url: http://yale.summon.serialssolutions.com/
-        description: Search Articles+ provides a fast way to search across the fulltext of
-          articles from thousands of published journals.
       searchDigitalCollections:
         title: Search Digital Collections
-        url: http://web.library.yale.edu/digital-collections
+        url: https://library.yale.edu/explore-collections/explore/digital-collections
         description: Access to digital image and text collections available from the Yale
           University Library.
       searchArchivesYale:
@@ -68,6 +44,10 @@ en:
         url: https://library.yale.edu/find-request-and-use/use/using-special-collections
         description: ''
     services:
+      requestDigitalCopiesSpecialCollections:
+        title: Request Digital Copies of Special Collections
+        url: https://library.yale.edu/find-request-and-use/use/using-special-collections/request-digitization
+        description: ''
       yourPersonalLibrarian:
         title: Your Personal Librarian
         url: https://library.yale.edu/pl
@@ -118,27 +98,27 @@ en:
         description: Robert B. Haas Family Arts Library
       bassLibrary:
         title: Bass Library
-        url: https://web.library.yale.edu/building/bass-library
+        url: https://library.yale.edu/bass
         description: Anne T. and Robert M. Bass Library
       beineckeLibrary:
         title: Beinecke Library
-        url: https://web.library.yale.edu/building/beinecke-rare-book-library
+        url: https://beinecke.library.yale.edu/
         description: Beinecke Rare Book & Manuscript Library
       classicsLibrary:
         title: Classics Library
-        url: https://web.library.yale.edu/building/classics-library
+        url: https://library.yale.edu/classics
         description: ''
       divinityLibrary:
         title: Divinity Library
-        url: https://web.library.yale.edu/building/divinity-library
+        url: https://library.yale.edu/divinity
         description: Divinity School Library
       filmStudyCenter:
-        title: Film Study Center
+        title: Yale Film Archive
         url: https://library.yale.edu/film
         description: ''
       fortunoffArchive:
         title: Fortunoff Archive
-        url: http://www.library.yale.edu/testimonies/
+        url: https://fortunoff.library.yale.edu/
         description: Fortunoff Video Archive for Holocaust Testimonies
       humanitiesCollections:
         title: Humanities Collections
@@ -150,11 +130,11 @@ en:
         description: ''
       lawLibrary:
         title: Law Library
-        url: https://web.library.yale.edu/building/lillian-goldman-law-library
+        url: https://library.law.yale.edu/
         description: Lillian Goldman Law Library in Memory of Sol Goldman
       lewisWalpoleLibrary:
         title: Lewis Walpole Library
-        url: https://web.library.yale.edu/building/lewis-walpole-library
+        url: https://walpole.library.yale.edu/
         description: ''
       libraryCollectionServices:
         title: Library Collection Services
@@ -170,15 +150,15 @@ en:
         description: ''
       marxScienceSocialScienceLibrary:
         title: Marx Science & Social Science Library
-        url:  https://web.library.yale.edu/building/marx-science-and-social-science-library
+        url: https://library.yale.edu/marx
         description: ''
       medicalLibrary:
         title: Medical Library
-        url:  https://web.library.yale.edu/building/cushingwhitney-medical-library
+        url: https://library.medicine.yale.edu/
         description: Harvey Cushing / John Hay Whitney Medical Library
       musicLibrary:
         title: Music Library
-        url: https://library.yale.edu/music
+        url: https://library.yale.edu/visit-and-study/libraries-locations/irving-s-gilmore-music-library
         description: Irving S. Gilmore Music Library
       sterlingLibrary:
         title: Sterling Library
@@ -186,7 +166,7 @@ en:
         description: Sterling Memorial Library
       yaleCenterBritishArt:
         title: Yale Center for British Art
-        url: https://britishart.yale.edu/while-we-are-closed
+        url: https://britishart.yale.edu/
         description: ''
     informationPolicies:
       libraryHours:
