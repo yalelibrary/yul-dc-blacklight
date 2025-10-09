@@ -30,14 +30,14 @@ module BlacklightHelper
     [value, label, options]
   end
 
-    # Helper method for caption_tesim index field
+  # Helper method for caption_tesim index field
   # Returns nil if search results do not contain a caption
   # This ensures the "Caption" label is not displayed when there's no caption content
   def display_caption_or_nil(args)
     document = args[:document]
     field = args[:field]
     caption_values = document[field]
-    
+
     # Return nil if caption_values is nil, empty, or contains only blank strings
     return nil if caption_values.blank? || caption_values.all?(&:blank?)
     return nil unless caption_values.any? { |value| params[:q]&.include?(value) }
@@ -47,10 +47,10 @@ module BlacklightHelper
   def display_index_caption_with_note(args)
     document = args[:document]
     field = args[:field]
-    
+
     caption_values = document[field]
     return nil if caption_values.blank? || caption_values.all?(&:blank?)
-    
+
     # Filter out empty/blank caption values and find matching captions
     non_blank_captions = caption_values.select(&:present?)
     search_words = params[:q]&.split(/\s+/)&.map(&:downcase) || []
@@ -58,21 +58,21 @@ module BlacklightHelper
       caption_words = caption.downcase.split(/\s+/)
       search_words.any? { |search_word| caption_words.any? { |caption_word| caption_word.include?(search_word) } }
     end
-    
+
     return nil if matching_captions.empty?
-    
+
     # Build link for the first matching caption
     first_match = matching_captions.first
     caption_index = caption_values.index(first_match) || 0
     content = build_caption_link(document, field, first_match, caption_index)
-    
+
     # Add note if there are multiple matches
     if matching_captions.length > 1
-      note = '<br/><em>More caption search results available on object page</em>'.html_safe
-      content = safe_join([content, note], '')
+      note_text = content_tag(:em, 'More caption search results available on object page')
+      content = safe_join([content, tag.br, note_text])
     end
-    
-    content.html_safe
+
+    content
   end
 
   # Helper method to build a caption link with highlighting and URL parameters
@@ -81,30 +81,32 @@ module BlacklightHelper
     object_url = solr_document_path(document[:id])
     url_params = { show_captions: 'true' }
     url_params[:q] = params[:q] if params[:q].present?
-    
+
     if document[:child_oids_ssim] && caption_index < document[:child_oids_ssim].length
       child_oid = document[:child_oids_ssim][caption_index]
       url_params[:child_oid] = child_oid
     end
     object_url += "?#{url_params.to_query}"
-    
+
     # Use Blacklight's highlighting if available
     highlight_field = document.highlight_field(field)
-    if highlight_field && highlight_field.any?
+    if highlight_field&.any?
       highlighted_caption = highlight_field.find { |hl| hl.include?(caption_text) } || highlight_field.first
-      
+
       # Add ellipsis if the caption is truncated
       plain_highlight = highlighted_caption.gsub(/<[^>]*>/, '')
       plain_original = caption_text.gsub(/<[^>]*>/, '')
-      
+
       if plain_highlight.length < plain_original.length
-        unless highlighted_caption.strip.end_with?('...', '…')
-          highlighted_caption = "#{highlighted_caption}..."
-        end
+        highlighted_caption = "#{highlighted_caption}..." unless highlighted_caption.strip.end_with?('...', '…')
       end
-      
-      link_to(highlighted_caption.html_safe, object_url, class: 'highlight-uv-caption')
+
+      # Blacklight's highlight_field already returns HTML-safe highlighted content
+      # but we sanitize to ensure only allowed tags (span with search-highlight class) remain
+      sanitized_caption = sanitize(highlighted_caption, tags: %w[span], attributes: %w[class])
+      link_to(sanitized_caption.html_safe, object_url, class: 'highlight-uv-caption')
     else
+      # Plain text link - Rails automatically escapes it
       link_to(caption_text, object_url)
     end
   end
@@ -113,13 +115,13 @@ module BlacklightHelper
   def display_show_page_captions(args)
     document = args[:document]
     field = args[:field]
-    
+
     caption_values = document[field]
     return nil if caption_values.blank? || caption_values.all?(&:blank?)
-    
+
     # Filter out empty/blank caption values
     non_blank_captions = caption_values.select(&:present?)
-    
+
     # Split search query into words and filter for matching captions only
     search_words = params[:q]&.split(/\s+/)&.map(&:downcase) || []
     matching_captions = non_blank_captions.select do |caption|
@@ -127,15 +129,15 @@ module BlacklightHelper
       search_words.any? { |search_word| caption_words.any? { |caption_word| caption_word.include?(search_word) } }
     end
     return nil if matching_captions.empty?
-    
+
     # Create links for each matching caption to its associated child object
     caption_links = matching_captions.map do |caption|
       # Find the index of this caption in the original caption array
       caption_index = caption_values.index(caption) || 0
-      
+
       # Create snippet: find matching word and extract 3 words before and after
       snippet = create_caption_snippet(caption, search_words)
-      
+
       # Create a link to the object page with child_oid, show_captions, and search query parameters
       object_url = solr_document_path(document[:id])
       url_params = { show_captions: 'true' }
@@ -146,53 +148,55 @@ module BlacklightHelper
         url_params[:child_oid] = child_oid
       end
       object_url += "?#{url_params.to_query}"
-      
-      link_to(snippet.html_safe, object_url)
+
+      # Sanitize snippet to only allow span tags with class attribute (for highlighting)
+      sanitized_snippet = sanitize(snippet, tags: %w[span], attributes: %w[class])
+      link_to(sanitized_snippet.html_safe, object_url)
     end
-    
+
     # Display all matching caption links separated by line breaks
-    safe_join(caption_links, '<br/>'.html_safe)
+    safe_join(caption_links, tag.br)
   end
 
   # Helper method to create a snippet showing 3 words before and after the matching search term
   def create_caption_snippet(caption, search_words)
     words = caption.split(/\s+/)
     words_lower = words.map(&:downcase)
-    
+
     # Find the first matching word position
     match_index = nil
     matched_word = nil
-    
+
     search_words.each do |search_word|
       words_lower.each_with_index do |word, idx|
-        if word.include?(search_word)
-          match_index = idx
-          matched_word = words[idx]
-          break
-        end
+        next unless word.include?(search_word)
+        match_index = idx
+        matched_word = words[idx]
+        break
       end
       break if match_index
     end
-    
-    return caption if match_index.nil?
-    
+
+    return h(caption) if match_index.nil?
+
     # Extract 3 words before and after
     context_size = 3
     start_index = [0, match_index - context_size].max
     end_index = [words.length - 1, match_index + context_size].min
-    
-    # Build the snippet
-    snippet_words = words[start_index..end_index]
+
+    # Build the snippet - escape each word first
+    snippet_words = words[start_index..end_index].map { |word| h(word) }
     snippet = snippet_words.join(' ')
-    
+
     # Add ellipsis if needed
     snippet = "...#{snippet}" if start_index > 0
     snippet = "#{snippet}..." if end_index < words.length - 1
-    
-    # Highlight the matched word (wrap in span with class for styling)
-    snippet.gsub(/\b#{Regexp.escape(matched_word)}\b/i, '<span class="search-highlight">\0</span>')
-  end
 
+    # Highlight the matched word (wrap in span with class for styling)
+    # matched_word is now escaped, so we need to escape it for the regex too
+    escaped_matched_word = h(matched_word)
+    snippet.gsub(/\b#{Regexp.escape(escaped_matched_word)}\b/i, '<span class="search-highlight">\0</span>')
+  end
 
   # removes date range params from link with unknown date
   def range_unknown_remove_url(url_in)
