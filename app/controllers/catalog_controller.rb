@@ -204,7 +204,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'sourceCreated_tesim', label: 'Collection Created', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'ancestorTitles_tesim', label: 'Found in', helper_method: :archival_display
     config.add_index_field 'caption_tesim', label: 'Caption', highlight: true, solr_params: disp_highlight_on_search_params, if: :should_display_caption?, helper_method: :display_index_caption_with_note
-    
+
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     #
@@ -602,7 +602,6 @@ class CatalogController < ApplicationController
   # Used with the 'if' option in field configuration
   def should_display_caption?(field_config, document)
     caption_values = document[:caption_tesim]
-    Rails.logger.info("Caption values: #{caption_values}")
     
     # Return false if caption_values is blank or contains only empty/blank strings
     return false if caption_values.blank? || caption_values.all?(&:blank?)
@@ -616,9 +615,6 @@ class CatalogController < ApplicationController
       caption_words = caption.downcase.split(/\s+/)
       search_words.any? { |search_word| caption_words.any? { |caption_word| caption_word.include?(search_word) } }
     end
-    Rails.logger.info("Params: #{params[:q]}")
-    Rails.logger.info("Non-blank captions: #{non_blank_captions}")
-    Rails.logger.info("Caption value conditional: #{has_matching_caption}")
     
     return has_matching_caption
   end
