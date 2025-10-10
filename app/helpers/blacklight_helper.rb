@@ -51,19 +51,49 @@ module BlacklightHelper
     end.join(', ')
   end
 
-  def display_max_abstract_characters(args)
-    highlights = args[:document].highlight_field('abstract_tesim')
+  def display_max_250_characters(args)
+    highlights = args[:document].highlight_field(args[:field])
     return highlights.first if highlights.present?
 
-    args[:document][:abstract_tesim].first.length > 250 ? args[:document][:abstract_tesim].first[0..250].concat("...") : args[:document][:abstract_tesim].first
+    args[:document][args[:field]].first.length > 250 ? args[:document][args[:field]].first[0..250].concat("...") : args[:document][args[:field]].first
   end
 
-  def display_max_description_characters(args)
-    highlights = args[:document].highlight_field('description_tesim')
-    return highlights.first if highlights.present?
+  # def display_max_abstract_characters(args)
+  #   highlights = args[:document].highlight_field('abstract_tesim')
+  #   return highlights.first if highlights.present?
 
-    args[:document][:description_tesim].first.length > 250 ? args[:document][:description_tesim].first[0..250].concat("...") : args[:document][:description_tesim].first
+  #   args[:document][:abstract_tesim].first.length > 250 ? args[:document][:abstract_tesim].first[0..250].concat("...") : args[:document][:abstract_tesim].first
+  # end
+
+  def display_max_caption_characters(args)
+    # byebug
+    out = []
+
+    highlights = args[:document].highlight_field(args[:field])
+    # return highlights if highlights.present?
+    # return highlights.first + "\n " + "More caption search results available on object page" if highlights.present? #&& highlights.size > 1
+    # out << highlights
+    if highlights.present?
+      highlights.map do |highlight|
+        out << link_to(highlight, "/catalog/#{args[:document][:id]}", rel: 'nofollow')
+      end
+    # # elsif out << args[:document][args[:field]].first.length > 100
+    # #   link_to(args[:document][args[:field]].first[0..100].concat('...'), "/catalog/#{args[:document][:id]}",
+    # #   rel: 'nofollow')
+    else
+      args[:document][args[:field]].map do |caption|
+        out << link_to(caption, "/catalog/#{args[:document][:id]}", rel: 'nofollow')
+      end
+    end
+    safe_join(out)
   end
+
+  # def display_max_description_characters(args)
+  #   highlights = args[:document].highlight_field('description_tesim')
+  #   return highlights.first if highlights.present?
+
+  #   args[:document][:description_tesim].first.length > 250 ? args[:document][:description_tesim].first[0..250].concat("...") : args[:document][:description_tesim].first
+  # end
 
   def language_codes_as_links(args)
     out = []

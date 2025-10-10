@@ -15,6 +15,7 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
       creator_tesim: 'Me and You',
       abstract_tesim: 'Binding: white with gold embossing.',
       alternativeTitle_tesim: 'The Yale Bulldogs',
+      caption_tesim: ['university mascot'],
       description_tesim: 'in black ink on thin white paper',
       format: 'three dimensional object',
       fulltext_tesim: ["fulltext text one.\n\nThis is for dog\n"],
@@ -97,6 +98,11 @@ RSpec.describe 'Search results displays field', type: :system, clean: true do
     it 'highlights the full text when multiple terms are queried' do
       visit '/catalog?search_field=fulltext_tesim&q=text+dog'
       expect(page.html).to include 'fulltext <span class="search-highlight">text</span> one.  This is for <span class="search-highlight">dog</span>'
+    end
+
+    it 'highlights the caption when a term is queried' do
+      visit '/catalog?search_field=all_fields&q=university'
+      expect(page.html).to include "<span class='search-highlight'>university</span> mascot"
     end
   end
 end
