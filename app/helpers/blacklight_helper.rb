@@ -119,21 +119,19 @@ module BlacklightHelper
     caption_values = document[field]
     return nil if caption_values.blank? || caption_values.all?(&:blank?)
 
-    # Filter out empty/blank caption values
-    non_blank_captions = caption_values.select(&:present?)
-
-    # Split search query into words and filter for matching captions only
+    # Split search query into words for matching
     search_words = params[:q]&.split(/\s+/)&.map(&:downcase) || []
-    matching_captions = non_blank_captions.select do |caption|
-      caption_words = caption.downcase.split(/\s+/)
-      search_words.any? { |search_word| caption_words.any? { |caption_word| caption_word.include?(search_word) } }
-    end
-    return nil if matching_captions.empty?
 
-    # Create links for each matching caption to its associated child object
-    caption_links = matching_captions.map do |caption|
-      # Find the index of this caption in the original caption array
-      caption_index = caption_values.index(caption) || 0
+    # Iterate through captions with their original indices to handle duplicate caption text
+    caption_links = []
+    caption_values.each_with_index do |caption, caption_index|
+      # Skip blank captions
+      next if caption.blank?
+
+      # Check if this caption matches the search query
+      caption_words = caption.downcase.split(/\s+/)
+      matches = search_words.any? { |search_word| caption_words.any? { |caption_word| caption_word.include?(search_word) } }
+      next unless matches
 
       # Create snippet: find matching word and extract 3 words before and after
       snippet = create_caption_snippet(caption, search_words)
@@ -151,8 +149,10 @@ module BlacklightHelper
 
       # Sanitize snippet to only allow span tags with class attribute (for highlighting)
       sanitized_snippet = sanitize(snippet, tags: %w[span], attributes: %w[class])
-      link_to(sanitized_snippet.html_safe, object_url)
+      caption_links << link_to(sanitized_snippet.html_safe, object_url)
     end
+
+    return nil if caption_links.empty?
 
     # Display all matching caption links separated by line breaks
     safe_join(caption_links, tag.br)
