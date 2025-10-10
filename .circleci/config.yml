@@ -33,8 +33,8 @@ jobs:
         environment:
             POSTGRES_HOST: localhost
             POSTGRES_DB: blacklight_yul_test
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: password
+            POSTGRES_USER: $POSTGRES_USER
+            POSTGRES_PASSWORD: $POSTGRES_PASSWORD
             SOLR_CORE: blacklight-test
             SOLR_TEST_URL: http://localhost:8983/solr/blacklight-test
       - image: yalelibraryit/dc-solr:v1.0.9
@@ -44,8 +44,8 @@ jobs:
       - image: cimg/postgres:9.6
         environment:
             POSTGRES_DB: blacklight_yul_test
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: password
+            POSTGRES_USER: $POSTGRES_USER
+            POSTGRES_PASSWORD: $POSTGRES_PASSWORD
       - image: seleniarm/standalone-chromium:latest
         name: chrome      
     parallelism: 4 
