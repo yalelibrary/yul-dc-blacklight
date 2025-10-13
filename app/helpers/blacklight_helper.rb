@@ -104,7 +104,7 @@ module BlacklightHelper
       # Blacklight's highlight_field already returns HTML-safe highlighted content
       # but we sanitize to ensure only allowed tags (span with search-highlight class) remain
       sanitized_caption = sanitize(highlighted_caption, tags: %w[span], attributes: %w[class])
-      link_to(sanitized_caption.html_safe, object_url, class: 'highlight-uv-caption')
+      link_to(sanitized_caption, object_url, class: 'highlight-uv-caption')
     else
       # Plain text link - Rails automatically escapes it
       link_to(caption_text, object_url)
@@ -149,7 +149,7 @@ module BlacklightHelper
 
       # Sanitize snippet to only allow span tags with class attribute (for highlighting)
       sanitized_snippet = sanitize(snippet, tags: %w[span], attributes: %w[class])
-      caption_links << link_to(sanitized_snippet.html_safe, object_url)
+      caption_links << link_to(sanitized_snippet, object_url)
     end
 
     return nil if caption_links.empty?
@@ -189,7 +189,7 @@ module BlacklightHelper
     snippet = snippet_words.join(' ')
 
     # Add ellipsis if needed
-    snippet = "...#{snippet}" if start_index > 0
+    snippet = "...#{snippet}" if start_index.positive?
     snippet = "#{snippet}..." if end_index < words.length - 1
 
     # Highlight the matched word (wrap in span with class for styling)

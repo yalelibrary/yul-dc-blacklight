@@ -609,15 +609,20 @@ class CatalogController < ApplicationController
 
     # Filter out empty/blank caption values and check for word-level matches
     non_blank_captions = caption_values.select(&:present?)
+    search_words = search_query_words
 
-    # Split search query into words and check if any caption contains any of those words
-    search_words = params[:q]&.split(/\s+/)&.map(&:downcase) || []
-    has_matching_caption = non_blank_captions.any? do |caption|
-      caption_words = caption.downcase.split(/\s+/)
-      search_words.any? { |search_word| caption_words.any? { |caption_word| caption_word.include?(search_word) } }
-    end
+    non_blank_captions.any? { |caption| caption_matches_search?(caption, search_words) }
+  end
 
-    has_matching_caption
+  # Check if a caption contains any of the search words
+  def caption_matches_search?(caption, search_words)
+    caption_words = caption.downcase.split(/\s+/)
+    search_words.any? { |search_word| caption_words.any? { |caption_word| caption_word.include?(search_word) } }
+  end
+
+  # Extract and normalize search query words
+  def search_query_words
+    params[:q]&.split(/\s+/)&.map(&:downcase) || []
   end
 
   # Conditional method to determine if all captions should be displayed on show page
