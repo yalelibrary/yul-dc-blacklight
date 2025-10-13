@@ -229,9 +229,9 @@ class CatalogController < ApplicationController
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date', metadata: 'description'
     config.add_show_field 'creationPlace_ssim', label: 'Publication Place', metadata: 'description'
     config.add_show_field 'publisher_ssim', label: 'Publisher', metadata: 'description'
+    config.add_show_field 'caption_tesim', label: 'Matching Captions', metadata: 'matching_captions', helper_method: :display_show_page_captions, if: :should_display_all_captions?
     config.add_show_field 'abstract_tesim', label: 'Abstract', metadata: 'description', helper_method: :join_as_paragraphs
     config.add_show_field 'description_tesim', label: 'Description', metadata: 'description', helper_method: :sanitize_join_with_br
-    config.add_show_field 'caption_tesim', label: 'Matching Captions', metadata: 'description', helper_method: :display_show_page_captions, if: :should_display_all_captions?
     config.add_show_field 'provenanceUncontrolled_tesi', label: 'Provenance', metadata: 'description'
     config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', metadata: 'description', helper_method: :format_digitization
