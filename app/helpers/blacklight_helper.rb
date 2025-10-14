@@ -40,7 +40,7 @@ module BlacklightHelper
 
     # Return nil if caption_values is nil, empty, or contains only blank strings
     return nil if caption_values.blank? || caption_values.all?(&:blank?)
-    
+
     # Extract caption text from "child_oid: caption" format for matching
     caption_texts = caption_values.map { |c| parse_caption_with_oid(c)[:caption_text] }.compact
     return nil unless caption_texts.any? { |caption_text| params[:q]&.include?(caption_text) }
@@ -51,10 +51,10 @@ module BlacklightHelper
   # If format doesn't match, returns the entire string as caption_text with nil child_oid
   def parse_caption_with_oid(caption_string)
     return { child_oid: nil, caption_text: nil } if caption_string.blank?
-    
+
     # Match pattern: digits followed by colon and space, then the caption
     match = caption_string.match(/^(\d+):\s*(.+)$/m)
-    
+
     if match
       { child_oid: match[1], caption_text: match[2].strip }
     else
@@ -74,7 +74,7 @@ module BlacklightHelper
     # Parse captions and filter out empty ones
     parsed_captions = caption_values.map { |c| parse_caption_with_oid(c) }
                                     .select { |parsed| parsed[:caption_text].present? }
-    
+
     # Find matching captions (search only the caption text, not the child_oid)
     search_words = params[:q]&.split(/\s+/)&.map(&:downcase) || []
     matching_captions = parsed_captions.select do |parsed|
@@ -106,7 +106,7 @@ module BlacklightHelper
 
     # Use the extracted child_oid directly
     url_params[:child_oid] = child_oid if child_oid.present?
-    
+
     object_url += "?#{url_params.to_query}"
 
     # Use Blacklight's highlighting if available
@@ -114,7 +114,7 @@ module BlacklightHelper
     if highlight_field&.any?
       # Find highlighted version that matches our caption text (not the child_oid prefix)
       highlighted_caption = highlight_field.find { |hl| hl.include?(caption_text) } || highlight_field.first
-      
+
       # Strip out the child_oid prefix from highlighting if present
       highlighted_caption = highlighted_caption.sub(/^\d+:\s*/, '')
 
@@ -151,12 +151,12 @@ module BlacklightHelper
     caption_links = []
     caption_values.each do |caption_with_oid|
       next if caption_with_oid.blank?
-      
+
       # Parse the caption to extract child_oid and caption text
       parsed = parse_caption_with_oid(caption_with_oid)
       caption_text = parsed[:caption_text]
       child_oid = parsed[:child_oid]
-      
+
       next if caption_text.blank?
 
       # Check if this caption matches the search query (search only caption text, not child_oid)
@@ -173,7 +173,7 @@ module BlacklightHelper
       # Preserve the search query so captions remain visible
       url_params[:q] = params[:q] if params[:q].present?
       url_params[:child_oid] = child_oid if child_oid.present?
-      
+
       object_url += "?#{url_params.to_query}"
 
       # Sanitize snippet to only allow span tags with class attribute (for highlighting)

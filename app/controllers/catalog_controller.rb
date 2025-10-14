@@ -603,12 +603,12 @@ class CatalogController < ApplicationController
   # Returns only the caption text (without child_oid prefix)
   def extract_caption_text(caption_with_oid)
     return nil if caption_with_oid.blank?
-    
+
     # Match pattern: digits followed by colon and space, then the caption
     match = caption_with_oid.match(/^(\d+):\s*(.+)$/m)
-    
+
     if match
-      match[2].strip  # Return just the caption text
+      match[2].strip # Return just the caption text
     else
       # If no match, treat entire string as caption (backward compatibility)
       caption_with_oid
