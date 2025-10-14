@@ -75,6 +75,29 @@ module BlacklightHelper
     content
   end
 
+  # Safely retrieve the child_oid for a given caption index
+  # Returns nil if the arrays don't exist, are out of sync, or the index is out of bounds
+  def get_child_oid_for_caption(document, caption_index)
+    return nil unless document[:caption_tesim].present? && document[:child_oids_ssim].present?
+    
+    caption_count = document[:caption_tesim].length
+    child_oid_count = document[:child_oids_ssim].length
+    
+    # Safety check: ensure arrays are same length
+    if caption_count != child_oid_count
+      Rails.logger.warn(
+        "Mismatched caption/child_oid arrays for document #{document[:id]}: " \
+        "#{caption_count} captions, #{child_oid_count} child_oids"
+      )
+      return nil
+    end
+    
+    # Ensure the index is within bounds
+    return nil unless caption_index >= 0 && caption_index < child_oid_count
+    
+    document[:child_oids_ssim][caption_index]
+  end
+
   # Helper method to build a caption link with highlighting and URL parameters
   def build_caption_link(document, field, caption_text, caption_index)
     # Build URL with necessary parameters
@@ -82,10 +105,10 @@ module BlacklightHelper
     url_params = { show_captions: 'true' }
     url_params[:q] = params[:q] if params[:q].present?
 
-    if document[:child_oids_ssim] && caption_index < document[:child_oids_ssim].length
-      child_oid = document[:child_oids_ssim][caption_index]
-      url_params[:child_oid] = child_oid
-    end
+    # Safely get the child_oid for this caption
+    child_oid = get_child_oid_for_caption(document, caption_index)
+    url_params[:child_oid] = child_oid if child_oid.present?
+    
     object_url += "?#{url_params.to_query}"
 
     # Use Blacklight's highlighting if available
@@ -141,10 +164,11 @@ module BlacklightHelper
       url_params = { show_captions: 'true' }
       # Preserve the search query so captions remain visible
       url_params[:q] = params[:q] if params[:q].present?
-      if document[:child_oids_ssim] && caption_index < document[:child_oids_ssim].length
-        child_oid = document[:child_oids_ssim][caption_index]
-        url_params[:child_oid] = child_oid
-      end
+      
+      # Safely get the child_oid for this caption
+      child_oid = get_child_oid_for_caption(document, caption_index)
+      url_params[:child_oid] = child_oid if child_oid.present?
+      
       object_url += "?#{url_params.to_query}"
 
       # Sanitize snippet to only allow span tags with class attribute (for highlighting)
