@@ -40,7 +40,27 @@ module BlacklightHelper
 
     # Return nil if caption_values is nil, empty, or contains only blank strings
     return nil if caption_values.blank? || caption_values.all?(&:blank?)
-    return nil unless caption_values.any? { |value| params[:q]&.include?(value) }
+    
+    # Extract caption text from "child_oid: caption" format for matching
+    caption_texts = caption_values.map { |c| parse_caption_with_oid(c)[:caption_text] }.compact
+    return nil unless caption_texts.any? { |caption_text| params[:q]&.include?(caption_text) }
+  end
+
+  # Parse caption in format "child_oid: caption text"
+  # Returns a hash with :child_oid and :caption_text
+  # If format doesn't match, returns the entire string as caption_text with nil child_oid
+  def parse_caption_with_oid(caption_string)
+    return { child_oid: nil, caption_text: nil } if caption_string.blank?
+    
+    # Match pattern: digits followed by colon and space, then the caption
+    match = caption_string.match(/^(\d+):\s*(.+)$/m)
+    
+    if match
+      { child_oid: match[1], caption_text: match[2].strip }
+    else
+      # If no match, treat entire string as caption (backward compatibility)
+      { child_oid: nil, caption_text: caption_string }
+    end
   end
 
   # Helper method for caption_tesim index field with additional note for multiple matches
@@ -51,11 +71,14 @@ module BlacklightHelper
     caption_values = document[field]
     return nil if caption_values.blank? || caption_values.all?(&:blank?)
 
-    # Filter out empty/blank caption values and find matching captions
-    non_blank_captions = caption_values.select(&:present?)
+    # Parse captions and filter out empty ones
+    parsed_captions = caption_values.map { |c| parse_caption_with_oid(c) }
+                                    .select { |parsed| parsed[:caption_text].present? }
+    
+    # Find matching captions (search only the caption text, not the child_oid)
     search_words = params[:q]&.split(/\s+/)&.map(&:downcase) || []
-    matching_captions = non_blank_captions.select do |caption|
-      caption_words = caption.downcase.split(/\s+/)
+    matching_captions = parsed_captions.select do |parsed|
+      caption_words = parsed[:caption_text].downcase.split(/\s+/)
       search_words.any? { |search_word| caption_words.any? { |caption_word| caption_word.include?(search_word) } }
     end
 
@@ -63,8 +86,7 @@ module BlacklightHelper
 
     # Build link for the first matching caption
     first_match = matching_captions.first
-    caption_index = caption_values.index(first_match) || 0
-    content = build_caption_link(document, field, first_match, caption_index)
+    content = build_caption_link(document, field, first_match[:caption_text], first_match[:child_oid])
 
     # Add note if there are multiple matches
     if matching_captions.length > 1
@@ -75,38 +97,14 @@ module BlacklightHelper
     content
   end
 
-  # Safely retrieve the child_oid for a given caption index
-  # Returns nil if the arrays don't exist, are out of sync, or the index is out of bounds
-  def get_child_oid_for_caption(document, caption_index)
-    return nil unless document[:caption_tesim].present? && document[:child_oids_ssim].present?
-    
-    caption_count = document[:caption_tesim].length
-    child_oid_count = document[:child_oids_ssim].length
-    
-    # Safety check: ensure arrays are same length
-    if caption_count != child_oid_count
-      Rails.logger.warn(
-        "Mismatched caption/child_oid arrays for document #{document[:id]}: " \
-        "#{caption_count} captions, #{child_oid_count} child_oids"
-      )
-      return nil
-    end
-    
-    # Ensure the index is within bounds
-    return nil unless caption_index >= 0 && caption_index < child_oid_count
-    
-    document[:child_oids_ssim][caption_index]
-  end
-
   # Helper method to build a caption link with highlighting and URL parameters
-  def build_caption_link(document, field, caption_text, caption_index)
+  def build_caption_link(document, field, caption_text, child_oid)
     # Build URL with necessary parameters
     object_url = solr_document_path(document[:id])
     url_params = { show_captions: 'true' }
     url_params[:q] = params[:q] if params[:q].present?
 
-    # Safely get the child_oid for this caption
-    child_oid = get_child_oid_for_caption(document, caption_index)
+    # Use the extracted child_oid directly
     url_params[:child_oid] = child_oid if child_oid.present?
     
     object_url += "?#{url_params.to_query}"
@@ -114,7 +112,11 @@ module BlacklightHelper
     # Use Blacklight's highlighting if available
     highlight_field = document.highlight_field(field)
     if highlight_field&.any?
+      # Find highlighted version that matches our caption text (not the child_oid prefix)
       highlighted_caption = highlight_field.find { |hl| hl.include?(caption_text) } || highlight_field.first
+      
+      # Strip out the child_oid prefix from highlighting if present
+      highlighted_caption = highlighted_caption.sub(/^\d+:\s*/, '')
 
       # Add ellipsis if the caption is truncated
       plain_highlight = highlighted_caption.gsub(/<[^>]*>/, '')
@@ -145,28 +147,31 @@ module BlacklightHelper
     # Split search query into words for matching
     search_words = params[:q]&.split(/\s+/)&.map(&:downcase) || []
 
-    # Iterate through captions with their original indices to handle duplicate caption text
+    # Iterate through captions, parsing each one
     caption_links = []
-    caption_values.each_with_index do |caption, caption_index|
-      # Skip blank captions
-      next if caption.blank?
+    caption_values.each do |caption_with_oid|
+      next if caption_with_oid.blank?
+      
+      # Parse the caption to extract child_oid and caption text
+      parsed = parse_caption_with_oid(caption_with_oid)
+      caption_text = parsed[:caption_text]
+      child_oid = parsed[:child_oid]
+      
+      next if caption_text.blank?
 
-      # Check if this caption matches the search query
-      caption_words = caption.downcase.split(/\s+/)
+      # Check if this caption matches the search query (search only caption text, not child_oid)
+      caption_words = caption_text.downcase.split(/\s+/)
       matches = search_words.any? { |search_word| caption_words.any? { |caption_word| caption_word.include?(search_word) } }
       next unless matches
 
-      # Create snippet: find matching word and extract 3 words before and after
-      snippet = create_caption_snippet(caption, search_words)
+      # Create snippet: find matching word and extract 3 words before and after (using caption text only)
+      snippet = create_caption_snippet(caption_text, search_words)
 
       # Create a link to the object page with child_oid, show_captions, and search query parameters
       object_url = solr_document_path(document[:id])
       url_params = { show_captions: 'true' }
       # Preserve the search query so captions remain visible
       url_params[:q] = params[:q] if params[:q].present?
-      
-      # Safely get the child_oid for this caption
-      child_oid = get_child_oid_for_caption(document, caption_index)
       url_params[:child_oid] = child_oid if child_oid.present?
       
       object_url += "?#{url_params.to_query}"

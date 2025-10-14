@@ -599,6 +599,22 @@ class CatalogController < ApplicationController
     }
   end
 
+  # Parse caption in format "child_oid: caption text"
+  # Returns only the caption text (without child_oid prefix)
+  def extract_caption_text(caption_with_oid)
+    return nil if caption_with_oid.blank?
+    
+    # Match pattern: digits followed by colon and space, then the caption
+    match = caption_with_oid.match(/^(\d+):\s*(.+)$/m)
+    
+    if match
+      match[2].strip  # Return just the caption text
+    else
+      # If no match, treat entire string as caption (backward compatibility)
+      caption_with_oid
+    end
+  end
+
   # Conditional method to determine if caption field should be displayed
   # Used with the 'if' option in field configuration
   def should_display_caption?(_field_config, document)
@@ -607,11 +623,12 @@ class CatalogController < ApplicationController
     # Return false if caption_values is blank or contains only empty/blank strings
     return false if caption_values.blank? || caption_values.all?(&:blank?)
 
-    # Filter out empty/blank caption values and check for word-level matches
-    non_blank_captions = caption_values.select(&:present?)
+    # Extract caption text from "child_oid: caption" format and filter out blanks
+    caption_texts = caption_values.map { |c| extract_caption_text(c) }.select(&:present?)
     search_words = search_query_words
 
-    non_blank_captions.any? { |caption| caption_matches_search?(caption, search_words) }
+    # Check if any caption text (not child_oid) matches search query
+    caption_texts.any? { |caption_text| caption_matches_search?(caption_text, search_words) }
   end
 
   # Check if a caption contains any of the search words
