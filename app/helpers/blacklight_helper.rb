@@ -61,6 +61,16 @@ module BlacklightHelper
                   .select { |parsed| parsed[:has_oid_prefix] && parsed[:caption_text].present? }
   end
 
+  # Get search words from query parameter
+  def search_words
+    params[:q]&.split(/\s+/)&.map(&:downcase) || []
+  end
+
+  # Find captions matching the search query
+  def matching_captions(caption_values)
+    valid_parsed_captions(caption_values).select { |p| caption_matches_search?(p[:caption_text], search_words) }
+  end
+
   # Check if caption text matches any search words
   def caption_matches_search?(caption_text, search_words)
     caption_words = caption_text.downcase.split(/\s+/)
@@ -75,16 +85,23 @@ module BlacklightHelper
     "#{solr_document_path(document[:id])}?#{url_params.to_query}"
   end
 
+  # Strip HTML tags from text
+  def strip_html(text)
+    text.gsub(/<[^>]*>/, '')
+  end
+
+  # Check if text needs ellipsis and doesn't already have one
+  def needs_ellipsis?(text)
+    !text.strip.end_with?('...', '…')
+  end
+
   # Helper method for caption_tesim index field with additional note for multiple matches
   def display_index_caption_with_note(args)
-    parsed_captions = valid_parsed_captions(args[:document][args[:field]])
-    return nil if parsed_captions.empty?
-
-    search_words = params[:q]&.split(/\s+/)&.map(&:downcase) || []
-    matching = parsed_captions.select { |p| caption_matches_search?(p[:caption_text], search_words) }
+    matching = matching_captions(args[:document][args[:field]])
     return nil if matching.empty?
 
-    content = build_caption_link(args[:document], args[:field], matching.first[:caption_text], matching.first[:child_oid])
+    first = matching.first
+    content = build_caption_link(args[:document], args[:field], first[:caption_text], first[:child_oid])
 
     if matching.length > 1
       note = content_tag(:em, 'More caption search results available on object page')
@@ -101,11 +118,10 @@ module BlacklightHelper
 
     if highlight_field&.any?
       highlighted = (highlight_field.find { |hl| hl.include?(caption_text) } || highlight_field.first)
-                    .sub(/^\d+:\s*/, '') # Strip child_oid prefix
+                    .sub(/^\d+:\s*/, '')
 
       # Add ellipsis if truncated
-      highlighted += "..." if highlighted.gsub(/<[^>]*>/, '').length < caption_text.gsub(/<[^>]*>/, '').length &&
-                              !highlighted.strip.end_with?('...', '…')
+      highlighted += "..." if strip_html(highlighted).length < strip_html(caption_text).length && needs_ellipsis?(highlighted)
 
       link_to(sanitize(highlighted, tags: %w[span], attributes: %w[class]), url, class: 'highlight-uv-caption')
     else
@@ -115,11 +131,7 @@ module BlacklightHelper
 
   # Helper method to display all captions for the show page
   def display_show_page_captions(args)
-    parsed_captions = valid_parsed_captions(args[:document][args[:field]])
-    return nil if parsed_captions.empty?
-
-    search_words = params[:q]&.split(/\s+/)&.map(&:downcase) || []
-    matching = parsed_captions.select { |p| caption_matches_search?(p[:caption_text], search_words) }
+    matching = matching_captions(args[:document][args[:field]])
     return nil if matching.empty?
 
     links = matching.map do |parsed|
@@ -136,39 +148,25 @@ module BlacklightHelper
     words = caption.split(/\s+/)
     words_lower = words.map(&:downcase)
 
-    # Find the first matching word position
-    match_index = nil
-    matched_word = nil
-
-    search_words.each do |search_word|
-      words_lower.each_with_index do |word, idx|
-        next unless word.include?(search_word)
-        match_index = idx
-        matched_word = words[idx]
-        break
-      end
-      break if match_index
-    end
+    # Find first matching word position
+    match_index = search_words.lazy
+                              .flat_map { |sw| words_lower.each_index.select { |i| words_lower[i].include?(sw) } }
+                              .first
 
     return h(caption) if match_index.nil?
 
-    # Extract 3 words before and after
-    context_size = 3
-    start_index = [0, match_index - context_size].max
-    end_index = [words.length - 1, match_index + context_size].min
+    # Extract context window (3 words before and after)
+    context = 3
+    start_idx = [0, match_index - context].max
+    end_idx = [words.length - 1, match_index + context].min
 
-    # Build the snippet - escape each word first
-    snippet_words = words[start_index..end_index].map { |word| h(word) }
-    snippet = snippet_words.join(' ')
+    # Build snippet with ellipsis
+    snippet = words[start_idx..end_idx].map { |w| h(w) }.join(' ')
+    snippet = "...#{snippet}" if start_idx.positive?
+    snippet = "#{snippet}..." if end_idx < words.length - 1
 
-    # Add ellipsis if needed
-    snippet = "...#{snippet}" if start_index.positive?
-    snippet = "#{snippet}..." if end_index < words.length - 1
-
-    # Highlight the matched word (wrap in span with class for styling)
-    # matched_word is now escaped, so we need to escape it for the regex too
-    escaped_matched_word = h(matched_word)
-    snippet.gsub(/\b#{Regexp.escape(escaped_matched_word)}\b/i, '<span class="search-highlight">\0</span>')
+    # Highlight the matched word
+    snippet.gsub(/\b#{Regexp.escape(h(words[match_index]))}\b/i, '<span class="search-highlight">\0</span>')
   end
 
   # removes date range params from link with unknown date
