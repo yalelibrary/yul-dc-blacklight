@@ -600,30 +600,24 @@ class CatalogController < ApplicationController
   end
 
   # Parse caption in format "child_oid: caption text"
-  # Returns a hash with :caption_text and :has_oid_prefix
   def parse_caption_format(caption_with_oid)
     return { caption_text: nil, has_oid_prefix: false } if caption_with_oid.blank?
 
-    # Match pattern: digits followed by colon and space, then the caption
     match = caption_with_oid.match(/^(\d+):\s*(.+)$/m)
-
     if match
       { caption_text: match[2].strip, has_oid_prefix: true }
     else
-      # Old format - no child_oid prefix
       { caption_text: caption_with_oid, has_oid_prefix: false }
     end
   end
 
   # Get valid caption texts from document (only new format with child_oid prefix)
   def valid_caption_texts(document)
-    caption_values = document[:caption_tesim]
-    return [] if caption_values.blank? || caption_values.all?(&:blank?)
+    return [] if document[:caption_tesim].blank?
 
-    # Parse and filter to only new format captions
-    caption_values.map { |c| parse_caption_format(c) }
-                  .select { |parsed| parsed[:has_oid_prefix] && parsed[:caption_text].present? }
-                  .map { |parsed| parsed[:caption_text] }
+    document[:caption_tesim].map { |c| parse_caption_format(c) }
+                            .select { |p| p[:has_oid_prefix] && p[:caption_text].present? }
+                            .map { |p| p[:caption_text] }
   end
 
   # Conditional method to determine if caption field should be displayed

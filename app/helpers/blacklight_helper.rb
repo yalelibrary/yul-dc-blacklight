@@ -32,83 +32,63 @@ module BlacklightHelper
 
   # Helper method for caption_tesim index field
   # Returns nil if search results do not contain a caption in the new format
-  # This ensures the "Caption" label is not displayed when there's no caption content
   def display_caption_or_nil(args)
-    document = args[:document]
-    field = args[:field]
-    caption_values = document[field]
+    parsed = valid_parsed_captions(args[:document][args[:field]])
+    return nil if parsed.empty?
 
-    # Return nil if caption_values is nil, empty, or contains only blank strings
-    return nil if caption_values.blank? || caption_values.all?(&:blank?)
-
-    # Extract caption text from "child_oid: caption" format, only for new format captions
-    parsed_captions = caption_values.map { |c| parse_caption_with_oid(c) }
-                                    .select { |parsed| parsed[:has_oid_prefix] && parsed[:caption_text].present? }
-
-    return nil if parsed_captions.empty?
-
-    caption_texts = parsed_captions.map { |parsed| parsed[:caption_text] }
-    return nil unless caption_texts.any? { |caption_text| params[:q]&.include?(caption_text) }
+    caption_texts = parsed.map { |p| p[:caption_text] }
+    caption_texts.any? { |text| params[:q]&.include?(text) } ? true : nil
   end
 
   # Parse caption in format "child_oid: caption text"
   # Returns a hash with :child_oid, :caption_text, and :has_oid_prefix
-  # If format doesn't match, returns the entire string as caption_text with nil child_oid
   def parse_caption_with_oid(caption_string)
     return { child_oid: nil, caption_text: nil, has_oid_prefix: false } if caption_string.blank?
 
-    # Match pattern: digits followed by colon and space, then the caption
     match = caption_string.match(/^(\d+):\s*(.+)$/m)
-
     if match
       { child_oid: match[1], caption_text: match[2].strip, has_oid_prefix: true }
     else
-      # If no match, treat entire string as caption (backward compatibility)
       { child_oid: nil, caption_text: caption_string, has_oid_prefix: false }
     end
   end
 
-  # Get child_oid from parsed caption
-  # Returns the embedded child_oid if present in new format, otherwise nil
-  # Old format records without "child_oid: caption" will not have child_oid links
-  def get_child_oid_for_caption_safe(_document, parsed_caption, _caption_index)
-    # Only use child_oid if caption has the new format with embedded child_oid
-    parsed_caption[:child_oid]
+  # Get valid parsed captions (only new format with child_oid prefix)
+  def valid_parsed_captions(caption_values)
+    return [] if caption_values.blank?
+
+    caption_values.map { |c| parse_caption_with_oid(c) }
+                  .select { |parsed| parsed[:has_oid_prefix] && parsed[:caption_text].present? }
+  end
+
+  # Check if caption text matches any search words
+  def caption_matches_search?(caption_text, search_words)
+    caption_words = caption_text.downcase.split(/\s+/)
+    search_words.any? { |search_word| caption_words.any? { |word| word.include?(search_word) } }
+  end
+
+  # Build URL for caption link
+  def caption_link_url(document, child_oid)
+    url_params = { show_captions: 'true' }
+    url_params[:q] = params[:q] if params[:q].present?
+    url_params[:child_oid] = child_oid if child_oid.present?
+    "#{solr_document_path(document[:id])}?#{url_params.to_query}"
   end
 
   # Helper method for caption_tesim index field with additional note for multiple matches
   def display_index_caption_with_note(args)
-    document = args[:document]
-    field = args[:field]
-
-    caption_values = document[field]
-    return nil if caption_values.blank? || caption_values.all?(&:blank?)
-
-    # Parse captions and filter to only include new format with child_oid prefix
-    parsed_captions = caption_values.map.with_index { |c, idx| parse_caption_with_oid(c).merge(original_index: idx) }
-                                    .select { |parsed| parsed[:caption_text].present? && parsed[:has_oid_prefix] }
-
+    parsed_captions = valid_parsed_captions(args[:document][args[:field]])
     return nil if parsed_captions.empty?
 
-    # Find matching captions (search only the caption text, not the child_oid)
     search_words = params[:q]&.split(/\s+/)&.map(&:downcase) || []
-    matching_captions = parsed_captions.select do |parsed|
-      caption_words = parsed[:caption_text].downcase.split(/\s+/)
-      search_words.any? { |search_word| caption_words.any? { |caption_word| caption_word.include?(search_word) } }
-    end
+    matching = parsed_captions.select { |p| caption_matches_search?(p[:caption_text], search_words) }
+    return nil if matching.empty?
 
-    return nil if matching_captions.empty?
+    content = build_caption_link(args[:document], args[:field], matching.first[:caption_text], matching.first[:child_oid])
 
-    # Build link for the first matching caption
-    first_match = matching_captions.first
-    # Get child_oid from new format
-    child_oid = get_child_oid_for_caption_safe(document, first_match, first_match[:original_index])
-    content = build_caption_link(document, field, first_match[:caption_text], child_oid)
-
-    # Add note if there are multiple matches
-    if matching_captions.length > 1
-      note_text = content_tag(:em, 'More caption search results available on object page')
-      content = safe_join([content, tag.br, note_text])
+    if matching.length > 1
+      note = content_tag(:em, 'More caption search results available on object page')
+      content = safe_join([content, tag.br, note])
     end
 
     content
@@ -116,95 +96,39 @@ module BlacklightHelper
 
   # Helper method to build a caption link with highlighting and URL parameters
   def build_caption_link(document, field, caption_text, child_oid)
-    # Build URL with necessary parameters
-    object_url = solr_document_path(document[:id])
-    url_params = { show_captions: 'true' }
-    url_params[:q] = params[:q] if params[:q].present?
-
-    # Use the extracted child_oid directly
-    url_params[:child_oid] = child_oid if child_oid.present?
-
-    object_url += "?#{url_params.to_query}"
-
-    # Use Blacklight's highlighting if available
+    url = caption_link_url(document, child_oid)
     highlight_field = document.highlight_field(field)
+
     if highlight_field&.any?
-      # Find highlighted version that matches our caption text (not the child_oid prefix)
-      highlighted_caption = highlight_field.find { |hl| hl.include?(caption_text) } || highlight_field.first
+      highlighted = (highlight_field.find { |hl| hl.include?(caption_text) } || highlight_field.first)
+                    .sub(/^\d+:\s*/, '') # Strip child_oid prefix
 
-      # Strip out the child_oid prefix from highlighting if present
-      highlighted_caption = highlighted_caption.sub(/^\d+:\s*/, '')
+      # Add ellipsis if truncated
+      highlighted += "..." if highlighted.gsub(/<[^>]*>/, '').length < caption_text.gsub(/<[^>]*>/, '').length &&
+                              !highlighted.strip.end_with?('...', '…')
 
-      # Add ellipsis if the caption is truncated
-      plain_highlight = highlighted_caption.gsub(/<[^>]*>/, '')
-      plain_original = caption_text.gsub(/<[^>]*>/, '')
-
-      if plain_highlight.length < plain_original.length
-        highlighted_caption = "#{highlighted_caption}..." unless highlighted_caption.strip.end_with?('...', '…')
-      end
-
-      # Blacklight's highlight_field already returns HTML-safe highlighted content
-      # but we sanitize to ensure only allowed tags (span with search-highlight class) remain
-      sanitized_caption = sanitize(highlighted_caption, tags: %w[span], attributes: %w[class])
-      link_to(sanitized_caption, object_url, class: 'highlight-uv-caption')
+      link_to(sanitize(highlighted, tags: %w[span], attributes: %w[class]), url, class: 'highlight-uv-caption')
     else
-      # Plain text link - Rails automatically escapes it
-      link_to(caption_text, object_url)
+      link_to(caption_text, url)
     end
   end
 
   # Helper method to display all captions for the show page
   def display_show_page_captions(args)
-    document = args[:document]
-    field = args[:field]
+    parsed_captions = valid_parsed_captions(args[:document][args[:field]])
+    return nil if parsed_captions.empty?
 
-    caption_values = document[field]
-    return nil if caption_values.blank? || caption_values.all?(&:blank?)
-
-    # Split search query into words for matching
     search_words = params[:q]&.split(/\s+/)&.map(&:downcase) || []
+    matching = parsed_captions.select { |p| caption_matches_search?(p[:caption_text], search_words) }
+    return nil if matching.empty?
 
-    # Iterate through captions, parsing each one
-    caption_links = []
-    caption_values.each_with_index do |caption_with_oid, caption_index|
-      next if caption_with_oid.blank?
-
-      # Parse the caption to extract child_oid and caption text
-      parsed = parse_caption_with_oid(caption_with_oid)
-      caption_text = parsed[:caption_text]
-
-      # Skip captions that don't have the new format with child_oid prefix
-      next if caption_text.blank? || !parsed[:has_oid_prefix]
-
-      # Check if this caption matches the search query (search only caption text, not child_oid)
-      caption_words = caption_text.downcase.split(/\s+/)
-      matches = search_words.any? { |search_word| caption_words.any? { |caption_word| caption_word.include?(search_word) } }
-      next unless matches
-
-      # Create snippet: find matching word and extract 3 words before and after (using caption text only)
-      snippet = create_caption_snippet(caption_text, search_words)
-
-      # Get child_oid from new format
-      child_oid = get_child_oid_for_caption_safe(document, parsed, caption_index)
-
-      # Create a link to the object page with child_oid, show_captions, and search query parameters
-      object_url = solr_document_path(document[:id])
-      url_params = { show_captions: 'true' }
-      # Preserve the search query so captions remain visible
-      url_params[:q] = params[:q] if params[:q].present?
-      url_params[:child_oid] = child_oid if child_oid.present?
-
-      object_url += "?#{url_params.to_query}"
-
-      # Sanitize snippet to only allow span tags with class attribute (for highlighting)
-      sanitized_snippet = sanitize(snippet, tags: %w[span], attributes: %w[class])
-      caption_links << link_to(sanitized_snippet, object_url)
+    links = matching.map do |parsed|
+      snippet = sanitize(create_caption_snippet(parsed[:caption_text], search_words),
+                        tags: %w[span], attributes: %w[class])
+      link_to(snippet, caption_link_url(args[:document], parsed[:child_oid]))
     end
 
-    return nil if caption_links.empty?
-
-    # Display all matching caption links separated by line breaks
-    safe_join(caption_links, tag.br)
+    safe_join(links, tag.br)
   end
 
   # Helper method to create a snippet showing 3 words before and after the matching search term
