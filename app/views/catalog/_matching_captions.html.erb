@@ -1,0 +1,36 @@
+<% # Display matching captions toggle button when captions are present
+   # This is shown when user searches for text that matches caption content
+   # The show_captions parameter controls visibility
+%>
+<% if params[:show_captions] == 'true' %>
+  <section class='item-page-captions-wrapper'>
+    <button class='caption-toggle-button'>
+      Hide Captions
+    </button>
+    <div class='matching-captions-content'>
+      <div class='metadata-block single-item-show'>
+        <dl class='metadata-block__group'>
+          <% doc_presenter = show_presenter(document) %>
+          <% doc_presenter.metadata_fields_to_render('matching_captions').each do |field_name, field, field_presenter| %>
+            <% unless field[:no_label].presence %>
+              <% next unless field_presenter.render.present? %>
+              <!-- KEY -->
+              <dt class='blacklight-<%= field_name.parameterize %> metadata-block__label-key'>
+                <%= (render_document_show_field_label document, field: field_name).tr(':', '') %>
+              </dt>
+              <!-- VALUE -->
+              <dd class='blacklight-<%= field_name.parameterize %> metadata-block__label-value metadata-block__label-value--yul'>
+                <%= field_presenter.render %>
+              </dd>
+            <% else %>
+              <p class='blacklight-<%= field_name.parameterize %> showpage_no_label_tag'>
+                <%= field_presenter.render %>
+              </p>
+            <% end %>
+          <% end %>
+        </dl>
+      </div>
+    </div>
+  </section>
+<% end %>
+

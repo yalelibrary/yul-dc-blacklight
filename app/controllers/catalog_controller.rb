@@ -600,32 +600,38 @@ class CatalogController < ApplicationController
   end
 
   # Parse caption in format "child_oid: caption text"
-  # Returns only the caption text (without child_oid prefix)
-  def extract_caption_text(caption_with_oid)
-    return nil if caption_with_oid.blank?
+  # Returns a hash with :caption_text and :has_oid_prefix
+  def parse_caption_format(caption_with_oid)
+    return { caption_text: nil, has_oid_prefix: false } if caption_with_oid.blank?
 
     # Match pattern: digits followed by colon and space, then the caption
     match = caption_with_oid.match(/^(\d+):\s*(.+)$/m)
 
     if match
-      match[2].strip # Return just the caption text
+      { caption_text: match[2].strip, has_oid_prefix: true }
     else
-      # If no match, treat entire string as caption (backward compatibility)
-      caption_with_oid
+      # Old format - no child_oid prefix
+      { caption_text: caption_with_oid, has_oid_prefix: false }
     end
   end
 
   # Conditional method to determine if caption field should be displayed
   # Used with the 'if' option in field configuration
+  # Only displays captions in the new "child_oid: caption" format
   def should_display_caption?(_field_config, document)
     caption_values = document[:caption_tesim]
 
     # Return false if caption_values is blank or contains only empty/blank strings
     return false if caption_values.blank? || caption_values.all?(&:blank?)
 
-    # Extract caption text from "child_oid: caption" format and filter out blanks
-    caption_texts = caption_values.map { |c| extract_caption_text(c) }.select(&:present?)
+    # Parse captions and only include those with the new format (child_oid prefix)
+    parsed_captions = caption_values.map { |c| parse_caption_format(c) }
+                                    .select { |parsed| parsed[:has_oid_prefix] && parsed[:caption_text].present? }
+
+    return false if parsed_captions.empty?
+
     search_words = search_query_words
+    caption_texts = parsed_captions.map { |parsed| parsed[:caption_text] }
 
     # Check if any caption text (not child_oid) matches search query
     caption_texts.any? { |caption_text| caption_matches_search?(caption_text, search_words) }
