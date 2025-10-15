@@ -40,13 +40,13 @@ module BlacklightHelper
 
     # Return nil if caption_values is nil, empty, or contains only blank strings
     return nil if caption_values.blank? || caption_values.all?(&:blank?)
-    
+
     # Extract caption text from "child_oid: caption" format, only for new format captions
     parsed_captions = caption_values.map { |c| parse_caption_with_oid(c) }
                                     .select { |parsed| parsed[:has_oid_prefix] && parsed[:caption_text].present? }
-    
+
     return nil if parsed_captions.empty?
-    
+
     caption_texts = parsed_captions.map { |parsed| parsed[:caption_text] }
     return nil unless caption_texts.any? { |caption_text| params[:q]&.include?(caption_text) }
   end
@@ -56,10 +56,10 @@ module BlacklightHelper
   # If format doesn't match, returns the entire string as caption_text with nil child_oid
   def parse_caption_with_oid(caption_string)
     return { child_oid: nil, caption_text: nil, has_oid_prefix: false } if caption_string.blank?
-    
+
     # Match pattern: digits followed by colon and space, then the caption
     match = caption_string.match(/^(\d+):\s*(.+)$/m)
-    
+
     if match
       { child_oid: match[1], caption_text: match[2].strip, has_oid_prefix: true }
     else
@@ -71,7 +71,7 @@ module BlacklightHelper
   # Get child_oid from parsed caption
   # Returns the embedded child_oid if present in new format, otherwise nil
   # Old format records without "child_oid: caption" will not have child_oid links
-  def get_child_oid_for_caption_safe(document, parsed_caption, caption_index)
+  def get_child_oid_for_caption_safe(_document, parsed_caption, _caption_index)
     # Only use child_oid if caption has the new format with embedded child_oid
     parsed_caption[:child_oid]
   end
@@ -87,9 +87,9 @@ module BlacklightHelper
     # Parse captions and filter to only include new format with child_oid prefix
     parsed_captions = caption_values.map.with_index { |c, idx| parse_caption_with_oid(c).merge(original_index: idx) }
                                     .select { |parsed| parsed[:caption_text].present? && parsed[:has_oid_prefix] }
-    
+
     return nil if parsed_captions.empty?
-    
+
     # Find matching captions (search only the caption text, not the child_oid)
     search_words = params[:q]&.split(/\s+/)&.map(&:downcase) || []
     matching_captions = parsed_captions.select do |parsed|
@@ -168,11 +168,11 @@ module BlacklightHelper
     caption_links = []
     caption_values.each_with_index do |caption_with_oid, caption_index|
       next if caption_with_oid.blank?
-      
+
       # Parse the caption to extract child_oid and caption text
       parsed = parse_caption_with_oid(caption_with_oid)
       caption_text = parsed[:caption_text]
-      
+
       # Skip captions that don't have the new format with child_oid prefix
       next if caption_text.blank? || !parsed[:has_oid_prefix]
 
@@ -193,7 +193,7 @@ module BlacklightHelper
       # Preserve the search query so captions remain visible
       url_params[:q] = params[:q] if params[:q].present?
       url_params[:child_oid] = child_oid if child_oid.present?
-      
+
       object_url += "?#{url_params.to_query}"
 
       # Sanitize snippet to only allow span tags with class attribute (for highlighting)

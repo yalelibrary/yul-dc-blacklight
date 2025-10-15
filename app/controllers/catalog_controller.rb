@@ -615,25 +615,25 @@ class CatalogController < ApplicationController
     end
   end
 
+  # Get valid caption texts from document (only new format with child_oid prefix)
+  def valid_caption_texts(document)
+    caption_values = document[:caption_tesim]
+    return [] if caption_values.blank? || caption_values.all?(&:blank?)
+
+    # Parse and filter to only new format captions
+    caption_values.map { |c| parse_caption_format(c) }
+                  .select { |parsed| parsed[:has_oid_prefix] && parsed[:caption_text].present? }
+                  .map { |parsed| parsed[:caption_text] }
+  end
+
   # Conditional method to determine if caption field should be displayed
   # Used with the 'if' option in field configuration
   # Only displays captions in the new "child_oid: caption" format
   def should_display_caption?(_field_config, document)
-    caption_values = document[:caption_tesim]
-
-    # Return false if caption_values is blank or contains only empty/blank strings
-    return false if caption_values.blank? || caption_values.all?(&:blank?)
-
-    # Parse captions and only include those with the new format (child_oid prefix)
-    parsed_captions = caption_values.map { |c| parse_caption_format(c) }
-                                    .select { |parsed| parsed[:has_oid_prefix] && parsed[:caption_text].present? }
-
-    return false if parsed_captions.empty?
+    caption_texts = valid_caption_texts(document)
+    return false if caption_texts.empty?
 
     search_words = search_query_words
-    caption_texts = parsed_captions.map { |parsed| parsed[:caption_text] }
-
-    # Check if any caption text (not child_oid) matches search query
     caption_texts.any? { |caption_text| caption_matches_search?(caption_text, search_words) }
   end
 
