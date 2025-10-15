@@ -514,4 +514,101 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).to have_content "Reason for request:"
     end
   end
+
+  context 'Caption search results and linking', js: true do
+    let(:document_with_captions) do
+      {
+        id: '999',
+        title_tesim: ['Document with Captions'],
+        format: 'text',
+        visibility_ssi: 'Public',
+        caption_tesim: ['112: Sketch of the Missouri River', '113: Portrait of Abraham Lincoln', '114: Map of the Territory'],
+        child_oids_ssim: [112, 113, 114],
+        oid_ssi: 999,
+        resourceType_ssim: 'Archives or Manuscripts'
+      }
+    end
+
+    let(:document_with_single_caption) do
+      {
+        id: '888',
+        title_tesim: ['Single Caption Document'],
+        format: 'text',
+        visibility_ssi: 'Public',
+        caption_tesim: ['555: Historic photograph of Yale campus'],
+        child_oids_ssim: [555],
+        oid_ssi: 888,
+        resourceType_ssim: 'Archives or Manuscripts'
+      }
+    end
+
+    before do
+      manifest_fixture = File.open(File.join('spec', 'fixtures', '2041002.json')).read
+      stub_request(:get, "https://yul-dc-development-samples.s3.amazonaws.com/manifests/99/99/999.json")
+        .to_return(status: 200, body: manifest_fixture, headers: {})
+      stub_request(:get, "https://yul-dc-development-samples.s3.amazonaws.com/manifests/88/88/888.json")
+        .to_return(status: 200, body: manifest_fixture, headers: {})
+
+      solr = Blacklight.default_index.connection
+      solr.add(document_with_captions)
+      solr.add(document_with_single_caption)
+      solr.commit
+    end
+
+    context 'when viewing show page with matching captions' do
+      it 'displays the caption toggle button when show_captions parameter is true' do
+        visit '/catalog/999?show_captions=true&q=Missouri'
+        expect(page).to have_css('.caption-toggle-button')
+        expect(page).to have_button('Hide Captions')
+      end
+
+      it 'displays all matching captions with links' do
+        visit '/catalog/999?show_captions=true&q=Missouri'
+        within('.matching-captions-content') do
+          expect(page).to have_link(href: /child_oid=112/)
+          expect(page).to have_text('Missouri')
+        end
+      end
+
+      it 'includes search query in caption links' do
+        visit '/catalog/999?show_captions=true&q=Lincoln'
+        within('.matching-captions-content') do
+          expect(page).to have_link(href: /q=Lincoln/)
+          expect(page).to have_link(href: /child_oid=113/)
+        end
+      end
+
+      it 'displays multiple matching captions' do
+        visit '/catalog/999?show_captions=true&q=the'
+        within('.matching-captions-content') do
+          expect(page).to have_text('Missouri River')
+          expect(page).to have_text('Territory')
+        end
+      end
+
+      it 'does not display caption section when show_captions parameter is false' do
+        visit '/catalog/999'
+        expect(page).not_to have_css('.caption-toggle-button')
+        expect(page).not_to have_css('.matching-captions-content')
+      end
+    end
+
+    context 'with single matching caption' do
+      it 'displays single caption without multiple results note' do
+        visit '/catalog/888?show_captions=true&q=Yale'
+        within('.matching-captions-content') do
+          expect(page).to have_text('Yale campus')
+          expect(page).to have_link(href: /child_oid=555/)
+        end
+      end
+    end
+
+    context 'caption navigation from search results' do
+      it 'navigates to correct child object when clicking caption link' do
+        visit '/catalog/999?show_captions=true&q=Lincoln&child_oid=113'
+        expect(page).to have_current_path(/child_oid=113/)
+        expect(page).to have_current_path(/show_captions=true/)
+      end
+    end
+  end
 end
