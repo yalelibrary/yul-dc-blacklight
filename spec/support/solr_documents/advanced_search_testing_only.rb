@@ -135,3 +135,148 @@ ADVANCED_SEARCH_TESTING_2 = {
   "year_isim": [1458]
 
 }.freeze
+
+ADVANCED_SEARCH_TESTING_3 = {
+      "id": "2005512",
+      "ancestorTitles_tesim": [
+        "Beinecke Library"
+      ],
+      "ancestor_titles_hierarchy_ssim": [
+        "Beinecke Library"
+      ],
+      "archiveSpaceUri_ssi": "/repositories/11/archival_objects/214638",
+      "box_ssim": [
+        "Box 3 | Folder 24"
+      ],
+      "callNumber_ssim": [
+        "GEN MSS 257"
+      ],
+      "callNumber_tesim": [
+        "GEN MSS 257"
+      ],
+      "caption_tesim": [
+        "The gold pen used by Lincoln to sign the Emancipation Proclamation in the Executive Mansion, Washington, D.C., 1863 Jan 1",
+        "The gold pen used by Lincoln to sign the Emancipation Proclamation in the Executive Mansion, Washington, D.C., 1863 Jan 1"
+      ],
+      "child_oids_ssim": [
+        "1030368",
+        "1032318"
+      ],
+      "collectionId_ssim": [
+        "1"
+      ],
+      "collectionId_tesim": [
+        "1"
+      ],
+      "containerGrouping_ssim": [
+        "Box 3 | Folder 24"
+      ],
+      "containerGrouping_tesim": [
+        "Box 3 | Folder 24"
+      ],
+      "date_ssim": [
+        "n.d."
+      ],
+      "dependentUris_ssim": [
+        "/ladybird/oid/2005512"
+      ],
+      "extent_ssim": [
+        "1 pen + 1 case",
+        "17.5 cm."
+      ],
+      "extentOfDigitization_ssim": [
+        "Completely digitized"
+      ],
+      "findingAid_ssim": [
+        "http://hdl.handle.net/10079/fa/beinecke.lincoln"
+      ],
+      "folder_ssim": [
+        "24"
+      ],
+      "format": [
+        "three dimensional object"
+      ],
+      "format_tesim": [
+        "three dimensional object"
+      ],
+      "genre_ssim": [
+        "Artifacts"
+      ],
+      "genre_tesim": [
+        "Artifacts"
+      ],
+      "hashed_id_ssi": "4ab6aacfb42f1d827b33d9ab8d3e0e2c",
+      "has_fulltext_ssi": "None",
+      "imageCount_isi": 2,
+      "oid_ssi": "2005512",
+      "orbisBarcode_ssi": "39002093768050",
+      "orbisBibId_ssi": "4113177",
+      "partOf_tesim": [
+        "Beinecke Library"
+      ],
+      "preferredCitation_tesim": [
+        "Abraham Lincoln Collection. General Collection, Beinecke Rare Book and Manuscript Library."
+      ],
+      "project_identifier_tesi": "3",
+      "public_bsi": true,
+      "recordType_ssi": "oid",
+      "repository_ssi": "Beinecke Library",
+      "repository_ssim": [
+        "Beinecke Library"
+      ],
+      "resourceType_ssim": [
+        "Archives or Manuscripts"
+      ],
+      "resourceType_tesim": [
+        "Archives or Manuscripts"
+      ],
+      "rights_ssim": [
+        "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+      ],
+      "rights_tesim": [
+        "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+      ],
+      "source_ssim": [
+        "ladybird"
+      ],
+      "sourceDate_tesim": [
+        "1824-1865"
+      ],
+      "sourceNote_tesim": [
+        "Oversize"
+      ],
+      "sourceTitle_tesim": [
+        "Abraham Lincoln collection"
+      ],
+      "sourceCreator_tesim": [
+        "Lincoln, Abraham, 1809-1865"
+      ],
+      "thumbnail_path_ss": "http://localhost:8182/iiif/2/1030368/full/!200,200/0/default.jpg",
+      "title_tesim": [
+        "The gold pen used by Lincoln to sign the Emancipation Proclamation in the Executive Mansion, Washington, D.C., 1863 Jan 1"
+      ],
+      "title_ssim": [
+        "The gold pen used by Lincoln to sign the Emancipation Proclamation in the Executive Mansion, Washington, D.C., 1863 Jan 1"
+      ],
+      "uri_ssim": [
+        "/ladybird/oid/2005512"
+      ],
+      "visibility_ssi": "Yale Community Only",
+      "type_ssi": "parent",
+}.freeze
+
+ADVANCED_SEARCH_TESTING_3_CHILD_1 = {
+        "id":"1030368",
+        "parent_ssi":"2005512",
+        "caption_tesim":["The gold pen used by Lincoln to sign the Emancipation Proclamation in the Executive Mansion, Washington, D.C., 1863 Jan 1 - front view"],
+        "caption_wstsim":["The gold pen used by Lincoln to sign the Emancipation Proclamation in the Executive Mansion, Washington, D.C., 1863 Jan 1 - front view"],
+        "type_ssi":"child"
+}.freeze
+
+ADVANCED_SEARCH_TESTING_3_CHILD_2 = {
+        "id":"1032318",
+        "parent_ssi":"2005512",
+        "caption_tesim":["The gold pen used by Lincoln to sign the Emancipation Proclamation in the Executive Mansion, Washington, D.C., 1863 Jan 1 - back view"],
+        "caption_wstsim":["The gold pen used by Lincoln to sign the Emancipation Proclamation in the Executive Mansion, Washington, D.C., 1863 Jan 1 - back view"],
+        "type_ssi":"child"
+}.freeze

@@ -46,4 +46,11 @@ module CatalogHelper
     end
     "&q=#{url_encode(q)}" if q
   end
+
+  def uv_caption_search_param
+    search_params = current_search_session.try(:query_params) || {}
+    q = nil
+    q = search_params['q'] if search_params['q']
+    "&q=#{url_encode(q)}" if q
+  end
 end

@@ -170,6 +170,40 @@ const getFulltext = async (child_oid) => {
     return result.body.value
 }
 
+// Get the caption and render it on screen
+const caption = () => {
+    // check if caption is present on page
+    const captionTranscription = $('.item-page-caption-wrapper .row')
+    captionTranscription.empty() // Delete the old caption
+    // check if caption is present on child object - button will only display if 'caption_tesim' is not empty
+    if($('.caption-button').length) {
+        const child_oids_array = $('#uv-pages').html().split(' ')
+        const pageWidth = child_oids_array.length === 1 ? 'col-md-12' : 'col-md-6'
+
+        child_oids_array.forEach(async child_oid => {
+            const transcription = await getCaption(child_oid)
+            if (child_oids_array.length === 1) {
+                captionTranscription.empty()
+            }   
+            return captionTranscription.append(`<span class='${pageWidth}'>${transcription}</span>`)
+        })
+    } else {
+        return
+    }
+}
+
+const getCaption = async (child_oid) => {
+    const result = await $.ajax({
+        type:'GET',
+        url:`/annotation/oid/${$('#parent-oid').text()}/canvas/${child_oid}/caption`,
+        data: {
+            oid: $('#parent-oid').text(),
+            child_oid: $('#uv-pages').text()
+        },
+    })
+    return result.body.value
+}
+
 $(document).on('turbolinks:load', function() {
     renderBanner();
 });

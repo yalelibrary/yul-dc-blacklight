@@ -93,6 +93,10 @@ class SearchBuilder < Blacklight::SearchBuilder
     solr_parameters["hl.simple.pre"] = "<span class='search-highlight'>"
     solr_parameters["hl.simple.post"] = "</span>"
   end
+
+  # def join_for_captions(solr_parameters)
+
+  # end
 end
 # rubocop:enable Metrics/ClassLength
 

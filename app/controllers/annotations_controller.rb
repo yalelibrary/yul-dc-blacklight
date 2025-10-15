@@ -5,7 +5,7 @@ class AnnotationsController < ApplicationController
   include Blacklight::Catalog
   include BlacklightHelper
   include CheckAuthorization
-  before_action :check_authorization, only: [:full_text]
+  before_action :check_authorization, only: [:full_text, :caption]
 
   def full_text
     @oid = params[:oid]
@@ -13,7 +13,19 @@ class AnnotationsController < ApplicationController
     @response, @child_document = search_service.fetch(@child_oid, { fl: ['child_fulltext_wstsim', 'parent_ssi'] })
     child_doc = @child_document.response['response']['docs'].first
     if child_doc["parent_ssi"] == @oid
-      render json: fulltext_response(child_doc["child_fulltext_wstsim"].join('\n'))
+      render json: text_response(child_doc["child_fulltext_wstsim"].join('\n'))
+    else
+      render json: { error: 'unauthorized' }.to_json, status: :unauthorized
+    end
+  end
+
+  def caption
+    @oid = params[:oid]
+    @child_oid = params[:child_oid]
+    @response, @child_document = search_service.fetch(@child_oid, { fl: ['caption_wstsim', 'parent_ssi'] })
+    child_doc = @child_document.response['response']['docs'].first
+    if child_doc["parent_ssi"] == @oid
+      render json: text_response(child_doc["caption_wstsim"].join('\n'))
     else
       render json: { error: 'unauthorized' }.to_json, status: :unauthorized
     end
@@ -30,14 +42,14 @@ class AnnotationsController < ApplicationController
     @manifest_base_url ||= (ENV["IIIF_MANIFESTS_BASE_URL"] || "http://localhost:3000/manifests")
   end
 
-  def fulltext_response(full_text)
+  def text_response(text)
     {
       "id": request.original_url,
       "type": "Annotation",
       "motivation": "supplementing",
       "body": {
         "type": "TextualBody",
-        "value": full_text
+        "value": text
       },
       "target": File.join(manifest_base_url.to_s, "oid/#{@oid}/canvas/#{@child_oid}")
     }

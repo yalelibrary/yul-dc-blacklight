@@ -1,0 +1,553 @@
+{
+  "@context": [
+    "http://iiif.io/api/search/1/context.json",
+    "http://iiif.io/api/extension/navplace/context.json",
+    "http://iiif.io/api/presentation/3/context.json"
+  ],
+  "id": "http://localhost/manifests/2005512",
+  "type": "Manifest",
+  "label": {
+    "none": [
+      "The gold pen used by Lincoln to sign the Emancipation Proclamation in the Executive Mansion, Washington, D.C., 1863 Jan 1"
+    ]
+  },
+  "homepage": [
+    {
+      "id": "https://collections.library.yale.edu/catalog/2005512",
+      "type": "Text",
+      "format": "text/html",
+      "label": {
+        "en": [
+          "Yale Digital Collections page"
+        ]
+      }
+    }
+  ],
+  "requiredStatement": {
+    "label": {
+      "en": [
+        "Provider"
+      ]
+    },
+    "value": {
+      "en": [
+        "Yale University Library"
+      ]
+    }
+  },
+  "rendering": [
+    {
+      "id": "http://localhost/pdfs/2005512.pdf",
+      "type": "Text",
+      "format": "application/pdf",
+      "label": {
+        "en": [
+          "Download as PDF"
+        ]
+      }
+    }
+  ],
+  "seeAlso": [
+    {
+      "id": "https://collections.library.yale.edu/catalog/oai?verb=GetRecord&metadataPrefix=oai_mods&identifier=oai:collections.library.yale.edu:2005512",
+      "type": "Dataset",
+      "format": "application/mods+xml",
+      "profile": "http://www.loc.gov/mods/v3"
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "en": [
+          "Published/Created Date"
+        ]
+      },
+      "value": {
+        "none": [
+          "n.d."
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Extent"
+        ]
+      },
+      "value": {
+        "none": [
+          "1 pen + 1 case",
+          "17.5 cm."
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Repository"
+        ]
+      },
+      "value": {
+        "none": [
+          "Beinecke Library"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Call Number"
+        ]
+      },
+      "value": {
+        "none": [
+          "GEN MSS 257"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Collection Title"
+        ]
+      },
+      "value": {
+        "none": [
+          "Abraham Lincoln collection"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Collection Date"
+        ]
+      },
+      "value": {
+        "none": [
+          "1824-1865"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Container / Volume Information"
+        ]
+      },
+      "value": {
+        "none": [
+          "Box 3 | Folder 24"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Extent of Digitization"
+        ]
+      },
+      "value": {
+        "none": [
+          "Completely digitized"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Finding Aid"
+        ]
+      },
+      "value": {
+        "none": [
+          "<span><a href=\"http://hdl.handle.net/10079/fa/beinecke.lincoln\">http://hdl.handle.net/10079/fa/beinecke.lincoln</a></span>"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Archives at Yale Item Page"
+        ]
+      },
+      "value": {
+        "none": [
+          "<span><a href=\"https://archives.yale.edu/repositories/11/archival_objects/214638\">https://archives.yale.edu/repositories/11/archival_objects/214638</a></span>"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Format"
+        ]
+      },
+      "value": {
+        "none": [
+          "three dimensional object"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Genre"
+        ]
+      },
+      "value": {
+        "none": [
+          "Artifacts"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Resource Type"
+        ]
+      },
+      "value": {
+        "none": [
+          "Archives or Manuscripts"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Access"
+        ]
+      },
+      "value": {
+        "none": [
+          "Yale Community Only"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Rights"
+        ]
+      },
+      "value": {
+        "none": [
+          "The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Citation"
+        ]
+      },
+      "value": {
+        "none": [
+          "Abraham Lincoln Collection. General Collection, Beinecke Rare Book and Manuscript Library."
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Orbis ID"
+        ]
+      },
+      "value": {
+        "none": [
+          "4113177"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Object ID (OID)"
+        ]
+      },
+      "value": {
+        "none": [
+          "2005512"
+        ]
+      }
+    }
+  ],
+  "provider": [
+    {
+      "id": "https://www.wikidata.org/wiki/Q2583293",
+      "type": "Agent",
+      "label": {
+        "en": [
+          "Yale Library"
+        ]
+      },
+      "homepage": [
+        {
+          "id": "https://library.yale.edu/",
+          "type": "Text",
+          "label": {
+            "en": [
+              "Yale Library homepage"
+            ]
+          },
+          "format": "text/html"
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "type": "Canvas",
+      "items": [
+        {
+          "id": "http://localhost/manifests/oid/2005512/canvas/1030368/page/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "http://localhost/manifests/oid/2005512/canvas/1030368/image/1",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "http://localhost/manifests/oid/2005512/canvas/1030368",
+              "body": {
+                "id": "http://localhost:8182/iiif/2/1030368/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 3974,
+                "width": 6384,
+                "service": [
+                  {
+                    "@id": "http://localhost:8182/iiif/2/1030368",
+                    "@type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "id": "http://localhost/manifests/oid/2005512/canvas/1030368",
+      "label": {
+        "none": [
+          ""
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "http://localhost:8182/iiif/2/1030368/full/!300,300/0/default.jpg",
+          "type": "Image",
+          "format": "image/jpeg",
+          "height": 187,
+          "width": 300,
+          "service": [
+            {
+              "@id": "http://localhost:8182/iiif/2/1030368",
+              "@type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "rendering": [
+        {
+          "id": "http://localhost:8182/iiif/2/1030368/full/full/0/default.jpg",
+          "label": {
+            "en": [
+              "Full size"
+            ]
+          },
+          "type": "Image",
+          "format": "image/jpeg"
+        },
+        {
+          "id": "http://localhost:3000/download/tiff/1030368",
+          "label": {
+            "en": [
+              "Full size original"
+            ]
+          },
+          "type": "Image",
+          "format": "image/tiff"
+        }
+      ],
+      "height": 3974,
+      "width": 6384,
+      "metadata": [
+        {
+          "label": {
+            "en": [
+              "Image ID"
+            ]
+          },
+          "value": {
+            "none": [
+              "1030368"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Image Caption"
+            ]
+          },
+          "value": {
+            "none": [
+              "The gold pen used by Lincoln to sign the Emancipation Proclamation in the Executive Mansion, Washington, D.C., 1863 Jan 1"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Link to this Image"
+            ]
+          },
+          "value": {
+            "none": [
+              "https://collections.library.yale.edu/catalog/2005512?child_oid=1030368"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "Canvas",
+      "items": [
+        {
+          "id": "http://localhost/manifests/oid/2005512/canvas/1032318/page/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "http://localhost/manifests/oid/2005512/canvas/1032318/image/1",
+              "type": "Annotation",
+              "motivation": "painting",
+              "target": "http://localhost/manifests/oid/2005512/canvas/1032318",
+              "body": {
+                "id": "http://localhost:8182/iiif/2/1032318/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 3992,
+                "width": 6411,
+                "service": [
+                  {
+                    "@id": "http://localhost:8182/iiif/2/1032318",
+                    "@type": "ImageService2",
+                    "profile": "http://iiif.io/api/image/2/level2.json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "id": "http://localhost/manifests/oid/2005512/canvas/1032318",
+      "label": {
+        "none": [
+          ""
+        ]
+      },
+      "thumbnail": [
+        {
+          "id": "http://localhost:8182/iiif/2/1032318/full/!300,300/0/default.jpg",
+          "type": "Image",
+          "format": "image/jpeg",
+          "height": 187,
+          "width": 300,
+          "service": [
+            {
+              "@id": "http://localhost:8182/iiif/2/1032318",
+              "@type": "ImageService2",
+              "profile": "http://iiif.io/api/image/2/level2.json"
+            }
+          ]
+        }
+      ],
+      "rendering": [
+        {
+          "id": "http://localhost:8182/iiif/2/1032318/full/full/0/default.jpg",
+          "label": {
+            "en": [
+              "Full size"
+            ]
+          },
+          "type": "Image",
+          "format": "image/jpeg"
+        },
+        {
+          "id": "http://localhost:3000/download/tiff/1032318",
+          "label": {
+            "en": [
+              "Full size original"
+            ]
+          },
+          "type": "Image",
+          "format": "image/tiff"
+        }
+      ],
+      "height": 3992,
+      "width": 6411,
+      "metadata": [
+        {
+          "label": {
+            "en": [
+              "Image ID"
+            ]
+          },
+          "value": {
+            "none": [
+              "1032318"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Image Caption"
+            ]
+          },
+          "value": {
+            "none": [
+              "The gold pen used by Lincoln to sign the Emancipation Proclamation in the Executive Mansion, Washington, D.C., 1863 Jan 1"
+            ]
+          }
+        },
+        {
+          "label": {
+            "en": [
+              "Link to this Image"
+            ]
+          },
+          "value": {
+            "none": [
+              "https://collections.library.yale.edu/catalog/2005512?child_oid=1032318"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "thumbnail": [
+    {
+      "id": "http://localhost:8182/iiif/2/1030368/full/!300,300/0/default.jpg",
+      "type": "Image",
+      "format": "image/jpeg",
+      "height": 187,
+      "width": 300,
+      "service": [
+        {
+          "@id": "http://localhost:8182/iiif/2/1030368",
+          "@type": "ImageService2",
+          "profile": "http://iiif.io/api/image/2/level2.json"
+        }
+      ]
+    }
+  ],
+  "start": {
+    "id": "http://localhost/manifests/oid/2005512/canvas/1030368",
+    "type": "Canvas"
+  },
+  "structures": []
+}

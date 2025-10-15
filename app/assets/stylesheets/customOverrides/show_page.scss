@@ -656,11 +656,11 @@ margin-bottom: 2%;  }
     display: none;
   }
 
-  .item-page-fulltext-wrapper {
+  .item-page-fulltext-wrapper, .item-page-caption-wrapper {
     width: 118%;
     padding-bottom: 25px;
 
-    .fulltext-button {
+    .fulltext-button, .caption-button {
       font-size: 14px;
       color: $medium_grey;
       font-family: $mallory_medium, Arial, Helvetica, sans-serif !important;

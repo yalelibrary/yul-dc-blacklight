@@ -64,6 +64,20 @@ module BlacklightHelper
 
     args[:document][:description_tesim].first.length > 250 ? args[:document][:description_tesim].first[0..250].concat("...") : args[:document][:description_tesim].first
   end
+  
+  def display_child_captions(args)
+    highlights = args[:document].highlight_field(args[:field])
+    captions = args[:document][args[:field]]
+    matches = []
+    captions.each_with_index do |caption, index|
+      matches << index if caption.include?(params["q"])
+    end
+    if highlights.present?
+      link_to(highlights.first, "/catalog/#{args[:document][:id]}?child_oid=#{args[:document][:child_oids_ssim][matches.first.presence || 0]}", rel: 'nofollow')
+    else
+      link_to(captions.first.length > 100 ? captions.first[0..100].concat("...") : captions.first, "/catalog/#{args[:document][:id]}?child_oid=#{args[:document][:child_oids_ssim][matches.first.presence || 0]}", rel: 'no-follow')
+    end
+  end
 
   def language_codes_as_links(args)
     out = []

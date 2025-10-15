@@ -1,0 +1,8 @@
+<% if !@document['caption_tesim'].empty? && client_can_view_digital?(@document) %>
+  <section class='item-page-caption-wrapper'>
+    <button class='caption-button'>
+      Show Caption
+    </button>
+    <div class='row'></div>
+  </section>
+<% end %>
