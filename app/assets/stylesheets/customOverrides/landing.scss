@@ -45,7 +45,7 @@ DEFAULT MOBILE STYLING
 	}
 
 	.intro {
-		height: 510px;
+		height: 540px;
 		position: relative;
 	}
 
@@ -305,7 +305,7 @@ DEFAULT MOBILE STYLING
 @media screen and (min-width: $small_device) {
 	#hero {
 		.intro {
-			height: 510px;
+			height: 540px;
 		}
 
 		#hero-image {
@@ -348,7 +348,7 @@ DEFAULT MOBILE STYLING
 		}
 
 		#hero-image {
-			object-position: 0 -20px;
+			object-position: 0 0;
 		}
 
 		.about-content {
@@ -433,11 +433,11 @@ DEFAULT MOBILE STYLING
 @media screen and (min-width: $large_device) {
 	#hero {
 		.intro {
-			height: 510px;
+			height: 520px;
 		}
 
 		#hero-image {
-			object-position: 0 -85px;
+			object-position: 0 -55px;
 		}
 
 		.about-content {
@@ -540,7 +540,7 @@ DEFAULT MOBILE STYLING
 @media screen and (min-width: $xlarge_device) {
 	#hero {
 		.intro {
-			height: 510px;
+			height: 540px;
 		}
 
 		#hero-image {
