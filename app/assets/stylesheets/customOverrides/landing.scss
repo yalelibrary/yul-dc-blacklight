@@ -344,7 +344,7 @@ DEFAULT MOBILE STYLING
 @media screen and (min-width: $medium_device) {
 	#hero {
 		.intro {
-			height: 510px;
+			height: 540px;
 		}
 
 		#hero-image {
@@ -433,11 +433,11 @@ DEFAULT MOBILE STYLING
 @media screen and (min-width: $large_device) {
 	#hero {
 		.intro {
-			height: 520px;
+			height: 560px;
 		}
 
 		#hero-image {
-			object-position: 0 -55px;
+			object-position: 0 -15px;
 		}
 
 		.about-content {
@@ -540,7 +540,7 @@ DEFAULT MOBILE STYLING
 @media screen and (min-width: $xlarge_device) {
 	#hero {
 		.intro {
-			height: 540px;
+			height: 550px;
 		}
 
 		#hero-image {
