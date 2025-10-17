@@ -203,6 +203,9 @@ class CatalogController < ApplicationController
     config.add_index_field 'subjectTopic_tesim', label: 'Subject (Topic)', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'sourceCreated_tesim', label: 'Collection Created', highlight: true, solr_params: disp_highlight_on_search_params
     config.add_index_field 'ancestorTitles_tesim', label: 'Found in', helper_method: :archival_display
+    config.add_index_field 'caption_tesim', label: 'Caption', highlight: true, solr_params: disp_highlight_on_search_params, if: :should_display_caption?,
+                                            helper_method: :display_index_caption_with_note
+
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     #
@@ -226,6 +229,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'copyrightDate_ssim', label: 'Copyright Date', metadata: 'description'
     config.add_show_field 'creationPlace_ssim', label: 'Publication Place', metadata: 'description'
     config.add_show_field 'publisher_ssim', label: 'Publisher', metadata: 'description'
+    config.add_show_field 'caption_tesim', label: 'Matching Captions', metadata: 'matching_captions', helper_method: :display_show_page_captions, if: :should_display_all_captions?
     config.add_show_field 'abstract_tesim', label: 'Abstract', metadata: 'description', helper_method: :join_as_paragraphs
     config.add_show_field 'description_tesim', label: 'Description', metadata: 'description', helper_method: :sanitize_join_with_br
     config.add_show_field 'provenanceUncontrolled_tesi', label: 'Provenance', metadata: 'description'
@@ -593,6 +597,56 @@ class CatalogController < ApplicationController
     config.default_solr_params = {
       fl: fl_fields.join(' ')
     }
+  end
+
+  # Parse caption in format "child_oid: caption text"
+  def parse_caption_format(caption_with_oid)
+    return { caption_text: nil, has_oid_prefix: false } if caption_with_oid.blank?
+
+    match = caption_with_oid.match(/^(\d+):\s*(.+)$/m)
+    if match
+      { caption_text: match[2].strip, has_oid_prefix: true }
+    else
+      { caption_text: caption_with_oid, has_oid_prefix: false }
+    end
+  end
+
+  # Get valid caption texts from document (only new format with child_oid prefix)
+  def valid_caption_texts(document)
+    return [] if document[:caption_tesim].blank?
+
+    document[:caption_tesim].map { |c| parse_caption_format(c) }
+                            .select { |p| p[:has_oid_prefix] && p[:caption_text].present? }
+                            .map { |p| p[:caption_text] }
+  end
+
+  # Conditional method to determine if caption field should be displayed
+  # Used with the 'if' option in field configuration
+  # Only displays captions in the new "child_oid: caption" format
+  def should_display_caption?(_field_config, document)
+    caption_texts = valid_caption_texts(document)
+    return false if caption_texts.empty?
+
+    search_words = search_query_words
+    caption_texts.any? { |caption_text| caption_matches_search?(caption_text, search_words) }
+  end
+
+  # Check if a caption contains any of the search words
+  def caption_matches_search?(caption, search_words)
+    caption_words = caption.downcase.split(/\s+/)
+    search_words.any? { |search_word| caption_words.any? { |caption_word| caption_word.include?(search_word) } }
+  end
+
+  # Extract and normalize search query words
+  def search_query_words
+    params[:q]&.split(/\s+/)&.map(&:downcase) || []
+  end
+
+  # Conditional method to determine if all captions should be displayed on show page
+  # Only show when user clicked on a caption link from search results
+  def should_display_all_captions?(_field_config, _document)
+    result = params[:show_captions] == 'true'
+    result
   end
 
   # This is for iiif_search

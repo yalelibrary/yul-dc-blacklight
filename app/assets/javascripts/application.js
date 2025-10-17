@@ -126,6 +126,18 @@ $(document).on('turbolinks:load', function() {
         })
         fulltextTranscription.css('display', 'flex')
     })
+
+    // Toggle the caption button
+    $('.caption-toggle-button').click(function() {
+        const caption_button = $(this)
+        const captionContent = $('.matching-captions-content')
+        captionContent.toggle()
+        if (captionContent.is(':visible')) {
+            caption_button.text('Hide Captions')
+        } else {
+            caption_button.text('Show Captions')
+        }
+    })
 });
 
 // 'uv-pages' is undefined by default

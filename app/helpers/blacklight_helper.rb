@@ -30,6 +30,145 @@ module BlacklightHelper
     [value, label, options]
   end
 
+  # Helper method for caption_tesim index field
+  # Returns nil if search results do not contain a caption in the new format
+  def display_caption_or_nil(args)
+    parsed = valid_parsed_captions(args[:document][args[:field]])
+    return nil if parsed.empty?
+
+    caption_texts = parsed.map { |p| p[:caption_text] }
+    caption_texts.any? { |text| params[:q]&.include?(text) } ? true : nil
+  end
+
+  # Parse caption in format "child_oid: caption text"
+  # Returns a hash with :child_oid, :caption_text, and :has_oid_prefix
+  def parse_caption_with_oid(caption_string)
+    return { child_oid: nil, caption_text: nil, has_oid_prefix: false } if caption_string.blank?
+
+    match = caption_string.match(/^(\d+):\s*(.+)$/m)
+    if match
+      { child_oid: match[1], caption_text: match[2].strip, has_oid_prefix: true }
+    else
+      { child_oid: nil, caption_text: caption_string, has_oid_prefix: false }
+    end
+  end
+
+  # Get valid parsed captions (only new format with child_oid prefix)
+  def valid_parsed_captions(caption_values)
+    return [] if caption_values.blank?
+
+    caption_values.map { |c| parse_caption_with_oid(c) }
+                  .select { |parsed| parsed[:has_oid_prefix] && parsed[:caption_text].present? }
+  end
+
+  # Get search words from query parameter
+  def search_words
+    params[:q]&.split(/\s+/)&.map(&:downcase) || []
+  end
+
+  # Find captions matching the search query
+  def matching_captions(caption_values)
+    valid_parsed_captions(caption_values).select { |p| caption_matches_search?(p[:caption_text], search_words) }
+  end
+
+  # Check if caption text matches any search words
+  def caption_matches_search?(caption_text, search_words)
+    caption_words = caption_text.downcase.split(/\s+/)
+    search_words.any? { |search_word| caption_words.any? { |word| word.include?(search_word) } }
+  end
+
+  # Build URL for caption link
+  def caption_link_url(document, child_oid)
+    url_params = { show_captions: 'true' }
+    url_params[:q] = params[:q] if params[:q].present?
+    url_params[:child_oid] = child_oid if child_oid.present?
+    "#{solr_document_path(document[:id])}?#{url_params.to_query}"
+  end
+
+  # Strip HTML tags from text
+  def strip_html(text)
+    text.gsub(/<[^>]*>/, '')
+  end
+
+  # Check if text needs ellipsis and doesn't already have one
+  def needs_ellipsis?(text)
+    !text.strip.end_with?('...', '…')
+  end
+
+  # Helper method for caption_tesim index field with additional note for multiple matches
+  def display_index_caption_with_note(args)
+    matching = matching_captions(args[:document][args[:field]])
+    return nil if matching.empty?
+
+    first = matching.first
+    content = build_caption_link(args[:document], args[:field], first[:caption_text], first[:child_oid])
+
+    if matching.length > 1
+      note = content_tag(:em, 'More caption search results available on object page')
+      content = safe_join([content, tag.br, note])
+    end
+
+    content
+  end
+
+  # Helper method to build a caption link with highlighting and URL parameters
+  def build_caption_link(document, field, caption_text, child_oid)
+    url = caption_link_url(document, child_oid)
+    highlight_field = document.highlight_field(field)
+
+    if highlight_field&.any?
+      highlighted = (highlight_field.find { |hl| hl.include?(caption_text) } || highlight_field.first)
+                    .sub(/^\d+:\s*/, '')
+
+      # Add ellipsis if truncated
+      highlighted += "..." if strip_html(highlighted).length < strip_html(caption_text).length && needs_ellipsis?(highlighted)
+
+      link_to(sanitize(highlighted, tags: %w[span], attributes: %w[class]), url, class: 'highlight-uv-caption')
+    else
+      link_to(caption_text, url)
+    end
+  end
+
+  # Helper method to display all captions for the show page
+  def display_show_page_captions(args)
+    matching = matching_captions(args[:document][args[:field]])
+    return nil if matching.empty?
+
+    links = matching.map do |parsed|
+      snippet = sanitize(create_caption_snippet(parsed[:caption_text], search_words),
+                        tags: %w[span], attributes: %w[class])
+      link_to(snippet, caption_link_url(args[:document], parsed[:child_oid]))
+    end
+
+    safe_join(links, tag.br)
+  end
+
+  # Helper method to create a snippet showing 3 words before and after the matching search term
+  def create_caption_snippet(caption, search_words)
+    words = caption.split(/\s+/)
+    words_lower = words.map(&:downcase)
+
+    # Find first matching word position
+    match_index = search_words.lazy
+                              .flat_map { |sw| words_lower.each_index.select { |i| words_lower[i].include?(sw) } }
+                              .first
+
+    return h(caption) if match_index.nil?
+
+    # Extract context window (3 words before and after)
+    context = 3
+    start_idx = [0, match_index - context].max
+    end_idx = [words.length - 1, match_index + context].min
+
+    # Build snippet with ellipsis
+    snippet = words[start_idx..end_idx].map { |w| h(w) }.join(' ')
+    snippet = "...#{snippet}" if start_idx.positive?
+    snippet = "#{snippet}..." if end_idx < words.length - 1
+
+    # Highlight the matched word
+    snippet.gsub(/\b#{Regexp.escape(h(words[match_index]))}\b/i, '<span class="search-highlight">\0</span>')
+  end
+
   # removes date range params from link with unknown date
   def range_unknown_remove_url(url_in)
     url = url_in.gsub(/[?&]range%5B-year_isim%5D%5B%5D=%5B*+TO+*%5D/, '')

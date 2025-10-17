@@ -4,7 +4,7 @@
     <% if document[:source_ssim]&.flatten&.include?('aspace') && metadata.titlecase.eql?('Collection Information') %>
       <h2 class='metadata-block__title'><%= 'Item Location' %></h2>
     <% else  %>
-    <h2 class='metadata-block__title'><%= metadata.titlecase %></h2>
+      <h2 class='metadata-block__title'><%= metadata.titlecase %></h2>
     <% end  %>
     <dl class='metadata-block__group'>
 

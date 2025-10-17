@@ -5,7 +5,7 @@ module Yul
     attr_reader :document, :config
 
     def initialize(document, view_context, configuration = view_context.blacklight_config)
-      @metadata_sections = %w[description subjects,_formats,_and_genres collection_information access_and_usage_rights identifiers]
+      @metadata_sections = %w[matching_captions description subjects,_formats,_and_genres collection_information access_and_usage_rights identifiers]
       super
     end
 
