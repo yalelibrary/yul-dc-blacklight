@@ -15,7 +15,7 @@ DEFAULT MOBILE STYLING
 		opacity: 0.5;
 
 		p {
-			font-size: 10px;
+			font-size: 12px;
 			font-family: $mallory_mp_medium_italic;
 			margin: 10px auto;
 		}
@@ -45,7 +45,7 @@ DEFAULT MOBILE STYLING
 	}
 
 	.intro {
-		height: 425px;
+		height: 540px;
 		position: relative;
 	}
 
@@ -66,14 +66,14 @@ DEFAULT MOBILE STYLING
 	}
 
 	.about-content {
-		font-size: .75rem; 
+		font-size: 1rem; 
 		text-align: left; 
 		margin-top: 2%;
 		font-family: MalloryMP-Medium;
 	}
 
 	.need-help-content {
-		font-size: .75rem; 
+		font-size: 1rem; 
 		text-align: left; 
 		margin-top: 2%;
 		font-family: MalloryMP-Medium;
@@ -305,11 +305,11 @@ DEFAULT MOBILE STYLING
 @media screen and (min-width: $small_device) {
 	#hero {
 		.intro {
-			height: 460px;
+			height: 540px;
 		}
 
 		#hero-image {
-			object-position: 0 -45px;
+			object-position: 0 0;
 		}
 
 		.about-content {
@@ -344,11 +344,11 @@ DEFAULT MOBILE STYLING
 @media screen and (min-width: $medium_device) {
 	#hero {
 		.intro {
-			height: 480px;
+			height: 540px;
 		}
 
 		#hero-image {
-			object-position: 0 -65px;
+			object-position: 0 0;
 		}
 
 		.about-content {
@@ -433,11 +433,11 @@ DEFAULT MOBILE STYLING
 @media screen and (min-width: $large_device) {
 	#hero {
 		.intro {
-			height: 470px;
+			height: 560px;
 		}
 
 		#hero-image {
-			object-position: 0 -85px;
+			object-position: 0 -15px;
 		}
 
 		.about-content {
@@ -540,7 +540,7 @@ DEFAULT MOBILE STYLING
 @media screen and (min-width: $xlarge_device) {
 	#hero {
 		.intro {
-			height: 480px;
+			height: 550px;
 		}
 
 		#hero-image {
