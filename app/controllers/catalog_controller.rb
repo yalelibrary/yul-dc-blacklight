@@ -623,23 +623,52 @@ class CatalogController < ApplicationController
   # Conditional method to determine if caption field should be displayed
   # Used with the 'if' option in field configuration
   # Only displays captions in the new "child_oid: caption" format
-  # Relies on Solr to have already matched the document, just checks for valid captions
   def should_display_caption?(_field_config, document)
     caption_texts = valid_caption_texts(document)
     return false if caption_texts.empty?
-    return true if params[:q].blank?
 
-    # Simple check: does any caption contain non-digit words from the search query?
-    # This prevents displaying captions that only matched on the OID
-    # Solr already did the phrase matching, so we just need basic validation
-    query_without_quotes = params[:q].gsub(/"([^"]+)"/, '\1')
-    query_words = query_without_quotes.split(/\s+/).reject { |w| w.match?(/^\d+$/) }
-    return true if query_words.empty?
+    search_words = search_query_words
+    caption_texts.any? { |caption_text| caption_matches_search?(caption_text, search_words) }
+  end
 
-    caption_texts.any? do |caption_text|
-      caption_lower = caption_text.downcase
-      query_words.any? { |word| caption_lower.include?(word.downcase) }
+  # Check if a caption contains search terms (phrases or words)
+  def caption_matches_search?(caption, search_terms)
+    return false if caption.blank? || search_terms.empty?
+
+    caption_lower = caption.downcase
+
+    search_terms.any? do |term|
+      if term[:type] == :phrase
+        # Exact phrase match
+        caption_lower.include?(term[:value])
+      else
+        # Individual word match
+        caption_words = caption_lower.split(/\s+/)
+        caption_words.any? { |caption_word| caption_word.include?(term[:value]) }
+      end
     end
+  end
+
+  # Extract and normalize search query words and phrases
+  # Returns array of hashes: { type: :phrase/:word, value: string }
+  def search_query_words
+    return [] if params[:q].blank?
+
+    query = params[:q]
+    terms = []
+
+    # Extract quoted phrases first
+    query.scan(/"([^"]+)"/).each do |match|
+      terms << { type: :phrase, value: match[0].downcase }
+    end
+
+    # Remove quoted phrases from query and extract remaining words
+    remaining = query.gsub(/"[^"]+"/, '').strip
+    remaining.split(/\s+/).each do |word|
+      terms << { type: :word, value: word.downcase } if word.present?
+    end
+
+    terms
   end
 
   # Conditional method to determine if all captions should be displayed on show page

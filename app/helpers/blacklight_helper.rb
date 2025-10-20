@@ -36,8 +36,9 @@ module BlacklightHelper
     parsed = valid_parsed_captions(args[:document][args[:field]])
     return nil if parsed.empty?
 
+    search_terms = search_words
     caption_texts = parsed.map { |p| p[:caption_text] }
-    caption_texts.any? { |text| caption_matches_search?(text) } ? true : nil
+    caption_texts.any? { |text| caption_matches_search?(text, search_terms) } ? true : nil
   end
 
   # Parse caption in format "child_oid: caption text"
@@ -61,50 +62,49 @@ module BlacklightHelper
                   .select { |parsed| parsed[:has_oid_prefix] && parsed[:caption_text].present? }
   end
 
-  # Find captions matching the search query using Solr's highlighting
-  # This leverages Solr's built-in phrase matching instead of reimplementing it
-  def matching_captions(caption_values, document = nil, field = nil)
-    valid_captions = valid_parsed_captions(caption_values)
-    return valid_captions if params[:q].blank? # No search query, return all valid captions
-    return [] if valid_captions.empty?
+  # Get search words and phrases from query parameter
+  # Returns array of hashes: { type: :phrase/:word, value: string }
+  def search_words
+    return [] if params[:q].blank?
 
-    # Use Solr's highlighting to determine matches (Solr handles phrase matching)
-    highlight_field = document&.highlight_field(field)
-    
-    if highlight_field&.any?
-      # Filter to captions that Solr highlighted
-      valid_captions.select do |parsed|
-        # Check if any highlight snippet matches this caption's text
-        # Strip the OID prefix from highlights for comparison
-        highlight_field.any? do |hl|
-          highlighted_text = hl.sub(/^\d+:\s*/, '') # Remove OID prefix
-          strip_html(highlighted_text).include?(parsed[:caption_text]) ||
-            parsed[:caption_text].include?(strip_html(highlighted_text))
-        end
-      end
-    else
-      # Fallback: if no highlighting data, return all valid captions
-      # This shouldn't normally happen if highlight: true is configured
-      valid_captions
+    query = params[:q]
+    terms = []
+
+    # Extract quoted phrases first
+    query.scan(/"([^"]+)"/).each do |match|
+      terms << { type: :phrase, value: match[0].downcase }
     end
+
+    # Remove quoted phrases from query and extract remaining words
+    remaining = query.gsub(/"[^"]+"/, '').strip
+    remaining.split(/\s+/).each do |word|
+      terms << { type: :word, value: word.downcase } if word.present?
+    end
+
+    terms
   end
 
-  # Check if caption matches search (used by controller)
-  # Leverages Solr's search results - if document is in results, captions matched
-  def caption_matches_search?(caption_text, _search_terms = nil)
-    # Since Solr already determined the document matches, we just need to verify
-    # the caption text is present and not just the OID that matched
-    return false if caption_text.blank?
-    return true if params[:q].blank?
-    
-    # Simple check: does the caption contain any non-digit characters from the search?
-    # This prevents matching on just the OID digits
-    query_without_quotes = params[:q].gsub(/"([^"]+)"/, '\1')
-    words = query_without_quotes.split(/\s+/).reject { |w| w.match?(/^\d+$/) }
-    return true if words.empty?
-    
+  # Find captions matching the search query
+  def matching_captions(caption_values)
+    valid_parsed_captions(caption_values).select { |p| caption_matches_search?(p[:caption_text], search_words) }
+  end
+
+  # Check if caption text matches search terms (phrases or words)
+  def caption_matches_search?(caption_text, search_terms)
+    return false if caption_text.blank? || search_terms.empty?
+
     caption_lower = caption_text.downcase
-    words.any? { |word| caption_lower.include?(word.downcase) }
+
+    search_terms.any? do |term|
+      if term[:type] == :phrase
+        # Exact phrase match
+        caption_lower.include?(term[:value])
+      else
+        # Individual word match
+        caption_words = caption_lower.split(/\s+/)
+        caption_words.any? { |word| word.include?(term[:value]) }
+      end
+    end
   end
 
   # Build URL for caption link
@@ -127,7 +127,7 @@ module BlacklightHelper
 
   # Helper method for caption_tesim index field with additional note for multiple matches
   def display_index_caption_with_note(args)
-    matching = matching_captions(args[:document][args[:field]], args[:document], args[:field])
+    matching = matching_captions(args[:document][args[:field]])
     return nil if matching.empty?
 
     first = matching.first
@@ -161,48 +161,72 @@ module BlacklightHelper
 
   # Helper method to display all captions for the show page
   def display_show_page_captions(args)
-    matching = matching_captions(args[:document][args[:field]], args[:document], args[:field])
+    matching = matching_captions(args[:document][args[:field]])
     return nil if matching.empty?
 
     links = matching.map do |parsed|
-      # Use Solr's highlighted version if available, otherwise show caption with simple highlight
-      snippet = create_caption_snippet(parsed[:caption_text], args[:document], args[:field])
-      link_to(sanitize(snippet, tags: %w[span], attributes: %w[class]), 
-              caption_link_url(args[:document], parsed[:child_oid]))
+      snippet = sanitize(create_caption_snippet(parsed[:caption_text], search_words),
+                        tags: %w[span], attributes: %w[class])
+      link_to(snippet, caption_link_url(args[:document], parsed[:child_oid]))
     end
 
     safe_join(links, tag.br)
   end
 
-  # Helper method to create a snippet with highlighting
-  # Uses Solr's highlighting when available, or creates simple word-based highlights
-  def create_caption_snippet(caption, document, field)
-    return h(caption) if params[:q].blank?
+  # Helper method to create a snippet showing 3 words before and after the matching search term
+  def create_caption_snippet(caption, search_terms)
+    return h(caption) if search_terms.empty?
 
-    # Try to get Solr's highlighted version
-    highlight_field = document&.highlight_field(field)
-    if highlight_field&.any?
-      # Find the highlight that matches this caption
-      matching_highlight = highlight_field.find do |hl|
-        stripped = hl.sub(/^\d+:\s*/, '') # Remove OID prefix
-        strip_html(stripped).include?(caption) || caption.include?(strip_html(stripped))
-      end
-      
-      if matching_highlight
-        # Use Solr's highlighting, just remove the OID prefix
-        return matching_highlight.sub(/^\d+:\s*/, '')
+    caption_lower = caption.downcase
+    words = caption.split(/\s+/)
+    words_lower = words.map(&:downcase)
+
+    # Find first matching position (phrase or word)
+    match_index = nil
+    matched_phrase = nil
+
+    # Check for phrase matches first
+    search_terms.each do |term|
+      if term[:type] == :phrase && caption_lower.include?(term[:value])
+        # Find the word index where the phrase starts
+        phrase_words = term[:value].split(/\s+/)
+        phrase_start = words_lower.each_cons(phrase_words.length).find_index { |cons| cons.join(' ') == term[:value] }
+        if phrase_start
+          match_index = phrase_start
+          matched_phrase = phrase_words.length
+          break
+        end
       end
     end
 
-    # Fallback: simple highlighting of query words in the caption
-    query_words = params[:q].gsub(/"([^"]+)"/, '\1').split(/\s+/).reject { |w| w.match?(/^\d+$/) }
-    result = h(caption)
-    
-    query_words.each do |word|
-      result = result.gsub(/\b(#{Regexp.escape(word)})\b/i, '<span class="search-highlight">\1</span>')
+    # If no phrase match, find individual word match
+    unless match_index
+      match_index = search_terms.lazy
+                                .flat_map { |term| words_lower.each_index.select { |i| words_lower[i].include?(term[:value]) } }
+                                .first
     end
-    
-    result
+
+    return h(caption) if match_index.nil?
+
+    # Extract context window (3 words before and after)
+    context = 3
+    start_idx = [0, match_index - context].max
+    end_idx = matched_phrase ? [words.length - 1, match_index + matched_phrase - 1 + context].min : [words.length - 1, match_index + context].min
+
+    # Build snippet with ellipsis
+    snippet = words[start_idx..end_idx].map { |w| h(w) }.join(' ')
+    snippet = "...#{snippet}" if start_idx.positive?
+    snippet = "#{snippet}..." if end_idx < words.length - 1
+
+    # Highlight the matched text
+    if matched_phrase
+      # Highlight the phrase
+      matched_text = words[match_index...(match_index + matched_phrase)].join(' ')
+      snippet.gsub(/\b#{Regexp.escape(h(matched_text))}\b/i, '<span class="search-highlight">\0</span>')
+    else
+      # Highlight the matched word
+      snippet.gsub(/\b#{Regexp.escape(h(words[match_index]))}\b/i, '<span class="search-highlight">\0</span>')
+    end
   end
 
   # removes date range params from link with unknown date
