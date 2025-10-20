@@ -193,16 +193,14 @@ module BlacklightHelper
 
     # Check for phrase matches first
     search_terms.each do |term|
-      if term[:type] == :phrase && caption_lower.include?(term[:value])
-        # Find the word index where the phrase starts
-        phrase_words = term[:value].split(/\s+/)
-        phrase_start = words_lower.each_cons(phrase_words.length).find_index { |cons| cons.join(' ') == term[:value] }
-        if phrase_start
-          match_index = phrase_start
-          matched_phrase = phrase_words.length
-          break
-        end
-      end
+      next unless term[:type] == :phrase && caption_lower.include?(term[:value])
+      # Find the word index where the phrase starts
+      phrase_words = term[:value].split(/\s+/)
+      phrase_start = words_lower.each_cons(phrase_words.length).find_index { |cons| cons.join(' ') == term[:value] }
+      next unless phrase_start
+      match_index = phrase_start
+      matched_phrase = phrase_words.length
+      break
     end
 
     # If no phrase match, find individual word match
