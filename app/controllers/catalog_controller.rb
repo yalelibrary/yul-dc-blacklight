@@ -623,23 +623,23 @@ class CatalogController < ApplicationController
   # Conditional method to determine if caption field should be displayed
   # Used with the 'if' option in field configuration
   # Only displays captions in the new "child_oid: caption" format
+  # Relies on Solr to have already matched the document, just checks for valid captions
   def should_display_caption?(_field_config, document)
     caption_texts = valid_caption_texts(document)
     return false if caption_texts.empty?
+    return true if params[:q].blank?
 
-    search_words = search_query_words
-    caption_texts.any? { |caption_text| caption_matches_search?(caption_text, search_words) }
-  end
+    # Simple check: does any caption contain non-digit words from the search query?
+    # This prevents displaying captions that only matched on the OID
+    # Solr already did the phrase matching, so we just need basic validation
+    query_without_quotes = params[:q].gsub(/"([^"]+)"/, '\1')
+    query_words = query_without_quotes.split(/\s+/).reject { |w| w.match?(/^\d+$/) }
+    return true if query_words.empty?
 
-  # Check if a caption contains any of the search words
-  def caption_matches_search?(caption, search_words)
-    caption_words = caption.downcase.split(/\s+/)
-    search_words.any? { |search_word| caption_words.any? { |caption_word| caption_word.include?(search_word) } }
-  end
-
-  # Extract and normalize search query words
-  def search_query_words
-    params[:q]&.split(/\s+/)&.map(&:downcase) || []
+    caption_texts.any? do |caption_text|
+      caption_lower = caption_text.downcase
+      query_words.any? { |word| caption_lower.include?(word.downcase) }
+    end
   end
 
   # Conditional method to determine if all captions should be displayed on show page
