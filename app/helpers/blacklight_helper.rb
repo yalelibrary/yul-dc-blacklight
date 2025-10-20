@@ -64,19 +64,25 @@ module BlacklightHelper
 
   # Get search words and phrases from query parameter
   # Returns array of hashes: { type: :phrase/:word, value: string }
+  # Supports both double quotes ("phrase") and single quotes ('phrase')
   def search_words
     return [] if params[:q].blank?
 
     query = params[:q]
     terms = []
 
-    # Extract quoted phrases first
+    # Extract double-quoted phrases
     query.scan(/"([^"]+)"/).each do |match|
       terms << { type: :phrase, value: match[0].downcase }
     end
 
-    # Remove quoted phrases from query and extract remaining words
-    remaining = query.gsub(/"[^"]+"/, '').strip
+    # Extract single-quoted phrases
+    query.scan(/'([^']+)'/).each do |match|
+      terms << { type: :phrase, value: match[0].downcase }
+    end
+
+    # Remove all quoted phrases (both single and double) from query and extract remaining words
+    remaining = query.gsub(/"[^"]+"/, '').gsub(/'[^']+'/, '').strip
     remaining.split(/\s+/).each do |word|
       terms << { type: :word, value: word.downcase } if word.present?
     end
