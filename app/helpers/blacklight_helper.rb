@@ -435,7 +435,7 @@ module BlacklightHelper
   end
 
   def build_escaped_facet(field, value)
-    "/catalog?f" + ERB::Util.url_encode("[#{field}][]") + "=#{value}"
+    "/catalog?f" + ERB::Util.url_encode("[#{field}][]") + "=#{Rack::Utils.escape(value)}"
   end
 
   def finding_aid_link(arg)
