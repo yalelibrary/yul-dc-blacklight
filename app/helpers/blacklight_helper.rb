@@ -30,17 +30,6 @@ module BlacklightHelper
     [value, label, options]
   end
 
-  # Helper method for caption_tesim index field
-  # Returns nil if search results do not contain a caption in the new format
-  def display_caption_or_nil(args)
-    parsed = valid_parsed_captions(args[:document][args[:field]])
-    return nil if parsed.empty?
-
-    search_terms = search_words
-    caption_texts = parsed.map { |p| p[:caption_text] }
-    caption_texts.any? { |text| caption_matches_search?(text, search_terms) } ? true : nil
-  end
-
   # Parse caption in format "child_oid: caption text"
   # Returns a hash with :child_oid, :caption_text, and :has_oid_prefix
   def parse_caption_with_oid(caption_string)
@@ -499,7 +488,7 @@ module BlacklightHelper
   end
 
   def build_escaped_facet(field, value)
-    "/catalog?f" + ERB::Util.url_encode("[#{field}][]") + "=#{value}"
+    "/catalog?f" + ERB::Util.url_encode("[#{field}][]") + "=#{Rack::Utils.escape(value)}"
   end
 
   def finding_aid_link(arg)

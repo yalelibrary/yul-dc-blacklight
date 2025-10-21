@@ -632,10 +632,11 @@ class CatalogController < ApplicationController
   end
 
   # Check if a caption contains search terms (phrases or words)
-  def caption_matches_search?(caption, search_terms)
-    return false if caption.blank? || search_terms.empty?
+  # Note: Also defined in BlacklightHelper for use in views
+  def caption_matches_search?(caption_text, search_terms)
+    return false if caption_text.blank? || search_terms.empty?
 
-    caption_lower = caption.downcase
+    caption_lower = caption_text.downcase
 
     search_terms.any? do |term|
       if term[:type] == :phrase
@@ -644,7 +645,7 @@ class CatalogController < ApplicationController
       else
         # Individual word match
         caption_words = caption_lower.split(/\s+/)
-        caption_words.any? { |caption_word| caption_word.include?(term[:value]) }
+        caption_words.any? { |word| word.include?(term[:value]) }
       end
     end
   end
