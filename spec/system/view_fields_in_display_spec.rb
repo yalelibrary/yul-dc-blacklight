@@ -365,8 +365,8 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         expect(page).to have_link('this is the resource type', href: '/catalog?f%5BresourceType_ssim%5D%5B%5D=this+is+the+resource+type')
       end
       it 'contains a link on language to its facet' do
-        expect(page).to have_link('English (en)', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=English+%28en%29')
-        expect(page).to have_link('English (eng)', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=English+%28eng%29')
+        expect(page).to have_link('English (en)', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=English (en)')
+        expect(page).to have_link('English (eng)', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=English (eng)')
         expect(page).to have_link('zz', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=zz')
       end
       it 'contains a link for the Creator field to the facet and displays' do
