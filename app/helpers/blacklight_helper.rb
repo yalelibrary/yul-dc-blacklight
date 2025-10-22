@@ -30,16 +30,6 @@ module BlacklightHelper
     [value, label, options]
   end
 
-  # Helper method for caption_tesim index field
-  # Returns nil if search results do not contain a caption in the new format
-  def display_caption_or_nil(args)
-    parsed = valid_parsed_captions(args[:document][args[:field]])
-    return nil if parsed.empty?
-
-    caption_texts = parsed.map { |p| p[:caption_text] }
-    caption_texts.any? { |text| params[:q]&.include?(text) } ? true : nil
-  end
-
   # Parse caption in format "child_oid: caption text"
   # Returns a hash with :child_oid, :caption_text, and :has_oid_prefix
   def parse_caption_with_oid(caption_string)
@@ -61,9 +51,32 @@ module BlacklightHelper
                   .select { |parsed| parsed[:has_oid_prefix] && parsed[:caption_text].present? }
   end
 
-  # Get search words from query parameter
+  # Get search words and phrases from query parameter
+  # Returns array of hashes: { type: :phrase/:word, value: string }
+  # Supports both double quotes ("phrase") and single quotes ('phrase')
   def search_words
-    params[:q]&.split(/\s+/)&.map(&:downcase) || []
+    return [] if params[:q].blank?
+
+    query = params[:q]
+    terms = []
+
+    # Extract double-quoted phrases
+    query.scan(/"([^"]+)"/).each do |match|
+      terms << { type: :phrase, value: match[0].downcase }
+    end
+
+    # Extract single-quoted phrases
+    query.scan(/'([^']+)'/).each do |match|
+      terms << { type: :phrase, value: match[0].downcase }
+    end
+
+    # Remove all quoted phrases (both single and double) from query and extract remaining words
+    remaining = query.gsub(/"[^"]+"/, '').gsub(/'[^']+'/, '').strip
+    remaining.split(/\s+/).each do |word|
+      terms << { type: :word, value: word.downcase } if word.present?
+    end
+
+    terms
   end
 
   # Find captions matching the search query
@@ -71,10 +84,22 @@ module BlacklightHelper
     valid_parsed_captions(caption_values).select { |p| caption_matches_search?(p[:caption_text], search_words) }
   end
 
-  # Check if caption text matches any search words
-  def caption_matches_search?(caption_text, search_words)
-    caption_words = caption_text.downcase.split(/\s+/)
-    search_words.any? { |search_word| caption_words.any? { |word| word.include?(search_word) } }
+  # Check if caption text matches search terms (phrases or words)
+  def caption_matches_search?(caption_text, search_terms)
+    return false if caption_text.blank? || search_terms.empty?
+
+    caption_lower = caption_text.downcase
+
+    search_terms.any? do |term|
+      if term[:type] == :phrase
+        # Exact phrase match
+        caption_lower.include?(term[:value])
+      else
+        # Individual word match
+        caption_words = caption_lower.split(/\s+/)
+        caption_words.any? { |word| word.include?(term[:value]) }
+      end
+    end
   end
 
   # Build URL for caption link
@@ -144,29 +169,57 @@ module BlacklightHelper
   end
 
   # Helper method to create a snippet showing 3 words before and after the matching search term
-  def create_caption_snippet(caption, search_words)
+  def create_caption_snippet(caption, search_terms)
+    return h(caption) if search_terms.empty?
+
+    caption_lower = caption.downcase
     words = caption.split(/\s+/)
     words_lower = words.map(&:downcase)
 
-    # Find first matching word position
-    match_index = search_words.lazy
-                              .flat_map { |sw| words_lower.each_index.select { |i| words_lower[i].include?(sw) } }
-                              .first
+    # Find first matching position (phrase or word)
+    match_index = nil
+    matched_phrase = nil
+
+    # Check for phrase matches first
+    search_terms.each do |term|
+      next unless term[:type] == :phrase && caption_lower.include?(term[:value])
+      # Find the word index where the phrase starts
+      phrase_words = term[:value].split(/\s+/)
+      phrase_start = words_lower.each_cons(phrase_words.length).find_index { |cons| cons.join(' ') == term[:value] }
+      next unless phrase_start
+      match_index = phrase_start
+      matched_phrase = phrase_words.length
+      break
+    end
+
+    # If no phrase match, find individual word match
+    unless match_index
+      match_index = search_terms.lazy
+                                .flat_map { |term| words_lower.each_index.select { |i| words_lower[i].include?(term[:value]) } }
+                                .first
+    end
 
     return h(caption) if match_index.nil?
 
     # Extract context window (3 words before and after)
     context = 3
     start_idx = [0, match_index - context].max
-    end_idx = [words.length - 1, match_index + context].min
+    end_idx = matched_phrase ? [words.length - 1, match_index + matched_phrase - 1 + context].min : [words.length - 1, match_index + context].min
 
     # Build snippet with ellipsis
     snippet = words[start_idx..end_idx].map { |w| h(w) }.join(' ')
     snippet = "...#{snippet}" if start_idx.positive?
     snippet = "#{snippet}..." if end_idx < words.length - 1
 
-    # Highlight the matched word
-    snippet.gsub(/\b#{Regexp.escape(h(words[match_index]))}\b/i, '<span class="search-highlight">\0</span>')
+    # Highlight the matched text
+    if matched_phrase
+      # Highlight the phrase
+      matched_text = words[match_index...(match_index + matched_phrase)].join(' ')
+      snippet.gsub(/\b#{Regexp.escape(h(matched_text))}\b/i, '<span class="search-highlight">\0</span>')
+    else
+      # Highlight the matched word
+      snippet.gsub(/\b#{Regexp.escape(h(words[match_index]))}\b/i, '<span class="search-highlight">\0</span>')
+    end
   end
 
   # removes date range params from link with unknown date

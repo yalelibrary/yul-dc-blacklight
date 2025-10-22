@@ -631,15 +631,51 @@ class CatalogController < ApplicationController
     caption_texts.any? { |caption_text| caption_matches_search?(caption_text, search_words) }
   end
 
-  # Check if a caption contains any of the search words
-  def caption_matches_search?(caption, search_words)
-    caption_words = caption.downcase.split(/\s+/)
-    search_words.any? { |search_word| caption_words.any? { |caption_word| caption_word.include?(search_word) } }
+  # Check if a caption contains search terms (phrases or words)
+  # Note: Also defined in BlacklightHelper for use in views
+  def caption_matches_search?(caption_text, search_terms)
+    return false if caption_text.blank? || search_terms.empty?
+
+    caption_lower = caption_text.downcase
+
+    search_terms.any? do |term|
+      if term[:type] == :phrase
+        # Exact phrase match
+        caption_lower.include?(term[:value])
+      else
+        # Individual word match
+        caption_words = caption_lower.split(/\s+/)
+        caption_words.any? { |word| word.include?(term[:value]) }
+      end
+    end
   end
 
-  # Extract and normalize search query words
+  # Extract and normalize search query words and phrases
+  # Returns array of hashes: { type: :phrase/:word, value: string }
+  # Supports both double quotes ("phrase") and single quotes ('phrase')
   def search_query_words
-    params[:q]&.split(/\s+/)&.map(&:downcase) || []
+    return [] if params[:q].blank?
+
+    query = params[:q]
+    terms = []
+
+    # Extract double-quoted phrases
+    query.scan(/"([^"]+)"/).each do |match|
+      terms << { type: :phrase, value: match[0].downcase }
+    end
+
+    # Extract single-quoted phrases
+    query.scan(/'([^']+)'/).each do |match|
+      terms << { type: :phrase, value: match[0].downcase }
+    end
+
+    # Remove all quoted phrases (both single and double) from query and extract remaining words
+    remaining = query.gsub(/"[^"]+"/, '').gsub(/'[^']+'/, '').strip
+    remaining.split(/\s+/).each do |word|
+      terms << { type: :word, value: word.downcase } if word.present?
+    end
+
+    terms
   end
 
   # Conditional method to determine if all captions should be displayed on show page
