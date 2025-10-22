@@ -1,56 +1,98 @@
-<div class="footer-container" role="contentinfo">
-  <div class="<%= container_classes %>">
-    <div class="footer-logo-wrapper">
-     <%= link_to application_name, root_path, class: 'footer-logo'%>
-      <div class="footer-links">
-        <ul>
-          <li>
-            <a href="http://web.library.yale.edu/gsearch" target="_blank" rel="noopener">Search</a>
-          </li>
-          <li>
-            <a href="http://www.library.yale.edu/librarynews" target="_blank" rel="noopener">News</a>
-          </li>
-          <li>
-            <a href="http://status.library.yale.edu" target="_blank" rel="noopener">Systems Status</a>
-          </li>
-          <li>
-            <a href="http://www.yale.edu/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>
-          </li>
-          <li>
-            <a href="https://guides.library.yale.edu/about/policies/access" target="_blank" rel="noopener">Terms</a>
-          </li>
-          <!--<% url = request.path() %>-->
-          <% url = request.original_url.gsub("&", "%26") %>
-          <li>
-            <%= link_to(:"Feedback", "http://web.library.yale.edu/form/findit-feedback?findITURL=#{url}", :target => '_blank' ) %>
-          </li>
-          <li>
-            <a href="https://web.library.yale.edu/data-use" target="_blank" rel="noopener">Data Use</a>
-          </li>
-          <li>
-            <a href="https://usability.yale.edu/web-accessibility/accessibility-yale" target="_blank" rel="noopener">Accessibility at Yale</a>
-          </li>
-        </ul>
+<footer id="section-footer" class="section section-footer" role="contentinfo">
+  <div id="zone-footer-wrapper" class="zone-wrapper zone-footer-wrapper clearfix">
+    <div id="zone-footer" class="zone zone-footer clearfix container-12">
+      <div class="grid-4 region region-footer-first" id="region-footer-first">
+        <div class="region-inner region-footer-first-inner">
+          <div class="block block-block block-8 block-block-8 odd block-without-title" id="block-block-8">
+            <div class="block-inner clearfix">
+              <div class="content clearfix">
+                <h3 class="visually-hidden">Contact Information</h3>
+                <address>
+                  <p>P.O. Box 208240<br>
+                  New Haven, CT 06520-8240<br>
+                  <span>(203) 432-1775</span></p>
+                </address>
+              </div>
+            </div>
+          </div>
+          <div class="footer-socmedia">
+            <h3 class="visually-hidden">Follow Yale Library</h3>
+            <a href="https://www.facebook.com/YaleLibrary" target="_blank" rel="noopener" aria-label="Follow Yale Library on Facebook (opens in new window)">
+              <%= image_tag("soc_media/icon_facebook.png", id: 'facebook', alt: 'Yale Library Facebook') %>
+            </a>
+            <a href="https://www.instagram.com/yalelibrary" target="_blank" rel="noopener" aria-label="Follow Yale Library on Instagram (opens in new window)">
+              <%= image_tag("soc_media/icon_instagram.png", id: 'instagram', alt: 'Yale Library Instagram') %>
+            </a>
+            <a href="http://www.youtube.com/yaleuniversitylibrary" target="_blank" rel="noopener" aria-label="Watch Yale Library videos on YouTube (opens in new window)">
+              <%= image_tag("soc_media/youtube_icon.png", id: 'youtube', alt: 'Yale Library Youtube') %>
+            </a>
+          </div>
+          <div class="footer-logo">
+            <%= link_to "http://www.yale.edu", "aria-label": "Visit Yale University homepage (opens in new window)", 
+                target: "_blank", rel: "noopener" do %>
+              <%= image_tag 'yul_logo/yale-logo.svg', class: 'yale-logo-img', alt: 'Yale University logo' %>
+              <span class="visually-hidden">Yale University</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="grid-4 region region-footer-second" id="region-footer-second">
+        <div class="region-inner region-footer-second-inner">
+          <div class="block block-menu block-menu-footer-navigation block-menu-menu-footer-navigation odd block-without-title" id="block-menu-menu-footer-navigation">
+            <div class="block-inner clearfix">
+              <div class="content clearfix">
+                <nav role="navigation" aria-labelledby="footer-nav-heading">
+                  <h3 id="footer-nav-heading" class="visually-hidden">Library Services</h3>
+                  <div class="footer-navigation-links">
+                    <%= link_to "Ask Yale Library", "https://ask.library.yale.edu/", 
+                        "aria-describedby": "ask-desc" %>
+                    <span id="ask-desc" class="visually-hidden">Get research help and support</span>
+                    
+                    <%= link_to "My Library Accounts", "/my-library-accounts" %>
+                    
+                    <%= link_to "Subscribe to our Newsletter", "https://subscribe.yale.edu/browse?area=a0df40000006XkNAAU",
+                        "aria-describedby": "newsletter-desc" %>
+                    <span id="newsletter-desc" class="visually-hidden">Stay updated with library news and events</span>
+                    
+                    <%= link_to "Contact our Web Team", "/contact-our-web-team" %>
+                  </div>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid-4 region region-footer-third" id="region-footer-third">
+        <div class="region-inner region-footer-third-inner">
+          <div class="block block-block block-18 block-block-18 odd block-without-title" id="block-block-18">
+            <div class="block-inner clearfix">
+              <div class="content clearfix">
+                <nav role="navigation" aria-labelledby="footer-info-heading">
+                  <h3 id="footer-info-heading" class="visually-hidden">Library Information</h3>
+                  <div class="footer-bottom-links">
+                    <%= link_to "Accessibility", "https://library.yale.edu/accessibility" %>
+                    <%= link_to "Giving", "https://library.yale.edu/giving" %>
+                    <%= link_to "Privacy and Data Use", "https://library.yale.edu/about-us/about/library-policies/privacy-and-data-use" %>
+                    <%= link_to "Library Staff Hub", "https://yaleedu.sharepoint.com/sites/YLHUB/SitePages/Home.aspx?spStartSource=spappbar", 
+                        target: "_blank", rel: "noopener", "aria-label": "Library Staff Hub (opens in new window)" %>
+                  </div>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid-12 region region-footer-footer" id="region-footer-footer">
+        <div class="region-inner region-footer-footer-inner">
+          <div class="block block-block block-10 block-block-10 odd block-without-title" id="block-block-10">
+            <div class="block-inner clearfix">
+              <div class="content clearfix">
+                <div class="footer-copyright" role="contentinfo">© <%= Date.current.year %> Yale University Library &nbsp;&nbsp;•&nbsp;&nbsp; All Rights Reserved</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="footer-socmedia">
-      <a href="http://yaleuniversity.tumblr.com/" target="_blank" rel="noopener" aria-label="Yale University on Tumblr">
-        <%= image_tag("soc_media/icon_tumblr.png", {id: 'tumblr', alt: 'Yale University Tumblr'})%>     
-      </a>
-      <a href="https://www.instagram.com/yalelibrary" target="_blank" rel="noopener" aria-label="Yale Library on Instagram">
-        <%= image_tag("soc_media/icon_instagram.png", {id: 'instagram', alt: 'Yale Library Instagram'})%>       
-      </a>
-      <a href="https://twitter.com/yalelibrary" target="_blank" rel="noopener" aria-label="Yale Library on Twitter">
-        <%= image_tag("soc_media/icon_twitter.png", {id: 'twitter', alt: 'Yale Library Twitter'})%>     
-      </a>
-      <a href="https://www.facebook.com/yalelibrary" target="_blank" rel="noopener" aria-label="Yale Library on Facebook">
-        <%= image_tag("soc_media/icon_facebook.png", {id: 'facebook', alt: 'Yale Library Facebook'}) %>      
-      </a>
-    </div>
   </div>
-</div>
-<aside>
-  <div class="branch-name">
-    Branch:<span title="SHA:<%=GIT_SHA%>"><%=ENV['BLACKLIGHT_VERSION']||GIT_BRANCH%></span>,Deployed:<%=DEPLOYED_AT%>
-  </div>
-</aside>
+</footer>

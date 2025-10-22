@@ -1,126 +1,435 @@
-/********************************************************
-DEFAULT MOBILE STYLING
-********************************************************/
+// Footer Base
+.section-footer {
+  background-color: $yale-blue;
+  padding-top: 3.2em;
+  font-size: 14px;
 
-.branch-name {
-  background-color: $yale_blue !important;
-  color: $white !important;
-  font-size: 8px;
-  padding: 0px 30px 10px;
+  .region-footer-third,
+  .region-footer-second {
+    .block .block-inner a {
+      font-size: 14px;
+      width: fit-content;
+    }
+
+    .footer-bottom-links a,
+    .footer-navigation-links a {
+      display: block;
+    }
+  }
+
+  // First region (contact info)
+  .region-footer-first {
+    .block-8 {
+      border: none;
+      margin-bottom: 0;
+
+      .block-inner {
+        padding-top: 0;
+        border: none;
+
+        .content {
+          color: $white;
+          font-family: "Mallory-Light", Arial, Helvetica, sans-serif;
+          font-size: 16px;
+          font-weight: 300;
+          line-height: 27px;
+
+          // Style the address element properly
+          address {
+            font-style: normal; // Remove italic styling from address
+
+            p {
+              font-size: 16px;
+              letter-spacing: 0;
+              line-height: 27px;
+              padding-bottom: 0.5em;
+              margin: 0; // Remove default margin
+            }
+          }
+
+          // Legacy support for existing p tags
+          p {
+            font-size: 16px;
+            letter-spacing: 0;
+            line-height: 27px;
+            padding-bottom: 0.5em;
+          }
+        }
+      }
+    }
+
+    .footer-logo {
+      padding: 0;
+      margin-left: -1em;
+
+      a {
+        color: $white;
+        font-size: 4em;
+      }
+    }
+
+    a {
+      color: $white;
+    }
+  }
+
+  .region-footer-second {
+    .footer-navigation-links {
+      margin-bottom: 1em;
+
+      a {
+        display: block;
+        color: white;
+        font-family: "Mallory-Light", Arial, Helvetica, sans-serif;
+        text-decoration: none;
+        text-transform: uppercase;
+        padding: 0;
+
+        &:hover {
+          color: $white;
+          text-decoration: underline;
+          background-color: $yale-blue;
+        }
+
+        &:focus {
+          outline: 2px solid $white;
+          outline-offset: 2px;
+          text-decoration: underline;
+          background-color: $yale-blue;
+        }
+      }
+    }
+  }
+
+  // Third region
+  .region-footer-third {
+    .block {
+      border: none;
+      margin-bottom: 0;
+
+      .block-inner {
+        a {
+          color: $white;
+          font-family: "Mallory-Light", Arial, Helvetica, sans-serif;
+          font-size: 14px;
+          text-decoration: none;
+          text-transform: uppercase;
+          padding: 0;
+
+          &:hover {
+            color: $white;
+            text-decoration: underline;
+            background-color: $yale-blue;
+          }
+
+          &:focus {
+            outline: 2px solid $white;
+            outline-offset: 2px;
+            text-decoration: underline;
+            background-color: $yale-blue;
+            border-radius: 0;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            -ms-border-radius: 0;
+            -o-border-radius: 0;
+          }
+        }
+      }
+    }
+  }
+
+  // Footer navigation
+  .block-menu-footer-libraries,
+  .block-menu-footer-navigation {
+    .menu li {
+      a {
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  // Copyright section
+  .region-footer-footer {
+    clear: both;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+
+    .block-without-title {
+      .block-inner {
+        .footer-copyright {
+          margin-top: -4em !important;
+          clear: both;
+          color: $white;
+          font-size: 14px;
+          line-height: 16px;
+        }
+      }
+    }
+  }
 }
 
-.footer-container {
-  background-color: $yale_blue;
-  font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif !important;
-  margin-top: 15px;
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 1rem;
+// Footer wrapper and zones
+#zone-footer {
+  padding-top: 2rem;
+  line-height: 32px;
+
+  .odd,
+  .even {
+    background-color: $yale-blue;
+    margin: 0;
+  }
+
+  // Social media buttons
+  .footer-socmedia {
+    margin-top: 0;
+    margin-bottom: 6.2em;
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+
+    a {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+
+      img {
+        height: 18px;
+        width: auto;
+        transition: opacity 0.2s ease;
+      }
+
+      i {
+        font-family: FontAwesome;
+        font-size: 32px;
+        color: $white;
+        transition: opacity 0.2s ease;
+        font-style: normal;
+      }
+
+      &:hover img {
+        opacity: 0.7;
+      }
+
+      &:hover i {
+        opacity: 0.7;
+      }
+
+      &:focus {
+        outline: 2px solid $white;
+        outline-offset: 2px;
+      }
+    }
+  }
 }
 
-.footer-links > ul {
-  padding: 0px;
-  list-style-type: none;
+// Grid system
+.container-12 {
+  max-width: 1600px !important;
 }
 
-.footer-links a {
-  margin: 0px !important;
-  font-size: 12px;
+// Standalone footer copyright (for global override)
+.footer-copyright {
+  margin-top: -2rem !important;
 }
 
-// hides the link and hover text of the footer logo only
-.footer-logo-wrapper a {
-  color: transparent;
+// General utilities
+
+.menu {
+  border: none;
+  list-style: none;
+  text-align: left;
+
+  li {
+    &.expanded,
+    &.collapsed,
+    &.leaf {
+      margin: 0;
+      padding: 0;
+      list-style-image: none;
+      list-style-type: none;
+    }
+  }
 }
 
 .footer-logo {
-  background-size: contain;
-  background-position-y: center;
-  background-image: image-url('yul_logo/yul_logo3x.png');
-  width: 150px;
-  background-repeat: no-repeat;
-  height: 50px;
-}
-
-.footer-logo > img {
-  width: 100%;
-}
-
-.footer-links {
-  text-transform: uppercase;
-}
-
-.footer-links a {
-  color: $white !important;
-  margin-left: 1rem;
-}
-
-.footer-socmedia {
-  display: grid;
-  grid-template-columns: 1.40rem 1.40rem 1.40rem 1.40rem;
-}
-
-.footer-socmedia a {
-  max-height: 2rem;
-}
-
-.footer-socmedia img {
-  width: 1rem;
-  height: 1rem;
-  margin-right: 3px;
-}
-
-.footer-container a {
-  text-decoration: none;
-}
-
-.footer-container a:active, .footer-container a:focus, .footer-container a:hover {
-  text-decoration: underline;
-}
-
-@media screen and (min-width: $medium_device) {
-  .footer-links > ul {
-    display: flex;
+  .yale-logo-svg {
+    height: 40px;
+    fill: $white;
   }
 
-  .footer-links li {
-    margin-right: 16px;
-  }
+  a {
+    &:hover {
+      background-color: $yale-blue;
+    }
 
-  .footer-logo {
-    width: 215px;
+    &:focus {
+      outline: 2px solid $white;
+      text-decoration: underline;
+      background-color: $yale-blue;
+      border-radius: 0;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      -ms-border-radius: 0;
+      -o-border-radius: 0;
+    }
   }
 }
 
+// Accessibility utilities
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
 
-@media screen and (min-width: $xlarge_device) {
-  .footer-container {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 0px;
+// Keep existing class for backward compatibility
+.element-invisible {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+// Accessibility improvements for screen reader content
+.region-footer-first,
+.region-footer-second,
+.region-footer-third {
+  h3.visually-hidden {
+    margin: 0 0 1em 0;
+    font-size: 1.2em;
+    font-weight: bold;
   }
+}
 
-  .footer-links li {
-    margin: 15px 0px 0px 16px;
+// Hide aria-describedby helper text visually
+#ask-desc,
+#newsletter-desc {
+  @extend .visually-hidden;
+}
+
+// Ensure navigation landmarks are properly styled
+nav[role="navigation"] {
+  // Inherit parent styles, no additional styling needed
+}
+
+@media screen and (min-width: 1025px) {
+  .container-12 {
+    margin-left: auto;
+    margin-right: auto;
+
+    .grid-4 {
+      width: 26.323987538941%;
+      display: inline;
+      float: left;
+      position: relative;
+      margin-left: 3.504672897196%;
+      margin-right: 3.504672897196%;
+    }
   }
+}
 
-  .footer-container > .container {
-    max-width: 85%;
-    padding: 0px
+@media screen and (max-width: 1024px) {
+  #zone-footer.container-12 {
+    .grid-4 {
+      display: block !important;
+      float: none !important;
+      padding: 0 2.5em !important;
+      width: 80% !important;
+      position: relative;
+      margin-left: 1.953125%;
+      margin-right: 1.953125%;
+
+      .footer-socmedia {
+        margin-bottom: 3em;
+      }
+
+      .footer-logo {
+        margin-bottom: 1em;
+      }
+    }
+
+    .grid-4.region-footer-second {
+      .menu {
+        margin: 1em 1em 0 0;
+      }
+    }
+
+    .grid-4.region-footer-third {
+      .footer-bottom-links {
+        margin: 1em 0 3em 0;
+      }
+    }
+
+    .grid-12 {
+      justify-content: start;
+      float: none !important;
+      padding: 0 2.5em !important;
+      margin-top: 0 !important;
+      margin-left: 1.953125%;
+      margin-right: 1.953125%;
+
+      .block {
+        margin-bottom: 3em;
+
+        .footer-copyright {
+          margin-top: 0 !important;
+        }
+      }
+    }
   }
+}
 
-  .footer-logo {
-    flex: 0 1 25%;
+@media screen and (max-width: 739px) {
+  // Social media buttons
+  .footer-socmedia {
+    a {
+      img {
+        height: 25px;
+      }
+
+      i {
+        font-family: FontAwesome;
+        font-size: 25px;
+        font-style: normal;
+      }
+    }
   }
+}
 
-  .footer-logo-wrapper {
-    display: flex;
-    justify-content: space-between;
+@media screen and (max-width: 394px) {
+  #zone-footer.container-12 {
+    .grid-12 {
+      width: 80%;
+    }
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .section-footer {
+    a:focus {
+      outline: 3px solid $white;
+      outline-offset: 3px;
+    }
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .section-footer {
+    * {
+      transition: none !important;
+    }
   }
 }
