@@ -222,9 +222,9 @@ RSpec.describe "Open with Permission", type: :system do
         expect(page).to have_content('11/02/34').twice
       end
 
-      it 'can search as expected' do
-        click_on 'Search'
-        expect(page.current_url).to eq 'http://web.library.yale.edu/gsearch'
+      it 'has footer links as expected' do
+        expect(page).to have_link('Ask Yale Library', href: 'https://ask.library.yale.edu/')
+        expect(page).to have_link('Contact our Web Team', href: '/contact-our-web-team')
       end
     end
 
@@ -263,9 +263,9 @@ RSpec.describe "Open with Permission", type: :system do
         expect(page).to have_content('11/02/34').twice
       end
 
-      it 'can search as expected' do
-        click_on 'Search'
-        expect(page.current_url).to eq 'http://web.library.yale.edu/gsearch'
+      it 'has footer links as expected' do
+        expect(page).to have_link('Ask Yale Library', href: 'https://ask.library.yale.edu/')
+        expect(page).to have_link('Contact our Web Team', href: '/contact-our-web-team')
       end
     end
   end

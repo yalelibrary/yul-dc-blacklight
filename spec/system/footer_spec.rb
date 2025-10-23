@@ -7,29 +7,30 @@ RSpec.describe 'footer', type: :system do
   end
 
   it 'has css' do
-    expect(page).to have_css '.branch-name'
-    expect(page).to have_css '.footer-container'
+    expect(page).to have_css '.section-footer'
     expect(page).to have_css '.footer-logo'
-    expect(page).to have_css '.footer-links'
-    expect(page).to have_css '.footer-links a'
     expect(page).to have_css '.footer-socmedia'
     expect(page).to have_css '.footer-socmedia img'
-    expect(page).to have_css '.footer-logo-wrapper a'
+    expect(page).to have_css '.footer-navigation-links'
+    expect(page).to have_css '.footer-navigation-links a'
+    expect(page).to have_css '.footer-bottom-links'
+    expect(page).to have_css '.footer-bottom-links a'
+    expect(page).to have_css '.footer-copyright'
   end
 
   it 'has links' do
-    expect(page).to have_link('Search', href: 'http://web.library.yale.edu/gsearch')
-    expect(page).to have_link('News', href: 'http://www.library.yale.edu/librarynews')
-    expect(page).to have_link('Systems Status', href: 'http://status.library.yale.edu')
-    expect(page).to have_link('Privacy Policy', href: 'http://www.yale.edu/privacy.html')
-    expect(page).to have_link('Terms', href: 'https://guides.library.yale.edu/about/policies/access')
-    expect(page).to have_link('Feedback', href: /http:\/\/web.library.yale.edu\/form\/findit-feedback\?findITURL=http.*/)
-    expect(page).to have_link('Data Use', href: 'https://web.library.yale.edu/data-use')
-    expect(page).to have_link('Accessibility', href: 'https://usability.yale.edu/web-accessibility/accessibility-yale')
-    expect(page).to have_link(nil, href: 'http://yaleuniversity.tumblr.com/')
+    expect(page).to have_link('Ask Yale Library', href: 'https://ask.library.yale.edu/')
+    expect(page).to have_link('My Library Accounts', href: '/my-library-accounts')
+    expect(page).to have_link('Subscribe to our Newsletter', href: 'https://subscribe.yale.edu/browse?area=a0df40000006XkNAAU')
+    expect(page).to have_link('Contact our Web Team', href: '/contact-our-web-team')
+    expect(page).to have_link('Accessibility', href: 'https://library.yale.edu/accessibility')
+    expect(page).to have_link('Giving', href: 'https://library.yale.edu/giving')
+    expect(page).to have_link('Privacy and Data Use', href: 'https://library.yale.edu/about-us/about/library-policies/privacy-and-data-use')
+    expect(page).to have_link('Library Staff Hub', href: 'https://yaleedu.sharepoint.com/sites/YLHUB/SitePages/Home.aspx?spStartSource=spappbar')
+    expect(page).to have_link(nil, href: 'https://www.facebook.com/YaleLibrary')
     expect(page).to have_link(nil, href: 'https://www.instagram.com/yalelibrary')
-    expect(page).to have_link(nil, href: 'https://twitter.com/yalelibrary')
-    expect(page).to have_link(nil, href: 'https://www.facebook.com/yalelibrary')
+    expect(page).to have_link(nil, href: 'http://www.youtube.com/yaleuniversitylibrary')
+    expect(page).to have_link(nil, href: 'http://www.yale.edu')
   end
 
   it 'has expected Yale log branding' do
@@ -37,9 +38,8 @@ RSpec.describe 'footer', type: :system do
   end
 
   it 'has expected social media icons images' do
-    expect(page.html).to include('<img id="tumblr" alt="Yale University Tumblr" src="/assets/soc_media/icon_tumblr-')
-    expect(page.html).to include('<img id="instagram" alt="Yale Library Instagram" src="/assets/soc_media/icon_instagram-')
-    expect(page.html).to include('<img id="twitter" alt="Yale Library Twitter" src="/assets/soc_media/icon_twitter-')
     expect(page.html).to include('<img id="facebook" alt="Yale Library Facebook" src="/assets/soc_media/icon_facebook-')
+    expect(page.html).to include('<img id="instagram" alt="Yale Library Instagram" src="/assets/soc_media/icon_instagram-')
+    expect(page.html).to include('<img id="youtube" alt="Yale Library Youtube" src="/assets/soc_media/youtube_icon-')
   end
 end
