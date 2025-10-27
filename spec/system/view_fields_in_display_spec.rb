@@ -348,21 +348,21 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         expect(page).to have_link("this is the online resource", href: 'http://this/is/the/link')
       end
       it 'displays the call number in results as link' do
-        expect(page).to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this is the call number')
-        expect(page).not_to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number+but+different')
+        expect(page).to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number')
+        expect(page).not_to have_link("this is the call number", href: '/catalog?f%5BcallNumber_ssim%5D%5B%5D=this+is+the+call+number%2C+but+different')
       end
       it 'contains a link on genre to its facet' do
-        expect(page).to have_link('this is the genre', href: '/catalog?f%5Bgenre_ssim%5D%5B%5D=this is the genre')
-        expect(page).to have_link('this is the second genre', href: '/catalog?f%5Bgenre_ssim%5D%5B%5D=this is the second genre')
+        expect(page).to have_link('this is the genre', href: '/catalog?f%5Bgenre_ssim%5D%5B%5D=this+is+the+genre')
+        expect(page).to have_link('this is the second genre', href: '/catalog?f%5Bgenre_ssim%5D%5B%5D=this+is+the+second+genre')
 
         # ensures that genre is separated with new line rather than concatenated with commas and 'and'
         expect(page).to have_text("this is the genrethis is the second genre")
       end
       it 'contains a link on format to its facet' do
-        expect(page).to have_link('three dimensional object', href: '/catalog?f%5Bformat%5D%5B%5D=three dimensional object')
+        expect(page).to have_link('three dimensional object', href: '/catalog?f%5Bformat%5D%5B%5D=three+dimensional+object')
       end
       it 'contains a link on resource type to its facet' do
-        expect(page).to have_link('this is the resource type', href: '/catalog?f%5BresourceType_ssim%5D%5B%5D=this is the resource type')
+        expect(page).to have_link('this is the resource type', href: '/catalog?f%5BresourceType_ssim%5D%5B%5D=this+is+the+resource+type')
       end
       it 'contains a link on language to its facet' do
         expect(page).to have_link('English (en)', href: '/catalog?f%5Blanguage_ssim%5D%5B%5D=English (en)')
@@ -385,16 +385,16 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         expect(page).to have_link('http://0.0.0.0:3000/catalog/111', href: 'http://0.0.0.0:3000/catalog/111')
       end
       it 'contains a link on subject (topic) to its facet' do
-        expect(page).to have_link('this is the subject topic', href: '/catalog?f%5BsubjectTopic_ssim%5D%5B%5D=this is the subject topic')
-        expect(page).to have_link('these are the subject topics', href: '/catalog?f%5BsubjectTopic_ssim%5D%5B%5D=these are the subject topics')
+        expect(page).to have_link('this is the subject topic', href: '/catalog?f%5BsubjectTopic_ssim%5D%5B%5D=this+is+the+subject+topic')
+        expect(page).to have_link('these are the subject topics', href: '/catalog?f%5BsubjectTopic_ssim%5D%5B%5D=these+are+the+subject+topics')
       end
       it 'contains a link on subject (name) to its facet' do
-        expect(page).to have_link('this is the subject name', href: '/catalog?f%5BsubjectName_ssim%5D%5B%5D=this is the subject name')
-        expect(page).to have_link('these are the subject names', href: '/catalog?f%5BsubjectName_ssim%5D%5B%5D=these are the subject names')
+        expect(page).to have_link('this is the subject name', href: '/catalog?f%5BsubjectName_ssim%5D%5B%5D=this+is+the+subject+name')
+        expect(page).to have_link('these are the subject names', href: '/catalog?f%5BsubjectName_ssim%5D%5B%5D=these+are+the+subject+names')
       end
       it 'contains a link on subject (geographic) to its facet' do
-        expect(page).to have_link('this is the geo subject', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=this is the geo subject')
-        expect(page).to have_link('these are the geo subjects', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=these are the geo subjects')
+        expect(page).to have_link('this is the geo subject', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=this+is+the+geo+subject')
+        expect(page).to have_link('these are the geo subjects', href: '/catalog?f%5BsubjectGeographic_ssim%5D%5B%5D=these+are+the+geo+subjects')
       end
     end
     context 'with alma record' do
