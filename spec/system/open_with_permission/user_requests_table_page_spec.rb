@@ -224,7 +224,8 @@ RSpec.describe "Open with Permission", type: :system do
 
       it 'has footer links as expected' do
         expect(page).to have_link('Ask Yale Library', href: 'https://ask.library.yale.edu/')
-        expect(page).to have_link('Contact our Web Team', href: '/contact-our-web-team')
+        url = page.current_url.gsub("&", "%26")
+        expect(page).to have_link('Feedback', href: "http://web.library.yale.edu/form/findit-feedback?findITURL=#{url}")
       end
     end
 
@@ -265,7 +266,8 @@ RSpec.describe "Open with Permission", type: :system do
 
       it 'has footer links as expected' do
         expect(page).to have_link('Ask Yale Library', href: 'https://ask.library.yale.edu/')
-        expect(page).to have_link('Contact our Web Team', href: '/contact-our-web-team')
+        url = page.current_url.gsub("&", "%26")
+        expect(page).to have_link('Feedback', href: "http://web.library.yale.edu/form/findit-feedback?findITURL=#{url}")
       end
     end
   end
