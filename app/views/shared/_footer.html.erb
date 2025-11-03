@@ -53,8 +53,8 @@
                     <%= link_to "Subscribe to our Newsletter", "https://subscribe.yale.edu/browse?area=a0df40000006XkNAAU",
                         "aria-describedby": "newsletter-desc" %>
                     <span id="newsletter-desc" class="visually-hidden">Stay updated with library news and events</span>
-                    
-                    <%= link_to "Contact our Web Team", "/contact-our-web-team" %>
+                    <% url = request.original_url.gsub("&", "%26") %>
+                    <%= link_to(:"Feedback", "http://web.library.yale.edu/form/findit-feedback?findITURL=#{url}", :target => '_blank' ) %>
                   </div>
                 </nav>
               </div>
