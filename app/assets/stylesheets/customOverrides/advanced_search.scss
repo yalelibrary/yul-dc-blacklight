@@ -157,6 +157,10 @@ input.btn:nth-child(2) {
   color: $medium_grey;
 }
 
+.query_criteria_heading label {
+  display: inline;
+}
+
 span#advanced-fulltext-info {
   font-family: $mallory_book, $mallory_light, Arial, Helvetica, sans-serif;
   font-size: 14px;
