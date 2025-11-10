@@ -52,7 +52,12 @@ DEFAULT MOBILE STYLING
 
 .nav-link-title {
   margin-bottom: 0px;
+  margin-top: 1rem;
   cursor: pointer;
+}
+
+.nav-link-title li {
+  list-style-type: none;
 }
 
 .navbar-brand {
