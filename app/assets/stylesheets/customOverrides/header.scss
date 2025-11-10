@@ -56,6 +56,10 @@ DEFAULT MOBILE STYLING
   cursor: pointer;
 }
 
+.nav-link-title li {
+  list-style-type: none;
+}
+
 .navbar-brand {
   color: transparent !important;
 }
