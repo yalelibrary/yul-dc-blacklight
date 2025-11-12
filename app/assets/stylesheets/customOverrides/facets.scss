@@ -35,10 +35,22 @@ div.card {
 .facet-field-heading button{
   text-transform: uppercase;
 }
+
+.facet-field-heading button:focus {
+  outline: 2px solid $yale_blue;
+  outline-offset: 2px;
+  background-color: $lightest_blue;
+}
+
+.facet-field-heading button:focus:not(:focus-visible) {
+  outline: none;
+  background-color: transparent;
+}
+
 .facet-field-heading button.collapsed::after {
   width: 11px;
   height: 8px;
-  color: $medium_grey;
+  color: $dark_grey;
   content: "^";
   margin-top: 12px;
   transform: rotate(180deg);
@@ -58,7 +70,7 @@ div.card {
 .facet-field-heading button::after[aria-expanded="true"] {
   width: 11px;
   height: 8px;
-  color: $medium_grey;
+  color: $dark_grey;
   content: "^";
   transform: rotate(0deg);
   /* Legacy vendor prefixes */
@@ -126,6 +138,7 @@ div.card {
 
 #facets .facet-field-heading .btn {
   border-top: 1px solid $light_grey !important;
+  color: $dark_grey !important;
 }
 
 #facets a, .facet-values a, .prev_next_links a {
