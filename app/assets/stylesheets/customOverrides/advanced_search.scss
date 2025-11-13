@@ -31,7 +31,7 @@ DEFAULT MOBILE STYLING
 }
 
 .query_criteria_heading {
-  color:$medium_grey;
+  color:$dark_grey;
   font-weight: bold;
   font-size: 12px;
   text-transform: uppercase;
@@ -60,7 +60,7 @@ DEFAULT MOBILE STYLING
 }
 //Sort text next to button
 .sort-buttons {
-  color:$medium_grey;
+  color:$dark_grey;
   font-weight: bold;
   font-size: 12px;
   text-transform: uppercase;
@@ -111,6 +111,10 @@ input.btn:nth-child(2) {
   border: 1px solid $light_grey !important;
 }
 
+.advanced_search_fields label {
+  color: $dark_grey;
+}
+
 .adv-search-help h2 {
   font-family: $yale_new_roman, 'Times New Roman', Times, serif !important;
   font-size: 28px;
@@ -123,14 +127,14 @@ input.btn:nth-child(2) {
   font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: $medium_grey;
+  color: $dark_grey;
 }
 
 .advanced-help-more-information {
   font-family: $mallory_mp_medium, $mallory_medium, Arial, Helvetica, sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: $medium_grey;
+  color: $dark_grey;
   list-style-type: none;
   padding-left: 25px;
 }
@@ -154,7 +158,7 @@ input.btn:nth-child(2) {
   font-family: $mallory_mp_black, $mallory_medium, Arial, Helvetica, sans-serif;
   font-size: 12px;
   font-weight: 900;
-  color: $medium_grey;
+  color: $dark_grey;
 }
 
 .query_criteria_heading label {
@@ -164,7 +168,7 @@ input.btn:nth-child(2) {
 span#advanced-fulltext-info {
   font-family: $mallory_book, $mallory_light, Arial, Helvetica, sans-serif;
   font-size: 14px;
-  color: $medium_grey;;
+  color: $dark_grey;;
 }
 
 //Do we want the advanced search to also change state?
@@ -226,6 +230,10 @@ span#advanced-fulltext-info {
     margin-left: -45px;
     margin-top: 4px;
     }
+
+  .adv-search-sort-submit-buttons {
+    padding-bottom: 25px;
+  }
 
   .adv-search-sort-submit-buttons.sort-submit-top {
     margin-top: -3px;
