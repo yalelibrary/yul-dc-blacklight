@@ -129,7 +129,7 @@ module BlacklightHelper
     content = build_caption_link(args[:document], args[:field], first[:caption_text], first[:child_oid])
 
     if matching.length > 1
-      note = content_tag(:em, 'More caption search results available on object page')
+      note = content_tag(:em, 'More caption search results available on item page')
       content = safe_join([content, tag.br, note])
     end
 
@@ -159,6 +159,7 @@ module BlacklightHelper
     matching = matching_captions(args[:document][args[:field]])
     return nil if matching.empty?
 
+    # instead of using only the first match, we now display all matching captions
     links = matching.map do |parsed|
       snippet = sanitize(create_caption_snippet(parsed[:caption_text], search_words),
                         tags: %w[span], attributes: %w[class])

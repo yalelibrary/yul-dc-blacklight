@@ -249,7 +249,7 @@ RSpec.describe 'search result', type: :system, clean: true do
       it 'shows note about additional caption matches' do
         visit '/catalog?q=Lincoln&search_field=all_fields'
         within "[data-document-id='caption_test_3']" do
-          expect(page).to have_css('em', text: /More caption search results available on object page/i)
+          expect(page).to have_css('em', text: /More caption search results available on item page/i)
         end
       end
 
