@@ -344,6 +344,24 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     end
   end
 
+  context 'direct URL access without search session' do
+    before do
+      visit 'catalog/111'
+    end
+    it 'has expected css with constraints-container wrapper' do
+      expect(page).to have_css '.constraints-container'
+      expect(page).to have_css '.show-buttons'
+      expect(page).to have_css '.btn-show'
+    end
+    it 'shows "New Search" button properly positioned' do
+      expect(page).to have_button "New Search"
+      expect(page).to have_xpath("//button[@href='/catalog']")
+    end
+    it 'does not show "Back to Search Results" button' do
+      expect(page).not_to have_content "Back to Search Results"
+    end
+  end
+
   context 'Universal Viewer' do
     it 'does not have a .json extension in the src attribute' do
       visit '/catalog?search_field=all_fields&q='
