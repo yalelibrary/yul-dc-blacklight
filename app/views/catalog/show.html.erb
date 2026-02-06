@@ -7,8 +7,10 @@
     <%= render 'previous_next_doc' if @search_context %>
   </div>
 <% else %>
-  <div id="showSearchButtons" class="show-buttons" >
+  <div id="appliedParams" class="row constraints-container">
+    <div id="showSearchButtons" class="show-buttons" >
       <%= render 'start_over' %>
+    </div>
   </div>
 <% end %>
 
