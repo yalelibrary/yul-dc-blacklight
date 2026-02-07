@@ -46,7 +46,7 @@
     "trim-newlines": "^4.0.2",
     "turbolinks": "^5.2.0",
     "universalviewer": "4.2.0-rc4",
-    "webpack": "5.94.0",
+    "webpack": "5.104.1",
     "webpack-cli": "5.1.4",
     "webpack-dev-middleware": "5.3.4",
     "ws": "^7.5.10",
