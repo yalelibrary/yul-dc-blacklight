@@ -7,6 +7,10 @@ DEFAULT MOBILE STYLING
   display: none;
   border: none;
   border-radius: 0;
+
+  a {
+    color: inherit;
+  }
 }
 
 .bg-dark {
