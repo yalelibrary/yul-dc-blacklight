@@ -619,7 +619,7 @@ module BlacklightHelper
     img = build_thumbnail_image(document)
     count = document['imageCount_isi'].to_i
     if count > 1 && client_can_view_digital?(document)
-      badge = content_tag(:span, "#{count} pages", class: 'multi-image-badge')
+      badge = content_tag(:span, "#{count} images", class: 'multi-image-badge')
       content_tag(:div, img + badge, class: 'multi-image')
     else
       img
