@@ -84,7 +84,10 @@ module Blacklight::SearchContext
   def find_or_initialize_search_session_from_params(params)
     params_copy = params.reject { |k, v| blocklisted_search_session_params.include?(k.to_sym) || v.blank? }
 
-    return if params_copy.reject { |k, _v| [:action, :controller].include? k.to_sym }.blank?
+    if params_copy.reject { |k, _v| [:action, :controller].include? k.to_sym }.blank?
+      Rails.logger.info "[SEARCH_DEBUG] find_or_initialize: params empty after filtering"
+      return
+    end
 
     saved_search = searches_from_history.find { |x| x.query_params == params_copy }
 
