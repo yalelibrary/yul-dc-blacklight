@@ -24,11 +24,12 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # Needed for guest user authentication. Devise expects the authentication key to be present.
-  # This method generates a unique guest UID if one is not present.
+  # Needed for guest user authentication. Devise expects the authentication key to be present, but we want to allow it to be nil for non-guest users.
+  # This method ensures that only keys starting with "guest" are considered valid, and generates a unique guest UID if the key is nil or invalid.
   # rubocop:disable Lint/UselessAssignment
   def guest_uid_authentication_key(key)
-    key ||= Digest::UUID.uuid_v5(Digest::UUID::DNS_NAMESPACE, ENV['BLACKLIGHT_HOST'] || 'localhost')
+    key &&= nil unless /^guest/.match?(key.to_s)
+    key ||= "guest_" + Array.new(5) { SecureRandom.rand(0..9) }.join
   end
   # rubocop:enable Lint/UselessAssignment
 end
