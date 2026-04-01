@@ -39,6 +39,7 @@ module Blacklight::SearchContext
   def find_search_session
     Rails.logger.info "[SEARCH_DEBUG] find_search_session: action=#{action_name} start_new=#{start_new_search_session?}"
     if agent_is_crawler?
+      Rails.logger.info "[SEARCH_DEBUG] crawler detected"
       nil
     elsif params[:search_context].present?
       find_or_initialize_search_session_from_params JSON.parse(params[:search_context])
