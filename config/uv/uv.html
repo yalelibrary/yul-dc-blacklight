@@ -67,8 +67,7 @@
                 embedded: true
             });
             uv = UV.init('uv', data);
-            
-            // ensure fresh package
+
             uv.on("configure", function ({ config, cb }) {
                   cb(
                     new Promise(function (resolve) {
@@ -79,43 +78,9 @@
                   );
                 });
 
-            // Post messages to the parent page when the canvas changes
             uv.on('canvasIndexChange', function (event) {
                 window.parent.postMessage(event, "*")
             })
-
-            // Fix initial zoom when coming from Thumbnail view, or whenever the initial zoom is set to a value that doesn't fill the viewport
-            uv.on(UV.Events.CREATED, function uvCreatedEvent() { 
-                const OSD = uv.get().extension.centerPanel; // OpenSeaDragon
-                if (OSD && OSD.viewer) {
-                    let viewportSize = null;
-                    let fixingZoom = false;
-                    const targetCoverage = uv.get().options.initialZoomMin ?? 1;
-
-                    OSD.viewer.addHandler("resize", (event) => {
-                        viewportSize = event.newContainerSize;
-                        fixingZoom = false;
-                    });
-
-                    OSD.viewer.addHandler("tile-drawn", (event) => {
-                        if (fixingZoom) {
-                            return;
-                        }
-
-                        fixingZoom = true;
-                        const zoomedSize = event.tiledImage.getSizeInWindowCoordinates();
-                        const filledRatio = Math.max(
-                            zoomedSize.x / viewportSize.x,
-                            zoomedSize.y / viewportSize.y,
-                        );
-
-                        if (filledRatio < targetCoverage) {
-                            const factor = targetCoverage / filledRatio;
-                            OSD.viewer.viewport.zoomBy(factor);
-                        }
-                    });
-                }    
-            });
         }, false);
     </script>
 </head>
