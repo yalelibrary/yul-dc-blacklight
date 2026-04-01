@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   include Blacklight::Controller
   include HttpAuthConcern
 
+  before_action :ensure_guest_uid_authentication_key
+
   layout :determine_layout if respond_to? :layout
 
   rescue_from Blacklight::Exceptions::RecordNotFound, with: :not_found
@@ -24,12 +26,21 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def ensure_guest_uid_authentication_key
+    # skip if user is logged in
+    return if current_user.present?
+    # skip for non-HTML requests to prevent breaking CSS and JS assets
+    return unless request.format.html?
+    # create a unique guest UID if necessary
+    guest_uid_authentication_key(session["warden.user.user.key"])
+  end
+
   # Needed for guest user authentication. Devise expects the authentication key to be present, but we want to allow it to be nil for non-guest users.
   # This method ensures that only keys starting with "guest" are considered valid, and generates a unique guest UID if the key is nil or invalid.
   # rubocop:disable Lint/UselessAssignment
   def guest_uid_authentication_key(key)
     key &&= nil unless /^guest/.match?(key.to_s)
-    key ||= "guest_" + Array.new(5) { SecureRandom.rand(0..9) }.join
+    key ||= "guest_" + Digest::UUID.uuid_v5(Digest::UUID::DNS_NAMESPACE, ENV['BLACKLIGHT_HOST'] || 'localhost')
   end
   # rubocop:enable Lint/UselessAssignment
 end

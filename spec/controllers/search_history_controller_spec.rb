@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe SearchHistoryController do
+  include Devise::Test::ControllerHelpers
   routes { Blacklight::Engine.routes }
 
   describe 'index' do
