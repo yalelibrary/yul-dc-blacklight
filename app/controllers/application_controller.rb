@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   include Blacklight::Controller
   include HttpAuthConcern
 
+  before_action :ensure_guest_uid_authentication_key
+
   layout :determine_layout if respond_to? :layout
 
   rescue_from Blacklight::Exceptions::RecordNotFound, with: :not_found
@@ -23,6 +25,15 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def ensure_guest_uid_authentication_key
+    # skip if user is logged in
+    return if current_user.present?
+    # skip for non-HTML requests to prevent breaking CSS and JS assets
+    return unless request.format.html?
+    # create a unique guest UID if necessary
+    guest_uid_authentication_key(session["warden.user.user.key"])
+  end
 
   # Needed for guest user authentication. Devise expects the authentication key to be present, but we want to allow it to be nil for non-guest users.
   # This method ensures that only keys starting with "guest" are considered valid, and generates a unique guest UID if the key is nil or invalid.
