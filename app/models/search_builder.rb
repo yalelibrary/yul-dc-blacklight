@@ -60,6 +60,7 @@ class SearchBuilder < Blacklight::SearchBuilder
       uri_ssim
       viewing_hint_ssi
       visibility_ssi
+      imageCount_isi
     ]
   end
 

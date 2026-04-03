@@ -616,7 +616,17 @@ module BlacklightHelper
   end
 
   def render_thumbnail(document, _options)
-    # return placeholder image if not logged in for yale only works
+    img = build_thumbnail_image(document)
+    count = document['imageCount_isi'].to_i
+    if count > 1 && client_can_view_digital?(document)
+      badge = content_tag(:span, "#{count} images", class: 'multi-image-badge')
+      content_tag(:div, img + badge, class: 'multi-image')
+    else
+      img
+    end
+  end
+
+  def build_thumbnail_image(document)
     unless client_can_view_digital?(document)
       if document['visibility_ssi'] == "Open with Permission"
         return image_tag('OwP-access-image.png',
