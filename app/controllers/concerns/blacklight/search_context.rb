@@ -32,11 +32,14 @@ module Blacklight::SearchContext
 
   # Persist the current search session id to the user's session
   def set_current_search_session
+    Rails.logger.info "[SEARCH_DEBUG] set_current_search_session: current_search_session=#{current_search_session&.id || 'NIL'}"
     search_session['id'] = current_search_session.id if current_search_session
   end
 
   def find_search_session
+    Rails.logger.info "[SEARCH_DEBUG] find_search_session: action=#{action_name} start_new=#{start_new_search_session?}"
     if agent_is_crawler?
+      Rails.logger.info "[SEARCH_DEBUG] crawler detected"
       nil
     elsif params[:search_context].present?
       find_or_initialize_search_session_from_params JSON.parse(params[:search_context])
@@ -48,8 +51,10 @@ module Blacklight::SearchContext
         nil
       end
     elsif start_new_search_session?
+      Rails.logger.info "[SEARCH_DEBUG] new search session, params: q=#{params[:q]} search_field=#{params[:search_field]}"
       find_or_initialize_search_session_from_params search_state.to_h
     elsif search_session['id']
+      Rails.logger.info "[SEARCH_DEBUG] existing search session, search_session['id']=#{search_session['id']}"
       begin
         searches_from_history.find(search_session['id'])
       rescue ActiveRecord::RecordNotFound
@@ -79,11 +84,15 @@ module Blacklight::SearchContext
   def find_or_initialize_search_session_from_params(params)
     params_copy = params.reject { |k, v| blocklisted_search_session_params.include?(k.to_sym) || v.blank? }
 
-    return if params_copy.reject { |k, _v| [:action, :controller].include? k.to_sym }.blank?
+    if params_copy.reject { |k, _v| [:action, :controller].include? k.to_sym }.blank?
+      Rails.logger.info "[SEARCH_DEBUG] find_or_initialize: params empty after filtering"
+      return
+    end
 
     saved_search = searches_from_history.find { |x| x.query_params == params_copy }
 
     saved_search || Search.create(query_params: params_copy).tap do |s|
+      Rails.logger.info "[SEARCH_DEBUG] created search id=#{s.id} persisted=#{s.persisted?}"
       add_to_search_history(s)
     end
   end
