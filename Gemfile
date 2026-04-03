@@ -21,7 +21,7 @@ gem 'citeproc-ruby', '~> 2.0.0'
 # pinned due to https://github.com/rails/rails/pull/54264
 gem 'concurrent-ruby', '< 1.3.5'
 gem 'csl-styles', '~> 2.0.1'
-gem 'devise', '~> 4.9.3'
+gem 'devise', '~> 5.0.3'
 gem 'devise-guests', '~> 0.6'
 gem 'dotenv-rails', '~> 2.8.1', groups: [:development, :test]
 gem 'honeybadger', '~> 4.0'
