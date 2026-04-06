@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     # skip if user is logged in
     return if current_user.present?
     # skip for non-HTML requests to prevent breaking CSS and JS assets
-    return unless request.format.html?
+    return unless request.format.html? && !request.xhr?
     # create a unique guest UID if necessary
     guest_uid_authentication_key(session["warden.user.user.key"])
   end
@@ -41,6 +41,7 @@ class ApplicationController < ActionController::Base
   def guest_uid_authentication_key(key)
     key &&= nil unless /^guest/.match?(key.to_s)
     key ||= "guest_" + Digest::UUID.uuid_v5(Digest::UUID::DNS_NAMESPACE, ENV['BLACKLIGHT_HOST'] || 'localhost')
+    session["warden.user.user.key"] = key
   end
   # rubocop:enable Lint/UselessAssignment
 end
