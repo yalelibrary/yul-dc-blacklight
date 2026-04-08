@@ -25,4 +25,24 @@ class User < ApplicationRecord
   def to_s
     uid
   end
+
+  # Override serialize_from_session to fix Rails 8/Devise 4.9.4 compatibility
+  # See: https://github.com/heartcombo/devise/issues/5752
+  def self.serialize_from_session(key, _salt = nil)
+    # Handle both old format [id, salt] and new format (full record hash)
+    if key.is_a?(Hash)
+      # New format: full record hash from Rails 8
+      record_id = key["id"] || key[:id]
+      return nil unless record_id
+      find_by(id: record_id)
+    elsif key.is_a?(Array) && key.length >= 1
+      # Old format: [id] or [id, salt]
+      record_id = key.first
+      return nil unless record_id
+      find_by(id: record_id)
+    else
+      # Single ID value
+      find_by(id: key)
+    end
+  end
 end
