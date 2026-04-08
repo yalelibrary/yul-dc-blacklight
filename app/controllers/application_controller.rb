@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   # rubocop:disable Lint/UselessAssignment
   def guest_uid_authentication_key(key)
     key &&= nil unless /^guest/.match?(key.to_s)
-    key ||= "guest_" + Digest::UUID.uuid_v5(Digest::UUID::DNS_NAMESPACE, ENV['BLACKLIGHT_HOST'] || 'localhost')
+    key ||= "guest_" + SecureRandom.uuid
     session["warden.user.user.key"] = key
   end
   # rubocop:enable Lint/UselessAssignment
