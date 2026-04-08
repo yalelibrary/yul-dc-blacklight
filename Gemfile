@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'addressable', '~> 2.8.6'
+gem 'addressable', '~> 2.9.0'
 gem 'awesome_print', '~> 1.9.2'
 gem "aws-sdk-cloudwatch", '~> 1.84.0'
 gem 'aws-sdk-s3', '~> 1.208.0'
