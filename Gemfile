@@ -49,7 +49,7 @@ gem 'twitter-typeahead-rails', '0.11.1.pre.corejavascript'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'unicode-display_width', '~> 2.5'
 gem 'webpacker', '~> 5.0'
-gem 'yard', '~> 0.9.36'
+gem 'yard', '~> 0.9.42'
 
 group :development, :test do
   gem 'bixby', '~> 5.0.1'
