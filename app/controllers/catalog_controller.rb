@@ -496,12 +496,12 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('orbisBibId_ssi', label: 'Orbis ID') do |field|
+    config.add_search_field('orbisBibId_ssi', label: 'Catalog ID') do |field|
       field.qt = 'search'
       field.include_in_advanced_search = false
       field.solr_parameters = {
-        qf: 'orbisBibId_ssi quicksearchId_ssi',
-        pf: 'orbisBibId_ssi quicksearchId_ssi'
+        qf: 'orbisBibId_ssi mmsId_ssi quicksearchId_ssi',
+        pf: 'orbisBibId_ssi mmsId_ssi quicksearchId_ssi'
       }
     end
 

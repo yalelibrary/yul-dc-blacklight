@@ -64,6 +64,28 @@ RSpec.describe 'Search results displays field', type: :system, clean: true, js: 
       expect(page).not_to have_content 'Handsome Dan is not a cat.'
     end
 
+    context 'when searching by catalog id (MMS ID only, no legacy Orbis bib id)' do
+      let(:mms_only_record) do
+        {
+          id: '313',
+          title_tesim: 'Alma only catalog match',
+          mmsId_ssi: '88888888',
+          visibility_ssi: 'Public'
+        }
+      end
+
+      before do
+        solr = Blacklight.default_index.connection
+        solr.add([mms_only_record])
+        solr.commit
+      end
+
+      it 'finds a record that has mmsId_ssi but no orbisBibId_ssi' do
+        visit '/catalog?search_field=orbisBibId_ssi&q=88888888'
+        expect(page).to have_content 'Alma only catalog match'
+      end
+    end
+
     it 'displays the correct record when searching by creator' do
       visit '/catalog?search_field=creator&q=Eric'
       expect(page).to have_content 'Handsome Dan is a bull dog.'
