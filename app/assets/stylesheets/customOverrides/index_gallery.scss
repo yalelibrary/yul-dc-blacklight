@@ -49,6 +49,46 @@ DEFAULT MOBILE STYLING
   display: none;
 }
 
+.documents-gallery .document-thumbnail .multi-image {
+  position: relative;
+  display: inline-block;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 0.5px solid #333;
+  }
+
+  &::before {
+    top: 4px;
+    left: 4px;
+    background: #888;
+    z-index: -1;
+  }
+
+  &::after {
+    top: 9px;
+    left: 9px;
+    background: #bbb;
+    z-index: -2;
+  }
+
+  .multi-image-badge {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    background: rgba(0, 0, 0, 0.65);
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    pointer-events: none;
+  }
+}
+
 .row-cols-2 > * {
   max-width: 100%;
   flex: 0 0 100%;
