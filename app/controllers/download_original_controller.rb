@@ -9,9 +9,7 @@ class DownloadOriginalController < ApplicationController
   before_action :check_authorization
 
   def tiff
-    if params[:q].present?
-      redirect_to "#{root_url}catalog?search_field=all_fields&fulltext_search=1&q=#{params[:q]}"
-    elsif S3Service.exists_in_s3(tiff_pairtree_path)
+    if S3Service.exists_in_s3(tiff_pairtree_path)
       send_tiff
     else
       stage_download
