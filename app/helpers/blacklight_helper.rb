@@ -260,9 +260,11 @@ module BlacklightHelper
 
   def display_max_alternative_title_characters(args)
     highlights = args[:document].highlight_field('alternativeTitle_tesim')
-    return highlights.first if highlights.present?
+    return safe_join(highlights, '<br/>'.html_safe) if highlights.present?
 
-    args[:document][:alternativeTitle_tesim].first.length > 250 ? args[:document][:alternativeTitle_tesim].first[0..250].concat("...") : args[:document][:alternativeTitle_tesim].first
+    combined = args[:document][:alternativeTitle_tesim].join("\n")
+    truncated = combined.length > 250 ? "#{combined[0..250]}..." : combined
+    safe_join(truncated.split("\n"), '<br/>'.html_safe)
   end
 
   def language_codes_as_links(args)
