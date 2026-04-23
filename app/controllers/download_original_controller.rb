@@ -31,6 +31,12 @@ class DownloadOriginalController < ApplicationController
 
   private
 
+  # Blacklight uses #search_action_url to figure out the right URL for
+  # the global search box - Override from Blacklight v7.36.2
+  def search_action_url(*args)
+    search_catalog_url(*args)
+  end
+
   def send_tiff
     log_download
     response.set_header('Content-Type', 'image/tiff')
