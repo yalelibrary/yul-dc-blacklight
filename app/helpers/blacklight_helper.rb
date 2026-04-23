@@ -262,10 +262,9 @@ module BlacklightHelper
     highlights = args[:document].highlight_field('alternativeTitle_tesim')
     return safe_join(highlights, '<br/>'.html_safe) if highlights.present?
 
-    truncated = args[:document][:alternativeTitle_tesim].map do |title|
-      title.length > 250 ? "#{title[0..250]}..." : title
-    end
-    safe_join(truncated, '<br/>'.html_safe)
+    combined = args[:document][:alternativeTitle_tesim].join("\n")
+    truncated = combined.length > 250 ? "#{combined[0..250]}..." : combined
+    safe_join(truncated.split("\n"), '<br/>'.html_safe)
   end
 
   def language_codes_as_links(args)
