@@ -21,6 +21,8 @@ module BlacklightYul
 
     # TODO: remove the line below when load_defaults 7.0 is enacted
     config.active_support.cache_format_version = 7.0
+    # TODO: remove the line below when load_defaults 7.0 is enacted
+    config.active_support.disable_to_s_conversion = true
 
     # Configuration for the application, engines, and railties goes here.
     #
