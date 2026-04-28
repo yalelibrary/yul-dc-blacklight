@@ -58,4 +58,7 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+
+  # Disable open redirect protection for tests only
+  config.action_controller.raise_on_open_redirects = false
 end
