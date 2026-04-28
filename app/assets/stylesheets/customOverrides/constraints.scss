@@ -4,7 +4,9 @@ DEFAULT MOBILE STYLING
 
 #appliedParams {
   padding: 16px;
+  padding-right: 170px;
   width: 100%;
+  position: relative;
 }
 
 .btn-group.applied-filter.constraint {
@@ -49,7 +51,9 @@ DEFAULT MOBILE STYLING
   width: fit-content;
   display: block;
   position: absolute;
-  right: 1%;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
 }
 
 .constraints-group {
@@ -126,10 +130,6 @@ DEFAULT MOBILE STYLING
   .constraints-group{
     width: 62%;
   }
-
-  #startOverButtonContainer {
-    right: 6%;
-  }
 }
 
 @media screen and (min-width: $medium_device) {
@@ -142,18 +142,10 @@ DEFAULT MOBILE STYLING
   .constraints-group{
     width: 55%;
   }
-
-  #startOverButtonContainer {
-    right: 5%;
-  }
 }
 
 @media screen and (min-width: $xlarge_device) {
   .constraints-group{
     width: 62%;
-  }
-
-  #startOverButtonContainer {
-    right: 7%;
   }
 }
