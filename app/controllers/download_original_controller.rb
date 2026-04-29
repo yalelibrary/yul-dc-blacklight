@@ -76,11 +76,8 @@ class DownloadOriginalController < ApplicationController
   end
 
   def search_for_item
-    search_state[:rows] = 1
-    search_service_class.new(config: blacklight_config, search_state: search_state, user_params: search_state.to_h, **search_service_context)
     response, document = search_service.search_results do |builder|
-      builder.where(child_oids_ssim: [child_oid])
-      builder
+      builder.where(child_oids_ssim: [child_oid]).rows(1)
     end
     [response, document.first]
   end
