@@ -4,11 +4,9 @@ DEFAULT MOBILE STYLING
 
 #appliedParams {
   padding: 16px;
-  padding-right: 200px;
+  padding-right: 170px;
   width: 100%;
   position: relative;
-  align-items: center;
-  flex-wrap: wrap;
 }
 
 .btn-group.applied-filter.constraint {
@@ -50,17 +48,12 @@ DEFAULT MOBILE STYLING
 }
 
 #startOverButtonContainer {
+  width: fit-content;
+  display: block;
   position: absolute;
   top: 50%;
   right: 16px;
   transform: translateY(-50%);
-  width: 170px;
-}
-
-.catalog_startOverLink.btn-show {
-  width: 100%;
-  white-space: nowrap;
-  padding-right: 16px;
 }
 
 .constraints-group {
