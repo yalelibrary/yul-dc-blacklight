@@ -7,7 +7,7 @@ gem 'addressable', '~> 2.9.0'
 gem 'awesome_print', '~> 1.9.2'
 gem "aws-sdk-cloudwatch", '~> 1.84.0'
 gem 'aws-sdk-s3', '~> 1.208.0'
-gem 'blacklight', '~> 7.36.2'
+gem 'blacklight', '~> 7.38.0'
 gem "blacklight_advanced_search", '~> 7.0.0'
 gem 'blacklight_dynamic_sitemap', '~> 1.0.0'
 gem 'blacklight-gallery', '~> 4.0.2'
@@ -39,7 +39,7 @@ gem 'pg', '~> 1.5.4'
 gem 'puma', '~> 5.6'
 # pinned to before 4 due to https://stackoverflow.com/questions/71191685/visit-psych-nodes-alias-unknown-alias-default-psychbadalias
 gem 'psych', '< 4'
-gem 'rails', '~> 7.0.8'
+gem 'rails', '~> 7.2.3.1'
 gem "rails_semantic_logger", ">=4.4.4"
 gem 'rsolr', '>= 1.0', '< 3'
 gem 'sass-rails', '>= 6'
@@ -54,12 +54,12 @@ gem 'yard', '~> 0.9.36'
 group :development, :test do
   gem 'bixby', '~> 5.0.1'
   gem 'byebug', '~> 11.1.3', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 5.0.0'
+  gem 'rspec-rails', '~> 8.0.4'
   gem 'solr_wrapper', '>= 0.3'
 end
 
 group :development do
-  gem 'activerecord-nulldb-adapter', '~> 1.0.1'
+  gem 'activerecord-nulldb-adapter', '~> 1.2.2'
   gem "amazing_print", ">=1.2.1"
   gem 'listen', '~> 3.2'
   gem 'spring', '~> 4.1'
