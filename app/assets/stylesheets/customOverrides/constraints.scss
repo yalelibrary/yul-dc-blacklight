@@ -54,6 +54,13 @@ DEFAULT MOBILE STYLING
   top: 50%;
   right: 16px;
   transform: translateY(-50%);
+  width: 170px;
+}
+
+#startOverButtonContainer .catalog_startOverLink.btn-show {
+  width: 100%;
+  white-space: nowrap;
+  padding-right: 16px;
 }
 
 .constraints-group {
