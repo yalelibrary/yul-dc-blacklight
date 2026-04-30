@@ -4,7 +4,6 @@ DEFAULT MOBILE STYLING
 
 #appliedParams {
   padding: 16px;
-  padding-right: 200px;
   width: 100%;
   position: relative;
   align-items: center;
@@ -50,15 +49,13 @@ DEFAULT MOBILE STYLING
 }
 
 #startOverButtonContainer {
-  position: absolute;
-  top: 50%;
-  right: 16px;
-  transform: translateY(-50%);
-  width: 170px;
+  flex-basis: 100%;
+  margin-top: 8px;
+  text-align: center;
 }
 
 #startOverButtonContainer .catalog_startOverLink.btn-show {
-  width: 100%;
+  width: fit-content;
   white-space: nowrap;
   padding-right: 16px;
 }
@@ -140,6 +137,24 @@ DEFAULT MOBILE STYLING
 }
 
 @media screen and (min-width: $medium_device) {
+  #appliedParams {
+    padding-right: 200px;
+  }
+
+  #startOverButtonContainer {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    width: 170px;
+    flex-basis: auto;
+    margin-top: 0;
+  }
+
+  #startOverButtonContainer .catalog_startOverLink.btn-show {
+    width: 100%;
+  }
+
   .constraints-group{
     width: 57%;
   }
