@@ -60,9 +60,9 @@ class PermissionRequestsController < ApplicationController
     req.set_form_data({
                         'oid': params['oid'],
                         'user_email': current_user.email,
-                        'user_full_name': params['permission_request']['user_full_name'],
+                        'user_full_name': sanitize_input(params['permission_request']['user_full_name']),
                         'user_netid': current_user.netid,
-                        'user_note': params['permission_request']['user_note'],
+                        'user_note': sanitize_input(params['permission_request']['user_note']),
                         'user_sub': current_user.sub
                       })
     req.add_field('Authorization', "Bearer #{ENV['OWP_AUTH_TOKEN']}")
@@ -136,5 +136,14 @@ class PermissionRequestsController < ApplicationController
 
   def permission_request_params
     params.require(:permission_request).permit(:oid, :user_sub, :user_email, :user_full_name, :user_note, :user_netid)
+  end
+
+  # Strip any HTML/script tags from user-supplied free-text fields before they
+  # are forwarded to the management host. The management app stores these
+  # values and the confirmation view later renders them with `.html_safe`, so
+  # we sanitize at the point of submission to prevent stored XSS.
+  def sanitize_input(value)
+    return value if value.blank?
+    ActionController::Base.helpers.strip_tags(value.to_s).strip
   end
 end
