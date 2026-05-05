@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 # Hardens BlacklightOaiProvider so that ListRecords / ListIdentifiers / GetRecord
 # only expose records whose visibility is in the catalog UI's metadata-viewable set.
-# OAI_ALLOWED_VISIBILITIES MUST stay in sync with AccessHelper#viewable_metadata_visibilities.
-# Defense-in-depth: this enforces the policy explicitly, independent of whether the
-# Blacklight SearchBuilder processor chain (filter_by_visibility) fires for OAI requests.
 #
-# Implemented via Module#prepend so that #conditions can call `super` and chain to
-# the gem's original implementation instead of replacing it.
 module BlacklightOaiProvider
   module OaiVisibilityPatch
     OAI_ALLOWED_VISIBILITIES = ["Public", "Yale Community Only", "Open with Permission"].freeze
@@ -29,8 +24,6 @@ module BlacklightOaiProvider
       end
     end
 
-    # Defense-in-depth: also enforce on the :all / resumption-token paths,
-    # which build their query via the gem's inherited `conditions`.
     def conditions(constraints)
       query = super
       query.append_filter_query(OaiVisibilityPatch.allowed_visibility_fq)
