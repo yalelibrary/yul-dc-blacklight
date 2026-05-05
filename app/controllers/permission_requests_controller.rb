@@ -139,9 +139,7 @@ class PermissionRequestsController < ApplicationController
   end
 
   # Strip any HTML/script tags from user-supplied free-text fields before they
-  # are forwarded to the management host. The management app stores these
-  # values and the confirmation view later renders them with `.html_safe`, so
-  # we sanitize at the point of submission to prevent stored XSS.
+  # are forwarded to management
   def sanitize_input(value)
     return value if value.blank?
     ActionController::Base.helpers.strip_tags(value.to_s).strip
