@@ -72,7 +72,7 @@ group :test do
   gem 'axe-matchers', '~> 2.6.1'
   gem 'capybara', '>= 2.15'
   gem 'coveralls_reborn', '~> 0.28.0', require: false
-  gem 'factory_bot_rails', '~> 6.4.3'
+  gem 'factory_bot_rails', '~> 6.5.1'
   gem 'ffaker', '2.20.0'
   gem 'rails-controller-testing', '~> 1.0.5'
   gem 'selenium-webdriver', '~> 4.16'

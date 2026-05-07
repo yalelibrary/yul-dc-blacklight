@@ -246,11 +246,11 @@ GEM
     equalizer (0.0.11)
     erubi (1.13.1)
     execjs (2.10.0)
-    factory_bot (6.4.5)
-      activesupport (>= 5.0.0)
-    factory_bot_rails (6.4.3)
-      factory_bot (~> 6.4)
-      railties (>= 5.0.0)
+    factory_bot (6.6.0)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.5.1)
+      factory_bot (~> 6.5)
+      railties (>= 6.1.0)
     faraday (2.14.1)
       faraday-net_http (>= 2.0, < 3.5)
       json
@@ -696,7 +696,7 @@ DEPENDENCIES
   devise (~> 5.0.3)
   devise-guests (~> 0.6)
   dotenv-rails (~> 2.8.1)
-  factory_bot_rails (~> 6.4.3)
+  factory_bot_rails (~> 6.5.1)
   ffaker (= 2.20.0)
   honeybadger (~> 4.0)
   iso-639 (~> 0.3.6)
@@ -734,4 +734,4 @@ DEPENDENCIES
   yard (~> 0.9.36)
 
 BUNDLED WITH
-   2.3.26
+  4.0.11
