@@ -58,11 +58,14 @@ RSpec.describe "Download Original", type: :request, clean: true do
   around do |example|
     original_download_bucket = ENV['S3_DOWNLOAD_BUCKET_NAME']
     original_management_url = ENV['MANAGEMENT_HOST']
+    original_token = ENV['OWP_AUTH_TOKEN']
     ENV['S3_DOWNLOAD_BUCKET_NAME'] = 'yul-test-samples'
     ENV['MANAGEMENT_HOST'] = 'https://www.example.com/management'
+    ENV['OWP_AUTH_TOKEN'] = 'valid'
     example.run
     ENV['S3_DOWNLOAD_BUCKET_NAME'] = original_download_bucket
     ENV['MANAGEMENT_HOST'] = original_management_url
+    ENV['OWP_AUTH_TOKEN'] = original_token
   end
 
   before do
