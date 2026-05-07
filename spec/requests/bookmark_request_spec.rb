@@ -6,7 +6,7 @@ RSpec.describe "Saved Items", type: :request, clean: true do
 
   around do |example|
     original_management_url = ENV['MANAGEMENT_HOST']
-    ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
+    ENV['MANAGEMENT_HOST'] = 'https://www.example.com/management'
     example.run
     ENV['MANAGEMENT_HOST'] = original_management_url
   end

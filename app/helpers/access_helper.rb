@@ -36,7 +36,10 @@ module AccessHelper
     parent_oid = document[:id]
     pending = false
     return unless current_user
-    user_owp_permissions['permissions']&.each do |permission|
+    # F03: ManagementClient returns nil on non-2xx (e.g. 404 for a brand-new
+    # user with no permissions yet) or transport failure. Use &.dig so the
+    # nil short-circuits cleanly to "no pending requests".
+    user_owp_permissions&.dig('permissions')&.each do |permission|
       pending = true if (permission['oid'].to_s == parent_oid) && !permission['request_date'].nil? && (permission['request_status'] == "Pending")
     end
     pending
@@ -49,7 +52,8 @@ module AccessHelper
     parent_oid = params[:oid].presence || document[:id]
     return false if parent_oid.nil?
     allowance = false
-    user_owp_permissions['permissions']&.each do |permission|
+    # F03: nil-safe — see comment on pending_request?.
+    user_owp_permissions&.dig('permissions')&.each do |permission|
       if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today) && (permission['request_status'] == "Approved")
         allowance = true
       end
@@ -73,39 +77,27 @@ module AccessHelper
     allowance
   end
 
+  # All management API calls flow through ManagementClient (F03), which enforces
+  # https + peer verification, URL-encodes path segments, and returns nil on
+  # non-2xx so the @credentials check in admin_of_owp? fails closed.
   def user_owp_permissions
     return nil if current_user.nil?
-    # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
-    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{current_user.sub}")
-    response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
-    JSON.parse(response.body)
+    ManagementClient.permissions_for_user(current_user.sub)
   end
 
   def retrieve_permission_set_terms
     return nil if current_user.nil?
-    # #{ENV['MANAGEMENT_HOST']}
-    # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
-    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{@document[:id]}/terms")
-    response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
-    JSON.parse(response.body) unless response.body.nil?
+    ManagementClient.permission_set_terms(@document[:id])
   end
 
   def retrieve_admin_credentials(document)
     return nil if current_user.nil? || current_user&.netid.nil?
-    # #{ENV['MANAGEMENT_HOST']}
-    # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
-    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document.id}/#{current_user.netid}")
-    response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
-    JSON.parse(response.body)
+    ManagementClient.admin_credentials(document.id, current_user.netid)
   end
 
   def retrieve_admin_fulltext_credentials(document)
     return nil if current_user.nil? || current_user&.netid.nil?
-    # #{ENV['MANAGEMENT_HOST']}
-    # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
-    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document}/#{current_user.netid}")
-    response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
-    JSON.parse(response.body)
+    ManagementClient.admin_credentials(document, current_user.netid)
   end
 
   def client_can_view_metadata?(document)

@@ -27,7 +27,7 @@ RSpec.describe "Open with Permission", type: :system do
     original_management_url = ENV['MANAGEMENT_HOST']
     original_token = ENV['OWP_AUTH_TOKEN']
     ENV['BLACKLIGHT_HOST'] = 'http://www.example.com'
-    ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
+    ENV['MANAGEMENT_HOST'] = 'https://www.example.com/management'
     ENV['OWP_AUTH_TOKEN'] = 'valid'
     example.run
     ENV['BLACKLIGHT_HOST'] = original_blacklight_url
@@ -35,7 +35,7 @@ RSpec.describe "Open with Permission", type: :system do
     ENV['OWP_AUTH_TOKEN'] = original_token
   end
   before do
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
@@ -45,7 +45,7 @@ RSpec.describe "Open with Permission", type: :system do
           "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
           "permission_set_terms_agreed":[1],
           "permissions":[]}')
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6g')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6g')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
@@ -55,7 +55,7 @@ RSpec.describe "Open with Permission", type: :system do
                   "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6g"},
                   "permission_set_terms_agreed":[1],
                   "permissions":[]}')
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1718909/terms")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/1718909/terms")
       .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}")
     solr = Blacklight.default_index.connection
     solr.add([owp_work_without_permission])
@@ -65,11 +65,11 @@ RSpec.describe "Open with Permission", type: :system do
 
   context 'as an authenticated user on the request form page' do
     before do
-      stub_request(:post, 'http://www.example.com/management/agreement_term')
+      stub_request(:post, 'https://www.example.com/management/agreement_term')
         .with(body: { "oid" => "1718909", "permission_set_terms_id" => "1", "user_email" => "not_real@example.com", "user_full_name" => "new", "user_netid" => "net_id1",
                       "user_sub" => "7bd425ee-1093-40cd-ba0c-5a2355e37d6e" }, headers: valid_header)
         .to_return(status: 200)
-      stub_request(:post, 'http://www.example.com/management/agreement_term')
+      stub_request(:post, 'https://www.example.com/management/agreement_term')
         .with(body: { "oid" => "1718909", "permission_set_terms_id" => "1", "user_email" => "not_real_either@example.com", "user_full_name" => "new", "user_netid" => nil,
                       "user_sub" => "7bd425ee-1093-40cd-ba0c-5a2355e37d6g" }, headers: valid_header)
         .to_return(status: 200)

@@ -742,7 +742,7 @@ class CatalogController < ApplicationController
       @permission_set_terms = retrieve_permission_set_terms
       if @permission_set_terms.nil?
         redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: "We are unable to complete your access request at this time. For more information about this object, click the ‘Feedback’ link located at the bottom of this page and fill out the form. We will get back to you as soon as possible.")
-      elsif user_owp_permissions['permission_set_terms_agreed']&.include?(@permission_set_terms['id'])
+      elsif user_owp_permissions&.dig('permission_set_terms_agreed')&.include?(@permission_set_terms['id'])
         render 'catalog/request_form'
       else
         render 'catalog/terms_and_conditions'
@@ -759,7 +759,7 @@ class CatalogController < ApplicationController
     @response, @document = search_service.fetch(params[:oid])
     if current_user && @document['visibility_ssi'] == 'Open with Permission'
       @render_confirmation = false
-      permissions = user_owp_permissions['permissions']
+      permissions = user_owp_permissions&.dig('permissions')
       requests = []
       permissions&.each do |permission|
         if permission['oid'].to_s == params['oid']

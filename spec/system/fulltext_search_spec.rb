@@ -64,7 +64,7 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
     original_management_url = ENV['MANAGEMENT_HOST']
     original_blacklight_url = ENV['BLACKLIGHT_HOST']
     original_token = ENV['OWP_AUTH_TOKEN']
-    ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
+    ENV['MANAGEMENT_HOST'] = 'https://www.example.com/management'
     ENV['BLACKLIGHT_HOST'] = 'http://www.example.com/'
     ENV['OWP_AUTH_TOKEN'] = 'valid'
     example.run
@@ -73,7 +73,7 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
     ENV['OWP_AUTH_TOKEN'] = original_token
   end
   before do
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
@@ -87,7 +87,7 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
           "access_until":"2034-11-02T20:23:18.824Z"}
         ]}',
                  headers: valid_header)
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/27bd425ee-1093-40cd-ba0c-5a2355e37d6e2')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/27bd425ee-1093-40cd-ba0c-5a2355e37d6e2')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"27bd425ee-1093-40cd-ba0c-5a2355e37d6e2"},
@@ -101,28 +101,28 @@ RSpec.describe 'Fulltext search', type: :system, clean: true, js: true do
           "access_until":"2034-11-02T20:23:18.824Z"}
         ]}',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/161890909/#{user.netid}")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/161890909/#{user.netid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"false"
       }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/161890909/#{owp_user_with_access.netid}")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/161890909/#{owp_user_with_access.netid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"false"
       }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/161890909/#{owp_user_no_access.netid}")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/161890909/#{owp_user_no_access.netid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"false"
       }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/123")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/123")
       .to_return(status: 200, body: '{
                   "timestamp":"2023-11-02",
                   "user":{"sub":"123"},
                   "permission_set_terms_agreed":null,
                   "permissions":null}', headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/161890909/terms")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/161890909/terms")
       .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: valid_header)
     solr = Blacklight.default_index.connection
     solr.add([public_work, yale_work, child_work, child_work_yale_only, yale_owp_work, child_work_owp])

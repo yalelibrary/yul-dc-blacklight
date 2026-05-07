@@ -63,7 +63,7 @@ RSpec.describe "Open with Permission", type: :system do
     original_management_url = ENV['MANAGEMENT_HOST']
     original_blacklight_url = ENV['BLACKLIGHT_HOST']
     original_token = ENV['OWP_AUTH_TOKEN']
-    ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
+    ENV['MANAGEMENT_HOST'] = 'https://www.example.com/management'
     ENV['BLACKLIGHT_HOST'] = 'http://www.example.com/'
     ENV['OWP_AUTH_TOKEN'] = 'valid'
     example.run
@@ -72,7 +72,7 @@ RSpec.describe "Open with Permission", type: :system do
     ENV['OWP_AUTH_TOKEN'] = original_token
   end
   before do
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
@@ -118,7 +118,7 @@ RSpec.describe "Open with Permission", type: :system do
           }
         ]}',
                  headers: valid_header)
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6f')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6f')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6f"},
@@ -164,15 +164,15 @@ RSpec.describe "Open with Permission", type: :system do
           }
         ]}',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1618909/terms")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/1618909/terms")
       .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1718909/terms")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/1718909/terms")
       .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1818909/terms")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/1818909/terms")
       .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1918909/terms")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/1918909/terms")
       .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/11018909/terms")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/11018909/terms")
       .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: valid_header)
     solr = Blacklight.default_index.connection
     solr.add([

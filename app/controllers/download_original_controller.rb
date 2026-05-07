@@ -64,10 +64,7 @@ class DownloadOriginalController < ApplicationController
 
   def stage_download
     Rails.logger.info("TIFF with id [#{child_oid}] not found - staging for download.")
-    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/download/stage/child/#{child_oid}")
-    req = Net::HTTP::Get.new(url.path)
-    con = Net::HTTP.new(url.host, url.port)
-    con.start { |http| http.request(req) }
+    ManagementClient.stage_child_download(child_oid)
   end
 
   def tiff_pairtree_path

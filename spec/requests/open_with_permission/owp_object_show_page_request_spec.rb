@@ -35,14 +35,14 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
   around do |example|
     original_management_url = ENV['MANAGEMENT_HOST']
     original_token = ENV['OWP_AUTH_TOKEN']
-    ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
+    ENV['MANAGEMENT_HOST'] = 'https://www.example.com/management'
     ENV['OWP_AUTH_TOKEN'] = 'valid'
     example.run
     ENV['MANAGEMENT_HOST'] = original_management_url
     ENV['OWP_AUTH_TOKEN'] = original_token
   end
   before do
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
@@ -64,7 +64,7 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
           }
         ]}',
                  headers: valid_header)
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6g')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6g')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6g"},
@@ -86,22 +86,22 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
           }
         ]}',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1618909/#{user.netid}")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/1618909/#{user.netid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"true"
         }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1618909/#{admin_approver_user.netid}")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/1618909/#{admin_approver_user.netid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"true"
         }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1718909/#{non_approved_user.netid}")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/1718909/#{non_approved_user.netid}")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"false"
         }',
                  headers: valid_header)
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6d')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6d')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6d"},
@@ -117,7 +117,7 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
           }
         ]}',
                  headers: [])
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6f')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6f')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6f"},
@@ -133,9 +133,9 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
           }
         ]}',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1718909/terms")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/1718909/terms")
       .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1618909/terms")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/1618909/terms")
       .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: valid_header)
     solr = Blacklight.default_index.connection
     solr.add([owp_work_with_permission, owp_work_without_permission])
@@ -229,6 +229,46 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
       sign_out user
       get "/catalog/1718909/request_form"
       expect(response).to have_http_status(:redirect)
+    end
+  end
+
+  # F03 regression: ManagementClient returns nil on non-2xx (e.g. a brand-new
+  # logged-in user whose sub doesn't have a record yet — management replies
+  # 404 {"title":"User not found"}). Pre-fix, every caller indexed
+  # `user_owp_permissions['permissions']` and crashed with
+  # "undefined method `[]' for nil:NilClass". The view + helpers must now
+  # tolerate a nil return and render normally.
+  context 'when management returns 404 for the user (brand-new logged-in user)' do
+    let(:fresh_user) do
+      FactoryBot.create(:user,
+                        netid: 'fresh_netid',
+                        sub: 'fresh-sub-no-record',
+                        uid: 'fresh_uid',
+                        email: 'fresh@example.com')
+    end
+
+    before do
+      stub_request(:get, 'https://www.example.com/management/api/permission_sets/fresh-sub-no-record')
+        .to_return(status: 404, body: '{"title":"User not found"}', headers: valid_header)
+      stub_request(:get, %r{https://www\.example\.com/management/api/permission_sets/\d+/fresh_netid})
+        .to_return(status: 200, body: '{"is_admin_or_approver?":"false"}', headers: valid_header)
+      stub_request(:get, %r{https://www\.example\.com/management/api/permission_sets/\d+/terms})
+        .to_return(status: 200, body: '{"id":1,"title":"Terms","body":"Body"}', headers: valid_header)
+    end
+
+    it 'renders the OWP show page without raising' do
+      sign_in fresh_user
+      expect { get "/catalog/1718909" }.not_to raise_error
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'renders the request_form (terms_and_conditions branch) without raising' do
+      sign_in fresh_user
+      expect { get "/catalog/1718909/request_form" }.not_to raise_error
+      expect(response).to have_http_status(:success)
+      # No 'permission_set_terms_agreed' from a 404 response means the user
+      # hasn't accepted terms — they should see the terms page, not the form.
+      expect(response.body).to include('terms and conditions')
     end
   end
 end

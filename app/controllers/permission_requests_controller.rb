@@ -55,20 +55,20 @@ class PermissionRequestsController < ApplicationController
       redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: 'Please log in to request access to these materials.')
       return false
     end
-    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_requests")
-    req = Net::HTTP::Post.new(url.path)
-    req.set_form_data({
-                        'oid': params['oid'],
-                        'user_email': current_user.email,
-                        'user_full_name': params['permission_request']['user_full_name'],
-                        'user_netid': current_user.netid,
-                        'user_note': params['permission_request']['user_note'],
-                        'user_sub': current_user.sub
-                      })
-    req.add_field('Authorization', "Bearer #{ENV['OWP_AUTH_TOKEN']}")
-    con = Net::HTTP.new(url.host, url.port)
-    con.start { |http| http.request(req) }
-    handle_request_response(response.status, response.body)
+    # F03: route through ManagementClient (TLS + peer verify) and capture the
+    # actual API response. The previous code read `response.status`/`.body`
+    # which is Rails' own ActionDispatch::Response — always defaulting to
+    # 200/"" — so the success branch always fired regardless of the API's
+    # real reply. Use a distinct local name to avoid that collision.
+    api_response = ManagementClient.create_permission_request(form: {
+                                                                'oid': params['oid'],
+                                                                'user_email': current_user.email,
+                                                                'user_full_name': params['permission_request']['user_full_name'],
+                                                                'user_netid': current_user.netid,
+                                                                'user_note': params['permission_request']['user_note'],
+                                                                'user_sub': current_user.sub
+                                                              })
+    handle_request_response(api_response.status, api_response.body)
   end
 
   def agreement_term
@@ -76,29 +76,25 @@ class PermissionRequestsController < ApplicationController
       redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: 'Please log in to request access to these materials.')
       return false
     end
-    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/agreement_term")
-    req = Net::HTTP::Post.new(url.path)
-    req.set_form_data({
-                        'oid': params['oid'],
-                        'user_email': current_user.email,
-                        'user_netid': current_user.netid,
-                        'user_sub': current_user.sub,
-                        'user_full_name': "new",
-                        'permission_set_terms_id': params['permission_set_terms_id']
-                      })
-    req.add_field('Authorization', "Bearer #{ENV['OWP_AUTH_TOKEN']}")
-    con = Net::HTTP.new(url.host, url.port)
-    con.start { |http| http.request(req) }
-    handle_agreement_request_response(response.status, response.body)
+    api_response = ManagementClient.submit_agreement_term(form: {
+                                                            'oid': params['oid'],
+                                                            'user_email': current_user.email,
+                                                            'user_netid': current_user.netid,
+                                                            'user_sub': current_user.sub,
+                                                            'user_full_name': "new",
+                                                            'permission_set_terms_id': params['permission_set_terms_id']
+                                                          })
+    handle_agreement_request_response(api_response.status, api_response.body)
   end
 
   # rubocop:disable Metrics/PerceivedComplexity
   # rubocop:disable Metrics/CyclomaticComplexity
   def handle_agreement_request_response(http_status, body)
-    if http_status == 400 && body == 'Term not found.'
-      redirect_to("/catalog/#{params[:oid]}", notice: body)
-    elsif http_status == 400 && body == 'User not found.'
-      redirect_to("/catalog/#{params[:oid]}", notice: body)
+    title = parsed_response_title(body)
+    if http_status == 400 && title == 'Term not found.'
+      redirect_to("/catalog/#{params[:oid]}", notice: title)
+    elsif http_status == 400 && title == 'User not found.'
+      redirect_to("/catalog/#{params[:oid]}", notice: title)
     elsif http_status == 401
       render json: { error: 'unauthorized' }.to_json, status: :unauthorized
     elsif http_status == 201 || http_status == 200
@@ -113,12 +109,13 @@ class PermissionRequestsController < ApplicationController
   # rubocop:disable Metrics/PerceivedComplexity
   # rubocop:disable Metrics/CyclomaticComplexity
   def handle_request_response(http_status, body)
-    if http_status == 400 && body == 'Invalid Parent OID'
+    title = parsed_response_title(body)
+    if http_status == 400 && title == 'Invalid Parent OID'
       redirect_to("/catalog/#{params[:oid]}/request_form", notice: 'Object not found')
-    elsif http_status == 400 && body == 'Object is private'
-      redirect_to("/catalog/#{params[:oid]}/request_form", notice: body)
-    elsif http_status == 400 && body == 'Object is public, permission not required'
-      redirect_to("/catalog/#{params[:oid]}/request_form", notice: body)
+    elsif http_status == 400 && title == 'Parent Object is private'
+      redirect_to("/catalog/#{params[:oid]}/request_form", notice: title)
+    elsif http_status == 400 && title == 'Parent Object is public, permission not required'
+      redirect_to("/catalog/#{params[:oid]}/request_form", notice: title)
     elsif http_status == 403
       redirect_to("/catalog/#{params[:oid]}/request_form", notice: 'Too many pending requests')
     elsif http_status == 401
@@ -133,6 +130,18 @@ class PermissionRequestsController < ApplicationController
   # rubocop:enable Metrics/CyclomaticComplexity
 
   private
+
+  # The yul-dc-management API wraps every error/success body in a JSON object
+  # like {"title": "..."}. Extract that field so the handlers above can compare
+  # against the documented strings. Returns nil when the body is missing or not
+  # JSON (e.g. on transport failure where ManagementClient returns body: nil).
+  def parsed_response_title(body)
+    return nil if body.blank?
+    parsed = JSON.parse(body)
+    parsed.is_a?(Hash) ? parsed['title'] : nil
+  rescue JSON::ParserError
+    nil
+  end
 
   def permission_request_params
     params.require(:permission_request).permit(:oid, :user_sub, :user_email, :user_full_name, :user_note, :user_netid)

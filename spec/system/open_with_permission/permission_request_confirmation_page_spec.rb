@@ -33,7 +33,7 @@ RSpec.describe "Permission Requests", type: :system do
   around do |example|
     original_management_url = ENV['MANAGEMENT_HOST']
     original_token = ENV['OWP_AUTH_TOKEN']
-    ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
+    ENV['MANAGEMENT_HOST'] = 'https://www.example.com/management'
     ENV['OWP_AUTH_TOKEN'] = 'valid'
     example.run
     ENV['MANAGEMENT_HOST'] = original_management_url
@@ -41,7 +41,7 @@ RSpec.describe "Permission Requests", type: :system do
   end
 
   before do
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
@@ -67,7 +67,7 @@ RSpec.describe "Permission Requests", type: :system do
           "user_full_name": "request_user.name"}
         ]}',
                  headers: valid_header)
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6f')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6f')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6f"},
@@ -102,7 +102,7 @@ RSpec.describe "Permission Requests", type: :system do
   context 'with an authenticated yale user' do
     before do
       login_as yale_user
-      stub_request(:post, 'http://www.example.com/management/api/permission_requests')
+      stub_request(:post, 'https://www.example.com/management/api/permission_requests')
         .with(body: {
                 "oid" => "1718909",
                 "user_email" => "not_real@example.com",
@@ -127,7 +127,7 @@ RSpec.describe "Permission Requests", type: :system do
   context 'with an authenticated non yale user' do
     before do
       login_as non_yale_user
-      stub_request(:post, 'http://www.example.com/management/api/permission_requests')
+      stub_request(:post, 'https://www.example.com/management/api/permission_requests')
         .with(body: {
                 "oid" => "1718909",
                 "user_email" => "not_real_either@example.com",

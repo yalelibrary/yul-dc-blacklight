@@ -2,7 +2,10 @@
 require 'rails_helper'
 
 RSpec.describe "access restrictions", type: :system, clean: true do
-  let(:user) { FactoryBot.create(:user) }
+  # Yale Community Only access requires a netid (see access_helper.rb).
+  # Without one, an authenticated-user spec expecting :ok against yale-only
+  # works will get :unauthorized.
+  let(:user) { FactoryBot.create(:user, netid: 'authenticated_user') }
   # "A General dictionary of the English language"
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY }
 

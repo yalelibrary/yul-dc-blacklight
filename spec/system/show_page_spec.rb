@@ -182,7 +182,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     original_download_bucket = ENV['S3_DOWNLOAD_BUCKET_NAME']
     original_management_url = ENV['MANAGEMENT_HOST']
     ENV['S3_DOWNLOAD_BUCKET_NAME'] = 'yul-dc-development-samples'
-    ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
+    ENV['MANAGEMENT_HOST'] = 'https://www.example.com/management'
     ENV['OWP_AUTH_TOKEN'] = 'valid'
     example.run
     ENV['S3_DOWNLOAD_BUCKET_NAME'] = original_download_bucket
@@ -208,29 +208,29 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
     stub_request(:get, "https://yul-dc-development-samples.s3.amazonaws.com/manifests/55/55/555.json")
       .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2041002.json')).read)
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/123454321')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/123454321')
       .to_return(status: 200, body: '{"timestamp":"2023-11-02","user":{"sub":"123454321"},"permission_set_terms_agreed":[],"permissions":[{"oid":12345,"permission_set":1,"permission_set_terms":1,"request_status":"Approved","request_date":"2023-11-02T20:23:18.824Z","access_until":"2024-11-02T20:23:18.824Z"}]}', headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/new_netid")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/12345/new_netid")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"false"
         }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/54321/new_netid")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/54321/new_netid")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"false"
         }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/net_id2")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/12345/net_id2")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"true"
         }',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/54321/net_id2")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/54321/net_id2")
       .to_return(status: 200, body: '{
         "is_admin_or_approver?":"true"
         }',
                  headers: valid_header)
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
@@ -244,7 +244,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
           "access_until":"2034-11-02T20:23:18.824Z"}
         ]}',
                  headers: valid_header)
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/1234')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/1234')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"1234"},
@@ -258,9 +258,9 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
           "access_until":"2034-11-02T20:23:18.824Z"}
         ]}',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/terms")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/12345/terms")
       .to_return(status: 200, body: "{\"id\":1,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: valid_header)
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
@@ -274,7 +274,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
           "access_until":"2034-11-02T20:23:18.824Z"}
         ]}',
                  headers: valid_header)
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/54321/terms")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/54321/terms")
       .to_return(status: 200, body: "{\"id\":2,\"title\":\"Permission Set Terms\",\"body\":\"These are some terms\"}", headers: valid_header)
 
     solr = Blacklight.default_index.connection

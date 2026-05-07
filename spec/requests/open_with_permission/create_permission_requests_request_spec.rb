@@ -33,14 +33,14 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
   around do |example|
     original_management_url = ENV['MANAGEMENT_HOST']
     original_token = ENV['OWP_AUTH_TOKEN']
-    ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
+    ENV['MANAGEMENT_HOST'] = 'https://www.example.com/management'
     ENV['OWP_AUTH_TOKEN'] = 'valid'
     example.run
     ENV['MANAGEMENT_HOST'] = original_management_url
     ENV['OWP_AUTH_TOKEN'] = original_token
   end
   before do
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
@@ -65,7 +65,7 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
             "user_full_name": "Request Full Name"}
         ]}',
                  headers: valid_header)
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6f')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6f')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6f"},
@@ -99,11 +99,11 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
   context 'with an authenticated yale user' do
     before do
       sign_in yale_user
-      stub_request(:post, 'http://www.example.com/management/agreement_term')
+      stub_request(:post, 'https://www.example.com/management/agreement_term')
         .with(body: { "oid" => "1718909", "permission_set_terms_id" => "1", "user_email" => "not_real@example.com", "user_full_name" => "new", "user_netid" => "net_id",
                       "user_sub" => "7bd425ee-1093-40cd-ba0c-5a2355e37d6e" }, headers: valid_header)
         .to_return(status: 200)
-      stub_request(:post, 'http://www.example.com/management/api/permission_requests')
+      stub_request(:post, 'https://www.example.com/management/api/permission_requests')
         .with(body: {
                 "oid" => "1718909",
                 "user_email" => "not_real@example.com",
@@ -143,11 +143,11 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
   context 'with an authenticated non yale user' do
     before do
       sign_in non_yale_user
-      stub_request(:post, 'http://www.example.com/management/agreement_term')
+      stub_request(:post, 'https://www.example.com/management/agreement_term')
         .with(body: { "oid" => "1718909", "permission_set_terms_id" => "1", "user_email" => "not_real_either@example.com", "user_full_name" => "new", "user_netid" => nil,
                       "user_sub" => "7bd425ee-1093-40cd-ba0c-5a2355e37d6f" }, headers: valid_header)
         .to_return(status: 200)
-      stub_request(:post, 'http://www.example.com/management/api/permission_requests')
+      stub_request(:post, 'https://www.example.com/management/api/permission_requests')
         .with(body: {
                 "oid" => "1718909",
                 "user_email" => "not_real_either@example.com",
@@ -199,6 +199,103 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
         }
       }
       expect(response.redirect_url).to eq('http://www.example.com/catalog/1718909')
+    end
+  end
+
+  # F03 regression: prior to the ManagementClient refactor, the POST controllers
+  # discarded the management API response and read Rails' own ActionDispatch
+  # response (default 200/""), so the success branch always fired regardless of
+  # what the management API said. These specs prove the API status/body now
+  # actually flow into handle_request_response / handle_agreement_request_response.
+  #
+  # The management app wraps every response body in {"title": "..."} — the
+  # handlers parse that and compare on the title string. Stubbed bodies below
+  # mirror the exact JSON envelopes documented in
+  # yul-dc-management/app/controllers/api/permission_requests_controller.rb and
+  # yul-dc-management/app/controllers/api/permission_sets_controller.rb.
+  context 'when the management API rejects the request (F03 regression)' do
+    before { sign_in yale_user }
+
+    it 'surfaces a 400 "Parent Object is private" from /api/permission_requests as a notice on the request_form' do
+      stub_request(:post, 'https://www.example.com/management/api/permission_requests')
+        .to_return(status: 400, body: '{"title":"Parent Object is private"}', headers: valid_header)
+
+      post '/catalog/1718909/request_form', params: {
+        'oid': '1718909',
+        'permission_request': {
+          'user_full_name': 'Request Full Name',
+          'user_note': 'lorem ipsum'
+        }
+      }, headers: valid_header
+
+      expect(response).to have_http_status(:redirect)
+      expect(response.redirect_url).to eq('http://www.example.com/catalog/1718909/request_form')
+      expect(flash[:notice]).to eq('Parent Object is private')
+    end
+
+    it 'maps a 400 "Invalid Parent OID" from /api/permission_requests to the "Object not found" notice' do
+      stub_request(:post, 'https://www.example.com/management/api/permission_requests')
+        .to_return(status: 400, body: '{"title":"Invalid Parent OID"}', headers: valid_header)
+
+      post '/catalog/1718909/request_form', params: {
+        'oid': '1718909',
+        'permission_request': {
+          'user_full_name': 'Request Full Name',
+          'user_note': 'lorem ipsum'
+        }
+      }, headers: valid_header
+
+      expect(response).to have_http_status(:redirect)
+      expect(response.redirect_url).to eq('http://www.example.com/catalog/1718909/request_form')
+      expect(flash[:notice]).to eq('Object not found')
+    end
+
+    it 'surfaces a 403 "Too many pending requests" from /api/permission_requests' do
+      stub_request(:post, 'https://www.example.com/management/api/permission_requests')
+        .to_return(status: 403, body: '{"title":"Too many pending requests"}', headers: valid_header)
+
+      post '/catalog/1718909/request_form', params: {
+        'oid': '1718909',
+        'permission_request': {
+          'user_full_name': 'Request Full Name',
+          'user_note': 'lorem ipsum'
+        }
+      }, headers: valid_header
+
+      expect(response).to have_http_status(:redirect)
+      expect(response.redirect_url).to eq('http://www.example.com/catalog/1718909/request_form')
+      expect(flash[:notice]).to eq('Too many pending requests')
+    end
+
+    it 'surfaces a 400 "Term not found." from /agreement_term as a notice on the catalog show page' do
+      stub_request(:post, 'https://www.example.com/management/agreement_term')
+        .to_return(status: 400, body: '{"title":"Term not found."}', headers: valid_header)
+
+      post '/catalog/1718909/terms_and_conditions', params: {
+        'oid': '1718909',
+        'permission_set_terms_id': 1
+      }, headers: valid_header
+
+      expect(response).to have_http_status(:redirect)
+      expect(response.redirect_url).to eq('http://www.example.com/catalog/1718909')
+      expect(flash[:notice]).to eq('Term not found.')
+    end
+
+    it 'falls through to the generic error notice when management returns an unknown 400 title' do
+      stub_request(:post, 'https://www.example.com/management/api/permission_requests')
+        .to_return(status: 400, body: '{"title":"User email is missing"}', headers: valid_header)
+
+      post '/catalog/1718909/request_form', params: {
+        'oid': '1718909',
+        'permission_request': {
+          'user_full_name': 'Request Full Name',
+          'user_note': 'lorem ipsum'
+        }
+      }, headers: valid_header
+
+      expect(response).to have_http_status(:redirect)
+      expect(response.redirect_url).to eq('http://www.example.com/catalog/1718909/request_form')
+      expect(flash[:notice]).to eq('An error has occured.  Please try again later.')
     end
   end
 end

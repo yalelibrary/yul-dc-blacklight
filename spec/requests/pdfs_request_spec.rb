@@ -50,15 +50,15 @@ RSpec.describe 'PdfController', type: :request do
         .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2034600.pdf')).read)
       stub_request(:get, 'https://yul-test-samples.s3.amazonaws.com/pdfs/09/18/18/90/1818909.pdf')
         .to_return(status: 200, body: File.open(File.join('spec', 'fixtures', '2034600.pdf')).read)
-      stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+      stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
         .to_return(status: 200, body: '{
           "timestamp":"2023-11-02",
           "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
           "permission_set_terms_agreed":[],
           "permissions":[]}')
-      stub_request(:get, "http://www.example.com/management/api/permission_sets/1818909/netid")
+      stub_request(:get, "https://www.example.com/management/api/permission_sets/1818909/netid")
         .to_return(status: 200, body: '{ "is_admin_or_approver?": "false" }')
-      stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6f')
+      stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6f')
         .to_return(status: 200, body: '{
           "timestamp":"2023-11-02",
           "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6f"},
@@ -76,7 +76,7 @@ RSpec.describe 'PdfController', type: :request do
       original_management_url = ENV['MANAGEMENT_HOST']
       original_token = ENV['OWP_AUTH_TOKEN']
       original_sample_bucket = ENV['S3_SOURCE_BUCKET_NAME']
-      ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
+      ENV['MANAGEMENT_HOST'] = 'https://www.example.com/management'
       ENV['OWP_AUTH_TOKEN'] = 'valid'
       ENV['S3_SOURCE_BUCKET_NAME'] = 'yul-test-samples'
       example.run

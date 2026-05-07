@@ -59,7 +59,7 @@ RSpec.describe "Download Original", type: :request, clean: true do
     original_download_bucket = ENV['S3_DOWNLOAD_BUCKET_NAME']
     original_management_url = ENV['MANAGEMENT_HOST']
     ENV['S3_DOWNLOAD_BUCKET_NAME'] = 'yul-test-samples'
-    ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
+    ENV['MANAGEMENT_HOST'] = 'https://www.example.com/management'
     example.run
     ENV['S3_DOWNLOAD_BUCKET_NAME'] = original_download_bucket
     ENV['MANAGEMENT_HOST'] = original_management_url
@@ -90,7 +90,7 @@ RSpec.describe "Download Original", type: :request, clean: true do
       .to_return(status: 404)
     stub_request(:head, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/77/77/77/77777.tif')
       .to_return(status: 404)
-    stub_request(:get, "http://www.example.com/management/api/download/stage/child/3333333")
+    stub_request(:get, "https://www.example.com/management/api/download/stage/child/3333333")
       .with(
         headers: {
           'Accept' => '*/*',
@@ -99,7 +99,7 @@ RSpec.describe "Download Original", type: :request, clean: true do
         }
       )
       .to_return(status: 200, body: '', headers: {})
-    stub_request(:get, "http://www.example.com/management/api/download/stage/child/77777")
+    stub_request(:get, "https://www.example.com/management/api/download/stage/child/77777")
       .with(
         headers: {
           'Accept' => '*/*',
@@ -108,7 +108,7 @@ RSpec.describe "Download Original", type: :request, clean: true do
         }
       )
       .to_return(status: 200, body: '', headers: {})
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6e"},
@@ -122,13 +122,13 @@ RSpec.describe "Download Original", type: :request, clean: true do
           "access_until":"2034-11-02T20:23:18.824Z",
           "user_note": "permission.user_note",
           "user_full_name": "request_user.name"}]}')
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1818909/net_id")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/1818909/net_id")
       .to_return(status: 200, body: '{ "is_admin_or_approver?": "false" }')
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/1918909/net_id")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/1918909/net_id")
       .to_return(status: 200, body: '{ "is_admin_or_approver?": "false" }')
-    stub_request(:get, "http://www.example.com/management/api/permission_sets/2345678999/net_id")
+    stub_request(:get, "https://www.example.com/management/api/permission_sets/2345678999/net_id")
       .to_return(status: 200, body: '{ "is_admin_or_approver?": "false" }')
-    stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6f')
+    stub_request(:get, 'https://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6f')
       .to_return(status: 200, body: '{
         "timestamp":"2023-11-02",
         "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d6f"},
