@@ -83,7 +83,7 @@ class ManagementClient
 
   def self.safe_parse(response)
     return nil unless (200..299).cover?(response.code.to_i)
-    return nil if response.body.nil? || response.body.empty?
+    return nil if response.body.blank?
     JSON.parse(response.body)
   rescue JSON::ParserError => e
     Rails.logger.warn("ManagementClient JSON parse error: #{e.message}")
