@@ -55,11 +55,6 @@ class PermissionRequestsController < ApplicationController
       redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: 'Please log in to request access to these materials.')
       return false
     end
-    # F03: route through ManagementClient (TLS + peer verify) and capture the
-    # actual API response. The previous code read `response.status`/`.body`
-    # which is Rails' own ActionDispatch::Response — always defaulting to
-    # 200/"" — so the success branch always fired regardless of the API's
-    # real reply. Use a distinct local name to avoid that collision.
     api_response = ManagementClient.create_permission_request(form: {
                                                                 'oid': params['oid'],
                                                                 'user_email': current_user.email,
@@ -131,10 +126,6 @@ class PermissionRequestsController < ApplicationController
 
   private
 
-  # The yul-dc-management API wraps every error/success body in a JSON object
-  # like {"title": "..."}. Extract that field so the handlers above can compare
-  # against the documented strings. Returns nil when the body is missing or not
-  # JSON (e.g. on transport failure where ManagementClient returns body: nil).
   def parsed_response_title(body)
     return nil if body.blank?
     parsed = JSON.parse(body)

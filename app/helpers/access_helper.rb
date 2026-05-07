@@ -36,9 +36,6 @@ module AccessHelper
     parent_oid = document[:id]
     pending = false
     return unless current_user
-    # F03: ManagementClient returns nil on non-2xx (e.g. 404 for a brand-new
-    # user with no permissions yet) or transport failure. Use &.dig so the
-    # nil short-circuits cleanly to "no pending requests".
     user_owp_permissions&.dig('permissions')&.each do |permission|
       pending = true if (permission['oid'].to_s == parent_oid) && !permission['request_date'].nil? && (permission['request_status'] == "Pending")
     end
@@ -52,7 +49,6 @@ module AccessHelper
     parent_oid = params[:oid].presence || document[:id]
     return false if parent_oid.nil?
     allowance = false
-    # F03: nil-safe — see comment on pending_request?.
     user_owp_permissions&.dig('permissions')&.each do |permission|
       if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today) && (permission['request_status'] == "Approved")
         allowance = true
@@ -77,9 +73,6 @@ module AccessHelper
     allowance
   end
 
-  # All management API calls flow through ManagementClient (F03), which enforces
-  # https + peer verification, URL-encodes path segments, and returns nil on
-  # non-2xx so the @credentials check in admin_of_owp? fails closed.
   def user_owp_permissions
     return nil if current_user.nil?
     ManagementClient.permissions_for_user(current_user.sub)

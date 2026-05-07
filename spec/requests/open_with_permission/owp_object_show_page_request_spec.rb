@@ -232,12 +232,6 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
     end
   end
 
-  # F03 regression: ManagementClient returns nil on non-2xx (e.g. a brand-new
-  # logged-in user whose sub doesn't have a record yet — management replies
-  # 404 {"title":"User not found"}). Pre-fix, every caller indexed
-  # `user_owp_permissions['permissions']` and crashed with
-  # "undefined method `[]' for nil:NilClass". The view + helpers must now
-  # tolerate a nil return and render normally.
   context 'when management returns 404 for the user (brand-new logged-in user)' do
     let(:fresh_user) do
       FactoryBot.create(:user,
@@ -266,8 +260,6 @@ RSpec.describe "Open with Permission", type: :request, clean: true do
       sign_in fresh_user
       expect { get "/catalog/1718909/request_form" }.not_to raise_error
       expect(response).to have_http_status(:success)
-      # No 'permission_set_terms_agreed' from a 404 response means the user
-      # hasn't accepted terms — they should see the terms page, not the form.
       expect(response.body).to include('terms and conditions')
     end
   end
