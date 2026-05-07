@@ -4,10 +4,13 @@ require 'rails_helper'
 RSpec.describe "/catalog", clean: true, type: :request do
   let(:public_work) { WORK_WITH_PUBLIC_VISIBILITY.merge({ "child_oids_ssim": ["5555555"] }) }
   let(:private_work) { WORK_WITH_PRIVATE_VISIBILITY }
+  let(:yco_work) { WORK_WITH_YALE_ONLY_VISIBILITY }
+  let(:owp_work) { WORK_WITH_OWP_VISIBILITY }
+  let(:redirect_work) { WORK_REDIRECTED }
 
   before do
     solr = Blacklight.default_index.connection
-    solr.add([public_work, private_work])
+    solr.add([public_work, private_work, yco_work, owp_work, redirect_work])
     solr.commit
   end
 
@@ -280,6 +283,61 @@ RSpec.describe "/catalog", clean: true, type: :request do
         xml.remove_namespaces!
         url_thumb = xml.xpath('//location/url[@access=\'preview\']', ns_hash).attr("href")
         expect(url_thumb.text).to eq(WORK_WITH_PUBLIC_VISIBILITY[:thumbnail_path_ss])
+      end
+    end
+  end
+
+  describe 'OAI visibility filtering' do
+    let(:unknown_identifier_msg) { "The value of the identifier argument is unknown or illegal in this repository." }
+
+    def oai_id(work)
+      "oai:collections.library.yale.edu:#{work[:id]}"
+    end
+
+    describe 'ListRecords' do
+      before { get "/catalog/oai?verb=ListRecords&metadataPrefix=oai_mods" }
+
+      it 'includes Public, YCO, and OWP identifiers' do
+        expect(response.body).to include(oai_id(WORK_WITH_PUBLIC_VISIBILITY))
+        expect(response.body).to include(oai_id(WORK_WITH_YALE_ONLY_VISIBILITY))
+        expect(response.body).to include(oai_id(WORK_WITH_OWP_VISIBILITY))
+      end
+
+      it 'omits Private and Redirect identifiers' do
+        expect(response.body).not_to include(oai_id(WORK_WITH_PRIVATE_VISIBILITY))
+        expect(response.body).not_to include(oai_id(WORK_REDIRECTED))
+      end
+    end
+
+    describe 'ListIdentifiers' do
+      before { get "/catalog/oai?verb=ListIdentifiers&metadataPrefix=oai_mods" }
+
+      it 'includes Public, YCO, and OWP identifiers' do
+        expect(response.body).to include(oai_id(WORK_WITH_PUBLIC_VISIBILITY))
+        expect(response.body).to include(oai_id(WORK_WITH_YALE_ONLY_VISIBILITY))
+        expect(response.body).to include(oai_id(WORK_WITH_OWP_VISIBILITY))
+      end
+
+      it 'omits Private and Redirect identifiers' do
+        expect(response.body).not_to include(oai_id(WORK_WITH_PRIVATE_VISIBILITY))
+        expect(response.body).not_to include(oai_id(WORK_REDIRECTED))
+      end
+    end
+
+    describe 'GetRecord' do
+      it 'returns data for Yale Community Only visibility' do
+        get "/catalog/oai?verb=GetRecord&metadataPrefix=oai_mods&identifier=#{oai_id(WORK_WITH_YALE_ONLY_VISIBILITY)}"
+        expect(response.body).not_to include(unknown_identifier_msg)
+      end
+
+      it 'returns data for Open with Permission visibility' do
+        get "/catalog/oai?verb=GetRecord&metadataPrefix=oai_mods&identifier=#{oai_id(WORK_WITH_OWP_VISIBILITY)}"
+        expect(response.body).not_to include(unknown_identifier_msg)
+      end
+
+      it 'rejects Redirect visibility' do
+        get "/catalog/oai?verb=GetRecord&metadataPrefix=oai_mods&identifier=#{oai_id(WORK_REDIRECTED)}"
+        expect(response.body).to include(unknown_identifier_msg)
       end
     end
   end

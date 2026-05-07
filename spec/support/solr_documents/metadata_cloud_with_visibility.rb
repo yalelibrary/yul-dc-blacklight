@@ -115,6 +115,35 @@ WORK_WITH_YALE_ONLY_VISIBILITY = {
   "visibility_ssi": "Yale Community Only"
 }.freeze
 
+WORK_WITH_OWP_VISIBILITY = {
+  "id": "16189097-owp",
+  "title_tesim": ["[Map of China]. [open-with-permission copy]"],
+  "extent_ssim": ["1 map ; folded in covers 25 x 16 cm."],
+  "format": ["cartographic"],
+  "language_ssim": ["Japanese"],
+  "description_tesim": ["In Japanese.",
+                        "Japanese reprint of a Chinese map published in 1663.",
+                        "Transliteration supplied by cataloger."],
+  "genre_ssim": ["Maps."],
+  "resourceType_ssim": ["Maps, Atlases & Globes"],
+  "extentOfDigitization_ssim": ["Complete work digitized."],
+  "rights_ssim": ["The use of this image may be subject to the copyright law of the United States (Title 17, United States Code) or to site license or other rights management terms and conditions. The person using the image is liable for any infringement."],
+  "creationPlace_ssim": ["Kyoto [Japan] :"],
+  "publisher_ssim": ["Umemura Yahaku,"],
+  "source_ssim": ["ladybird"],
+  "recordType_ssi": "oid",
+  "illustrativeMatter_tesim": "080815s189u    ja ",
+  "oid_ssi": "16189097-owp",
+  "callNumber_ssim": ["Lanman Covers 56 189x"],
+  "containerGrouping_ssim": ["Lanman Covers 56 189x"],
+  "orbisBibId_ssi": "8330740",
+  "scale_tesim": ["Scale not given."],
+  "coordinateDisplay_ssim": ["a"],
+  "date_ssim": ["[189x?]"],
+  "public_bsi": true,
+  "visibility_ssi": "Open with Permission"
+}.freeze
+
 WORK_WITH_SENSITIVE_MATERIALS = {
   "id": "2055095",
   "title_tesim": ["A General dictionary of the English language"],
