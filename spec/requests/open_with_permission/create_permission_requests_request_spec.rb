@@ -202,17 +202,6 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
     end
   end
 
-  # F03 regression: prior to the ManagementClient refactor, the POST controllers
-  # discarded the management API response and read Rails' own ActionDispatch
-  # response (default 200/""), so the success branch always fired regardless of
-  # what the management API said. These specs prove the API status/body now
-  # actually flow into handle_request_response / handle_agreement_request_response.
-  #
-  # The management app wraps every response body in {"title": "..."} — the
-  # handlers parse that and compare on the title string. Stubbed bodies below
-  # mirror the exact JSON envelopes documented in
-  # yul-dc-management/app/controllers/api/permission_requests_controller.rb and
-  # yul-dc-management/app/controllers/api/permission_sets_controller.rb.
   context 'when the management API rejects the request (F03 regression)' do
     before { sign_in yale_user }
 
