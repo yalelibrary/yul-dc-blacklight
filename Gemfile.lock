@@ -206,7 +206,7 @@ GEM
       rexml
     csl-styles (2.0.1)
       csl (~> 2.0)
-    date (3.4.1)
+    date (3.5.1)
     deprecation (1.1.0)
       activesupport
     descendants_tracker (0.0.4)
@@ -339,7 +339,7 @@ GEM
       racc (~> 1.7)
     net-http (0.9.1)
       uri (>= 0.11.1)
-    net-imap (0.4.20)
+    net-imap (0.4.24)
       date
       net-protocol
     net-pop (0.1.2)
@@ -554,7 +554,7 @@ GEM
     thor (1.5.0)
     thread_safe (0.3.6)
     tilt (2.4.0)
-    timeout (0.4.3)
+    timeout (0.6.1)
     tins (1.32.1)
       sync
     traject (3.8.1)
