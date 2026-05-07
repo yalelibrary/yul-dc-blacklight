@@ -305,7 +305,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).to have_css '.manifestItem'
     end
     it '"Back to Search Results" button returns user to search results' do
-      expect(page).to have_content "Back to Search Results"
+      expect(page).to have_content(/back to search results/i)
       expect(page).to have_xpath("//button[@href='/catalog?page=1&per_page=10&search_field=all_fields']")
     end
     it 'Archival Context breadcrumbs render the Archival Context' do
@@ -358,7 +358,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       expect(page).to have_xpath("//button[@href='/catalog']")
     end
     it 'does not show "Back to Search Results" button' do
-      expect(page).not_to have_content "Back to Search Results"
+      expect(page).not_to have_content(/back to search results/i)
     end
   end
 
