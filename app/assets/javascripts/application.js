@@ -18,6 +18,9 @@
 //= require show_more
 // For blacklight_range_limit built-in JS
 //= require blacklight_range_limit
+//= require landing_hero
+//= require permission_requests_sort
+//= require grouped_metadata
 
 /**
  * Setup button functionality.
@@ -56,6 +59,26 @@ $(document).on('turbolinks:load', function() {
 function onChangeSearchFields() {
     changePlaceholderText();
 }
+
+// Delegated handlers replacing previously-inline event attributes (blocked by
+// strict CSP since `script_src_attr :none`). Bound once at document level so
+// they survive turbolinks navigations.
+$(document).on('click', '.js-history-back', function(e) {
+    e.preventDefault();
+    history.back();
+});
+
+$(document).on('change', '[data-search-fields-trigger]', function() {
+    onChangeSearchFields();
+});
+
+$(document).on('click', '[data-fulltext-mode="description"]', function() {
+    onSelectDescription();
+});
+
+$(document).on('click', '[data-fulltext-mode="fulltext"]', function() {
+    onSelectFulltext();
+});
 
 
 $(document).on('turbolinks:load', function() {

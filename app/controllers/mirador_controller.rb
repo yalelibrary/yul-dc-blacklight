@@ -2,13 +2,10 @@
 class MiradorController < ApplicationController
   include BlacklightHelper
 
-  # Allows Mirador to use inline JS to open viewer in new tab
-  content_security_policy(only: :show) do |policy|
-    policy.script_src_attr  :self, :unsafe_inline, 'siteimproveanalytics.com', 'www.googletagmanager.com'
-    policy.script_src_elem  :self, :unsafe_inline, 'siteimproveanalytics.com', 'www.googletagmanager.com'    # policy.style_src :self, :unsafe_inline
-    policy.style_src_attr :self, :unsafe_inline
-    policy.style_src_elem :self, :unsafe_inline
-  end
+  # The per-action CSP override that previously re-asserted :unsafe_inline for
+  # script directives has been removed. The Mirador show view's inline init script
+  # now carries a CSP nonce (see app/views/mirador/show.html.erb), and the global
+  # policy's :unsafe_inline-free script-src directives apply uniformly.
 
   def show
     @oid = number_or_nil params[:oid]

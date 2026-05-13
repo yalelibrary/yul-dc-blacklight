@@ -16,7 +16,7 @@
       <p class="overlay-middle">* Depictions of human remains; or</p>
       <p class="overlay-second-to-last">* Obscene content as defined by the FCC.</p>
       <p class="overlay-bottom">Please refer to Yale Library's <a class= "overlay-link" href="https://guides.library.yale.edu/statementharmfulcontent" target="_blank" rel="noopener noreferrer">Statement on Potentially Harmful Content</a> for information about the inclusion of these materials in our collections and our principles for providing online access to these materials.</p>
-      <button onclick="document.getElementById('sensitive-overlay').style.display='none';" class="overlay-button">View Object</button>
+      <button class="overlay-button">View Object</button>
     </div>
   <% end %>
 <iframe
@@ -38,7 +38,7 @@
 <div id='uv-pages'></div>
 <div id='parent-oid'><%= @document.id %></div>
 
-<script>
+<script nonce="<%= content_security_policy_nonce %>">
   $(document).ready(function(){
     window.addEventListener('message', (event) => {
       if (event.origin.match('<%= request.protocol %><%= request.host %>')) {
