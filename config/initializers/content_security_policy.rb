@@ -49,6 +49,6 @@ if enforce_envs.include?(ENV['RAILS_ENV'])
     # Test always runs report-only so specs can inspect header contents without
     # affecting other request behavior.
     # config.content_security_policy_report_only =
-      # ENV['RAILS_ENV'] == 'test' || ENV.fetch('CSP_REPORT_ONLY', 'false') == 'true'
+    # ENV['RAILS_ENV'] == 'test' || ENV.fetch('CSP_REPORT_ONLY', 'false') == 'true'
   end
 end
