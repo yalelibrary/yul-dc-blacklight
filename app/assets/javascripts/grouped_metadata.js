@@ -1,6 +1,3 @@
-// Replaces the previous inline <script> in _grouped_metadata.html.erb which
-// used innerHTML string concatenation to inject onclick= handlers — blocked
-// by strict CSP.
 $(document).on('turbolinks:load', function() {
   const template = document.getElementById('grouped-metadata-terms-template');
   if (!template) return;

@@ -72,11 +72,11 @@ $(document).on('change', '[data-search-fields-trigger]', function() {
     onChangeSearchFields();
 });
 
-$(document).on('click', '[data-fulltext-mode="description"]', function() {
+$(document).on('click', '[data-search-mode="description"]', function() {
     onSelectDescription();
 });
 
-$(document).on('click', '[data-fulltext-mode="fulltext"]', function() {
+$(document).on('click', '[data-search-mode="fulltext"]', function() {
     onSelectFulltext();
 });
 

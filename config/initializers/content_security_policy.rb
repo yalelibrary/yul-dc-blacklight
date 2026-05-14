@@ -14,9 +14,6 @@ if enforce_envs.include?(ENV['RAILS_ENV'])
       policy.object_src      :none
       policy.script_src      :self, 'siteimproveanalytics.com', 'www.googletagmanager.com'
       policy.script_src_elem :self, 'siteimproveanalytics.com', 'www.googletagmanager.com'
-      # Inline event handler attributes (onclick=, onchange=, etc.) cannot be authorized
-      # by nonces or hashes, so we block them entirely. All inline handlers have been
-      # migrated to addEventListener-based bindings.
       policy.script_src_attr :none
       policy.style_src       :self, :unsafe_inline
       policy.style_src_attr  :self, :unsafe_inline
