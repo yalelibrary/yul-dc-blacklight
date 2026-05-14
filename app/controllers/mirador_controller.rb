@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class MiradorController < ApplicationController
   include BlacklightHelper
-  
+
   def show
     @oid = number_or_nil params[:oid]
     @manifest = @oid ? manifest_url(@oid) : nil
