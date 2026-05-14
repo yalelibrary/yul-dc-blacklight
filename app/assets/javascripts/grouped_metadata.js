@@ -1,8 +1,3 @@
-// Renders the "Terms & Conditions" metadata block after the Rights row, with
-// expand/truncate controls bound via addEventListener. The terms body HTML is
-// provided server-side inside a <template id="grouped-metadata-terms-template">
-// element to avoid attribute-escaping issues (the body may contain rich HTML).
-//
 // Replaces the previous inline <script> in _grouped_metadata.html.erb which
 // used innerHTML string concatenation to inject onclick= handlers — blocked
 // by strict CSP.
@@ -10,8 +5,6 @@ $(document).on('turbolinks:load', function() {
   const template = document.getElementById('grouped-metadata-terms-template');
   if (!template) return;
 
-  // Idempotency: bail out if the terms block has already been inserted
-  // (turbolinks may fire this handler more than once per page lifecycle).
   if (document.querySelector('dd.blacklight-terms')) return;
 
   const rights = document.querySelector('dd.blacklight-rights_ssim');
@@ -68,8 +61,6 @@ $(document).on('turbolinks:load', function() {
   ddShow.addEventListener('click', expand);
   ddHide.addEventListener('click', truncate);
 
-  // Initial visibility mirrors the original: only show the toggle if the body
-  // is actually being truncated.
   if (ddTerms.offsetHeight < ddTerms.scrollHeight ||
       ddTerms.offsetWidth < ddTerms.scrollWidth) {
     dtShow.classList.remove('hidden');

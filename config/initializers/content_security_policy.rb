@@ -43,12 +43,5 @@ if enforce_envs.include?(ENV['RAILS_ENV'])
     # already set to :none). script-src is listed as a fallback for older browsers
     # that don't honor script-src-elem.
     config.content_security_policy_nonce_directives = %w[script-src script-src-elem]
-
-    # Default to enforcing in production/staging; allow ops override via env var so
-    # a problematic deploy can be flipped to report-only without a code revert.
-    # Test always runs report-only so specs can inspect header contents without
-    # affecting other request behavior.
-    # config.content_security_policy_report_only =
-    # ENV['RAILS_ENV'] == 'test' || ENV.fetch('CSP_REPORT_ONLY', 'false') == 'true'
   end
 end

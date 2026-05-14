@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-# The CSP initializer runs in the test environment in report-only mode so the
-# header ships for inspection without affecting other request behavior. See
-# config/initializers/content_security_policy.rb.
 RSpec.describe 'Content-Security-Policy header', type: :request do
   def csp_header
     response.headers['Content-Security-Policy'] ||

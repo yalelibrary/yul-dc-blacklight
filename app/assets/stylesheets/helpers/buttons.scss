@@ -7,15 +7,6 @@
   font-family: $mallory_mp_medium;
 }
 
-// Previously: .lg-btn:focus { color: #fff }
-// Every .lg-btn in the app is also .btn-primary, which (per main.scss) has a
-// white background — so setting the focus text color to white made the button
-// label invisible until blur. The SEARCH and BASIC SEARCH buttons hid the bug
-// because submit/navigation tore the page down before the user noticed; the
-// CLEAR reset button exposed it after the inline onclick (which incidentally
-// shifted focus on click) was removed. Default Bootstrap :focus styling
-// (focus ring) is sufficient.
-
 .sm-btn {
   font-size: 14px;
   padding: 10.5px 16px;

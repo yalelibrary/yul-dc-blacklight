@@ -1,6 +1,3 @@
-// Sort handlers for the Permission Requests table.
-// Headers carry data-sort-column="<N>" and data-sort-type="text"|"date".
-
 function sortPermissionRequestsTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("permission-requests-table");

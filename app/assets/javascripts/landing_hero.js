@@ -1,6 +1,3 @@
-// Landing page hero carousel.
-// Image list (with Rails asset paths resolved) is provided via a `data-hero-images`
-// JSON attribute on the #hero element so this module can live outside of ERB.
 $(document).ready(function() {
   const hero = document.getElementById('hero');
   if (!hero || !hero.dataset.heroImages) return;

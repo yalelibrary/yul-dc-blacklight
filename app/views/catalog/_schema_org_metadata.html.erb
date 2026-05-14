@@ -1,5 +1,3 @@
-<%# Use a raw <script> tag rather than javascript_tag — the latter wraps content
-    in //<![CDATA[ ... //]]> markers (sensible for JS, broken for JSON-LD). %>
 <script type="application/ld+json" nonce="<%= content_security_policy_nonce %>">
 <%= raw metadata.to_json %>
 </script>
