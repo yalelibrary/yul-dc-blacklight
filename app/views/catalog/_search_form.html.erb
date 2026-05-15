@@ -10,7 +10,7 @@
                        title: t('blacklight.search.form.search_field.title'),
                        id: "search_field",
                        class: "custom-select search-field",
-                       :onchange => 'onChangeSearchFields()')
+                       data: { search_fields_trigger: true })
         %>
     <% elsif search_fields.length == 1 %>
       <%= hidden_field_tag :search_field, search_fields.first.last %>
@@ -22,14 +22,14 @@
               :fulltext_search,
               1,
               false,
-              onclick:("onSelectDescription();")
+              data: { search_mode: 'description' }
           )
       %>
       <%= label_tag(:fulltext_search_1, "Description") %>
       <%= radio_button_tag(:fulltext_search,
                            2,
                            false,
-                           onclick:("onSelectFulltext();")
+                           data: { search_mode: 'fulltext' }
                            )
       %>
       <%= label_tag(:fulltext_search_2, "Full text") %>

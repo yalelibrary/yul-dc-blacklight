@@ -138,6 +138,43 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
       expect(response).to have_http_status(:redirect)
       expect(response.redirect_url).to eq('http://www.example.com/catalog/1718909/request_confirmation')
     end
+    it 'strips HTML/script tags from user_full_name and user_note before forwarding to management' do
+      # Catch-all stub so the controller's POST always succeeds; we then
+      # inspect the captured request body to assert what was actually sent.
+      stub_request(:post, 'http://www.example.com/management/api/permission_requests')
+        .to_return(status: 201, body: '{ "title": "New request created"}', headers: valid_header)
+
+      post '/catalog/1718909/request_form', params: {
+        'oid': '1718909',
+        'permission_request': {
+          'user_full_name': '<script>alert("xss")</script>Request Full Name',
+          'user_note': '<b>lorem</b> <img src=x onerror=alert(1)> ipsum'
+        }
+      }, headers: valid_header
+
+      management_post = a_request(:post, 'http://www.example.com/management/api/permission_requests')
+
+      # Positive: management receives only the cleaned plain-text values.
+      # `<script>` element contents are removed by the full
+      # sanitizer; inline tags like `<b>` and `<img>` are stripped, leaving
+      # their surrounding text.
+      expect(management_post.with do |req|
+        body = Rack::Utils.parse_nested_query(req.body)
+        body['user_full_name'] == 'Request Full Name' &&
+          body['user_note'] == 'lorem  ipsum'
+      end).to have_been_made.once
+
+      # No HTML markup or script payload reaches management,
+      # regardless of which field it was injected into.
+      expect(management_post.with(body: /<\s*script/i)).not_to have_been_made
+      expect(management_post.with(body: /<\s*img/i)).not_to have_been_made
+      expect(management_post.with(body: /<\s*b\s*>/i)).not_to have_been_made
+      expect(management_post.with(body: /onerror/i)).not_to have_been_made
+      expect(management_post.with(body: /alert\(/i)).not_to have_been_made
+
+      expect(response).to have_http_status(:redirect)
+      expect(response.redirect_url).to eq('http://www.example.com/catalog/1718909/request_confirmation')
+    end
   end
 
   context 'with an authenticated non yale user' do

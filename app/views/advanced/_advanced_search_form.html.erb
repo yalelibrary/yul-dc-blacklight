@@ -43,9 +43,9 @@
                     tabindex: "0" do %>
       BASIC SEARCH
     <% end %>
-    <%= button_tag  class: "btn btn-primary lg-btn pull-right", 
-                    type: 'reset', 
-                    onclick: "this.form.reset()",
+    <%# type: 'reset' provides native form reset; no JS handler needed. %>
+    <%= button_tag  class: "btn btn-primary lg-btn pull-right",
+                    type: 'reset',
                     aria: {label: 'clear form'},
                     tabindex: "0" do %>
       CLEAR

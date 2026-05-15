@@ -21,7 +21,7 @@ gem 'citeproc-ruby', '~> 2.0.0'
 # pinned due to https://github.com/rails/rails/pull/54264
 gem 'concurrent-ruby', '< 1.3.5'
 gem 'csl-styles', '~> 2.0.1'
-gem 'devise', '~> 5.0.3'
+gem 'devise', '~> 5.0.4'
 gem 'devise-guests', '~> 0.6'
 gem 'dotenv-rails', '~> 2.8.1', groups: [:development, :test]
 gem 'honeybadger', '~> 4.0'
@@ -49,7 +49,7 @@ gem 'twitter-typeahead-rails', '0.11.1.pre.corejavascript'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'unicode-display_width', '~> 2.5'
 gem 'webpacker', '~> 5.0'
-gem 'yard', '~> 0.9.36'
+gem 'yard', '~> 0.9.42'
 
 group :development, :test do
   gem 'bixby', '~> 5.0.1'

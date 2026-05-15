@@ -9,7 +9,7 @@ class ManifestsController < ApplicationController
 
   def show
     remote_path = pairtree_path
-    response.set_header('Access-Control-Allow-Origin', '*')
+    response.set_header('Access-Control-Allow-Origin', '*') if @document['visibility_ssi'] == 'Public'
     render json: download_from_s3(remote_path)
   rescue ArgumentError
     render json: { error: 'unauthorized' }.to_json, status: :unauthorized

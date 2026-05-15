@@ -10,7 +10,7 @@
   <%= render partial: 'shared/ga_body' %>
 <div id="my-mirador"/>
 
-<script type="text/javascript">
+<script type="text/javascript" nonce="<%= content_security_policy_nonce %>">
   let dc_mirador_config = {
       "id": "my-mirador",
       "osdConfig": {
