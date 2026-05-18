@@ -2,6 +2,13 @@
 require 'rails_helper'
 
 RSpec.describe AccessHelper, helper: true, style: true do
+  around do |example|
+    original = ENV['MANAGEMENT_HOST']
+    ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
+    example.run
+    ENV['MANAGEMENT_HOST'] = original
+  end
+
   let(:user) { FactoryBot.create(:user, netid: 'net_id', sub: 'sub-123') }
   let(:document) { SolrDocument.new(id: '12345', visibility_ssi: 'Open with Permission') }
   let(:management_url) { "#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document.id}/#{user.netid}" }
