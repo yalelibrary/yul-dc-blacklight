@@ -3,20 +3,21 @@ require 'rails_helper'
 
 RSpec.describe AccessHelper, helper: true, style: true do
   around do |example|
-    original = ENV['MANAGEMENT_HOST']
+    original_host = ENV['MANAGEMENT_HOST']
+    original_token = ENV['OWP_AUTH_TOKEN']
     ENV['MANAGEMENT_HOST'] = 'http://www.example.com/management'
+    ENV['OWP_AUTH_TOKEN'] = 'valid'
     example.run
-    ENV['MANAGEMENT_HOST'] = original
+    ENV['MANAGEMENT_HOST'] = original_host
+    ENV['OWP_AUTH_TOKEN'] = original_token
   end
 
   let(:user) { FactoryBot.create(:user, netid: 'net_id', sub: 'sub-123') }
   let(:document) { SolrDocument.new(id: '12345', visibility_ssi: 'Open with Permission') }
   let(:management_url) { "#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document.id}/#{user.netid}" }
-  let(:auth_header) { { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" } }
 
   def stub_admin_response(is_admin)
     stub_request(:get, management_url)
-      .with(headers: auth_header)
       .to_return(status: 200, body: %({"is_admin_or_approver?": #{is_admin}}))
   end
 
