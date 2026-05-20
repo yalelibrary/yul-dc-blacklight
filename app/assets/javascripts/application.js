@@ -1,3 +1,4 @@
+//= require google_tag_manager
 //= require jquery
 //= require 'blacklight_advanced_search'
 
@@ -5,6 +6,7 @@
 //= require jquery3
 //= require rails-ujs
 //= require turbolinks
+//= require turbolinks_csp_nonce
 //
 // Required by Blacklight
 //= require popper
