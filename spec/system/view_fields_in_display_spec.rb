@@ -91,7 +91,10 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       coordinateDisplay_ssim: "this is the coordinates, using ssim",
       projection_tesim: "this is the projection, using ssim",
       extent_ssim: ["this is the extent, using ssim", "here is another extent"],
-      resourceVersionOnline_ssim: ["this is the online resource|http://this/is/the/link"]
+      resourceVersionOnline_ssim: ["this is the online resource|http://this/is/the/link"],
+      copyDescription_tesim: "First edition, cloth binding",
+      acquisitionSource_tesim: "Gift of Jane Doe",
+      bindingInfo_tesim: "Full leather binding with gold lettering"
     }
   end
   let(:test_aspace_record) do
@@ -151,7 +154,10 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       ancestorDisplayStrings_tesim: %w[seventh sixth fifth fourth third second first],
       ancestor_titles_hierarchy_ssim: ['first > ', 'first > second > ', 'first > second > third > ',
                                        'first > second > third > fourth > ', 'first > second > third > fourth > fifth > ',
-                                       'first > second > third > fourth > fifth > sixth > ', 'first > second > third > fourth > fifth > sixth > seventh > ']
+                                       'first > second > third > fourth > fifth > sixth > ', 'first > second > third > fourth > fifth > sixth > seventh > '],
+      copyDescription_tesim: "This is a copy description for an aspace record",
+      acquisitionSource_tesim: "This is an acquisition source for an aspace record",
+      bindingInfo_tesim: "This is binding info for an aspace record"
     }
   end
 
@@ -310,6 +316,17 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       it 'does not display the Record Type in results' do
         expect(document).not_to have_content("this is the record type")
       end
+      it 'does not display Notes on this Copy for non-alma sources' do
+        expect(document).not_to have_content('Notes on this Copy')
+        expect(document).not_to have_content('This is a copy description for an aspace record')
+      end
+      it 'does not display Source of Acquisition for non-alma sources' do
+        expect(document).not_to have_content('Source of Acquisition')
+        expect(document).not_to have_content('This is an acquisition source for an aspace record')
+      end
+      it 'does not display Binding for non-alma sources' do
+        expect(document).not_to have_content('This is binding info for an aspace record')
+      end
       it 'displays the Source Title in results' do
         expect(document).to have_content("this is the source title")
       end
@@ -405,6 +422,18 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
         expect(page).to have_content('Catalog Record')
         expect(page).to have_link('777777777777', href: 'https://search.library.yale.edu/catalog/777777777777').once
         expect(page).not_to have_link('12345677', href: 'https://search.library.yale.edu/catalog/12345677')
+      end
+      it 'displays Notes on this Copy' do
+        expect(page).to have_content('Notes on this Copy')
+        expect(page).to have_content('First edition, cloth binding')
+      end
+      it 'displays Source of Acquisition' do
+        expect(page).to have_content('Source of Acquisition')
+        expect(page).to have_content('Gift of Jane Doe')
+      end
+      it 'displays Binding' do
+        expect(page).to have_content('Binding')
+        expect(page).to have_content('Full leather binding with gold lettering')
       end
     end
     context 'with sierra record' do

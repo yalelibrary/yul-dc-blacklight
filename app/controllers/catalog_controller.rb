@@ -232,7 +232,10 @@ class CatalogController < ApplicationController
     config.add_show_field 'caption_tesim', label: 'Matching Captions', metadata: 'matching_captions', helper_method: :display_show_page_captions, if: :should_display_all_captions?
     config.add_show_field 'abstract_tesim', label: 'Abstract', metadata: 'description', helper_method: :join_as_paragraphs
     config.add_show_field 'description_tesim', label: 'Description', metadata: 'description', helper_method: :sanitize_join_with_br
+    config.add_show_field 'copyDescription_tesim', label: 'Notes on this Copy', metadata: 'description', if: :alma_source?
     config.add_show_field 'provenanceUncontrolled_tesi', label: 'Provenance', metadata: 'description'
+    config.add_show_field 'acquisitionSource_tesim', label: 'Source of Acquisition', metadata: 'description', if: :alma_source?
+    config.add_show_field 'bindingInfo_tesim', label: 'Binding', metadata: 'description', if: :alma_source?
     config.add_show_field 'extent_ssim', label: 'Extent', metadata: 'description', helper_method: :join_with_br
     config.add_show_field 'extentOfDigitization_ssim', label: 'Extent of Digitization', metadata: 'description', helper_method: :format_digitization
     config.add_show_field 'digitization_note_tesi', label: 'Digitization Note', metadata: 'description'
@@ -683,6 +686,11 @@ class CatalogController < ApplicationController
   def should_display_all_captions?(_field_config, _document)
     result = params[:show_captions] == 'true'
     result
+  end
+
+  # Conditional method to determine if a field should be displayed only for Alma-sourced records
+  def alma_source?(_field_config, document)
+    Array(document[:source_ssim]).include?('alma')
   end
 
   # This is for iiif_search
