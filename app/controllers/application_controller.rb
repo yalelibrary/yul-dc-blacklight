@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   def enforce_idle_timeout
     return unless user_signed_in?
     last_active = session[:last_request_at] || session[:signed_in_at]
-    if last_active.blank? || current_user.timedout?(Time.at(last_active))
+    if last_active.blank? || current_user.timedout?(Time.zone.at(last_active))
       sign_out(:user)
       session.delete(:last_request_at)
       session.delete(:signed_in_at)
