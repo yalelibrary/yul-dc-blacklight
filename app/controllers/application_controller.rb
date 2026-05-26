@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   include Blacklight::Controller
   include HttpAuthConcern
 
+  before_action :enforce_idle_timeout
   before_action :ensure_guest_uid_authentication_key
 
   layout :determine_layout if respond_to? :layout
@@ -25,6 +26,18 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def enforce_idle_timeout
+    return unless user_signed_in?
+    last_active = session[:last_request_at] || session[:signed_in_at]
+    if last_active.blank? || current_user.timedout?(Time.at(last_active))
+      sign_out(:user)
+      session.delete(:last_request_at)
+      session.delete(:signed_in_at)
+    else
+      session[:last_request_at] = Time.current.to_i
+    end
+  end
 
   def ensure_guest_uid_authentication_key
     # skip if user is logged in
