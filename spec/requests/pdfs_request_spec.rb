@@ -57,7 +57,7 @@ RSpec.describe 'PdfController', type: :request do
           "permission_set_terms_agreed":[],
           "permissions":[]}')
       stub_request(:get, "http://www.example.com/management/api/permission_sets/1818909/netid")
-        .to_return(status: 200, body: '{ "is_admin_or_approver?": false }')
+        .to_return(status: 200, body: '{ "is_admin_or_approver?": "false" }')
       stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6f')
         .to_return(status: 200, body: '{
           "timestamp":"2023-11-02",

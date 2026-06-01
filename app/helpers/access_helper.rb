@@ -50,52 +50,27 @@ module AccessHelper
     return false if parent_oid.nil?
     allowance = false
     user_owp_permissions['permissions']&.each do |permission|
-      next unless (permission['oid'].to_s == parent_oid) && (permission['request_status'] == "Approved")
-      next unless permission['access_until'].nil? || permission_unexpired?(permission['access_until'])
-      allowance = true
+      if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today) && (permission['request_status'] == "Approved")
+        allowance = true
+      end
     end
     allowance
-  end
-
-  def permission_unexpired?(access_until)
-    parsed = Time.zone.parse(access_until)
-    return false if parsed.nil?
-    parsed > Time.zone.today
-  rescue ArgumentError, TypeError
-    false
   end
   # rubocop:enable Metrics/PerceivedComplexity
   # rubocop:enable Metrics/CyclomaticComplexity
 
   def admin_of_owp?(document)
     return unless current_user
-    admin_credentialed?(document) && !admin_session_expired?
-  end
-
-  def admin_credentialed?(document)
-    fetch_admin_credentials(document)
-    @credentials.is_a?(Hash) && @credentials['is_admin_or_approver?'] == true
-  end
-
-  def fetch_admin_credentials(document)
-    @credentials ||= if params[:oid].present?
-                       retrieve_admin_fulltext_credentials(params[:oid])
-                     else
-                       retrieve_admin_credentials(document)
-                     end
-  end
-
-  def admin_reauth_required?(document)
-    return false unless current_user
-    return false unless admin_credentialed?(document)
-    admin_session_expired?
-  end
-
-  # True if sign in is older than the Devise session timeout (12 hours)
-  def admin_session_expired?
-    signed_in_at = session[:signed_in_at]
-    return true if signed_in_at.nil?
-    (Time.current.to_i - signed_in_at.to_i) >= User.timeout_in.to_i
+    @credentials = if params[:oid].present?
+                     retrieve_admin_fulltext_credentials(params[:oid])
+                   else
+                     retrieve_admin_credentials(document)
+                   end
+    allowance = false
+    if @credentials
+      allowance = true if @credentials['is_admin_or_approver?'] == "true"
+    end
+    allowance
   end
 
   def user_owp_permissions
@@ -103,7 +78,7 @@ module AccessHelper
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{current_user.sub}")
     response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
-    safe_parse_management_response(response) || {}
+    JSON.parse(response.body)
   end
 
   def retrieve_permission_set_terms
@@ -112,7 +87,7 @@ module AccessHelper
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{@document[:id]}/terms")
     response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
-    safe_parse_management_response(response)
+    JSON.parse(response.body) unless response.body.nil?
   end
 
   def retrieve_admin_credentials(document)
@@ -121,7 +96,7 @@ module AccessHelper
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document.id}/#{current_user.netid}")
     response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
-    safe_parse_management_response(response)
+    JSON.parse(response.body)
   end
 
   def retrieve_admin_fulltext_credentials(document)
@@ -130,14 +105,7 @@ module AccessHelper
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document}/#{current_user.netid}")
     response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
-    safe_parse_management_response(response)
-  end
-
-  def safe_parse_management_response(response)
-    return nil unless response.is_a?(Net::HTTPSuccess)
     JSON.parse(response.body)
-  rescue JSON::ParserError
-    nil
   end
 
   def client_can_view_metadata?(document)
@@ -151,9 +119,6 @@ module AccessHelper
     when 'Yale Community Only'
       return "The digital version of this work is restricted due to copyright or other restrictions."
     when 'Open with Permission'
-      if admin_reauth_required?(document)
-        return "Your admin session has expired for security. Please #{link_to 'sign out', destroy_user_session_path, method: :delete, data: { turbolinks: false }} and sign in again to access this object.".html_safe
-      end
       return "You are currently logged in to your account. However, you do not have permission to view this folder. If you would like to request permission, please fill out this #{link_to 'form', "/catalog/#{document.id}/request_form", data: { turbolinks: false }}.".html_safe
     end
     "The digital version is restricted."

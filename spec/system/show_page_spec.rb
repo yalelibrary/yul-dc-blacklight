@@ -212,22 +212,22 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
       .to_return(status: 200, body: '{"timestamp":"2023-11-02","user":{"sub":"123454321"},"permission_set_terms_agreed":[],"permissions":[{"oid":12345,"permission_set":1,"permission_set_terms":1,"request_status":"Approved","request_date":"2023-11-02T20:23:18.824Z","access_until":"2024-11-02T20:23:18.824Z"}]}', headers: valid_header)
     stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/new_netid")
       .to_return(status: 200, body: '{
-        "is_admin_or_approver?": false
+        "is_admin_or_approver?":"false"
         }',
                  headers: valid_header)
     stub_request(:get, "http://www.example.com/management/api/permission_sets/54321/new_netid")
       .to_return(status: 200, body: '{
-        "is_admin_or_approver?": false
+        "is_admin_or_approver?":"false"
         }',
                  headers: valid_header)
     stub_request(:get, "http://www.example.com/management/api/permission_sets/12345/net_id2")
       .to_return(status: 200, body: '{
-        "is_admin_or_approver?": true
+        "is_admin_or_approver?":"true"
         }',
                  headers: valid_header)
     stub_request(:get, "http://www.example.com/management/api/permission_sets/54321/net_id2")
       .to_return(status: 200, body: '{
-        "is_admin_or_approver?": true
+        "is_admin_or_approver?":"true"
         }',
                  headers: valid_header)
     stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e')
