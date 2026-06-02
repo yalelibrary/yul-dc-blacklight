@@ -158,12 +158,9 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
       # `<script>` element contents are removed by the full
       # sanitizer; inline tags like `<b>` and `<img>` are stripped, leaving
       # their surrounding text.
-      expect(management_post.with do |req|
-        body = Rack::Utils.parse_nested_query(req.body)
-        body['user_full_name'] == 'Request Full Name' &&
-          body['user_note'] == 'lorem  ipsum'
-      end).to have_been_made.once
-
+      # rubocop:disable Layout/LineLength
+      expect(management_post.with(body: 'oid=1718909&user_email=not_real%40example.com&user_full_name=alert%28%22xss%22%29Request+Full+Name&user_netid=net_id&user_note=lorem++ipsum&user_sub=7bd425ee-1093-40cd-ba0c-5a2355e37d6e')).to have_been_made
+      # rubocop:enable Layout/LineLength
       # No HTML markup or script payload reaches management,
       # regardless of which field it was injected into.
       expect(management_post.with(body: /<\s*script/i)).not_to have_been_made
