@@ -68,7 +68,7 @@ module AccessHelper
                    end
     allowance = false
     if @credentials
-      allowance = true if @credentials['is_admin_or_approver?'] == "true"
+      allowance = true if @credentials['is_admin_or_approver?'] == true
     end
     allowance
   end
@@ -78,7 +78,7 @@ module AccessHelper
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{current_user.sub}")
     response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
-    JSON.parse(response.body)
+    safe_parse_management_response(response) || {}
   end
 
   def retrieve_permission_set_terms
@@ -87,7 +87,7 @@ module AccessHelper
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{@document[:id]}/terms")
     response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
-    JSON.parse(response.body) unless response.body.nil?
+    safe_parse_management_response(response)
   end
 
   def retrieve_admin_credentials(document)
@@ -96,7 +96,7 @@ module AccessHelper
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document.id}/#{current_user.netid}")
     response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
-    JSON.parse(response.body)
+    safe_parse_management_response(response)
   end
 
   def retrieve_admin_fulltext_credentials(document)
@@ -105,7 +105,14 @@ module AccessHelper
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document}/#{current_user.netid}")
     response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
+    safe_parse_management_response(response)
+  end
+
+  def safe_parse_management_response(response)
+    return nil unless response.is_a?(Net::HTTPSuccess)
     JSON.parse(response.body)
+  rescue JSON::ParserError
+    nil
   end
 
   def client_can_view_metadata?(document)
