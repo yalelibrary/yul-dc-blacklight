@@ -31,8 +31,8 @@ RSpec.describe 'catalog/_uv.html.erb' do
       image_width = page.evaluate_script("document.querySelector('#uv iframe').contentWindow.document.querySelector('.uv-canvas').clientWidth")
       # calculate the filled ratio
       filled_ratio = [image_width.to_f / viewport_width, image_height.to_f / viewport_height].max
-      # expect the ratio to be 1
-      expect(filled_ratio).to eq(1)
+      # expect the ratio to be what zoom level is set to in the UV config
+      expect(filled_ratio).to eq(UV.modules.openSeadragonCenterPanel.options.defaultZoomLevel)
     end
   end
 end
