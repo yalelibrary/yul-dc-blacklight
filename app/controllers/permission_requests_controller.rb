@@ -67,8 +67,8 @@ class PermissionRequestsController < ApplicationController
                       })
     req.add_field('Authorization', "Bearer #{ENV['OWP_AUTH_TOKEN']}")
     con = Net::HTTP.new(url.host, url.port)
-    con.start { |http| http.request(req) }
-    handle_request_response(response.status, response.body)
+    http_response = con.start { |http| http.request(req) }
+    handle_request_response(http_response.code.to_i, http_response.body)
   end
 
   def agreement_term
@@ -88,8 +88,8 @@ class PermissionRequestsController < ApplicationController
                       })
     req.add_field('Authorization', "Bearer #{ENV['OWP_AUTH_TOKEN']}")
     con = Net::HTTP.new(url.host, url.port)
-    con.start { |http| http.request(req) }
-    handle_agreement_request_response(response.status, response.body)
+    http_response = con.start { |http| http.request(req) }
+    handle_agreement_request_response(http_response.code.to_i, http_response.body)
   end
 
   # rubocop:disable Metrics/PerceivedComplexity
@@ -113,12 +113,13 @@ class PermissionRequestsController < ApplicationController
   # rubocop:disable Metrics/PerceivedComplexity
   # rubocop:disable Metrics/CyclomaticComplexity
   def handle_request_response(http_status, body)
-    if http_status == 400 && body == 'Invalid Parent OID'
+    title = parse_response_title(body)
+    if http_status == 400 && title == 'Invalid Parent OID'
       redirect_to("/catalog/#{params[:oid]}/request_form", notice: 'Object not found')
-    elsif http_status == 400 && body == 'Object is private'
-      redirect_to("/catalog/#{params[:oid]}/request_form", notice: body)
-    elsif http_status == 400 && body == 'Object is public, permission not required'
-      redirect_to("/catalog/#{params[:oid]}/request_form", notice: body)
+    elsif http_status == 400 && title == 'Parent Object is private'
+      redirect_to("/catalog/#{params[:oid]}", notice: 'Object is private')
+    elsif http_status == 400 && title == 'Parent Object is public, permission not required'
+      redirect_to("/catalog/#{params[:oid]}", notice: 'Object is public, permission not required')
     elsif http_status == 403
       redirect_to("/catalog/#{params[:oid]}/request_form", notice: 'Too many pending requests')
     elsif http_status == 401
@@ -133,6 +134,12 @@ class PermissionRequestsController < ApplicationController
   # rubocop:enable Metrics/CyclomaticComplexity
 
   private
+
+  def parse_response_title(body)
+    JSON.parse(body)['title']
+  rescue JSON::ParserError, TypeError
+    body
+  end
 
   def permission_request_params
     params.require(:permission_request).permit(:oid, :user_sub, :user_email, :user_full_name, :user_note, :user_netid)
