@@ -8,7 +8,6 @@ development_environments:
   - local
 request:
   # Identity / PII fields scrubbed from captured params before they reach Honeybadger
-  # (mirrors config.filter_parameters; see issue #3327).
   filter_keys:
     - password
     - passw
