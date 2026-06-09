@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ClassLength
 class PermissionRequestsController < ApplicationController
   include Blacklight::Catalog
   include Blacklight::Configurable
@@ -152,3 +153,4 @@ class PermissionRequestsController < ApplicationController
     ActionController::Base.helpers.strip_tags(value.to_s).strip
   end
 end
+# rubocop:enable Metrics/ClassLength
