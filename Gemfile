@@ -36,7 +36,7 @@ gem 'openseadragon', '~> 0.6.0'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 gem 'partridge', '~> 0.1.2'
 gem 'pg', '~> 1.5.4'
-gem 'puma', '~> 5.6'
+gem 'puma', '~> 7.2'
 # pinned to before 4 due to https://stackoverflow.com/questions/71191685/visit-psych-nodes-alias-unknown-alias-default-psychbadalias
 gem 'psych', '< 4'
 gem 'rails', '~> 7.2.3.1'
