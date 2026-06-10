@@ -391,6 +391,7 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     end
 
     it 'Metadata og tags are in the header of html' do
+      expect(page).to have_css("meta[property='og:title']", visible: :all, wait: 10)
       expect(page.html).to include("og:title")
       expect(page.html).to include("Amor Llama")
       expect(page.html).to include("og:url")
