@@ -6,3 +6,27 @@ development_environments:
   - test
   - cucumber
   - local
+request:
+  # Identity / PII fields scrubbed from captured params before they reach Honeybadger
+  filter_keys:
+    - authorization
+    - certificate
+    - crypt
+    - email
+    - id_token
+    - idtoken
+    - netid
+    - otp
+    - passw
+    - password
+    - salt
+    - secret
+    - ssn
+    - sub
+    - token
+    - uid
+    - user_email
+    - user_full_name
+    - user_netid
+    - user_note
+    - user_sub
