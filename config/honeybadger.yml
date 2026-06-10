@@ -9,24 +9,24 @@ development_environments:
 request:
   # Identity / PII fields scrubbed from captured params before they reach Honeybadger
   filter_keys:
-    - password
-    - passw
-    - secret
-    - token
-    - crypt
-    - salt
-    - certificate
-    - otp
-    - ssn
-    - email
-    - user_email
-    - netid
-    - user_netid
-    - sub
-    - user_sub
-    - uid
-    - user_full_name
-    - user_note
-    - idtoken
-    - id_token
     - authorization
+    - certificate
+    - crypt
+    - email
+    - id_token
+    - idtoken
+    - netid
+    - otp
+    - passw
+    - password
+    - salt
+    - secret
+    - ssn
+    - sub
+    - token
+    - uid
+    - user_email
+    - user_full_name
+    - user_netid
+    - user_note
+    - user_sub
