@@ -356,7 +356,7 @@ GEM
       racc (~> 1.7)
     net-http (0.9.1)
       uri (>= 0.11.1)
-    net-imap (0.4.24)
+    net-imap (0.5.15)
       date
       net-protocol
     net-pop (0.1.2)
