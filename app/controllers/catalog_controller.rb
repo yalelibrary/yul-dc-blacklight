@@ -738,17 +738,30 @@ class CatalogController < ApplicationController
   # rubocop:disable Metrics/PerceivedComplexity
   def request_form
     @response, @document = search_service.fetch(params[:oid])
-    if current_user && @document['visibility_ssi'] == 'Open with Permission'
+    if current_user.nil?
+      redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: "Please log in to request access to these materials.")
+    elsif @document['visibility_ssi'] != 'Open with Permission'
+      redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: visibility_request_notice(@document['visibility_ssi']))
+    else
       @permission_set_terms = retrieve_permission_set_terms
       if @permission_set_terms.nil?
-        redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: "We are unable to complete your access request at this time. For more information about this object, click the ‘Feedback’ link located at the bottom of this page and fill out the form. We will get back to you as soon as possible.")
+        redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: "We are unable to complete your access request at this time. For more information about this object, click the ‘Feedback’ link located at the bottom of this page and fill out the form. We will get back to you as soon as possible.")
       elsif user_owp_permissions['permission_set_terms_agreed']&.include?(@permission_set_terms['id'])
         render 'catalog/request_form'
       else
         render 'catalog/terms_and_conditions'
       end
+    end
+  end
+
+  def visibility_request_notice(visibility)
+    case visibility
+    when 'Public'
+      'Object is public, permission not required'
+    when 'Private'
+      'Object is private'
     else
-      redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params[:oid]}", notice: "Please log in to request access to these materials.")
+      'This object does not require an access request.'
     end
   end
   # rubocop:enable Layout/LineLength
@@ -778,7 +791,7 @@ class CatalogController < ApplicationController
         false
       end
     else
-      redirect_back(fallback_location: "#{ENV['BLACKLIGHT_HOST']}/catalog/#{params['oid']}", notice: "Please log in to request access to these materials.")
+      redirect_to("#{ENV['BLACKLIGHT_HOST']}/catalog/#{params['oid']}", notice: "Please log in to request access to these materials.")
       false
     end
   end
