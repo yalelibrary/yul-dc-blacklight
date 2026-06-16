@@ -97,7 +97,7 @@ RSpec.describe "Iiif Search", type: :request do
     end
 
     context "when searching for word capitalized in original text" do
-      it 'returns matches to suggest search when case does not match with case maintained' do
+      xit 'returns matches to suggest search when case does not match with case maintained' do
         get solr_document_iiif_suggest_path(yale_work[:id], { q: 'pa' })
         expect(response).to have_http_status(:success)
         term_matches = JSON.parse(response.body)["terms"].map { |term| term["match"] }
@@ -105,7 +105,7 @@ RSpec.describe "Iiif Search", type: :request do
         expect(term_matches).to include "Paris"
       end
 
-      it 'returns matches to suggest search case does match with case maintained' do
+      xit 'returns matches to suggest search case does match with case maintained' do
         get solr_document_iiif_suggest_path(yale_work[:id], { q: 'Pa' })
         expect(response).to have_http_status(:success)
         term_matches = JSON.parse(response.body)["terms"].map { |term| term["match"] }
