@@ -110,6 +110,7 @@ module AccessHelper
 
   def safe_parse_management_response(response)
     return nil unless response.is_a?(Net::HTTPSuccess)
+    return nil if response.body.nil? || response.body.strip.empty?
     JSON.parse(response.body)
   rescue JSON::ParserError
     nil
