@@ -18,13 +18,8 @@ RUN /sbin/setuser app bash -l -c "bundle check || bundle install"
 COPY  --chown=app . $APP_HOME
 
 
-# Assets and packs are moved aside - building them means you find out early if the asset compilation is broken
-# not on final deploy. It means that public/assets and public/packs can be volumes in production allowing for
-# cached pages / assets to be kept and cleaned the way Rails expects them to be while keeping deployment very fast.
-# The assets/packs get copied back by rsync on app load (see ops/nginx.sh)
 RUN /sbin/setuser app bash -l -c " \
     DB_ADAPTER=nulldb yarn install --frozen-lockfile --ignore-scripts && \
     yarn run uv-install && yarn run uv-config && \
     bundle exec rake assets:precompile && \
-    mv ./public/assets ./public/assets-new && \
-    mv ./public/packs ./public/packs-new"
+    mv ./public/assets ./public/assets-new"

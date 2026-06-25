@@ -34,9 +34,6 @@ then
     if [ -d /home/app/webapp/public/assets-new ]; then
         /sbin/setuser app /bin/bash -l -c 'cd /home/app/webapp && rsync -a public/assets-new/ public/assets/'
     fi
-    if [ -d /home/app/webapp/public/packs-new ]; then
-        /sbin/setuser app /bin/bash -l -c 'cd /home/app/webapp && rsync -a public/packs-new/ public/packs/'
-    fi
 fi
 
 exec /usr/sbin/nginx
