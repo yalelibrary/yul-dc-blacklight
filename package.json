@@ -54,6 +54,7 @@
   },
   "resolutions": {
     "form-data": "4.0.6"
+    "brace-expansion": "2.0.3"
   },
   "scripts": {
     "preinstall": "rm -rf ./public/uv",
