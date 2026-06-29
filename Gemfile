@@ -19,7 +19,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap', '~> 5.3'
 gem 'citeproc-ruby', '~> 2.0.0'
 # pinned due to https://github.com/rails/rails/pull/54264
-gem 'concurrent-ruby', '< 1.3.5'
+gem 'concurrent-ruby', '< 1.3.8'
 gem 'csl-styles', '~> 2.0.1'
 gem 'devise', '~> 5.0.4'
 gem 'devise-guests', '~> 0.6'
