@@ -6,7 +6,7 @@ module AccessHelper
   end
 
   def client_can_view_digital?(document)
-    Rails.logger.warn("starting client can view digital check for #{sanitize_header_value_for_logs(request.env['HTTP_X_ORIGIN_URI'])}")
+    Rails.logger.warn("starting client can view digital check for #{request.env['HTTP_X_ORIGIN_URI']}")
     case document['visibility_ssi']
     when 'Public'
       return true
@@ -19,14 +19,9 @@ module AccessHelper
   end
 
   def client_can_view_owp?(document)
-    Rails.logger.warn("starting client can view digital check for #{sanitize_header_value_for_logs(request.env['HTTP_X_ORIGIN_URI'])}")
+    Rails.logger.warn("starting client can view digital check for #{request.env['HTTP_X_ORIGIN_URI']}")
     return true if object_owp?(document) && user_has_permission?(document)
     false
-  end
-
-  def sanitize_header_value_for_logs(value, max_length: 512)
-    sanitized = value.to_s.gsub(/[\r\n]+/, ' ').strip
-    sanitized.length > max_length ? sanitized[0, max_length] : sanitized
   end
 
   def object_owp?(document)
@@ -115,6 +110,7 @@ module AccessHelper
 
   def safe_parse_management_response(response)
     return nil unless response.is_a?(Net::HTTPSuccess)
+    return nil if response.body.nil? || response.body.strip.empty?
     JSON.parse(response.body)
   rescue JSON::ParserError
     nil

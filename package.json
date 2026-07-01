@@ -52,6 +52,10 @@
     "ws": "^7.5.11",
     "yargs-parser": "^13.1.2"
   },
+  "resolutions": {
+    "form-data": "4.0.6",
+    "brace-expansion": "2.0.3"
+  },
   "scripts": {
     "preinstall": "rm -rf ./public/uv",
     "postinstall": "yarn run uv-install && yarn run uv-config",
