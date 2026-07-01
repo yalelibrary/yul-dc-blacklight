@@ -243,6 +243,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'digital_ssim', label: 'Digital', metadata: 'description'
     config.add_show_field 'edition_ssim', label: 'Edition', metadata: 'description'
     config.add_show_field 'language_ssim', label: 'Language', metadata: 'description', helper_method: :language_codes_as_links
+    config.add_show_field 'reparativeDescription_tesim', label: 'Reparative Description', metadata: 'description'
 
     # Collection Information Group
     # ancestorDisplayStrings must be first and the information of the ASpace tree
