@@ -70,6 +70,18 @@ RSpec.describe Yul::MetadataPresenter do
           expect(fields.any? { |field| field.include? 'description_tesim' }).to be_truthy
         end
 
+        it 'returns the Notes on this Copy Key' do
+          expect(fields.any? { |field| field.include? 'copyDescription_tesim' }).to be_truthy
+        end
+
+        it 'returns the Source of Acquisition Key' do
+          expect(fields.any? { |field| field.include? 'acquisitionSource_tesim' }).to be_truthy
+        end
+
+        it 'returns the Binding Key' do
+          expect(fields.any? { |field| field.include? 'bindingInfo_tesim' }).to be_truthy
+        end
+
         it 'returns the Extent Key' do
           expect(fields.any? { |field| field.include? 'extent_ssim' }).to be_truthy
         end
