@@ -124,7 +124,7 @@
                 "downloadWholeImageLowResEnabled": true,
                 "maxImageWidth": 5000,
                 "optionsExplanatoryTextEnabled": false,
-                "selectionEnabled": false
+                "selectionEnabled": true
             },
             "content": {
                 "currentViewAsJpg": "Current view {0} x {1}px (jpg)",
