@@ -59,20 +59,20 @@ DEFAULT MOBILE STYLING
     position: absolute;
     width: 100%;
     height: 100%;
-    border: 0.5px solid #333;
+    border: 0.5px solid $gallery_border_grey;
   }
 
   &::before {
     top: 4px;
     left: 4px;
-    background: #888;
+    background: $gallery_border_light_grey;
     z-index: -1;
   }
 
   &::after {
     top: 9px;
     left: 9px;
-    background: #bbb;
+    background: $gallery_border_lighter_grey;
     z-index: -2;
   }
 
