@@ -52,5 +52,8 @@ WORK_WITH_ALL_FIELDS = {
   digital_ssim: "this is the digital, using ssim",
   coordinateDisplay_ssim: "this is the coordinates, using ssim",
   projection_tesim: "this is the projection, using ssim",
-  extent_ssim: "this is the extent, using ssim"
+  extent_ssim: "this is the extent, using ssim",
+  copyDescription_tesim: "this is the copy description",
+  acquisitionSource_tesim: "this is the acquisition source",
+  bindingInfo_tesim: "this is the binding info"
 }.freeze
