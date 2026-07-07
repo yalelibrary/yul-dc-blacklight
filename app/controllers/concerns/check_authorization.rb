@@ -6,6 +6,7 @@ module CheckAuthorization
 
   def check_authorization
     # checking authorization
+    Rails.logger.warn("starting authorization check for #{sanitize_header_value_for_logs(request.env['HTTP_X_ORIGIN_URI'])}")
     @response, @document = search_for_item
     if @document.blank?
       render json: { error: 'not-found' }.to_json, status: :not_found
