@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 secure = Rails.env.production?
-default_key = Rails.env.production? ? "_app_session" : "_blacklight_yul_session"
+# Keep this key distinct from other apps under *.library.yale.edu; blacklight and
+# management have separate user databases and must not share a session cookie.
+default_key = Rails.env.production? ? "_blacklight_session" : "_blacklight_yul_session"
 key = ENV.fetch("SESSION_COOKIE_KEY", default_key)
 
 # Do not force a cookie domain in local/test environments.
