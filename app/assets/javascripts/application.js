@@ -211,51 +211,57 @@ $(document).on('turbolinks:load', function() {
     renderBanner();
 });
 
+// Only accept a strict #RRGGBB hex color; reject anything else so a
+// compromised banner host cannot inject arbitrary CSS values.
+function sanitizeBannerColor(color) {
+    return /^#[0-9a-fA-F]{6}$/.test(color) ? color : "";
+}
+
+function applyBanner(data) {
+    let allBanners = data.banners;
+    if (!allBanners || !("global" in allBanners)) {
+        return;
+    }
+    let banners = allBanners.global;
+    if (banners.length === 0) {
+        return;
+    }
+    let banner = banners[0];
+    let container = document.getElementById("banner");
+    if (!container) {
+        return;
+    }
+
+    // Apply colors only when they pass strict #RRGGBB validation.
+    let backgroundColor = sanitizeBannerColor(banner.backgroundColor);
+    let textColor = sanitizeBannerColor(banner.textColor);
+    if (backgroundColor) {
+        container.style.backgroundColor = backgroundColor;
+    }
+    if (textColor) {
+        container.style.color = textColor;
+    }
+
+    // Use textContent (not innerHTML) so the third-party message is rendered
+    // as plain text and cannot inject markup or event handlers.
+    container.textContent = "";
+    let paragraph = document.createElement("p");
+    paragraph.textContent = banner.message == null ? "" : String(banner.message);
+    container.appendChild(paragraph);
+    container.style.display = "block";
+}
+
 function renderBanner() {
-    if (document.URL.indexOf('https://collections.library') !== -1) {
-        fetch("https://banner.library.yale.edu/banner.json")
-            .then(response => response.json())
-            .then(data => {
-                let allBanners = data.banners;
-                if ("global" in allBanners) {
-                    let banners = allBanners.global;
-                    if (banners.length > 0) {
-                        let banner = banners[0];
-                        let container = document.getElementById("banner");
-                        // Code to apply text and background color directly
-                        container.style.backgroundColor = banner.backgroundColor;
-                        container.style.color = banner.textColor;
-                        container.innerHTML = "<p>" + banner.message + "</p>";
-                        container.style.display = "block";
-                    }
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                $("#banner").remove();
-            });
-    } else {
+    let bannerUrl = document.URL.indexOf('https://collections.library') !== -1
+        ? "https://banner.library.yale.edu/banner.json"
         // Use test banner for all non prod environments
-        fetch("https://banner.library.yale.edu/test/banner.json")
+        : "https://banner.library.yale.edu/test/banner.json";
+
+    fetch(bannerUrl)
         .then(response => response.json())
-        .then(data => {
-            let allBanners = data.banners;
-            if ("global" in allBanners) {
-                let banners = allBanners.global;
-                if (banners.length > 0) {
-                    let banner = banners[0];
-                    let container = document.getElementById("banner");
-                    // Code to apply text and background color directly
-                    container.style.backgroundColor = banner.backgroundColor;
-                    container.style.color = banner.textColor;
-                    container.innerHTML = "<p>" + banner.message + "</p>";
-                    container.style.display = "block";
-                }
-            }
-        })
+        .then(applyBanner)
         .catch(error => {
             console.error('Error:', error);
             $("#banner").remove();
         });
-    }
 }
