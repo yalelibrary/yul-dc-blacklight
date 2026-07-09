@@ -26,25 +26,23 @@ class User < ApplicationRecord
     uid
   end
 
-  # Devise 5.0.4's serialize_from_session(key, salt) has a fixed 2-arg arity, but
-  # Warden calls it as serialize_from_session(*stored_key). Cookies written by older
-  # Devise/Rails versions can store a 1- or 3-element key, which raises ArgumentError
-  # on read and 500s the request. Accept any arity, extract the id defensively, and
-  # treat anything unreadable as "no session" so a stale cookie logs the user out
-  # instead of crashing. See: https://github.com/heartcombo/devise/issues/5752
-  def self.serialize_from_session(*args)
-    key = args.first
-    record_id =
-      case key
-      when Hash  then key["id"] || key[:id]
-      when Array then Array(key).flatten.first
-      else key
-      end
-    return nil if record_id.blank?
-
-    find_by(id: record_id)
-  rescue StandardError => e
-    Rails.logger.warn("serialize_from_session: discarding unreadable session (#{e.class}: #{e.message})")
-    nil
+  # Override serialize_from_session to fix Rails 8/Devise 4.9.4 compatibility
+  # See: https://github.com/heartcombo/devise/issues/5752
+  def self.serialize_from_session(key, _salt = nil)
+    # Handle both old format [id, salt] and new format (full record hash)
+    if key.is_a?(Hash)
+      # New format: full record hash from Rails 8
+      record_id = key["id"] || key[:id]
+      return nil unless record_id
+      find_by(id: record_id)
+    elsif key.is_a?(Array) && key.length >= 1
+      # Old format: [id] or [id, salt]
+      record_id = key.first
+      return nil unless record_id
+      find_by(id: record_id)
+    else
+      # Single ID value
+      find_by(id: key)
+    end
   end
 end
