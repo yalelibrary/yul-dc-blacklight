@@ -88,7 +88,7 @@ RSpec.describe 'Banner', type: :system, js: true, clean: true do
 
     it 'keeps the text but drops the unsafe href so nothing can execute' do
       expect(state['xss']).to be_nil
-      expect(state['linkHref']).to be_nil        # javascript: href rejected
+      expect(state['linkHref']).to be_nil # javascript: href rejected
       expect(state['linkText']).to eq('click')
     end
   end
