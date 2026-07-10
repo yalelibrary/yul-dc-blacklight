@@ -68,6 +68,7 @@ class PermissionRequestsController < ApplicationController
                       })
     req.add_field('Authorization', "Bearer #{ENV['OWP_AUTH_TOKEN']}")
     con = Net::HTTP.new(url.host, url.port)
+    con.use_ssl = (url.scheme == 'https')
     http_response = con.start { |http| http.request(req) }
     handle_request_response(http_response.code.to_i, http_response.body)
   end
@@ -89,6 +90,7 @@ class PermissionRequestsController < ApplicationController
                       })
     req.add_field('Authorization', "Bearer #{ENV['OWP_AUTH_TOKEN']}")
     con = Net::HTTP.new(url.host, url.port)
+    con.use_ssl = (url.scheme == 'https')
     http_response = con.start { |http| http.request(req) }
     handle_agreement_request_response(http_response.code.to_i, http_response.body)
   end
