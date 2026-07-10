@@ -217,6 +217,54 @@ function sanitizeBannerColor(color) {
     return /^#[0-9a-fA-F]{6}$/.test(color) ? color : "";
 }
 
+function isSafeBannerHref(href) {
+    return /^(https?:|mailto:)/i.test((href || "").trim());
+}
+
+var BANNER_ALLOWED_TAGS = { A: true };
+
+var BANNER_DROP_TAGS = { SCRIPT: true, STYLE: true, TEMPLATE: true, NOSCRIPT: true, IFRAME: true, OBJECT: true, EMBED: true };
+
+function sanitizeBannerNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+        return document.createTextNode(node.textContent);
+    }
+    if (node.nodeType !== Node.ELEMENT_NODE) {
+        return document.createTextNode("");
+    }
+    if (BANNER_DROP_TAGS[node.tagName]) {
+        return document.createDocumentFragment();
+    }
+
+    var target;
+    if (BANNER_ALLOWED_TAGS[node.tagName]) {
+        target = document.createElement(node.tagName.toLowerCase());
+        if (node.tagName === "A") {
+            var href = (node.getAttribute("href") || "").trim();
+            if (isSafeBannerHref(href)) {
+                target.setAttribute("href", href);
+                target.setAttribute("rel", "noopener noreferrer");
+            }
+        }
+    } else {
+        target = document.createDocumentFragment();
+    }
+
+    node.childNodes.forEach(function(child) {
+        target.appendChild(sanitizeBannerNode(child));
+    });
+    return target;
+}
+
+function sanitizeBannerMessage(message) {
+    var fragment = document.createDocumentFragment();
+    var doc = new DOMParser().parseFromString(String(message == null ? "" : message), "text/html");
+    doc.body.childNodes.forEach(function(node) {
+        fragment.appendChild(sanitizeBannerNode(node));
+    });
+    return fragment;
+}
+
 function applyBanner(data) {
     let allBanners = data.banners;
     if (!allBanners || !("global" in allBanners)) {
@@ -242,11 +290,9 @@ function applyBanner(data) {
         container.style.color = textColor;
     }
 
-    // Use textContent (not innerHTML) so the third-party message is rendered
-    // as plain text and cannot inject markup or event handlers.
     container.textContent = "";
     let paragraph = document.createElement("p");
-    paragraph.textContent = banner.message == null ? "" : String(banner.message);
+    paragraph.appendChild(sanitizeBannerMessage(banner.message));
     container.appendChild(paragraph);
     container.style.display = "block";
 }

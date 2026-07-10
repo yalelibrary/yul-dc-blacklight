@@ -18,6 +18,7 @@ RSpec.describe 'Banner', type: :system, js: true, clean: true do
         #{applies}
         el = document.getElementById('banner');
         var p = el && el.querySelector('p');
+        var a = el && el.querySelector('a');
         return {
           paraCount: el ? el.querySelectorAll('p').length : 0,
           text: p ? p.textContent : null,
@@ -25,6 +26,10 @@ RSpec.describe 'Banner', type: :system, js: true, clean: true do
           color: el ? el.style.color : null,
           display: el ? el.style.display : null,
           imgCount: el ? el.querySelectorAll('img').length : 0,
+          boldCount: el ? el.querySelectorAll('b').length : 0,
+          linkCount: el ? el.querySelectorAll('a').length : 0,
+          linkHref: a ? a.getAttribute('href') : null,
+          linkText: a ? a.textContent : null,
           xss: (typeof window.__xss === 'undefined') ? null : window.__xss
         };
       })();
@@ -50,15 +55,54 @@ RSpec.describe 'Banner', type: :system, js: true, clean: true do
     end
   end
 
-  context 'when the message contains HTML (supply-chain / XSS attempt)' do
+  context 'when the message contains dangerous HTML (supply-chain / XSS attempt)' do
     let(:state) do
       banner_state(banners: { global: [{ message: '<img src=x onerror="window.__xss=true">hello' }] })
     end
 
-    it 'renders the markup as inert text instead of executing it' do
+    it 'strips the dangerous element and never executes it, keeping safe text' do
       expect(state['imgCount']).to eq(0)
       expect(state['xss']).to be_nil
-      expect(state['text']).to eq('<img src=x onerror="window.__xss=true">hello')
+      # The disallowed <img> is dropped; its surrounding text survives.
+      expect(state['text']).to eq('hello')
+    end
+  end
+
+  context 'when the message contains a safe link' do
+    let(:state) do
+      banner_state(banners: { global: [{ message: 'See <a href="https://library.yale.edu/news">the news</a>' }] })
+    end
+
+    it 'preserves the link as a real, clickable anchor' do
+      expect(state['linkCount']).to eq(1)
+      expect(state['linkHref']).to eq('https://library.yale.edu/news')
+      expect(state['linkText']).to eq('the news')
+      expect(state['text']).to eq('See the news')
+    end
+  end
+
+  context 'when a link uses a dangerous URL scheme' do
+    let(:state) do
+      banner_state(banners: { global: [{ message: '<a href="javascript:window.__xss=true">click</a>' }] })
+    end
+
+    it 'keeps the text but drops the unsafe href so nothing can execute' do
+      expect(state['xss']).to be_nil
+      expect(state['linkHref']).to be_nil        # javascript: href rejected
+      expect(state['linkText']).to eq('click')
+    end
+  end
+
+  context 'when the message uses non-link tags' do
+    let(:state) do
+      banner_state(banners: { global: [{ message: '<script>window.__xss=true</script>hi <b>there</b>' }] })
+    end
+
+    it 'drops dangerous tags and flattens other formatting to text (only links are kept)' do
+      expect(state['xss']).to be_nil
+      expect(state['text']).to eq('hi there')
+      # Only <a> is allowlisted, so <b> is unwrapped to plain text.
+      expect(state['boldCount']).to eq(0)
     end
   end
 
