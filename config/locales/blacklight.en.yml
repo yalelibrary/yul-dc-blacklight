@@ -35,6 +35,7 @@ en:
     back_to_search: 'Back to Search Results'
     permission_requests:
       bookmark_button: 'BACK TO BOOKMARKS'
+      item_removed: 'This item has been removed from the index'
       need_login: 'Please log in to view your requests'
       no_requests: 'No requests found'
       title: 'Access Requests'
