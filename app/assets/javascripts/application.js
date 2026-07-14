@@ -211,51 +211,103 @@ $(document).on('turbolinks:load', function() {
     renderBanner();
 });
 
-function renderBanner() {
-    if (document.URL.indexOf('https://collections.library') !== -1) {
-        fetch("https://banner.library.yale.edu/banner.json")
-            .then(response => response.json())
-            .then(data => {
-                let allBanners = data.banners;
-                if ("global" in allBanners) {
-                    let banners = allBanners.global;
-                    if (banners.length > 0) {
-                        let banner = banners[0];
-                        let container = document.getElementById("banner");
-                        // Code to apply text and background color directly
-                        container.style.backgroundColor = banner.backgroundColor;
-                        container.style.color = banner.textColor;
-                        container.innerHTML = "<p>" + banner.message + "</p>";
-                        container.style.display = "block";
-                    }
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                $("#banner").remove();
-            });
-    } else {
-        // Use test banner for all non prod environments
-        fetch("https://banner.library.yale.edu/test/banner.json")
-        .then(response => response.json())
-        .then(data => {
-            let allBanners = data.banners;
-            if ("global" in allBanners) {
-                let banners = allBanners.global;
-                if (banners.length > 0) {
-                    let banner = banners[0];
-                    let container = document.getElementById("banner");
-                    // Code to apply text and background color directly
-                    container.style.backgroundColor = banner.backgroundColor;
-                    container.style.color = banner.textColor;
-                    container.innerHTML = "<p>" + banner.message + "</p>";
-                    container.style.display = "block";
-                }
+// Only accept a strict #RRGGBB hex color; reject anything else so a
+// compromised banner host cannot inject arbitrary CSS values.
+function sanitizeBannerColor(color) {
+    return /^#[0-9a-fA-F]{6}$/.test(color) ? color : "";
+}
+
+function isSafeBannerHref(href) {
+    return /^(https?:|mailto:)/i.test((href || "").trim());
+}
+
+var BANNER_ALLOWED_TAGS = { A: true };
+
+var BANNER_DROP_TAGS = { SCRIPT: true, STYLE: true, TEMPLATE: true, NOSCRIPT: true, IFRAME: true, OBJECT: true, EMBED: true };
+
+function sanitizeBannerNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+        return document.createTextNode(node.textContent);
+    }
+    if (node.nodeType !== Node.ELEMENT_NODE) {
+        return document.createTextNode("");
+    }
+    if (BANNER_DROP_TAGS[node.tagName]) {
+        return document.createDocumentFragment();
+    }
+
+    var target;
+    if (BANNER_ALLOWED_TAGS[node.tagName]) {
+        target = document.createElement(node.tagName.toLowerCase());
+        if (node.tagName === "A") {
+            var href = (node.getAttribute("href") || "").trim();
+            if (isSafeBannerHref(href)) {
+                target.setAttribute("href", href);
+                target.setAttribute("rel", "noopener noreferrer");
             }
-        })
+        }
+    } else {
+        target = document.createDocumentFragment();
+    }
+
+    node.childNodes.forEach(function(child) {
+        target.appendChild(sanitizeBannerNode(child));
+    });
+    return target;
+}
+
+function sanitizeBannerMessage(message) {
+    var fragment = document.createDocumentFragment();
+    var doc = new DOMParser().parseFromString(String(message == null ? "" : message), "text/html");
+    doc.body.childNodes.forEach(function(node) {
+        fragment.appendChild(sanitizeBannerNode(node));
+    });
+    return fragment;
+}
+
+function applyBanner(data) {
+    let allBanners = data.banners;
+    if (!allBanners || !("global" in allBanners)) {
+        return;
+    }
+    let banners = allBanners.global;
+    if (banners.length === 0) {
+        return;
+    }
+    let banner = banners[0];
+    let container = document.getElementById("banner");
+    if (!container) {
+        return;
+    }
+
+    // Apply colors only when they pass strict #RRGGBB validation.
+    let backgroundColor = sanitizeBannerColor(banner.backgroundColor);
+    let textColor = sanitizeBannerColor(banner.textColor);
+    if (backgroundColor) {
+        container.style.backgroundColor = backgroundColor;
+    }
+    if (textColor) {
+        container.style.color = textColor;
+    }
+
+    container.textContent = "";
+    let paragraph = document.createElement("p");
+    paragraph.appendChild(sanitizeBannerMessage(banner.message));
+    container.appendChild(paragraph);
+    container.style.display = "block";
+}
+
+function renderBanner() {
+    let bannerUrl = document.URL.indexOf('https://collections.library') !== -1
+        ? "https://banner.library.yale.edu/banner.json"
+        // Use test banner for all non prod environments
+        : "https://banner.library.yale.edu/test/banner.json";
+
+    fetch(bannerUrl)
+        .then(response => response.json())
+        .then(applyBanner)
         .catch(error => {
             console.error('Error:', error);
             $("#banner").remove();
         });
-    }
 }
