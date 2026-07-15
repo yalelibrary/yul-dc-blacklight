@@ -79,7 +79,7 @@
                 "panelAnimationDuration": 250,
                 "panelCollapsedWidth": 30,
                 "panelExpandedWidth": 255,
-                "panelOpen": true,
+                "panelOpen": false,
                 "tabOrder": "",
                 "thumbsCacheInvalidation": {
                     "enabled": true,
