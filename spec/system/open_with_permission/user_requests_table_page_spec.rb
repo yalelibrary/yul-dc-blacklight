@@ -272,6 +272,61 @@ RSpec.describe "Open with Permission", type: :system do
     end
   end
 
+  context 'with requests that reference missing or malformed data' do
+    let(:edge_case_user) do
+      FactoryBot.create(:user, netid: "edge_net", sub: "7bd425ee-1093-40cd-ba0c-5a2355e37d70", uid: 'edge_user', email: 'edge@example.com')
+    end
+
+    before do
+      # oid 9999999 is intentionally NOT added to Solr (removed item);
+      # oid 1718909 is indexed but has a null request_date (malformed date).
+      stub_request(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d70')
+        .to_return(status: 200, body: '{
+          "timestamp":"2023-11-02",
+          "user":{"sub":"7bd425ee-1093-40cd-ba0c-5a2355e37d70"},
+          "permission_set_terms_agreed":[1],
+          "permissions":[
+            {
+              "oid":1618909,
+              "request_status":"Approved",
+              "request_date":"2023-11-02T20:23:18.824Z",
+              "access_until":"2034-11-02T20:23:18.824Z"
+            },
+            {
+              "oid":9999999,
+              "request_status":"Pending",
+              "request_date":"2025-11-02T20:23:18.824Z",
+              "access_until":null
+            },
+            {
+              "oid":1718909,
+              "request_status":"Pending",
+              "request_date":null,
+              "access_until":null
+            }
+          ]}',
+                   headers: valid_header)
+      login_as edge_case_user
+      visit '/permission_requests'
+    end
+
+    it 'renders a placeholder row instead of 404ing when a request references an item no longer in the index' do
+      expect(page).to have_http_status(:success)
+      # a still-indexed request renders normally
+      expect(page).to have_link 'Map of China', href: '/catalog/1618909'
+      # the removed item shows placeholder text and no catalog link
+      expect(page).to have_content 'This item has been removed from the index'
+      expect(page).to have_no_link(href: '/catalog/9999999')
+    end
+
+    it 'shows N/A for a missing request date instead of raising an error' do
+      expect(page).to have_http_status(:success)
+      # the row for the item with a null request_date still renders
+      expect(page).to have_link 'Map of India', href: '/catalog/1718909'
+      expect(page).to have_content 'N/A'
+    end
+  end
+
   context 'as a NOT authenticated user on the requests page' do
     it 'will redirect to homepage' do
       visit '/permission_requests'

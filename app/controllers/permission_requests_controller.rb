@@ -22,17 +22,30 @@ class PermissionRequestsController < ApplicationController
       # retrive permission requests for user
       user_owp_permissions['permissions']&.each do |permission|
         oid = permission['oid']
-        request_date = DateTime.parse(permission['request_date']).strftime("%m/%d/%y")
+        request_date = format_date(permission['request_date'])
         request_status = permission['request_status']
         access_until = create_readable_access_until(permission)
         # oid, status, date requested, access until
-        document = search_service.fetch(oid)
-        request_details = {
-          document: document.first[:response][:docs].first,
-          status: request_status,
-          request_date: request_date,
-          access_until: access_until
-        }
+        begin
+          document = search_service.fetch(oid)
+          request_details = {
+            document: document.first[:response][:docs].first,
+            status: request_status,
+            request_date: request_date,
+            access_until: access_until
+          }
+        rescue Blacklight::Exceptions::RecordNotFound
+          # Request points at an oid no longer in the index. Keep the row with a
+          # nil document; the view renders placeholder text for a nil document
+          # rather than the whole page 404ing (ApplicationController rescues this).
+          Rails.logger.warn("OwP request references oid #{oid.inspect} not found in index; showing placeholder row")
+          request_details = {
+            document: nil,
+            status: request_status,
+            request_date: request_date,
+            access_until: access_until
+          }
+        end
         @table_data << request_details
       end
       @table_data
@@ -41,8 +54,16 @@ class PermissionRequestsController < ApplicationController
 
   def create_readable_access_until(permission_request)
     readable_access_until = 'N/A'
-    readable_access_until = DateTime.parse(permission_request['access_until']).strftime("%m/%d/%y") if permission_request['request_status'] == "Approved"
+    readable_access_until = format_date(permission_request['access_until']) if permission_request['request_status'] == "Approved"
     readable_access_until
+  end
+
+  # Parse a date string from the management response for display, tolerating a
+  # nil/blank/malformed value so one bad record can't 500 the whole page.
+  def format_date(value)
+    DateTime.parse(value.to_s).strftime("%m/%d/%y")
+  rescue ArgumentError, TypeError
+    'N/A'
   end
 
   # Blacklight uses #search_action_url to figure out the right URL for
@@ -68,6 +89,7 @@ class PermissionRequestsController < ApplicationController
                       })
     req.add_field('Authorization', "Bearer #{ENV['OWP_AUTH_TOKEN']}")
     con = Net::HTTP.new(url.host, url.port)
+    con.use_ssl = (url.scheme == 'https')
     http_response = con.start { |http| http.request(req) }
     handle_request_response(http_response.code.to_i, http_response.body)
   end
@@ -89,6 +111,7 @@ class PermissionRequestsController < ApplicationController
                       })
     req.add_field('Authorization', "Bearer #{ENV['OWP_AUTH_TOKEN']}")
     con = Net::HTTP.new(url.host, url.port)
+    con.use_ssl = (url.scheme == 'https')
     http_response = con.start { |http| http.request(req) }
     handle_agreement_request_response(http_response.code.to_i, http_response.body)
   end

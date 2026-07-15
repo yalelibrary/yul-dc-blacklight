@@ -67,6 +67,7 @@ class DownloadOriginalController < ApplicationController
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/download/stage/child/#{child_oid}")
     req = Net::HTTP::Get.new(url.path)
     con = Net::HTTP.new(url.host, url.port)
+    con.use_ssl = (url.scheme == 'https')
     con.start { |http| http.request(req) }
   end
 
