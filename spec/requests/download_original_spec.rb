@@ -166,19 +166,19 @@ RSpec.describe "Download Original", type: :request, clean: true do
     end
     it 'does not display if set to YCO' do
       get "/download/tiff/#{yale_work[:child_oids_ssim].first}"
-      expect(response).to have_http_status(:unauthorized) # 401
+      expect(response).to have_http_status(:not_found)
     end
     it 'does not stage the download if set to YCO' do
       get "/download/tiff/#{yale_work[:child_oids_ssim].first}/staged"
-      expect(response).to have_http_status(:unauthorized) # 401
+      expect(response).to have_http_status(:not_found)
     end
     it 'does not display if set to OWP' do
       get "/download/tiff/#{owp_work_without_permission[:child_oids_ssim].first}"
-      expect(response).to have_http_status(:unauthorized) # 401
+      expect(response).to have_http_status(:not_found)
     end
     it 'does not stage the download if set to OWP' do
       get "/download/tiff/#{owp_work_without_permission[:child_oids_ssim].first}/staged"
-      expect(response).to have_http_status(:unauthorized) # 401
+      expect(response).to have_http_status(:not_found)
     end
     it 'does not display if set to private' do
       get "/download/tiff/#{private_work[:child_oids_ssim].first}"
@@ -212,7 +212,7 @@ RSpec.describe "Download Original", type: :request, clean: true do
       end
       it 'does not display if set to OWP without permission' do
         get "/download/tiff/#{owp_work_without_permission[:child_oids_ssim].first}"
-        expect(response).to have_http_status(:unauthorized) # 401
+        expect(response).to have_http_status(:not_found)
       end
       it 'does not display if set to private' do
         get "/download/tiff/#{private_work[:child_oids_ssim].first}"
@@ -227,7 +227,7 @@ RSpec.describe "Download Original", type: :request, clean: true do
       end
       it 'does not stage tiff for download when user does not have viewing access' do
         get "/download/tiff/#{not_available_yet_owp[:child_oids_ssim].first}"
-        expect(response).to have_http_status(:unauthorized) # 401
+        expect(response).to have_http_status(:not_found)
       end
     end
     context 'when child object does not exist' do
@@ -235,6 +235,25 @@ RSpec.describe "Download Original", type: :request, clean: true do
         get '/download/tiff/89'
         expect(response).to have_http_status(:not_found) # 404
       end
+    end
+  end
+
+  context 'with a HEAD request' do
+    it 'answers 200 without pulling the object body from S3' do
+      head "/download/tiff/#{public_work[:child_oids_ssim].first}"
+      expect(response).to have_http_status(:ok) # 200
+      expect(a_request(:get, 'https://yul-test-samples.s3.amazonaws.com/download/tiff/55/55/55/55/5555555.tif'))
+        .not_to have_been_made
+    end
+    it 'answers 404 without staging when the tiff is not yet on S3' do
+      head "/download/tiff/#{not_available_yet[:child_oids_ssim].first}"
+      expect(response).to have_http_status(:not_found) # 404
+      expect(a_request(:get, 'http://www.example.com/management/api/download/stage/child/3333333'))
+        .not_to have_been_made
+    end
+    it 'does not reveal restricted items (same 404 as not-found)' do
+      head "/download/tiff/#{yale_work[:child_oids_ssim].first}"
+      expect(response).to have_http_status(:not_found) # 404
     end
   end
 
@@ -250,7 +269,7 @@ RSpec.describe "Download Original", type: :request, clean: true do
       end
       it 'does not display if set to YCO' do
         get "/download/tiff/#{yale_work[:child_oids_ssim].first}"
-        expect(response).to have_http_status(:unauthorized) # 401
+        expect(response).to have_http_status(:not_found)
       end
       it 'display if set to OWP with permission' do
         get "/download/tiff/#{owp_work_with_permission[:child_oids_ssim].first}"
@@ -259,7 +278,7 @@ RSpec.describe "Download Original", type: :request, clean: true do
       end
       it 'does not display if set to OWP without permission' do
         get "/download/tiff/#{owp_work_without_permission[:child_oids_ssim].first}"
-        expect(response).to have_http_status(:unauthorized) # 401
+        expect(response).to have_http_status(:not_found)
       end
       it 'does not display if set to private' do
         get "/download/tiff/#{private_work[:child_oids_ssim].first}"

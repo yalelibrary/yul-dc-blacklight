@@ -9,7 +9,9 @@ class DownloadOriginalController < ApplicationController
   before_action :check_authorization
 
   def tiff
-    if S3Service.exists_in_s3(tiff_pairtree_path)
+    if request.head?
+      head(S3Service.exists_in_s3(tiff_pairtree_path) ? :ok : :not_found)
+    elsif S3Service.exists_in_s3(tiff_pairtree_path)
       send_tiff
     else
       stage_download
@@ -30,6 +32,13 @@ class DownloadOriginalController < ApplicationController
   end
 
   private
+
+  def check_authorization
+    @response, @document = search_for_item
+    return true if @document.present? && client_can_view_digital?(@document)
+    render json: { error: 'not-found' }.to_json, status: :not_found
+    false
+  end
 
   # Blacklight uses #search_action_url to figure out the right URL for
   # the global search box - Override from Blacklight v7.36.2
