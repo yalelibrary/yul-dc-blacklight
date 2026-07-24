@@ -6,7 +6,8 @@
   },
   "resolutions": {
     "form-data": "4.0.6",
-    "brace-expansion": "2.0.3"
+    "brace-expansion": "2.0.3",
+    "filelist/minimatch": "^5.1.8"
   },
   "scripts": {
     "preinstall": "rm -rf ./public/uv",
