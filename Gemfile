@@ -39,7 +39,7 @@ gem 'pg', '~> 1.5.4'
 gem 'puma', '~> 7.2'
 # pinned to before 4 due to https://stackoverflow.com/questions/71191685/visit-psych-nodes-alias-unknown-alias-default-psychbadalias
 gem 'psych', '< 4'
-gem 'rack', '~> 3.0.13'
+gem 'rack', '~> 3.1.21'
 gem 'rails', '~> 7.2.3.1'
 gem "rails_semantic_logger", ">=4.4.4"
 gem 'rsolr', '>= 1.0', '< 3'
