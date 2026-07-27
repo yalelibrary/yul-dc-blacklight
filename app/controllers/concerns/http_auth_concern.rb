@@ -11,7 +11,7 @@ module HttpAuthConcern
     http_username = ENV['HTTP_USERNAME'] || 'admin'
     http_password = ENV['HTTP_PASSWORD'] || 'changeme'
     authenticate_or_request_with_http_basic do |username, password|
-      username == http_username && password == http_password
+      ActiveSupport::SecurityUtils.secure_compare(username, http_username) && ActiveSupport::SecurityUtils.secure_compare(password, http_password)
     end
   end
 end
