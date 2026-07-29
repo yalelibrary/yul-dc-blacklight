@@ -344,6 +344,36 @@ RSpec.describe 'Show Page', type: :system, js: true, clean: true do
     end
   end
 
+  context 'Collections AI link' do
+    let(:ai_authorized_user) { FactoryBot.create(:user, :ai_authorized, sub: "998877665", netid: "ai_netid", uid: "ai_dan") }
+
+    it 'is shown to an AI authorized user on a public object' do
+      login_as ai_authorized_user
+      visit 'catalog/111'
+      expect(page).to have_xpath("//div[@id='collections-ai-link']")
+    end
+
+    it 'is not shown to a signed in user who is not AI authorized' do
+      login_as user
+      visit 'catalog/111'
+      expect(page).to have_content 'Amor Llama'
+      expect(page).not_to have_xpath("//div[@id='collections-ai-link']")
+    end
+
+    it 'is no longer shown after the AI authorized user signs out' do
+      login_as ai_authorized_user
+      visit 'catalog/111'
+      expect(page).to have_xpath("//div[@id='collections-ai-link']")
+
+      find("form[action='/sign_out'] button").click
+      expect(page).to have_button 'Log in'
+
+      visit 'catalog/111'
+      expect(page).to have_content 'Amor Llama'
+      expect(page).not_to have_xpath("//div[@id='collections-ai-link']")
+    end
+  end
+
   context 'direct URL access without search session' do
     before do
       visit 'catalog/111'
