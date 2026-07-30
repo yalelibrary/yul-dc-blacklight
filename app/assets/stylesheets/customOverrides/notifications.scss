@@ -10,6 +10,10 @@ DEFAULT MOBILE STYLING
   text-decoration: none;
 }
 
+#main-flashes .landing-flash-login-link {
+  text-decoration: underline;
+}
+
 #main-flashes a:active, #main-flashes a:focus, #main-flashes a:hover {
   text-decoration: underline;
 }

@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load', function() {
   const hero = document.getElementById('hero');
   if (!hero || !hero.dataset.heroImages) return;
 
