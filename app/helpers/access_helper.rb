@@ -37,6 +37,10 @@ module AccessHelper
     false
   end
 
+  def show_ai_option?
+    current_user&.ai_user? || false
+  end
+
   def pending_request?(document)
     parent_oid = document[:id]
     pending = false

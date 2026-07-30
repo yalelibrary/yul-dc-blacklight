@@ -24,7 +24,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
             email: auth.info.email
           )
       end
-      set_ai_session
     else
       # Login for non-yale users without a net_id
       @user = User.where(provider: auth.provider, uid: auth.uid, sub: sub).first
@@ -39,6 +38,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
 
     if @user
+      sync_ai_access(@user)
       sign_in @user, event: :authentication # this will throw if @user is not activated
       redirect_to request.env['omniauth.origin'] || root_path
       set_flash_message(:notice, :success, kind: "CAS") if is_navigational_format?
@@ -50,11 +50,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   protected
 
-  def set_ai_session
-    # set flag in session for AI-authorized users
-    groups = auth.extra.raw_info['cognito:groups']
-    ai_group = groups.find { |g| 'ai-user' == g || 'org:LibIT:Cognito:collections-ai-users' == g } if groups
-    session[:show_ai_option] = true if ai_group
+  def sync_ai_access(user)
+    return unless user&.persisted?
+    ai_user = User.ai_group_member?(auth.extra.raw_info['cognito:groups'])
+    user.update(ai_user: ai_user) unless user.ai_user == ai_user
   end
 
   def after_omniauth_failure_path_for(_resource)

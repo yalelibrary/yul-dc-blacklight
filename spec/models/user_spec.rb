@@ -27,6 +27,27 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "User class method ai_group_member?" do
+    it "returns false when the cognito:groups claim is missing" do
+      expect(described_class.ai_group_member?(nil)).to be false
+    end
+    it "returns false when the user belongs to no groups" do
+      expect(described_class.ai_group_member?([])).to be false
+    end
+    it "returns false when the user belongs only to unrelated groups" do
+      expect(described_class.ai_group_member?(%w[some-other-group org:LibIT:Cognito:staff])).to be false
+    end
+    it "returns true for the ai-user group" do
+      expect(described_class.ai_group_member?(['ai-user'])).to be true
+    end
+    it "returns true for the collections-ai-users group" do
+      expect(described_class.ai_group_member?(['org:LibIT:Cognito:collections-ai-users'])).to be true
+    end
+    it "returns true when an authorized group is mixed in with unrelated groups" do
+      expect(described_class.ai_group_member?(%w[staff ai-user other])).to be true
+    end
+  end
+
   describe "when YALE_NETWORK_IPS environment variable is not set, User.on_campus?" do
     around do |example|
       original_value = ENV["YALE_NETWORK_IPS"]

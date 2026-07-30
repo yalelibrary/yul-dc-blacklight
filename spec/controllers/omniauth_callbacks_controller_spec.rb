@@ -127,4 +127,83 @@ RSpec.describe OmniauthCallbacksController do
       expect(response.redirect_url).to eq 'http://test.host/'
     end
   end
+
+  describe 'Collections AI access' do
+    def auth_hash(uid:, sub:, groups: nil, yale: true)
+      raw_info = { sub: sub }
+      raw_info[:identities] = [Identities.new] if yale
+      raw_info['cognito:groups'] = groups unless groups.nil?
+      OmniAuth::AuthHash.new(
+        provider: 'openid_connect',
+        uid: uid,
+        info: { email: "#{uid}@yale.edu" },
+        extra: { raw_info: raw_info }
+      )
+    end
+
+    before do
+      request.env[devise_mapping] = Devise.mappings[:user]
+    end
+
+    context 'when a Yale user is in an authorized Cognito group' do
+      before do
+        request.env[omniauth_auth] = auth_hash(uid: 'ai_dan', sub: 'ai_sub_1', groups: ['ai-user'])
+      end
+
+      it 'grants AI access on the user record' do
+        post :openid_connect
+        expect(User.find_by(uid: 'ai_dan').ai_user).to be true
+      end
+    end
+
+    context 'when a Yale user is in no authorized Cognito group' do
+      before do
+        request.env[omniauth_auth] = auth_hash(uid: 'plain_dan', sub: 'ai_sub_2', groups: ['some-other-group'])
+      end
+
+      it 'does not grant AI access' do
+        post :openid_connect
+        expect(User.find_by(uid: 'plain_dan').ai_user).to be false
+      end
+    end
+
+    context 'when the cognito:groups claim is absent' do
+      before do
+        request.env[omniauth_auth] = auth_hash(uid: 'no_groups_dan', sub: 'ai_sub_3')
+      end
+
+      it 'does not grant AI access' do
+        post :openid_connect
+        expect(User.find_by(uid: 'no_groups_dan').ai_user).to be false
+      end
+    end
+
+    context 'when a non-Yale user without a netid is in an authorized Cognito group' do
+      before do
+        request.env[omniauth_auth] = auth_hash(uid: 'ai_stan', sub: 'ai_sub_4',
+                                               groups: ['org:LibIT:Cognito:collections-ai-users'], yale: false)
+      end
+
+      it 'grants AI access on the user record' do
+        post :openid_connect
+        user = User.find_by(uid: 'ai_stan')
+        expect(user.netid).to be_nil
+        expect(user.ai_user).to be true
+      end
+    end
+
+    context 'when an authorized user is no longer in the Cognito group' do
+      before do
+        User.create(provider: 'openid_connect', uid: 'former_ai_dan', sub: 'ai_sub_5',
+                    email: 'former_ai_dan@yale.edu', ai_user: true)
+        request.env[omniauth_auth] = auth_hash(uid: 'former_ai_dan', sub: 'ai_sub_5',
+                                               groups: ['some-other-group'], yale: false)
+      end
+
+      it 'revokes AI access at the next login' do
+        post :openid_connect
+        expect(User.find_by(uid: 'former_ai_dan').ai_user).to be false
+      end
+    end
+  end
 end

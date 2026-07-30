@@ -8,6 +8,12 @@ class User < ApplicationRecord
   devise :timeoutable, :omniauthable, omniauth_providers: [:openid_connect]
   validates :sub, presence: true
 
+  AI_COGNITO_GROUPS = ['ai-user', 'org:LibIT:Cognito:collections-ai-users'].freeze
+
+  def self.ai_group_member?(groups)
+    Array(groups).any? { |g| AI_COGNITO_GROUPS.include?(g) }
+  end
+
   def self.on_campus?(ip_address)
     return false unless Resolv::IPv4::Regex.match?(ip_address)
     on_campus_ip_ranges.any? do |ir|

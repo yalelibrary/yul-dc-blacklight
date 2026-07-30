@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_27_200115) do
+ActiveRecord::Schema[7.2].define(version: 2026_07_29_143000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_27_200115) do
     t.string "uid"
     t.string "netid"
     t.string "sub"
+    t.boolean "ai_user", default: false, null: false
     t.index ["netid"], name: "index_users_on_netid", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["sub"], name: "index_users_on_sub", unique: true
