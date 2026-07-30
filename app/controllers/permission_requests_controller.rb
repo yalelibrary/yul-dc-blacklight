@@ -12,7 +12,7 @@ class PermissionRequestsController < ApplicationController
   def index
     @table_data = []
     if current_user.nil?
-      redirect_to((ENV['BLACKLIGHT_HOST']).to_s, notice: 'Please log in to gain access to this page.')
+      redirect_to((ENV['BLACKLIGHT_HOST']).to_s, flash: { login_required: request.fullpath })
       return false
     end
     if user_owp_permissions.nil?

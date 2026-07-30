@@ -1,4 +1,11 @@
 <div class="landing_flash_messages">
+  <% if flash[:login_required].present? %>
+    <%= render(Blacklight::System::FlashMessageComponent.new(type: :notice)) do |component| %>
+      <% component.with_message do %>
+        Please <%= link_to 'log in', user_openid_connect_omniauth_authorize_path(origin: login_return_path(flash[:login_required])), method: :post, class: 'landing-flash-login-link' %> to gain access to this page.
+      <% end %>
+    <% end %>
+  <% end %>
   <% [:success, :notice, :error, :alert].each do |type| %>
     <%= render(Blacklight::System::FlashMessageComponent.with_collection(Array.wrap(flash[type]), type: type)) if flash[type] %>
   <% end %>

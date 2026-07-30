@@ -42,7 +42,7 @@ module Blacklight::Bookmarks
 
   def index
     if current_user.nil?
-      redirect_to((ENV['BLACKLIGHT_HOST']).to_s, notice: 'Please log in to gain access to this page.')
+      redirect_to((ENV['BLACKLIGHT_HOST']).to_s, flash: { login_required: request.fullpath })
       return false
     end
     @bookmarks = token_or_current_or_guest_user.bookmarks
