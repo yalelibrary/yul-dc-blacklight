@@ -595,15 +595,8 @@ module BlacklightHelper
   # rubocop:enable Layout/DefEndAlignment
 
   def link_to_url(arg)
-    value = arg[:value][0]
-    return nil if value.blank?
-
-    if safe_url?(value)
-      url = value.strip
-      link_to(url, url, rel: "nofollow")
-    else
-      h(value)
-    end
+    url = arg[:value][0].to_s.strip
+    link_to(url, url, rel: "nofollow") if safe_url?(url)
   end
 
   def sanitize_first_value(arg)

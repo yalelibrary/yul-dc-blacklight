@@ -211,7 +211,7 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     let(:document) { SolrDocument.new(id: 'xyz') }
 
     def rendered(value)
-      helper.link_to_url({ document: document, field: 'url_suppl_ssim', value: [value] }).to_s
+      helper.link_to_url({ document: document, field: 'url_suppl_ssim', value: [value] })
     end
 
     context 'with a permitted scheme' do
@@ -232,30 +232,42 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     end
 
     context 'with an unpermitted scheme' do
-      it 'does not build an href for a javascript: value' do
-        expect(rendered('javascript:window.__xss=true')).not_to include('href')
+      it 'renders nothing for a javascript: value' do
+        expect(rendered('javascript:window.__xss=true')).to be_nil
       end
 
-      it 'does not build an href for a mixed case, padded JaVaScRiPt: value' do
-        expect(rendered("  JaVaScRiPt:window.__xss=true  ")).not_to include('href')
+      it 'renders nothing for a mixed case, padded JaVaScRiPt: value' do
+        expect(rendered("  JaVaScRiPt:window.__xss=true  ")).to be_nil
       end
 
-      it 'does not build an href for a data: value' do
-        expect(rendered('data:text/html;base64,PHNjcmlwdD53aW5kb3cuX194c3M9dHJ1ZTwvc2NyaXB0Pg==')).not_to include('href')
+      it 'renders nothing for a data: value' do
+        expect(rendered('data:text/html;base64,PHNjcmlwdD53aW5kb3cuX194c3M9dHJ1ZTwvc2NyaXB0Pg==')).to be_nil
       end
 
-      it 'does not build an href for a scheme relative value' do
-        expect(rendered('//collections.library.yale.edu/catalog/111')).not_to include('href')
-      end
-
-      it 'still shows the value as text so unexpected metadata stays visible' do
-        expect(rendered('javascript:window.__xss=true')).to include('javascript:window.__xss=true')
+      it 'renders nothing for a scheme relative value' do
+        expect(rendered('//collections.library.yale.edu/catalog/111')).to be_nil
       end
     end
 
-    context 'with an unparseable value' do
-      it 'does not raise' do
-        expect { rendered('http://[not a uri') }.not_to raise_error
+    context 'with a value that is not a url' do
+      it 'renders nothing for an unparseable value' do
+        expect(rendered('http://[not a uri')).to be_nil
+      end
+
+      it 'renders nothing for a url containing a space' do
+        expect(rendered('http://exa mple.com/page')).to be_nil
+      end
+
+      it 'renders nothing for plain text' do
+        expect(rendered('not a url at all')).to be_nil
+      end
+
+      it 'renders nothing for a blank value' do
+        expect(rendered('')).to be_nil
+      end
+
+      it 'renders nothing for a missing value' do
+        expect(rendered(nil)).to be_nil
       end
     end
   end
