@@ -131,6 +131,133 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
         # rubocop:enable Layout/LineLength
       end
     end
+
+    context 'with a value using an unpermitted scheme' do
+      let(:document) { SolrDocument.new(id: 'xyz') }
+      let(:args) do
+        {
+          document: document,
+          field: 'relatedResourceOnline_ssim',
+          value: ['View Related Resource|javascript:window.__xss=true']
+        }
+      end
+
+      it 'does not build a link out of the value' do
+        expect(helper.link_to_url_with_label(args).to_s).not_to include('javascript:')
+      end
+    end
+
+    context 'with a scheme that only begins with the letters http' do
+      let(:document) { SolrDocument.new(id: 'xyz') }
+      let(:args) do
+        {
+          document: document,
+          field: 'relatedResourceOnline_ssim',
+          value: ['View Related Resource|httpx://collections.library.yale.edu/catalog/111']
+        }
+      end
+
+      it 'does not treat httpx:// as a web link' do
+        expect(helper.link_to_url_with_label(args).to_s).not_to include('httpx:')
+      end
+    end
+
+    context 'with a filtered url alongside an unfiltered one' do
+      let(:document) { SolrDocument.new(id: 'xyz') }
+      let(:filters) { ['brbl-archive.library.yale.edu'] }
+      let(:filtered) { 'Archive copy|http://brbl-archive.library.yale.edu/item/1' }
+      let(:kept) { 'Publisher copy|https://www.loc.gov/item/2021667925' }
+
+      it 'keeps the unfiltered link when the filtered url comes first' do
+        args = { document: document, field: 'resourceVersionOnline_ssim', value: [filtered, kept] }
+        rendered = helper.link_to_url_with_label(args, filters).to_s
+        expect(rendered).to include('https://www.loc.gov/item/2021667925')
+        expect(rendered).not_to include('brbl-archive.library.yale.edu')
+      end
+
+      it 'keeps the unfiltered link when the filtered url comes second' do
+        args = { document: document, field: 'resourceVersionOnline_ssim', value: [kept, filtered] }
+        rendered = helper.link_to_url_with_label(args, filters).to_s
+        expect(rendered).to include('https://www.loc.gov/item/2021667925')
+        expect(rendered).not_to include('brbl-archive.library.yale.edu')
+      end
+
+      it 'drops the field entirely when every url is filtered' do
+        args = { document: document, field: 'resourceVersionOnline_ssim', value: [filtered] }
+        expect(helper.link_to_url_with_label(args, filters)).to be_nil
+      end
+    end
+
+    context 'with the ils filter list applied' do
+      let(:document) { SolrDocument.new(id: 'xyz') }
+      let(:args) do
+        {
+          document: document,
+          field: 'resourceVersionOnline_ssim',
+          value: ['Digital copy|https://collections.library.yale.edu/catalog/111',
+                  'Publisher copy|https://www.loc.gov/item/2021667925']
+        }
+      end
+
+      it 'keeps the non ils link' do
+        rendered = helper.link_to_url_with_label_and_filter(args).to_s
+        expect(rendered).to include('https://www.loc.gov/item/2021667925')
+        expect(rendered).not_to include('collections.library.yale.edu')
+      end
+    end
+  end
+
+  describe '#link_to_url' do
+    let(:document) { SolrDocument.new(id: 'xyz') }
+
+    def rendered(value)
+      helper.link_to_url({ document: document, field: 'url_suppl_ssim', value: [value] }).to_s
+    end
+
+    context 'with a permitted scheme' do
+      let(:advanced_search_url) { 'https://collections.library.yale.edu/advanced?q=bulldog&search_field=all_fields' }
+      let(:catalog_url) { 'http://collections.library.yale.edu/catalog/111' }
+
+      it 'links an https url using the url as both text and href' do
+        # rubocop:disable Layout/LineLength
+        expect(rendered(advanced_search_url)).to eq "<a rel=\"nofollow\" href=\"https://collections.library.yale.edu/advanced?q=bulldog&amp;search_field=all_fields\">https://collections.library.yale.edu/advanced?q=bulldog&amp;search_field=all_fields</a>"
+        # rubocop:enable Layout/LineLength
+      end
+
+      it 'links an http url' do
+        # rubocop:disable Layout/LineLength
+        expect(rendered(catalog_url)).to eq "<a rel=\"nofollow\" href=\"http://collections.library.yale.edu/catalog/111\">http://collections.library.yale.edu/catalog/111</a>"
+        # rubocop:enable Layout/LineLength
+      end
+    end
+
+    context 'with an unpermitted scheme' do
+      it 'does not build an href for a javascript: value' do
+        expect(rendered('javascript:window.__xss=true')).not_to include('href')
+      end
+
+      it 'does not build an href for a mixed case, padded JaVaScRiPt: value' do
+        expect(rendered("  JaVaScRiPt:window.__xss=true  ")).not_to include('href')
+      end
+
+      it 'does not build an href for a data: value' do
+        expect(rendered('data:text/html;base64,PHNjcmlwdD53aW5kb3cuX194c3M9dHJ1ZTwvc2NyaXB0Pg==')).not_to include('href')
+      end
+
+      it 'does not build an href for a scheme relative value' do
+        expect(rendered('//collections.library.yale.edu/catalog/111')).not_to include('href')
+      end
+
+      it 'still shows the value as text so unexpected metadata stays visible' do
+        expect(rendered('javascript:window.__xss=true')).to include('javascript:window.__xss=true')
+      end
+    end
+
+    context 'with an unparseable value' do
+      it 'does not raise' do
+        expect { rendered('http://[not a uri') }.not_to raise_error
+      end
+    end
   end
 
   describe '#render_thumbnail' do
