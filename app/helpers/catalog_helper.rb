@@ -25,12 +25,13 @@ module CatalogHelper
   # rubocop:enable Metrics/PerceivedComplexity
 
   def change_iiif_image_size(url, new_size)
-    return nil unless url
-    url = URI.parse(url) # e.g. https://collections-test.library.yale.edu/iiif/2/17120080/full/!200,200/0/default.jpg
-    path_components = url.path.split("/")
+    return nil if SafeUrl.permitted?(url) == false
+
+    uri = URI.parse(url) # e.g. https://collections-test.library.yale.edu/iiif/2/17120080/full/!200,200/0/default.jpg
+    path_components = uri.path.split("/")
     path_components[5] = new_size
-    url.path = path_components.join("/")
-    url.to_s
+    uri.path = path_components.join("/")
+    uri.to_s
   end
 
   # Extract fulltext param from search

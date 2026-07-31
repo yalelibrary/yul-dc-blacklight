@@ -34,7 +34,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
     {
       id: '444',
       visibility_ssi: 'Public',
-      findingAid_ssim: 'this is the finding aid',
+      findingAid_ssim: 'http://hdl.handle.net/10079/fa/beinecke.lincoln',
       resourceVersionOnline_ssim: ["this is the online resource that does not display|http://brbl-archive.library.yale.edu"]
     }
   end
@@ -82,7 +82,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       orbisBibId_ssi: '12345677',
       quicksearchId_ssi: 'b12345677',
       mmsId_ssi: '777777777777',
-      findingAid_ssim: 'this is the finding aid',
+      findingAid_ssim: 'http://hdl.handle.net/10079/fa/beinecke.lincoln',
       collection_title_ssi: 'this is the collection title',
       edition_ssim: 'this is the edition',
       material_tesim: "this is the material, using ssim",
@@ -140,7 +140,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       orbisBibId_ssi: '1234567',
       quicksearchId_ssi: 'b1234567',
       archiveSpaceUri_ssi: "/repositories/11/archival_objects/214638",
-      findingAid_ssim: 'this is the finding aid',
+      findingAid_ssim: 'http://hdl.handle.net/10079/fa/beinecke.lincoln',
       collection_title_ssi: 'this is the collection title',
       edition_ssim: 'this is the edition',
       material_tesim: "this is the material, using ssim",
@@ -203,7 +203,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
       containerGrouping_tesim: 'this is the container information',
       orbisBibId_ssi: '12345675',
       quicksearchId_ssi: 'b12345675',
-      findingAid_ssim: 'this is the finding aid',
+      findingAid_ssim: 'http://hdl.handle.net/10079/fa/beinecke.lincoln',
       collection_title_ssi: 'this is the collection title',
       edition_ssim: 'this is the edition',
       material_tesim: "this is the material, using ssim",
@@ -565,7 +565,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
 
     it 'contains a link to Finding Aid' do
       visit '/catalog/111'
-      finding_aid_link = page.find("a[href = 'this is the finding aid']")
+      finding_aid_link = page.find("a[href = 'http://hdl.handle.net/10079/fa/beinecke.lincoln']")
 
       expect(finding_aid_link).to be_truthy
       expect(finding_aid_link).to have_content "View full finding aid for this is the collection title"
@@ -599,7 +599,7 @@ RSpec.feature "View Search Results", type: :system, clean: true, js: false do
   context 'when record has no collection title' do
     it 'the finding aid contains fallback text in the link' do
       visit '/catalog/444'
-      finding_aid_link = page.find("a[href = 'this is the finding aid']")
+      finding_aid_link = page.find("a[href = 'http://hdl.handle.net/10079/fa/beinecke.lincoln']")
 
       expect(finding_aid_link).to be_truthy
       expect(finding_aid_link).to have_content "View full finding aid for this collection"

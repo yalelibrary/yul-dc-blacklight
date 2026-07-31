@@ -506,16 +506,13 @@ module BlacklightHelper
   end
 
   def finding_aid_link(arg)
-    # rubocop:disable Naming/VariableName
-    findingAidUri = arg[:document][arg[:field]]
-    links = []
-    findingAidUri.each do |link|
+    links = Array(arg[:document][arg[:field]]).select { |link| safe_url?(link) }.map do |link|
       popup_window = image_tag("YULPopUpWindow.png", { id: 'popup_window', alt: 'pop up window' })
-      links << link_to(safe_join(['View full finding aid for ',
-                                  arg[:document]['collection_title_ssi'].presence || arg[:document]['sourceTitle_tesim'].presence || 'this collection']) + popup_window,
-                                  link,
-                                  target: '_blank',
-                                  rel: 'noopener')
+      link_to(safe_join(['View full finding aid for ',
+                         arg[:document]['collection_title_ssi'].presence || arg[:document]['sourceTitle_tesim'].presence || 'this collection']) + popup_window,
+                         link,
+                         target: '_blank',
+                         rel: 'noopener')
     end
     links.first
   end

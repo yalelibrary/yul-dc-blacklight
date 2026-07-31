@@ -272,6 +272,43 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     end
   end
 
+  describe '#finding_aid_link' do
+    let(:finding_aid_url) { 'http://hdl.handle.net/10079/fa/beinecke.lincoln' }
+
+    def rendered(values)
+      document = SolrDocument.new(id: 'xyz', findingAid_ssim: values, collection_title_ssi: 'A Collection')
+      helper.finding_aid_link({ document: document, field: 'findingAid_ssim' })
+    end
+
+    it 'links a permitted url' do
+      expect(rendered([finding_aid_url])).to include("href=\"#{finding_aid_url}\"")
+    end
+
+    it 'keeps the label and the popup image for a permitted url' do
+      expect(rendered([finding_aid_url])).to include('View full finding aid for A Collection', 'YULPopUpWindow')
+    end
+
+    it 'renders nothing for a javascript: value' do
+      expect(rendered(['javascript:window.__xss=true'])).to be_nil
+    end
+
+    it 'renders nothing for a scheme relative value' do
+      expect(rendered(['//collections.library.yale.edu/fa/1'])).to be_nil
+    end
+
+    it 'renders nothing for a value that is not a url' do
+      expect(rendered(['this is the finding aid'])).to be_nil
+    end
+
+    it 'renders nothing for an unparseable value' do
+      expect(rendered(['http://[not a uri'])).to be_nil
+    end
+
+    it 'skips an unpermitted value and links the next permitted one' do
+      expect(rendered(['javascript:window.__xss=true', finding_aid_url])).to include("href=\"#{finding_aid_url}\"")
+    end
+  end
+
   describe '#render_thumbnail' do
     context 'with a sensitive materials record' do
       let(:sensitive_materials_document) do

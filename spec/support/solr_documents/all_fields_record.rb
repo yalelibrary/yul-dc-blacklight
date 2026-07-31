@@ -44,7 +44,7 @@ WORK_WITH_ALL_FIELDS = {
   containerGrouping_tesim: 'this is the container information',
   callNumber_ssim: 'this is the call number',
   orbisBibId_ssi: '1234567',
-  findingAid_ssim: 'this is the finding aid',
+  findingAid_ssim: 'http://hdl.handle.net/10079/fa/beinecke.lincoln',
   edition_ssim: 'this is the edition',
   numberOfPages_ssim: "this is the number of pages, using ssim",
   material_tesim: "this is the material, using ssim",
