@@ -24,9 +24,6 @@ module CheckAuthorization
 
   private
 
-  # An anonymous client gets the same response whether the item does not exist or
-  # exists but is restricted, so the status cannot be used to enumerate the
-  # visibility of items.  Only a signed in client who is positively denied gets a 403.
   def render_access_denied
     return render_not_found if current_user.blank?
     render json: { error: 'forbidden' }.to_json, status: :forbidden
