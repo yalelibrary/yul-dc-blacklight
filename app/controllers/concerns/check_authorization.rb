@@ -9,16 +9,30 @@ module CheckAuthorization
     Rails.logger.warn("starting authorization check for #{sanitize_header_value_for_logs(request.env['HTTP_X_ORIGIN_URI'])}")
     @response, @document = search_for_item
     if @document.blank?
-      render json: { error: 'not-found' }.to_json, status: :not_found
+      render_not_found
       return false
     end
     return true if client_can_view_digital?(@document)
-    render json: { error: 'unauthorized' }.to_json, status: :unauthorized
+    render_access_denied
     false
   end
 
   # Default implementation, to make it easy to override later
   def search_for_item
     search_service.fetch(params[:id], { fl: ['visibility_ssi', 'id'] })
+  end
+
+  private
+
+  # An anonymous client gets the same response whether the item does not exist or
+  # exists but is restricted, so the status cannot be used to enumerate the
+  # visibility of items.  Only a signed in client who is positively denied gets a 403.
+  def render_access_denied
+    return render_not_found if current_user.blank?
+    render json: { error: 'forbidden' }.to_json, status: :forbidden
+  end
+
+  def render_not_found
+    render json: { error: 'not-found' }.to_json, status: :not_found
   end
 end

@@ -67,18 +67,18 @@ RSpec.describe 'Manifests', type: :request, clean: true do
       expect(manifest['title_tesim'][0]).to eq('A General dictionary of the English language')
     end
 
-    it 'do not display if set to yale only' do
+    it 'returns a 404/not-found if set to yale only' do
       get '/manifests/1618909'
       manifest = JSON.parse(response.body)
 
-      expect(manifest['error']).to eq('unauthorized')
+      expect(manifest['error']).to eq('not-found')
     end
 
-    it 'returns a 401/unauthorized if there is no visibility key' do
+    it 'returns a 404/not-found if there is no visibility key' do
       get '/manifests/1234567'
       manifest = JSON.parse(response.body)
 
-      expect(manifest['error']).to eq('unauthorized')
+      expect(manifest['error']).to eq('not-found')
     end
   end
 
@@ -95,18 +95,18 @@ RSpec.describe 'Manifests', type: :request, clean: true do
       expect(manifest['title_tesim'][0]).to eq('A General dictionary of the English language')
     end
 
-    it 'returns a 401 if set to yale only' do
+    it 'returns a 403 if set to yale only' do
       get '/manifests/1618909'
       manifest = JSON.parse(response.body)
 
-      expect(manifest['error']).to eq('unauthorized')
+      expect(manifest['error']).to eq('forbidden')
     end
 
-    it 'returns a 401 if there is no visibility key' do
+    it 'returns a 403 if there is no visibility key' do
       get '/manifests/1234567'
       manifest = JSON.parse(response.body)
 
-      expect(manifest['error']).to eq('unauthorized')
+      expect(manifest['error']).to eq('forbidden')
     end
 
     it 'returns a 404 if redirected' do
@@ -136,11 +136,11 @@ RSpec.describe 'Manifests', type: :request, clean: true do
       expect(manifest['title_tesim'][0]).to eq('[Map of China]. [yale-only copy]')
     end
 
-    it 'returns a 401 if there is no visibility key' do
+    it 'returns a 403 if there is no visibility key' do
       get '/manifests/1234567'
       manifest = JSON.parse(response.body)
 
-      expect(manifest['error']).to eq('unauthorized')
+      expect(manifest['error']).to eq('forbidden')
     end
 
     it 'returns a 404 if redirected' do
