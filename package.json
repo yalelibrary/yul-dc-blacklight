@@ -6,6 +6,7 @@
   },
   "resolutions": {
     "brace-expansion": "2.0.3",
+    "canvas": "link:./node_modules/.cache/null",
     "filelist/minimatch": "^5.1.8",
     "form-data": "4.0.6",
     "svgo": "^4.0.2",
