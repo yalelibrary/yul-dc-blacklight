@@ -52,22 +52,22 @@ RSpec.describe "Iiifs", type: :request do
       expect(response).to have_http_status(:success)
     end
 
-    it 'returns a not found response if set to yale only' do
+    it 'returns a forbidden response if set to yale only' do
       get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/1111111/full/#{thumbnail_size}/0/default.jpg" }
 
-      expect(response).to have_http_status(:not_found)
+      expect(response).to have_http_status(:forbidden)
     end
 
-    it 'returns a not found response if there is no visibility key' do
+    it 'returns a forbidden response if there is no visibility key' do
       get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/2222222/full/#{thumbnail_size}/0/default.jpg" }
 
-      expect(response).to have_http_status(:not_found)
+      expect(response).to have_http_status(:forbidden)
     end
 
-    it 'returns an not found response if there child is not found' do
+    it 'returns a forbidden response if there child is not found' do
       get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/9328239/full/#{thumbnail_size}/0/default.jpg" }
 
-      expect(response).to have_http_status(:not_found)
+      expect(response).to have_http_status(:forbidden)
     end
 
     it 'returns bad request when X-Origin-URI header is missing' do

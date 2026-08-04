@@ -43,4 +43,14 @@ class IiifController < ApplicationController
     Rails.logger.warn("Bad request in IiifController: #{exception.message}")
     render json: { error: 'bad-request' }, status: :bad_request
   end
+
+  private
+
+  def render_access_denied
+    render json: { error: 'forbidden' }.to_json, status: :forbidden
+  end
+
+  def render_not_found
+    render_access_denied
+  end
 end
