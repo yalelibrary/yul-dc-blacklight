@@ -45,8 +45,8 @@ module ModsSolrDocument
             self[:extent_ssim]&.each { |extent| xml['mods'].extent extent.to_s }
           end
         end
-        self[:findingAid_ssim]&.each { |finding_aid| xml['mods'].relatedItem({ displayLabel: 'Finding Aid', "xlink:href" => finding_aid }) }
-        self[:url_suppl_ssim]&.each { |url_suppl| xml['mods'].relatedItem({ displayLabel: 'Related Resource', "xlink:href" => url_suppl }) }
+        permitted_urls(:findingAid_ssim).each { |finding_aid| xml['mods'].relatedItem({ displayLabel: 'Finding Aid', "xlink:href" => finding_aid }) }
+        permitted_urls(:url_suppl_ssim).each { |url_suppl| xml['mods'].relatedItem({ displayLabel: 'Related Resource', "xlink:href" => url_suppl }) }
         self[:partOf_tesim]&.each { |part_of| xml['mods'].relatedItem({ displayLabel: 'Related Exhibition or Resource', "xlink:href" => part_of }) }
 
         if related_item_host.any? { |related_item| self[related_item].present? }
@@ -131,7 +131,7 @@ module ModsSolrDocument
           xml['mods'].url({ access: 'object in context',
                             displayLabel: 'View information and digital image(s) in the Beinecke Library’s Digital Images Online database',
                             "xlink:href" => "https://collections.library.yale.edu/catalog/#{self[:oid_ssi]}" })
-          if self[:thumbnail_path_ss].present?
+          if SafeUrl.permitted?(self[:thumbnail_path_ss])
             thumbnail_array = self[:thumbnail_path_ss].split("/")
             thumbnail_array[7] = "full"
             thumbnail_array[0] = 'https:'
@@ -145,6 +145,10 @@ module ModsSolrDocument
     Nokogiri::XML(builder.to_xml).root.to_xml
   end
   # rubocop:enable Metrics/BlockLength,Metrics/MethodLength,Metrics/PerceivedComplexity,Metrics/AbcSize
+
+  def permitted_urls(field)
+    Array(self[field]).select { |value| SafeUrl.permitted?(value) }
+  end
 
   def valid_formats
     ["text",

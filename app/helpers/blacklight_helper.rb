@@ -7,6 +7,10 @@ module BlacklightHelper
     "/mirador/#{oid}"
   end
 
+  def safe_url?(value)
+    SafeUrl.permitted?(value)
+  end
+
   # sets up date params for constraint partial
   def get_date_constraint_params(params, url)
     label = "Date"
@@ -502,16 +506,13 @@ module BlacklightHelper
   end
 
   def finding_aid_link(arg)
-    # rubocop:disable Naming/VariableName
-    findingAidUri = arg[:document][arg[:field]]
-    links = []
-    findingAidUri.each do |link|
+    links = Array(arg[:document][arg[:field]]).select { |link| safe_url?(link) }.map do |link|
       popup_window = image_tag("YULPopUpWindow.png", { id: 'popup_window', alt: 'pop up window' })
-      links << link_to(safe_join(['View full finding aid for ',
-                                  arg[:document]['collection_title_ssi'].presence || arg[:document]['sourceTitle_tesim'].presence || 'this collection']) + popup_window,
-                                  link,
-                                  target: '_blank',
-                                  rel: 'noopener')
+      link_to(safe_join(['View full finding aid for ',
+                         arg[:document]['collection_title_ssi'].presence || arg[:document]['sourceTitle_tesim'].presence || 'this collection']) + popup_window,
+                         link,
+                         target: '_blank',
+                         rel: 'noopener')
     end
     links.first
   end
@@ -565,13 +566,13 @@ module BlacklightHelper
     links = arg[:value].map do |value|
       link_part = value.split('|')
       next unless link_part.count <= 2
-      urls = link_part.select { |s| s.start_with? 'http' }
-      labels = link_part.select { |s| !s.start_with? 'http' }
+      urls = link_part.select { |s| safe_url?(s) }
+      labels = link_part.reject { |s| safe_url?(s) }
       next unless urls.count == 1
       ils_filters = filters.any? do |ils|
         urls[0].include?(ils)
       end
-      return nil if ils_filters
+      next if ils_filters
       label = labels[0] || urls[0]
       link_to(label, urls[0], rel: "nofollow")
     end.compact
@@ -591,7 +592,8 @@ module BlacklightHelper
   # rubocop:enable Layout/DefEndAlignment
 
   def link_to_url(arg)
-    link_to(arg[:value][0], arg[:value][0], rel: "nofollow")
+    url = arg[:value][0].to_s.strip
+    link_to(url, url, rel: "nofollow") if safe_url?(url)
   end
 
   def sanitize_first_value(arg)
@@ -606,12 +608,6 @@ module BlacklightHelper
       sanitized_values << sanitize(v, tags: %w[a], attributes: %w[href])
     end
     safe_join(sanitized_values, '<br/>'.html_safe)
-  end
-
-  def search_field_value_link(args)
-    field_value = args[:document][args[:field]]
-    link_text = "/?q=#{field_value}&search_field=#{args[:field]}"
-    link_to(field_value.join, link_text, rel: "nofollow")
   end
 
   def sep_title_show_page

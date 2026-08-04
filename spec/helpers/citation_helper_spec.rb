@@ -49,7 +49,7 @@ RSpec.feature "Citation Helper", helper: true, clean: true, system: true do
       containerGrouping_tesim: 'this is the container grouping',
       folder_ssim: 'this is the folder',
       orbisBibId_ssi: 'this is the orbis bib ID',
-      findingAid_ssim: 'this is the finding aid',
+      findingAid_ssim: 'http://hdl.handle.net/10079/fa/beinecke.lincoln',
       collectionId_ssim: 'this is the collection ID',
       edition_ssim: 'this is the edition',
       uri_ssim: 'this is the URI',
