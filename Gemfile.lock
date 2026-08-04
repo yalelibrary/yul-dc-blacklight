@@ -351,7 +351,7 @@ GEM
     mini_mime (1.1.5)
     minitar (0.9)
     minitest (5.27.0)
-    msgpack (1.7.2)
+    msgpack (1.8.2)
     namae (1.2.0)
       racc (~> 1.7)
     net-http (0.9.1)
