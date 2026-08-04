@@ -418,7 +418,7 @@ GEM
     puma (7.2.1)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (3.0.18)
+    rack (3.1.21)
     rack-oauth2 (2.2.0)
       activesupport
       attr_required
@@ -705,7 +705,7 @@ DEPENDENCIES
   pg (~> 1.5.4)
   psych (< 4)
   puma (~> 7.2)
-  rack (~> 3.0.13)
+  rack (~> 3.1.21)
   rails (~> 7.2.3.1)
   rails-controller-testing (~> 1.0.5)
   rails_semantic_logger (>= 4.4.4)
