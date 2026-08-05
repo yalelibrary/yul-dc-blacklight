@@ -6,6 +6,14 @@ module AccessHelper
   end
 
   def client_can_view_digital?(document)
+    oid = document[:id]
+    return uncached_client_can_view_digital?(document) if oid.blank?
+    @client_can_view_digital ||= {}
+    return @client_can_view_digital[oid] if @client_can_view_digital.key?(oid)
+    @client_can_view_digital[oid] = uncached_client_can_view_digital?(document)
+  end
+
+  def uncached_client_can_view_digital?(document)
     Rails.logger.warn("starting client can view digital check for #{sanitize_header_value_for_logs(request.env['HTTP_X_ORIGIN_URI'])}")
     case document['visibility_ssi']
     when 'Public'
@@ -70,24 +78,27 @@ module AccessHelper
 
   def admin_of_owp?(document)
     return unless current_user
-    @credentials = if params[:oid].present?
-                     retrieve_admin_fulltext_credentials(params[:oid])
-                   else
-                     retrieve_admin_credentials(document)
-                   end
+    credentials = if params[:oid].present?
+                    retrieve_admin_fulltext_credentials(params[:oid])
+                  else
+                    retrieve_admin_credentials(document)
+                  end
     allowance = false
-    if @credentials
-      allowance = true if @credentials['is_admin_or_approver?'] == true
+    if credentials
+      allowance = true if credentials['is_admin_or_approver?'] == true
     end
     allowance
   end
 
+  # Keyed on the user rather than the document, so one lookup covers every document
+  # rendered in the request.
   def user_owp_permissions
     return nil if current_user.nil?
+    return @user_owp_permissions if defined?(@user_owp_permissions)
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
     url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{current_user.sub}")
     response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
-    safe_parse_management_response(response) || {}
+    @user_owp_permissions = safe_parse_management_response(response) || {}
   end
 
   def retrieve_permission_set_terms
@@ -101,20 +112,22 @@ module AccessHelper
 
   def retrieve_admin_credentials(document)
     return nil if current_user.nil? || current_user&.netid.nil?
-    # #{ENV['MANAGEMENT_HOST']}
-    # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
-    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document.id}/#{current_user.netid}")
-    response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
-    safe_parse_management_response(response)
+    retrieve_credentials_for_oid(document.id)
   end
 
-  def retrieve_admin_fulltext_credentials(document)
+  def retrieve_admin_fulltext_credentials(oid)
     return nil if current_user.nil? || current_user&.netid.nil?
+    retrieve_credentials_for_oid(oid)
+  end
+
+  def retrieve_credentials_for_oid(oid)
+    @admin_credentials ||= {}
+    return @admin_credentials[oid] if @admin_credentials.key?(oid)
     # #{ENV['MANAGEMENT_HOST']}
     # for local debugging - http://yul-dc-management-1:3001/management or http://yul-dc_management_1:3001/management
-    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{document}/#{current_user.netid}")
+    url = URI.parse("#{ENV['MANAGEMENT_HOST']}/api/permission_sets/#{oid}/#{current_user.netid}")
     response = Net::HTTP.get_response(url, { 'Authorization' => "Bearer #{ENV['OWP_AUTH_TOKEN']}" })
-    safe_parse_management_response(response)
+    @admin_credentials[oid] = safe_parse_management_response(response)
   end
 
   def safe_parse_management_response(response)
