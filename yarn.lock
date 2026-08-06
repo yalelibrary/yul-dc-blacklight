@@ -282,38 +282,20 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@edsilv/http-status-codes@1.0.3", "@edsilv/http-status-codes@^1.0.3":
+"@edsilv/http-status-codes@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@edsilv/http-status-codes/-/http-status-codes-1.0.3.tgz#a1b767c552ac43f2983ab2b9ee20e9c73b79960b"
   integrity sha512-HLK2FS5sZqxPqD53D6hhZxC6C8THTVwlyZDZ7J0iWsrB8JmMA69m/CQuNKZc1kki9WSVeck2fXna26NL0SE7cg==
-
-"@edsilv/jquery-plugins@1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@edsilv/jquery-plugins/-/jquery-plugins-1.0.7.tgz#192ea944112860364aa6bbd849c33a5b05b09ca4"
-  integrity sha512-lz+Rsax7QrBEnHI+WwZ+A4jxqLypTl6RvKP5jI3P2vxG3975fTj2qOvxl1/npxuJ7wCerrvYcBqwZd743iPSdg==
 
 "@edsilv/key-codes@0.1.1":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@edsilv/key-codes/-/key-codes-0.1.1.tgz#d5b4bc3f7308937607aa80585b5c2823c08f20c0"
   integrity sha512-mSDgQXsHD55C1+qu5MYORrWXndzVn7ecOWt3b7bGenIOVpkWMrnd2V4I8nKYcSOE0+lBCjuZ4jS63c2gWzarIg==
 
-"@edsilv/key-codes@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@edsilv/key-codes/-/key-codes-1.0.0.tgz#2230fde580b496d31d2b752004f5582165b76507"
-  integrity sha512-L4w4xW7u8Gqd1Nsr0S7Q/H+HTHTkiwgZT6cFKPPlw6Fo6lk31hTufdIaYJ9RNk8c05nLAnn2ZI1DzQwIDr6+iA==
-
 "@edsilv/stencil-redux@0.1.1":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@edsilv/stencil-redux/-/stencil-redux-0.1.1.tgz#1b09e48ca7277f9ee5e3261d06837eb485d23929"
   integrity sha512-J6ArTAknSpunDNMmT41tplg3SdK9kyk3o9nGSc/WMj73nB/m8W2eqYK+loyUrpcNZ3f8IBkcH+xUsdd90vk53w==
-
-"@edsilv/utils@1.0.2", "@edsilv/utils@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@edsilv/utils/-/utils-1.0.2.tgz#8b3c32675d8b835a70f44b450a6d2d789409a54d"
-  integrity sha512-sSq1Rcixz/X1GoL9Bf1LdAZ4icfxXARj5RgysG2eJhSuM/7QXZEbOzoayo/DJro1qJgC4j8oXCneSeKuN9qa+A==
-  dependencies:
-    "@types/jquery" "^2.0.40"
-    "@types/node" "8.10.52"
 
 "@esbuild/aix-ppc64@0.25.4":
   version "0.25.4"
@@ -477,41 +459,7 @@
     url-loader "^4.1.1"
     waveform-panel "^1.2.0"
 
-"@iiif/iiif-gallery-component@^1.1.23":
-  version "1.1.23"
-  resolved "https://registry.yarnpkg.com/@iiif/iiif-gallery-component/-/iiif-gallery-component-1.1.23.tgz#a811c248bdf4abb1c9a4dd480e0ae912a0b66f1d"
-  integrity sha512-r6eUdBlCPhlqWp9fNiTkS0GeYFzFk0yXlEb4z1vRgGYdjRNUyPhe4doQvXgxQt7oShPLdpjfl92etydBwA6pfQ==
-  dependencies:
-    "@edsilv/jquery-plugins" "1.0.7"
-    "@edsilv/utils" "1.0.2"
-    "@iiif/base-component" "2.0.1"
-    "@iiif/manifold" "2.*"
-    "@iiif/vocabulary" "1.0.11"
-    "@types/jquery" "3.3.14"
-    manifesto.js "4.*"
-
-"@iiif/iiif-metadata-component@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@iiif/iiif-metadata-component/-/iiif-metadata-component-1.2.1.tgz#268285dbd41845e09df299e432b2eb490dd04ebb"
-  integrity sha512-wPDjaazjJdRatuGxqoduW+CYaH2O3VVvaElerxYQ59/0ifo6fBUxo0GMdni7aNA1NU3Qpo86NmYp/GYtyjYe8Q==
-  dependencies:
-    "@edsilv/jquery-plugins" "1.0.7"
-    "@edsilv/utils" "1.0.2"
-    "@iiif/base-component" "2.*"
-    "@iiif/manifold" "^2.1.1"
-    "@iiif/vocabulary" "1.*"
-    manifesto.js "^4.2.21"
-
-"@iiif/iiif-tree-component@^2.0.7":
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/@iiif/iiif-tree-component/-/iiif-tree-component-2.0.7.tgz#56b5975fdf6b1cde52c1960fa54b35aca91a4ce0"
-  integrity sha512-YRL3r+WOeY/2SM2C5kxHub4dPWLGEzTIBpUwv/CJ9dF/6cjmmf4Af9nItpYW7ajG+7k63+h0P792aRgNQGwEKA==
-  dependencies:
-    "@iiif/base-component" "2.*"
-    "@iiif/manifold" "2.*"
-    manifesto.js "4.*"
-
-"@iiif/manifold@2.*", "@iiif/manifold@^2.0.5", "@iiif/manifold@^2.1.1":
+"@iiif/manifold@^2.0.5":
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@iiif/manifold/-/manifold-2.1.1.tgz#cfd8db976d25130b165b666c07411d0d7e42a413"
   integrity sha512-QBcqM9KNXqG6dvzIg2kp7C4wNcdXwvRX04li+WNNT1gSZ+DRBwHWt7tyrnOw4sc+QTXZaM6UjNL6vV8VhXFNfg==
@@ -526,6 +474,17 @@
   optionalDependencies:
     fsevents "*"
 
+"@iiif/manifold@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@iiif/manifold/-/manifold-2.3.0.tgz#bebfeef9c0745046c7655e36c01365932d1730d5"
+  integrity sha512-4kAkZ4p7zyFYZR6BcVeu3TrUpbPwIGVpdY2NdWhAbe2ZhdGzZ3s6npAjVXSTqiO3tDjIGYPMGMI16xP1HkddPg==
+  dependencies:
+    "@edsilv/http-status-codes" "^1.0.3"
+    "@iiif/vocabulary" "^1.0.30"
+    manifesto.js "^4.3.3"
+  optionalDependencies:
+    fsevents "*"
+
 "@iiif/presentation-3@^1.0.5":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@iiif/presentation-3/-/presentation-3-1.1.3.tgz#7f5ea909ae22aa9ce2e9d91cec79f5f1cd0fd6fb"
@@ -533,15 +492,15 @@
   dependencies:
     "@types/geojson" "^7946.0.7"
 
-"@iiif/vocabulary@1.*", "@iiif/vocabulary@^1.0.23", "@iiif/vocabulary@^1.0.26":
+"@iiif/vocabulary@^1.0.23", "@iiif/vocabulary@^1.0.26":
   version "1.0.26"
   resolved "https://registry.yarnpkg.com/@iiif/vocabulary/-/vocabulary-1.0.26.tgz#557fab623100ca860daeddf6e4de46a8f94aaf86"
   integrity sha512-yOsMDg5C90iMfD5HSydoTDzmOM/ki5zGiu4DbHpzRueM7D+12IcDHeai2A8QvEroS8HCJl5M1Edbju5rOlPIpg==
 
-"@iiif/vocabulary@1.0.11":
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/@iiif/vocabulary/-/vocabulary-1.0.11.tgz#32271acd6d62ee2c7a6ecd18cdb86c304537a6a2"
-  integrity sha512-JjPbZ+SCn0ljsfs9Nf0U1OWNZK7tauw7iHezDJA+28AAzmMwpFS/lTOe/4N0ynZsnk4x7cA9NL6CK3K0zDd50w==
+"@iiif/vocabulary@^1.0.28", "@iiif/vocabulary@^1.0.30", "@iiif/vocabulary@^1.0.31":
+  version "1.0.31"
+  resolved "https://registry.yarnpkg.com/@iiif/vocabulary/-/vocabulary-1.0.31.tgz#49d3aa005468469b8235e2bee8107b5824bd4a61"
+  integrity sha512-j2Y/WKRgyHGO7VkQYg2JPJk6XSdYcZ51J/NHnMygeOAo7rSLVHT9B97+tYlYMqV3Z7EBpXID/zeS5Gn12cyUAA==
 
 "@ionic/core@^4.11.5":
   version "4.11.13"
@@ -990,18 +949,6 @@
   version "2.0.34"
   resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-2.0.34.tgz#27615b369f30e572336126514e74672dda6e3d04"
   integrity sha512-zydaVQrBPlZhn+PwHOPGnvffCppxw01TyYXuD90CcYiAwwkrPheui9WWkpLyKAUVGfYRXmyF8XJS4Qp+obyiUg==
-
-"@types/jquery@3.3.14":
-  version "3.3.14"
-  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.14.tgz#7c78e18f8c4bf9a8eae1de62815493ab1d7cc04f"
-  integrity sha512-M6m6Xm6RtsmYOlGk7YS0D7T19Axsc3x30+Mj9b7Fqb4c7c2hPmvBJsrMmuhwJy96iSx/3BQkOmbtEKijs2iQPg==
-  dependencies:
-    "@types/sizzle" "*"
-
-"@types/jquery@^2.0.40":
-  version "2.0.68"
-  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-2.0.68.tgz#f8115a3fd77b503c995e91f4b9a6ecbabf63ad26"
-  integrity sha512-9E8HinL4D/VgWf6tci0/NWlkw8i8e5pL00yVmBpFaVmveSwMq3lEQcrRJVbu62Fprm3nBTHXkqkEByjGoQCpTA==
 
 "@types/jqueryui@^1.11.36":
   version "1.12.23"
@@ -3567,7 +3514,7 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
-manifesto.js@4.*, manifesto.js@4.2.21, manifesto.js@^4.2.21, manifesto.js@^4.2.4:
+manifesto.js@4.2.21, manifesto.js@^4.2.4:
   version "4.2.21"
   resolved "https://registry.yarnpkg.com/manifesto.js/-/manifesto.js-4.2.21.tgz#a62e9c7673467f7dd832a4fe27fe1c97a7b62d6c"
   integrity sha512-C14J8zMSXlQaQjKR7KpIYEAXWquS2DtdxL8cFj1P2kc/ZJ5nWWmDUrthysVoQlRIzks5HtUNf5bStOwzhzarag==
@@ -3576,6 +3523,15 @@ manifesto.js@4.*, manifesto.js@4.2.21, manifesto.js@^4.2.21, manifesto.js@^4.2.4
     "@iiif/vocabulary" "^1.0.26"
     isomorphic-unfetch "^3.0.0"
     lodash "^4.17.21"
+
+manifesto.js@^4.3.0, manifesto.js@^4.3.3:
+  version "4.3.5"
+  resolved "https://registry.yarnpkg.com/manifesto.js/-/manifesto.js-4.3.5.tgz#7613ea46c522a53c9b64ef704775af7b5239fea0"
+  integrity sha512-BupIjlVpvrIjOIwEgBWmlYs9yoYNmMiDy7XjrhaRcVZ1eiP1ycPZGKGcI7sSGC3idY59ybVeol9GEYQ695qcBw==
+  dependencies:
+    "@edsilv/http-status-codes" "^1.0.3"
+    "@iiif/vocabulary" "^1.0.28"
+    isomorphic-unfetch "^3.0.0"
 
 marks-pane@^1.0.9:
   version "1.0.9"
@@ -3877,10 +3833,10 @@ onetime@^5.1.2:
   dependencies:
     mimic-fn "^2.1.0"
 
-openseadragon@4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/openseadragon/-/openseadragon-4.0.0.tgz#1832f2048f786c69fd1ced3dee8368487f212d3e"
-  integrity sha512-HsjSgqiiPwLkW5576GxDJ7Rax96iLUET8fnTsJvu7uYYkd+qzen3bflxHyph0OVVgZBKP9SpGH1nPdU4Mz0Z2A==
+openseadragon@^6.0.0:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/openseadragon/-/openseadragon-6.0.2.tgz#7a32330e890d545e7e496a33ac25a7d7c6792cc1"
+  integrity sha512-WNPPQWp9sHunyzkV9J2yhfxnSfDF9CfBsE6unmkdxh1uTWzFcueMvBPhmuZdY7M1v/ffJ3NdaF3Qq3jogphIbA==
 
 os-browserify@^0.3.0:
   version "0.3.0"
@@ -4932,23 +4888,17 @@ universalify@^0.2.0:
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.2.0.tgz#6451760566fa857534745ab1dde952d1b1761be0"
   integrity sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg==
 
-universalviewer@4.2.0-rc4:
-  version "4.2.0-rc4"
-  resolved "https://registry.yarnpkg.com/universalviewer/-/universalviewer-4.2.0-rc4.tgz#f739daff24cb702e05b3cb32b54f69ae78e10327"
-  integrity sha512-fZdnZmHlj7CWP0Meadfbc+7ChroiJU1cOvpAj5kQFhTwsSBQHAs99noecdPbmSvsY72sJQxJbFMCBegLRzCi7w==
+universalviewer@4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/universalviewer/-/universalviewer-4.4.2.tgz#d30a0023ffdfd989f82fe933667769f7f8d05286"
+  integrity sha512-jAXK3zjUMUyEAO/7DlLVX6xRx3kp3A1hM1pavojmjB2LmrYIHBDThYsiSRyDVB/MAjuPvi6zwZOWzmnmxlcGMQ==
   dependencies:
-    "@edsilv/http-status-codes" "1.0.3"
-    "@edsilv/key-codes" "1.0.0"
-    "@edsilv/utils" "^1.0.2"
     "@google/model-viewer" "^4.0.0"
     "@iiif/base-component" "2.0.1"
     "@iiif/iiif-av-component" "1.2.4"
-    "@iiif/iiif-gallery-component" "^1.1.23"
-    "@iiif/iiif-metadata-component" "^1.2.1"
-    "@iiif/iiif-tree-component" "^2.0.7"
-    "@iiif/manifold" "^2.1.1"
+    "@iiif/manifold" "^2.3.0"
     "@iiif/presentation-3" "^1.0.5"
-    "@iiif/vocabulary" "^1.0.23"
+    "@iiif/vocabulary" "^1.0.31"
     "@openseadragon-imaging/openseadragon-viewerinputhook" "^2.2.1"
     "@universalviewer/aleph" "0.0.21"
     "@universalviewer/uv-ebook-components" "1.0.2"
@@ -4962,10 +4912,10 @@ universalviewer@4.2.0-rc4:
     jquery "3.5.0"
     jsviews "1.0.15"
     less-plugin-clean-css "^1.5.1"
-    manifesto.js "^4.2.21"
+    manifesto.js "^4.3.0"
     mediaelement "4.2.15"
     mediaelement-plugins "5.0.0"
-    openseadragon "4.0.0"
+    openseadragon "^6.0.0"
     pdfjs-dist "3.11.174"
     pdfobject "2.3.0"
     react "^19.0.0"

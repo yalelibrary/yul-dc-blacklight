@@ -44,15 +44,12 @@
         "openTemplate": "http://universalviewer.io?manifest={0}",
         "overrideFullScreen": false,
         "pagingEnabled": true,
-        "pagingOptionEnabled": true,
-        "pessimisticAccessControl": false,
         "preserveViewport": false,
         "rightPanelEnabled": true,
         "saveUserSettings": false,
         "clickToZoomEnabled": true,
         "searchWithinEnabled": true,
         "termsOfUseEnabled": true,
-        "theme": "uv-en-GB-theme",
         "tokenStorage": "session",
         "useArrowKeysToNavigate": false,
         "zoomToSearchResultEnabled": false,
@@ -67,7 +64,6 @@
                 "branchNodesSelectable": false,
                 "defaultToTreeEnabled": false,
                 "defaultToTreeIfGreaterThan": 0,
-                "elideCount": 40,
                 "expandFullEnabled": true,
                 "galleryThumbChunkedResizingThreshold": 400,
                 "galleryThumbHeight": 320,
@@ -118,12 +114,10 @@
         "downloadDialogue": {
             "options": {
                 "confinedImageSize": 1000,
-                "currentViewDisabledPercentage": 90,
                 "downloadCurrentViewEnabled": true,
                 "downloadWholeImageHighResEnabled": true,
                 "downloadWholeImageLowResEnabled": true,
                 "maxImageWidth": 5000,
-                "optionsExplanatoryTextEnabled": false,
                 "selectionEnabled": false
             },
             "content": {
@@ -236,7 +230,6 @@
         },
         "multiSelectDialogue": {
             "options": {
-                "galleryThumbChunkedResizingEnabled": true,
                 "galleryThumbChunkedResizingThreshold": 400,
                 "galleryThumbHeight": 320,
                 "galleryThumbLoadPadding": 3,
@@ -244,7 +237,7 @@
                 "pageModeEnabled": true
             },
             "content": {
-                "select": "Download",
+                "download": "Download",
                 "selectAll": "Select All",
                 "title": "Select Pages for Download"
             }
@@ -357,9 +350,7 @@
         },
         "shareDialogue": {
             "options": {
-                "embedTemplate": "<iframe src=\"{0}\" width=\"{1}\" height=\"{2}\" allowfullscreen frameborder=\"0\"></iframe>",
-                "instructionsEnabled": false,
-                "shareFrameEnabled": true
+                "embedTemplate": "<iframe src=\"{0}\" width=\"{1}\" height=\"{2}\" allowfullscreen frameborder=\"0\"></iframe>"
             },
             "content": {
                 "customSize": "custom",
