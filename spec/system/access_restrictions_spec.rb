@@ -75,12 +75,12 @@ RSpec.describe "access restrictions", type: :system, clean: true do
 
     it 'does NOT allow iiif_search for yale-only works' do
       visit solr_document_iiif_search_path(yale_work[:id], { q: 'blacklight' })
-      expect(page).to have_http_status(:unauthorized)
+      expect(page).to have_http_status(:not_found)
     end
 
     it 'does NOT allow iiif_search for private works' do
       visit solr_document_iiif_search_path(private_work[:id], { q: 'blacklight' })
-      expect(page).to have_http_status(:unauthorized)
+      expect(page).to have_http_status(:not_found)
     end
 
     it 'does allow iiif_suggest for public works' do
@@ -90,12 +90,12 @@ RSpec.describe "access restrictions", type: :system, clean: true do
 
     it 'does NOT allow iiif_suggest for yale-only works' do
       visit solr_document_iiif_suggest_path(yale_work[:id], { q: 'blacklight' })
-      expect(page).to have_http_status(:unauthorized)
+      expect(page).to have_http_status(:not_found)
     end
 
     it 'does NOT allow iiif_suggest for private works' do
       visit solr_document_iiif_suggest_path(private_work[:id], { q: 'blacklight' })
-      expect(page).to have_http_status(:unauthorized)
+      expect(page).to have_http_status(:not_found)
     end
   end
 
@@ -148,7 +148,7 @@ RSpec.describe "access restrictions", type: :system, clean: true do
 
     it 'does NOT allow iiif_search for private works' do
       visit solr_document_iiif_search_path(private_work[:id], { q: 'blacklight' })
-      expect(page).to have_http_status(:unauthorized)
+      expect(page).to have_http_status(:forbidden)
     end
 
     it 'does allow iiif_suggest for public works' do
@@ -163,7 +163,7 @@ RSpec.describe "access restrictions", type: :system, clean: true do
 
     it 'does NOT allow iiif_suggest for private works' do
       visit solr_document_iiif_suggest_path(private_work[:id], { q: 'blacklight' })
-      expect(page).to have_http_status(:unauthorized)
+      expect(page).to have_http_status(:forbidden)
     end
   end
 
@@ -217,7 +217,7 @@ RSpec.describe "access restrictions", type: :system, clean: true do
 
     it 'does NOT allow iiif_search for private works' do
       visit solr_document_iiif_search_path(private_work[:id], { q: 'blacklight' })
-      expect(page).to have_http_status(:unauthorized)
+      expect(page).to have_http_status(:not_found)
     end
 
     it 'does allow iiif_suggest for public works' do
@@ -232,7 +232,7 @@ RSpec.describe "access restrictions", type: :system, clean: true do
 
     it 'does NOT allow iiif_suggest for private works' do
       visit solr_document_iiif_suggest_path(private_work[:id], { q: 'blacklight' })
-      expect(page).to have_http_status(:unauthorized)
+      expect(page).to have_http_status(:not_found)
     end
   end
 end

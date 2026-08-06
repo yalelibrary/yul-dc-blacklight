@@ -52,22 +52,22 @@ RSpec.describe "Iiifs", type: :request do
       expect(response).to have_http_status(:success)
     end
 
-    it 'do not display if set to yale only' do
+    it 'returns a forbidden response if set to yale only' do
       get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/1111111/full/#{thumbnail_size}/0/default.jpg" }
 
-      expect(response).to have_http_status(:unauthorized)
+      expect(response).to have_http_status(:forbidden)
     end
 
-    it 'returns an unauthorized response if there is no visibility key' do
+    it 'returns a forbidden response if there is no visibility key' do
       get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/2222222/full/#{thumbnail_size}/0/default.jpg" }
 
-      expect(response).to have_http_status(:unauthorized)
+      expect(response).to have_http_status(:forbidden)
     end
 
-    it 'returns an not found response if there child is not found' do
+    it 'returns a forbidden response if there child is not found' do
       get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/9328239/full/#{thumbnail_size}/0/default.jpg" }
 
-      expect(response).to have_http_status(:not_found)
+      expect(response).to have_http_status(:forbidden)
     end
 
     it 'returns bad request when X-Origin-URI header is missing' do
@@ -111,10 +111,10 @@ RSpec.describe "Iiifs", type: :request do
       expect(response).to have_http_status(:success)
     end
 
-    it 'returns an unauthorized response if there is no visibility key' do
+    it 'returns a forbidden response if there is no visibility key' do
       get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/2222222/full/#{thumbnail_size}/0/default.jpg" }
 
-      expect(response).to have_http_status(:unauthorized)
+      expect(response).to have_http_status(:forbidden)
     end
   end
 
@@ -128,16 +128,16 @@ RSpec.describe "Iiifs", type: :request do
       expect(response).to have_http_status(:success)
     end
 
-    it 'do not display if set to yale only' do
+    it 'returns a forbidden response if set to yale only' do
       get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/1111111/full/#{thumbnail_size}/0/default.jpg" }
 
-      expect(response).to have_http_status(:unauthorized)
+      expect(response).to have_http_status(:forbidden)
     end
 
-    it 'returns an unauthorized response if there is no visibility key' do
+    it 'returns a forbidden response if there is no visibility key' do
       get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/2222222/full/#{thumbnail_size}/0/default.jpg" }
 
-      expect(response).to have_http_status(:unauthorized)
+      expect(response).to have_http_status(:forbidden)
     end
   end
 
@@ -177,10 +177,10 @@ RSpec.describe "Iiifs", type: :request do
           .to_return(status: 200, body: '{ "is_admin_or_approver?": false }', headers: {})
       end
 
-      it 'returns unauthorized and calls management APIs through mocked MANAGEMENT_HOST' do
+      it 'returns forbidden and calls management APIs through mocked MANAGEMENT_HOST' do
         get "/check-iiif", headers: { 'X-Origin-URI' => "/iiif/2/9333333/full/#{thumbnail_size}/0/default.jpg" }
 
-        expect(response).to have_http_status(:unauthorized)
+        expect(response).to have_http_status(:forbidden)
         expect(WebMock).to have_requested(:get, 'http://www.example.com/management/api/permission_sets/7bd425ee-1093-40cd-ba0c-5a2355e37d6e').at_least_once
         expect(WebMock).to have_requested(:get, "http://www.example.com/management/api/permission_sets/91818909/#{owp_user.netid}").at_least_once
       end

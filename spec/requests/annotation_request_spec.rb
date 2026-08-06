@@ -77,21 +77,21 @@ RSpec.describe 'AnnotationsController', type: :request, clean: true, js: true do
         expect(response).to have_http_status(:success)
         expect(response.body).to include("This is the full text public")
       end
-      it 'returns 401 for a full text annotation on Yale Only parent' do
+      it 'returns 404 for a full text annotation on Yale Only parent' do
         get '/annotation/oid/1618909/canvas/998834/fulltext'
-        expect(response).to have_http_status(:unauthorized)
+        expect(response).to have_http_status(:not_found)
       end
-      it 'returns 401 for a full text annotation on Open with Permission parent' do
+      it 'returns 404 for a full text annotation on Open with Permission parent' do
         get '/annotation/oid/1618909/canvas/9988344/fulltext'
-        expect(response).to have_http_status(:unauthorized)
+        expect(response).to have_http_status(:not_found)
       end
       it 'returns 401 for a full text annotation because of mismatch parent' do
         get '/annotation/oid/2034600/canvas/998834/fulltext'
         expect(response).to have_http_status(:unauthorized)
       end
-      it 'returns 401 for a full text annotation unknown visibility' do
+      it 'returns 404 for a full text annotation unknown visibility' do
         get '/annotation/oid/1618904/canvas/998835/fulltext'
-        expect(response).to have_http_status(:unauthorized)
+        expect(response).to have_http_status(:not_found)
       end
     end
 
@@ -118,9 +118,9 @@ RSpec.describe 'AnnotationsController', type: :request, clean: true, js: true do
           get '/annotation/oid/2034600/canvas/998834/fulltext'
           expect(response).to have_http_status(:unauthorized)
         end
-        it 'returns 401 for a full text annotation unknown visibility' do
+        it 'returns 404 for a full text annotation unknown visibility' do
           get '/annotation/oid/1618904/canvas/998835/fulltext'
-          expect(response).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:not_found)
         end
       end
       context 'while not on campus' do
@@ -132,21 +132,21 @@ RSpec.describe 'AnnotationsController', type: :request, clean: true, js: true do
           expect(response).to have_http_status(:success)
           expect(response.body).to include("This is the full text public")
         end
-        it 'returns a full text annotation on yale only' do
+        it 'returns 404 for a full text annotation on yale only' do
           get '/annotation/oid/1618909/canvas/998834/fulltext'
-          expect(response).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:not_found)
         end
-        it 'returns 401 for a full text annotation on Open with Permission parent' do
+        it 'returns 404 for a full text annotation on Open with Permission parent' do
           get '/annotation/oid/1618909/canvas/9988344/fulltext'
-          expect(response).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:not_found)
         end
         it 'returns 401 for a full text annotation because of mismatch parent' do
           get '/annotation/oid/2034600/canvas/998834/fulltext'
           expect(response).to have_http_status(:unauthorized)
         end
-        it 'returns 401 for a full text annotation unknown visibility' do
+        it 'returns 404 for a full text annotation unknown visibility' do
           get '/annotation/oid/1618904/canvas/998835/fulltext'
-          expect(response).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:not_found)
         end
       end
     end
@@ -177,9 +177,9 @@ RSpec.describe 'AnnotationsController', type: :request, clean: true, js: true do
           get '/annotation/oid/2034600/canvas/998834/fulltext'
           expect(response).to have_http_status(:unauthorized)
         end
-        it 'returns 401 for a full text annotation unknown visibility' do
+        it 'returns 403 for a full text annotation unknown visibility' do
           get '/annotation/oid/1618904/canvas/998835/fulltext'
-          expect(response).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:forbidden)
         end
       end
       context 'while not on campus' do
@@ -204,9 +204,9 @@ RSpec.describe 'AnnotationsController', type: :request, clean: true, js: true do
           get '/annotation/oid/2034600/canvas/998834/fulltext'
           expect(response).to have_http_status(:unauthorized)
         end
-        it 'returns 401 for a full text annotation unknown visibility' do
+        it 'returns 403 for a full text annotation unknown visibility' do
           get '/annotation/oid/1618904/canvas/998835/fulltext'
-          expect(response).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end
@@ -236,9 +236,9 @@ RSpec.describe 'AnnotationsController', type: :request, clean: true, js: true do
           get '/annotation/oid/2034600/canvas/998834/fulltext'
           expect(response).to have_http_status(:unauthorized)
         end
-        it 'returns 401 for a full text annotation unknown visibility' do
+        it 'returns 403 for a full text annotation unknown visibility' do
           get '/annotation/oid/1618904/canvas/998835/fulltext'
-          expect(response).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:forbidden)
         end
       end
       context 'while not on campus' do
@@ -250,21 +250,21 @@ RSpec.describe 'AnnotationsController', type: :request, clean: true, js: true do
           expect(response).to have_http_status(:success)
           expect(response.body).to include("This is the full text public")
         end
-        it 'returns 401 for a full text annotation on yale only' do
+        it 'returns 403 for a full text annotation on yale only' do
           get '/annotation/oid/1618909/canvas/998834/fulltext'
-          expect(response).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:forbidden)
         end
-        it 'returns 401 for a full text annotation on Open with Permission parent' do
+        it 'returns 403 for a full text annotation on Open with Permission parent' do
           get '/annotation/oid/1618909/canvas/9988344/fulltext'
-          expect(response).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:forbidden)
         end
         it 'returns 401 for a full text annotation because of mismatch parent' do
           get '/annotation/oid/2034600/canvas/998834/fulltext'
           expect(response).to have_http_status(:unauthorized)
         end
-        it 'returns 401 for a full text annotation unknown visibility' do
+        it 'returns 403 for a full text annotation unknown visibility' do
           get '/annotation/oid/1618904/canvas/998835/fulltext'
-          expect(response).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end

@@ -95,17 +95,17 @@ RSpec.describe 'PdfController', type: :request do
             expect(response.body).to include 'PDF-1.4'
             expect(response.headers['X-Robots-Tag']).to be('noindex')
           end
-          it 'returns unauthorized for oid with no visibility' do
+          it 'returns not found for oid with no visibility' do
             get '/pdfs/1234567.pdf'
-            expect(response).to have_http_status(:unauthorized)
+            expect(response).to have_http_status(:not_found)
           end
-          it 'returns unauthorized for oid with Yale Only' do
+          it 'returns not found for oid with Yale Only' do
             get '/pdfs/1618909.pdf'
-            expect(response).to have_http_status(:unauthorized)
+            expect(response).to have_http_status(:not_found)
           end
-          it 'returns unauthorized for oid with Open with Permission' do
+          it 'returns not found for oid with Open with Permission' do
             get '/pdfs/1818909.pdf'
-            expect(response).to have_http_status(:unauthorized)
+            expect(response).to have_http_status(:not_found)
           end
           it 'returns not found for oid with Redirect' do
             get '/pdfs/16685691.pdf'
@@ -123,9 +123,9 @@ RSpec.describe 'PdfController', type: :request do
             expect(response.body).to include 'PDF-1.4'
             expect(response.headers['X-Robots-Tag']).to be('noindex')
           end
-          it 'returns unauthorized for oid with no visibility' do
+          it 'returns not found for oid with no visibility' do
             get '/pdfs/1234567.pdf'
-            expect(response).to have_http_status(:unauthorized)
+            expect(response).to have_http_status(:not_found)
           end
           it 'returns pdf for oid with Yale Only' do
             get '/pdfs/1618909.pdf'
@@ -133,9 +133,9 @@ RSpec.describe 'PdfController', type: :request do
             expect(response.content_type).to eq 'application/pdf'
             expect(response.body).to include 'PDF-1.4'
           end
-          it 'returns unauthorized for oid with Open with Permission' do
+          it 'returns not found for oid with Open with Permission' do
             get '/pdfs/1818909.pdf'
-            expect(response).to have_http_status(:unauthorized)
+            expect(response).to have_http_status(:not_found)
           end
           it 'returns not found for oid with Redirect' do
             get '/pdfs/16685691.pdf'
@@ -155,9 +155,9 @@ RSpec.describe 'PdfController', type: :request do
           expect(response.body).to include 'PDF-1.4'
           expect(response.headers['X-Robots-Tag']).to be('noindex')
         end
-        it 'returns not found for oid with no visibility' do
+        it 'returns forbidden for oid with no visibility' do
           get '/pdfs/1234567.pdf'
-          expect(response).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:forbidden)
         end
         it 'returns pdf for oid with Yale Only' do
           get '/pdfs/1618909.pdf'
@@ -165,9 +165,9 @@ RSpec.describe 'PdfController', type: :request do
           expect(response.content_type).to eq 'application/pdf'
           expect(response.body).to include 'PDF-1.4'
         end
-        it 'returns unauthorized for oid with Open with Permission' do
+        it 'returns forbidden for oid with Open with Permission' do
           get '/pdfs/1818909.pdf'
-          expect(response).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:forbidden)
         end
         it 'returns not found for oid with Redirect' do
           get '/pdfs/16685691.pdf'
@@ -186,17 +186,17 @@ RSpec.describe 'PdfController', type: :request do
           expect(response.body).to include 'PDF-1.4'
           expect(response.headers['X-Robots-Tag']).to be('noindex')
         end
-        it 'returns not found for oid with no visibility' do
+        it 'returns forbidden for oid with no visibility' do
           get '/pdfs/1234567.pdf'
-          expect(response).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:forbidden)
         end
-        it 'returns unauthorized for oid with Yale Only' do
+        it 'returns forbidden for oid with Yale Only' do
           get '/pdfs/1618909.pdf'
-          expect(response).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:forbidden)
         end
-        it 'returns unauthorized for oid with Open with Permission' do
+        it 'returns forbidden for oid with Open with Permission' do
           get '/pdfs/1818909.pdf'
-          expect(response).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:forbidden)
         end
         it 'returns not found for oid with Redirect' do
           get '/pdfs/16685691.pdf'
