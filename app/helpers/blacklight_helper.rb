@@ -621,9 +621,10 @@ module BlacklightHelper
   end
 
   def render_thumbnail(document, _options)
-    img = build_thumbnail_image(document)
+    can_view_digital = client_can_view_digital?(document)
+    img = build_thumbnail_image(document, can_view_digital)
     count = document['imageCount_isi'].to_i
-    if count > 1 && client_can_view_digital?(document)
+    if count > 1 && can_view_digital
       badge = content_tag(:span, "#{count} images", class: 'multi-image-badge')
       content_tag(:div, img + badge, class: 'multi-image')
     else
@@ -631,8 +632,8 @@ module BlacklightHelper
     end
   end
 
-  def build_thumbnail_image(document)
-    unless client_can_view_digital?(document)
+  def build_thumbnail_image(document, can_view_digital = client_can_view_digital?(document))
+    unless can_view_digital
       if document['visibility_ssi'] == "Open with Permission"
         return image_tag('OwP-access-image.png',
 alt: 'Access Available by request only due to collection restrictions. Place log in to request access')
