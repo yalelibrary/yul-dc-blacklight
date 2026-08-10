@@ -94,45 +94,39 @@ RSpec.describe "Blacklight Range Limit", type: :system, clean: true, js: true do
     expect(page).to have_button 'Apply'
   end
 
-  it "provides date information" do
+  it "draws the distribution chart" do
     visit search_catalog_path
     click_button 'Date Created'
-    el = page.find(:css, '.slider.slider-horizontal > .tooltip.top.hide > .tooltip-inner', visible: false)
-    expect(el).to have_text(:all, "1100 : 2023")
+
+    within '#facet-year_isim' do
+      expect(page).to have_selector('canvas.blacklight-range-limit-chart', visible: :all)
+    end
   end
 
-  it "does not show the date slider if only one date" do
+  it "does not show the date range facet if only one date" do
     visit '/catalog?search_field=callNumber_ssim&q="unique call number"'
     expect(page).not_to have_css('.card.facet-limit.blacklight-year_isim')
   end
 
-  # TODO: Fix page.find(:css, '.slider-handle') returning []
-  xit "is able to search with the slider", :style, style: true, js: true do
+  it "is able to search by entering a range" do
     visit search_catalog_path
     click_button 'Date Created'
 
     within '#facet-year_isim' do
-      sliders = page.find(:css, '.slider-handle')
-
-      beg_slider = sliders.first
-      beg_slider.drag_by(5, 0)
-
-      end_slider = sliders.last
-      end_slider.drag_by(-70, 0)
-    end
-    within '#facet-year_isim' do
+      fill_in 'range[year_isim][begin]', with: '1100'
+      fill_in 'range[year_isim][end]', with: '1600'
       click_on 'Apply', match: :first
     end
 
     within '.blacklight-year_isim' do
-      expect(page.text).to match(/11\d\d to 16\d\d/)
+      expect(page.text).to match(/1100 to 1600/)
     end
 
     within '.constraints-container' do
-      expect(page.text).to match(/Date Created 11\d\d To 16\d\d/)
+      expect(page.text).to match(/Date Created 1100 To 1600/)
     end
 
     # makes sure that it includes the turtle record with years: 1555-1800
-    expect(page).to have_content '1 - 4'
+    expect(page).to have_content '1 - 5'
   end
 end
