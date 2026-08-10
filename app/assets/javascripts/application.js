@@ -17,11 +17,11 @@
 //= require download_original
 //= require notifications
 //= require show_more
-// blacklight_range_limit 9.x is an ES module, delivered via importmap: see
-// config/importmap.rb and app/javascript/range_limit.js
 //= require landing_hero
 //= require permission_requests_sort
 //= require grouped_metadata
+// blacklight_range_limit 9.x is an ES module, delivered via importmap: see
+// config/importmap.rb and app/javascript/range_limit.js
 
 /**
  * Setup button functionality.
