@@ -137,7 +137,10 @@ class CatalogController < ApplicationController
     config.add_facet_field 'year_isim', label: 'Date Created',
                                         range: {
                                           segments: true,
-                                          maxlength: 4
+                                          # $yale_blue from app/assets/stylesheets/theme/colors.scss
+                                          chart_segment_border_color: '#043669',
+                                          # $yale_blue at 50% opacity, for the fill under the line
+                                          chart_segment_bg_color: 'rgba(4, 54, 105, 0.5)'
                                         },
                                         if: lambda { |_context, _field_config, facet|
                                               facet.items.length > 1
