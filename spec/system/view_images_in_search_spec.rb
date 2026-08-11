@@ -62,7 +62,15 @@ RSpec.describe 'Search results displays images', type: :system, clean: true, js:
   context 'public records with broken images', style: true do
     it 'displays the image_not_found_png for records with broken images' do
       visit "/catalog?q=#{document_with_broken_image[:oid_ssi]}&search_field=oid_ssi"
-      expect(page.html).to match('/assets/image_not_found')
+      # The fallback is swapped in by JS on the image's error event, so assert on
+      # the rendered src rather than merely on the fallback URL being in the markup.
+      expect(page).to have_css("img[src*='image_not_found']")
+    end
+
+    it 'does not use an inline onerror handler, which CSP blocks' do
+      visit "/catalog?q=#{document_with_broken_image[:oid_ssi]}&search_field=oid_ssi"
+      expect(page).to have_css("img[src*='image_not_found']")
+      expect(page.html).not_to match(/onerror/i)
     end
   end
 

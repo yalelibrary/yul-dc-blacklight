@@ -17,6 +17,7 @@
 //= require download_original
 //= require notifications
 //= require show_more
+//= require thumbnail_fallback
 //= require landing_hero
 //= require permission_requests_sort
 //= require grouped_metadata

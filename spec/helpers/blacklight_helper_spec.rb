@@ -346,6 +346,11 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
       it 'returns an image_tag for oids that have images' do
         expect(helper.render_thumbnail(valid_document, { alt: "" })).to match "<img [^>]* src=\"http://localhost:8182/iiif/2/1234822/full/#{thumbnail_size}/0/default.jpg\" />"
       end
+      it 'declares the fallback via a data attribute rather than an inline onerror handler' do
+        thumbnail = helper.render_thumbnail(valid_document, { alt: "" })
+        expect(thumbnail).to match(/data-fallback-src="[^"]*\/assets\/image_not_found-[^"]*"/)
+        expect(thumbnail).not_to match(/onerror/i)
+      end
       it 'returns an image_tag pointing to image_not_found.png for oids without images' do
         expect(helper.render_thumbnail(non_valid_document, {})).to include("<img src=\"/assets/image_not_found-")
       end
