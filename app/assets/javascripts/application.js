@@ -18,6 +18,7 @@
 //= require download_original
 //= require notifications
 //= require show_more
+//= require thumbnail_fallback
 // For blacklight_range_limit built-in JS
 //= require blacklight_range_limit
 //= require landing_hero

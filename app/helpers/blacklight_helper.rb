@@ -648,10 +648,7 @@ alt: 'Access Available on YALE network only due to copyright or other restrictio
         alt: 'Access Available within Digital Collections')
     end
     url = document[:thumbnail_path_ss]
-    if url.present?
-      error_image_url = image_url('image_not_found.png')
-      return image_tag(url, onerror: "this.error=null;this.src='#{error_image_url}'", loading: "lazy")
-    end
+    return image_tag(url, loading: "lazy", data: { fallback_src: image_url('image_not_found.png') }) if url.present?
     image_tag('image_not_found.png')
   end
 
