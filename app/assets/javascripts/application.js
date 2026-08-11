@@ -1,9 +1,8 @@
 //= require google_tag_manager
-//= require jquery
-//= require 'blacklight_advanced_search'
-
-
+// jQuery 3 only: jquery-rails' `jquery` is 1.12.4, whose feature detection sets
+// on* attributes, causing a script-src-attr CSP violation.
 //= require jquery3
+//= require 'blacklight_advanced_search'
 //= require rails-ujs
 //= require turbolinks
 //= require turbolinks_csp_nonce
