@@ -24,7 +24,7 @@ gem 'csl-styles', '~> 2.0.1'
 gem 'devise', '~> 5.0.4'
 gem 'devise-guests', '~> 0.6'
 gem 'dotenv-rails', '~> 2.8.1', groups: [:development, :test]
-gem 'honeybadger', '~> 4.0'
+gem 'honeybadger', '~> 5.29'
 # Delivers blacklight_range_limit 9.x's ES module; it no longer supports sprockets-only
 gem 'importmap-rails', '~> 2.0'
 gem 'iso-639', '~> 0.3.6'
