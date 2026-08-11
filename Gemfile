@@ -14,7 +14,7 @@ gem 'blacklight-gallery', '~> 4.5.1'
 gem 'blacklight_iiif_search', git: 'https://github.com/yalelibrary/blacklight_iiif_search', branch: 'main'
 gem 'blacklight-marc', '>= 7.0.0.rc1', '< 8'
 gem 'blacklight_oai_provider', git: 'https://github.com/projectblacklight/blacklight_oai_provider.git'
-gem 'blacklight_range_limit', '~> 8.5.0'
+gem 'blacklight_range_limit', '~> 9.0.0'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap', '~> 5.3'
 gem 'citeproc-ruby', '~> 2.0.0'
@@ -25,6 +25,8 @@ gem 'devise', '~> 5.0.4'
 gem 'devise-guests', '~> 0.6'
 gem 'dotenv-rails', '~> 2.8.1', groups: [:development, :test]
 gem 'honeybadger', '~> 4.0'
+# Delivers blacklight_range_limit 9.x's ES module; it no longer supports sprockets-only
+gem 'importmap-rails', '~> 2.0'
 gem 'iso-639', '~> 0.3.6'
 gem 'jbuilder', '~> 2.7'
 gem 'jquery-rails', '~> 4.6.0'

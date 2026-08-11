@@ -14,6 +14,7 @@
     <link rel="apple-touch-icon" sizes="120x120" href="<%= root_url %>apple-touch-icon.png">
     <%= stylesheet_link_tag "application", media: "all" unless ENV["NO_STYLE"] %>
     <%= javascript_include_tag "application" %>
+    <%= javascript_importmap_tags "range_limit" %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <script async src="https://siteimproveanalytics.com/js/siteanalyze_66356571.js"></script>

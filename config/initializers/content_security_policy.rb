@@ -12,8 +12,9 @@ if enforce_envs.include?(ENV['RAILS_ENV'])
       policy.font_src        :self, 'static.library.yale.edu'
       policy.img_src         :self, :https, :data, "#{ENV['IIIF_IMAGE_BASE_URL']}/"
       policy.object_src      :none
-      policy.script_src      :self, 'siteimproveanalytics.com', 'www.googletagmanager.com'
-      policy.script_src_elem :self, 'siteimproveanalytics.com', 'www.googletagmanager.com'
+      # ga.jspm.io serves chart.js for blacklight_range_limit; see config/importmap.rb
+      policy.script_src      :self, 'siteimproveanalytics.com', 'www.googletagmanager.com', 'ga.jspm.io'
+      policy.script_src_elem :self, 'siteimproveanalytics.com', 'www.googletagmanager.com', 'ga.jspm.io'
       policy.script_src_attr :none
       policy.style_src       :self, :unsafe_inline
       policy.style_src_attr  :self, :unsafe_inline
