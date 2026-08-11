@@ -58,19 +58,26 @@ RSpec.describe "search result pagination", type: :system, clean: true, js: true 
   context "navigating with search context links" do
     it "has the appropriate context links on the first page of results" do
       visit '/catalog?per_page=2&q=&search_field=all_fields'
-      expect(page).to have_link "PREVIOUS"
-      # this link is disabled on the first page of results
-      expect(page).not_to have_link "«"
-      expect(page).to have_link "»"
-      expect(page).to have_link "NEXT"
+      within 'ul.pagination' do
+        # PREVIOUS and « are disabled on the first page, so they render as text
+        expect(page).not_to have_link "PREVIOUS"
+        expect(page).to have_css 'li.page-item.disabled span.page-link', text: 'PREVIOUS'
+        expect(page).not_to have_link "«"
+        expect(page).to have_link "»"
+        expect(page).to have_link "NEXT"
+      end
     end
 
     it "jumps to last page of results" do
       visit '/catalog?per_page=2&q=&search_field=all_fields'
       click_on "»"
       within 'ul.pagination' do
-        # next button is disabled on last page so it cannot be found
-        expect(page).not_to have_button("NEXT")
+        # NEXT and » are disabled on the last page, so they render as text
+        expect(page).not_to have_link "NEXT"
+        expect(page).to have_css 'li.page-item.disabled span.page-link', text: 'NEXT'
+        expect(page).not_to have_link "»"
+        expect(page).to have_link "PREVIOUS"
+        expect(page).to have_link "«"
       end
     end
 
@@ -79,8 +86,11 @@ RSpec.describe "search result pagination", type: :system, clean: true, js: true 
       click_on "»"
       click_on "«"
       within 'ul.pagination' do
-        # previous button is disabled on first page so it cannot be found
-        expect(page).not_to have_button("PREVIOUS")
+        # back on the first page, PREVIOUS and « render as text again
+        expect(page).not_to have_link "PREVIOUS"
+        expect(page).to have_css 'li.page-item.disabled span.page-link', text: 'PREVIOUS'
+        expect(page).not_to have_link "«"
+        expect(page).to have_link "NEXT"
       end
     end
   end
