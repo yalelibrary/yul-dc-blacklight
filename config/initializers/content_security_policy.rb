@@ -15,7 +15,10 @@ if enforce_envs.include?(ENV['RAILS_ENV'])
       # ga.jspm.io serves chart.js for blacklight_range_limit; see config/importmap.rb
       policy.script_src      :self, 'siteimproveanalytics.com', 'www.googletagmanager.com', 'ga.jspm.io'
       policy.script_src_elem :self, 'siteimproveanalytics.com', 'www.googletagmanager.com', 'ga.jspm.io'
-      policy.script_src_attr :none
+      # :report_sample adds 'report-sample', which makes violation reports include
+      # a snippet of the offending handler in `script-sample`. Without it a
+      # script-src-attr report identifies no source beyond the document itself.
+      policy.script_src_attr :none, :report_sample
       policy.style_src       :self, :unsafe_inline
       policy.style_src_attr  :self, :unsafe_inline
       policy.style_src_elem  :self, :unsafe_inline, "#{ENV['IIIF_IMAGE_BASE_URL']}/"
