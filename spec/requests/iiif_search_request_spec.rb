@@ -45,9 +45,27 @@ RSpec.describe "Iiif Search", type: :request do
     }
   end
 
+  let(:child_work_page_one) do
+    {
+      "id": "3458",
+      "child_fulltext_wstsim": ["Janet walked to the river."],
+      "child_fulltext_tesim": ["Janet walked to the river."],
+      "parent_ssi": "1234567"
+    }
+  end
+  let(:child_work_page_two) do
+    {
+      "id": "3459",
+      "child_fulltext_wstsim": ["I would not care to guess."],
+      "child_fulltext_tesim": ["I would not care to guess."],
+      "parent_ssi": "1234567"
+    }
+  end
+
   before do
     solr = Blacklight.default_index.connection
-    solr.add([yale_work, owp_work, child_work1, child_work2, child_work3])
+    solr.add([yale_work, owp_work, child_work1, child_work2, child_work3,
+              child_work_page_one, child_work_page_two])
     solr.commit
     allow(User).to receive(:on_campus?).and_return(true)
   end
@@ -69,6 +87,25 @@ RSpec.describe "Iiif Search", type: :request do
       get solr_document_iiif_search_path(owp_work[:id], { q: 'OwP' })
       expect(response).to have_http_status(:not_found)
     end
+
+    it 'returns a hit for every page holding any of the terms' do
+      get solr_document_iiif_search_path(yale_work[:id], { q: 'Janet guess' })
+      expect(response).to have_http_status(:success)
+      body = JSON.parse(response.body)
+      expect(body["hits"].count).to eq 2
+      canvases = body["resources"].map { |resource| resource["on"] }.join(' ')
+      expect(canvases).to include('/canvas/3458')
+      expect(canvases).to include('/canvas/3459')
+    end
+
+    it 'does not widen matching beyond the requested object' do
+      get solr_document_iiif_search_path(yale_work[:id], { q: 'Janet OwP' })
+      expect(response).to have_http_status(:success)
+      body = JSON.parse(response.body)
+      expect(body["hits"].count).to eq 1
+      expect(body["resources"].map { |resource| resource["on"] }.join).not_to include('345678')
+    end
+
     it 'includes proper "on" property in resources' do
       get solr_document_iiif_search_path(yale_work[:id], { q: 'BaskeTball' })
       expect(response).to have_http_status(:success)
