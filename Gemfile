@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-source 'https://rubygems.org', cooldown: 14
+source 'https://rubygems.org', cooldown: 30
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'addressable', '~> 2.9.0'
