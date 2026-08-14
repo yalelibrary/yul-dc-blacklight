@@ -67,7 +67,7 @@ module AccessHelper
     return false if parent_oid.nil?
     allowance = false
     user_owp_permissions['permissions']&.each do |permission|
-      if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.today) && (permission['request_status'] == "Approved")
+      if (permission['oid'].to_s == parent_oid) && (permission['access_until'].nil? || Time.zone.parse(permission['access_until']) > Time.zone.now) && (permission['request_status'] == "Approved")
         allowance = true
       end
     end
