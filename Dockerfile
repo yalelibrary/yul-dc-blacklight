@@ -19,7 +19,7 @@ COPY  --chown=app . $APP_HOME
 
 
 RUN /sbin/setuser app bash -l -c " \
-    DB_ADAPTER=nulldb yarn install --frozen-lockfile --ignore-scripts && \
+    DB_ADAPTER=nulldb YARN_ENABLE_SCRIPTS=false yarn install --immutable && \
     yarn run uv-install && yarn run uv-config && \
     bundle exec rake assets:precompile && \
     mv ./public/assets ./public/assets-new"
