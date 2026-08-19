@@ -10,7 +10,7 @@ RUN rm -f /etc/service/nginx/down
 
 ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
 BUNDLE_JOBS=4
-RUN /sbin/setuser app bash -l -c "gem install bundler -v 4.0.11"
+RUN /sbin/setuser app bash -l -c "gem install bundler -v 4.0.13"
 
 COPY --chown=app Gemfile* $APP_HOME/
 RUN /sbin/setuser app bash -l -c "bundle check || bundle install"
@@ -19,7 +19,7 @@ COPY  --chown=app . $APP_HOME
 
 
 RUN /sbin/setuser app bash -l -c " \
-    DB_ADAPTER=nulldb yarn install --frozen-lockfile --ignore-scripts && \
+    DB_ADAPTER=nulldb YARN_ENABLE_SCRIPTS=false yarn install --immutable && \
     yarn run uv-install && yarn run uv-config && \
     bundle exec rake assets:precompile && \
     mv ./public/assets ./public/assets-new"
