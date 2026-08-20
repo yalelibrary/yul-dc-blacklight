@@ -1,8 +1,18 @@
 # frozen_string_literal: true
 # rubocop:disable Metrics/ModuleLength
 module AccessHelper
+  FULLTEXT_PRESENT_STATUSES = ["Yes", "Partial"].freeze
+
   def viewable_metadata_visibilities
     ["Public", "Yale Community Only", "Open with Permission"]
+  end
+
+  def object_has_fulltext?(document)
+    FULLTEXT_PRESENT_STATUSES.include?(document['has_fulltext_ssi'])
+  end
+
+  def display_fulltext_button?(document)
+    object_has_fulltext?(document) && client_can_view_digital?(document)
   end
 
   def client_can_view_digital?(document)
