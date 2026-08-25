@@ -397,17 +397,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@edsilv/http-status-codes@npm:1.0.3, @edsilv/http-status-codes@npm:^1.0.3":
+"@edsilv/http-status-codes@npm:^1.0.3":
   version: 1.0.3
   resolution: "@edsilv/http-status-codes@npm:1.0.3"
   checksum: 10c0/0436ca3fbfbe0500443c49e04661d177042dc56f9cb5fd2b58d6186e487b5b81f5d1ef3a7b13566c0bb051a8cbd8dacc76576b96254d099edeaaaf2aa0500b40
-  languageName: node
-  linkType: hard
-
-"@edsilv/jquery-plugins@npm:1.0.7":
-  version: 1.0.7
-  resolution: "@edsilv/jquery-plugins@npm:1.0.7"
-  checksum: 10c0/bee1f37e5ddd0ac871107a08cb02edf727899db5d1a483c3538d6693e0b82c6a6c422d33415bd795ab00e1c02f1f479bea3721b8f57e7ca5f5d3db482146392b
   languageName: node
   linkType: hard
 
@@ -418,29 +411,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@edsilv/key-codes@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@edsilv/key-codes@npm:1.0.0"
-  checksum: 10c0/28ce9965714a917f960e40dd5c7648a5e8d0011161e1007bdba272d69a068b74a62feebcc20c5ee6df86295764521966e304b9a370cbb1f91328c64761626384
-  languageName: node
-  linkType: hard
-
 "@edsilv/stencil-redux@npm:0.1.1":
   version: 0.1.1
   resolution: "@edsilv/stencil-redux@npm:0.1.1"
   peerDependencies:
     redux: ^4.0.1
   checksum: 10c0/1667a772a0c1fe9c9d4bde5fefa3adb4441d5299f0db431dfe082b4e02738f37ce5b860d3c321a3a364b25d429caa691e862082f62d4a6994da696ccaa2d3fc6
-  languageName: node
-  linkType: hard
-
-"@edsilv/utils@npm:1.0.2, @edsilv/utils@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@edsilv/utils@npm:1.0.2"
-  dependencies:
-    "@types/jquery": "npm:^2.0.40"
-    "@types/node": "npm:8.10.52"
-  checksum: 10c0/e7544bd3a93cd59255ab054bbb781c9e2db3d18b96ba700cc52de1f22251682899bbafd2e0c7ae769b1598e5823ebe244771cc1e6f46a637b5105676a75cb704
   languageName: node
   linkType: hard
 
@@ -664,47 +640,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iiif/iiif-gallery-component@npm:^1.1.23":
-  version: 1.1.23
-  resolution: "@iiif/iiif-gallery-component@npm:1.1.23"
-  dependencies:
-    "@edsilv/jquery-plugins": "npm:1.0.7"
-    "@edsilv/utils": "npm:1.0.2"
-    "@iiif/base-component": "npm:2.0.1"
-    "@iiif/manifold": "npm:2.*"
-    "@iiif/vocabulary": "npm:1.0.11"
-    "@types/jquery": "npm:3.3.14"
-    manifesto.js: "npm:4.*"
-  checksum: 10c0/333692d50bd2e99e1fe966f8257d28834fb7c52e4c296fa5bb3be4d0f418a6fd9f5229c6293c13348deb1eef389e3a72ad258565331ef7b46edf7bf09014d572
-  languageName: node
-  linkType: hard
-
-"@iiif/iiif-metadata-component@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "@iiif/iiif-metadata-component@npm:1.2.1"
-  dependencies:
-    "@edsilv/jquery-plugins": "npm:1.0.7"
-    "@edsilv/utils": "npm:1.0.2"
-    "@iiif/base-component": "npm:2.*"
-    "@iiif/manifold": "npm:^2.1.1"
-    "@iiif/vocabulary": "npm:1.*"
-    manifesto.js: "npm:^4.2.21"
-  checksum: 10c0/2445cd4f17c1854b99463f10558fd9b1e4baddbac65f3bb4cff19f574ef390cb54ba6edd38ce14d242495294e4486ad9db50d5c2bebee48d949fe64b48ad8793
-  languageName: node
-  linkType: hard
-
-"@iiif/iiif-tree-component@npm:^2.0.7":
-  version: 2.0.7
-  resolution: "@iiif/iiif-tree-component@npm:2.0.7"
-  dependencies:
-    "@iiif/base-component": "npm:2.*"
-    "@iiif/manifold": "npm:2.*"
-    manifesto.js: "npm:4.*"
-  checksum: 10c0/bfd603b388de7a7cf644158e7c801295ba34e2a29afcd342d645c9749238e2a90b3bba98e0e52a906dfcc8e92732f492d3619f8a4bec5fdf9028df2be66bc028
-  languageName: node
-  linkType: hard
-
-"@iiif/manifold@npm:2.*, @iiif/manifold@npm:^2.0.5, @iiif/manifold@npm:^2.1.1":
+"@iiif/manifold@npm:^2.0.5":
   version: 2.1.1
   resolution: "@iiif/manifold@npm:2.1.1"
   dependencies:
@@ -723,6 +659,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@iiif/manifold@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "@iiif/manifold@npm:2.3.0"
+  dependencies:
+    "@edsilv/http-status-codes": "npm:^1.0.3"
+    "@iiif/vocabulary": "npm:^1.0.30"
+    fsevents: "npm:*"
+    manifesto.js: "npm:^4.3.3"
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  checksum: 10c0/d4f5c04ca378855b98a18a76bf58c48a79cda5cec145f44a7e5d0c50e534ad1559db8c6e9d7cebe3c20488d49da8cf8065a498ec87a81655d0d8d16b89ce3a4f
+  languageName: node
+  linkType: hard
+
 "@iiif/presentation-3@npm:^1.0.5":
   version: 1.1.3
   resolution: "@iiif/presentation-3@npm:1.1.3"
@@ -732,17 +683,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iiif/vocabulary@npm:1.*, @iiif/vocabulary@npm:^1.0.23, @iiif/vocabulary@npm:^1.0.26":
+"@iiif/vocabulary@npm:^1.0.23, @iiif/vocabulary@npm:^1.0.26":
   version: 1.0.26
   resolution: "@iiif/vocabulary@npm:1.0.26"
   checksum: 10c0/c4a7e270ef6aef035bb91a4d57a2c2cdeeda546600597193023fbec425098f2edf299e5db4ab6db6a23014c06f9535a9eea109270cda7154da5e259f79b0126a
   languageName: node
   linkType: hard
 
-"@iiif/vocabulary@npm:1.0.11":
-  version: 1.0.11
-  resolution: "@iiif/vocabulary@npm:1.0.11"
-  checksum: 10c0/db4ab592cc2d3d8b340b7827b4bc39a93a62cb413d217d35220984594a682f4aaf7b89ded5dc0d9210cb4b174a1faa7a757ea91350f7ae5a95eccec92a3eab60
+"@iiif/vocabulary@npm:^1.0.28, @iiif/vocabulary@npm:^1.0.30, @iiif/vocabulary@npm:^1.0.31":
+  version: 1.0.31
+  resolution: "@iiif/vocabulary@npm:1.0.31"
+  checksum: 10c0/f050b193867f4093475a5b81e17a5efc2ae6f3b754d2f4f2a99579316e76c5f391815096c7827b8a5670349922736525215ae4c3785afd46f704a1eab1ca5210
   languageName: node
   linkType: hard
 
@@ -1334,22 +1285,6 @@ __metadata:
   version: 2.0.34
   resolution: "@types/jquery@npm:2.0.34"
   checksum: 10c0/891c6cbcbef6642cbe6a40f75d8052e1b86ae6fba526d8d852a459e36a7249a0830ce2949effaf805bb6fa74f18242d9451d309db89154f023e8277799b1b5c6
-  languageName: node
-  linkType: hard
-
-"@types/jquery@npm:3.3.14":
-  version: 3.3.14
-  resolution: "@types/jquery@npm:3.3.14"
-  dependencies:
-    "@types/sizzle": "npm:*"
-  checksum: 10c0/ffd4ea3ff4ad685ccf9a3f1b5d6bc4df5c67250edf479f80b8c5d2d6180ba22bef5c9c79006a8cc64772386caa4cc6cecbb2472ee3b9a9cc0ffa9817b8f9788c
-  languageName: node
-  linkType: hard
-
-"@types/jquery@npm:^2.0.40":
-  version: 2.0.68
-  resolution: "@types/jquery@npm:2.0.68"
-  checksum: 10c0/83c13735201569caf7d525c7bbc0ccd0b3444beef4d141d55b97fc6d01d4c79a9fb47317ebee7f18653805a14451fa78599aa007dc0f2e4ff93bd0d29b201317
   languageName: node
   linkType: hard
 
@@ -4910,7 +4845,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"manifesto.js@npm:4.*, manifesto.js@npm:4.2.21, manifesto.js@npm:^4.2.21, manifesto.js@npm:^4.2.4":
+"manifesto.js@npm:4.2.21, manifesto.js@npm:^4.2.4":
   version: 4.2.21
   resolution: "manifesto.js@npm:4.2.21"
   dependencies:
@@ -4919,6 +4854,18 @@ __metadata:
     isomorphic-unfetch: "npm:^3.0.0"
     lodash: "npm:^4.17.21"
   checksum: 10c0/a910141ce9e9ef343e6b3a1650c02ca779360919604a0f61b3adac7b3387a295b4db172af21f74b7ffc0a284b5647c1b80a6a5ede93d7f04ea68572ff5d9b036
+  languageName: node
+  linkType: hard
+
+"manifesto.js@npm:^4.3.0, manifesto.js@npm:^4.3.3":
+  version: 4.3.4
+  resolution: "manifesto.js@npm:4.3.4"
+  dependencies:
+    "@edsilv/http-status-codes": "npm:^1.0.3"
+    "@iiif/vocabulary": "npm:^1.0.28"
+    isomorphic-unfetch: "npm:^3.0.0"
+    lodash: "npm:^4.17.21"
+  checksum: 10c0/c13e6315526781aa66947e5aef1a0ab2c33dd0cf719f32406dcb3e79b4d2150d20e7d723b643d7d74abf90ef535c31dcacafc730693716a38016f326e76387ce
   languageName: node
   linkType: hard
 
@@ -5381,10 +5328,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openseadragon@npm:4.0.0":
-  version: 4.0.0
-  resolution: "openseadragon@npm:4.0.0"
-  checksum: 10c0/8d70d68f54288b76407cd272d0a2939dd79dd3d6565f95be3f4f956a405fdfbc386312ff49c54a966e1585c5c77efa88a86ef16ca63a6534689f212460cd6c06
+"openseadragon@npm:^6.0.0":
+  version: 6.0.2
+  resolution: "openseadragon@npm:6.0.2"
+  checksum: 10c0/0cfbde9dab7d76f27171de06761e78c68997cf083319a32e7bf5d0e2efd15e6e8fbbcaaf2aea1d335efc055580d897691a5ad1edb80c18594975997fa854e722
   languageName: node
   linkType: hard
 
@@ -6920,22 +6867,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"universalviewer@npm:4.2.0-rc4":
-  version: 4.2.0-rc4
-  resolution: "universalviewer@npm:4.2.0-rc4"
+"universalviewer@npm:4.4.2":
+  version: 4.4.2
+  resolution: "universalviewer@npm:4.4.2"
   dependencies:
-    "@edsilv/http-status-codes": "npm:1.0.3"
-    "@edsilv/key-codes": "npm:1.0.0"
-    "@edsilv/utils": "npm:^1.0.2"
     "@google/model-viewer": "npm:^4.0.0"
     "@iiif/base-component": "npm:2.0.1"
     "@iiif/iiif-av-component": "npm:1.2.4"
-    "@iiif/iiif-gallery-component": "npm:^1.1.23"
-    "@iiif/iiif-metadata-component": "npm:^1.2.1"
-    "@iiif/iiif-tree-component": "npm:^2.0.7"
-    "@iiif/manifold": "npm:^2.1.1"
+    "@iiif/manifold": "npm:^2.3.0"
     "@iiif/presentation-3": "npm:^1.0.5"
-    "@iiif/vocabulary": "npm:^1.0.23"
+    "@iiif/vocabulary": "npm:^1.0.31"
     "@openseadragon-imaging/openseadragon-viewerinputhook": "npm:^2.2.1"
     "@universalviewer/aleph": "npm:0.0.21"
     "@universalviewer/uv-ebook-components": "npm:1.0.2"
@@ -6949,10 +6890,10 @@ __metadata:
     jquery: "npm:3.5.0"
     jsviews: "npm:1.0.15"
     less-plugin-clean-css: "npm:^1.5.1"
-    manifesto.js: "npm:^4.2.21"
+    manifesto.js: "npm:^4.3.0"
     mediaelement: "npm:4.2.15"
     mediaelement-plugins: "npm:5.0.0"
-    openseadragon: "npm:4.0.0"
+    openseadragon: "npm:^6.0.0"
     pdfjs-dist: "npm:3.11.174"
     pdfobject: "npm:2.3.0"
     react: "npm:^19.0.0"
@@ -6961,7 +6902,7 @@ __metadata:
     waveform-panel: "npm:^1.2.0"
     xss: "npm:1.0.15"
     zustand: "npm:^5.0.3"
-  checksum: 10c0/bb03335ce6be5f6cb307a4d095c8cab91caac8b5b313cddf4ba5dd6e251b99251c4882f03b8b117ec0cc84f86d059f37293b231ea729de6b16d6abb40fd5bd69
+  checksum: 10c0/aeadd26396a914597094fa3e85a22ef1be142a0bbab0e3c4ef69363c49624fa51d1e2532265c7498d4e08366b24664fc8d2207be379fd458635e9238a8ed9686
   languageName: node
   linkType: hard
 
