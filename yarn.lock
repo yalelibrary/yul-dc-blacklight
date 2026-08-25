@@ -1782,7 +1782,7 @@ __metadata:
   resolution: "blacklight_yul@workspace:."
   dependencies:
     shx: "npm:^0.4.0"
-    universalviewer: "npm:4.2.0-rc4"
+    universalviewer: "npm:4.4.2"
   languageName: unknown
   linkType: soft
 
