@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="float: left; width=device-float: left; width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Internet Explorer use the highest version available -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -94,38 +94,52 @@
   <main id="main-container" class="<%= container_classes %>" role="main" aria-label="<%= t('blacklight.main.aria.main_container') %>">
     <div id='highlights'>
       <h2>Highlights</h2>
+      <%#
+        Each highlight is a text link over a decorative CSS background image. The image
+        descriptions are attached with aria-describedby rather than aria-label so the
+        link's accessible name stays the visible text -- an aria-label would replace it,
+        leaving voice-control users unable to speak the label they can see.
+      %>
       <ul class='clearfix'>
-        <li><%= link_to File.join(root_path, "catalog/33338891?child_oid=33342820"), id: 'sous-marine', class: 'btn float-start', alt: "La végétation sous-marine piece from the Robert B. Haas Family Arts Library Special Collections" do %>
+        <li><%= link_to File.join(root_path, "catalog/33338891?child_oid=33342820"), id: 'sous-marine', class: 'btn float-start', aria: { describedby: 'sous-marine-desc' } do %>
           <div class='highlight-link'>La Végétation Sous-marine, Arts Library</div>
           <% end %>
+          <span id="sous-marine-desc" class="visually-hidden">La végétation sous-marine piece from the Robert B. Haas Family Arts Library Special Collections</span>
         </li>
-        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"JWJ MSS 26"'), id: 'hughes-papers', class: 'btn float-start', alt: "Langston Hughes (center) with Zora Neale Hurston (right) and Jessie Fauset (left) in Tuskegee, Alabama, in front of a statue of Booker T. Washington") do %>
+        <li><%= link_to( search_catalog_path(search_field: 'callNumber_tesim', q: '"JWJ MSS 26"'), id: 'hughes-papers', class: 'btn float-start', aria: { describedby: 'hughes-papers-desc' }) do %>
           <div class='highlight-link'>Langston Hughes Papers, Beinecke Library</div>
           <% end %>
+          <span id="hughes-papers-desc" class="visually-hidden">Langston Hughes (center) with Zora Neale Hurston (right) and Jessie Fauset (left) in Tuskegee, Alabama, in front of a statue of Booker T. Washington</span>
         </li>
-        <li><%= link_to File.join(root_path, "/catalog?all_fields_advanced=&callNumber_tesim=%22MS+1981%22+OR+%22MS+2004%22&child_oids_ssim=&creator_tesim=&date_fields=&digitization_note_tesi=&fulltext_tsim_advanced=&genre_fields=&oid_ssi=&op=AND&search_field=advanced&sort=title_ssim+asc%2C+oid_ssi+desc%2C+archivalSort_ssi+asc&subject_fields=&title_tesim="), id: 'kissinger', class: 'btn float-start', alt: "Photograph of a plane flying over fields, with mountains in the background, inscribed “To our ambassador, Anne and Charles Lindbergh” in the upper left" do %>
+        <li><%= link_to File.join(root_path, "/catalog?all_fields_advanced=&callNumber_tesim=%22MS+1981%22+OR+%22MS+2004%22&child_oids_ssim=&creator_tesim=&date_fields=&digitization_note_tesi=&fulltext_tsim_advanced=&genre_fields=&oid_ssi=&op=AND&search_field=advanced&sort=title_ssim+asc%2C+oid_ssi+desc%2C+archivalSort_ssi+asc&subject_fields=&title_tesim="), id: 'kissinger', class: 'btn float-start', aria: { describedby: 'kissinger-desc' } do %>
           <div class='highlight-link'>Henry A. Kissinger papers, Parts II & III, Manuscripts and Archives</div>
           <% end %>
+          <span id="kissinger-desc" class="visually-hidden">Photograph of a plane flying over fields, with mountains in the background, inscribed “To our ambassador, Anne and Charles Lindbergh” in the upper left</span>
         </li>
-        <li><%= link_to File.join(root_path, "/catalog?f%5BcallNumber_ssim%5D%5B%5D=RG+221"), id: 'ephemera', class: 'btn float-start', alt: "Missionary children playing with a goat-drawn cart in China, with two Chinese men in the background, 1895" do %>
+        <li><%= link_to File.join(root_path, "/catalog?f%5BcallNumber_ssim%5D%5B%5D=RG+221"), id: 'ephemera', class: 'btn float-start', aria: { describedby: 'ephemera-desc' } do %>
           <div class='highlight-link'>Missionary Ephemera Collection, Divinity Library</div>
           <% end %>
+          <span id="ephemera-desc" class="visually-hidden">Missionary children playing with a goat-drawn cart in China, with two Chinese men in the background, 1895</span>
         </li>
-        <li><%= link_to File.join(root_path, "/catalog?f%5Bproject_identifier_tesi%5D%5B0%5D=legalpostcard"), id: 'postcard', class: 'btn float-start', alt: "Lectures on Law by Hon. Tapping Reeve and James Gould Esq., Litchfield, 1812-1813" do %>
+        <li><%= link_to File.join(root_path, "/catalog?f%5Bproject_identifier_tesi%5D%5B0%5D=legalpostcard"), id: 'postcard', class: 'btn float-start', aria: { describedby: 'postcard-desc' } do %>
           <div class='highlight-link'>Legal Postcard Collection, Law Library</div>
           <% end %>
+          <span id="postcard-desc" class="visually-hidden">Lectures on Law by Hon. Tapping Reeve and James Gould Esq., Litchfield, 1812-1813</span>
         </li>
-        <li><%= link_to File.join(root_path, "/catalog/16945082"), id: 'hogarth', class: 'btn float-start', alt: "Satirical 19th century print of a man sitting on the pavement, having fallen backwards, with his wig falling off and coins spilling from his pockets; four men observing prints posted in a shop window are behind him." do %>
+        <li><%= link_to File.join(root_path, "/catalog/16945082"), id: 'hogarth', class: 'btn float-start', aria: { describedby: 'hogarth-desc' } do %>
           <div class='highlight-link'>Hogarth Painting the Comic Muse, Lewis Walpole Library</div>
           <% end %>
+          <span id="hogarth-desc" class="visually-hidden">Satirical 19th century print of a man sitting on the pavement, having fallen backwards, with his wig falling off and coins spilling from his pockets; four men observing prints posted in a shop window are behind him.</span>
         </li>
-        <li><%= link_to File.join(root_path, "/catalog/16986907?child_oid=16987505"), id: 'medical', class: 'btn', alt: "Black and white seventeenth century print of the muscles in the human body in perspective, with three views of an individual and a smaller skeleton" do %>
+        <li><%= link_to File.join(root_path, "/catalog/16986907?child_oid=16987505"), id: 'medical', class: 'btn', aria: { describedby: 'medical-desc' } do %>
           <div class='highlight-link'>Fasciculus Medicinae, with Consilium Pro Peste Evitanda, Medical Historical Library</div>
           <% end %>
+          <span id="medical-desc" class="visually-hidden">Black and white seventeenth century print of the muscles in the human body in perspective, with three views of an individual and a smaller skeleton</span>
         </li>
-        <li><%= link_to File.join(root_path, "/catalog/32307332?child_oid=32307367"), id: 'music', class: 'btn', alt: "Handwritten music noted in tablature from the Wickhambrook lute manuscript, with “finis si vou voules” written at the end" do %>
+        <li><%= link_to File.join(root_path, "/catalog/32307332?child_oid=32307367"), id: 'music', class: 'btn', aria: { describedby: 'music-desc' } do %>
           <div class='highlight-link'>Divertimenti a Mandolino, Music Library</div>
           <% end %>
+          <span id="music-desc" class="visually-hidden">Handwritten music noted in tablature from the Wickhambrook lute manuscript, with “finis si vou voules” written at the end</span>
         </li>
       </ul>
       <div id="content-statement">
