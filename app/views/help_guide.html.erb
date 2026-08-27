@@ -5,38 +5,40 @@
   <div class="help-guide-table-of-contents">
     <ul>
       <li><a href="#whats-in-dc">What's in this Digital Collections site?</a></li>
-      <li><a href="#how-search-in-dc">How do I search Digital Collections?</a></li>
+      <li><a href="#how-search-in-dc">How do I search Digital Collections?</a>
         <ul>
           <li><a href="#starting-search-in-dc">Starting a search and phrasing your searches</a></li>
           <li><a href="#limiting-search-in-dc">Limiting and sorting your search results</a></li>
           <li><a href="#fulltext-search-in-dc">Full text searching</a></li>
           <li><a href="#advanced-search-in-dc">Advanced searching</a></li>
         </ul>
-      <li><a href="#what-info-in-dc">What kind of information is available when I find an item I'm interested in?</a></li>
+      </li>
+      <li><a href="#what-info-in-dc">What kind of information is available when I find an item I'm interested in?</a>
         <ul>
           <li><a href="#viewing-search-in-dc">Viewing your search results and item pages</a></li>
           <li><a href="#item-viewer-in-dc">The item viewer, IIIF, and linking to materials</a></li>
         </ul>
+      </li>
       <li><a href="#can-download-in-dc">Can I download items? What formats can I download? How?</a></li>
       <li><a href="#cant-view-in-dc">What does it mean if I can't view an item in Digital Collections</a></li>
       <li><a href="#request-view-in-dc">How do I request to view an item in person?</a></li>
       <li><a href="#reuse-images-in-dc">May I reuse images I find in Digital Collections?</a></li>
-      <li><a href="#feedbad-in-dc">What if I have feedback on the site, its functionality, or Yale's descriptions?</a></li>
+      <li><a href="#feedback-in-dc">What if I have feedback on the site, its functionality, or Yale's descriptions?</a></li>
       <li><a href="#additional-resources-in-dc">Additional resources</a></li>
     </ul>
   </div>
 
   <div class="help-guide-dc-site">
     <h2 id="whats-in-dc">What's in this Digital Collections site?</h2>
-    <p>This Digital Collections site provides access to millions of digitized objects from Yale Library’s collections, which include archives and manuscripts, printed books, maps, ephemera, prints and drawings, and photographic material. This site does not include Yale Library’s audiovisual digital collections, which are available via Aviary <a href="https://avcollections.library.yale.edu/">[https://avcollections.library.yale.edu/]</a>, nor licensed e-resources included in the general collections.</p>
+    <p>This Digital Collections site provides access to millions of digitized objects from Yale Library’s collections, which include archives and manuscripts, printed books, maps, ephemera, prints and drawings, and photographic material. This site does not include Yale Library’s audiovisual digital collections, which are available via <a href="https://avcollections.library.yale.edu/">Aviary</a>, nor licensed e-resources included in the general collections.</p>
     <p>Although the materials in Digital Collections are numerous, they represent only a portion of Yale Library’s collections. More items are being added all the time. Additionally, different collections have been digitized to different extents: some collections are digitized in their entirety, but more often, selections from larger collections are partially digitized and added to Digital Collections. These digitization decisions are prompted by researcher digitization requests and proactive curatorial decisions. </p>
-    <p>To browse all items that have been added to Digital Collections, leave the main search box on <a href="https://collections.library.yale.edu/">https://collections.library.yale.edu/</a> empty and click the search button. This will take you to a list of every item currently available.</p>
+    <p>To browse all items that have been added to Digital Collections, leave the main search box on the <a href="https://collections.library.yale.edu/">Digital Collections home page</a> empty and click the search button. This will take you to a list of every item currently available.</p>
   </div>
 
   <div class="help-guide-search">
     <h2 id="how-search-in-dc">How do I search Digital Collections?</h2>
     <h3 id="starting-search-in-dc">Starting a search and phrasing your searches</h3>
-    <p>To initiate a search, enter your search terms in the main search box on <a href="https://collections.library.yale.edu/">https://collections.library.yale.edu/</a>. Once you’ve started your search, you will be able to further limit your search on the following page. You will also then be able to perform new searches using the search bar at the top of the page and by accessing the Advanced Search functionality. Access the Advanced Search by clicking the link that says “Advanced Search” that appears underneath the main search box on the Digital Collection home page.</p>
+    <p>To initiate a search, enter your search terms in the main search box on the <a href="https://collections.library.yale.edu/">Digital Collections home page</a>. Once you’ve started your search, you will be able to further limit your search on the following page. You will also then be able to perform new searches using the search bar at the top of the page and by accessing the Advanced Search functionality. Access the Advanced Search by clicking the link that says “Advanced Search” that appears underneath the main search box on the Digital Collection home page.</p>
     <p>Some tips for search phrasing include:</p>
     <ul>
       <li>Searches are not case sensitive.</li>
@@ -80,12 +82,13 @@
       <li>Page through multipage works</li>
       <li>Control how you’re viewing the item (e.g., as thumbnails or as individual pages)</li>
       <li>Deeply zoom on a page and rotate images</li>
-      <li>Use the MORE INFORMATION panel to learn more about the item. Information on this panel includes</li>
+      <li>Use the MORE INFORMATION panel to learn more about the item. Information on this panel includes
         <ul>
           <li>All information available on the item record page</li>
           <li>The identification number (“Image ID”) for the single page or image being viewed</li>
           <li>The direct link to the specific page of the item or image being viewed</li>
         </ul>
+      </li>
       <li><a href="#can-download-in-dc">Download the item</a></li>
       <li>Share or embed content</li>
       <li>See where any full text search results appear in the item, via the bottom scroll bar (only  appears for items with full text)</li>
@@ -97,37 +100,44 @@
   <div class="help-guide-download">
     <h2 id="can-download-in-dc">Can I download items? What formats can I download? How?</h2>
     <p>To download an object, click on the download icon in the bottom left corner of the Universal Viewer. The download icon features a downward facing arrow above a horizontal bar.</p>
-    <div class="uv_image">
-      <%= image_tag("help_guide/uv_help_guide.png", alt: "The download icon is in the bottom-left corner of Universal Viewer.") %>
-    </div>
-    <div class="uv_caption">
-      <i>The download icon is a downward facing arrow over a horizontal bar located in the bottom left of the Universal Viewer.</i>
-    </div>
+    <%# alt is empty because the figcaption below, and the paragraph above, already
+        describe this screenshot -- a third copy in alt would be read out redundantly. %>
+    <figure class="uv_image">
+      <%= image_tag("help_guide/uv_help_guide.png", alt: "") %>
+      <figcaption class="uv_caption">
+        <i>The download icon is a downward facing arrow over a horizontal bar located in the bottom left of the Universal Viewer.</i>
+      </figcaption>
+    </figure>
     <p>Once you click on the icon, you will be presented with a white pop-up menu with the following options:</p>
     <ul>
-      <li><strong>Reduced size (JPG)</strong></li>
+      <li><strong>Reduced size (JPG)</strong>
         <ul>
           <li>This provides a JPG of the single image that is currently being displayed in the Universal Viewer</li>
           <li>The size is indicated and has smaller dimensions than the original file uploaded to Digital Collections.</li>
         </ul>
-      <li><strong>Full size (JPG)</strong></li>
+      </li>
+      <li><strong>Full size (JPG)</strong>
         <ul>
           <li>This provides a JPG of the single image that is currently being displayed in the Universal Viewer.</li>
-          <li>In most cases, the size is indicated and has the <strong>same dimensions as the original file uploaded to Digital Collections.</strong></li>
+          <li>In most cases, the size is indicated and has the <strong>same dimensions as the original file uploaded to Digital Collections.</strong>
             <ul>
               <li>For some extra-large objects (for example, scrolls or scanned negatives), the JPG may be resized to the largest dimensions available to be delivered as a JPG.</li>
             </ul>
+          </li>
         </ul>
-      <li><strong>Full size original (TIFF)</strong></li>
+      </li>
+      <li><strong>Full size original (TIFF)</strong>
         <ul>
           <li>This provides an exact copy of the original TIFF file that was uploaded to Digital Collections for the single image that is currently being displayed in the Universal Viewer.</li>
         </ul>
-      <li><strong>Download as PDF</strong></li>
+      </li>
+      <li><strong>Download as PDF</strong>
         <ul>
           <li>This provides a single PDF containing all images from an object.</li>
           <li>Each scanned image is on an individual page of the PDF. The individual page also includes the image ID number (OID).</li>
           <li>The PDF includes a cover page with the object’s title, collection title, rights, date generated, and links to the Terms of Use and object’s location in digital collections.</li>
         </ul>
+      </li>
     </ul>
     <p>Click the blue link of the format you would like to download. </p>
     <p><strong>Please note that technical metadata may be altered in the download process to reflect a lower dpi than the object was originally digitized at.</strong> You can calculate the maximum reproduction size based on an image’s dimensions. For example, this image download has dimensions of 4516 x 2951px. If we would like to find the maximum reproduction size at 300 dpi, we can divide the length and width by the dpi 300. We could print at a size of approximately 15” x 9.8” (4516/300 by 2951/300).</p>
@@ -139,11 +149,12 @@
     </ul>
     <p><strong>If you are downloading a Full size TIFF:</strong></p>
     <ul>
-      <li>After clicking the download link, a new tab will open in your browser stating that the file will download automatically when ready.</li>
+      <li>After clicking the download link, a new tab will open in your browser stating that the file will download automatically when ready.
         <ul>
           <li>Please note that, depending on the size of the item, the automatic download may take a few minutes to complete.</li>
           <li>The new browser tab must remain open until the original TIFF file is finished downloading.</li>
         </ul>
+      </li>
       <li>The image file will download automatically when it is ready. Check your ‘downloads’ folder for the file.</li>
       <li>The new browser tab will automatically close once the file has downloaded. This may take a few minutes.</li>
     </ul>
@@ -159,12 +170,12 @@
     <p>Some materials in Yale’s Digital Collections may only be viewed online by members of the Yale community, due to copyright or other restrictions. These materials are indicated by thumbnail images describing this restriction. You may limit your search by access category to exclude or include materials that are restricted to the Yale community or only open with permission.</p>
     <p>Off-campus Yale users may login using their Yale NetID, and anyone, regardless of whether you are affiliated with Yale, is welcome to contact Yale Library staff to inquire about access to a physical copy or an emailed digital copy of the material. To do so, please use the Feedback link in the footer of the Digital Collections.</p>
     <br>
-    <div class="footer_image">
-      <%= image_tag("help_guide/footer-feedback.png", alt: "The Feedback link is in the footer of the Digital Collections website.") %>
-    </div>
-    <div class="footer_caption">
-      <i>The Feedback link in the footer of the Digital Collection website.</i>
-    </div>
+    <figure class="footer_image">
+      <%= image_tag("help_guide/footer-feedback.png", alt: "") %>
+      <figcaption class="footer_caption">
+        <i>The Feedback link in the footer of the Digital Collections website.</i>
+      </figcaption>
+    </figure>
     <p>Additionally, some materials may only be viewed online with permission. These materials also feature a thumbnail image identifying them as only available with permission, and they fall into the Access category of Open with Permission. Some collections, such as the Henry A. Kissinger Papers, require approval from collection representatives outside of Yale University. Collections that are Open with Permission may require that patrons agree to a set of Terms & Conditions regarding use.</p>
     <p>If you are a Yale Digital Collections user, you may log in using your Yale NetID and click on the request form link on an item’s page to request permission to view an object. If you are a non-Yale Digital Collections user, you can create an account by clicking “Log In” at the top of the page and following the "Sign up" link. Once logged in, you can click on the request form link on an item’s page to request permission to view an object.</p>
     <p>In the “Notes” section of the request form, we ask that you please provide as much information as possible about the research you are undertaking and why you would like to view the selected object. More information allows collection approvers to make an informed response to your request.</p>
@@ -177,7 +188,7 @@
     <p>Please note that we endeavor to provide factual information about copyright status and owners. Please contact Yale Library staff via the Feedback button in the footer of the Digital Collections site if you have more information on material we hold. If you are the copyright owner and believe Digital Collections has not properly attributed your work or has used it without your authorization, please contact our Copyright Librarian at <a href="mailto:copyright.librarian@yale.edu">copyright.librarian@yale.edu</a>.</p>
     <p>For more information, see: <a href="https://guides.library.yale.edu/specialcollections/speccoll-copyrightpermissions">Guide to Using Special Collections at Yale University: Rights and Permissions</a>.</p>
     <p>Additionally, please attribute the work in the manner specified by the applicable library or archive guidelines, without suggestion of endorsement. Attribution will help other people find the materials. Objects may have the preferred citation in the Access and Usage Rights section of the item’s record.</p>
-    <h2 id="feedbad-in-dc">What if I have feedback on the site, its functionality, or Yale's descriptions?</h2>
+    <h2 id="feedback-in-dc">What if I have feedback on the site, its functionality, or Yale's descriptions?</h2>
     <p>We welcome feedback on the Digital Collections site and how we describe the material it contains. The footer of our site includes a Feedback link; Yale Library staff will review and respond to any feedback submitted through that link.</p>
     <h2 id="additional-resources-in-dc">Additional resources</h2>
     <p><a href="https://library.yale.edu/find-request-and-use/use/using-special-collections">Guide to Using Special Collections at Yale Univerity</a></p>
