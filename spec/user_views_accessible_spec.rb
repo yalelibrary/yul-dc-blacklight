@@ -16,4 +16,10 @@ feature 'welcome', js: true do
       expect(page).to be_accessible
     end
   end
+  context 'help guide page is accessible' do
+    it 'with axe gem' do
+      visit "/help_guide"
+      expect(page).to be_accessible
+    end
+  end
 end
