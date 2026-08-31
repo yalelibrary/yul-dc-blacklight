@@ -16,4 +16,10 @@ feature 'welcome', js: true do
       expect(page).to be_accessible
     end
   end
+  context 'advanced search page is accessible' do
+    it 'with axe gem' do
+      visit "/advanced"
+      expect(page).to be_accessible
+    end
+  end
 end
