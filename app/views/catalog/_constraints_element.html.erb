@@ -5,22 +5,29 @@
     #   :remove => url for a remove constraint link
     #   :classes => array of classes to add to container span
     options ||= {}
+
+    display_label =
+      if label.blank?
+        nil
+      elsif label == "Project Identifier Tesi"
+        label[0...label.rindex(" ")]
+      else
+        label
+      end
+
+    remove_label = ["Remove filter:", display_label, value].compact.join(' ').squish
 %>
 
 <span class="btn-group applied-filter constraint query <%= options[:classes].join if options[:classes] %>">
-  <button class="constraint-value btn btn-outline-secondary href-button" href="<%=options[:remove]%>">
-    <% unless label.blank? %>
-      <% if label == "Project Identifier Tesi" %>
-        <span class="filter-name"><%= label[0...label.rindex(" ")] %> </span>
-      <% else %>
-        <span class="filter-name"><%= label %> </span>
-      <% end %>
+  <button class="constraint-value btn btn-outline-secondary href-button" href="<%=options[:remove]%>" aria-label="<%= remove_label %>">
+    <% if display_label.present? %>
+      <span class="filter-name"><%= display_label %> </span>
     <% end %>
 
     <% unless value.blank? %>
       <%= content_tag :span, value, class: 'filter-value'%>
       <!-- icon to remove-->
-      <%= content_tag(:span, image_tag('x2x.png', alt: "remove"), class: 'remove-icon')  %>
+      <%= content_tag(:span, image_tag('x2x.png', alt: ""), class: 'remove-icon')  %>
     <% end %>
   </button>
 </span>
