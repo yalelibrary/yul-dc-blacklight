@@ -94,12 +94,6 @@
   <main id="main-container" class="<%= container_classes %>" role="main" aria-label="<%= t('blacklight.main.aria.main_container') %>">
     <div id='highlights'>
       <h2>Highlights</h2>
-      <%#
-        Each highlight is a text link over a decorative CSS background image. The image
-        descriptions are attached with aria-describedby rather than aria-label so the
-        link's accessible name stays the visible text -- an aria-label would replace it,
-        leaving voice-control users unable to speak the label they can see.
-      %>
       <ul class='clearfix'>
         <li><%= link_to File.join(root_path, "catalog/33338891?child_oid=33342820"), id: 'sous-marine', class: 'btn float-start', aria: { describedby: 'sous-marine-desc' } do %>
           <div class='highlight-link'>La Végétation Sous-marine, Arts Library</div>
