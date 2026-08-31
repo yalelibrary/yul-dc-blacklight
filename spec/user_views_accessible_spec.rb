@@ -19,6 +19,9 @@ feature 'welcome', js: true do
   context 'help guide page is accessible' do
     it 'with axe gem' do
       visit "/help_guide"
+  context 'advanced search page is accessible' do
+    it 'with axe gem' do
+      visit "/advanced"
       expect(page).to be_accessible
     end
   end

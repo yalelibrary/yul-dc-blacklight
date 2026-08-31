@@ -6,8 +6,8 @@
         <% if key== "all_fields_advanced" %>
           <%= text_field_tag key, label_tag_default_for(key), placeholder: 'Search words about the items',:class => 'form-control', aria: { describedby: 'advanced-help' } %>
         <% elsif key== "fulltext_tsim_advanced" %>
-          <%= text_field_tag key, label_tag_default_for(key), placeholder: 'Search words within the items', :class => 'form-control', aria: { describedby: 'advanced-help' } %>
-          <span id="advanced-fulltext-info" class about="advanced-fulltext-info" >Search full text that occurs in a work. Not all works contain searchable full text.</span>
+          <%= text_field_tag key, label_tag_default_for(key), placeholder: 'Search words within the items', :class => 'form-control', aria: { describedby: 'advanced-help advanced-fulltext-info' } %>
+          <span id="advanced-fulltext-info">Search full text that occurs in a work. Not all works contain searchable full text.</span>
         <% else %>
           <%= text_field_tag key, label_tag_default_for(key), :class => 'form-control', aria: { describedby: 'advanced-help' } %>
         <% end %>
