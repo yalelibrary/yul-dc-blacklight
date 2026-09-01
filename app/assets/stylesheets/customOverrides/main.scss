@@ -78,9 +78,7 @@ a {
 }
 
 .sr-only {
-  visibility: hidden;
-  max-width: 0;
-  max-height: 0;
+  @include visually-hidden();
 }
 
 .start-over-icon {
