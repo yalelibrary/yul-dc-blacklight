@@ -2,7 +2,7 @@
   "name": "blacklight_yul",
   "private": true,
   "dependencies": {
-    "universalviewer": "4.4.2"
+    "universalviewer": "4.4.4"
   },
   "resolutions": {
     "brace-expansion": "2.0.3",
