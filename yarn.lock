@@ -1782,7 +1782,7 @@ __metadata:
   resolution: "blacklight_yul@workspace:."
   dependencies:
     shx: "npm:^0.4.0"
-    universalviewer: "npm:4.4.2"
+    universalviewer: "npm:4.4.4"
   languageName: unknown
   linkType: soft
 
@@ -6867,9 +6867,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"universalviewer@npm:4.4.2":
-  version: 4.4.2
-  resolution: "universalviewer@npm:4.4.2"
+"universalviewer@npm:4.4.4":
+  version: 4.4.4
+  resolution: "universalviewer@npm:4.4.4"
   dependencies:
     "@google/model-viewer": "npm:^4.0.0"
     "@iiif/base-component": "npm:2.0.1"
@@ -6902,7 +6902,7 @@ __metadata:
     waveform-panel: "npm:^1.2.0"
     xss: "npm:1.0.15"
     zustand: "npm:^5.0.3"
-  checksum: 10c0/aeadd26396a914597094fa3e85a22ef1be142a0bbab0e3c4ef69363c49624fa51d1e2532265c7498d4e08366b24664fc8d2207be379fd458635e9238a8ed9686
+  checksum: 10c0/4147af2ce52789a4761362892368fdb60e7c570404fa9d354d2593f4a72a0cf7089b460d4006b01ac3b2cf5072c8ff1454d759c29ad743057d527d953c0030c7
   languageName: node
   linkType: hard
 
