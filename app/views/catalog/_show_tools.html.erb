@@ -15,45 +15,57 @@
 
             <% oid = @document.id %>
 
+            <% can_view = client_can_view_digital?(@document) %>
+            <% restriction_tooltip = 'The digital version of this work is restricted due to copyright or other restrictions.  Please log in using your Yale NetID or contact library staff to inquire about access to a physical copy.' %>
+
             <%# MANIFEST LINK %>
-            <% if client_can_view_digital?(@document) %>
+            <% if can_view %>
                 <li class="list-group-item manifestItem">
                     <span class='nav-link'>
-                        <%= link_to(image_tag('iiif.png', alt: '') + t('blacklight.sidebar.manifest'), manifest_url(oid), target: '_blank', id: 'manifestLink', class: 'iiif-logo')
+                        <%= link_to(image_tag('iiif.png', alt: '') + t('blacklight.sidebar.manifest'),
+                                    manifest_url(oid),
+                                    target: '_blank',
+                                    rel: 'noopener',
+                                    id: 'manifestLink',
+                                    class: 'iiif-logo',
+                                    aria: { label: "#{t('blacklight.sidebar.manifest')} (opens in new window)" })
                         %>
                     </span>
                 </li>
             <% else %>
                 <li class="list-group-item manifestItem">
-                    <span class='nav-link not-found iiif-logo' title='The digital version of this work is restricted due to copyright or other restrictions.  Please log in using your Yale NetID or contact library staff to inquire about access to a physical copy.' >
-                        <%= image_tag('iiif.png', alt: '', id: 'manifestLink') %> 
+                    <span class='nav-link not-found iiif-logo' title='<%= restriction_tooltip %>'>
+                        <%= image_tag('iiif.png', alt: '') %>
                         <span id="manifestLink"> Manifest Link</span>
+                        <span class="visually-hidden"> (unavailable)</span>
                     </span>
                 </li>
             <% end %>
 
             <%# MIRADOR LINK %>
-            <% if client_can_view_digital?(@document) %>
+            <% if can_view %>
                 <li class="list-group-item miradorItem">
-                    <%= link_to 'View in Mirador', mirador_url(oid), target: '_blank', id: 'miradorLink', class: 'nav-link' %>
+                    <%= link_to 'View in Mirador', mirador_url(oid), target: '_blank', rel: 'noopener', id: 'miradorLink', class: 'nav-link', aria: { label: 'View in Mirador (opens in new window)' } %>
                 </li>
             <% else %>
                 <li class="list-group-item manifestItem">
-                    <span class='nav-link not-found iiif-logo' title='The digital version of this work is restricted due to copyright or other restrictions.  Please log in using your Yale NetID or contact library staff to inquire about access to a physical copy.' >
+                    <span class='nav-link not-found iiif-logo' title='<%= restriction_tooltip %>'>
                     <span id="miradorLink"> View in Mirador </span>
+                    <span class="visually-hidden">(unavailable)</span>
                     </span>
                 </li>
             <% end %>
 
             <%# PDF LINK %>
-            <% if client_can_view_digital?(@document) %>
+            <% if can_view %>
                 <li class="list-group-item pdfItem">
-                    <%= link_to 'Download as PDF', pdf_url(oid, format: 'pdf'), target: '_blank', id: 'pdfLink', rel: 'external', class: 'nav-link' %>
+                    <%= link_to 'Download as PDF', pdf_url(oid, format: 'pdf'), target: '_blank', rel: 'noopener external', id: 'pdfLink', class: 'nav-link', aria: { label: 'Download as PDF (opens in new window)' } %>
                 </li>
             <% else %>
                 <li class="list-group-item manifestItem">
-                    <span class='nav-link not-found iiif-logo' title='The digital version of this work is restricted due to copyright or other restrictions.  Please log in using your Yale NetID or contact library staff to inquire about access to a physical copy.' >
+                    <span class='nav-link not-found iiif-logo' title='<%= restriction_tooltip %>'>
                     <span id="pdfLink"> Download as PDF </span>
+                    <span class="visually-hidden">(unavailable)</span>
                     </span>
                 </li>
             <% end %>

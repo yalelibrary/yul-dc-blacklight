@@ -146,7 +146,9 @@ $(document).on('turbolinks:load', function() {
     $('.fulltext-button').click(function() {
         const fulltext_button = $(this)
         fulltextTranscription.toggle(function(i, text) {
-            $(this).is(':visible') ? fulltext_button.text('Hide Full Text') : fulltext_button.text('Show Full Text')
+            const expanded = $(this).is(':visible')
+            fulltext_button.text(expanded ? 'Hide Full Text' : 'Show Full Text')
+            fulltext_button.attr('aria-expanded', expanded)
         })
         fulltextTranscription.css('display', 'flex')
     })
@@ -156,11 +158,9 @@ $(document).on('turbolinks:load', function() {
         const caption_button = $(this)
         const captionContent = $('.matching-captions-content')
         captionContent.toggle()
-        if (captionContent.is(':visible')) {
-            caption_button.text('Hide Captions')
-        } else {
-            caption_button.text('Show Captions')
-        }
+        const expanded = captionContent.is(':visible')
+        caption_button.text(expanded ? 'Hide Captions' : 'Show Captions')
+        caption_button.attr('aria-expanded', expanded)
     })
 });
 
