@@ -68,6 +68,17 @@ dd.blacklight-ancestordisplaystrings_tesim.metadata-block__label-value {
   margin: 4px 4px 4px 0px;
 }
 
+.fulltext-button,
+.caption-toggle-button {
+  font-size: 14px;
+  color: $medium_grey;
+  font-family: $mallory_medium, Arial, Helvetica, sans-serif !important;
+  font-weight: 900;
+  padding-bottom: 15px;
+  background: none;
+  border: none;
+}
+
 .card {
   border: none;
 }
