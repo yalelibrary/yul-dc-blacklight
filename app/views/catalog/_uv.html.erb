@@ -39,7 +39,7 @@
 <div id='parent-oid'><%= @document.id %></div>
 
 <script nonce="<%= content_security_policy_nonce %>">
-  $(document).ready(function(){
+  $(function(){
     window.addEventListener('message', (event) => {
       if (event.origin.match('<%= request.protocol %><%= request.host %>')) {
         const index = event.data
