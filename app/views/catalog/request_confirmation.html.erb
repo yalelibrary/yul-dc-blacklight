@@ -59,7 +59,7 @@
   </dl>
 </div>
 <br />
-<div>
+<div class="confirmation_form">
   <h3 class="confirmation-form-header">Request Information</h3>
   <div class="confirmation-key">
     <%= "<b>Status:</b> #{@request_status}".html_safe %><br />
@@ -68,5 +68,7 @@
     <%= "<b>Full Name:</b> #{@user_full_name}".html_safe %><br />
     <%= "<b>Reason for request:</b> #{@user_note}".html_safe %><br />
   </div>
-  <%= link_to "CONTINUE", "/catalog/#{@document[:id]}", class: "request-continue btn" %>
+  <div class="form_buttons">
+    <%= link_to "CONTINUE", "/catalog/#{@document[:id]}", class: "request-continue btn" %>
+  </div>
 </div>
