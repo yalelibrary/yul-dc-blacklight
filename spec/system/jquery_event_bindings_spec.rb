@@ -90,11 +90,21 @@ RSpec.describe 'jQuery event bindings', type: :system, js: true, clean: true do
     page.execute_script("window.postMessage(#{index}, window.location.origin)")
   end
 
+  around do |example|
+    original_sample_bucket = ENV['SAMPLE_BUCKET']
+    ENV['SAMPLE_BUCKET'] = 'yul-dc-development-samples'
+    example.run
+    ENV['SAMPLE_BUCKET'] = original_sample_bucket
+  end
+
+  def stub_manifest(oid)
+    pairtree = Partridge::Pairtree.oid_to_pairtree(oid)
+    stub_request(:get, "https://#{ENV['SAMPLE_BUCKET']}.s3.amazonaws.com/manifests/#{pairtree}/#{oid}.json")
+      .to_return(status: 200, body: manifest_fixture)
+  end
+
   before do
-    ['11/11/111', '11/11/112', '11/11/113', '22/22/222', '99/99/999', '88/88/888'].each do |pairtree|
-      stub_request(:get, "https://yul-dc-development-samples.s3.amazonaws.com/manifests/#{pairtree}.json")
-        .to_return(status: 200, body: manifest_fixture)
-    end
+    [111, 112, 113, 222, 888, 999].each { |oid| stub_manifest(oid) }
 
     solr = Blacklight.default_index.connection
     solr.add([fulltext_parent, fulltext_child, plain_work, caption_work, sensitive_work])
