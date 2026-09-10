@@ -43,7 +43,7 @@ gem 'puma', '~> 7.2'
 gem 'psych', '< 4'
 gem 'rack', '~> 3.1.21'
 gem 'rails', '~> 7.2.3.1'
-gem "rails_semantic_logger", ">=4.4.4"
+gem 'rails_semantic_logger', '>= 4.20.0', '< 5'
 gem 'rsolr', '>= 1.0', '< 3'
 gem 'sass-rails', '>= 6'
 gem 'sprockets-rails', '~> 3.4.2'
