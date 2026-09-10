@@ -50,7 +50,7 @@ $(document).on('turbolinks:load', function() {
             $(element).replaceWith(buttonElement);
         }
     });
-    $(".href-button").click(function (e){
+    $(".href-button").on("click", function (e){
         let href = $(this).attr("href");
         e.preventDefault();
         if (href) Turbolinks.visit(href);
@@ -143,7 +143,7 @@ $(document).on('turbolinks:load', function() {
     const fulltextTranscription = $('.item-page-fulltext-wrapper .row')
     fulltextTranscription.addClass('hidden')
 
-    $('.fulltext-button').click(function() {
+    $('.fulltext-button').on('click', function() {
         const fulltext_button = $(this)
         fulltextTranscription.toggle(function(i, text) {
             const expanded = $(this).is(':visible')
@@ -154,7 +154,7 @@ $(document).on('turbolinks:load', function() {
     })
 
     // Toggle the caption button
-    $('.caption-toggle-button').click(function() {
+    $('.caption-toggle-button').on('click', function() {
         const caption_button = $(this)
         const captionContent = $('.matching-captions-content')
         captionContent.toggle()
@@ -166,7 +166,7 @@ $(document).on('turbolinks:load', function() {
 
 // 'uv-pages' is undefined by default
 // the setTimeout waits until 'uv-pages' has text in it before getting the text
-$(document).ready(() => {
+$(() => {
     window.addEventListener('message', () => {
         setTimeout(fulltext, 250)
     }, false)
