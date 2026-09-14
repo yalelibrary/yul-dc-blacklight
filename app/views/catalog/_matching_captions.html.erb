@@ -4,10 +4,10 @@
 %>
 <% if params[:show_captions] == 'true' %>
   <section class='item-page-captions-wrapper'>
-    <button class='caption-toggle-button'>
+    <button class='caption-toggle-button' aria-expanded='true' aria-controls='matching-captions'>
       Hide Captions
     </button>
-    <div class='matching-captions-content'>
+    <div class='matching-captions-content' id='matching-captions'>
       <div class='metadata-block single-item-show'>
         <h2 class='metadata-block__title'>Matching Captions</h2>
         <dl class='metadata-block__group'>
@@ -24,9 +24,9 @@
                 <%= field_presenter.render %>
               </dd>
             <% else %>
-              <p class='blacklight-<%= field_name.parameterize %> showpage_no_label_tag'>
+              <dd class='blacklight-<%= field_name.parameterize %> showpage_no_label_tag'>
                 <%= field_presenter.render %>
-              </p>
+              </dd>
             <% end %>
           <% end %>
         </dl>

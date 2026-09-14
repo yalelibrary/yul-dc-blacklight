@@ -1,8 +1,8 @@
 <% if display_fulltext_button?(document) %>
   <section class='item-page-fulltext-wrapper'>
-    <button class='fulltext-button'>
+    <button class='fulltext-button' aria-expanded='false' aria-controls='fulltext-transcription'>
       Show Full Text
     </button>
-    <div class='row'></div>
+    <div class='row' id='fulltext-transcription'></div>
   </section>
 <% end %>

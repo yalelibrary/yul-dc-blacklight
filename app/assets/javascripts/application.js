@@ -50,7 +50,7 @@ $(document).on('turbolinks:load', function() {
             $(element).replaceWith(buttonElement);
         }
     });
-    $(".href-button").click(function (e){
+    $(".href-button").on("click", function (e){
         let href = $(this).attr("href");
         e.preventDefault();
         if (href) Turbolinks.visit(href);
@@ -143,30 +143,30 @@ $(document).on('turbolinks:load', function() {
     const fulltextTranscription = $('.item-page-fulltext-wrapper .row')
     fulltextTranscription.addClass('hidden')
 
-    $('.fulltext-button').click(function() {
+    $('.fulltext-button').on('click', function() {
         const fulltext_button = $(this)
         fulltextTranscription.toggle(function(i, text) {
-            $(this).is(':visible') ? fulltext_button.text('Hide Full Text') : fulltext_button.text('Show Full Text')
+            const expanded = $(this).is(':visible')
+            fulltext_button.text(expanded ? 'Hide Full Text' : 'Show Full Text')
+            fulltext_button.attr('aria-expanded', expanded)
         })
         fulltextTranscription.css('display', 'flex')
     })
 
     // Toggle the caption button
-    $('.caption-toggle-button').click(function() {
+    $('.caption-toggle-button').on('click', function() {
         const caption_button = $(this)
         const captionContent = $('.matching-captions-content')
         captionContent.toggle()
-        if (captionContent.is(':visible')) {
-            caption_button.text('Hide Captions')
-        } else {
-            caption_button.text('Show Captions')
-        }
+        const expanded = captionContent.is(':visible')
+        caption_button.text(expanded ? 'Hide Captions' : 'Show Captions')
+        caption_button.attr('aria-expanded', expanded)
     })
 });
 
 // 'uv-pages' is undefined by default
 // the setTimeout waits until 'uv-pages' has text in it before getting the text
-$(document).ready(() => {
+$(() => {
     window.addEventListener('message', () => {
         setTimeout(fulltext, 250)
     }, false)
