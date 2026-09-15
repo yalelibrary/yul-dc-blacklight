@@ -22,8 +22,10 @@ if enforce_envs.include?(ENV['RAILS_ENV'])
       policy.style_src       :self, :unsafe_inline
       policy.style_src_attr  :self, :unsafe_inline
       policy.style_src_elem  :self, :unsafe_inline, "#{ENV['IIIF_IMAGE_BASE_URL']}/"
-      policy.connect_src     :self, 'banner.library.yale.edu', 'www.google-analytics.com',
-                             'region1.google-analytics.com', "#{ENV['IIIF_IMAGE_BASE_URL']}/"
+      policy.connect_src     :self, 'banner.library.yale.edu', '*.google-analytics.com',
+                             'www.google-analytics.com', 'analytics.google.com',
+                             '*.analytics.google.com', 'www.googletagmanager.com',
+                             'www.google.com', "#{ENV['IIIF_IMAGE_BASE_URL']}/"
 
       # Specify URI for violation reports
       unless ENV['CLUSTER_NAME'] == 'local'
