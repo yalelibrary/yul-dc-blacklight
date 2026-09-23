@@ -1,4 +1,4 @@
-FROM yalelibraryit/dc-base:v1.4.8
+FROM yalelibraryit/dc-base:v1.4.9
 ENV NODE_OPTIONS="--openssl-legacy-provider"
 
 COPY ops/webapp.conf /etc/nginx/sites-enabled/webapp.conf
@@ -9,7 +9,8 @@ RUN chmod +x /etc/service/nginx/run
 RUN rm -f /etc/service/nginx/down
 
 ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
-BUNDLE_JOBS=4
+BUNDLE_JOBS=4 \
+BUNDLE_FROZEN=true
 RUN /sbin/setuser app bash -l -c "gem install bundler -v 4.0.13"
 
 COPY --chown=app Gemfile* $APP_HOME/
