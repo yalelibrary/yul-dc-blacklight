@@ -70,7 +70,8 @@ DEFAULT MOBILE STYLING
   .document-title {
     position: relative;
     font-size: 15px;
-    width: 492px;
+    width: auto;
+    max-width: 100%;
     display: -webkit-inline-flex;
     margin-top: 0rem;
     text-align: left;

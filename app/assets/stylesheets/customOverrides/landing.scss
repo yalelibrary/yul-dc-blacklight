@@ -381,6 +381,7 @@ DEFAULT MOBILE STYLING
 	////// BODY //////
 	#highlights {
 		width: 726px;
+		max-width: 100%;
 
 		.highlight-link {
 			margin-left: 5%;
@@ -575,7 +576,7 @@ DEFAULT MOBILE STYLING
 	////// BODY //////
 	#highlights {
 		width: 1111px;
-		max-width: initial;
+		max-width: 100%;
 
 		h2 {
 			max-width: 1098px;
