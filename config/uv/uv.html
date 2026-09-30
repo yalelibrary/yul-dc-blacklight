@@ -54,6 +54,78 @@
                 padding-bottom: 35px;
             }
         }
+
+        @media only screen and (max-width: 767px) {
+            .uv .footerPanel:has(> .searchPager:not([style*="display: none"])) {
+                display: block !important;
+                visibility: visible !important;
+            }
+
+            .uv .footerPanel:has(> .searchPager:not([style*="display: none"])) .options {
+                display: none !important;
+            }
+
+            .uv .footerPanel .searchPager .controls {
+                display: flex;
+                align-items: center;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100%;
+                margin-top: 0 !important;
+            }
+
+            .uv .footerPanel .searchPager .controls .previousResult,
+            .uv .footerPanel .searchPager .controls .nextResult {
+                flex: 0 0 auto;
+            }
+
+            .uv .footerPanel .searchPager .controls .searchResultsInfo {
+                display: flex;
+                flex: 1 1 auto;
+                align-items: center;
+                justify-content: center;
+                min-width: 0;
+                width: auto !important;
+                margin: 0 !important;
+                float: none !important;
+            }
+
+            .uv .footerPanel .searchPager .controls .searchResultsInfo .info {
+                min-width: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .uv .footerPanel .searchPager .controls .clearSearch {
+                flex: 0 0 auto;
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+            .uv .footerPanel .searchResults {
+                display: none !important;
+            }
+
+            .uv .mobileFooterPanel .options .main-options {
+                display: flex;
+                flex: 1 1 auto;
+                justify-content: center;
+                flex-wrap: nowrap;
+                min-width: 0;
+            }
+
+            .uv .mobileFooterPanel .options .main-options .btn {
+                flex: 0 1 40px;
+                min-width: 26px;
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .uv .footerPanel:has(> .searchPager:not([style*="display: none"])) {
+                padding-bottom: 16px;
+            }
+        }
     </style>
 
     <script type="text/javascript" src="umd/UV.js"></script>
