@@ -89,7 +89,7 @@ RSpec.describe 'jQuery event bindings', type: :system, js: true, clean: true do
   def post_uv_message(index)
     page.execute_script("const iframe = document.getElementById('uv-iframe');
     window.dispatchEvent(new MessageEvent('message', {
-      data: 1,
+      data: #{index},
       origin: window.location.origin,
       source: iframe.contentWindow
     }));")
