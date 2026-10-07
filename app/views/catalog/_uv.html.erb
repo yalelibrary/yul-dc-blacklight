@@ -38,6 +38,11 @@
 <div id='uv-pages'></div>
 <div id='parent-oid'><%= @document.id %></div>
 
+<% # Do we run this on every object?  Do we need to? %>
+
+<% # if display_fulltext_button?(@document) %>
+<% # end %>
+
 <script nonce="<%= content_security_policy_nonce %>">
   $(function(){
     window.addEventListener('message', (event) => {
