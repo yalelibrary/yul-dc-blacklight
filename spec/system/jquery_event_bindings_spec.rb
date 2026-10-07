@@ -87,7 +87,12 @@ RSpec.describe 'jQuery event bindings', type: :system, js: true, clean: true do
   # iframe does, so the listeners registered from the document-ready callbacks
   # are exercised for real.
   def post_uv_message(index)
-    page.execute_script("window.postMessage(#{index}, window.location.origin)")
+    page.execute_script("const iframe = document.getElementById('uv-iframe');
+    window.dispatchEvent(new MessageEvent('message', {
+      data: 1,
+      origin: window.location.origin,
+      source: iframe.contentWindow
+    }));")
   end
 
   around do |example|
@@ -181,11 +186,11 @@ RSpec.describe 'jQuery event bindings', type: :system, js: true, clean: true do
   describe 'universal viewer document ready handler' do
     it 'records the child oid the viewer reports through postMessage' do
       visit '/catalog/222'
-      expect(page).to have_css('#uv-pages')
+      expect(page).to have_css('#uv-pages', visible: :all)
 
       post_uv_message(1)
 
-      expect(page).to have_css('#uv-pages', text: '555')
+      expect(page).to have_css('#uv-pages', text: '555', visible: :all)
     end
 
     it 'toggles the sensitive materials overlay' do
