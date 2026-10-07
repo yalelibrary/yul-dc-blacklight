@@ -165,28 +165,36 @@ $(document).on('turbolinks:load', function() {
 });
 
 // 'uv-pages' is undefined by default
-// the setTimeout waits until 'uv-pages' has text in it before getting the text
+// The setTimeout waits 250 ms for UV to load and _uv.html.erb JS put child OID(s) into 'uv-pages' div
 $(() => {
     window.addEventListener('message', () => {
+        // should we add a step to not do this if the parent or the child doesn't have fulltext?
         setTimeout(fulltext, 250)
     }, false)
 })
 
-// Get the full text and render it on screen
+// Get the fulltext and render it on screen
 const fulltext = () => {
-    // check if fulltext is present on page
+    // Check if fulltext is present on page
     const fulltextTranscription = $('.item-page-fulltext-wrapper .row')
-    fulltextTranscription.empty() // Delete the old full text
-    // check if fulltext is present on child object - button will only display if 'has_fulltext_ssi' is Yes
+    // Delete the old fulltext
+    fulltextTranscription.empty()
+    // Check if fulltext is present on parent object - button will only display if 'has_fulltext_ssi' is Yes or Partial
     if($('.fulltext-button').length) {
+        // Get child OIDs - there may be one or two
         const child_oids_array = $('#uv-pages').html().split(' ')
+        // Set page width based on number of child OIDs
         const pageWidth = child_oids_array.length === 1 ? 'col-md-12' : 'col-md-6'
 
+        // Iterate over child OIDs and retrieve fulltext content
         child_oids_array.forEach(async child_oid => {
+            // wait for retrieval of fulltext content
             const transcription = await getFulltext(child_oid)
+            // if there is one child then delete the old text
             if (child_oids_array.length === 1) {
                 fulltextTranscription.empty()
-            }   
+            }
+            // add span with fulltext content to element with classes .item-page-fulltext-wrapper & .row
             return fulltextTranscription.append(`<span class='${pageWidth}'>${transcription}</span>`)
         })
     } else {
@@ -194,13 +202,15 @@ const fulltext = () => {
     }
 }
 
+// Get the fulltext
 const getFulltext = async (child_oid) => {
+    // make ajax call to annotation link
     const result = await $.ajax({
         type:'GET',
         url:`/annotation/oid/${$('#parent-oid').text()}/canvas/${child_oid}/fulltext`,
         data: {
             oid: $('#parent-oid').text(),
-            child_oid: $('#uv-pages').text()
+            child_oid: child_oid
         },
     })
     return result.body.value
