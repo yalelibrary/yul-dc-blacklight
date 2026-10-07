@@ -190,9 +190,14 @@ const fulltext = () => {
         child_oids_array.forEach(async child_oid => {
             // wait for retrieval of fulltext content
             const transcription = await getFulltext(child_oid)
-            // if there is one child then delete the old text
+            // if there is one child then delete the contents of element with classes .item-page-fulltext-wrapper & .row
+            // why are we deleting it again if we did so on line 181?
             if (child_oids_array.length === 1) {
                 fulltextTranscription.empty()
+            }
+            // do not append if null was retrieved
+            if (transcription === null) {
+                return
             }
             // add span with fulltext content to element with classes .item-page-fulltext-wrapper & .row
             return fulltextTranscription.append(`<span class='${pageWidth}'>${transcription}</span>`)
