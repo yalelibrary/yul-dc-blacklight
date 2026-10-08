@@ -38,50 +38,51 @@
 <div id='uv-pages'></div>
 <div id='parent-oid'><%= @document.id %></div>
 
-<% # Do we run this on every object?  Do we need to? %>
-
-<% # if display_fulltext_button?(@document) %>
-<% # end %>
-
-<script nonce="<%= content_security_policy_nonce %>">
-  $(function(){
-    window.addEventListener('message', (event) => {
-      if (event.source !== document.getElementById("uv-iframe").contentWindow) return;
-      if (event.origin.match('<%= request.protocol %><%= request.host %>')) {
-        const index = event.data
-        const is_even = index % 2 === 0
-        const array = '<%= @document[:child_oids_ssim] %>'
-        const viewing_hint = '<%= @document[:viewing_hint_ssi] %>'
-        const child_oids = JSON.parse(array.replace(/&quot;/g,'"'))
-        let uv_thumbnail = child_oids[index];
-        const btn = event.source?.document?.querySelector('#uv .two-up');
-        const two_up = btn?.classList.contains('on');
-        if (two_up) {
-          console.debug("TWO UP");
-          uv_thumbnail = is_even
-            ? `${child_oids[index - 1] || ''} ${child_oids[index]}`
-            : `${child_oids[index]} ${child_oids[index + 1] || ''}`
-        } else {
-          console.debug("ONE UP");
+<% if display_fulltext_button?(@document) %>
+  <script nonce="<%= content_security_policy_nonce %>">
+    $(function(){
+      window.addEventListener('message', (event) => {
+        if (event.source !== document.getElementById("uv-iframe").contentWindow) return;
+        if (event.origin.match('<%= request.protocol %><%= request.host %>')) {
+          const index = event.data
+          const is_even = index % 2 === 0
+          const array = '<%= @document[:child_oids_ssim] %>'
+          const viewing_hint = '<%= @document[:viewing_hint_ssi] %>'
+          const child_oids = JSON.parse(array.replace(/&quot;/g,'"'))
+          let uv_thumbnail = child_oids[index];
+          const btn = event.source?.document?.querySelector('#uv .two-up');
+          const two_up = btn?.classList.contains('on');
+          if (two_up) {
+            uv_thumbnail = is_even
+              ? `${child_oids[index - 1] || ''} ${child_oids[index]}`
+              : `${child_oids[index]} ${child_oids[index + 1] || ''}`
+          $('#uv-pages').html(uv_thumbnail)
+          }
         }
-        $('#uv-pages').html(uv_thumbnail)
-      }
-    }, false)
+      }, false)
+    })
+  </script>
+<% end %>
 
-    // Overlay toggle
-    const overlay = document.getElementById('sensitive-overlay');
-    const hideBtn = document.getElementById('hide-object-btn');
-    if (overlay && hideBtn) {
-      // When overlay is hidden, show the Hide Object button
-      overlay.querySelector('.overlay-button').addEventListener('click', function() {
-        overlay.style.display = 'none';
-        hideBtn.style.display = 'inline-block';
-      });
-      // When Hide Object is clicked, show the overlay again
-      hideBtn.addEventListener('click', function() {
-        overlay.style.display = 'block';
-        hideBtn.style.display = 'none';
-      });
-    }
-  })
-</script>
+<% if @show_sensitive_overlay %>
+  <script nonce="<%= content_security_policy_nonce %>">
+    $(function(){
+      window.addEventListener('message', (event) => {
+        // Overlay toggle
+        const overlay = document.getElementById('sensitive-overlay');
+        const hideBtn = document.getElementById('hide-object-btn');
+        if (overlay && hideBtn) {
+          // When overlay is hidden, show the Hide Object button
+          overlay.querySelector('.overlay-button').addEventListener('click', function() {
+            overlay.style.display = 'none';
+            hideBtn.style.display = 'inline-block';
+          });
+          // When Hide Object is clicked, show the overlay again
+          hideBtn.addEventListener('click', function() {
+            overlay.style.display = 'block';
+            hideBtn.style.display = 'none';
+        });
+      })
+    })
+  </script>
+<% end %>

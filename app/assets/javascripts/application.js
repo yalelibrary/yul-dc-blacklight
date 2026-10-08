@@ -186,34 +186,34 @@ const fulltext = async () => {
         // Set page width based on number of child OIDs
         const pageWidth = child_oids_array.length === 1 ? 'col-md-12' : 'col-md-6'
 
-        const fulltextTranscription = await fetchFulltext(child_oids_array)
-        console.log('fulltextTranscription', fulltextTranscription)
-        console.log('fulltextTranscription keys', Object.keys(fulltextTranscription))
+        const fulltextTranscriptions = await fetchAndStoreFulltext(child_oids_array)
         child_oids_array.forEach(child_oid => {
-            let matchingChildText = fulltextTranscription['OID' + child_oid];
-            console.log('matchingChildText', matchingChildText);
-            console.log('fulltextTranscription w/ child oid', fulltextTranscription[parseInt(child_oid)])
-            console.log('fulltextTranscription w/ property func', fulltextTranscription.hasOwnProperty('OID' + child_oid))
+            // match text to OID so content fills the correct column
+            let matchingChildText = fulltextTranscriptions['OID' + child_oid];
+            // if matchingChildText has something in it
             if (matchingChildText) {
                 // add span with fulltext content to element with classes .item-page-fulltext-wrapper & .row
                 fulltextTranscriptionHolder.append(`<span class='${pageWidth}'>${matchingChildText}</span>`);
-            }            
+            // matchingChildText is null but we still need a span for proper page layout
+            } else {
+                fulltextTranscriptionHolder.append(`<span class='${pageWidth}'></span>`);
+            }     
         })
     } else {
         return
     }
 }
 
-const fetchFulltext = async (child_oids_array) => {
+// Retrieve and store fulltext content
+const fetchAndStoreFulltext = async (child_oids_array) => {
     let fulltextContent = {child_oids_array: child_oids_array};
-    child_oids_array.forEach(async child_oid => {
-        console.log('child OIDs:', child_oids_array)
+    // wait for all child oids to be processed
+    await Promise.all(child_oids_array.map(async (child_oid) => {
         // wait for retrieval of fulltext content
         const transcription = await getFulltext(child_oid)
-        console.log('child_oid:', child_oid)
-        console.log('transcription:', transcription)
+        // add key and fulltext content to object
         fulltextContent["OID" + child_oid] = transcription
-    });
+    }))
     return fulltextContent
 }
 
