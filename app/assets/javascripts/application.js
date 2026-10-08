@@ -209,7 +209,7 @@ const fetchAndStoreFulltext = async (child_oids_array) => {
         // wait for retrieval of fulltext content
         const transcription = await getFulltext(child_oid)
         // add key and fulltext content to object
-        fulltextContent["OID" + child_oid] = transcription
+        fulltextContent['OID' + child_oid] = transcription
     }))
     return fulltextContent
 }
