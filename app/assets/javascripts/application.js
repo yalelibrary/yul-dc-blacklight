@@ -174,37 +174,47 @@ $(() => {
 })
 
 // Get the fulltext and render it on screen
-const fulltext = () => {
+const fulltext = async () => {
     // Check if fulltext is present on page
-    const fulltextTranscription = $('.item-page-fulltext-wrapper .row')
+    const fulltextTranscriptionHolder = $('.item-page-fulltext-wrapper .row')
     // Delete the old fulltext
-    fulltextTranscription.empty()
+    fulltextTranscriptionHolder.empty()
     // Check if fulltext is present on parent object - button will only display if 'has_fulltext_ssi' is Yes or Partial
     if($('.fulltext-button').length) {
         // Get child OIDs - there may be one or two
-        const child_oids_array = $('#uv-pages').html().split(' ')
+        const child_oids_array = $('#uv-pages').html().split(' ').filter(x => x);
         // Set page width based on number of child OIDs
         const pageWidth = child_oids_array.length === 1 ? 'col-md-12' : 'col-md-6'
 
-        // Iterate over child OIDs and retrieve fulltext content
-        child_oids_array.forEach(async child_oid => {
-            // wait for retrieval of fulltext content
-            const transcription = await getFulltext(child_oid)
-            // if there is one child then delete the contents of element with classes .item-page-fulltext-wrapper & .row
-            // why are we deleting it again if we did so on line 181?
-            if (child_oids_array.length === 1) {
-                fulltextTranscription.empty()
-            }
-            // do not append if null was retrieved
-            if (transcription === null) {
-                return
-            }
-            // add span with fulltext content to element with classes .item-page-fulltext-wrapper & .row
-            return fulltextTranscription.append(`<span class='${pageWidth}'>${transcription}</span>`)
+        const fulltextTranscription = await fetchFulltext(child_oids_array)
+        console.log('fulltextTranscription', fulltextTranscription)
+        console.log('fulltextTranscription keys', Object.keys(fulltextTranscription))
+        child_oids_array.forEach(child_oid => {
+            let matchingChildText = fulltextTranscription['OID' + child_oid];
+            console.log('matchingChildText', matchingChildText);
+            console.log('fulltextTranscription w/ child oid', fulltextTranscription[parseInt(child_oid)])
+            console.log('fulltextTranscription w/ property func', fulltextTranscription.hasOwnProperty('OID' + child_oid))
+            if (matchingChildText) {
+                // add span with fulltext content to element with classes .item-page-fulltext-wrapper & .row
+                fulltextTranscriptionHolder.append(`<span class='${pageWidth}'>${matchingChildText}</span>`);
+            }            
         })
     } else {
         return
     }
+}
+
+const fetchFulltext = async (child_oids_array) => {
+    let fulltextContent = {child_oids_array: child_oids_array};
+    child_oids_array.forEach(async child_oid => {
+        console.log('child OIDs:', child_oids_array)
+        // wait for retrieval of fulltext content
+        const transcription = await getFulltext(child_oid)
+        console.log('child_oid:', child_oid)
+        console.log('transcription:', transcription)
+        fulltextContent["OID" + child_oid] = transcription
+    });
+    return fulltextContent
 }
 
 // Get the fulltext
