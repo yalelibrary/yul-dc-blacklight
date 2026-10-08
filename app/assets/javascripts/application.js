@@ -168,8 +168,10 @@ $(document).on('turbolinks:load', function() {
 // The setTimeout waits 250 ms for UV to load and _uv.html.erb JS put child OID(s) into 'uv-pages' div
 $(() => {
     window.addEventListener('message', () => {
-        // should we add a step to not do this if the parent or the child doesn't have fulltext?
-        setTimeout(fulltext, 250)
+        // Check if fulltext is present on parent object - button will only display if 'has_fulltext_ssi' is Yes or Partial
+        if($('.fulltext-button').length) {
+            setTimeout(fulltext, 250)
+        }
     }, false)
 })
 
@@ -179,29 +181,24 @@ const fulltext = async () => {
     const fulltextTranscriptionHolder = $('.item-page-fulltext-wrapper .row')
     // Delete the old fulltext
     fulltextTranscriptionHolder.empty()
-    // Check if fulltext is present on parent object - button will only display if 'has_fulltext_ssi' is Yes or Partial
-    if($('.fulltext-button').length) {
-        // Get child OIDs - there may be one or two
-        const child_oids_array = $('#uv-pages').html().split(' ').filter(x => x);
-        // Set page width based on number of child OIDs
-        const pageWidth = child_oids_array.length === 1 ? 'col-md-12' : 'col-md-6'
+    // Get child OIDs - there may be one or two
+    const child_oids_array = $('#uv-pages').html().split(' ').filter(x => x);
+    // Set page width based on number of child OIDs
+    const pageWidth = child_oids_array.length === 1 ? 'col-md-12' : 'col-md-6'
 
-        const fulltextTranscriptions = await fetchAndStoreFulltext(child_oids_array)
-        child_oids_array.forEach(child_oid => {
-            // match text to OID so content fills the correct column
-            let matchingChildText = fulltextTranscriptions['OID' + child_oid];
-            // if matchingChildText has something in it
-            if (matchingChildText) {
-                // add span with fulltext content to element with classes .item-page-fulltext-wrapper & .row
-                fulltextTranscriptionHolder.append(`<span class='${pageWidth}'>${matchingChildText}</span>`);
-            // matchingChildText is null but we still need a span for proper page layout
-            } else {
-                fulltextTranscriptionHolder.append(`<span class='${pageWidth}'></span>`);
-            }     
-        })
-    } else {
-        return
-    }
+    const fulltextTranscriptions = await fetchAndStoreFulltext(child_oids_array)
+    child_oids_array.forEach(child_oid => {
+        // match text to OID so content fills the correct column
+        let matchingChildText = fulltextTranscriptions['OID' + child_oid];
+        // if matchingChildText has something in it
+        if (matchingChildText) {
+            // add span with fulltext content to element with classes .item-page-fulltext-wrapper & .row
+            fulltextTranscriptionHolder.append(`<span class='${pageWidth}'>${matchingChildText}</span>`);
+        // matchingChildText is null but we still need a span for proper page layout
+        } else {
+            fulltextTranscriptionHolder.append(`<span class='${pageWidth}'></span>`);
+        }     
+    })
 }
 
 // Retrieve and store fulltext content
