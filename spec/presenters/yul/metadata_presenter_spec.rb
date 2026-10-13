@@ -5,7 +5,7 @@ RSpec.describe Yul::MetadataPresenter do
   subject(:presenter) { described_class.new(SolrDocument.new(WORK_WITH_ALL_FIELDS), request_context) }
 
   let(:config) { CatalogController.blacklight_config }
-  let(:request_context) { instance_double('View context', should_render_field?: true, blacklight_config: config) }
+  let(:request_context) { instance_double('View context', should_render_field?: true, blacklight_config: config, action_name: 'show') }
   let(:controller) { double }
   let(:params) { {} }
   let(:search_state) { Blacklight::SearchState.new(params, config, controller) }
