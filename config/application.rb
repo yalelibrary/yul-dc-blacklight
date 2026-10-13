@@ -33,5 +33,9 @@ module BlacklightYul
 
     # See https://github.com/projectblacklight/blacklight/issues/2768
     config.active_record.yaml_column_permitted_classes = [HashWithIndifferentAccess]
+
+    initializer "yul.skip_blacklight_importmap", after: "blacklight.importmap", before: "importmap" do |app|
+      app.config.importmap.paths.delete(Blacklight::Engine.root.join("config/importmap.rb"))
+    end
   end
 end
