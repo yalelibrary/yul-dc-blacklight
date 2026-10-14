@@ -34,6 +34,10 @@ module BlacklightYul
     # See https://github.com/projectblacklight/blacklight/issues/2768
     config.active_record.yaml_column_permitted_classes = [HashWithIndifferentAccess]
 
+    # Blacklight >= 7.42 appends its own config/importmap.rb, pinning its ES modules.
+    # We load blacklight.js through sprockets instead, and those unused pins raise
+    # AssetNotPrecompiledError from javascript_importmap_tags. Initializer is here instead 
+    # of initializer.rb because the ordering of importmap.rb and blacklight.importmap.rb is a race condition.
     initializer "yul.skip_blacklight_importmap", after: "blacklight.importmap", before: "importmap" do |app|
       app.config.importmap.paths.delete(Blacklight::Engine.root.join("config/importmap.rb"))
     end
