@@ -148,16 +148,18 @@ GEM
       rubocop-performance
       rubocop-rails
       rubocop-rspec
-    blacklight (7.38.0)
+    blacklight (7.43.1)
       deprecation
       globalid
       hashdiff
       i18n (>= 1.7.0)
       jbuilder (~> 2.7)
+      json (< 3.0)
       kaminari (>= 0.15)
       ostruct (>= 0.3.2)
-      rails (>= 5.1, < 7.3)
-      view_component (>= 2.66, < 4)
+      rails (>= 6.1, < 9)
+      view_component (>= 2.74, < 4)
+      zeitwerk
     blacklight-gallery (4.5.4)
       blacklight (>= 7.17, < 9)
       rails (>= 6.1, < 8)
@@ -682,7 +684,7 @@ DEPENDENCIES
   aws-sdk-s3 (~> 1.208.0)
   axe-matchers (~> 2.6.1)
   bixby (~> 5.0.1)
-  blacklight (~> 7.38.0)
+  blacklight (~> 7.43.1)
   blacklight-gallery (~> 4.5.1)
   blacklight-marc (>= 7.0.0.rc1, < 8)
   blacklight_advanced_search (~> 7.0.0)
