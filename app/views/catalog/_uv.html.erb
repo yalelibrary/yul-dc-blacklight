@@ -41,21 +41,24 @@
 <script nonce="<%= content_security_policy_nonce %>">
   $(function(){
     window.addEventListener('message', (event) => {
+      if (event.source !== document.getElementById("uv-iframe").contentWindow) return;
       if (event.origin.match('<%= request.protocol %><%= request.host %>')) {
         const index = event.data
         const is_even = index % 2 === 0
         const array = '<%= @document[:child_oids_ssim] %>'
         const viewing_hint = '<%= @document[:viewing_hint_ssi] %>'
         const child_oids = JSON.parse(array.replace(/&quot;/g,'"'))
-        const selected = $('iframe').contents().find('[id^="thumb"].thumb.selected')
-        let uv_thumbnail = child_oids[index]
-
-        if (selected.length > 1) {
+        let uv_thumbnail = child_oids[index];
+        const btn = event.source?.document?.querySelector('#uv .two-up');
+        const two_up = btn?.classList.contains('on');
+        if (two_up) {
+          console.debug("TWO UP");
           uv_thumbnail = is_even
             ? `${child_oids[index - 1] || ''} ${child_oids[index]}`
             : `${child_oids[index]} ${child_oids[index + 1] || ''}`
+        } else {
+          console.debug("ONE UP");
         }
-
         $('#uv-pages').html(uv_thumbnail)
       }
     }, false)
