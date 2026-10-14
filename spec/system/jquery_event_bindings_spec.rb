@@ -190,7 +190,7 @@ RSpec.describe 'jQuery event bindings', type: :system, js: true, clean: true do
       visit '/catalog/111'
       expect(page).to have_css('#uv-pages', visible: :all)
 
-      post_uv_message(1)
+      post_uv_message(0)
 
       expect(page).to have_css('#uv-pages', text: '112', visible: :all)
     end
@@ -199,7 +199,7 @@ RSpec.describe 'jQuery event bindings', type: :system, js: true, clean: true do
       visit '/catalog/222'
       expect(page).to have_css('#uv-pages', visible: :all)
 
-      post_uv_message(1)
+      post_uv_message(0)
 
       expect(page).to have_css('#uv-pages', text: '', visible: :all)
     end
