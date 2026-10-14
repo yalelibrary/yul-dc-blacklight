@@ -36,8 +36,8 @@ module BlacklightYul
 
     # Blacklight >= 7.42 appends its own config/importmap.rb, pinning its ES modules.
     # We load blacklight.js through sprockets instead, and those unused pins raise
-    # AssetNotPrecompiledError from javascript_importmap_tags. Initializer is here instead 
-    # of initializer.rb because the ordering of importmap.rb and blacklight.importmap.rb is a race condition.
+    # AssetNotPrecompiledError from javascript_importmap_tags. This can't live in
+    # config/initializers/, which loads after the importmap is already built.
     initializer "yul.skip_blacklight_importmap", after: "blacklight.importmap", before: "importmap" do |app|
       app.config.importmap.paths.delete(Blacklight::Engine.root.join("config/importmap.rb"))
     end
