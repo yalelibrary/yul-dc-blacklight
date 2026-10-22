@@ -90,8 +90,6 @@ class SearchBuilder < Blacklight::SearchBuilder
     # Solr 9 defaults to the unified highlighter, which ignores the per-field
     # hl.fragsize/hl.preserveMulti settings that keep snippets short
     solr_parameters['hl.method'] = 'original'
-    # return whole titles instead of truncating them to a fragment
-    solr_parameters['f.title_tesim.hl.fragsize'] = 0
     # solr_parameters['hl.usePhraseHighlighter'] = false
     solr_parameters['hl.requireFieldMatch'] = true
     solr_parameters['hl.preserveMulti'] = true
