@@ -36,7 +36,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   get '/download/tiff/:child_oid/suggest', to: 'download_original#suggest'
   get '/download/tiff/:child_oid/available', to: 'download_original#available'
 
-  resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
+  resource :catalog, only: [], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :oai_provider
 
     concerns :searchable
