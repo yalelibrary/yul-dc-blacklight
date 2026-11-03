@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-
+# TODO: Remove comment below when methods are officially removed
 # Regression coverage for the handlers that were migrated off jQuery APIs which
 # are deprecated in jQuery 3.x and scheduled for removal:
 #
@@ -15,8 +15,10 @@ require 'rails_helper'
 RSpec.describe 'jQuery event bindings', type: :system, js: true, clean: true do
   let(:manifest_fixture) { File.open(File.join('spec', 'fixtures', '2041002.json')).read }
 
-  # has_fulltext_ssi + Public visibility is what makes the "Show Full Text"
-  # button render (see AccessHelper#display_fulltext_button?).
+  # has_fulltext_ssi must be Yes or Partial & fulltext_tesim must be populated in solr
+  # & an indexed child with child_fulltext_wstsim populated in solr
+  # This set up is what makes the "Show Full Text" button render & full text search work
+  # see AccessHelper#display_fulltext_button?
   let(:fulltext_parent) do
     {
       id: '111',
@@ -26,7 +28,8 @@ RSpec.describe 'jQuery event bindings', type: :system, js: true, clean: true do
       resourceType_ssim: 'Archives or Manuscripts',
       child_oids_ssim: [112, 113],
       oid_ssi: 111,
-      has_fulltext_ssi: 'Yes'
+      has_fulltext_ssi: 'Yes',
+      fulltext_tesim: ['Transcribed page one.']
     }
   end
 
@@ -37,8 +40,7 @@ RSpec.describe 'jQuery event bindings', type: :system, js: true, clean: true do
       format: 'text',
       visibility_ssi: 'Public',
       parent_ssi: '111',
-      child_fulltext_wstsim: ['Transcribed page one.'],
-      has_fulltext_ssi: 'Yes'
+      child_fulltext_wstsim: ['Transcribed page one.']
     }
   end
 
@@ -87,7 +89,12 @@ RSpec.describe 'jQuery event bindings', type: :system, js: true, clean: true do
   # iframe does, so the listeners registered from the document-ready callbacks
   # are exercised for real.
   def post_uv_message(index)
-    page.execute_script("window.postMessage(#{index}, window.location.origin)")
+    page.execute_script("const iframe = document.getElementById('uv-iframe');
+    window.dispatchEvent(new MessageEvent('message', {
+      data: #{index},
+      origin: window.location.origin,
+      source: iframe.contentWindow
+    }));")
   end
 
   around do |example|
@@ -179,13 +186,22 @@ RSpec.describe 'jQuery event bindings', type: :system, js: true, clean: true do
 
   # `$(fn)` in app/views/catalog/_uv.html.erb.
   describe 'universal viewer document ready handler' do
-    it 'records the child oid the viewer reports through postMessage' do
+    it 'records the child oid if object has fulltext' do
+      visit '/catalog/111'
+      expect(page).to have_css('#uv-pages', visible: :all)
+
+      post_uv_message(0)
+
+      expect(page).to have_css('#uv-pages', text: '112', visible: :all)
+    end
+
+    it 'does not record the child oid if object does not have fulltext' do
       visit '/catalog/222'
-      expect(page).to have_css('#uv-pages')
+      expect(page).to have_css('#uv-pages', visible: :all)
 
-      post_uv_message(1)
+      post_uv_message(0)
 
-      expect(page).to have_css('#uv-pages', text: '555')
+      expect(page).to have_css('#uv-pages', text: '', visible: :all)
     end
 
     it 'toggles the sensitive materials overlay' do

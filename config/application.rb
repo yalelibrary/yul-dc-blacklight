@@ -11,7 +11,7 @@ Bundler.require(*Rails.groups)
 module BlacklightYul
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.2
+    config.load_defaults 8.0
     config.log_level = :debug
     STDOUT.sync = true # turn off log buffering
     config.rails_semantic_logger.add_file_appender = false # turn off regular file appenders
@@ -33,5 +33,19 @@ module BlacklightYul
 
     # See https://github.com/projectblacklight/blacklight/issues/2768
     config.active_record.yaml_column_permitted_classes = [HashWithIndifferentAccess]
+
+    # Blacklight >= 7.42 appends its own config/importmap.rb, pinning its ES modules.
+    # We load blacklight.js through sprockets instead, and those unused pins raise
+    # AssetNotPrecompiledError from javascript_importmap_tags. This can't live in
+    # config/initializers/, which loads after the importmap is already built.
+    initializer "yul.skip_blacklight_importmap", after: "blacklight.importmap", before: "importmap" do |app|
+      app.config.importmap.paths.delete(Blacklight::Engine.root.join("config/importmap.rb"))
+    end
+
+    # Same for blacklight-gallery >= 4.9, whose pins (masonry/slideshow) we don't use:
+    # the gallery view is rendered server-side by Blacklight::Gallery::DocumentComponent.
+    initializer "yul.skip_blacklight_gallery_importmap", after: "blacklight_gallery.importmap", before: "importmap" do |app|
+      app.config.importmap.paths.delete(Blacklight::Gallery::Engine.root.join("config/importmap.rb"))
+    end
   end
 end

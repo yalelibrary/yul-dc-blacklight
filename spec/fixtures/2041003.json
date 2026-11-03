@@ -1,0 +1,363 @@
+{
+  "@id": "http://127.0.0.1/manifests/2041002.json",
+  "@context": "http://iiif.io/api/presentation/2/context.json",
+  "@type": "sc:Manifest",
+  "label": "A General dictionary of the English language - Condensed",
+  "viewingHint": "paged",
+  "metadata": [
+    {
+      "label": "Title",
+      "value": [
+        "A General dictionary of the English language"
+      ]
+    },
+    {
+      "label": "Creator",
+      "value": [
+        "Johnson, Samuel, 1709-1784"
+      ]
+    },
+    {
+      "label": "Date",
+      "value": "1755"
+    },
+    {
+      "label": "Extent",
+      "value": "43 cm."
+    },
+    {
+      "label": "Call number",
+      "value": "GEN MSS VOL 728 (Oversize)"
+    },
+    {
+      "label": "Description",
+      "value": [
+        "Three volume printer's proof with manuscript notes throughout."
+      ]
+    },
+    {
+      "label": "Resource type",
+      "value": "Books, Journals & Pamphlets"
+    },
+    {
+      "label": "Object Identifier (OID)",
+      "value": "2041002"
+    }
+  ],
+  "sequences": [
+    {
+      "@id": "http://127.0.0.1/manifests/sequence/2041002",
+      "@type": "sc:Sequence",
+      "canvases": [
+        {
+          "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164179",
+          "@type": "sc:Canvas",
+          "label": "[Front cover]",
+          "height": 8961,
+          "width": 5788,
+          "images": [
+            {
+              "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164179/image/1",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "http://127.0.0.1/manifests/oid/2041002/canvas/1164179",
+              "resource": {
+                "@id": "http://127.0.0.1/iiif/2/1164179/full/250,/0/default.png",
+                "@type": "dctypes:Image",
+                "format": "image/png",
+                "height": 8961,
+                "width": 5788
+              }
+            }
+          ]
+        },
+        {
+          "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164180",
+          "@type": "sc:Canvas",
+          "label": "[Bookplate]",
+          "height": 9773,
+          "width": 6026,
+          "images": [
+            {
+              "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164180/image/1",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "http://127.0.0.1/manifests/oid/2041002/canvas/1164180",
+              "resource": {
+                "@id": "http://127.0.0.1/iiif/2/1164180/full/250,/0/default.png",
+                "@type": "dctypes:Image",
+                "format": "image/png",
+                "height": 9773,
+                "width": 6026
+              }
+            }
+          ]
+        },
+        {
+          "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164181",
+          "@type": "sc:Canvas",
+          "label": "[Front free endpaper]",
+          "height": 8639,
+          "width": 5570,
+          "images": [
+            {
+              "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164181/image/1",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "http://127.0.0.1/manifests/oid/2041002/canvas/1164181",
+              "resource": {
+                "@id": "http://127.0.0.1/iiif/2/1164181/full/250,/0/default.png",
+                "@type": "dctypes:Image",
+                "format": "image/png",
+                "height": 8639,
+                "width": 5570
+              }
+            }
+          ]
+        },
+        {
+          "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164182",
+          "@type": "sc:Canvas",
+          "label": "[Front free endpaper]",
+          "height": 9741,
+          "width": 6120,
+          "images": [
+            {
+              "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164182/image/1",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "http://127.0.0.1/manifests/oid/2041002/canvas/1164182",
+              "resource": {
+                "@id": "http://127.0.0.1/iiif/2/1164182/full/250,/0/default.png",
+                "@type": "dctypes:Image",
+                "format": "image/png",
+                "height": 9741,
+                "width": 6120
+              }
+            }
+          ]
+        },
+        {
+          "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164183",
+          "@type": "sc:Canvas",
+          "label": "[Front flyleaf]",
+          "height": 8745,
+          "width": 5434,
+          "images": [
+            {
+              "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164183/image/1",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "http://127.0.0.1/manifests/oid/2041002/canvas/1164183",
+              "resource": {
+                "@id": "http://127.0.0.1/iiif/2/1164183/full/250,/0/default.png",
+                "@type": "dctypes:Image",
+                "format": "image/png",
+                "height": 8745,
+                "width": 5434
+              }
+            }
+          ]
+        },
+        {
+          "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164184",
+          "@type": "sc:Canvas",
+          "label": "[Front flyleaf]",
+          "height": 9757,
+          "width": 6087,
+          "images": [
+            {
+              "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164184/image/1",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "http://127.0.0.1/manifests/oid/2041002/canvas/1164184",
+              "resource": {
+                "@id": "http://127.0.0.1/iiif/2/1164184/full/250,/0/default.png",
+                "@type": "dctypes:Image",
+                "format": "image/png",
+                "height": 9757,
+                "width": 6087
+              }
+            }
+          ]
+        },
+        {
+          "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164185",
+          "@type": "sc:Canvas",
+          "label": "p. 1",
+          "height": 8699,
+          "width": 5465,
+          "images": [
+            {
+              "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164185/image/1",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "http://127.0.0.1/manifests/oid/2041002/canvas/1164185",
+              "resource": {
+                "@id": "http://127.0.0.1/iiif/2/1164185/full/250,/0/default.png",
+                "@type": "dctypes:Image",
+                "format": "image/png",
+                "height": 8699,
+                "width": 5465
+              }
+            }
+          ]
+        },
+        {
+          "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164186",
+          "@type": "sc:Canvas",
+          "label": "p. 2",
+          "height": 9757,
+          "width": 6120,
+          "images": [
+            {
+              "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164186/image/1",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "http://127.0.0.1/manifests/oid/2041002/canvas/1164186",
+              "resource": {
+                "@id": "http://127.0.0.1/iiif/2/1164186/full/250,/0/default.png",
+                "@type": "dctypes:Image",
+                "format": "image/png",
+                "height": 9757,
+                "width": 6120
+              }
+            }
+          ]
+        },
+        {
+          "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164187",
+          "@type": "sc:Canvas",
+          "label": "[leaf between p. 2-3]",
+          "height": 672,
+          "width": 2746,
+          "images": [
+            {
+              "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164187/image/1",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "http://127.0.0.1/manifests/oid/2041002/canvas/1164187",
+              "resource": {
+                "@id": "http://127.0.0.1/iiif/2/1164187/full/250,/0/default.png",
+                "@type": "dctypes:Image",
+                "format": "image/png",
+                "height": 672,
+                "width": 2746
+              }
+            }
+          ]
+        },
+        {
+          "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164188",
+          "@type": "sc:Canvas",
+          "label": "[leaf between p. 2-3]",
+          "height": 1377,
+          "width": 2652,
+          "images": [
+            {
+              "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164188/image/1",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "http://127.0.0.1/manifests/oid/2041002/canvas/1164188",
+              "resource": {
+                "@id": "http://127.0.0.1/iiif/2/1164188/full/250,/0/default.png",
+                "@type": "dctypes:Image",
+                "format": "image/png",
+                "height": 1377,
+                "width": 2652
+              }
+            }
+          ]
+        },
+        {
+          "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164189",
+          "@type": "sc:Canvas",
+          "label": "[leaf between p. 2-3]",
+          "height": 1636,
+          "width": 2751,
+          "images": [
+            {
+              "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164189/image/1",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "http://127.0.0.1/manifests/oid/2041002/canvas/1164189",
+              "resource": {
+                "@id": "http://127.0.0.1/iiif/2/1164189/full/250,/0/default.png",
+                "@type": "dctypes:Image",
+                "format": "image/png",
+                "height": 1636,
+                "width": 2751
+              }
+            }
+          ]
+        },
+        {
+          "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164190",
+          "@type": "sc:Canvas",
+          "label": "[leaf between p. 2-3]",
+          "height": 1420,
+          "width": 2687,
+          "images": [
+            {
+              "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164190/image/1",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "http://127.0.0.1/manifests/oid/2041002/canvas/1164190",
+              "resource": {
+                "@id": "http://127.0.0.1/iiif/2/1164190/full/250,/0/default.png",
+                "@type": "dctypes:Image",
+                "format": "image/png",
+                "height": 1420,
+                "width": 2687
+              }
+            }
+          ]
+        },
+        {
+          "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164191",
+          "@type": "sc:Canvas",
+          "label": "p. 3",
+          "height": 8699,
+          "width": 5404,
+          "images": [
+            {
+              "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164191/image/1",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "http://127.0.0.1/manifests/oid/2041002/canvas/1164191",
+              "resource": {
+                "@id": "http://127.0.0.1/iiif/2/1164191/full/250,/0/default.png",
+                "@type": "dctypes:Image",
+                "format": "image/png",
+                "height": 8699,
+                "width": 5404
+              }
+            }
+          ]
+        },
+        {
+          "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164192",
+          "@type": "sc:Canvas",
+          "label": "p. 4",
+          "height": 9757,
+          "width": 6104,
+          "images": [
+            {
+              "@id": "http://127.0.0.1/manifests/oid/2041002/canvas/1164192/image/1",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "on": "http://127.0.0.1/manifests/oid/2041002/canvas/1164192",
+              "resource": {
+                "@id": "http://127.0.0.1/iiif/2/1164192/full/250,/0/default.png",
+                "@type": "dctypes:Image",
+                "format": "image/png",
+                "height": 9757,
+                "width": 6104
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
