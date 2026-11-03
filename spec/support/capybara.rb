@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-# TODO  Webdrivers.cache_time = 3
 Capybara.default_max_wait_time = 8
 Capybara.default_driver = :rack_test
 
