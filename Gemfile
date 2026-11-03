@@ -78,7 +78,6 @@ group :test do
   gem 'factory_bot_rails', '~> 6.5.1'
   gem 'ffaker', '2.20.0'
   gem 'rails-controller-testing', '~> 1.0.5'
-  gem 'selenium-webdriver', '~> 4.16'
-  gem 'webdrivers', '~> 5.2.0', require: false
+  gem 'selenium-webdriver', '~> 4.52'
   gem 'webmock', '~> 3.19.1'
 end
