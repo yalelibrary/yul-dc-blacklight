@@ -209,7 +209,7 @@ GEM
       tins (~> 1.32)
     crack (0.4.5)
       rexml
-    crass (1.0.7)
+    crass (1.0.8)
     csl (2.0.0)
       namae (~> 1.0)
       rexml
