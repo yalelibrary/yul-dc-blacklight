@@ -269,7 +269,8 @@ GEM
     globalid (1.4.0)
       activesupport (>= 6.1)
     hashdiff (1.1.0)
-    hashie (5.0.0)
+    hashie (5.2.0)
+      logger
     honeybadger (5.30.0)
       logger
       ostruct
@@ -383,10 +384,11 @@ GEM
       faraday (< 3)
       faraday-follow_redirects (>= 0.3.0, < 2)
     observer (0.1.2)
-    omniauth (2.1.2)
-      hashie (>= 3.4.6)
-      rack (>= 2.2.3)
-      rack-protection
+    omniauth (2.2.0)
+      hashie (>= 3.5.2)
+      logger
+      rack (>= 2.2.8)
+      rack-protection (>= 2.2.0)
     omniauth-rails_csrf_protection (1.0.2)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
@@ -707,7 +709,7 @@ DEPENDENCIES
   logger (~> 1.6.0)
   mutex_m (~> 0.3.0)
   observer (~> 0.1.2)
-  omniauth (~> 2.1.0)
+  omniauth (~> 2.2.0)
   omniauth-rails_csrf_protection (~> 1.0)
   omniauth_openid_connect (~> 0.7.1)
   openseadragon (~> 0.6.0)
