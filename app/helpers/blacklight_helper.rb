@@ -248,6 +248,44 @@ module BlacklightHelper
     end.join(', ')
   end
 
+  INDEX_TITLE_MAX_LENGTH = 250
+  # Solr's highlight markup tag
+  HIGHLIGHT_TAG = %r{(</?span[^>]*>)}.freeze
+
+  # Title for a search results entry: the highlighted title if the search
+  # matched it, otherwise the plain title. Truncated with "..." only when
+  # longer than 250 characters.
+  def index_title(document)
+    highlighted = document.highlight_field('title_tesim')&.first
+    return truncate_highlighted_title(highlighted) if highlighted.present?
+
+    title = document_presenter(document).heading.to_s
+    title.length > INDEX_TITLE_MAX_LENGTH ? "#{title[0, INDEX_TITLE_MAX_LENGTH].rstrip}..." : title
+  end
+
+  # Count just the text character count, without the highlighted tags injected by Solr.
+  def truncate_highlighted_title(html)
+    return html if strip_html(html).length <= INDEX_TITLE_MAX_LENGTH
+
+    out = +''
+    remaining = INDEX_TITLE_MAX_LENGTH
+    in_highlight = false
+    html.split(HIGHLIGHT_TAG).each do |part|
+      break if remaining.zero?
+
+      if part.match?(HIGHLIGHT_TAG)
+        in_highlight = !part.start_with?('</')
+        out << part
+      else
+        out << part[0, remaining]
+        remaining -= [part.length, remaining].min
+      end
+    end
+    out.rstrip!
+    out << '</span>' if in_highlight
+    "#{out}...".html_safe # rubocop:disable Rails/OutputSafety
+  end
+
   def display_max_abstract_characters(args)
     highlights = args[:document].highlight_field('abstract_tesim')
     return highlights.first if highlights.present?
