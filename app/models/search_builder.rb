@@ -94,6 +94,8 @@ class SearchBuilder < Blacklight::SearchBuilder
     solr_parameters['hl.requireFieldMatch'] = true
     solr_parameters['hl.preserveMulti'] = true
     solr_parameters['hl.fl'] << "*"
+    # Return the whole title in the highlight instead of a ~100 char fragment
+    solr_parameters['f.title_tesim.hl.fragsize'] = 0
     solr_parameters["hl.simple.pre"] = "<span class='search-highlight'>"
     solr_parameters["hl.simple.post"] = "</span>"
   end
