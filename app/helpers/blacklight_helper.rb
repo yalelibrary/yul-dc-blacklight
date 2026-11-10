@@ -264,26 +264,28 @@ module BlacklightHelper
   end
 
   # Count just the text character count, without the highlighted tags injected by Solr.
-  def truncate_highlighted_title(html)
-    return html if strip_html(html).length <= INDEX_TITLE_MAX_LENGTH
+  def truncate_highlighted_title(highlighted_title)
+    return highlighted_title if strip_html(highlighted_title).length <= INDEX_TITLE_MAX_LENGTH
 
-    out = +''
-    remaining = INDEX_TITLE_MAX_LENGTH
-    in_highlight = false
-    html.split(HIGHLIGHT_TAG).each do |part|
-      break if remaining.zero?
+    truncated_title = +''
+    characters_left = INDEX_TITLE_MAX_LENGTH
+    inside_highlight = false
+    # Splitting on the tag keeps the tags, so each piece is either a tag or text
+    highlighted_title.split(HIGHLIGHT_TAG).each do |tag_or_text|
+      break if characters_left.zero?
 
-      if part.match?(HIGHLIGHT_TAG)
-        in_highlight = !part.start_with?('</')
-        out << part
+      if tag_or_text.match?(HIGHLIGHT_TAG)
+        inside_highlight = !tag_or_text.start_with?('</')
+        truncated_title << tag_or_text
       else
-        out << part[0, remaining]
-        remaining -= [part.length, remaining].min
+        visible_text = tag_or_text[0, characters_left]
+        truncated_title << visible_text
+        characters_left -= visible_text.length
       end
     end
-    out.rstrip!
-    out << '</span>' if in_highlight
-    "#{out}...".html_safe # rubocop:disable Rails/OutputSafety
+    truncated_title.rstrip!
+    truncated_title << '</span>' if inside_highlight
+    "#{truncated_title}...".html_safe # rubocop:disable Rails/OutputSafety
   end
 
   def display_max_abstract_characters(args)
