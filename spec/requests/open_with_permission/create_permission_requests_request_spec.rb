@@ -159,7 +159,7 @@ RSpec.describe "Permission Requests", type: :request, clean: true do
       # sanitizer; inline tags like `<b>` and `<img>` are stripped, leaving
       # their surrounding text.
       # rubocop:disable Layout/LineLength
-      expect(management_post.with(body: 'oid=1718909&user_email=not_real%40example.com&user_full_name=alert%28%22xss%22%29Request+Full+Name&user_netid=net_id&user_note=lorem++ipsum&user_sub=7bd425ee-1093-40cd-ba0c-5a2355e37d6e')).to have_been_made
+      expect(management_post.with(body: 'oid=1718909&user_email=not_real%40example.com&user_full_name=alert%28%26quot%3Bxss%26quot%3B%29Request+Full+Name&user_netid=net_id&user_note=lorem++ipsum&user_sub=7bd425ee-1093-40cd-ba0c-5a2355e37d6e')).to have_been_made
       # rubocop:enable Layout/LineLength
       # No HTML markup or script payload reaches management,
       # regardless of which field it was injected into.
