@@ -169,16 +169,16 @@
                         fixingZoom = false;
                     });
 
-                    OSD.viewer.addHandler("tile-drawn", (event) => {
+                    OSD.viewer.addHandler("update-viewport", (event) => {
                         if (fixingZoom) {
                             return;
                         }
 
                         fixingZoom = true;
-                        const zoomedSize = event.tiledImage.getSizeInWindowCoordinates();
+                        const zoomedSize = event.eventSource.canvas;
                         const filledRatio = Math.max(
-                            zoomedSize.x / viewportSize.x,
-                            zoomedSize.y / viewportSize.y,
+                            zoomedSize.clientWidth / viewportSize.x,
+                            zoomedSize.clientHeight / viewportSize.y,
                         );
 
                         if (filledRatio < targetCoverage) {
