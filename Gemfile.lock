@@ -357,7 +357,6 @@ GEM
     matrix (0.4.3)
     method_source (1.1.0)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.9)
     minitar (0.9)
     minitest (6.1.0)
       drb (~> 2.0)
@@ -378,9 +377,6 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.5)
-    nokogiri (1.19.7)
-      mini_portile2 (~> 2.8.2)
-      racc (~> 1.4)
     nokogiri (1.19.7-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.19.7-x86_64-linux-gnu)
@@ -435,7 +431,7 @@ GEM
     puma (7.2.1)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (3.1.23)
+    rack (3.1.21)
     rack-oauth2 (2.2.0)
       activesupport
       attr_required
@@ -723,7 +719,7 @@ DEPENDENCIES
   pg (~> 1.5.4)
   psych (< 4)
   puma (~> 7.2)
-  rack (~> 3.1.23)
+  rack (~> 3.1.21)
   rails (~> 8.0.5)
   rails-controller-testing (~> 1.0.5)
   rails_semantic_logger (>= 4.20.0, < 5)
