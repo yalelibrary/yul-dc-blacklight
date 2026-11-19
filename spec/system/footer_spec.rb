@@ -20,7 +20,7 @@ RSpec.describe 'footer', type: :system do
 
   it 'has links' do
     expect(page).to have_link('Ask Yale Library', href: 'https://ask.library.yale.edu/')
-    expect(page).to have_link('My Library Accounts', href: 'https://library.yale.edu/my-library-accounts')
+    expect(page).to have_link('My Library Accounts', href: '/my-library-accounts')
     expect(page).to have_link('Subscribe to our Newsletter', href: 'https://subscribe.yale.edu/browse?area=a0df40000006XkNAAU')
     url = page.current_url.gsub("&", "%26")
     expect(page).to have_link('Feedback', href: "http://web.library.yale.edu/form/findit-feedback?findITURL=#{url}")

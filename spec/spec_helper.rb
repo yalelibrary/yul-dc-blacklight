@@ -49,14 +49,10 @@ require 'capybara/rspec'
 
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-# Allow connections to local services / localhost
-WEBMOCK_ALLOWED_SITES = ["solr", "localhost", "chromedriver.storage.googleapis.com", "chrome", "127.0.0.1", "0.0.0.0"].freeze
-
 RSpec.configure do |config|
-  WebMock.disable_net_connect!(allow: WEBMOCK_ALLOWED_SITES)
-
-  # Specs that hit live external sites are opt-in: bundle exec rspec --tag external_links
-  config.filter_run_excluding :external_links
+  # Allow connections to local services / localhost
+  allowed_sites = ["solr", "localhost", "chromedriver.storage.googleapis.com", "chrome", "127.0.0.1", "0.0.0.0"]
+  WebMock.disable_net_connect!(allow: allowed_sites)
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
