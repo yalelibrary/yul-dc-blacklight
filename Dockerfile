@@ -1,4 +1,4 @@
-FROM yalelibraryit/dc-base:v1.4.10
+FROM yalelibraryit/dc-base:v1.4.11
 ENV NODE_OPTIONS="--openssl-legacy-provider"
 
 COPY ops/webapp.conf /etc/nginx/sites-enabled/webapp.conf
