@@ -36,7 +36,7 @@ en:
           that is, they may be searched at one time in combination with other databases'
       findeJournalsTitle:
         title: Find eJournals by Title
-        url: http://wa4py6yj8t.search.serialssolutions.com
+        url: https://library.yale.edu/find-request-and-use/use/using-e-resources
         description: Browse or search for the descriptions of online journals and newspapers to
           which the library subscribes or has access to free on the Web.
       guideUsingSpecialCollections:
@@ -50,23 +50,23 @@ en:
         description: ''
       yourPersonalLibrarian:
         title: Your Personal Librarian
-        url: https://library.yale.edu/pl
+        url: https://library.yale.edu/help-and-research-support/help/personal-librarians
         description: ''
       subjectSpecialists:
         title: Subject Specialists
-        url: https://library.yale.edu/subject-specialists
+        url: https://library.yale.edu/help-and-research-support/subject-specialist
         description: ''
       researchSupportandWorkshops:
         title: Research Support and Workshops
-        url: http://guides.library.yale.edu/research-help
+        url: https://library.yale.edu/help-and-research-support
         description: ''
       citationTools:
         title: Citation Tools
         url: http://guides.library.yale.edu/citationmanagement
         description: Create Bibliographies
-      getIt@Yale:
-        title: Get It @ Yale (Borrow Direct, Interlibrary Loan, Scan & Deliver)
-        url: http://guides.library.yale.edu/getit
+      findAndRequest:
+        title: Find and Request
+        url: https://library.yale.edu/find-request-and-use
         description: ''
       courseReserves:
         title: Course Reserves
@@ -120,10 +120,6 @@ en:
         title: Fortunoff Archive
         url: https://fortunoff.library.yale.edu/
         description: Fortunoff Video Archive for Holocaust Testimonies
-      humanitiesCollections:
-        title: Humanities Collections
-        url: https://library.yale.edu/humanities
-        description: ''
       internationalCollections:
         title: International Collections
         url: https://web.library.yale.edu/international-collections
@@ -146,7 +142,7 @@ en:
         description: ''
       mapCollection:
         title: Map Collection
-        url: http://www.library.yale.edu/maps
+        url: https://beinecke.library.yale.edu/beinecke/collections/maps-collection
         description: ''
       marxScienceSocialScienceLibrary:
         title: Marx Science & Social Science Library
@@ -207,7 +203,7 @@ en:
         description: ''
       givingtoLibrary:
         title: Giving to the Library
-        url: https://library.yale.edu/development
+        url: https://library.yale.edu/about-us/giving
         description: ''
       purchaseRequest:
         title: Purchase Request
