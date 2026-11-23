@@ -30,6 +30,52 @@ RSpec.describe BlacklightHelper, helper: true, style: true do
     end
   end
 
+  describe 'object title truncation' do
+    let(:document) { SolrDocument.new(id: 'title-test', title_tesim: [title]) }
+    let(:highlight) { nil }
+
+    before do
+      allow(document).to receive(:highlight_field).with('title_tesim').and_return(highlight)
+      allow(helper).to receive(:document_presenter).with(document).and_return(instance_double(Blacklight::IndexPresenter, heading: title))
+    end
+
+    context 'with a title of 250 characters or fewer' do
+      let(:title) { 'a' * 250 }
+
+      it 'returns the full title without an ellipsis' do
+        expect(helper.index_title(document)).to eq title
+      end
+    end
+
+    context 'with a title longer than 250 characters' do
+      let(:title) { "#{'a' * 250}bcdef" }
+
+      it 'truncates to 250 characters and adds an ellipsis' do
+        expect(helper.index_title(document)).to eq "#{'a' * 250}..."
+      end
+    end
+
+    context 'with a highlighted title of 250 visible characters or fewer' do
+      let(:title) { "Highlighted #{'a' * 200}" }
+      let(:highlight) { ["<span class='search-highlight'>Highlighted</span> #{'a' * 200}".html_safe] } # rubocop:disable Rails/OutputSafety
+
+      it 'returns the full highlighted title' do
+        expect(helper.index_title(document)).to eq highlight.first
+      end
+    end
+
+    context 'with a highlighted title longer than 250 visible characters' do
+      let(:title) { "#{'a' * 245} Highlighted words" }
+      let(:highlight) { ["#{'a' * 245} <span class='search-highlight'>Highlighted</span> words".html_safe] } # rubocop:disable Rails/OutputSafety
+
+      it 'truncates visible text to 250 characters, closes the highlight span, and adds an ellipsis' do
+        result = helper.index_title(document)
+        expect(result).to eq "#{'a' * 245} <span class='search-highlight'>High</span>..."
+        expect(result).to be_html_safe
+      end
+    end
+  end
+
   describe '#aspace_link' do
     let(:document) { SolrDocument.new(id: 'aspace_link', archiveSpaceUri_ssi: '/repositories/11/archival_objects/21463') }
     let(:args) do
