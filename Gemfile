@@ -32,7 +32,7 @@ gem 'jquery-rails', '~> 4.6.0'
 gem 'logger', '~> 1.6.0'
 gem 'mutex_m', '~> 0.3.0'
 gem 'observer', '~> 0.1.2'
-gem 'omniauth', '~> 2.1.0'
+gem 'omniauth', '~> 2.2.0'
 gem 'omniauth_openid_connect', '~> 0.7.1'
 gem 'openseadragon', '~> 0.6.0'
 # This addresses CVE-2015-9284 https://github.com/advisories/GHSA-ww4x-rwq6-qpgf
